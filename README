@@ -1,0 +1,11 @@
+Litle & Co. powers the payment processing engines for leading companies that sell directly to consumers through internet retail, direct response marketing (TV, radio and telephone), and online services. Litle & Co. is the leading, independent authority in card-not-present (CNP) commerce, transaction processing and merchant services.
+
+The Litle Online API is a PHP implementation of the Litle & Co. XML API. This API supports the HTTPS interface and requires coordination with the Litle team in order to be provided with credentials for accessing our systems.  Note that you will get separate credentials for our test system and require certification before being granted production access.
+
+Our PHP API supports all of the functionality present in Litle XML v8. Please request a copy of the XSD for Litle XML from your implementations coordinator at Litle.
+
+This API is implemented to support the PHP programming language and was created by Litle & Co. It is intended use is for online transactions processing on the Litle payments engine. This API is currently in the alpha testing phase and is not generally available or supported by Litle.  Litle will support this API during the on-boarding process.
+
+Source Code available from : https://github.com/litleco/LitleOnline_XML_v8_PHP
+
+Please contact Litle & Co. to receive valid merchant credentials in order to run tests successfully.
