@@ -1,28 +1,24 @@
+<html>
+<header>
+</header>
+<body>
 <?php
-/*class Configuration{
-	function config(){
-		$createFile = "config.txt";
-		$fileHandle = fopen($createFile,'w') or die("can't open file");
-		fclose($fileHandle);
-	}
-}*/
-/*
-$config = 'config.txt';
-$handle = fopen($config, 'w') or die('cannot open file: '.$config);
-//$data = implode(array('usr'=>'PHXMLTEST'));
-$data = "'usr'=>'PHXMLTEST'";//,'password'=>'certpass');
-fwrite($handle, $data);
-//$rhandle = fopen($config, 'r');
-//$rdate = fread($rhandle, filesize($config));
-//echo $rdate;
-fclose($rhandle);
-*/
+	require_once realpath(dirname(__FILE__)) . '/configuration.php';
 
-$assoc_array = array("user" => "PHXMLTEST", "password" => "certpass","version" => "8.8", "url" => "");
+//$config = realpath(dirname(__FILE__)).'/config.txt';
+//$data = implode($new_array);
+//create config file
 
-$new_array = array_map(create_function('$key, $value', 'return $key.":".$value." <br> ";'), array_keys($assoc_array), array_values($assoc_array));
+$config_array = array("user" => $_POST["user"], "password" => $_POST["password"],"version" => $_POST["version"], "url" => $_POST["url"],"proxy_address" => $_POST["proxy_address"],"proxy_port" => $_POST["proxy_port"]);
+
+$new_array = array_map(create_function('$key, $value', 'return $key."=>".$value." <br> ";'), array_keys($config_array), array_values($config_array));
 
 print implode($new_array);
 
+Configuration::create_config(realpath(dirname(__FILE__)).'/config.txt', implode($new_array));
+
+echo realpath(dirname(__FILE__)).'/config.txt';
 
 ?>
+</body>
+</html>

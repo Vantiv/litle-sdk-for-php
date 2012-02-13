@@ -27,7 +27,7 @@ class Obj2xml {
   	 function toXml($object,$type,$config) { 
   	      $this->iteratechildren($object,$this->xmlResult);   
   	      $this->xmlResult->$type-> addAttribute('reportGroup',$config["reportGroup"]);
-	      isset($config["id"]) ?($this->xmlResult->$type->addAttribute('id',$config["id"])):NULL;
+	      $this->xmlResult->$type-> addAttribute('id',$config["id"]);
    	      return $this->xmlResult->asXML();
   	 }
 }
