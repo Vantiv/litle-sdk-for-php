@@ -9,9 +9,9 @@
 	require_once realpath(dirname(__FILE__)) . '/../lib/Obj2xml.php';
 	require_once realpath(dirname(__FILE__)) . '/../lib/tagValue.php';
 
-	$config = array('usr'=>'IMPTEST',
-			'password'=>'cert3d6Z',
-			'merchantId'=>'087900',
+	$config = array('usr'=>'PHXMLTEST',
+			'password'=>'certpass',
+			'merchantId'=>'101',
 			'version'=>'8.8',
 			'reportGroup'=>'Planets',
 			//'id'=>'001',

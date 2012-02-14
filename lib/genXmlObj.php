@@ -32,7 +32,7 @@
 	$amexAggregatorDataField = array('amexAggregator','sellerId','sellerMerchantCategoryCode');
 	$billToAddressField = array('billToAddress', 'name', 'firstName','middleInitial','lastName','companyName','addressLine1','addressLine2','addressLine3','city', 'state', 'zip','country','email','phone');
 	$shipToAddressField = array('shipToAddress', 'name', 'addressLine1','addressLine2','addressLine3','city', 'state', 'zip','country','email','phone');
-    	$cardField = array('card','type','number','expDate','cardValidationNum');
+    $cardField = array('card','type','number','expDate','cardValidationNum');
 	$cardTokenField = array('cardTokenType','litleToken','expDate','cardValidationNum');
 	$cardPaypageTypeField = array('cardPaypageType','paypageRegistrationId','expDate','cardValidationNum','type');
 	$payPalField = array('payPal','payerId','token','transactionId');

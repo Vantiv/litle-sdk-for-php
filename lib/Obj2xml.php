@@ -8,6 +8,8 @@ class Obj2xml {
 	  // construct function creates the basic XML doc with attributes added
   	  function __construct($rootNode,$config){
  	       $this->xmlResult = new SimpleXMLElement("<$rootNode></$rootNode>");
+ 	       
+ 	       # take in array of attributes and clycle through them or pull values from config file/
 	       $this->xmlResult-> addAttribute('version',$config["version"]);
 	       $this->xmlResult-> addAttribute('merchantId',$config["merchantId"]);
   	       $this->xmlResult-> addAttribute('xmlns:xmlns','http://www.litle.com/schema');// does not show up on browser docs

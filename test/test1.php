@@ -1,4 +1,5 @@
 <?php
+require_once('../simpletest');
 require_once('simpletest/autorun.php');
 require_once realpath(dirname(__FILE__)) . '/lib/communication.php';
 require_once realpath(dirname(__FILE__)) . '/lib/createObj.php';
