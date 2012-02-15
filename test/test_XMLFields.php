@@ -228,20 +228,20 @@ class AllTests extends UnitTestCase{
 
 	}
 
-	function test_simple_payPal()
+	function test_simple_paypal()
 	{
 		$hash = array(
 	      'token'=>'123');
-		$hash_out = XMLFields::payPal($hash);
+		$hash_out = XMLFields::paypal($hash);
 		$this->assertEqual($hash_out['token'], '123');
 		$this->assertEqual($hash_out['payerId'], 'REQUIRED');
 		$this->assertEqual($hash_out['transactionId'], 'REQUIRED');
 	}
 
-	function test_simple_credit_payPal()
+	function test_simple_credit_paypal()
 	{
 		$hash = array();
-		$hash_out = XMLFields::credit_payPal($hash);
+		$hash_out = XMLFields::credit_paypal($hash);
 		$this->assertEqual($hash_out['payerId'], 'REQUIRED');
 		$this->assertEqual($hash_out['payerEmail'], 'REQUIRED');
 

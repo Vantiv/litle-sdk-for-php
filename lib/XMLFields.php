@@ -242,7 +242,7 @@ class XMLFields
 			'expDate'=>$hash_in['expDate'],
 			'cardValidationNum'=>$hash_in['cardValidationNum']);
 		#Checker.purge_null(hash_out)
-		#Checker.choice(choice_hash)
+		#Checker.choice(choice_hash)	function test_echeckForTokenType()
 		return $hash_out;
 	}
 
@@ -270,7 +270,7 @@ class XMLFields
 		return $hash_out;
 	}
 
-	public static function payPal($hash_in)
+	public static function paypal($hash_in)
 	{
 		$hash_out = array(
 		'payerId'=>(($hash_in['payerId'] == NULL) ? 'REQUIRED':$hash_in['payerId']),
@@ -282,7 +282,7 @@ class XMLFields
 	}
 
 	#paypal field for credit transaction
-	public static function credit_payPal($hash_in)
+	public static function credit_paypal($hash_in)
 	{
 		$hash_out = array(
 		'payerId'=>(($hash_in['payerId'] == NULL) ? 'REQUIRED':$hash_in['payerId']),
