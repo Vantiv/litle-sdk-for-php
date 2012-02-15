@@ -340,6 +340,52 @@ class XMLFields
 		// 	Checker.required_missing(hash_out)
 		return $hash_out;
 	}
+
+	public static function filteringType($hash_in)
+	{
+		$hash_out = array(
+					'prepaid'=>$hash_in['prepaid'] ,
+					'international' =>$hash_in['international'],
+					'chargeback' =>$hash_in['chargeback']);
+		// 		Checker.purge_null(hash_out)
+		// 		Checker.required_missing(hash_out)
+		return $hash_out;
+	}
+
+	public static function echeckType($hash_in)
+	{
+		$hash_out = array(
+			'accType'=>(($hash_in['accType'] == NULL) ? 'REQUIRED':$hash_in['accType']),
+			'accNum' =>(($hash_in['accNum'] == NULL) ? 'REQUIRED':$hash_in['accNum']),
+			'routingNum' =>(($hash_in['routingNum'] == NULL) ? 'REQUIRED':$hash_in['routingNum']),
+			'checkNumberType' =>$hash_in['checkNumberType']);
+		// 	Checker.purge_null(hash_out)
+		// 	Checker.required_missing(hash_out)
+		return $hash_out;
+	}
+
+	public static function echeckTokenType($hash_in)
+	{
+		$hash_out = array(
+				'litleToken'=>(($hash_in['litleToken'] == NULL) ? 'REQUIRED':$hash_in['litleToken']),
+				'routingNum' =>(($hash_in['routingNum'] == NULL) ? 'REQUIRED':$hash_in['routingNum']),
+				'accType' =>(($hash_in['accType'] == NULL) ? 'REQUIRED':$hash_in['accType']),
+				'checkNum' =>$hash_in['checkNum']);
+		// 	Checker.purge_null(hash_out)
+		// 	Checker.required_missing(hash_out)
+		return $hash_out;
+	}
+
+	public static function recyclingRequestType($hash_in)
+	{
+		$hash_out = array(
+				'recyleBy'=>(($hash_in['recyleBy'] == NULL) ? 'REQUIRED':$hash_in['recyleBy']));
+		// 	Checker.purge_null(hash_out)
+		// 	Checker.required_missing(hash_out)
+		return $hash_out;
+	}
+
+
 }
 
 
