@@ -267,7 +267,7 @@ class XMLFields
 		'type'=>$hash_in['type']);
 		#Checker.purge_null(hash_out)
 		#Checker.required_missing(hash_out)
-		return hash_out;
+		return $hash_out;
 	}
 
 	public static function payPal($hash_in)
@@ -295,7 +295,9 @@ class XMLFields
 		return $hash_out;
 		}
 
-	}
+	
+}
+	
 
 
 
@@ -324,4 +326,4 @@ class XMLFields
 
 
 
-	?>
+?>
