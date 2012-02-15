@@ -247,6 +247,43 @@ class AllTests extends UnitTestCase{
 
 	}
 
+	function test_customBilling()
+	{
+		$hash = array(
+		'phone'=>'978-287',
+		'city'=>'lowell',
+		'descriptor'=>'123');
+		$hash_out = XMLFields::customBilling($hash);
+		$this->assertEqual($hash_out['phone'], '978-287');
+		$this->assertEqual($hash_out['URL'], NULL);
+		$this->assertEqual($hash_out['descriptor'], '123');
+	}
+	
+	function test_taxBilling()
+	{
+		$hash = array(
+	   'taxAuthority'=> '123',
+       'state'=>'MA');
+		$hash_out = XMLFields::taxBilling($hash);
+		$this->assertEqual($hash_out['taxAuthority'], '123');
+		$this->assertEqual($hash_out['state'], NULL);
+		$this->assertEqual($hash_out['govtTxnType'], 'REQUIRED');
+	}
+	
+	function test_processingInstructions()
+	{
+		$hash = array('bypassVelocityCheck'=>'yes');
+		$hash_out = XMLFields::processingInstructions($hash);
+		$this->assertEqual($hash_out['bypassVelocityCheck'], 'yes');
+	}
+	
+	function test_echeckForTokenType()
+	{
+		$hash = array('accNum'=>'1322143124');
+		$hash_out = XMLFields::echeckForTokenType($hash);
+		$this->assertEqual($hash_out['accNum'], 'yes');
+		$this->assertEqual($hash_out['routingNum'], 'REQUIRED');
+	}
 }
 ?>
 
