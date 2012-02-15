@@ -266,7 +266,7 @@ class AllTests extends UnitTestCase{
        'state'=>'MA');
 		$hash_out = XMLFields::taxBilling($hash);
 		$this->assertEqual($hash_out['taxAuthority'], '123');
-		$this->assertEqual($hash_out['state'], NULL);
+		$this->assertEqual($hash_out['state'], 'MA');
 		$this->assertEqual($hash_out['govtTxnType'], 'REQUIRED');
 	}
 	
@@ -281,7 +281,7 @@ class AllTests extends UnitTestCase{
 	{
 		$hash = array('accNum'=>'1322143124');
 		$hash_out = XMLFields::echeckForTokenType($hash);
-		$this->assertEqual($hash_out['accNum'], 'yes');
+		$this->assertEqual($hash_out['accNum'], '1322143124');
 		$this->assertEqual($hash_out['routingNum'], 'REQUIRED');
 	}
 }

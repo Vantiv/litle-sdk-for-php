@@ -301,7 +301,8 @@ class XMLFields
 		$hash_out = array(
 				'phone'=>$hash_in['phone'] ,
 				'city' =>$hash_in['city'],
-				'url' =>$hash_in['url']);
+				'url' =>$hash_in['url'],
+				'descriptor' =>$hash_in['descriptor']);
 		// 		Checker.purge_null(hash_out)
 		// 		Checker.choice(hash_out)
 		// 		hash_out[:descriptor] = hash_in['descriptor']
