@@ -27,6 +27,8 @@
 #
 # Contains all of the underlying XML fields and specifications needed to create the transaction set
 #
+require_once realpath(dirname(__FILE__)) . '/Checker.php';
+
 class XMLFields
 {
 	public static function contact($hash_in)
@@ -110,8 +112,8 @@ class XMLFields
 	public static function authInformation($hash_in)
 	{
 		$hash_out = array(
-		'authDate'=>(($hash_in['authDate'] == NULL) ? 'REQUIRED':$hash_in['authDate']),
-		'authCode'=>(($hash_in['authCode'] == NULL) ? 'REQUIRED':$hash_in['authCode']),
+		'authDate'=>(Checker::requiredValue($hash_in['authDate'])),
+		'authCode'=>(Checker::requiredValue($hash_in['authCode'])),
 		'fraudResult'=>XMLFields::fraudResult($hash_in['detailTax']),
 		'authAmount'=>$hash_in['authAmount']);
 		#Checker.purge_null($hash_out)
@@ -158,9 +160,9 @@ class XMLFields
 	public static function pos($hash_in)
 	{
 		$hash_out = array(
-		'capability'=>(($hash_in['capability'] == NULL) ? 'REQUIRED':$hash_in['capability']),
-		'entryMode'=>(($hash_in['entryMode'] == NULL) ? 'REQUIRED':$hash_in['entryMode']),
-		'cardholderId'=>(($hash_in['cardholderId'] == NULL) ? 'REQUIRED':$hash_in['cardholderId']));
+		'capability'=>(Checker::requiredValue($hash_in['capability'])),
+		'entryMode'=>(Checker::requiredValue($hash_in['entryMode'])),
+		'cardholderId'=>(Checker::requiredValue($hash_in['cardholderId'])));
 		//Checker.purge_null(hash_out)
 		//Checker.required_missing(hash_out)
 		return $hash_out;
@@ -249,7 +251,7 @@ class XMLFields
 	public static function cardTokenType($hash_in)
 	{
 		$hash_out = array(
-		'litleToken'=> (($hash_in['litleToken'] == NULL) ? 'REQUIRED':$hash_in['litleToken']),
+		'litleToken'=> (Checker::requiredValue($hash_in['litleToken'])),
 		'expDate'=>$hash_in['expDate'],
 		'cardValidationNum'=>$hash_in['cardValidationNumber'],
 		'type'=>$hash_in['type']);
@@ -261,7 +263,7 @@ class XMLFields
 	public static function cardPaypageType($hash_in)
 	{
 		$hash_out = array(
-		'paypageRegistrationId'=> (($hash_in['paypageRegistrationId'] == NULL) ? 'REQUIRED':$hash_in['paypageRegistrationId']),
+		'paypageRegistrationId'=> (Checker::requiredValue($hash_in['paypageRegistrationId'])),
 		'expDate'=>$hash_in['expDate'] ,
 		'cardValidationNum'=>$hash_in['cardValidationNumber'],
 		'type'=>$hash_in['type']);
@@ -273,9 +275,9 @@ class XMLFields
 	public static function paypal($hash_in)
 	{
 		$hash_out = array(
-		'payerId'=>(($hash_in['payerId'] == NULL) ? 'REQUIRED':$hash_in['payerId']),
+		'payerId'=>(Checker::requiredValue($hash_in['payerId'])),
 		'token'=>$hash_in['token'],
-		'transactionId'=>(($hash_in['transactionId'] == NULL) ? 'REQUIRED':$hash_in['transactionId']));
+		'transactionId'=>(Checker::requiredValue($hash_in['transactionId'])));
 		#Checker.purge_null(hash_out)
 		#Checker.required_missing(hash_out)
 		return $hash_out;
@@ -285,8 +287,8 @@ class XMLFields
 	public static function credit_paypal($hash_in)
 	{
 		$hash_out = array(
-		'payerId'=>(($hash_in['payerId'] == NULL) ? 'REQUIRED':$hash_in['payerId']),
-		'payerEmail' =>(($hash_in['payerEmail'] == NULL) ? 'REQUIRED':$hash_in['payerEmail']));
+		'payerId'=>(Checker::requiredValue($hash_in['payerId'])),
+		'payerEmail' =>(Checker::requiredValue($hash_in['payerEmail'])));
 		#Checker.purge_null(hash_out)
 		#choice_hash={
 		#'1'=>hash_out[:payerId],'2'=>hash_out[:payerEmail]}
@@ -307,18 +309,16 @@ class XMLFields
 		// 		Checker.choice(hash_out)
 		// 		hash_out[:descriptor] = hash_in['descriptor']
 		// 		Checker.purge_null(hash_out)
-		// 		Checker.required_missing(hash_out)
 		return $hash_out;
 	}
 
 	public static function taxBilling($hash_in)
 	{
 		$hash_out = array(
-		'taxAuthority'=>(($hash_in['taxAuthority'] == NULL) ? 'REQUIRED':$hash_in['taxAuthority']),
-		'state' =>(($hash_in['state'] == NULL) ? 'REQUIRED':$hash_in['state']),
-		'govtTxnType' =>(($hash_in['govtTxnType'] == NULL) ? 'REQUIRED':$hash_in['govtTxnType']));
+		'taxAuthority'=>(Checker::requiredValue($hash_in['taxAuthority'])),
+		'state' =>(Checker::requiredValue($hash_in['state'])),
+		'govtTxnType' =>(Checker::requiredValue($hash_in['govtTxnType'])));
 		// 	Checker.purge_null(hash_out)
-		// 	Checker.required_missing(hash_out)
 		return $hash_out;
 	}
 
@@ -327,17 +327,15 @@ class XMLFields
 		$hash_out = array(
 		'bypassVelocityCheck'=>$hash_in['bypassVelocityCheck']);
 		// 	Checker.purge_null(hash_out)
-		// 	Checker.required_missing(hash_out)
 		return $hash_out;
 	}
 
 	public static function echeckForTokenType($hash_in)
 	{
 		$hash_out = array(
-			'accNum'=>(($hash_in['accNum'] == NULL) ? 'REQUIRED':$hash_in['accNum']),
-			'routingNum' =>(($hash_in['routingNum'] == NULL) ? 'REQUIRED':$hash_in['routingNum']));
+			'accNum'=>(Checker::requiredValue($hash_in['accNum'])),
+			'routingNum' =>(Checker::requiredValue($hash_in['routingNum'])));
 		// 	Checker.purge_null(hash_out)
-		// 	Checker.required_missing(hash_out)
 		return $hash_out;
 	}
 
@@ -348,71 +346,42 @@ class XMLFields
 					'international' =>$hash_in['international'],
 					'chargeback' =>$hash_in['chargeback']);
 		// 		Checker.purge_null(hash_out)
-		// 		Checker.required_missing(hash_out)
 		return $hash_out;
 	}
 
 	public static function echeckType($hash_in)
 	{
 		$hash_out = array(
-			'accType'=>(($hash_in['accType'] == NULL) ? 'REQUIRED':$hash_in['accType']),
-			'accNum' =>(($hash_in['accNum'] == NULL) ? 'REQUIRED':$hash_in['accNum']),
-			'routingNum' =>(($hash_in['routingNum'] == NULL) ? 'REQUIRED':$hash_in['routingNum']),
+			'accType'=>(Checker::requiredValue($hash_in['accType'])),
+			'accNum' =>(Checker::requiredValue($hash_in['accNum'])),
+			'routingNum' =>(Checker::requiredValue($hash_in['routingNum'])),
 			'checkNumberType' =>$hash_in['checkNumberType']);
 		// 	Checker.purge_null(hash_out)
-		// 	Checker.required_missing(hash_out)
 		return $hash_out;
 	}
 
 	public static function echeckTokenType($hash_in)
 	{
 		$hash_out = array(
-				'litleToken'=>(($hash_in['litleToken'] == NULL) ? 'REQUIRED':$hash_in['litleToken']),
-				'routingNum' =>(($hash_in['routingNum'] == NULL) ? 'REQUIRED':$hash_in['routingNum']),
-				'accType' =>(($hash_in['accType'] == NULL) ? 'REQUIRED':$hash_in['accType']),
+				'litleToken'=>(Checker::requiredValue($hash_in['litleToken'])),
+				'routingNum' =>(Checker::requiredValue($hash_in['routingNum'])),
+				'accType' =>(Checker::requiredValue($hash_in['accType'])),
 				'checkNum' =>$hash_in['checkNum']);
 		// 	Checker.purge_null(hash_out)
-		// 	Checker.required_missing(hash_out)
 		return $hash_out;
 	}
 
 	public static function recyclingRequestType($hash_in)
 	{
 		$hash_out = array(
-				'recyleBy'=>(($hash_in['recyleBy'] == NULL) ? 'REQUIRED':$hash_in['recyleBy']));
+				'recyleBy'=>(Checker::requiredValue($hash_in['recyleBy'])));
 		// 	Checker.purge_null(hash_out)
-		// 	Checker.required_missing(hash_out)
+		
 		return $hash_out;
 	}
 
-
+   
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ?>

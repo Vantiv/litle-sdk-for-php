@@ -2,6 +2,7 @@
 #require_once realpath(dirname(__FILE__)) . '/../simpletest/test/autorun.php';
 require_once('../simpletest/autorun.php');
 require_once realpath(dirname(__FILE__)) . '/../lib/XMLFields.php';
+require_once realpath(dirname(__FILE__)) . '/../lib/Checker.php';
 
 class AllTests extends UnitTestCase{
 
