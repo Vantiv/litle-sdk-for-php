@@ -87,7 +87,7 @@ class XMLFields
 		'secretQuestionAnswer'=>$hash_in['secretQuestionAnswer'] ,
 		'virtualAuthenticationKeyPresenceIndicator'=>$hash_in['virtualAuthenticationKeyPresenceIndicator'] ,
 		'virtualAuthenticationKeyData'=>$hash_in['virtualAuthenticationKeyData'],
-		'itemCategoryCode'=>$hash_in['itemCategoryCode'] ,
+		'itemCategoryCode'=>$hash_in['itemCategoryCode'],
 		'authorizationSourcePlatform'=>$hash_in['authorizationSourcePlatform']
 		);
 		#Checker.purge_null($hash_out)
@@ -104,15 +104,15 @@ class XMLFields
 		'authenticatedByMerchant'=>$hash_in['authenticatedByMerchant']);
 		#Checker.purge_null(hash_out)
 		#Checker.required_missing(hash_out)
-		return hash_out;
+		return $hash_out;
 	}
 
 	public static function authInformation($hash_in)
 	{
 		$hash_out = array(
-		'authDate'=>($hash_in['authDate']  or 'REQUIRED'),
-		'authCode'=>($hash_in['authCode']  or 'REQUIRED'),
-		'fraudResult'=>fraudResult($hash_in['detailTax']),
+		'authDate'=>(($hash_in['authDate'] == NULL) ? 'REQUIRED':$hash_in['authDate']),
+		'authCode'=>(($hash_in['authCode'] == NULL) ? 'REQUIRED':$hash_in['authCode']),
+		'fraudResult'=>XMLFields::fraudResult($hash_in['detailTax']),
 		'authAmount'=>$hash_in['authAmount']);
 		#Checker.purge_null($hash_out)
 		#Checker.required_missing($hash_out)
@@ -131,10 +131,11 @@ class XMLFields
 		// 	Checker.required_missing($hash_out)
 		return $hash_out;
 	}
+	
 	public static function healthcareAmounts($hash_in)
 	{
 		$hash_out = array(
-		'totalHealthctagValueareAmount'=>$hash_in['totalHealthcareAmount'],
+		'totalHealthcareAmount'=>$hash_in['totalHealthcareAmount'],
 		'RxAmount'=>$hash_in['RxAmount'],
 		'visionAmount'=>$hash_in['visionAmount'],
 		'clinicOtherAmount'=>$hash_in['clinicOtherAmount'],
@@ -157,9 +158,9 @@ class XMLFields
 	public static function pos($hash_in)
 	{
 		$hash_out = array(
-		'capability'=>$hash_in['capability'],
-		'entryMode'=>$hash_in['entryMode'],
-		'cardholderId'=>$hash_in['cardholderId']);
+		'capability'=>(($hash_in['capability'] == NULL) ? 'REQUIRED':$hash_in['capability']),
+		'entryMode'=>(($hash_in['entryMode'] == NULL) ? 'REQUIRED':$hash_in['entryMode']),
+		'cardholderId'=>(($hash_in['cardholderId'] == NULL) ? 'REQUIRED':$hash_in['cardholderId']));
 		//Checker.purge_null(hash_out)
 		//Checker.required_missing(hash_out)
 		return $hash_out;
@@ -167,9 +168,8 @@ class XMLFields
 
 	public static function detailTax($hash_in)
 	{
-
 		$hash_out = array(
-		'taxIncludedtagValueInTotal'=>$hash_in['taxIncludedInTotal'],
+		'taxIncludedInTotal'=>$hash_in['taxIncludedInTotal'],
 		'taxAmount'=>$hash_in['taxAmount'],
 		'taxRate'=>$hash_in['taxRate'],
 		'taxTypeIdentifier'=>$hash_in['taxTypeIdentifier'],
@@ -178,6 +178,7 @@ class XMLFields
 		//Checker.required_missing($hash_out)
 		return $hash_out;
 	}
+	
 	public static function lineItemData($hash_in)
 	{
 		$hash_out = array(
@@ -221,6 +222,7 @@ class XMLFields
 		// Checker.required_missing(hash_out)
 		return $hash_out;
 	}
+	
 	public static function amexAggregatorData($hash_in)
 	{
 		$hash_out = array(
