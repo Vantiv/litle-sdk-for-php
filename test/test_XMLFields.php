@@ -284,6 +284,54 @@ class AllTests extends UnitTestCase{
 		$this->assertEqual($hash_out['accNum'], '1322143124');
 		$this->assertEqual($hash_out['routingNum'], 'REQUIRED');
 	}
+
+	function test_filteringType()
+	{
+		$hash = array(
+		'prepaid'=>'yes',
+      	'international'=>'no');
+		$hash_out = XMLFields::filteringType($hash);
+		$this->assertEqual($hash_out['prepaid'], 'yes');
+		$this->assertEqual($hash_out['international'], 'no');
+		$this->assertEqual($hash_out['chargeback'], NUll);
+	}
+
+	function test_echeckType()
+	{
+		$hash = array(
+		'accType'=>'checking',
+		'accNum'=>'12431431413');
+		$hash_out = XMLFields::echeckType($hash);
+		$this->assertEqual($hash_out['accType'], 'checking');
+		$this->assertEqual($hash_out['routingNum'], 'REQUIRED');
+		$this->assertEqual($hash_out['checkNum'], NUll);
+	}
+	
+	function test_echeckTokenType()
+	{
+		$hash = array(
+		'litleToken' =>'1243141413421343',
+		'accType'=>'checking');
+		$hash_out = XMLFields::echeckTokenType($hash);
+		$this->assertEqual($hash_out['accType'], 'checking');
+		$this->assertEqual($hash_out['routingNum'], 'REQUIRED');
+		$this->assertEqual($hash_out['checkNum'], NUll);
+	}
+
+	function test_recyclingRequestType_withmissing()
+	{
+		$hash = array();
+		$hash_out = XMLFields::recyclingRequestType($hash);
+		$this->assertEqual($hash_out['recyleBy'], 'REQUIRED');
+	}
+	function test_recyclingRequestType()
+	{
+		$hash = array(
+		'recyleBy' => 'recylingbin');
+		$hash_out = XMLFields::recyclingRequestType($hash);
+		$this->assertEqual($hash_out['recyleBy'], 'recylingbin');
+	}
 }
+
 ?>
 
