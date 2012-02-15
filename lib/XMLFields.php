@@ -293,11 +293,53 @@ class XMLFields
 		#Checker.choice(choice_hash)
 		#Checker.required_missing(hash_out)
 		return $hash_out;
-		}
+	}
 
-	
+
+	public static function customBilling($hash_in)
+	{
+		$hash_out = array(
+				'phone'=>$hash_in['phone'] ,
+				'city' =>$hash_in['city'],
+				'url' =>$hash_in['url']);
+		// 		Checker.purge_null(hash_out)
+		// 		Checker.choice(hash_out)
+		// 		hash_out[:descriptor] = hash_in['descriptor']
+		// 		Checker.purge_null(hash_out)
+		// 		Checker.required_missing(hash_out)
+		return $hash_out;
+	}
+
+	public static function taxBilling($hash_in)
+	{
+		$hash_out = array(
+		'taxAuthority'=>(($hash_in['taxAuthority'] == NULL) ? 'REQUIRED':$hash_in['taxAuthority']),
+		'state' =>(($hash_in['state'] == NULL) ? 'REQUIRED':$hash_in['state']),
+		'govtTxnType' =>(($hash_in['govtTxnType'] == NULL) ? 'REQUIRED':$hash_in['govtTxnType']));
+		// 	Checker.purge_null(hash_out)
+		// 	Checker.required_missing(hash_out)
+		return $hash_out;
+	}
+
+	public static function processingInstructions($hash_in)
+	{
+		$hash_out = array(
+		'bypassVelocityCheck'=>$hash_in['bypassVelocityCheck']);
+		// 	Checker.purge_null(hash_out)
+		// 	Checker.required_missing(hash_out)
+		return $hash_out;
+	}
+
+	public static function echeckForTokenType($hash_in)
+	{
+		$hash_out = array(
+			'accNum'=>(($hash_in['accNum'] == NULL) ? 'REQUIRED':$hash_in['accNum']),
+			'routingNum' =>(($hash_in['routingNum'] == NULL) ? 'REQUIRED':$hash_in['routingNum']));
+		// 	Checker.purge_null(hash_out)
+		// 	Checker.required_missing(hash_out)
+		return $hash_out;
+	}
 }
-	
 
 
 
