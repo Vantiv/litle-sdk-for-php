@@ -131,7 +131,7 @@ class XMLFields
 		// 	Checker.required_missing($hash_out)
 		return $hash_out;
 	}
-	
+
 	public static function healthcareAmounts($hash_in)
 	{
 		$hash_out = array(
@@ -178,7 +178,7 @@ class XMLFields
 		//Checker.required_missing($hash_out)
 		return $hash_out;
 	}
-	
+
 	public static function lineItemData($hash_in)
 	{
 		$hash_out = array(
@@ -222,7 +222,7 @@ class XMLFields
 		// Checker.required_missing(hash_out)
 		return $hash_out;
 	}
-	
+
 	public static function amexAggregatorData($hash_in)
 	{
 		$hash_out = array(
@@ -232,5 +232,96 @@ class XMLFields
 		//Checker.required_missing(hash_out)
 		return $hash_out;
 	}
-}
-?>
+
+	public static function cardType($hash_in)
+	{
+		$hash_out= array(
+			'type'=>$hash_in['type'] ,
+			'track'=>$hash_in['track'],
+			'number'=>$hash_in['number'],
+			'expDate'=>$hash_in['expDate'],
+			'cardValidationNum'=>$hash_in['cardValidationNum']);
+		#Checker.purge_null(hash_out)
+		#Checker.choice(choice_hash)
+		return $hash_out;
+	}
+
+	public static function cardTokenType($hash_in)
+	{
+		$hash_out = array(
+		'litleToken'=> (($hash_in['litleToken'] == NULL) ? 'REQUIRED':$hash_in['litleToken']),
+		'expDate'=>$hash_in['expDate'],
+		'cardValidationNum'=>$hash_in['cardValidationNumber'],
+		'type'=>$hash_in['type']);
+		#Checker.purge_null(hash_out)
+		# Checker.required_missing(hash_out)
+		return $hash_out;
+	}
+
+	public static function cardPaypageType($hash_in)
+	{
+		$hash_out = array(
+		'paypageRegistrationId'=> (($hash_in['paypageRegistrationId'] == NULL) ? 'REQUIRED':$hash_in['paypageRegistrationId']),
+		'expDate'=>$hash_in['expDate'] ,
+		'cardValidationNum'=>$hash_in['cardValidationNumber'],
+		'type'=>$hash_in['type']);
+		#Checker.purge_null(hash_out)
+		#Checker.required_missing(hash_out)
+		return hash_out;
+	}
+
+	public static function payPal($hash_in)
+	{
+		$hash_out = array(
+		'payerId'=>(($hash_in['payerId'] == NULL) ? 'REQUIRED':$hash_in['payerId']),
+		'token'=>$hash_in['token'],
+		'transactionId'=>(($hash_in['transactionId'] == NULL) ? 'REQUIRED':$hash_in['transactionId']));
+		#Checker.purge_null(hash_out)
+		#Checker.required_missing(hash_out)
+		return $hash_out;
+	}
+
+	#paypal field for credit transaction
+	public static function credit_payPal($hash_in)
+	{
+		$hash_out = array(
+		'payerId'=>(($hash_in['payerId'] == NULL) ? 'REQUIRED':$hash_in['payerId']),
+		'payerEmail' =>(($hash_in['payerEmail'] == NULL) ? 'REQUIRED':$hash_in['payerEmail']));
+		#Checker.purge_null(hash_out)
+		#choice_hash={
+		#'1'=>hash_out[:payerId],'2'=>hash_out[:payerEmail]}
+		#Checker.choice(choice_hash)
+		#Checker.required_missing(hash_out)
+		return $hash_out;
+		}
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	?>
