@@ -183,6 +183,70 @@ class AllTests extends UnitTestCase{
 		$this->assertEqual($hash_out['sellerMerchantCategoryCode'], NULL);
 	
 	}
+	
+	function test_simple_cardType()
+	{
+		$hash = array(
+		'type'=>'VISA',
+		'track'=>'123',
+		'number'=>'4100000000000001',
+		'expDate'=>'2013',
+		'cardValidationNum'=>'123');
+		$hash_out = XMLFields::cardType($hash);
+		$this->assertEqual($hash_out['type'], 'VISA');
+		$this->assertEqual($hash_out['track'], '123');
+		$this->assertEqual($hash_out['number'], '4100000000000001');
+		$this->assertEqual($hash_out['expDate'], '2013');
+		$this->assertEqual($hash_out['cardValidationNum'], '123');
+	
+	}
+	
+	function test_simple_cardTokenType()
+	{
+		$hash = array(
+      'expDate'=>'2013',
+      'cardValidationNumber'=>'123',
+      'type'=>'VISA');
+		$hash_out = XMLFields::cardTokenType($hash);
+		$this->assertEqual($hash_out['type'], 'VISA');
+		$this->assertEqual($hash_out['expDate'], '2013');
+		$this->assertEqual($hash_out['cardValidationNum'], '123');
+		$this->assertEqual($hash_out['litleToken'], 'REQUIRED');
+	
+	}
+	
+	function test_simple_cardPaypageType()
+	{
+		$hash = array(
+      'expDate'=>'2013',
+      'cardValidationNumber'=>'123',
+      'type'=>'VISA');
+		$hash_out = XMLFields::cardPaypageType($hash);
+		$this->assertEqual($hash_out['type'], 'VISA');
+		$this->assertEqual($hash_out['expDate'], '2013');
+		$this->assertEqual($hash_out['cardValidationNum'], '123');
+		$this->assertEqual($hash_out['paypageRegistrationId'], 'REQUIRED');
+	
+	}
+	
+	function test_simple_payPal()
+	{
+		$hash = array(
+      'token'=>'123');
+		$hash_out = XMLFields::payPal($hash);
+		$this->assertEqual($hash_out['token'], '123');
+		$this->assertEqual($hash_out['payerId'], 'REQUIRED');
+		$this->assertEqual($hash_out['transactionId'], 'REQUIRED');
+	
+	}
+	function test_simple_credit_payPal()
+	{
+		$hash = array();
+		$hash_out = XMLFields::credit_payPal($hash);
+		$this->assertEqual($hash_out['payerId'], 'REQUIRED');
+		$this->assertEqual($hash_out['payerEmail'], 'REQUIRED');
+	
+	}
 
 }
 ?>
