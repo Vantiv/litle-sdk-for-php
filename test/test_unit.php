@@ -32,8 +32,10 @@ $rob = LitleXmlMapper::request($ob,'void',$config);
 #echo $rob->saveXML();
 
 $books = $rob->getElementsByTagName("litleTxnId");
-echo $books->nodeValue, PHP_EOL;
-
+#echo $books->nodeValue, PHP_EOL;
+foreach ($books as $book) {
+	echo $book->nodeValue;
+}
 #$x = $rob->documentElement;
 
 #$this->assertEqual($responseArray["usr"],"IMPTEST");
