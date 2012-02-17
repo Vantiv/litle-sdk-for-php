@@ -10,7 +10,9 @@ class Checker
 		else
 		{
 			return "REQUIRED";
+			#change this later to raise a standard error
 		}
 	}
+	
 }
 ?>

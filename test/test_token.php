@@ -19,7 +19,7 @@
 	$ob=createObj::createToken($config);
 	$type = 'registerTokenRequest';
     	$converter=new Obj2xml("litleOnlineRequest",$config);
-    	header("Content-Type:text/xml");
+  #  	header("Content-Type:text/xml");
 	$req = $converter->toXml($ob,$type,$config);
 	if (!$req){
 		echo "error with Litle Online Request";
