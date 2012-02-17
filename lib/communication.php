@@ -1,4 +1,7 @@
 <?php 
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
 class communication{
   function httpRequest($req){
 	$ch = curl_init();
