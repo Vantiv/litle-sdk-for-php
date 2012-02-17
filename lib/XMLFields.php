@@ -145,7 +145,7 @@ class XMLFields
 		$hash_out = array(
 		"capability"=>(Checker::requiredValue($hash_in["capability"])),
 		"entryMode"=>(Checker::requiredValue($hash_in["entryMode"])),
-		"cardholderId"=>(Checker::requiredValue($hash_in["cardholderId"])));)
+		"cardholderId"=>(Checker::requiredValue($hash_in["cardholderId"])));
 		return $hash_out;
 	}
 
@@ -233,7 +233,7 @@ class XMLFields
 		"paypageRegistrationId"=> (Checker::requiredValue($hash_in["paypageRegistrationId"])),
 		"expDate"=>$hash_in["expDate"] ,
 		"cardValidationNum"=>$hash_in["cardValidationNumber"],
-		"type"=>$hash_in["type"]);)
+		"type"=>$hash_in["type"]);
 		return $hash_out;
 	}
 

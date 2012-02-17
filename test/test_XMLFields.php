@@ -86,10 +86,7 @@ class AllTests extends UnitTestCase{
 		"avsResult"=> "123",
 		"ardValidationResult"=>"456",
 		"advancedAVSResult"=>"789");
-		$hash_out = XMLFiel
-		echo "error with Litle Online Response ";
-	}
-		ds::fraudResult($hash);
+		$hash_out = XMLFields::fraudResult($hash);
 		$this->assertEqual($hash_out["avsResult"],"123");
 		$this->assertEqual($hash_out["authenticationResult"], NULL);
 		$this->assertEqual($hash_out["advancedAVSResult"],"789");
@@ -151,10 +148,7 @@ class AllTests extends UnitTestCase{
 		"itemDiscountAmount"=>"3",
 		"commodityCode"=>"3",
 		"detailTax"=> (array("taxAmount" => "high")));
-		$hash_out = XMLFiel
-		echo "error with Litle Online Response ";
-	}
-		ds::lineItemData($hash);
+		$hash_out = XMLFields::lineItemData($hash);
 		$this->assertEqual($hash_out["lineItemTotal"],"1");
 		$this->assertEqual($hash_out["unitCost"], NULL);
 		$this->assertEqual($hash_out["lineItemTotalWithTax"],"2");
@@ -265,7 +259,7 @@ class AllTests extends UnitTestCase{
 		$this->assertEqual($hash_out["URL"], NULL);
 		$this->assertEqual($hash_out["descriptor"], "123");
 	}
-	
+
 	function test_taxBilling()
 	{
 		$hash = array(
@@ -276,14 +270,14 @@ class AllTests extends UnitTestCase{
 		$this->assertEqual($hash_out["state"], "MA");
 		$this->assertEqual($hash_out["govtTxnType"], "REQUIRED");
 	}
-	
+
 	function test_processingInstructions()
 	{
 		$hash = array("bypassVelocityCheck"=>"yes");
 		$hash_out = XMLFields::processingInstructions($hash);
 		$this->assertEqual($hash_out["bypassVelocityCheck"], "yes");
 	}
-	
+
 	function test_echeckForTokenType()
 	{
 		$hash = array("accNum"=>"1322143124");
@@ -313,7 +307,7 @@ class AllTests extends UnitTestCase{
 		$this->assertEqual($hash_out["routingNum"], "REQUIRED");
 		$this->assertEqual($hash_out["checkNum"], NUll);
 	}
-	
+
 	function test_echeckTokenType()
 	{
 		$hash = array(
