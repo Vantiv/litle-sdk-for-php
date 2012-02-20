@@ -1,6 +1,7 @@
 <?php
-#error_reporting(E_ALL);
-#ini_set('display_errors', '1');
+error_reporting(E_ALL ^ E_NOTICE);
+ini_set('display_errors', '1');
+
 
 require_once realpath(dirname(__FILE__)) . '/Checker.php';
 require_once realpath(dirname(__FILE__)) . '/XMLFields.php';
@@ -12,10 +13,17 @@ class LitleOnlineRequest
 	public static function initilaize()
 	{
 		#load configuration file
-	}
+	
+		}
 
 	public static function authorizationRequest($hash_in)
 	{
+		$config = array('user'=>'PHXMLTEST',
+				'password' => 'certpass', 
+				'merchantId' => '101',
+				'version' => '8.10', 
+				'reportGrop' => 'planets',
+				'id' => '10');
 		$hash_out = array(
 			'litleTxnId'=> Checker::required_field($hash_in['litleTxnId']),
 			'orderId'=> Checker::required_field($hash_in['orderId']),
@@ -37,14 +45,14 @@ class LitleOnlineRequest
 			'enhancedData'=>XMLFields::enhancedData($hash_in['enhancedData']),
 			'amexAggregatorData'=>XMLFields::amexAggregatorData($hash_in['amexAggregatorData']),
 			'allowPartialAuth'=>$hash_in['allowPartialAuth'],
-			'healthcareIIAS'=>XMLFields.healthcareIIAS($hash_in['healthcareIIAS']),
+			'healthcareIIAS'=>XMLFields::healthcareIIAS($hash_in['healthcareIIAS']),
 			'filtering'=>XMLFields::filteringType($hash_in['filtering']),
 			'merchantData'=>XMLFields::filteringType($hash_in['merchantData']),
 			'recyclingRequest'=>XMLFields::recyclingRequestType($hash_in['recyclingRequest']));
 		
 		//	litleOnline_hash = build_full_hash($hash_in, {
 		//		:authorization => hash_out})
-		//		LitleXmlMapper::request('authorizationRequest',litleOnline_hash,@config_hash)
+				echo LitleXmlMapper::request('authorizationRequest',$hash_in,$config);
 	}
 
 	#private function($config)
