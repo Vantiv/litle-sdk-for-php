@@ -1,6 +1,6 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
+#error_reporting(E_ALL);
+#ini_set('display_errors', '1');
 
 #require_once("../simpletest/autorun.php");
 #header("Content-Type:text/xml");
@@ -27,11 +27,13 @@ $config = array('usr'=>'IMPTEST',
 			'id'=>'12',
 			'reportGroup'=>'Planets', 
 			'litleTxnId'=>'2234567890');
-$ob=createObj::createVoid($config);
-$rob = LitleXmlMapper::request($ob,'void',$config);
+#$ob=createObj::createVoid($config);
+#$rob = LitleXmlMapper::request($ob,'void',$config);
+echo LitleOnlineRequest::authorizationRequest($config);
+
 #echo $rob->saveXML();
 
-echo Xml_parser::get_node($rob,'litleTxnId')
+#echo Xml_parser::get_node($rob,'litleTxnId')
 
 #$x = $rob->documentElement;
 

@@ -174,7 +174,6 @@ class AllTests extends UnitTestCase{
 		$this->assertEqual($hash_out["detailTax"]["taxAmount"],"high");
 		$this->assertEqual($hash_out["detailTax"]["taxRate"],NULL);
 	}
-
 	function test_simple_amexAggregatorData()
 	{
 		$hash = array(
@@ -256,7 +255,7 @@ class AllTests extends UnitTestCase{
 		"descriptor"=>"123");
 		$hash_out = XMLFields::customBilling($hash);
 		$this->assertEqual($hash_out["phone"], "978-287");
-		$this->assertEqual($hash_out["URL"], NULL);
+		$this->assertEqual($hash_out["url"], NULL);
 		$this->assertEqual($hash_out["descriptor"], "123");
 	}
 

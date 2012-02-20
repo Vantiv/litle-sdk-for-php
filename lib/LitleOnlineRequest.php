@@ -1,11 +1,12 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
+#error_reporting(E_ALL);
+#ini_set('display_errors', '1');
 
 require_once realpath(dirname(__FILE__)) . '/Checker.php';
 require_once realpath(dirname(__FILE__)) . '/XMLFields.php';
 require_once realpath(dirname(__FILE__)) . '/Obj2xml.php';
 require_once realpath(dirname(__FILE__)) . '/communication.php';
+
 class LitleOnlineRequest
 {
 	public static function initilaize()
@@ -16,7 +17,7 @@ class LitleOnlineRequest
 	public static function authorizationRequest($hash_in)
 	{
 		$hash_out = array(
-			'litleTxnId'=> Checker::$hash_in['litleTxnId'],
+			'litleTxnId'=> Checker::required_field($hash_in['litleTxnId']),
 			'orderId'=> Checker::required_field($hash_in['orderId']),
 			'amount'=>Checker::required_field($hash_in['amount']),
 			'orderSource'=>Checker::required_field($hash_in['orderSource']),
@@ -41,9 +42,9 @@ class LitleOnlineRequest
 			'merchantData'=>XMLFields::filteringType($hash_in['merchantData']),
 			'recyclingRequest'=>XMLFields::recyclingRequestType($hash_in['recyclingRequest']));
 		
-			#litleOnline_hash = build_full_hash($hash_in, {
-				#:authorization => hash_out})
-				#LitleXmlMapper::request('authorizationRequest',litleOnline_hash,@config_hash)
+		//	litleOnline_hash = build_full_hash($hash_in, {
+		//		:authorization => hash_out})
+		//		LitleXmlMapper::request('authorizationRequest',litleOnline_hash,@config_hash)
 	}
 
 	#private function($config)
@@ -55,26 +56,4 @@ class LitleOnlineRequest
 	#}
 	
 }
-// echo "Start";
-// $hash=array(
-// 		'customerReference'=>'yes',
-// 		'salesTax'=>'5',
-// 		'deliveryType'=>'ups',
-// 		'taxExempt'=>'no',
-// 		'lineItemData' => (array('lineItemTotal'=>'1',
-// 		'itemDiscountAmount'=>'3')));
-// $config = array('usr'=>'IMPTEST',
-// 			'password'=>'cert3d6Z',
-// 			'merchantId'=>'087900',
-// 			'version'=>'8.8',
-// 			'reportGroup'=>'Planets',
-// 			'litleTxnId'=>'1234567890');
-// $type = 'authentication';
-// $hash_out = XMLFields::enhancedData($hash);
-// $converter=new Obj2xml("litleOnlineRequest",$config);
-// #header("Content-Type:text/xml");
-// $req = $converter->toXml($hash,$type,$config);
-// $response = communication::httpRequest($req);
-// echo $response;
-// echo $req;
 ?>

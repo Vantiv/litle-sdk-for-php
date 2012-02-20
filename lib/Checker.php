@@ -1,10 +1,10 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
+#error_reporting(E_ALL);
+#ini_set('display_errors', '1');
 
 class Checker
 {
-	function requiredValue($value)
+	function required_field($value)
 	{
 		if ($value != null)
 		{
@@ -17,5 +17,18 @@ class Checker
 		}
 	}
 	
+	function optional_field($value)
+	{
+		if ($value != null)
+		{
+			return $value;
+		}
+		else
+		{
+			return "VALUE";
+			#unset($value);
+			#change this later to raise a standard error
+		}
+	}
 }
 ?>
