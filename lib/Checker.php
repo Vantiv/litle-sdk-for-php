@@ -13,19 +13,22 @@ class Checker
 			#change this later to raise a standard error
 		}
 	}
-	
-	function optional_field($value)
+
+	function optional_field($hash)
 	{
-		if ($value != null)
-		{
-			return $value;
+		$i= 0;
+		foreach ($hash as  $key => $value){
+			$i|=$value;
 		}
-		else
-		{
-			return "VALUE";
-			#unset($value);
-			#change this later to raise a standard error
-		}
+	     if ($i == 0)
+	     {
+	     	unset($hash);
+	     }
+	     else
+	     {
+	     	return $hash;
+	     }
+	
 	}
 }
 ?>

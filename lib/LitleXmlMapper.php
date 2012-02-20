@@ -37,9 +37,9 @@ class LitleXmlMapper
 	function request($hash,$type,$config)
 	{
 		$request = Obj2xml::toXml($hash,$type,$config);
-		echo $request;
+		#echo $request;
 	    $response = communication::httpRequest($request);
-	    #echo $response;
+	    echo $response;
 		$respOb = Xml_parser::domParser($response);
 		return $respOb;
 	}

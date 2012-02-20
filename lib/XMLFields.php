@@ -136,7 +136,7 @@ class XMLFields
 	public static function healthcareIIAS($hash_in)
 	{
 		$hash_out = array(
-		"healthcareAmounts"=>XMLFields::healthcareAmounts($hash_in["healthcareAmounts"]),
+		"healthcareAmounts"=>Checker::optional_field(XMLFields::healthcareAmounts($hash_in["healthcareAmounts"])),
 		"IIASFlag"=>$hash_in["IIASFlag"]);
 		return $hash_out;
 	}
@@ -175,7 +175,7 @@ class XMLFields
 		"itemDiscountAmount"=>$hash_in["itemDiscountAmount"],
 		"commodityCode"=>$hash_in["commodityCode"],
 		"unitCost"=>$hash_in["unitCost"],
-		"detailTax"=>XMLFields::detailTax($hash_in["detailTax"]));
+		"detailTax"=>Checker::optional_field(XMLFields::detailTax($hash_in["detailTax"])));
 		return $hash_out;
 	}
 
@@ -194,8 +194,8 @@ class XMLFields
 		"destinationCountryCode"=>$hash_in["destinationCountryCode"],
 		"invoiceReferenceNumber"=>$hash_in["invoiceReferenceNumber"],
 		"orderDate"=>$hash_in["orderDate"],
-		"detailTax"=>XMLFields::detailTax($hash_in["detailTax"]),
-		"lineItemData"=>XMLFields::lineItemData($hash_in["lineItemData"]));
+		"detailTax"=>Checker::optional_field(XMLFields::detailTax($hash_in["detailTax"])),
+		"lineItemData"=>Checker::optional_field(XMLFields::lineItemData($hash_in["lineItemData"])));
 		return $hash_out;
 	}
 

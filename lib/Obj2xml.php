@@ -66,35 +66,22 @@ class Obj2xml {
 private function iterateChildren($data,$transacType){
 	foreach($data as $key => $value)
 	{
-		if (is_string($value) || is_numeric($value)) {
-			// if there is another array found recrusively call this function
+		if ((is_string($value) && $value != 'REQUIRED') || is_numeric($value)) {
+			$transacType->addChild($key,$value);
+		}
+		elseif(is_array($value))
+		{
+			#$transacType->$name=$key;
 			#if (is_array($value))
 			#{
-			#$node = $transacType->addChild($key);
-			//#foreach($node as $key2 => $value2){
-			#	$node->addChild($key,$value);
-			#}
-			// recrusive call.
-			//Obj2xml::iterateChildren($value,$node);
-			#}
-		#else
-		#{
-		echo '1';
-		// add single node.
-		$value = htmlentities($value);
-		$transacType->addChild($key,$value);
+			#echo $key;
+			#var_dump($value);
+		#echo '            ';
+		$node = $transacType->addChild($key);
+
+		Obj2xml::iterateChildren($value,$node);
+
 		#}
-		}
-		elseif (is_array($value) && $value!=null){
-			$node = $transacType->addChild($key);
-			
-			#foreach($node as $key2 => $value2){
-			
-			#	if (is_string($value2) || is_numeric($value2)) {
-			#	$node->addChild($key2,$value2);
-			#	}
-			#}
-				
 		}
 	}
 }
