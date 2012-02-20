@@ -2,19 +2,16 @@
 error_reporting(E_ALL ^ E_NOTICE);
 ini_set('display_errors', '1');
 
-
+require_once realpath(dirname(__FILE__)) . '/LitleXmlMapper.php';
 require_once realpath(dirname(__FILE__)) . '/Checker.php';
 require_once realpath(dirname(__FILE__)) . '/XMLFields.php';
-require_once realpath(dirname(__FILE__)) . '/Obj2xml.php';
-require_once realpath(dirname(__FILE__)) . '/communication.php';
-
 class LitleOnlineRequest
 {
 	public static function initilaize()
 	{
 		#load configuration file
 	
-		}
+	}
 
 	public static function authorizationRequest($hash_in)
 	{
@@ -53,7 +50,8 @@ class LitleOnlineRequest
 		//	litleOnline_hash = build_full_hash($hash_in, {
 		//		:authorization => hash_out})
 		
-				  LitleXmlMapper::request($hash_out,'authorization',$config);
+				  $respOb = LitleXmlMapper::request($hash_out,'authorization',$config);
+				  return $respOb;
 	}
 
 	#private function($config)

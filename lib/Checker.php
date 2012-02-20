@@ -18,7 +18,10 @@ class Checker
 	{
 		$i= 0;
 		foreach ($hash as  $key => $value){
-			$i|=$value;
+			$i|=($value);
+			//if ($value != NULL){
+			//	$i=1;
+			//}
 		}
 	     if ($i == 0)
 	     {

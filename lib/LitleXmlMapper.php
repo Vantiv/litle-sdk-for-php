@@ -31,7 +31,8 @@ ini_set('display_errors', '1');
 
 require_once realpath(dirname(__FILE__)) . '/communication.php';
 require_once realpath(dirname(__FILE__)) . '/Xml_parser.php';
-require_once realpath(dirname(__FILE__)) . '/LitleOnlineRequest.php';
+require_once realpath(dirname(__FILE__)) . '/Obj2xml.php';
+
 class LitleXmlMapper
 {
 	function request($hash,$type,$config)
@@ -39,8 +40,9 @@ class LitleXmlMapper
 		$request = Obj2xml::toXml($hash,$type,$config);
 		#echo $request;
 	    $response = communication::httpRequest($request);
-	    echo $response;
+		#echo $response;
 		$respOb = Xml_parser::domParser($response);
+		#var_dump($respOb);
 		return $respOb;
 	}
 

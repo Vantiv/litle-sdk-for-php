@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL ^ E_NOTICE);
+ini_set('display_errors', '1');
 #require_once realpath(dirname(__FILE__)) . "/../simpletest/test/autorun.php";
 require_once("../simpletest/autorun.php");
 require_once realpath(dirname(__FILE__)) . "/../lib/XMLFields.php";
@@ -192,7 +194,7 @@ class AllTests extends UnitTestCase{
 		"expDate"=>"2013",
 		"cardValidationNum"=>"123");
 		$hash_out = XMLFields::cardType($hash);
-		$this->assertEqual($hash_out["type"], "VISA");
+		$this->assertEqual($hash_out["type"], "VI");
 		$this->assertEqual($hash_out["track"], NULL);
 		$this->assertEqual($hash_out["number"], "4100000000000001");
 		$this->assertEqual($hash_out["expDate"], "2013");
