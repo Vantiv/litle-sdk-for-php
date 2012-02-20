@@ -46,8 +46,16 @@ class Xml_parser{
 		$doc = new DOMDocument();
 		$doc->loadXML($xml);
 		return $doc;
-		
 	}
-
+	
+	function get_node($xml, $string)
+	{
+		$books = $xml->getElementsByTagName($string);
+		#echo $books->nodeValue, PHP_EOL;
+		foreach ($books as $book) {
+			$val = $book->nodeValue;
+		}
+		return $val;
+	}
 }
 ?>

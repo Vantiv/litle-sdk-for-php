@@ -25,17 +25,14 @@ $config = array('usr'=>'IMPTEST',
 			'merchantId'=>'087900',
 			'version'=>'8.8',
 			'id'=>'12',
-			'reportGroup'=>'Planets',
-			'litleTxnId'=>'1234567890');
+			'reportGroup'=>'Planets', 
+			'litleTxnId'=>'2234567890');
 $ob=createObj::createVoid($config);
 $rob = LitleXmlMapper::request($ob,'void',$config);
 #echo $rob->saveXML();
 
-$books = $rob->getElementsByTagName("litleTxnId");
-#echo $books->nodeValue, PHP_EOL;
-foreach ($books as $book) {
-	echo $book->nodeValue;
-}
+echo Xml_parser::get_node($rob,'litleTxnId')
+
 #$x = $rob->documentElement;
 
 #$this->assertEqual($responseArray["usr"],"IMPTEST");
