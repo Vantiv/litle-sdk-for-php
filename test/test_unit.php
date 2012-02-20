@@ -1,7 +1,4 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
-
 #require_once("../simpletest/autorun.php");
 #header("Content-Type:text/xml");
 require_once('../simpletest/unit_tester.php');
@@ -24,13 +21,20 @@ $config = array('usr'=>'IMPTEST',
 			'password'=>'cert3d6Z',
 			'merchantId'=>'087900',
 			'version'=>'8.8',
+'card'=>array('type'=>'VI',
+		'number'=>'4100000000000001',
+		'expDate'=>'123',
+		'cardValidationNum' => '123'),
 			'id'=>'12',
-			'reportGroup'=>'Planets', 
+			'orderId'=> '21',
+			'reportGroup'=>'Planets',
+			'orderSource'=>'ecommerce',
+			'amount'=>'123', 
 			'litleTxnId'=>'2234567890');
 #$ob=createObj::createVoid($config);
 #$rob = LitleXmlMapper::request($ob,'void',$config);
-echo LitleOnlineRequest::authorizationRequest($config);
-
+$returned = LitleOnlineRequest::authorizationRequest($config);
+#echo Xml_parser::get_node($rob,'litleTxnId')
 #echo $rob->saveXML();
 
 #echo Xml_parser::get_node($rob,'litleTxnId')

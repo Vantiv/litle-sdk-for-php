@@ -22,10 +22,10 @@ class LitleOnlineRequest
 				'password' => 'certpass', 
 				'merchantId' => '101',
 				'version' => '8.10', 
-				'reportGrop' => 'planets',
+				'reportGroup' => 'planets',
 				'id' => '10');
 		$hash_out = array(
-			'litleTxnId'=> Checker::required_field($hash_in['litleTxnId']),
+			#'litleTxnId'=> Checker::required_field($hash_in['litleTxnId']),
 			'orderId'=> Checker::required_field($hash_in['orderId']),
 			'amount'=>Checker::required_field($hash_in['amount']),
 			'orderSource'=>Checker::required_field($hash_in['orderSource']),
@@ -52,7 +52,8 @@ class LitleOnlineRequest
 		
 		//	litleOnline_hash = build_full_hash($hash_in, {
 		//		:authorization => hash_out})
-				echo LitleXmlMapper::request('authorizationRequest',$hash_in,$config);
+		
+				  LitleXmlMapper::request($hash_out,'authorization',$config);
 	}
 
 	#private function($config)

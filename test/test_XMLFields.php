@@ -187,7 +187,7 @@ class AllTests extends UnitTestCase{
 	function test_simple_cardType()
 	{
 		$hash = array(
-		"type"=>"VISA",
+		"type"=>"VI",
 		"number"=>"4100000000000001",
 		"expDate"=>"2013",
 		"cardValidationNum"=>"123");
