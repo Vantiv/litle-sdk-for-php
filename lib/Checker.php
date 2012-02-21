@@ -13,33 +13,6 @@ class Checker
 		}
 	}
 
-	function optional_field($hash)
-	{
-		if (count($hash) == 1 || count($hash) == 0)
-		{
-			return $hash;
-		}
-		else
-		{
-			$i= 0;
-			foreach ($hash as  $key => $value){
-				$i|=($value);
-				//if ($value != NULL){
-				//	$i=1;
-				//}
-			}
-			if ($i == 0)
-			{
-				unset($hash);
-			}
-			else
-			{
-				return $hash;
-			}
-		}
-
-	}
-
 	function choice($choiceArray)
 	{
 		$i= 0;
@@ -65,18 +38,6 @@ class Checker
 
 	}
 
-	function exists($hash_in,$hash_out)
-	{
-		// 		$i = O;
-		// 		foreach($hash_in as $key => $value)
-		// 		{
-		// 			echo $value;
-		// 			#$i|=($value);
-		// 		}
-		if (is_array($hash_in))
-		{
-			return $hash_out;
-		}
-	}
+
 }
 ?>

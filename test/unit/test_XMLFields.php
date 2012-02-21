@@ -2,9 +2,9 @@
 error_reporting(E_ALL ^ E_NOTICE);
 ini_set('display_errors', '1');
 #require_once realpath(dirname(__FILE__)) . "/../simpletest/test/autorun.php";
-require_once("../simpletest/autorun.php");
-require_once realpath(dirname(__FILE__)) . "/../lib/XMLFields.php";
-require_once realpath(dirname(__FILE__)) . "/../lib/Checker.php";
+require_once("../../simpletest/autorun.php");
+require_once realpath(dirname(__FILE__)) . "/../../lib/XMLFields.php";
+require_once realpath(dirname(__FILE__)) . "/../../lib/Checker.php";
 
 class Tests_XMLFIELDS extends UnitTestCase{
 

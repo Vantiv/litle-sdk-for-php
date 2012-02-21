@@ -34,7 +34,9 @@ class XMLFields
 {
 	public static function contact($hash_in)
 	{
-		$hash_out = array(
+		if (isset($hash_in))
+		{
+			$hash_out = array(
 		"name"=>$hash_in["name"],
 		"firstName" =>$hash_in["firstName"],
 		"middleInitial"=>$hash_in["middleInitial"],
@@ -48,15 +50,17 @@ class XMLFields
 		"zip"=>$hash_in["zip"],
 		"country"=>$hash_in["country"],
 		"email"=>$hash_in["email"],
-		"phone"=>$hash_in["phone"]
-		);
-		Checker::exists($hash_in,$hash_out);
+		"phone"=>$hash_in["phone"]);
+			return $hash_out;
+		}
 
 	}
 
 	public static function customerInfo($hash_in)
 	{
-		$hash_out=array(
+		if (isset($hash_in))
+		{
+			$hash_out=array(
 		"ssn"=>$hash_in["ssn"],
 		"dob"=>$hash_in["dob"],
 		"customerRegistrationDate"=>$hash_in["customerRegistrationDate"],
@@ -68,15 +72,16 @@ class XMLFields
 		"customerWorkTelephone"=>$hash_in["customerWorkTelephone"],
 		"residenceStatus"=>$hash_in["residenceStatus"],
 		"yearsAtResidence"=>$hash_in["yearsAtResidence"],
-		"yearsAtEmployer"=>$hash_in["yearsAtEmployer"]
-		);
-		Checker::exists($hash_in,$hash_out);
-
+		"yearsAtEmployer"=>$hash_in["yearsAtEmployer"]);
+			return $hash_out;
+		}
 	}
 
 	public static function billMeLaterRequest($hash_in)
 	{
-		$hash_out = array(
+		if (isset($hash_in))
+		{
+			$hash_out = array(
 		"bmlMerchantId"=>$hash_in["bmlMerchantId"],
 		"termsAndConditions"=>$hash_in["termsAndConditions"],
 		"preapprovalNumber"=>$hash_in["preapprovalNumber"],
@@ -89,91 +94,106 @@ class XMLFields
 		"virtualAuthenticationKeyPresenceIndicator"=>$hash_in["virtualAuthenticationKeyPresenceIndicator"] ,
 		"virtualAuthenticationKeyData"=>$hash_in["virtualAuthenticationKeyData"],
 		"itemCategoryCode"=>$hash_in["itemCategoryCode"],
-		"authorizationSourcePlatform"=>$hash_in["authorizationSourcePlatform"]
-		);
-		Checker::exists($hash_in,$hash_out);
-
+		"authorizationSourcePlatform"=>$hash_in["authorizationSourcePlatform"]);
+			return $hash_out;
+		}
 	}
 
 	public static function fraudCheckType($hash_in)
 	{
-		$hash_out =array(
+		if (isset($hash_in))
+		{
+			$hash_out =array(
 		"authenticationValue"=>$hash_in["authenticationValue"],
 		"authenticationTransactionId"=>$hash_in["authenticationTransactionId"],
 		"customerIpAddress"=>$hash_in["customerIpAddress"],
 		"authenticatedByMerchant"=>$hash_in["authenticatedByMerchant"]);
-		Checker::exists($hash_in,$hash_out);
-
+			return $hash_out;
+		}
 	}
 
 	public static function authInformation($hash_in)
 	{
-		$hash_out = array(
+		if (isset($hash_in))
+		{
+			$hash_out = array(
 		"authDate"=>(Checker::required_field($hash_in["authDate"])),
 		"authCode"=>(Checker::required_field($hash_in["authCode"])),
 		"fraudResult"=>XMLFields::fraudResult($hash_in["detailTax"]),
 		"authAmount"=>$hash_in["authAmount"]);
-		Checker::exists($hash_in,$hash_out);
-
+			return $hash_out;
+		}
 	}
 
 	public static function fraudResult($hash_in)
 	{
-		$hash_out= array(
+		if (isset($hash_in))
+		{
+			$hash_out= array(
 		"avsResult"=>$hash_in["avsResult"],
 		"ardValidationResult"=>$hash_in["cardValidationResult"],
 		"authenticationResult"=>$hash_in["authenticationResult"],
 		"advancedAVSResult"=>$hash_in["advancedAVSResult"]);
-		Checker::exists($hash_in,$hash_out);
-
+			return $hash_out;
+		}
 	}
 
 	public static function healthcareAmounts($hash_in)
 	{
-		$hash_out = array(
+		if (isset($hash_in))
+		{
+			$hash_out = array(
 		"totalHealthcareAmount"=>$hash_in["totalHealthcareAmount"],
 		"RxAmount"=>$hash_in["RxAmount"],
 		"visionAmount"=>$hash_in["visionAmount"],
 		"clinicOtherAmount"=>$hash_in["clinicOtherAmount"],
 		"dentalAmount"=>$hash_in["dentalAmount"]);
-		Checker::exists($hash_in,$hash_out);
-
+			return $hash_out;
+		}
 	}
 
 	public static function healthcareIIAS($hash_in)
 	{
-		$hash_out = array(
-		"healthcareAmounts"=>Checker::optional_field(XMLFields::healthcareAmounts($hash_in["healthcareAmounts"])),
+		if (isset($hash_in))
+		{
+			$hash_out = array(
+		"healthcareAmounts"=>(XMLFields::healthcareAmounts($hash_in["healthcareAmounts"])),
 		"IIASFlag"=>$hash_in["IIASFlag"]);
-		Checker::exists($hash_in,$hash_out);
-
+			return $hash_out;
+		}
 	}
 
 	public static function pos($hash_in)
 	{
-		$hash_out = array(
+		if (isset($hash_in))
+		{
+			$hash_out = array(
 		"capability"=>(Checker::required_field($hash_in["capability"])),
 		"entryMode"=>(Checker::required_field($hash_in["entryMode"])),
 		"cardholderId"=>(Checker::required_field($hash_in["cardholderId"])));
-		Checker::exists($hash_in,$hash_out);
-
+			return $hash_out;
+		}
 	}
 
 	public static function detailTax($hash_in)
 	{
-		$hash_out = array(
+		if (isset($hash_in))
+		{
+			$hash_out = array(
 		"taxIncludedInTotal"=>$hash_in["taxIncludedInTotal"],
 		"taxAmount"=>$hash_in["taxAmount"],
 		"taxRate"=>$hash_in["taxRate"],
 		"taxTypeIdentifier"=>$hash_in["taxTypeIdentifier"],
 		"cardAcceptorTaxId"=>$hash_in["cardAcceptorTaxId"]);
-		Checker::exists($hash_in,$hash_out);
-
+			return $hash_out;
+		}
 	}
 
 	public static function lineItemData($hash_in)
 	{
-		$hash_out = array(
+		if (isset($hash_in))
+		{
+			$hash_out = array(
 		"itemSequenceNumber"=>$hash_in["itemSequenceNumber"],
 		"itemDescription"=>$hash_in["itemDescription"],
 		"productCode"=>$hash_in["productCode"],
@@ -185,14 +205,16 @@ class XMLFields
 		"itemDiscountAmount"=>$hash_in["itemDiscountAmount"],
 		"commodityCode"=>$hash_in["commodityCode"],
 		"unitCost"=>$hash_in["unitCost"],
-		"detailTax"=>Checker::optional_field(XMLFields::detailTax($hash_in["detailTax"])));
-		Checker::exists($hash_in,$hash_out);
-
+		"detailTax"=>(XMLFields::detailTax($hash_in["detailTax"])));
+			return $hash_out;
+		}
 	}
 
 	public static function enhancedData($hash_in)
 	{
-		$hash_out = array(
+		if (isset($hash_in))
+		{
+			$hash_out = array(
 		"customerReference"=>$hash_in["customerReference"],
 		"salesTax"=>$hash_in["salesTax"],
 		"deliveryType"=>$hash_in["deliveryType"],
@@ -205,19 +227,21 @@ class XMLFields
 		"destinationCountryCode"=>$hash_in["destinationCountryCode"],
 		"invoiceReferenceNumber"=>$hash_in["invoiceReferenceNumber"],
 		"orderDate"=>$hash_in["orderDate"],
-		"detailTax"=>Checker::optional_field(XMLFields::detailTax($hash_in["detailTax"])),
-		"lineItemData"=>Checker::optional_field(XMLFields::lineItemData($hash_in["lineItemData"])));
-		Checker::exists($hash_in,$hash_out);
-
+		"detailTax"=>(XMLFields::detailTax($hash_in["detailTax"])),
+		"lineItemData"=>(XMLFields::lineItemData($hash_in["lineItemData"])));
+			return $hash_out;
+		}
 	}
 
 	public static function amexAggregatorData($hash_in)
 	{
-		$hash_out = array(
+		if (isset($hash_in))
+		{
+			$hash_out = array(
 		"sellerId"=>$hash_in["sellerId"],
 		"sellerMerchantCategoryCode"=>$hash_in["sellerMerchantCategoryCode"]);
-		Checker::exists($hash_in,$hash_out);
-
+			return $hash_out;
+		}
 	}
 
 	public static function cardType($hash_in)
@@ -236,24 +260,28 @@ class XMLFields
 
 	public static function cardTokenType($hash_in)
 	{
-		$hash_out = array(
+		if (isset($hash_in))
+		{
+			$hash_out = array(
 		"litleToken"=>(Checker::required_field($hash_in["litleToken"])),
 		"expDate"=>$hash_in["expDate"],
 		"cardValidationNum"=>$hash_in["cardValidationNumber"],
 		"type"=>$hash_in["type"]);
-		Checker::exists($hash_in,$hash_out);
-
+			return $hash_out;
+		}
 	}
 
 	public static function cardPaypageType($hash_in)
 	{
-		$hash_out = array(
+		if (isset($hash_in))
+		{
+			$hash_out = array(
 		"paypageRegistrationId"=>(Checker::required_field($hash_in["paypageRegistrationId"])),
 		"expDate"=>$hash_in["expDate"] ,
 		"cardValidationNum"=>$hash_in["cardValidationNumber"],
 		"type"=>$hash_in["type"]);
-		Checker::exists($hash_in,$hash_out);
-
+			return $hash_out;
+		}
 	}
 
 	public static function paypal($hash_in)
@@ -276,7 +304,6 @@ class XMLFields
 			$hash_out = array(
 		"payerId"=>(Checker::required_field($hash_in["payerId"])),
 		"payerEmail" =>(Checker::required_field($hash_in["payerEmail"])));
-
 			return $hash_out;
 		}
 	}
@@ -302,7 +329,6 @@ class XMLFields
 		"taxAuthority"=>(Checker::required_field($hash_in["taxAuthority"])),
 		"state" =>(Checker::required_field($hash_in["state"])),
 		"govtTxnType" =>(Checker::required_field($hash_in["govtTxnType"])));
-			Checker::exists($hash_in,$hash_out);
 			return $hash_out;
 		}
 	}
@@ -313,7 +339,6 @@ class XMLFields
 		{
 			$hash_out = array(
 		"bypassVelocityCheck"=>$hash_in["bypassVelocityCheck"]);
-			Checker::exists($hash_in,$hash_out);
 			return $hash_out;
 		}
 	}
@@ -350,7 +375,6 @@ class XMLFields
 			"accNum" =>(Checker::required_field($hash_in["accNum"])),
 			"routingNum" =>(Checker::required_field($hash_in["routingNum"])),
 			"checkNum" =>$hash_in["checkNum"]);
-			Checker::exists($hash_in,$hash_out);
 			return $hash_out;
 		}
 	}
