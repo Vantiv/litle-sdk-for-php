@@ -42,7 +42,13 @@ class Checker
 
 	function choice($choiceArray)
 	{
-		if (count($choiceArray) > 1)
+		$i= 0;
+		for($y=0;$y<count($choiceArray);$y++){
+			if (isset($choiceArray[$y])){
+				$i++;
+			}
+		}
+		if ( $i > 1)
 		{
 			throw new Exception("Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
 		}
@@ -61,12 +67,12 @@ class Checker
 
 	function exists($hash_in,$hash_out)
 	{
-// 		$i = O;
-// 		foreach($hash_in as $key => $value)
-// 		{
-// 			echo $value; 
-// 			#$i|=($value);
-// 		}
+		// 		$i = O;
+		// 		foreach($hash_in as $key => $value)
+		// 		{
+		// 			echo $value;
+		// 			#$i|=($value);
+		// 		}
 		if (is_array($hash_in))
 		{
 			return $hash_out;

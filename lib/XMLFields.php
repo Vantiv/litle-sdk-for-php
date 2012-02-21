@@ -258,12 +258,14 @@ class XMLFields
 
 	public static function paypal($hash_in)
 	{
+		if (isset($hash_in))
+		{
 		$hash_out = array(
 		"payerId"=>(Checker::required_field($hash_in["payerId"])),
 		"token"=>$hash_in["token"],
 		"transactionId"=>(Checker::required_field($hash_in["transactionId"])));
-		#Checker::exists($hash_in,$hash_out);
-		Checker::exists($hash_in,$hash_out);
+		return $hash_out;
+		}
 	}
 
 	#paypal field for credit transaction

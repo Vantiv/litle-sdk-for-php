@@ -52,7 +52,7 @@ class LitleOnlineRequest
 			'recyclingRequest'=>Checker::optional_field(XMLFields::recyclingRequestType($hash_in['recyclingRequest'])));
 		Checker::requiredMissing($hash_out);
 		$request = Obj2xml::toXml($hash_out,'authorization',$config);
-		#$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
+		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
 		Checker::choice($choice_hash);
 		echo $request;
 		$respOb = $this->newXML->request($request);
