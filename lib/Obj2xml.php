@@ -25,7 +25,7 @@ class Obj2xml {
 	private function iterateChildren($data,$transacType){
 		foreach($data as $key => $value)
 		{
-			if ((is_string($value) && $value != 'REQUIRED') || is_numeric($value)) {
+			if ((is_string($value)) || is_numeric($value)) {
 				$transacType->addChild($key,$value);
 			}
 			elseif(is_array($value))

@@ -10,28 +10,67 @@ class Checker
 		else
 		{
 			return "REQUIRED";
-			#change this later to raise a standard error
 		}
 	}
 
 	function optional_field($hash)
 	{
-		$i= 0;
-		foreach ($hash as  $key => $value){
-			$i|=($value);
-			//if ($value != NULL){
-			//	$i=1;
-			//}
+		if (count($hash) == 1 || count($hash) == 0)
+		{
+			return $hash;
 		}
-	     if ($i == 0)
-	     {
-	     	unset($hash);
-	     }
-	     else
-	     {
-	     	return $hash;
-	     }
-	
+		else
+		{
+			$i= 0;
+			foreach ($hash as  $key => $value){
+				$i|=($value);
+				//if ($value != NULL){
+				//	$i=1;
+				//}
+			}
+			if ($i == 0)
+			{
+				unset($hash);
+			}
+			else
+			{
+				return $hash;
+			}
+		}
+
+	}
+
+	function choice($choiceArray)
+	{
+		if (count($choiceArray) > 1)
+		{
+			throw new Exception("Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
+		}
+	}
+
+	function requiredMissing($hash){
+
+		foreach ($hash as $key => $value)
+		{
+			if ($value == "REQUIRED"){
+				throw new Exception("Missing Required Field: /$key/");
+			}
+		}
+
+	}
+
+	function exists($hash_in,$hash_out)
+	{
+// 		$i = O;
+// 		foreach($hash_in as $key => $value)
+// 		{
+// 			echo $value; 
+// 			#$i|=($value);
+// 		}
+		if (is_array($hash_in))
+		{
+			return $hash_out;
+		}
 	}
 }
 ?>

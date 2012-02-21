@@ -26,7 +26,7 @@ class LitleOnlineRequest
 				'reportGroup' => 'planets',
 				'id' => '10');
 		$hash_out = array(
-		#'litleTxnId'=> Checker::required_field($hash_in['litleTxnId']),
+			'litleTxnId'=> ($hash_in['litleTxnId']),
 			'orderId'=> Checker::required_field($hash_in['orderId']),
 			'amount'=>Checker::required_field($hash_in['amount']),
 			'orderSource'=>Checker::required_field($hash_in['orderSource']),
@@ -50,8 +50,11 @@ class LitleOnlineRequest
 			'filtering'=>Checker::optional_field(XMLFields::filteringType($hash_in['filtering'])),
 			'merchantData'=>Checker::optional_field(XMLFields::filteringType($hash_in['merchantData'])),
 			'recyclingRequest'=>Checker::optional_field(XMLFields::recyclingRequestType($hash_in['recyclingRequest'])));
-		
+		Checker::requiredMissing($hash_out);
 		$request = Obj2xml::toXml($hash_out,'authorization',$config);
+		#$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
+		Checker::choice($choice_hash);
+		echo $request;
 		$respOb = $this->newXML->request($request);
 		return $respOb;
 	}
