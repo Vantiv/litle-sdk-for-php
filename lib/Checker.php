@@ -27,23 +27,5 @@ class Checker
 		}
 	}
 
-	function requiredMissing($hash){
-
-		foreach ($hash as $key => $value)
-		{
-			if ((is_string($value)) || is_numeric($value)){
-				if ($value == "REQUIRED"){
-					throw new Exception("Missing Required Field: /$key/");
-				}
-				elseif (is_array($value))
-				{
-					Checker::requiredMissing($value);
-				}
-			}
-		}
-
-	}
-
-
 }
 ?>
