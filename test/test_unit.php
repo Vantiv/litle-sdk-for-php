@@ -7,14 +7,11 @@ require_once('../simpletest/mock_objects.php');
 require_once realpath(dirname(__FILE__)) . '/../lib/communication.php';
 require_once realpath(dirname(__FILE__)) . '/../lib/LitleOnlineRequest.php';
 Mock::generate('communication');
-
+Mock::generate('LitleXmlMapper');
 class LitleUnitTest extends UnitTestCase
 {
 	function test_auth()
 	{
-		$connection = &new Mockcommunication();
-		$connection->expectOnce('httpRequest');
-		$connection->setReturnValue('httpRequest',$req);
 		$hash_in = array('usr'=>'IMPTEST',
 			'password'=>'cert3d6Z',
 			'merchantId'=>'087900',
@@ -29,9 +26,14 @@ class LitleUnitTest extends UnitTestCase
 			'orderSource'=>'ecommerce',
 			'amount'=>'123', 
 			'litleTxnId'=>'2234567890');
-	$retOb = LitleOnlineRequest::authorizationRequest($hash_in);
-	$user =  Xml_parser::get_node($retOb,'message');
-	$this->assertEqual($user,'Approved');
+		$mappTest = &new MockLitleXmlMapper();
+		$commTest = &new Mockcommunication();
+		$mappTest->expectOnce('request',array(new PatternExpectation('/.*/')));
+		
+		$litleTest = &new LitleOnlineRequest();
+		$litleTest->newXML = $mappTest;
+		$retOb = $litleTest->authorizationRequest($hash_in);
+
 	}
 }
 ?>

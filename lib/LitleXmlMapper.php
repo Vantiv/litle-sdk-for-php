@@ -35,10 +35,12 @@ require_once realpath(dirname(__FILE__)) . '/Obj2xml.php';
 
 class LitleXmlMapper
 {
-	function request($hash,$type,$config)
+	public function __construct()
 	{
-		$request = Obj2xml::toXml($hash,$type,$config);
-		#echo $request;
+	}
+	
+	public function request($request)
+	{
 	    $response = communication::httpRequest($request);
 		#echo $response;
 		$respOb = Xml_parser::domParser($response);

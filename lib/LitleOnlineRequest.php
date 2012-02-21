@@ -5,15 +5,19 @@ ini_set('display_errors', '1');
 require_once realpath(dirname(__FILE__)) . '/LitleXmlMapper.php';
 require_once realpath(dirname(__FILE__)) . '/Checker.php';
 require_once realpath(dirname(__FILE__)) . '/XMLFields.php';
+require_once realpath(dirname(__FILE__)) . '/communication.php';
+require_once realpath(dirname(__FILE__)) . '/Obj2xml.php';
+require_once realpath(dirname(__FILE__)) . '/Xml_parser.php';
+
 class LitleOnlineRequest
 {
-	public static function initilaize()
+	public function __construct()
 	{
 		#load configuration file
-	
+		$this->newXML = new LitleXmlMapper();
 	}
 
-	public static function authorizationRequest($hash_in)
+	public function authorizationRequest($hash_in)
 	{
 		$config = array('user'=>'PHXMLTEST',
 				'password' => 'certpass', 
@@ -22,7 +26,7 @@ class LitleOnlineRequest
 				'reportGroup' => 'planets',
 				'id' => '10');
 		$hash_out = array(
-			#'litleTxnId'=> Checker::required_field($hash_in['litleTxnId']),
+		#'litleTxnId'=> Checker::required_field($hash_in['litleTxnId']),
 			'orderId'=> Checker::required_field($hash_in['orderId']),
 			'amount'=>Checker::required_field($hash_in['amount']),
 			'orderSource'=>Checker::required_field($hash_in['orderSource']),
@@ -47,12 +51,13 @@ class LitleOnlineRequest
 			'merchantData'=>Checker::optional_field(XMLFields::filteringType($hash_in['merchantData'])),
 			'recyclingRequest'=>Checker::optional_field(XMLFields::recyclingRequestType($hash_in['recyclingRequest'])));
 		
-		//	litleOnline_hash = build_full_hash($hash_in, {
-		//		:authorization => hash_out})
-		
-				  $respOb = LitleXmlMapper::request($hash_out,'authorization',$config);
-				  return $respOb;
+		$request = Obj2xml::toXml($hash_out,'authorization',$config);
+		$respOb = $this->newXML->request($request);
+		return $respOb;
 	}
+
+
+
 
 	#private function($config)
 	#{
@@ -61,6 +66,6 @@ class LitleOnlineRequest
 	#	'password' =>(Checker::requiredValue($config['password'])));
 	#	return $hash_out;
 	#}
-	
+
 }
 ?>
