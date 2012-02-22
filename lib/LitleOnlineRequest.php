@@ -50,17 +50,60 @@ class LitleOnlineRequest
 			'filtering'=>(XMLFields::filteringType($hash_in['filtering'])),
 			'merchantData'=>(XMLFields::filteringType($hash_in['merchantData'])),
 			'recyclingRequest'=>(XMLFields::recyclingRequestType($hash_in['recyclingRequest'])));
-		
+
 		$request = Obj2xml::toXml($hash_out,'authorization',$config);
-		
 		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
 		Checker::choice($choice_hash);
-		echo $request;
 		$respOb = $this->newXML->request($request);
 		return $respOb;
 	}
+	public function saleRequest($hash_in)
+	{
+		$config = array('user'=>'PHXMLTEST',
+						'password' => 'certpass', 
+						'merchantId' => '101',
+						'version' => '8.10', 
+						'reportGroup' => 'planets',
+						'id' => '10');
+		$hash_out = array(
+		'litleTxnId' => $hash_in['litleTxnId'],
+		'orderId' =>Checker::required_field($hash_in['orderId']),
+		'amount' =>Checker::required_field($hash_in['amount']),
+		'orderSource'=>Checker::required_field($hash_in['orderSource']),
+		'customerInfo'=>XMLFields::customerInfo($hash_in['customerInfo']),
+		'billToAddress'=>XMLFields::contact($hash_in['billToAddress']),
+		'shipToAddress'=>XMLFields::contact($hash_in['shipToAddress']),
+		'card'=> XMLFields::cardType($hash_in['card']),
+		'paypal'=>XMLFields::payPal($hash_in['paypal']),
+		'token'=>XMLFields::cardTokenType($hash_in['token']),
+		'paypage'=>XMLFields::cardPaypageType($hash_in['paypage']),
+		'billMeLaterRequest'=>XMLFields::billMeLaterRequest($hash_in['billMeLaterRequest']),
+		'fraudCheck'=>XMLFields::fraudCheckType($hash_in['fraudCheck']),
+		'cardholderAuthentication'=>XMLFields::fraudCheckType($hash_in['cardholderAuthentication']),
+		'customBilling'=>XMLFields::customBilling($hash_in['customBilling']),
+		'taxBilling'=>XMLFields::taxBilling($hash_in['taxBilling']),
+		'enhancedData'=>XMLFields::enhancedData($hash_in['enhancedData']),
+		'processingInstructions'=>XMLFields::processingInstructions($hash_in['processingInstructions']),
+		'pos'=>XMLFields::pos($hash_in['pos']),
+		'payPalOrderComplete'=> $hash_in['paypalOrderComplete'],
+		'payPalNotes'=> $hash_in['paypalNotesType'],
+		'amexAggregatorData'=>XMLFields::amexAggregatorData($hash_in['amexAggregatorData']),
+		'allowPartialAuth'=>$hash_in['allowPartialAuth'],
+		'healthcareIIAS'=>XMLFields::healthcareIIAS($hash_in['healthcareIIAS']),
+		'filtering'=>XMLFields::filteringType($hash_in['filtering']),
+		'merchantData'=>XMLFields::filteringType($hash_in['merchantData']),
+		'recyclingRequest'=>XMLFields::recyclingRequestType($hash_in['recyclingRequest']));
 
-
+		$request = Obj2xml::toXml($hash_out,'sale',$config);
+		
+		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
+		Checker::choice($choice_hash);
+		$choice2_hash= array($hash_out['fraudCheck'],$hash_out['cardholderAuthentication']);
+		Checker::choice($choice2_hash);
+		
+		$respOb = $this->newXML->request($request);
+		return $respOb;
+	}
 
 
 	#private function($config)

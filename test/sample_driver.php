@@ -22,5 +22,5 @@ $hash_in = array('usr'=>'IMPTEST',
 			'orderSource'=>'ecommerce',
 			'amount'=>'123');
 $litleTest = &new LitleOnlineRequest();
-$retOb = $litleTest->authorizationRequest($hash_in);
+$retOb = $litleTest->saleRequest($hash_in);
 ?>
