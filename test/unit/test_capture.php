@@ -10,26 +10,6 @@ Mock::generate('communication');
 Mock::generate('LitleXmlMapper');
 class capture_UnitTest extends UnitTestCase
 {
-	function test_simple_capture()
-	{
-		$config = array(
-			'reportGroup'=>'Planets',
-			'litleTxnId'=>'1234567890',
-			'amount'=>'5000');
-		$mappTest = &new MockLitleXmlMapper();
-		$commTest = &new Mockcommunication();
-		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<litleTxnId>1234567890.*<amount>5000.*/')));
-		$litleTest = &new LitleOnlineRequest();
-		$litleTest->newXML = $mappTest;
-		$retOb = $litleTest->captureRequest($hash_in);
-	}
-	function test_simple_capture()
-	{
-		$config = array('reportGroup'=>'Planets','amount'=>'106');
-		$litleTest = &new LitleOnlineRequest();
-		$this->expectException(new Exception("Missing Required Field: /litleTxnId/"));
-		$retOb = $litleTest->captureRequest($hash_in);
-	}
 
 }
 ?>

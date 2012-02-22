@@ -8,9 +8,9 @@ require_once realpath(dirname(__FILE__)) . '/../../lib/communication.php';
 require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnlineRequest.php';
 Mock::generate('communication');
 Mock::generate('LitleXmlMapper');
-class LitleUnitTest extends UnitTestCase
+class sale_UnitTest extends UnitTestCase
 {
-	function test_auth_with_card()
+	function test_sale_with_card()
 	{
 		$hash_in = array('usr'=>'IMPTEST',
 			'password'=>'cert3d6Z',
