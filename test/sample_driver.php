@@ -6,10 +6,7 @@ require_once realpath(dirname(__FILE__)) . '/../lib/communication.php';
 require_once realpath(dirname(__FILE__)) . '/../lib/LitleOnlineRequest.php';
 
 
-$hash_in = array('usr'=>'IMPTEST',
-			'password'=>'cert3d6Z',
-			'merchantId'=>'087900',
-			'version'=>'8.8',
+$hash_in = array(
 			'card'=>array('type'=>'VI',
 					'number'=>'4100000000000001',
 					'expDate'=>'1213',

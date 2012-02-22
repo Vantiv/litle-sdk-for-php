@@ -95,16 +95,27 @@ class LitleOnlineRequest
 		'recyclingRequest'=>XMLFields::recyclingRequestType($hash_in['recyclingRequest']));
 
 		$request = Obj2xml::toXml($hash_out,'sale',$config);
-		
+
 		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
 		Checker::choice($choice_hash);
 		$choice2_hash= array($hash_out['fraudCheck'],$hash_out['cardholderAuthentication']);
 		Checker::choice($choice2_hash);
-		
+
 		$respOb = $this->newXML->request($request);
 		return $respOb;
 	}
-
+	public function authReversalRequest($hash_in)
+	{
+		$hash_out = array(
+			'litleTxnId' => XMLFields::required_field($hash_in['litleTxnId']),
+			'amount' =>$hash_in['amount'],
+			'payPalNotes'=>$hash_in['payPalNotes'],
+			'actionReason'=>$hash_in['actionReason']);
+		
+		$request = Obj2xml::toXml($hash_out,'authReversal',$config);
+		$respOb = $this->newXML->request($request);
+		return $respOb;
+	}
 
 	#private function($config)
 	#{
