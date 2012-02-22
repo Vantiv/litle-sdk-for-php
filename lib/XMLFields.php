@@ -28,7 +28,7 @@
 #
 # Contains all of the underlying XML fields and specifications needed to create the transaction set
 #
-require_once realpath(dirname(__FILE__)) . "/Checker.php";
+require_once realpath(dirname(__FILE__)) . "/LitleOnline.php";
 
 class XMLFields
 {

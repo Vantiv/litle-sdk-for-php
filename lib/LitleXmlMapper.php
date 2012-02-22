@@ -1,7 +1,4 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
-
 // =begin
 // Copyright (c) 2011 Litle & Co.
 
@@ -26,12 +23,7 @@ ini_set('display_errors', '1');
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
 // =end
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
-
-require_once realpath(dirname(__FILE__)) . '/communication.php';
-require_once realpath(dirname(__FILE__)) . '/Xml_parser.php';
-require_once realpath(dirname(__FILE__)) . '/Obj2xml.php';
+require_once realpath(dirname(__FILE__)) . '/LitleOnline.php';
 
 class LitleXmlMapper
 {
