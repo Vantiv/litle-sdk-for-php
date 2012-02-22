@@ -104,6 +104,7 @@ class LitleOnlineRequest
 		$respOb = $this->newXML->request($request);
 		return $respOb;
 	}
+
 	public function authReversalRequest($hash_in)
 	{
 		$hash_out = array(
@@ -111,19 +112,47 @@ class LitleOnlineRequest
 			'amount' =>$hash_in['amount'],
 			'payPalNotes'=>$hash_in['payPalNotes'],
 			'actionReason'=>$hash_in['actionReason']);
-		
+
 		$request = Obj2xml::toXml($hash_out,'authReversal',$config);
 		$respOb = $this->newXML->request($request);
 		return $respOb;
 	}
 
+	public function creditRequest($hash_in)
+	{
+		$hash_out = array(
+			'litleTxnId' => $hash_in['litleTxnId'],
+			'orderId' =>$hash_in['orderId'],
+			'amount' =>$hash_in['amount'],
+			'orderSource'=>$hash_in['orderSource'],
+			'billToAddress'=>XMLFields::contact($hash_in['billToAddress']),
+			'card'=> XMLFields::cardType($hash_in['card']),
+			'paypal'=>XMLFields::payPal($hash_in['paypal']),
+			'token'=>XMLFields::cardTokenType($hash_in['token']),
+			'paypage'=>XMLFields::cardPaypageType($hash_in['paypage']),
+			'customBilling'=>XMLFields::customBilling($hash_in['customBilling']),
+			'taxBilling'=>XMLFields::taxBilling($hash_in['taxBilling']),
+			'billMeLaterRequest'=>XMLFields::billMeLaterRequest($hash_in['billMeLaterRequest']),
+			'enhancedData'=>XMLFields::enhancedData($hash_in['enhancedData']),
+			'processingInstructions'=>XMLFields::processingInstructions($hash_in['processingInstructions']),
+			'pos'=>XMLFields::pos($hash_in['pos']),
+			'amexAggregatorData'=>XMLFields::amexAggregatorData($hash_in['amexAggregatorData']),
+			'payPalNotes' =>$hash_in['payPalNotes']);
+
+		$request = Obj2xml::toXml($hash_out,'capture',$config);
+		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
+		Checker::choice($choice_hash);
+		$creditResponse = $this->newXML->request($request);
+		return $creditResponse;
+
+	}
 	#private function($config)
 	#{
 	#	$hash_out = array(
-	#	'user' =>(Checker::requiredValue($config['user'])),
-	#	'password' =>(Checker::requiredValue($config['password'])));
+		#	'user' =>(Checker::requiredValue($config['user'])),
+		#	'password' =>(Checker::requiredValue($config['password'])));
 	#	return $hash_out;
 	#}
 
-}
-?>
+	}
+	?>
