@@ -22,8 +22,6 @@ class echeckSale_UnitTest extends UnitTestCase
 		$retOb = $litleTest->echeckSaleRequest($hash_in);
 	}
 
-	
-	
 	function test_bothChoices()
 	{
 		$hash_in = array('reportGroup'=>'Planets','litleTxnId'=>'123456',

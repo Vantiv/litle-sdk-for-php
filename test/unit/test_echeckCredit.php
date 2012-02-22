@@ -23,7 +23,6 @@ class echeckCredit_UnitTest extends UnitTestCase
 	}
 
 	
-	
 	function test_bothChoices()
 	{
 		$hash_in = array('reportGroup'=>'Planets','litleTxnId'=>'123456',

@@ -295,6 +295,12 @@ class LitleOnlineRequest
 
 	public function echeckSaleRequest($hash_in)
 	{
+		$config = array('user'=>'PHXMLTEST',
+								'password' => 'certpass', 
+								'merchantId' => '101',
+								'version' => '8.10', 
+								'reportGroup' => 'planets',
+								'id' => '10');
 		$hash_out = array(
 		'litleTxnId'=>$hash_in['litleTxnId'],
 		'orderId'=>$hash_in['orderId'],
@@ -313,6 +319,32 @@ class LitleOnlineRequest
 
 		$cecheckSaleResponse = $this->newXML->request($request);
 		return $echeckSaleResponse;
+	}
+	
+	public function echeckCreditRequest($hash_in)
+	{
+		$config = array('user'=>'PHXMLTEST',
+									'password' => 'certpass', 
+									'merchantId' => '101',
+									'version' => '8.10', 
+									'reportGroup' => 'planets',
+									'id' => '10');
+		$hash_out = array(
+			'litleTxnId'=>$hash_in['litleTxnId'],
+			'orderId'=>$hash_in['orderId'],
+			'amount'=>$hash_in['amount'],
+			'orderSource'=>$hash_in['orderSource'],
+			'billToAddress'=>XMLFields::contact($hash_in['billToAddress']),
+			'echeck'=>XMLFields::echeckType($hash_in['echeck']),
+			'echeckToken'=>XMLFields::echeckTokenType($hash_in['echeckToken']),
+			'customBilling'=>XMLFields::customBilling($hash_in['customBilling']));
+	
+		$request = Obj2xml::toXml($hash_out,'echeckSale',$config);
+		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
+		Checker::choice($choice_hash);
+	
+		$cecheckCreditResponse = $this->newXML->request($request);
+		return $echeckCreditResponse;
 	}
 
 
