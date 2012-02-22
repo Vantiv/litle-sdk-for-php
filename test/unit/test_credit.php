@@ -10,26 +10,16 @@ Mock::generate('communication');
 Mock::generate('LitleXmlMapper');
 class credit_UnitTest extends UnitTestCase
 {
-	function test_credit_with_card()
+function test_credit()
 	{
-		$hash_in = array(
-			'card'=>array('type'=>'VI',
-					'number'=>'4100000000000001',
-					'expDate'=>'1213',
-					'cardValidationNum' => '1213'),
-			'id'=>'1211',
-			'orderId'=> '2111',
-			'reportGroup'=>'Planets',
-			'orderSource'=>'ecommerce',
-			'amount'=>'123');
+		$hash_in = array('litleTxnId'=> '12312312','reportGroup'=>'Planets', 'amount'=>'123');
 		$mappTest = &new MockLitleXmlMapper();
 		$commTest = &new Mockcommunication();
-		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<card><type>VI.*<number>4100000000000001.*<expDate>1213.*<cardValidationNum>1213.*/')));
+		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<litleTxnId>12312312.*<amount>123.*/')));
 		$litleTest = &new LitleOnlineRequest();
 		$litleTest->newXML = $mappTest;
 		$retOb = $litleTest->creditRequest($hash_in);
 	}
-
 	
 	function test_BothChoicesCardandPaypal()
 	{
