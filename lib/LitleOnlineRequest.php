@@ -177,7 +177,7 @@ class LitleOnlineRequest
 
 		$choice_hash = array($hash_out['accountNumber'],$hash_out['echeckForToken'],$hash_out['paypageRegistrationId']);
 		Checker::choice($choice_hash);
-		
+		echo $request;
 		$registerTokenResponse = $this->newXML->request($request);
 		return $registerTokenResponse;
 	}

@@ -33,7 +33,19 @@ class token_UnitTest extends UnitTestCase
 // 		$retOb = $litleTest->registerTokenRequest($hash_in);
 // 	}
 
-
+	function test_token()
+	{
+		$hash_in = array(
+			'reportGroup'=>'Planets',
+			'orderId'=>'1',
+			'accountNumber'=>'123456789101112');;
+		$mappTest = &new MockLitleXmlMapper();
+		$commTest = &new Mockcommunication();
+		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<accountNumber>123456789101112*/')));
+		$litleTest = &new LitleOnlineRequest();
+		$litleTest->newXML = $mappTest;
+		$retOb = $litleTest->registerTokenRequest($hash_in);
+	}
 
 
 	function test_accountNumandPaypage()
