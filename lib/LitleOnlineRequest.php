@@ -177,9 +177,40 @@ class LitleOnlineRequest
 
 		$choice_hash = array($hash_out['accountNumber'],$hash_out['echeckForToken'],$hash_out['paypageRegistrationId']);
 		Checker::choice($choice_hash);
-		echo $request;
+
 		$registerTokenResponse = $this->newXML->request($request);
 		return $registerTokenResponse;
+	}
+	public function forceCaptureRequest($hash_in)
+	{
+		$config = array('user'=>'PHXMLTEST',
+								'password' => 'certpass', 
+								'merchantId' => '101',
+								'version' => '8.10', 
+								'reportGroup' => 'planets',
+								'id' => '10');
+		$hash_out = array(
+		'orderId' =>Checker::required_field($hash_in['orderId']),
+		'amount' =>$hash_in['amount'],
+		'orderSource'=>Checker::required_field($hash_in['orderSource']),
+		'billToAddress'=>XMLFields::contact($hash_in['billToAddress']),
+		'card'=> XMLFields::cardType($hash_in['card']),
+		'token'=>XMLFields::cardTokenType($hash_in['token']),
+		'paypage'=>XMLFields::cardPaypageType($hash_in['paypage']),
+		'customBilling'=>XMLFields::customBilling($hash_in['customBilling']),
+		'taxBilling'=>XMLFields::taxBilling($hash_in['taxBilling']),
+		'enhancedData'=>XMLFields::enhancedData($hash_in['enhancedData']),
+		'processingInstructions'=>XMLFields::processingInstructions($hash_in['processingInstructions']),
+		'pos'=>XMLFields::pos($hash_in['pos']),
+		'amexAggregatorData'=>XMLFields::amexAggregatorData($hash_in['amexAggregatorData']));
+
+		$request = Obj2xml::toXml($hash_out,'forceCapture',$config);
+		
+		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
+		Checker::choice($choice_hash);
+
+		$forceCaptureResponse = $this->newXML->request($request);
+		return $forceCaptureResponse;
 	}
 
 	public function captureRequest($hash_in)
@@ -191,8 +222,8 @@ class LitleOnlineRequest
 								'reportGroup' => 'planets',
 								'id' => '10');
 		$hash_out = array(
-				'partial'=>$hash_in['partial'],
-			'litleTxnId' => Checker::required_field($hash_in['litleTxnId']),
+		'partial'=>$hash_in['partial'],
+	    'litleTxnId' => Checker::required_field($hash_in['litleTxnId']),
 		'amount' =>($hash_in['amount']),
 		'enhancedData'=>XMLFields::enhancedData($hash_in['enhancedData']),
 		'processingInstructions'=>XMLFields::processingInstructions($hash_in['processingInstructions']),
@@ -211,5 +242,5 @@ class LitleOnlineRequest
 	#	return $hash_out;
 	#}
 
-	}
-	?>
+}
+?>
