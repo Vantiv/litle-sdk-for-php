@@ -54,8 +54,8 @@ class LitleOnlineRequest
 		$request = Obj2xml::toXml($hash_out,'authorization',$config);
 		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
 		Checker::choice($choice_hash);
-		$respOb = $this->newXML->request($request);
-		return $respOb;
+		$authorizationResponse = $this->newXML->request($request);
+		return $authorizationResponse;
 	}
 	public function saleRequest($hash_in)
 	{
@@ -101,25 +101,38 @@ class LitleOnlineRequest
 		$choice2_hash= array($hash_out['fraudCheck'],$hash_out['cardholderAuthentication']);
 		Checker::choice($choice2_hash);
 
-		$respOb = $this->newXML->request($request);
-		return $respOb;
+		$saleResponse = $this->newXML->request($request);
+		return $saleResponse;
 	}
 
 	public function authReversalRequest($hash_in)
 	{
+		$config = array('user'=>'PHXMLTEST',
+						'password' => 'certpass', 
+						'merchantId' => '101',
+						'version' => '8.10', 
+						'reportGroup' => 'planets',
+						'id' => '10');
 		$hash_out = array(
-			'litleTxnId' => XMLFields::required_field($hash_in['litleTxnId']),
+			'litleTxnId' => Checker::required_field($hash_in['litleTxnId']),
 			'amount' =>$hash_in['amount'],
 			'payPalNotes'=>$hash_in['payPalNotes'],
 			'actionReason'=>$hash_in['actionReason']);
 
 		$request = Obj2xml::toXml($hash_out,'authReversal',$config);
-		$respOb = $this->newXML->request($request);
-		return $respOb;
+		echo $request;
+		$authReversalResponse = $this->newXML->request($request);
+		return $authReversalResponse;
 	}
 
 	public function creditRequest($hash_in)
 	{
+		$config = array('user'=>'PHXMLTEST',
+										'password' => 'certpass', 
+										'merchantId' => '101',
+										'version' => '8.10', 
+										'reportGroup' => 'planets',
+										'id' => '10');
 		$hash_out = array(
 			'litleTxnId' => $hash_in['litleTxnId'],
 			'orderId' =>$hash_in['orderId'],
@@ -146,7 +159,7 @@ class LitleOnlineRequest
 		return $creditResponse;
 
 	}
-	
+
 	public function captureRequest($hash_in)
 	{
 		$config = array('user'=>'PHXMLTEST',
@@ -163,19 +176,18 @@ class LitleOnlineRequest
 		'processingInstructions'=>XMLFields::processingInstructions($hash_in['processingInstructions']),
 		'payPalOrderComplete'=>$hash_in['payPalOrderComplete'],
 		'payPalNotes' =>$hash_in['payPalNotes']);
-	
+
 		$request = Obj2xml::toXml($hash_out,'capture',$config);
-		echo $request;
-		$respOb = $this->newXML->request($request);
-		return $respOb;
+		$captureResponse = $this->newXML->request($request);
+		return $captureResponse;
 	}
 	#private function($config)
 	#{
 	#	$hash_out = array(
-		#	'user' =>(Checker::requiredValue($config['user'])),
-		#	'password' =>(Checker::requiredValue($config['password'])));
+	#	'user' =>(Checker::requiredValue($config['user'])),
+	#	'password' =>(Checker::requiredValue($config['password'])));
 	#	return $hash_out;
 	#}
 
-	}
-	?>
+}
+?>
