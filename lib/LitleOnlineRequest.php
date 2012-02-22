@@ -121,7 +121,6 @@ class LitleOnlineRequest
 			'actionReason'=>$hash_in['actionReason']);
 
 		$request = Obj2xml::toXml($hash_out,'authReversal',$config);
-		echo $request;
 		$authReversalResponse = $this->newXML->request($request);
 		return $authReversalResponse;
 	}
@@ -272,7 +271,7 @@ class LitleOnlineRequest
 		$captureGivenAuthResponse = $this->newXML->request($request);
 		return $captureGivenAuthResponse;
 	}
-	
+
 	public function echeckRedepositRequest($hash_in)
 	{
 		$config = array('user'=>'PHXMLTEST',
@@ -285,15 +284,37 @@ class LitleOnlineRequest
 		'litleTxnId' => Checker::required_field($hash_in['litleTxnId']),
 		'echeck'=>XMLFields::echeckType($hash_in['echeck']),
 		'echeckToken'=>XMLFields::echeckTokenType($hash_in['echeckToken']));
-	
+
 		$request = Obj2xml::toXml($hash_out,'echeckRedeposit',$config);
-		echo $request;
 		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
 		Checker::choice($choice_hash);
-	
+
 		$cecheckRedepositResponse = $this->newXML->request($request);
 		return $echeckRedepositResponse;
 	}
-	
+
+	public function echeckSaleRequest($hash_in)
+	{
+		$hash_out = array(
+		'litleTxnId'=>$hash_in['litleTxnId'],
+		'orderId'=>$hash_in['orderId'],
+		'verify'=>$hash_in['verify'],
+		'amount'=>$hash_in['amount'],
+		'orderSource'=>$hash_in['orderSource'],
+		'billToAddress'=>XMLFields::contact($hash_in['billToAddress']),
+		'shipToAddress'=>XMLFields::contact($hash_in['shipToAddress']),
+		'echeck'=>XMLFields::echeckType($hash_in['echeck']),
+		'echeckToken'=>XMLFields::echeckTokenType($hash_in['echeckToken']),
+		'customBilling'=>XMLFields::customBilling($hash_in['customBilling']));
+		
+		$request = Obj2xml::toXml($hash_out,'echeckSale',$config);
+		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
+		Checker::choice($choice_hash);
+
+		$cecheckSaleResponse = $this->newXML->request($request);
+		return $echeckSaleResponse;
+	}
+
+
 }
 ?>
