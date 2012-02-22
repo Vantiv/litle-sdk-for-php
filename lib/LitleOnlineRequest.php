@@ -27,9 +27,9 @@ class LitleOnlineRequest
 				'id' => '10');
 		$hash_out = array(
 			'litleTxnId'=> ($hash_in['litleTxnId']),
-			'orderId'=> Checker::required_field($hash_in['orderId']),
-			'amount'=>Checker::required_field($hash_in['amount']),
-			'orderSource'=>Checker::required_field($hash_in['orderSource']),
+			'orderId'=> $hash_in['orderId'],
+			'amount'=>$hash_in['amount'],
+			'orderSource'=>$hash_in['orderSource'],
 			'customerInfo'=>(XMLFields::customerInfo($hash_in['customerInfo'])),
 			'billToAddress'=>(XMLFields::contact($hash_in['billToAddress'])),
 			'shipToAddress'=>(XMLFields::contact($hash_in['shipToAddress'])),
