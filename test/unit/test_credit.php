@@ -12,10 +12,7 @@ class credit_UnitTest extends UnitTestCase
 {
 	function test_credit_with_card()
 	{
-		$hash_in = array('usr'=>'IMPTEST',
-			'password'=>'cert3d6Z',
-			'merchantId'=>'087900',
-			'version'=>'8.8',
+		$hash_in = array(
 			'card'=>array('type'=>'VI',
 					'number'=>'4100000000000001',
 					'expDate'=>'1213',
@@ -34,12 +31,9 @@ class credit_UnitTest extends UnitTestCase
 	}
 
 	
-	
-	
 	function test_BothChoicesCardandPaypal()
 	{
-		$hash_in = array('merchantId' => '101',
-	      'version'=>'8.8',
+		$hash_in = array(
 	      'reportGroup'=>'Planets',
 	      'orderId'=>'12344',
 	      'amount'=>'106',
@@ -57,13 +51,11 @@ class credit_UnitTest extends UnitTestCase
 		$litleTest = &new LitleOnlineRequest();
 		$this->expectException(new Exception("Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!"));
 		$retOb = $litleTest->creditRequest($hash_in);
-	
 	}
 	
 	function test_threeChoicesCardandPaypageandPaypal()
 	{
-		$hash_in = array('merchantId' => '101',
-	      'version'=>'8.8',
+		$hash_in = array(
 	      'reportGroup'=>'Planets',
 	      'orderId'=>'12344',
 	      'amount'=>'106',
@@ -91,8 +83,7 @@ class credit_UnitTest extends UnitTestCase
 	
 	function test_allChoicesCardandPaypageandPaypalandToken()
 	{
-		$hash_in = array('merchantId' => '101',
-	      'version'=>'8.8',
+		$hash_in = array(
 	      'reportGroup'=>'Planets',
 	      'litleTxnId'=>'123456',
 	      'orderId'=>'12344',
@@ -125,9 +116,5 @@ class credit_UnitTest extends UnitTestCase
 		$retOb = $litleTest->creditRequest($hash_in);
 	
 	}
-	
-
-	
-
 }
 ?>

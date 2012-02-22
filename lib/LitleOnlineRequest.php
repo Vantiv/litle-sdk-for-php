@@ -159,6 +159,28 @@ class LitleOnlineRequest
 		return $creditResponse;
 
 	}
+	public function registerTokenRequest($hash_in)
+	{
+		$config = array('user'=>'PHXMLTEST',
+						'password' => 'certpass', 
+						'merchantId' => '101',
+						'version' => '8.10', 
+						'reportGroup' => 'planets',
+						'id' => '10');
+		$hash_out = array(
+		'orderId'=>$hash_in['orderId'],
+		'accountNumber'=>$hash_in['accountNumber'],
+		'echeckForToken'=>XMLFields::echeckForTokenType($hash_in['echeckForToken']),
+		'paypageRegistrationId'=>$hash_in['paypageRegistrationId']);
+
+		$request = Obj2xml::toXml($hash_out,'registerTokenRequest',$config);
+
+		$choice_hash = array($hash_out['accountNumber'],$hash_out['echeckForToken'],$hash_out['paypageRegistrationId']);
+		Checker::choice($choice_hash);
+		
+		$registerTokenResponse = $this->newXML->request($request);
+		return $registerTokenResponse;
+	}
 
 	public function captureRequest($hash_in)
 	{
@@ -189,5 +211,5 @@ class LitleOnlineRequest
 	#	return $hash_out;
 	#}
 
-}
-?>
+	}
+	?>
