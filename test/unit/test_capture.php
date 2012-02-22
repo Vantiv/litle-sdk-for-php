@@ -11,7 +11,7 @@ Mock::generate('LitleXmlMapper');
 
 class capture_UnitTest extends UnitTestCase
 {
-	function test_capture()
+	function test_simple_capture()
 	{
 		$hash_in = array('litleTxnId'=> '12312312','reportGroup'=>'Planets', 'amount'=>'123');
 		$mappTest = &new MockLitleXmlMapper();

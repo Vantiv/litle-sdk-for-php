@@ -57,6 +57,7 @@ class LitleOnlineRequest
 		$authorizationResponse = $this->newXML->request($request);
 		return $authorizationResponse;
 	}
+
 	public function saleRequest($hash_in)
 	{
 		$config = array('user'=>'PHXMLTEST',
@@ -159,6 +160,7 @@ class LitleOnlineRequest
 		return $creditResponse;
 
 	}
+
 	public function registerTokenRequest($hash_in)
 	{
 		$config = array('user'=>'PHXMLTEST',
@@ -181,6 +183,7 @@ class LitleOnlineRequest
 		$registerTokenResponse = $this->newXML->request($request);
 		return $registerTokenResponse;
 	}
+
 	public function forceCaptureRequest($hash_in)
 	{
 		$config = array('user'=>'PHXMLTEST',
@@ -205,7 +208,7 @@ class LitleOnlineRequest
 		'amexAggregatorData'=>XMLFields::amexAggregatorData($hash_in['amexAggregatorData']));
 
 		$request = Obj2xml::toXml($hash_out,'forceCapture',$config);
-		
+
 		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
 		Checker::choice($choice_hash);
 
@@ -234,13 +237,40 @@ class LitleOnlineRequest
 		$captureResponse = $this->newXML->request($request);
 		return $captureResponse;
 	}
-	#private function($config)
-	#{
-	#	$hash_out = array(
-	#	'user' =>(Checker::requiredValue($config['user'])),
-	#	'password' =>(Checker::requiredValue($config['password'])));
-	#	return $hash_out;
-	#}
 
+	public function captureGivenAuthRequest($hash_in)
+	{
+		$config = array('user'=>'PHXMLTEST',
+										'password' => 'certpass', 
+										'merchantId' => '101',
+										'version' => '8.10', 
+										'reportGroup' => 'planets',
+										'id' => '10');
+		$hash_out = array(
+		'orderId'=>Checker::required_field($hash_in['orderId']),
+		'authInformation'=>XMLFields::authInformation($hash_in['authInformation']),
+		'amount' =>Checker::required_field($hash_in['amount']),
+		'orderSource'=>Checker::required_field($hash_in['orderSource']),
+		'billToAddress'=>XMLFields::contact($hash_in['billToAddress']),
+		'shipToAddress'=>XMLFields::contact($hash_in['shipToAddress']),
+		'card'=> XMLFields::cardType($hash_in['card']),
+		'token'=>XMLFields::cardTokenType($hash_in['token']),
+		'paypage'=>XMLFields::cardPaypageType($hash_in['paypage']),
+		'customBilling'=>XMLFields::customBilling($hash_in['customBilling']),
+		'taxBilling'=>XMLFields::taxBilling($hash_in['taxBilling']),
+		'billMeLaterRequest'=>XMLFields::billMeLaterRequest($hash_in['billMeLaterRequest']),
+		'enhancedData'=>XMLFields::enhancedData($hash_in['enhancedData']),
+		'processingInstructions'=>XMLFields::processingInstructions($hash_in['processingInstructions']),
+		'pos'=>XMLFields::pos($hash_in['pos']),
+		'amexAggregatorData'=>XMLFields::amexAggregatorData($hash_in['amexAggregatorData']));
+
+		$request = Obj2xml::toXml($hash_out,'captureGivenAuth',$config);
+
+		$choice_hash = array($hash_out['card'],$hash_out['token'],$hash_out['paypage']);
+		Checker::choice($choice_hash);
+
+		$captureGivenAuthResponse = $this->newXML->request($request);
+		return $captureGivenAuthResponse;
+	}
 }
 ?>
