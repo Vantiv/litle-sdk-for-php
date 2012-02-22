@@ -272,5 +272,28 @@ class LitleOnlineRequest
 		$captureGivenAuthResponse = $this->newXML->request($request);
 		return $captureGivenAuthResponse;
 	}
+	
+	public function echeckRedepositRequest($hash_in)
+	{
+		$config = array('user'=>'PHXMLTEST',
+											'password' => 'certpass', 
+											'merchantId' => '101',
+											'version' => '8.10', 
+											'reportGroup' => 'planets',
+											'id' => '10');
+		$hash_out = array(
+			'litleTxnId' => Checker::required_field($hash_in['litleTxnId']),
+		'echeck'=>XMLFields::echeckType(optional_field($hash_in['echeck'])),
+		'echeckToken'=>XMLFields::echeckTokenType(optional_field($hash_in['echeckToken'])));
+	
+		$request = Obj2xml::toXml($hash_out,'echeckRedeposit',$config);
+	
+		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
+		Checker::choice($choice_hash);
+	
+		$cecheckRedepositResponse = $this->newXML->request($request);
+		return $echeckRedepositResponse;
+	}
+	
 }
 ?>
