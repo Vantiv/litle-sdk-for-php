@@ -146,6 +146,29 @@ class LitleOnlineRequest
 		return $creditResponse;
 
 	}
+	
+	public function captureRequest($hash_in)
+	{
+		$config = array('user'=>'PHXMLTEST',
+								'password' => 'certpass', 
+								'merchantId' => '101',
+								'version' => '8.10', 
+								'reportGroup' => 'planets',
+								'id' => '10');
+		$hash_out = array(
+				'partial'=>$hash_in['partial'],
+			'litleTxnId' => Checker::required_field($hash_in['litleTxnId']),
+		'amount' =>($hash_in['amount']),
+		'enhancedData'=>XMLFields::enhancedData($hash_in['enhancedData']),
+		'processingInstructions'=>XMLFields::processingInstructions($hash_in['processingInstructions']),
+		'payPalOrderComplete'=>$hash_in['payPalOrderComplete'],
+		'payPalNotes' =>$hash_in['payPalNotes']);
+	
+		$request = Obj2xml::toXml($hash_out,'capture',$config);
+		echo $request;
+		$respOb = $this->newXML->request($request);
+		return $respOb;
+	}
 	#private function($config)
 	#{
 	#	$hash_out = array(
