@@ -375,14 +375,14 @@ class LitleOnlineRequest
 	public function voidRequest($hash_in)
 	{
 		$config = array('user'=>'PHXMLTEST',
-									'password' => 'certpass', 
-									'merchantId' => '101',
-									'version' => '8.10', 
-									'reportGroup' => 'planets',
-									'id' => '10');
+						'password' => 'certpass', 
+						'merchantId' => '101',
+						'version' => '8.10', 
+						'reportGroup' => 'planets',
+						'id' => '10');
 		$hash_out = array(
-		    'litleTxnId' => Checker::required_field($hash_in['litleTxnId']),
-			'processingInstructions'=>XMLFields::processingInstructions($hash_in['processingInstructions']));
+		'litleTxnId' => Checker::required_field($hash_in['litleTxnId']),
+	    'processingInstructions'=>XMLFields::processingInstructions($hash_in['processingInstructions']));
 
 		$request = Obj2xml::toXml($hash_out,'void',$config);
 		$voidResponse = $this->newXML->request($request);
