@@ -40,6 +40,7 @@ class Xml_parser{
 	function get_node($xml, $string)
 	{
 		$books = $xml->getElementsByTagName($string);
+		#echo $books->nodeValue, PHP_EOL;
 		$val = "";
 		foreach ($books as $book) {
 			$val = $book->nodeValue;

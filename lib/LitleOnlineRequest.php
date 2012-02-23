@@ -169,7 +169,7 @@ class LitleOnlineRequest
 			'amexAggregatorData'=>XMLFields::amexAggregatorData($hash_in['amexAggregatorData']),
 			'payPalNotes' =>$hash_in['payPalNotes']);
 
-		$request = Obj2xml::toXml($hash_out,'capture',$config);
+		$request = Obj2xml::toXml($hash_out,'credit',$config);
 		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
 		Checker::choice($choice_hash);
 		$creditResponse = $this->newXML->request($request);

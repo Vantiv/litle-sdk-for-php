@@ -135,7 +135,6 @@ class auth_UnitTest extends UnitTestCase
 		$litleTest = &new LitleOnlineRequest();
 		$this->expectException(new Exception("Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!"));
 		$retOb = $litleTest->authorizationRequest($hash_in);
-	
 	}
 	
 	function test_threeChoicesCardandPaypageandPaypal()
@@ -201,7 +200,6 @@ class auth_UnitTest extends UnitTestCase
 		$litleTest = &new LitleOnlineRequest();
 		$this->expectException(new Exception("Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!"));
 		$retOb = $litleTest->authorizationRequest($hash_in);
-	
 	}
 	
 

@@ -27,10 +27,12 @@
 class communication{
   function httpRequest($req){
 	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_PROXY, "");
+	curl_setopt($ch, CURLOPT_PROXY, "smoothproxy:8080");
+	#curl_setopt($ch, CURLOPT_PROXY, "");
 	curl_setopt($ch, CURLOPT_POST, true);
-	curl_setopt($ch, CURLOPT_HEADER, false);
-	curl_setopt($ch, CURLOPT_URL, "https://cert.litle.com/vap/communicator/online");
+	#curl_setopt($ch, CURLOPT_HEADER, true);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: text/xml'));
+	curl_setopt($ch, CURLOPT_URL, 'https://www.testlitle.com/sandbox/communicator/online' );
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $req);
 	curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, true);
 	//curl_setopt($ch, CURLOPT_SSLVERIFYPEER, true);
