@@ -29,17 +29,6 @@
 // class and methods to parse a XML document into an object
 class Xml_parser{
 
-	function parser($xml){
-		$parser    =    xml_parser_create('UTF-8');//Create an XML parser
-		#xml_set_element_handler($Parser, 'StartHandler', 'EndHandler');
-		#xml_set_character_data_handler($xml_parser, "contents");
-		xml_parser_set_option($parser, XML_OPTION_CASE_FOLDING, 0);
-		xml_parser_set_option($parser, XML_OPTION_SKIP_WHITE, 1);
-		xml_parse_into_struct($parser, $xml, $array);// Parse XML data into an array structure
-		xml_parser_free($parser);//Free an XML parser
-		return $array;
-	}
-
 	function domParser($xml)
 	{
 		#$doc = new DomDocument($xml);
@@ -51,10 +40,17 @@ class Xml_parser{
 	function get_node($xml, $string)
 	{
 		$books = $xml->getElementsByTagName($string);
-		#echo $books->nodeValue, PHP_EOL;
+		$val = "";
 		foreach ($books as $book) {
 			$val = $book->nodeValue;
 		}
+		return $val;
+	}
+
+	function get_attribute($in_domDoc,$element, $attributeName)
+	{
+		$books = $in_domDoc->getElementsByTagName($element)->item(0);
+		$val = $books->getAttribute($attributeName);
 		return $val;
 	}
 }
