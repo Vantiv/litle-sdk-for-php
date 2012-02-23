@@ -325,5 +325,77 @@ class cert1_Test_beta extends UnitTestCase
 		$this->assertEqual('Pick Up Card',Xml_parser::get_node($saleResponse,'message'));
 		$this->assertEqual('34',Xml_parser::get_node($saleResponse,'avsResult'));
 	}
+
+	function test_10()
+	{
+		$auth_hash = array(
+		'orderId' => '10',
+    	'amount' => '40000',
+    	'orderSource'=>'ecommerce',
+    	'card'=>array(
+    	'number' =>'4457010140000141',
+    	'expDate' => '0912',
+    	'type' => 'VI'),
+    	'allowPartialAuth' => 'true');
+		$initilaize = &new LitleOnlineRequest();
+		$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
+		$this->assertEqual('010',Xml_parser::get_node($authorizationResponse,'response'));
+		$this->assertEqual('Partially Approved',Xml_parser::get_node($authorizationResponse,'message'));
+		$this->assertEqual('32000',Xml_parser::get_node($authorizationResponse,'approvedAmount'));
+	}
+	
+	function test_11()
+	{
+		$auth_hash = array(
+			'orderId' => '11',
+	    	'amount' => '60000',
+	    	'orderSource'=>'ecommerce',
+	    	'card'=>array(
+	    	'number' =>'5112010140000004',
+    			'expDate' => '1111',
+    			'type' => 'MC'),
+	    	'allowPartialAuth' => 'true');
+		$initilaize = &new LitleOnlineRequest();
+		$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
+		$this->assertEqual('010',Xml_parser::get_node($authorizationResponse,'response'));
+		$this->assertEqual('Partially Approved',Xml_parser::get_node($authorizationResponse,'message'));
+		$this->assertEqual('48000',Xml_parser::get_node($authorizationResponse,'approvedAmount'));
+	}
+	
+	function test_12()
+	{
+		$auth_hash = array(
+				'orderId' => '12',
+		    	'amount' => '50000',
+		    	'orderSource'=>'ecommerce',
+		    	'card'=>array(
+		    	'number' =>'375001014000009',
+    			'expDate' => '0412',
+    			'type' => 'AX'),
+		    	'allowPartialAuth' => 'true');
+		$initilaize = &new LitleOnlineRequest();
+		$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
+		$this->assertEqual('010',Xml_parser::get_node($authorizationResponse,'response'));
+		$this->assertEqual('Partially Approved',Xml_parser::get_node($authorizationResponse,'message'));
+		$this->assertEqual('40000',Xml_parser::get_node($authorizationResponse,'approvedAmount'));
+	}
+	
+	function test_13()
+	{
+		$auth_hash = array(
+		'orderId' => '13',
+		'amount' => '15000',
+		'orderSource'=>'ecommerce',
+		'card'=>array(
+		'number' =>'6011010140000004',
+        'expDate' => '0812',
+        'type' => 'DI'),
+		'allowPartialAuth' => 'true');
+		$initilaize = &new LitleOnlineRequest();
+		$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
+		$this->assertEqual('010',Xml_parser::get_node($authorizationResponse,'response'));
+		$this->assertEqual('Partially Approved',Xml_parser::get_node($authorizationResponse,'message'));
+		$this->assertEqual('12000',Xml_parser::get_node($authorizationResponse,'approvedAmount'));
+	}
 }
 ?>
