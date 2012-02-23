@@ -306,7 +306,7 @@ class LitleOnlineRequest
 		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
 		Checker::choice($choice_hash);
 
-		$cecheckRedepositResponse = $this->newXML->request($request);
+		$echeckRedepositResponse = $this->newXML->request($request);
 		return $echeckRedepositResponse;
 	}
 
@@ -334,7 +334,7 @@ class LitleOnlineRequest
 		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
 		Checker::choice($choice_hash);
 
-		$cecheckSaleResponse = $this->newXML->request($request);
+		$echeckSaleResponse = $this->newXML->request($request);
 		return $echeckSaleResponse;
 	}
 
@@ -360,7 +360,7 @@ class LitleOnlineRequest
 		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
 		Checker::choice($choice_hash);
 
-		$cecheckCreditResponse = $this->newXML->request($request);
+		$echeckCreditResponse = $this->newXML->request($request);
 		return $echeckCreditResponse;
 	}
 
@@ -384,8 +384,8 @@ class LitleOnlineRequest
 		$request = Obj2xml::toXml($hash_out,'echeckVerification',$config);
 		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
 		Checker::choice($choice_hash);
-
-		$cecheckVerificationResponse = $this->newXML->request($request);
+	
+		$echeckVerificationResponse = $this->newXML->request($request);
 		return $echeckVerificationResponse;
 	}
 
