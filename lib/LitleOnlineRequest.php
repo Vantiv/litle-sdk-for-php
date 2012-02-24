@@ -61,10 +61,8 @@ class LitleOnlineRequest
 			'merchantData'=>(XMLFields::filteringType($hash_in['merchantData'])),
 			'recyclingRequest'=>(XMLFields::recyclingRequestType($hash_in['recyclingRequest'])));
 
-		$request = Obj2xml::toXml($hash_out,'authorization');
 		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
-		Checker::choice($choice_hash);
-		$authorizationResponse = $this->newXML->request($request);
+		$authorizationResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'authorization',$choice_hash);
 		return $authorizationResponse;
 	}
 
@@ -144,12 +142,9 @@ class LitleOnlineRequest
 			'amexAggregatorData'=>XMLFields::amexAggregatorData($hash_in['amexAggregatorData']),
 			'payPalNotes' =>$hash_in['payPalNotes']);
 
-		$request = Obj2xml::toXml($hash_out,'credit');
 		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
-		Checker::choice($choice_hash);
-		$creditResponse = $this->newXML->request($request);
+		$creditResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'credit',$choice_hash);
 		return $creditResponse;
-
 	}
 
 	public function registerTokenRequest($hash_in)
@@ -206,8 +201,7 @@ class LitleOnlineRequest
 		'payPalOrderComplete'=>$hash_in['payPalOrderComplete'],
 		'payPalNotes' =>$hash_in['payPalNotes']);
 
-		$request = Obj2xml::toXml($hash_out,'capture');
-		$captureResponse = $this->newXML->request($request);
+		$captureResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'capture');
 		return $captureResponse;
 	}
 
@@ -323,10 +317,32 @@ class LitleOnlineRequest
 		'litleTxnId' => Checker::required_field($hash_in['litleTxnId']),
 	    'processingInstructions'=>XMLFields::processingInstructions($hash_in['processingInstructions']));
 
-		$request = Obj2xml::toXml($hash_out,'void');
-		$voidResponse = $this->newXML->request($request);
+		$voidResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'void');
 		return $voidResponse;
 	}
-
+	
+	private function overide_Config($hash_in)
+	{
+		$hash_out = array(
+		'user'=>$hash_in['user'],
+		'password'=>$hash_in['password'],
+		'merchantId'=>$hash_in['merchantId'],
+		'reportGroup'=>$hash_in['reportGroup'],
+		'id'=>$hash_in['id'],
+		'version'=>$hash_in['version']);
+		return $hash_out;
+	}
+	
+	private function processRequest($hash_out, $hash_in, $type, $choice1 = null, $choice2 = null)
+	{
+		#$hash_config = LitleOnlineRequest::overide_config($hash_in);
+		
+		$request = Obj2xml::toXml($hash_out,$type);
+		Checker::choice($choice1);
+		Checker::choice($choice2);
+		$litleOnlineResponse = $this->newXML->request($request);
+		return $litleOnlineResponse;
+	}
+	
 }
 ?>
