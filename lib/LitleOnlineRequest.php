@@ -36,12 +36,6 @@ class LitleOnlineRequest
 
 	public function authorizationRequest($hash_in)
 	{
-		$config = array('user'=>'PHXMLTEST',
-				'password' => 'certpass', 
-				'merchantId' => '101',
-				'version' => '8.10', 
-				'reportGroup' => 'planets',
-				'id' => '10');
 		$hash_out = array(
 			'litleTxnId'=> ($hash_in['litleTxnId']),
 			'orderId'=> $hash_in['orderId'],
@@ -68,7 +62,7 @@ class LitleOnlineRequest
 			'merchantData'=>(XMLFields::filteringType($hash_in['merchantData'])),
 			'recyclingRequest'=>(XMLFields::recyclingRequestType($hash_in['recyclingRequest'])));
 
-		$request = Obj2xml::toXml($hash_out,'authorization',$config);
+		$request = Obj2xml::toXml($hash_out,'authorization');
 		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
 		Checker::choice($choice_hash);
 		$authorizationResponse = $this->newXML->request($request);
@@ -77,12 +71,6 @@ class LitleOnlineRequest
 
 	public function saleRequest($hash_in)
 	{
-		$config = array('user'=>'PHXMLTEST',
-						'password' => 'certpass', 
-						'merchantId' => '101',
-						'version' => '8.10', 
-						'reportGroup' => 'planets',
-						'id' => '10');
 		$hash_out = array(
 		'litleTxnId' => $hash_in['litleTxnId'],
 		'orderId' =>Checker::required_field($hash_in['orderId']),
@@ -112,7 +100,7 @@ class LitleOnlineRequest
 		'merchantData'=>XMLFields::filteringType($hash_in['merchantData']),
 		'recyclingRequest'=>XMLFields::recyclingRequestType($hash_in['recyclingRequest']));
 
-		$request = Obj2xml::toXml($hash_out,'sale',$config);
+		$request = Obj2xml::toXml($hash_out,'sale');
 
 		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
 		Checker::choice($choice_hash);
@@ -125,31 +113,19 @@ class LitleOnlineRequest
 
 	public function authReversalRequest($hash_in)
 	{
-		$config = array('user'=>'PHXMLTEST',
-						'password' => 'certpass', 
-						'merchantId' => '101',
-						'version' => '8.10', 
-						'reportGroup' => 'planets',
-						'id' => '10');
 		$hash_out = array(
 			'litleTxnId' => Checker::required_field($hash_in['litleTxnId']),
 			'amount' =>$hash_in['amount'],
 			'payPalNotes'=>$hash_in['payPalNotes'],
 			'actionReason'=>$hash_in['actionReason']);
 
-		$request = Obj2xml::toXml($hash_out,'authReversal',$config);
+		$request = Obj2xml::toXml($hash_out,'authReversal');
 		$authReversalResponse = $this->newXML->request($request);
 		return $authReversalResponse;
 	}
 
 	public function creditRequest($hash_in)
 	{
-		$config = array('user'=>'PHXMLTEST',
-										'password' => 'certpass', 
-										'merchantId' => '101',
-										'version' => '8.10', 
-										'reportGroup' => 'planets',
-										'id' => '10');
 		$hash_out = array(
 			'litleTxnId' => $hash_in['litleTxnId'],
 			'orderId' =>$hash_in['orderId'],
@@ -169,7 +145,7 @@ class LitleOnlineRequest
 			'amexAggregatorData'=>XMLFields::amexAggregatorData($hash_in['amexAggregatorData']),
 			'payPalNotes' =>$hash_in['payPalNotes']);
 
-		$request = Obj2xml::toXml($hash_out,'credit',$config);
+		$request = Obj2xml::toXml($hash_out,'credit');
 		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
 		Checker::choice($choice_hash);
 		$creditResponse = $this->newXML->request($request);
@@ -179,19 +155,13 @@ class LitleOnlineRequest
 
 	public function registerTokenRequest($hash_in)
 	{
-		$config = array('user'=>'PHXMLTEST',
-						'password' => 'certpass', 
-						'merchantId' => '101',
-						'version' => '8.10', 
-						'reportGroup' => 'planets',
-						'id' => '10');
 		$hash_out = array(
 		'orderId'=>$hash_in['orderId'],
 		'accountNumber'=>$hash_in['accountNumber'],
 		'echeckForToken'=>XMLFields::echeckForTokenType($hash_in['echeckForToken']),
 		'paypageRegistrationId'=>$hash_in['paypageRegistrationId']);
 
-		$request = Obj2xml::toXml($hash_out,'registerTokenRequest',$config);
+		$request = Obj2xml::toXml($hash_out,'registerTokenRequest');
 
 		$choice_hash = array($hash_out['accountNumber'],$hash_out['echeckForToken'],$hash_out['paypageRegistrationId']);
 		Checker::choice($choice_hash);
@@ -202,12 +172,6 @@ class LitleOnlineRequest
 
 	public function forceCaptureRequest($hash_in)
 	{
-		$config = array('user'=>'PHXMLTEST',
-								'password' => 'certpass', 
-								'merchantId' => '101',
-								'version' => '8.10', 
-								'reportGroup' => 'planets',
-								'id' => '10');
 		$hash_out = array(
 		'orderId' =>Checker::required_field($hash_in['orderId']),
 		'amount' =>$hash_in['amount'],
@@ -223,7 +187,7 @@ class LitleOnlineRequest
 		'pos'=>XMLFields::pos($hash_in['pos']),
 		'amexAggregatorData'=>XMLFields::amexAggregatorData($hash_in['amexAggregatorData']));
 
-		$request = Obj2xml::toXml($hash_out,'forceCapture',$config);
+		$request = Obj2xml::toXml($hash_out,'forceCapture');
 
 		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
 		Checker::choice($choice_hash);
@@ -234,12 +198,6 @@ class LitleOnlineRequest
 
 	public function captureRequest($hash_in)
 	{
-		$config = array('user'=>'PHXMLTEST',
-								'password' => 'certpass', 
-								'merchantId' => '101',
-								'version' => '8.10', 
-								'reportGroup' => 'planets',
-								'id' => '10');
 		$hash_out = array(
 		'partial'=>$hash_in['partial'],
 	    'litleTxnId' => Checker::required_field($hash_in['litleTxnId']),
@@ -249,19 +207,14 @@ class LitleOnlineRequest
 		'payPalOrderComplete'=>$hash_in['payPalOrderComplete'],
 		'payPalNotes' =>$hash_in['payPalNotes']);
 
-		$request = Obj2xml::toXml($hash_out,'capture',$config);
+		$request = Obj2xml::toXml($hash_out,'capture');
 		$captureResponse = $this->newXML->request($request);
 		return $captureResponse;
 	}
 
 	public function captureGivenAuthRequest($hash_in)
 	{
-		$config = array('user'=>'PHXMLTEST',
-										'password' => 'certpass', 
-										'merchantId' => '101',
-										'version' => '8.10', 
-										'reportGroup' => 'planets',
-										'id' => '10');
+	
 		$hash_out = array(
 		'orderId'=>Checker::required_field($hash_in['orderId']),
 		'authInformation'=>XMLFields::authInformation($hash_in['authInformation']),
@@ -280,7 +233,7 @@ class LitleOnlineRequest
 		'pos'=>XMLFields::pos($hash_in['pos']),
 		'amexAggregatorData'=>XMLFields::amexAggregatorData($hash_in['amexAggregatorData']));
 
-		$request = Obj2xml::toXml($hash_out,'captureGivenAuth',$config);
+		$request = Obj2xml::toXml($hash_out,'captureGivenAuth');
 
 		$choice_hash = array($hash_out['card'],$hash_out['token'],$hash_out['paypage']);
 		Checker::choice($choice_hash);
@@ -291,18 +244,12 @@ class LitleOnlineRequest
 
 	public function echeckRedepositRequest($hash_in)
 	{
-		$config = array('user'=>'PHXMLTEST',
-						'password' => 'certpass', 
-						'merchantId' => '101',
-						'version' => '8.10', 
-						'reportGroup' => 'planets',
-						'id' => '10');
 		$hash_out = array(
 		'litleTxnId' => Checker::required_field($hash_in['litleTxnId']),
 		'echeck'=>XMLFields::echeckType($hash_in['echeck']),
 		'echeckToken'=>XMLFields::echeckTokenType($hash_in['echeckToken']));
 
-		$request = Obj2xml::toXml($hash_out,'echeckRedeposit',$config);
+		$request = Obj2xml::toXml($hash_out,'echeckRedeposit');
 		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
 		Checker::choice($choice_hash);
 
@@ -312,12 +259,6 @@ class LitleOnlineRequest
 
 	public function echeckSaleRequest($hash_in)
 	{
-		$config = array('user'=>'PHXMLTEST',
-								'password' => 'certpass', 
-								'merchantId' => '101',
-								'version' => '8.10', 
-								'reportGroup' => 'planets',
-								'id' => '10');
 		$hash_out = array(
 		'litleTxnId'=>$hash_in['litleTxnId'],
 		'orderId'=>$hash_in['orderId'],
@@ -330,7 +271,7 @@ class LitleOnlineRequest
 		'echeckToken'=>XMLFields::echeckTokenType($hash_in['echeckToken']),
 		'customBilling'=>XMLFields::customBilling($hash_in['customBilling']));
 
-		$request = Obj2xml::toXml($hash_out,'echeckSale',$config);
+		$request = Obj2xml::toXml($hash_out,'echeckSale');
 		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
 		Checker::choice($choice_hash);
 
@@ -340,12 +281,6 @@ class LitleOnlineRequest
 
 	public function echeckCreditRequest($hash_in)
 	{
-		$config = array('user'=>'PHXMLTEST',
-									'password' => 'certpass', 
-									'merchantId' => '101',
-									'version' => '8.10', 
-									'reportGroup' => 'planets',
-									'id' => '10');
 		$hash_out = array(
 			'litleTxnId'=>$hash_in['litleTxnId'],
 			'orderId'=>$hash_in['orderId'],
@@ -356,7 +291,7 @@ class LitleOnlineRequest
 			'echeckToken'=>XMLFields::echeckTokenType($hash_in['echeckToken']),
 			'customBilling'=>XMLFields::customBilling($hash_in['customBilling']));
 
-		$request = Obj2xml::toXml($hash_out,'echeckCredit',$config);
+		$request = Obj2xml::toXml($hash_out,'echeckCredit');
 		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
 		Checker::choice($choice_hash);
 
@@ -366,12 +301,6 @@ class LitleOnlineRequest
 
 	public function echeckVerificationRequest($hash_in)
 	{
-		$config = array('user'=>'PHXMLTEST',
-						'password' => 'certpass', 
-						'merchantId' => '101',
-						'version' => '8.10', 
-						'reportGroup' => 'planets',
-						'id' => '10');
 		$hash_out = array(
 			'litleTxnId'=>$hash_in['litleTxnId'],
 			'orderId'=>Checker::required_field($hash_in['orderId']),
@@ -381,29 +310,65 @@ class LitleOnlineRequest
 			'echeck'=>XMLFields::echeckType($hash_in['echeck']),
 			'echeckToken'=>XMLFields::echeckTokenType($hash_in['echeckToken']));
 
-		$request = Obj2xml::toXml($hash_out,'echeckVerification',$config);
+		$request = Obj2xml::toXml($hash_out,'echeckVerification');
 		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
 		Checker::choice($choice_hash);
-	
+
 		$echeckVerificationResponse = $this->newXML->request($request);
 		return $echeckVerificationResponse;
 	}
 
 	public function voidRequest($hash_in)
 	{
-		$config = array('user'=>'PHXMLTEST',
-						'password' => 'certpass', 
-						'merchantId' => '101',
-						'version' => '8.10', 
-						'reportGroup' => 'planets',
-						'id' => '10');
 		$hash_out = array(
 		'litleTxnId' => Checker::required_field($hash_in['litleTxnId']),
 	    'processingInstructions'=>XMLFields::processingInstructions($hash_in['processingInstructions']));
 
-		$request = Obj2xml::toXml($hash_out,'void',$config);
+		$request = Obj2xml::toXml($hash_out,'void');
 		$voidResponse = $this->newXML->request($request);
 		return $voidResponse;
 	}
+
+	private function get_Config()
+	{
+		$config_array = parse_ini_file('./litle_SDK_config.ini');
+		return $config_array;
+	}
+
+	private function get_User()
+	{
+		$config_array = LitleOnlineRequest::get_config();
+		$user = $config['user'];
+		return $user;
+	}
+
+	private function get_Password()
+	{
+		$config_array = LitleOnlineRequest::get_config();
+		$password = $config['Password'];
+		return $password;
+	}
+
+	private function get_merchantId()
+	{
+		$config_array = LitleOnlineRequest::get_config();
+		$merchantId = $config['merchantId'];
+		return $merchantId;
+	}
+	
+	private function get_Version()
+	{
+		$config_array = LitleOnlineRequest::get_config();
+		$Version = $config['version'];
+		return $Version;
+	}
+	
+	private function get_reportGroup()
+	{
+		$config_array = LitleOnlineRequest::get_config();
+		$reportGroup = $config['reportGroup'];
+		return $reportGroup;
+	}
+
 }
 ?>

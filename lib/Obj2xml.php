@@ -27,8 +27,14 @@
 
 class Obj2xml {
 
-	public static function toXml($data, $type, $config, $rootNodeName = 'litleOnlineRequest', $xml=null)
+	public static function toXml($data, $type, $rootNodeName = 'litleOnlineRequest', $xml=null)
 	{
+		$config = array('user'=>'PHXMLTEST',
+								'password' => 'certpass', 
+								'merchantId' => '101',
+								'version' => '8.10', 
+								'reportGroup' => 'planets',
+								'id' => '10');
 		$xml = simplexml_load_string("<?xml version='1.0' encoding='utf-8'?><$rootNodeName />");
 		$xml-> addAttribute('version',$config["version"]);
 		$xml-> addAttribute('merchantId',$config["merchantId"]);
