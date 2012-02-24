@@ -33,7 +33,7 @@ class cert1_Test_alpha extends UnitTestCase
 		function test_1_Auth()
 		{
 			$auth_hash = array(
-			 'reportGroup'=> '123123',
+			  #'user'=> '12312',
 		      'orderId' => '1',
 		      'amount' => '10010',
 		      'orderSource'=>'ecommerce',

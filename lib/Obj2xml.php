@@ -67,10 +67,11 @@ class Obj2xml {
 		$config_array =parse_ini_file('litle_SDK_config.ini');
 		$names = array('user','password','merchantId','id','reportGroup','version');
 		foreach($names as $name)
-		{
-			if (isset($hash_config[$name]))
+		{ 
+			if (isset($data[$name]))
 			{
-				$config[$name] = $hash_config[$name];
+				$config[$name] = $data[$name];
+			
 			}
 			else 
 			{

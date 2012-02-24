@@ -27,6 +27,7 @@
 require_once realpath(dirname(__FILE__)) . '/../lib/LitleOnline.php';
 
 $hash_in = array(
+'user'=>'rushimg',
 			'card'=>array('type'=>'VI',
 					'number'=>'4100000000000001',
 					'expDate'=>'1213',
@@ -37,8 +38,7 @@ $hash_in = array(
 			'orderId'=> '2111',
 			'reportGroup'=>'Planets',
 			'orderSource'=>'ecommerce',
-			'amount'=>'123','litleTxnId' => '123213213213123');
+			'amount'=>'123');
 $litleTest = &new LitleOnlineRequest();
 $retOb = $litleTest->authorizationRequest($hash_in);
-echo '1';
 ?>
