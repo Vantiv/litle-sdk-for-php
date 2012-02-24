@@ -29,12 +29,7 @@ class Obj2xml {
 
 	public static function toXml($data, $type, $rootNodeName = 'litleOnlineRequest', $xml=null)
 	{
-		$config = array('user'=>'PHXMLTEST',
-								'password' => 'certpass', 
-								'merchantId' => '101',
-								'version' => '8.10', 
-								'reportGroup' => 'planets',
-								'id' => '10');
+		$config= Obj2xml::get_config();
 		$xml = simplexml_load_string("<?xml version='1.0' encoding='utf-8'?><$rootNodeName />");
 		$xml-> addAttribute('version',$config["version"]);
 		$xml-> addAttribute('merchantId',$config["merchantId"]);
@@ -48,6 +43,7 @@ class Obj2xml {
 		Obj2xml::iterateChildren($data,$transacType);
 		return $xml->asXML();
 	}
+	
 	// loop through the data passed in.
 	private function iterateChildren($data,$transacType){
 		foreach($data as $key => $value)
@@ -65,6 +61,12 @@ class Obj2xml {
 
 			}
 		}
+	}
+	
+	private function get_config()
+	{
+		$config_array =parse_ini_file('litle_SDK_config.ini');
+		return $config_array;
 	}
 }
 

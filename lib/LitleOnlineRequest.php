@@ -30,7 +30,6 @@ class LitleOnlineRequest
 {
 	public function __construct()
 	{
-		#load configuration file
 		$this->newXML = new LitleXmlMapper();
 	}
 
@@ -327,47 +326,6 @@ class LitleOnlineRequest
 		$request = Obj2xml::toXml($hash_out,'void');
 		$voidResponse = $this->newXML->request($request);
 		return $voidResponse;
-	}
-
-	private function get_Config()
-	{
-		$config_array = parse_ini_file('./litle_SDK_config.ini');
-		return $config_array;
-	}
-
-	private function get_User()
-	{
-		$config_array = LitleOnlineRequest::get_config();
-		$user = $config['user'];
-		return $user;
-	}
-
-	private function get_Password()
-	{
-		$config_array = LitleOnlineRequest::get_config();
-		$password = $config['Password'];
-		return $password;
-	}
-
-	private function get_merchantId()
-	{
-		$config_array = LitleOnlineRequest::get_config();
-		$merchantId = $config['merchantId'];
-		return $merchantId;
-	}
-	
-	private function get_Version()
-	{
-		$config_array = LitleOnlineRequest::get_config();
-		$Version = $config['version'];
-		return $Version;
-	}
-	
-	private function get_reportGroup()
-	{
-		$config_array = LitleOnlineRequest::get_config();
-		$reportGroup = $config['reportGroup'];
-		return $reportGroup;
 	}
 
 }

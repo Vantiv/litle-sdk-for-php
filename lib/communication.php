@@ -26,13 +26,14 @@
 
 class communication{
   function httpRequest($req){
+  	$config = communication::get_config();
 	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_PROXY, "smoothproxy:8080");
+	curl_setopt($ch, CURLOPT_PROXY,$config['proxy']);
 	#curl_setopt($ch, CURLOPT_PROXY, "");
 	curl_setopt($ch, CURLOPT_POST, true);
 	#curl_setopt($ch, CURLOPT_HEADER, true);
 	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: text/xml'));
-	curl_setopt($ch, CURLOPT_URL, 'https://www.testlitle.com/sandbox/communicator/online' );
+	curl_setopt($ch, CURLOPT_URL, $config['url']);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $req);
 	curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, true);
 	//curl_setopt($ch, CURLOPT_SSLVERIFYPEER, true);
@@ -43,6 +44,12 @@ class communication{
 	$response_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 	curl_close($ch);
 	return $output;
+  }
+  
+  private function get_config()
+  {
+  	$config_array =parse_ini_file('litle_SDK_config.ini');
+  	return $config_array;
   }
 }
 ?>
