@@ -37,8 +37,8 @@ $hash_in = array(
 			'orderId'=> '2111',
 			'reportGroup'=>'Planets',
 			'orderSource'=>'ecommerce',
-			'amount'=>'123');
+			'amount'=>'123','litleTxnId' => '123213213213123');
 $litleTest = &new LitleOnlineRequest();
-$retOb = $litleTest->saleRequest($hash_in);
+$retOb = $litleTest->authorizationRequest($hash_in);
 echo '1';
 ?>

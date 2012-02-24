@@ -27,9 +27,9 @@
 
 class Obj2xml {
 
-	public static function toXml($data, $type, $rootNodeName = 'litleOnlineRequest', $xml=null)
+	public static function toXml($data, $hash_config, $type, $rootNodeName = 'litleOnlineRequest', $xml=null)
 	{
-		$config= Obj2xml::get_config($data);
+		$config= Obj2xml::get_config($hash_config);
 		$xml = simplexml_load_string("<?xml version='1.0' encoding='utf-8'?><$rootNodeName />");
 		$xml-> addAttribute('version',$config["version"]);
 		$xml-> addAttribute('merchantId',$config["merchantId"]);

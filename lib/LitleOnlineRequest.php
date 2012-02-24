@@ -97,14 +97,9 @@ class LitleOnlineRequest
 		'merchantData'=>XMLFields::filteringType($hash_in['merchantData']),
 		'recyclingRequest'=>XMLFields::recyclingRequestType($hash_in['recyclingRequest']));
 
-		$request = Obj2xml::toXml($hash_out,'sale');
-
 		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
-		Checker::choice($choice_hash);
 		$choice2_hash= array($hash_out['fraudCheck'],$hash_out['cardholderAuthentication']);
-		Checker::choice($choice2_hash);
-
-		$saleResponse = $this->newXML->request($request);
+		$saleResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'sale',$choice_hash,$choice_hash2);
 		return $saleResponse;
 	}
 
@@ -115,9 +110,7 @@ class LitleOnlineRequest
 			'amount' =>$hash_in['amount'],
 			'payPalNotes'=>$hash_in['payPalNotes'],
 			'actionReason'=>$hash_in['actionReason']);
-
-		$request = Obj2xml::toXml($hash_out,'authReversal');
-		$authReversalResponse = $this->newXML->request($request);
+		$authReversalResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'authReversal');
 		return $authReversalResponse;
 	}
 
@@ -155,12 +148,8 @@ class LitleOnlineRequest
 		'echeckForToken'=>XMLFields::echeckForTokenType($hash_in['echeckForToken']),
 		'paypageRegistrationId'=>$hash_in['paypageRegistrationId']);
 
-		$request = Obj2xml::toXml($hash_out,'registerTokenRequest');
-
 		$choice_hash = array($hash_out['accountNumber'],$hash_out['echeckForToken'],$hash_out['paypageRegistrationId']);
-		Checker::choice($choice_hash);
-
-		$registerTokenResponse = $this->newXML->request($request);
+		$registerTokenResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'registerTokenRequest',$choice_hash);
 		return $registerTokenResponse;
 	}
 
@@ -181,12 +170,8 @@ class LitleOnlineRequest
 		'pos'=>XMLFields::pos($hash_in['pos']),
 		'amexAggregatorData'=>XMLFields::amexAggregatorData($hash_in['amexAggregatorData']));
 
-		$request = Obj2xml::toXml($hash_out,'forceCapture');
-
 		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
-		Checker::choice($choice_hash);
-
-		$forceCaptureResponse = $this->newXML->request($request);
+		$forceCaptureResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'forceCapture',$choice_hash);
 		return $forceCaptureResponse;
 	}
 
@@ -200,7 +185,6 @@ class LitleOnlineRequest
 		'processingInstructions'=>XMLFields::processingInstructions($hash_in['processingInstructions']),
 		'payPalOrderComplete'=>$hash_in['payPalOrderComplete'],
 		'payPalNotes' =>$hash_in['payPalNotes']);
-
 		$captureResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'capture');
 		return $captureResponse;
 	}
@@ -226,12 +210,9 @@ class LitleOnlineRequest
 		'pos'=>XMLFields::pos($hash_in['pos']),
 		'amexAggregatorData'=>XMLFields::amexAggregatorData($hash_in['amexAggregatorData']));
 
-		$request = Obj2xml::toXml($hash_out,'captureGivenAuth');
-
+		
 		$choice_hash = array($hash_out['card'],$hash_out['token'],$hash_out['paypage']);
-		Checker::choice($choice_hash);
-
-		$captureGivenAuthResponse = $this->newXML->request($request);
+		$captureGivenAuthResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'captureGivenAuth',$choice_hash);
 		return $captureGivenAuthResponse;
 	}
 
@@ -242,11 +223,8 @@ class LitleOnlineRequest
 		'echeck'=>XMLFields::echeckType($hash_in['echeck']),
 		'echeckToken'=>XMLFields::echeckTokenType($hash_in['echeckToken']));
 
-		$request = Obj2xml::toXml($hash_out,'echeckRedeposit');
 		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
-		Checker::choice($choice_hash);
-
-		$echeckRedepositResponse = $this->newXML->request($request);
+		$echeckRedepositResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'echeckRedeposit',$choice_hash);
 		return $echeckRedepositResponse;
 	}
 
@@ -264,11 +242,9 @@ class LitleOnlineRequest
 		'echeckToken'=>XMLFields::echeckTokenType($hash_in['echeckToken']),
 		'customBilling'=>XMLFields::customBilling($hash_in['customBilling']));
 
-		$request = Obj2xml::toXml($hash_out,'echeckSale');
 		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
-		Checker::choice($choice_hash);
 
-		$echeckSaleResponse = $this->newXML->request($request);
+		$echeckSaleResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'echeckSale',$choice_hash);
 		return $echeckSaleResponse;
 	}
 
@@ -284,11 +260,8 @@ class LitleOnlineRequest
 			'echeckToken'=>XMLFields::echeckTokenType($hash_in['echeckToken']),
 			'customBilling'=>XMLFields::customBilling($hash_in['customBilling']));
 
-		$request = Obj2xml::toXml($hash_out,'echeckCredit');
 		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
-		Checker::choice($choice_hash);
-
-		$echeckCreditResponse = $this->newXML->request($request);
+		$echeckCreditResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'echeckCredit',$choice_hash);
 		return $echeckCreditResponse;
 	}
 
@@ -303,11 +276,10 @@ class LitleOnlineRequest
 			'echeck'=>XMLFields::echeckType($hash_in['echeck']),
 			'echeckToken'=>XMLFields::echeckTokenType($hash_in['echeckToken']));
 
-		$request = Obj2xml::toXml($hash_out,'echeckVerification');
-		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
-		Checker::choice($choice_hash);
 
-		$echeckVerificationResponse = $this->newXML->request($request);
+		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
+		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
+		$echeckVerificationResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'echeckVerification',$choice_hash);
 		return $echeckVerificationResponse;
 	}
 
@@ -335,9 +307,8 @@ class LitleOnlineRequest
 	
 	private function processRequest($hash_out, $hash_in, $type, $choice1 = null, $choice2 = null)
 	{
-		#$hash_config = LitleOnlineRequest::overide_config($hash_in);
-		
-		$request = Obj2xml::toXml($hash_out,$type);
+		$hash_config = LitleOnlineRequest::overide_config($hash_in);
+		$request = Obj2xml::toXml($hash_out,$hash_config, $type);
 		Checker::choice($choice1);
 		Checker::choice($choice2);
 		$litleOnlineResponse = $this->newXML->request($request);
