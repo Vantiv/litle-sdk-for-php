@@ -56,6 +56,7 @@ class Obj2xml {
 			elseif(is_array($value))
 			{
 				$node = $transacType->addChild($key);
+				Obj2xml::iterateChildren($value,$node);
 			}
 		}
 	}
