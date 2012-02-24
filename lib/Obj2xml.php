@@ -38,8 +38,8 @@ class Obj2xml {
 		$authentication->addChild('user',$config["user"]);
 		$authentication->addChild('password',$config["password"]);
 		$transacType = $xml->addChild($type);
-		$transacType-> addAttribute('reportGroup',$config["reportGroup"]);
-		$transacType-> addAttribute('id',$config["id"]);
+		if(isset($config['reportGroup'])) {($transacType-> addAttribute('reportGroup',$config["reportGroup"]));};
+		if(isset($config['id'])) {($transacType-> addAttribute('id',$config["id"]));};
 		Obj2xml::iterateChildren($data,$transacType);
 		return $xml->asXML();
 	}
@@ -56,8 +56,6 @@ class Obj2xml {
 			elseif(is_array($value))
 			{
 				$node = $transacType->addChild($key);
-				Obj2xml::iterateChildren($value,$node);
-
 			}
 		}
 	}

@@ -34,9 +34,7 @@ $hash_in = array(
 					'cardValidationNum' => '1213'),
 // 					'paypal'=>array("payerId"=>'123',"token"=>'12321312',
 // 		"transactionId" => '123123'),
-			'id'=>'1211',
 			'orderId'=> '2111',
-			'reportGroup'=>'Planets',
 			'orderSource'=>'ecommerce',
 			'amount'=>'123');
 $litleTest = &new LitleOnlineRequest();
