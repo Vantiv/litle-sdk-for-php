@@ -43,6 +43,7 @@ class Obj2xml {
 		Obj2xml::iterateChildren($data,$transacType);
 		return $xml->asXML();
 	}
+	
 	// loop through the data passed in.
 	private function iterateChildren($data,$transacType){
 		foreach($data as $key => $value)
@@ -62,7 +63,7 @@ class Obj2xml {
 		}
 	}
 	
-	public static function get_config()
+	private function get_config()
 	{
 		$config_array =parse_ini_file('litle_SDK_config.ini');
 		return $config_array;
