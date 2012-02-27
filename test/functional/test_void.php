@@ -23,22 +23,20 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
 // =end
-require_once realpath(dirname(__FILE__)) . '/LitleOnline.php';
 
-class LitleXmlMapper
+require_once("../../simpletest/autorun.php");
+require_once('../../simpletest/unit_tester.php');
+require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
+
+class void_FunctionalTest extends UnitTestCase
 {
-	public function __construct()
+	function test_simple_void()
 	{
-	}
-	
-	public function request($request)
-	{
-		#echo $request;
-	    $response = communication::httpRequest($request);
-		echo $response;
-		$respOb = Xml_parser::domParser($response);
-		#var_dump($respOb);
-		return $respOb;
+		$hash_in = array('litleTxnId'=> '123456789012345678');
+		$initilaize = &new LitleOnlineRequest();
+		$voidResponse = $initilaize->voidRequest($hash_in);
+		$response = Xml_parser::get_attribute($voidResponse,'litleOnlineResponse','response');
+		$this->assertEqual('1',$response);
 	}
 
 }
