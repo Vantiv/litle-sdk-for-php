@@ -123,7 +123,7 @@ class LitleOnlineRequest
 			'orderSource'=>$hash_in['orderSource'],
 			'billToAddress'=>XMLFields::contact($hash_in['billToAddress']),
 			'card'=> XMLFields::cardType($hash_in['card']),
-			'paypal'=>XMLFields::payPal($hash_in['paypal']),
+			'paypal'=>XMLFields::credit_payPal($hash_in['paypal']),
 			'token'=>XMLFields::cardTokenType($hash_in['token']),
 			'paypage'=>XMLFields::cardPaypageType($hash_in['paypage']),
 			'customBilling'=>XMLFields::customBilling($hash_in['customBilling']),
