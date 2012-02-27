@@ -64,11 +64,11 @@ class capture_FunctionalTest extends UnitTestCase
 			'litleTxnId'=>'1234567891234567891',
 			'patial'=>'true',
 			'amount'=>'123');
-	
+
 		$initilaize = &new LitleOnlineRequest();
 		$captureResponse = $initilaize->captureRequest($hash_in);
 		$message = Xml_parser::get_attribute($captureResponse,'litleOnlineResponse','response');
 		$this->assertEqual('1',$message);
 	}
-	}
-	?>
+}
+?>
