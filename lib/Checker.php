@@ -50,6 +50,23 @@ class Checker
 			throw new Exception("Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
 		}
 	}
+	
+// 	function requiredMissing($hash_out)
+// 	{
+// 		foreach ($hash_out as $key => $value)
+// 		{
+// 			if ((is_string($value)) || is_numeric($value)){
+// 				if ($value == "REQUIRED"){
+// 					throw new Exception("Missing Required Field: /$key/");
+// 				}
+// 				elseif (is_array($value))
+// 				{
+// 					Checker::requiredMissing($value);
+// 				}
+// 			}
+// 		}
+		
+// 	}
 
 }
 ?>

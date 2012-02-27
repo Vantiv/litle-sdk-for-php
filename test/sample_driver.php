@@ -26,20 +26,16 @@
 
 require_once realpath(dirname(__FILE__)) . '/../lib/LitleOnline.php';
 
-$hash_in = array(
-'user'=>'rushimg',
-			'card'=>array('type'=>'VI',
-					'number'=>'4100000000000001',
-					'expDate'=>'1213',
-					'cardValidationNum' => '1213'),
-					#'partial'=>'true',
-					#'litleTxnId'=>'123213213213213',
-// 					'paypal'=>array("payerId"=>'123',"token"=>'12321312',
-// 		"transactionId" => '123123'),
-			'orderId'=> '2111',
-			'orderSource'=>'ecommerce',
-			'amount'=>'123');
+	$hash_in = array(
+	      'litleTxnId'=>'123456',
+	      'amount'=>'106',
+	      'orderSource'=>'ecommerce',
+	      'card'=>array(
+	      'type'=>'VI',
+	      'number' =>'4100000000000001',
+	      'expDate' =>'1210')
+	      );
 $litleTest = &new LitleOnlineRequest();
-$retOb = $litleTest->authorizationRequest($hash_in);
+$retOb = $litleTest->saleRequest($hash_in);
 echo '1'
 ?>

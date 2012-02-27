@@ -308,18 +308,29 @@ class LitleOnlineRequest
 	private function processRequest($hash_out, $hash_in, $type, $choice1 = null, $choice2 = null)
 	{
 		$hash_config = LitleOnlineRequest::overide_config($hash_in);
-		Checker::choice($choice1);
-		Checker::choice($choice2);
 		$request = Obj2xml::toXml($hash_out,$hash_config, $type);
-		LitleOnlineRequest::validate_schema($request);
+		LitleOnlineRequest::validate_schema($request,$hash_out,$choice1,$choice2);
 		$litleOnlineResponse = $this->newXML->request($request);
 		return $litleOnlineResponse;
 	}
 	
-	private function validate_schema($litleOnlineRequest)
+	private function validate_schema($litleOnlineRequest,$hash_out,$choice1 = null, $choice2 = null)
 	{
+		libxml_use_internal_errors(true);
 		$domxml = Xml_parser::domParser($litleOnlineRequest);
-		return $domxml->schemaValidate(realpath(dirname(__FILE__)) . '/xsd/litleOnline_v8.10.xsd');
+		
+	    if  (!$domxml->schemaValidate(realpath(dirname(__FILE__)) . '/xsd/litleOnline_v8.10.xsd')){
+	    	if (Checker::choice($choice1) || Checker::choice($choice2)){
+	    		Checker::choice($choice1);
+	    		Checker::choice($choice2);
+	    	}
+// 	    	elseif(Checker::requiredMissing($hash_out)){
+// 	    			Checker::requiredMissing($hash_out);
+// 	    	}
+	    	else {
+	    		print '<b>Error Validating against the Schema</b>';
+	    	}
+	    }
 	}
 	
 }
