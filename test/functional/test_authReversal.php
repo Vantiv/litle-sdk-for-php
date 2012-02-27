@@ -23,23 +23,36 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
 // =end
-require_once realpath(dirname(__FILE__)) . '/LitleOnline.php';
 
-class LitleXmlMapper
+require_once("../../simpletest/autorun.php");
+require_once('../../simpletest/unit_tester.php');
+require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
+
+class authReversal_FunctionalTest extends UnitTestCase
 {
-	public function __construct()
+	function test_simple_Authreversal()
 	{
+		$hash_in = array(
+				'litleTxnId'=>'12345678000','amount'=>'123',
+		      'payPalNotes'=>'Notes');
+
+		$initilaize = &new LitleOnlineRequest();
+		$authReversalResponse = $initilaize->authReversalRequest($hash_in);
+		$response = Xml_parser::get_node($authReversalResponse,'response');
+		$this->assertEqual('000',$response);
+	}
+
+function test_simple_Authreversal_filedsOutoforder()
+	{
+		$hash_in = array(
+				'amount'=>'123',
+		      'payPalNotes'=>'Notes','litleTxnId'=>'12345678000',);
+
+		$initilaize = &new LitleOnlineRequest();
+		$authReversalResponse = $initilaize->authReversalRequest($hash_in);
+		$response = Xml_parser::get_node($authReversalResponse,'response');
+		$this->assertEqual('000',$response);
 	}
 	
-	public function request($request)
-	{
-		#echo $request;
-	    $response = communication::httpRequest($request);
-		#echo $response;
-		$respOb = Xml_parser::domParser($response);
-		#var_dump($respOb);
-		return $respOb;
-	}
-
 }
 ?>
