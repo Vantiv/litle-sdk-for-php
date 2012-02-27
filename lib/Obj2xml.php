@@ -39,6 +39,7 @@ class Obj2xml {
 		$authentication->addChild('password',$config["password"]);
 		$transacType = $xml->addChild($type);
 		if(isset($data['partial'])) {($transacType-> addAttribute('partial',$data["partial"]));};
+		unset($data['partial']);
 		if(isset($config['reportGroup'])) {($transacType-> addAttribute('reportGroup',$config["reportGroup"]));};
 		if(isset($config['id'])) {($transacType-> addAttribute('id',$config["id"]));};
 		Obj2xml::iterateChildren($data,$transacType);
