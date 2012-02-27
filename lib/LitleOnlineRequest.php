@@ -308,11 +308,18 @@ class LitleOnlineRequest
 	private function processRequest($hash_out, $hash_in, $type, $choice1 = null, $choice2 = null)
 	{
 		$hash_config = LitleOnlineRequest::overide_config($hash_in);
-		$request = Obj2xml::toXml($hash_out,$hash_config, $type);
 		Checker::choice($choice1);
 		Checker::choice($choice2);
+		$request = Obj2xml::toXml($hash_out,$hash_config, $type);
+		LitleOnlineRequest::validate_schema($request);
 		$litleOnlineResponse = $this->newXML->request($request);
 		return $litleOnlineResponse;
+	}
+	
+	private function validate_schema($litleOnlineRequest)
+	{
+		$domxml = Xml_parser::domParser($litleOnlineRequest);
+		return $domxml->schemaValidate(realpath(dirname(__FILE__)) . '/xsd/litleOnline_v8.10.xsd');
 	}
 	
 }

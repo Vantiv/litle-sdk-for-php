@@ -32,6 +32,8 @@ $hash_in = array(
 					'number'=>'4100000000000001',
 					'expDate'=>'1213',
 					'cardValidationNum' => '1213'),
+					#'partial'=>'true',
+					#'litleTxnId'=>'123213213213213',
 // 					'paypal'=>array("payerId"=>'123',"token"=>'12321312',
 // 		"transactionId" => '123123'),
 			'orderId'=> '2111',
@@ -39,4 +41,5 @@ $hash_in = array(
 			'amount'=>'123');
 $litleTest = &new LitleOnlineRequest();
 $retOb = $litleTest->authorizationRequest($hash_in);
+echo '1'
 ?>
