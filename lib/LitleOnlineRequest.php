@@ -328,7 +328,7 @@ class LitleOnlineRequest
 // 	    			Checker::requiredMissing($hash_out);
 // 	    	}
 	    	else {
-	    		print '<b>Error Validating against the Schema</b>';
+	    		throw new Exception ("Error Validating against the Schema");
 	    	}
 	    }
 	}

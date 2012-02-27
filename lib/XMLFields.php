@@ -172,6 +172,7 @@ class XMLFields
 		"entryMode"=>(Checker::required_field($hash_in["entryMode"])),
 		"cardholderId"=>(Checker::required_field($hash_in["cardholderId"])));
 			return $hash_out;
+			echo 'here';
 		}
 	}
 

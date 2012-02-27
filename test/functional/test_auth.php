@@ -73,7 +73,72 @@ class auth_FunctionalTest extends UnitTestCase
 		$initilaize = &new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($hash_in);
 		$message= Xml_parser::get_attribute($authorizationResponse,'litleOnlineResponse','message');
-		#$this->assertEqual("Error mapping xml data unable to find FieldDescriptor for 'litleTxnId' in ClassDescriptor of authorization",$message);
+		$this->assertEqual("Valid Format",$message);
+	}
+	function test_illegal_ordersource()
+	{
+		$hash_in = array(
+							'paypal'=>array("payerId"=>'123',"token"=>'12321312',
+			 				"transactionId" => '123123'),
+							'id'=>'1211',
+							'orderId'=> '2111',
+							'reportGroup'=>'Planets',
+							'orderSource'=>'notecommerce',
+							'amount'=>'123');
+	
+		$litleTest = &new LitleOnlineRequest();
+		$this->expectException(new Exception("Error Validating against the Schema"));
+		$retOb = $litleTest->authorizationRequest($hash_in);
+	}
+	function test_fields_out_of_order()
+	{
+		$hash_in = array(
+						'paypal'=>array("payerId"=>'123',"token"=>'12321312',
+		 				"transactionId" => '123123'),
+						'id'=>'1211',
+						'orderId'=> '2111',
+						'reportGroup'=>'Planets',
+						'orderSource'=>'ecommerce',
+						'amount'=>'123');
+	
+		$initilaize = &new LitleOnlineRequest();
+		$authorizationResponse = $initilaize->authorizationRequest($hash_in);
+		$message = Xml_parser::get_node($authorizationResponse,'message');
+		$this->assertEqual('Approved',$message);
+	}
+	function test_invalidField()
+	{
+		$hash_in = array(
+							'paypal'=>array("payerId"=>'123',"token"=>'12321312',
+			 				"transactionId" => '123123'),
+							'id'=>'1211',
+							'orderId'=> '2111',
+							'nonexistant'=>'novalue',
+							'reportGroup'=>'Planets',
+							'orderSource'=>'ecommerce',
+							'amount'=>'123');
+	
+		$initilaize = &new LitleOnlineRequest();
+		$authorizationResponse = $initilaize->authorizationRequest($hash_in);
+		$message = Xml_parser::get_node($authorizationResponse,'message');
+		$this->assertEqual('Approved',$message);
+	}
+
+	function test_pos_missing_field()
+	{
+		$hash_in = array(
+		'reportGroup'=>'Planets',
+        'orderId'=>'12344',
+        'amount'=>'106',
+        'orderSource'=>'ecommerce',
+        'pos'=>array('entryMode'=>'123'),
+        'card'=>array(
+        'type'=>'VI',
+        'number' =>'4100000000000001',
+        'expDate' =>'1210'));
+		$litleTest = &new LitleOnlineRequest();
+		$this->expectException(new Exception("Missing Required Field: /capability/"));
+		$retOb = $litleTest->authorizationRequest($hash_in);
 	}
 }
 ?>
