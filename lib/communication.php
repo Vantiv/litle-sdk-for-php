@@ -34,11 +34,12 @@ class communication{
 		curl_setopt($ch, CURLOPT_URL, $config['url']);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $req);
 		curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, true);
+		curl_setopt($ch,CURLOPT_TIMEOUT, $config['timeout']);
 		if ($config['sslverify'] == true)
 		{
 			curl_setopt($ch, CURLOPT_SSLVERIFYPEER, true);
-			curl_setopt($ch, CURLOPT_SSLVERIFYHOST,1);
-			curl_setopt($ch, CURLOPT_CAINFO,realpath(dirname(__FILE__))."/../cert/cert.litle.pem");//check the pem file
+			curl_setopt($ch, CURLOPT_SSLVERIFYHOST,2);
+			curl_setopt($ch, CURLOPT_CAINFO,(realpath(dirname(__FILE__))."/../cert/sandbox_braintreegateway_com.ca.crt"));
 		}
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		$output = curl_exec($ch);
