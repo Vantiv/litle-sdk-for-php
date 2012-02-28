@@ -1,4 +1,4 @@
-<?php 
+<?php
 // =begin
 // Copyright (c) 2011 Litle & Co.
 
@@ -25,31 +25,39 @@
 // =end
 
 class communication{
-  function httpRequest($req){
-  	$config = communication::get_config();
-	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_PROXY,$config['proxy']);
-	#curl_setopt($ch, CURLOPT_PROXY, "");
-	curl_setopt($ch, CURLOPT_POST, true);
-	#curl_setopt($ch, CURLOPT_HEADER, true);
-	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: text/xml'));
-	curl_setopt($ch, CURLOPT_URL, $config['url']);
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $req);
-	curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, true);
-	//curl_setopt($ch, CURLOPT_SSLVERIFYPEER, true);
-	//curl_setopt($ch, CURLOPT_SSLVERIFYHOST,1);
-	//curl_setopt($ch, CURLOPT_CAINFO,realpath(dirname(__FILE__))."/../cert/cert.litle.pem");//check the pem file
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	$output = curl_exec($ch);
-	$response_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-	curl_close($ch);
-	return $output;
-  }
-  
-  private function get_config()
-  {
-  	$config_array =parse_ini_file('litle_SDK_config.ini');
-  	return $config_array;
-  }
+	function httpRequest($req){
+		$config = communication::get_config();
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_PROXY,$config['proxy']);
+		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: text/xml'));
+		curl_setopt($ch, CURLOPT_URL, $config['url']);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $req);
+		curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, true);
+		if ($config['sslverify'] == true)
+		{
+			curl_setopt($ch, CURLOPT_SSLVERIFYPEER, true);
+			curl_setopt($ch, CURLOPT_SSLVERIFYHOST,1);
+			curl_setopt($ch, CURLOPT_CAINFO,realpath(dirname(__FILE__))."/../cert/cert.litle.pem");//check the pem file
+		}
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		$output = curl_exec($ch);
+		$response_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		if (! $output){
+			throw new Exception (curl_error($ch));
+		}
+		else
+		{
+			curl_close($ch);
+			return $output;
+		}
+
+	}
+
+	private function get_config()
+	{
+		$config_array =parse_ini_file('litle_SDK_config.ini');
+		return $config_array;
+	}
 }
 ?>

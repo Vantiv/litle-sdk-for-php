@@ -27,7 +27,7 @@ function initialize(){
 		fwrite($handle, "timeout =  65".  PHP_EOL);
 		fwrite($handle, "id =  10".  PHP_EOL);
 		fwrite($handle, "reportGroup = planets".  PHP_EOL);
-		
+		fwrite($handle, "sslverify = false".  PHP_EOL);
 		
 	}
 	fclose($handle);

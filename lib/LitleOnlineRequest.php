@@ -312,9 +312,9 @@ class LitleOnlineRequest
 	private function processRequest($hash_out, $hash_in, $type, $choice1 = null, $choice2 = null)
 	{
 		$hash_config = LitleOnlineRequest::overide_config($hash_in);
-		$request = Obj2xml::toXml($hash_out,$hash_config, $type);
 		Checker::choice($choice1);
-	    Checker::choice($choice2);
+		Checker::choice($choice2);
+		$request = Obj2xml::toXml($hash_out,$hash_config, $type);
 		$litleOnlineResponse = $this->newXML->request($request);
 		return $litleOnlineResponse;
 	}
