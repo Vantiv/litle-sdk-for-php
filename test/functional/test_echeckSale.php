@@ -72,9 +72,10 @@ class echeckSale_FunctionalTest extends UnitTestCase
 		      	'echeckToken' => array('accType'=>'Checking','litleToken'=>'1234565789012','routingNum'=>'123456789','checkNum'=>'123455'),
 		      'billToAddress'=>array('name'=>'Bob','city'=>'lowell','state'=>'MA','email'=>'litle.com'));
 
-		$litleTest = &new LitleOnlineRequest();
-		$this->expectException(new Exception("Error Validating against the Schema"));
-		$retOb = $litleTest->echeckSaleRequest($hash_in);
+		$initilaize = &new LitleOnlineRequest();
+		$echeckSaleResponse = $initilaize->echeckSaleRequest($hash_in);
+		$message= Xml_parser::get_attribute($echeckSaleResponse,'litleOnlineResponse','message');
+		$this->assertPattern('/Error validating xml data against the schema/',$message);
 	}
 	function test_echeckSale_with_shipto()
 	{

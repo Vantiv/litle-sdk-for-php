@@ -77,10 +77,10 @@ class sale_FunctionalTest extends UnitTestCase
 							'reportGroup'=>'Planets',
 							'orderSource'=>'notecommerce',
 							'amount'=>'123');
-
-		$litleTest = &new LitleOnlineRequest();
-		$this->expectException(new Exception("Error Validating against the Schema"));
-		$retOb = $litleTest->saleRequest($hash_in);
+		$initilaize = &new LitleOnlineRequest();
+		$saleResponse = $initilaize->saleRequest($hash_in);
+		$message= Xml_parser::get_attribute($saleResponse,'litleOnlineResponse','message');
+		$this->assertPattern('/Error validating xml data against the schema/',$message);
 	}
 
 	function test_illegal_card_type()
@@ -96,9 +96,10 @@ class sale_FunctionalTest extends UnitTestCase
 				'orderSource'=>'ecommerce',
 				'amount'=>'123');
 
-		$litleTest = &new LitleOnlineRequest();
-		$this->expectException(new Exception("Error Validating against the Schema"));
-		$retOb = $litleTest->saleRequest($hash_in);
+		$initilaize = &new LitleOnlineRequest();
+		$saleResponse = $initilaize->saleRequest($hash_in);
+		$message= Xml_parser::get_attribute($saleResponse,'litleOnlineResponse','message');
+		$this->assertPattern('/Error validating xml data against the schema/',$message);
 	}
 	function no_reportGroup()
 	{
@@ -166,9 +167,10 @@ class sale_FunctionalTest extends UnitTestCase
       'card'=>array(
       'type'=>'VI',
       'number' =>'4100000000000002'));
-		$litleTest = &new LitleOnlineRequest();
-		$this->expectException(new Exception("Error Validating against the Schema"));
-		$retOb = $litleTest->saleRequest($hash_in);
+		$initilaize = &new LitleOnlineRequest();
+		$saleResponse = $initilaize->saleRequest($hash_in);
+		$message= Xml_parser::get_attribute($saleResponse,'litleOnlineResponse','message');
+		$this->assertPattern('/Error validating xml data against the schema/',$message);
 	}
 }
 ?>

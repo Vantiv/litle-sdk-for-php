@@ -56,63 +56,59 @@ class auth_UnitTest extends UnitTestCase
 	}
 
 	
-// 	function test_noOrderId()
-// 	{
-// 		$hash_in = array('merchantId' => '101',
-// 	      'version'=>'8.8',
-// 	      'reportGroup'=>'Planets',
-// 	      'litleTxnId'=>'123456',
-// 	      'amount'=>'106',
-// 	      'orderSource'=>'ecommerce',
-// 	      'card'=>array(
-// 	      'type'=>'VI',
-// 	      'number' =>'4100000000000001',
-// 	      'expDate' =>'1210')
-// 	      );
-// 		$litleTest = &new LitleOnlineRequest();
-// 		$this->expectException(new Exception("Missing Required Field: /orderId/"));
-// 		$retOb = $litleTest->authorizationRequest($hash_in);
+	function test_noOrderId()
+	{
+		$hash_in = array('merchantId' => '101',
+	      'version'=>'8.8',
+	      'reportGroup'=>'Planets',
+	      'amount'=>'106',
+	      'orderSource'=>'ecommerce',
+	      'card'=>array(
+	      'type'=>'VI',
+	      'number' =>'4100000000000001',
+	      'expDate' =>'1210')
+	      );
+		$litleTest = &new LitleOnlineRequest();
+		$this->expectException(new Exception("Missing Required Field: /orderId/"));
+		$retOb = $litleTest->authorizationRequest($hash_in);
 		
-		
-// 	}
+ 	}
 	
-// 	function test_noAmount()
-// 	{
-// 		$hash_in = array('merchantId' => '101',
-// 	      'version'=>'8.8',
-// 	      'reportGroup'=>'Planets',
-// 	      'litleTxnId'=>'123456',
-// 	      'orderId'=>'12344',
-// 	      'orderSource'=>'ecommerce',
-// 	      'card'=>array(
-// 	      'type'=>'VI',
-// 	      'number' =>'4100000000000001',
-// 	      'expDate' =>'1210')
-// 		);
-// 		$litleTest = &new LitleOnlineRequest();
-// 		$this->expectException(new Exception("Missing Required Field: /amount/"));
-// 		$retOb = $litleTest->authorizationRequest($hash_in);
+	function test_noAmount()
+	{
+		$hash_in = array('merchantId' => '101',
+	      'version'=>'8.8',
+	      'reportGroup'=>'Planets',
+	      'orderId'=>'12344',
+	      'orderSource'=>'ecommerce',
+	      'card'=>array(
+	      'type'=>'VI',
+	      'number' =>'4100000000000001',
+	      'expDate' =>'1210')
+		);
+		$litleTest = &new LitleOnlineRequest();
+		$this->expectException(new Exception("Missing Required Field: /amount/"));
+		$retOb = $litleTest->authorizationRequest($hash_in);
 	
-// 	}
+	}
 	
-// 	function test_noOrderSource()
-// 	{
-// 		$hash_in = array('merchantId' => '101',
-// 	      'version'=>'8.8',
-// 	      'reportGroup'=>'Planets',
-// 	      'litleTxnId'=>'123456',
-// 	      'orderId'=>'12344',
-// 	      'amount'=>'106',
-// 	      'card'=>array(
-// 	      'type'=>'VI',
-// 	      'number' =>'4100000000000001',
-// 	      'expDate' =>'1210')
-// 		);
-// 		$litleTest = &new LitleOnlineRequest();
-// 	$this->expectException(new Exception("Missing Required Field: /orderSource/"));
-// 		$retOb = $litleTest->authorizationRequest($hash_in);
+	function test_noOrderSource()
+	{
+		$hash_in = array('merchantId' => '101',
+	      'version'=>'8.8',
+	      'reportGroup'=>'Planets',
+	      'orderId'=>'12344',
+	      'amount'=>'106',
+	      'card'=>array(
+	      'type'=>'VI',
+	      'number' =>'4100000000000001',
+	      'expDate' =>'1210')
+		);
+		$litleTest = &new LitleOnlineRequest();
+	$this->expectException(new Exception("Missing Required Field: /orderSource/"));
+		$retOb = $litleTest->authorizationRequest($hash_in);
 	
-// 	}
+	}
 	
 	function test_BothChoicesCardandPaypal()
 	{
@@ -171,7 +167,6 @@ class auth_UnitTest extends UnitTestCase
 		$hash_in = array('merchantId' => '101',
 	      'version'=>'8.8',
 	      'reportGroup'=>'Planets',
-	      'litleTxnId'=>'123456',
 	      'orderId'=>'12344',
 	      'amount'=>'106',
 	      'orderSource'=>'ecommerce',

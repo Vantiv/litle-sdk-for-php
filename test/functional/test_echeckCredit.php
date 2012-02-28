@@ -45,9 +45,10 @@ class echeckCredit_FunctionalTest extends UnitTestCase
 	function test_no_amount()
 	{
 		$hash_in = array();
-		$litleTest = &new LitleOnlineRequest();
-		$this->expectException(new Exception("Error Validating against the Schema"));
-		$retOb = $litleTest->echeckCreditRequest($hash_in);
+		$initilaize = &new LitleOnlineRequest();
+		$echeckCreditResponse = $initilaize->echeckCreditRequest($hash_in);
+		$message= Xml_parser::get_attribute($echeckCreditResponse,'litleOnlineResponse','message');
+		$this->assertPattern('/Error validating xml data against the schema/',$message);
 	}
 	
 	function test_echeckcredit_with_echeck()
@@ -91,9 +92,9 @@ class echeckCredit_FunctionalTest extends UnitTestCase
 		      	'echeckToken' => array('accType'=>'Checking','litleToken'=>'1234565789012','routingNum'=>'123456789','checkNum'=>'123455'));
 	
 		$initilaize = &new LitleOnlineRequest();
-		$litleTest = &new LitleOnlineRequest();
-		$this->expectException(new Exception("Error Validating against the Schema"));
-		$retOb = $litleTest->echeckCreditRequest($hash_in);
+		$echeckCreditResponse = $initilaize->echeckCreditRequest($hash_in);
+		$message= Xml_parser::get_attribute($echeckCreditResponse,'litleOnlineResponse','message');
+		$this->assertPattern('/Error validating xml data against the schema/',$message);
 	}
 
 }

@@ -60,9 +60,10 @@ class credit_FunctionalTest extends UnitTestCase
 				'orderSource'=>'ecommerce',
 				'amount'=>'123');
 
-		$litleTest = &new LitleOnlineRequest();
-		$this->expectException(new Exception("Error Validating against the Schema"));
-		$retOb = $litleTest->creditRequest($hash_in);
+		$initilaize = &new LitleOnlineRequest();
+		$creditResponse = $initilaize->creditRequest($hash_in);
+		$message= Xml_parser::get_attribute($creditResponse,'litleOnlineResponse','message');
+		$this->assertPattern('/Error validating xml data against the schema/',$message);
 	}
 	
 	function test_simple_credit_withlitleTxnId()
