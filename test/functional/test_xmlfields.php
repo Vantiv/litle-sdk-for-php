@@ -46,9 +46,10 @@ class xmlfields_FunctionalTest extends UnitTestCase
 	      'cardValidationNum'=> '123'
 		));
 
-		$litleTest = &new LitleOnlineRequest();
-		$this->expectException(new Exception("Error Validating against the Schema"));
-		$retOb = $litleTest->saleRequest($hash_in);
+		$initilaize = &new LitleOnlineRequest();
+		$saleResponse = $initilaize->saleRequest($hash_in);
+		$message= Xml_parser::get_attribute($saleResponse,'litleOnlineResponse','message');
+		$this->assertPattern('/Error validating xml data against the schema/',$message);
 	}
 
 
@@ -198,9 +199,10 @@ class xmlfields_FunctionalTest extends UnitTestCase
       'number' =>'4100000000000001',
       'expDate' =>'1210'));
 
-		$litleTest = &new LitleOnlineRequest();
-		$this->expectException(new Exception("Error Validating against the Schema"));
-		$retOb = $litleTest->saleRequest($hash_in);
+		$initilaize = &new LitleOnlineRequest();
+		$saleResponse = $initilaize->saleRequest($hash_in);
+		$message= Xml_parser::get_attribute($saleResponse,'litleOnlineResponse','message');
+		$this->assertPattern('/Error validating xml data against the schema/',$message);
 	}
 
 	function test_amexData()
@@ -238,9 +240,10 @@ class xmlfields_FunctionalTest extends UnitTestCase
 	      'expDate' =>'1210'),
 	      'amexAggregatorData'=>array('sellerMerchantCategoryCode'=>'1234'));
 
-		$litleTest = &new LitleOnlineRequest();
-		$this->expectException(new Exception("Error Validating against the Schema"));
-		$retOb = $litleTest->creditRequest($hash_in);
+		$initilaize = &new LitleOnlineRequest();
+		$creditResponse = $initilaize->creditRequest($hash_in);
+		$message= Xml_parser::get_attribute($creditResponse,'litleOnlineResponse','message');
+		$this->assertPattern('/Error validating xml data against the schema/',$message);
 	}
 
 
@@ -269,7 +272,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 		$message= Xml_parser::get_attribute($creditResponse,'litleOnlineResponse','message');
 		$this->assertEqual("Valid Format",$message);
 	}
-	
+
 	function test_simpleEnhancedDataincorrectEnumforCountryCode()
 	{
 		$hash_in = array(
@@ -290,12 +293,13 @@ class xmlfields_FunctionalTest extends UnitTestCase
 	      'deliveryType'=>'TBD',
 	      'shipFromPostalCode'=>'01741',
 	      'destinationPostalCode'=>'01742'));
-	
-		$litleTest = &new LitleOnlineRequest();
-		$this->expectException(new Exception("Error Validating against the Schema"));
-		$retOb = $litleTest->creditRequest($hash_in);
+
+		$initilaize = &new LitleOnlineRequest();
+		$creditResponse = $initilaize->creditRequest($hash_in);
+		$message= Xml_parser::get_attribute($creditResponse,'litleOnlineResponse','message');
+		$this->assertPattern('/Error validating xml data against the schema/',$message);
 	}
-	
+
 	function test_EnhancedDatawithdetailtax()
 	{
 		$hash_in = array(  'merchantId' => '101',
@@ -316,13 +320,13 @@ class xmlfields_FunctionalTest extends UnitTestCase
 	      'restriction'=>'DIG',
 	      'shipFromPostalCode'=>'01741',
 	      'destinationPostalCode'=>'01742'));
-	
+
 		$initilaize = &new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
 		$message= Xml_parser::get_attribute($creditResponse,'litleOnlineResponse','message');
 		$this->assertEqual("Valid Format",$message);
 	}
-	
+
 	function test_EnhancedDatawithlineItem()
 	{
 		$hash_in = array('merchantId' => '101',
@@ -350,13 +354,13 @@ class xmlfields_FunctionalTest extends UnitTestCase
 	      'restriction'=>'DIG',
 	      'shipFromPostalCode'=>'01741',
 	      'destinationPostalCode'=>'01742'));
-	
+
 		$initilaize = &new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
 		$message= Xml_parser::get_attribute($creditResponse,'litleOnlineResponse','message');
 		$this->assertEqual("Valid Format",$message);
 	}
-	
+
 	function test_simpletoken()
 	{
 		$hash_in = array('merchantId' => '101',
@@ -370,13 +374,13 @@ class xmlfields_FunctionalTest extends UnitTestCase
       'expDate'=>'1210',
       'cardValidationNum'=>'555',
       'type'=>'VI'));
-	
+
 		$initilaize = &new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
 		$message= Xml_parser::get_attribute($creditResponse,'litleOnlineResponse','message');
 		$this->assertEqual("Valid Format",$message);
 	}
-	
+
 	function test_tokenwithincorrecttokenLength()
 	{
 		$hash_in = array( 'merchantId' => '101',
@@ -390,12 +394,13 @@ class xmlfields_FunctionalTest extends UnitTestCase
       'expDate'=>'1210',
       'cardValidationNum'=>'555',
       'type'=>'VI'));
-	
-		$litleTest = &new LitleOnlineRequest();
-		$this->expectException(new Exception("Error Validating against the Schema"));
-		$retOb = $litleTest->creditRequest($hash_in);
+
+		$initilaize = &new LitleOnlineRequest();
+		$creditResponse = $initilaize->creditRequest($hash_in);
+		$message= Xml_parser::get_attribute($creditResponse,'litleOnlineResponse','message');
+		$this->assertPattern('/Error validating xml data against the schema/',$message);
 	}
-	
+
 	function test_tokenmissingexpDatandvalidNum()
 	{
 		$hash_in = array('merchantId' => '101',
@@ -407,13 +412,13 @@ class xmlfields_FunctionalTest extends UnitTestCase
       'token'=> array(
       'litleToken'=>'123456789101112',
       'type'=>'VI'));
-	
+
 		$initilaize = &new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
 		$message= Xml_parser::get_attribute($creditResponse,'litleOnlineResponse','message');
 		$this->assertEqual("Valid Format",$message);
 	}
-	
+
 	function test_simplePaypage()
 	{
 		$hash_in = array( 'merchantId' => '101',
@@ -427,13 +432,13 @@ class xmlfields_FunctionalTest extends UnitTestCase
       'expDate'=>'1210',
       'cardValidationNum'=>'555',
       'type'=>'VI'));
-	
+
 		$initilaize = &new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
 		$message= Xml_parser::get_attribute($creditResponse,'litleOnlineResponse','message');
 		$this->assertEqual("Valid Format",$message);
 	}
-	
+
 	function test_paypagemissingexpDatandvalidNum()
 	{
 		$hash_in = array('merchantId' => '101',
@@ -445,7 +450,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 	      'paypage'=> array(
 	      'paypageRegistrationId'=>'123456789101112',
 	      'type'=>'VI'));
-	
+
 		$initilaize = &new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
 		$message= Xml_parser::get_attribute($creditResponse,'litleOnlineResponse','message');
