@@ -35,11 +35,14 @@ class LitleOnlineRequest
 
 	public function authorizationRequest($hash_in)
 	{
+		if (isset($hash_in['litleTxnId'])){
+			$hash_out = array('litleTxnId'=> ($hash_in['litleTxnId']));
+		}
+		else {
 		$hash_out = array(
-			'litleTxnId'=> ($hash_in['litleTxnId']),
-			'orderId'=> $hash_in['orderId'],
-			'amount'=>$hash_in['amount'],
-			'orderSource'=>$hash_in['orderSource'],
+			'orderId'=> Checker::required_field($hash_in['orderId']),
+			'amount'=>Checker::required_field($hash_in['amount']),
+			'orderSource'=>Checker::required_field($hash_in['orderSource']),
 			'customerInfo'=>(XMLFields::customerInfo($hash_in['customerInfo'])),
 			'billToAddress'=>(XMLFields::contact($hash_in['billToAddress'])),
 			'shipToAddress'=>(XMLFields::contact($hash_in['shipToAddress'])),
@@ -60,6 +63,7 @@ class LitleOnlineRequest
 			'filtering'=>(XMLFields::filteringType($hash_in['filtering'])),
 			'merchantData'=>(XMLFields::filteringType($hash_in['merchantData'])),
 			'recyclingRequest'=>(XMLFields::recyclingRequestType($hash_in['recyclingRequest'])));
+		}
 
 		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
 		$authorizationResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'authorization',$choice_hash);
@@ -309,29 +313,13 @@ class LitleOnlineRequest
 	{
 		$hash_config = LitleOnlineRequest::overide_config($hash_in);
 		$request = Obj2xml::toXml($hash_out,$hash_config, $type);
-		LitleOnlineRequest::validate_schema($request,$hash_out,$choice1,$choice2);
+		Checker::choice($choice1);
+	    Checker::choice($choice2);
 		$litleOnlineResponse = $this->newXML->request($request);
 		return $litleOnlineResponse;
 	}
 	
-	private function validate_schema($litleOnlineRequest,$hash_out,$choice1 = null, $choice2 = null)
-	{
-		libxml_use_internal_errors(true);
-		$domxml = Xml_parser::domParser($litleOnlineRequest);
-		
-	    if  (!$domxml->schemaValidate(realpath(dirname(__FILE__)) . '/xsd/litleOnline_v8.10.xsd')){
-	    	if (Checker::choice($choice1) || Checker::choice($choice2)){
-	    		Checker::choice($choice1);
-	    		Checker::choice($choice2);
-	    	}
-// 	    	elseif(Checker::requiredMissing($hash_out)){
-// 	    			Checker::requiredMissing($hash_out);
-// 	    	}
-	    	else {
-	    		throw new Exception ("Error Validating against the Schema");
-	    	}
-	    }
-	}
+	
 	
 }
 ?>
