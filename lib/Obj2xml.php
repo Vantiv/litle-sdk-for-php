@@ -26,7 +26,7 @@ class Obj2xml {
 
 	public static function toXml($data, $hash_config, $type, $rootNodeName = 'litleOnlineRequest', $xml=null)
 	{
-		$config= Obj2xml::get_config($hash_config);
+		$config= Obj2xml::getConfig($hash_config);
 		$xml = simplexml_load_string("<?xml version='1.0' encoding='utf-8'?><$rootNodeName />");
 		$xml-> addAttribute('version',$config["version"]);
 		$xml-> addAttribute('merchantId',$config["merchantId"]);
@@ -37,6 +37,7 @@ class Obj2xml {
 		$transacType = $xml->addChild($type);
 		if(isset($data['partial'])) {($transacType-> addAttribute('partial',$data["partial"]));};
 		unset($data['partial']);
+		#merchant SDK attribute $transacType-> addAttribute('partial',$data["partial"])
 		if(isset($config['customerId'])) {($transacType-> addAttribute('customerId',$config["customerId"]));};
 		if(isset($config['reportGroup'])) {($transacType-> addAttribute('reportGroup',$config["reportGroup"]));};
 		if(isset($config['id'])) {($transacType-> addAttribute('id',$config["id"]));};
@@ -61,7 +62,7 @@ class Obj2xml {
 		}
 	}
 	
-	private function get_config($data)
+	private function getConfig($data)
 	{	
 		$config_array =parse_ini_file('litle_SDK_config.ini');
 		$names = array('user','password','merchantId','id','reportGroup','version');
