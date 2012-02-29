@@ -22,34 +22,18 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-require_once("../../simpletest/autorun.php");
-require_once('../../simpletest/unit_tester.php');
-require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
+require_once realpath(dirname(__FILE__)) . '/../lib/LitleOnline.php';
 
-class authReversal_FunctionalTest extends UnitTestCase
-{
-	function test_simple_Authreversal()
-	{
-		$hash_in = array(
-				'litleTxnId'=>'12345678000','amount'=>'123',
-		      'payPalNotes'=>'Notes');
-
-		$initilaize = &new LitleOnlineRequest();
-		$authReversalResponse = $initilaize->authReversalRequest($hash_in);
-		$response = XMLParser::get_node($authReversalResponse,'response');
-		$this->assertEqual('000',$response);
-	}
-
-function test_simple_Authreversal_filedsOutoforder()
-	{
-		$hash_in = array(
-				'amount'=>'123',
-		      'payPalNotes'=>'Notes','litleTxnId'=>'12345678000',);
-
-		$initilaize = &new LitleOnlineRequest();
-		$authReversalResponse = $initilaize->authReversalRequest($hash_in);
-		$response = XMLParser::get_node($authReversalResponse,'response');
-		$this->assertEqual('000',$response);
-	}
-	
-}
+	$hash_in = array(
+	      'litleTxnId'=>'123456',
+	      'amount'=>'106',
+	      'orderSource'=>'ecommerce',
+	      'card'=>array(
+	      'type'=>'VI',
+	      'number' =>'4100000000000001',
+	      'expDate' =>'1210')
+	      );
+$litleTest = &new LitleOnlineRequest();
+$retOb = $litleTest->saleRequest($hash_in);
+echo '1'
+?>

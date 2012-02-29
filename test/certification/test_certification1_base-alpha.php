@@ -1,28 +1,27 @@
 <?php
-// =begin
-// Copyright (c) 2011 Litle & Co.
-
-// Permission is hereby granted, free of charge, to any person
-// obtaining a copy of this software and associated documentation
-// files (the "Software"), to deal in the Software without
-// restriction, including without limitation the rights to use,
-// copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the
-// Software is furnished to do so, subject to the following
-// conditions:
-
-// The above copyright notice and this permission notice shall be
-// included in all copies or substantial portions of the Software.
-
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-// OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-// HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-// WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-// OTHER DEALINGS IN THE SOFTWARE.
-// =end
+/*
+* Copyright (c) 2011 Litle & Co.
+*
+* Permission is hereby granted, free of charge, to any person
+* obtaining a copy of this software and associated documentation
+* files (the "Software"), to deal in the Software without
+* restriction, including without limitation the rights to use,
+* copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the
+* Software is furnished to do so, subject to the following
+* conditions:
+*
+* The above copyright notice and this permission notice shall be
+* included in all copies or substantial portions of the Software.
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND
+* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+* OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+* NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+* HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+* WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+* OTHER DEALINGS IN THE SOFTWARE.
+*/
 
 require_once("../../simpletest/autorun.php");
 require_once('../../simpletest/unit_tester.php');
@@ -51,38 +50,38 @@ class cert1_Test_alpha extends UnitTestCase
 		      'type' => 'VI'));
 			$initilaize = &new LitleOnlineRequest();
 			$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
-			$this->assertEqual('000',Xml_parser::get_node($authorizationResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($authorizationResponse,'message'));
-			$this->assertEqual('11111 ',Xml_parser::get_node($authorizationResponse,'authCode'));
-			$this->assertEqual('1',Xml_parser::get_node($authorizationResponse,'avsResult'));
-			$this->assertEqual('M',Xml_parser::get_node($authorizationResponse,'cardValidationResult'));
+			$this->assertEqual('000',XmlParser::get_node($authorizationResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($authorizationResponse,'message'));
+			$this->assertEqual('11111 ',XmlParser::get_node($authorizationResponse,'authCode'));
+			$this->assertEqual('1',XmlParser::get_node($authorizationResponse,'avsResult'));
+			$this->assertEqual('M',XmlParser::get_node($authorizationResponse,'cardValidationResult'));
 
 			//test 1A
 			$capture_hash =  array(
-			'litleTxnId' =>(Xml_parser::get_node($authorizationResponse,'litleTxnId')),
+			'litleTxnId' =>(XmlParser::get_node($authorizationResponse,'litleTxnId')),
 			'reportGroup'=>'planets');
 			$initilaize = &new LitleOnlineRequest();
 			$captureResponse = $initilaize->captureRequest($capture_hash);
-			$this->assertEqual('000',Xml_parser::get_node($captureResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($captureResponse,'message'));
+			$this->assertEqual('000',XmlParser::get_node($captureResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($captureResponse,'message'));
 
 			//test 1B
 			$credit_hash =  array(
-			'litleTxnId' =>(Xml_parser::get_node($captureResponse,'litleTxnId')),
+			'litleTxnId' =>(XmlParser::get_node($captureResponse,'litleTxnId')),
 			'reportGroup'=>'planets');
 			$initilaize = &new LitleOnlineRequest();
 			$creditResponse = $initilaize->creditRequest($credit_hash);
-			$this->assertEqual('000',Xml_parser::get_node($creditResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($creditResponse,'message'));
+			$this->assertEqual('000',XmlParser::get_node($creditResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($creditResponse,'message'));
 
 			//test 1C
 			$void_hash =  array(
-			'litleTxnId' =>(Xml_parser::get_node($creditResponse,'litleTxnId')),
+			'litleTxnId' =>(XmlParser::get_node($creditResponse,'litleTxnId')),
 			'reportGroup'=>'planets');
 			$initilaize = &new LitleOnlineRequest();
 			$voidResponse = $initilaize->voidRequest($void_hash);
-			$this->assertEqual('000',Xml_parser::get_node($voidResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($voidResponse,'message'));
+			$this->assertEqual('000',XmlParser::get_node($voidResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($voidResponse,'message'));
 		}
 
 		function test_1_avs()
@@ -105,11 +104,11 @@ class cert1_Test_alpha extends UnitTestCase
 				      'type' => 'VI'));
 			$initilaize = &new LitleOnlineRequest();
 			$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
-			$this->assertEqual('000',Xml_parser::get_node($authorizationResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($authorizationResponse,'message'));
-			$this->assertEqual('11111 ',Xml_parser::get_node($authorizationResponse,'authCode'));
-			$this->assertEqual('1',Xml_parser::get_node($authorizationResponse,'avsResult'));
-			$this->assertEqual('M',Xml_parser::get_node($authorizationResponse,'cardValidationResult'));
+			$this->assertEqual('000',XmlParser::get_node($authorizationResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($authorizationResponse,'message'));
+			$this->assertEqual('11111 ',XmlParser::get_node($authorizationResponse,'authCode'));
+			$this->assertEqual('1',XmlParser::get_node($authorizationResponse,'avsResult'));
+			$this->assertEqual('M',XmlParser::get_node($authorizationResponse,'cardValidationResult'));
 		}
 
 		function test_1_sale()
@@ -132,27 +131,27 @@ class cert1_Test_alpha extends UnitTestCase
 			      'type' => 'VI'));
 			$initilaize = &new LitleOnlineRequest();
 			$saleResponse = $initilaize->saleRequest($sale_hash);
-			$this->assertEqual('000',Xml_parser::get_node($saleResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($saleResponse,'message'));
-			$this->assertEqual('11111 ',Xml_parser::get_node($saleResponse,'authCode'));
-			$this->assertEqual('1',Xml_parser::get_node($saleResponse,'avsResult'));
-			$this->assertEqual('M',Xml_parser::get_node($saleResponse,'cardValidationResult'));
+			$this->assertEqual('000',XmlParser::get_node($saleResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($saleResponse,'message'));
+			$this->assertEqual('11111 ',XmlParser::get_node($saleResponse,'authCode'));
+			$this->assertEqual('1',XmlParser::get_node($saleResponse,'avsResult'));
+			$this->assertEqual('M',XmlParser::get_node($saleResponse,'cardValidationResult'));
 
 			$credit_hash =  array(
-				'litleTxnId' =>(Xml_parser::get_node($saleResponse,'litleTxnId')),
+				'litleTxnId' =>(XmlParser::get_node($saleResponse,'litleTxnId')),
 				'reportGroup'=>'planets');
 			$initilaize = &new LitleOnlineRequest();
 			$creditResponse = $initilaize->creditRequest($credit_hash);
-			$this->assertEqual('000',Xml_parser::get_node($creditResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($creditResponse,'message'));
+			$this->assertEqual('000',XmlParser::get_node($creditResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($creditResponse,'message'));
 
 			$void_hash =  array(
-				'litleTxnId' =>(Xml_parser::get_node($creditResponse,'litleTxnId')),
+				'litleTxnId' =>(XmlParser::get_node($creditResponse,'litleTxnId')),
 				'reportGroup'=>'planets');
 			$initilaize = &new LitleOnlineRequest();
 			$voidResponse = $initilaize->voidRequest($void_hash);
-			$this->assertEqual('000',Xml_parser::get_node($voidResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($voidResponse,'message'));
+			$this->assertEqual('000',XmlParser::get_node($voidResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($voidResponse,'message'));
 		}
 
 		function test_2_Auth()
@@ -178,38 +177,38 @@ class cert1_Test_alpha extends UnitTestCase
 
 			$initilaize = &new LitleOnlineRequest();
 			$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
-			$this->assertEqual('000',Xml_parser::get_node($authorizationResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($authorizationResponse,'message'));
-			$this->assertEqual('22222',Xml_parser::get_node($authorizationResponse,'authCode'));
-			$this->assertEqual('10',Xml_parser::get_node($authorizationResponse,'avsResult'));
-			$this->assertEqual('M',Xml_parser::get_node($authorizationResponse,'cardValidationResult'));
+			$this->assertEqual('000',XmlParser::get_node($authorizationResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($authorizationResponse,'message'));
+			$this->assertEqual('22222',XmlParser::get_node($authorizationResponse,'authCode'));
+			$this->assertEqual('10',XmlParser::get_node($authorizationResponse,'avsResult'));
+			$this->assertEqual('M',XmlParser::get_node($authorizationResponse,'cardValidationResult'));
 
 			//test 2A
 			$capture_hash =  array(
-				'litleTxnId' =>(Xml_parser::get_node($authorizationResponse,'litleTxnId')),
+				'litleTxnId' =>(XmlParser::get_node($authorizationResponse,'litleTxnId')),
 				'reportGroup'=>'planets');
 			$initilaize = &new LitleOnlineRequest();
 			$captureResponse = $initilaize->captureRequest($capture_hash);
-			$this->assertEqual('000',Xml_parser::get_node($captureResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($captureResponse,'message'));
+			$this->assertEqual('000',XmlParser::get_node($captureResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($captureResponse,'message'));
 
 			//test 2B
 			$credit_hash =  array(
-				'litleTxnId' =>(Xml_parser::get_node($captureResponse,'litleTxnId')),
+				'litleTxnId' =>(XmlParser::get_node($captureResponse,'litleTxnId')),
 				'reportGroup'=>'planets');
 			$initilaize = &new LitleOnlineRequest();
 			$creditResponse = $initilaize->creditRequest($credit_hash);
-			$this->assertEqual('000',Xml_parser::get_node($creditResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($creditResponse,'message'));
+			$this->assertEqual('000',XmlParser::get_node($creditResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($creditResponse,'message'));
 
 			//test 2C
 			$void_hash =  array(
-				'litleTxnId' =>(Xml_parser::get_node($creditResponse,'litleTxnId')),
+				'litleTxnId' =>(XmlParser::get_node($creditResponse,'litleTxnId')),
 				'reportGroup'=>'planets');
 			$initilaize = &new LitleOnlineRequest();
 			$voidResponse = $initilaize->voidRequest($void_hash);
-			$this->assertEqual('000',Xml_parser::get_node($voidResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($voidResponse,'message'));
+			$this->assertEqual('000',XmlParser::get_node($voidResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($voidResponse,'message'));
 		}
 
 		function test_2_avs()
@@ -235,11 +234,11 @@ class cert1_Test_alpha extends UnitTestCase
 
 			$initilaize = &new LitleOnlineRequest();
 			$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
-			$this->assertEqual('000',Xml_parser::get_node($authorizationResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($authorizationResponse,'message'));
-			$this->assertEqual('22222',Xml_parser::get_node($authorizationResponse,'authCode'));
-			$this->assertEqual('10',Xml_parser::get_node($authorizationResponse,'avsResult'));
-			$this->assertEqual('M',Xml_parser::get_node($authorizationResponse,'cardValidationResult'));
+			$this->assertEqual('000',XmlParser::get_node($authorizationResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($authorizationResponse,'message'));
+			$this->assertEqual('22222',XmlParser::get_node($authorizationResponse,'authCode'));
+			$this->assertEqual('10',XmlParser::get_node($authorizationResponse,'avsResult'));
+			$this->assertEqual('M',XmlParser::get_node($authorizationResponse,'cardValidationResult'));
 		}
 
 		function test_2_sale()
@@ -265,29 +264,29 @@ class cert1_Test_alpha extends UnitTestCase
 
 			$initilaize = &new LitleOnlineRequest();
 			$saleResponse = $initilaize->saleRequest($sale_hash);
-			$this->assertEqual('000',Xml_parser::get_node($saleResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($saleResponse,'message'));
-			$this->assertEqual('22222',Xml_parser::get_node($saleResponse,'authCode'));
-			$this->assertEqual('10',Xml_parser::get_node($saleResponse,'avsResult'));
-			$this->assertEqual('M',Xml_parser::get_node($saleResponse,'cardValidationResult'));
+			$this->assertEqual('000',XmlParser::get_node($saleResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($saleResponse,'message'));
+			$this->assertEqual('22222',XmlParser::get_node($saleResponse,'authCode'));
+			$this->assertEqual('10',XmlParser::get_node($saleResponse,'avsResult'));
+			$this->assertEqual('M',XmlParser::get_node($saleResponse,'cardValidationResult'));
 
 			//test 2B
 			$credit_hash =  array(
-					'litleTxnId' =>(Xml_parser::get_node($saleResponse,'litleTxnId')),
+					'litleTxnId' =>(XmlParser::get_node($saleResponse,'litleTxnId')),
 					'reportGroup'=>'planets');
 			$initilaize = &new LitleOnlineRequest();
 			$creditResponse = $initilaize->creditRequest($credit_hash);
-			$this->assertEqual('000',Xml_parser::get_node($creditResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($creditResponse,'message'));
+			$this->assertEqual('000',XmlParser::get_node($creditResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($creditResponse,'message'));
 
 			//test 2C
 			$void_hash =  array(
-					'litleTxnId' =>(Xml_parser::get_node($creditResponse,'litleTxnId')),
+					'litleTxnId' =>(XmlParser::get_node($creditResponse,'litleTxnId')),
 					'reportGroup'=>'planets');
 			$initilaize = &new LitleOnlineRequest();
 			$voidResponse = $initilaize->voidRequest($void_hash);
-			$this->assertEqual('000',Xml_parser::get_node($voidResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($voidResponse,'message'));
+			$this->assertEqual('000',XmlParser::get_node($voidResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($voidResponse,'message'));
 		}
 
 		function test_3_Auth()
@@ -311,38 +310,38 @@ class cert1_Test_alpha extends UnitTestCase
 
 			$initilaize = &new LitleOnlineRequest();
 			$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
-			$this->assertEqual('000',Xml_parser::get_node($authorizationResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($authorizationResponse,'message'));
-			$this->assertEqual('33333',Xml_parser::get_node($authorizationResponse,'authCode'));
-			$this->assertEqual('10',Xml_parser::get_node($authorizationResponse,'avsResult'));
-			$this->assertEqual('M',Xml_parser::get_node($authorizationResponse,'cardValidationResult'));
+			$this->assertEqual('000',XmlParser::get_node($authorizationResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($authorizationResponse,'message'));
+			$this->assertEqual('33333',XmlParser::get_node($authorizationResponse,'authCode'));
+			$this->assertEqual('10',XmlParser::get_node($authorizationResponse,'avsResult'));
+			$this->assertEqual('M',XmlParser::get_node($authorizationResponse,'cardValidationResult'));
 
 			//test 3A
 			$capture_hash =  array(
-					'litleTxnId' =>(Xml_parser::get_node($authorizationResponse,'litleTxnId')),
+					'litleTxnId' =>(XmlParser::get_node($authorizationResponse,'litleTxnId')),
 					'reportGroup'=>'planets');
 			$initilaize = &new LitleOnlineRequest();
 			$captureResponse = $initilaize->captureRequest($capture_hash);
-			$this->assertEqual('000',Xml_parser::get_node($captureResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($captureResponse,'message'));
+			$this->assertEqual('000',XmlParser::get_node($captureResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($captureResponse,'message'));
 
 			//test 3B
 			$credit_hash =  array(
-					'litleTxnId' =>(Xml_parser::get_node($captureResponse,'litleTxnId')),
+					'litleTxnId' =>(XmlParser::get_node($captureResponse,'litleTxnId')),
 					'reportGroup'=>'planets');
 			$initilaize = &new LitleOnlineRequest();
 			$creditResponse = $initilaize->creditRequest($credit_hash);
-			$this->assertEqual('000',Xml_parser::get_node($creditResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($creditResponse,'message'));
+			$this->assertEqual('000',XmlParser::get_node($creditResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($creditResponse,'message'));
 
 			//test 3C
 			$void_hash =  array(
-					'litleTxnId' =>(Xml_parser::get_node($creditResponse,'litleTxnId')),
+					'litleTxnId' =>(XmlParser::get_node($creditResponse,'litleTxnId')),
 					'reportGroup'=>'planets');
 			$initilaize = &new LitleOnlineRequest();
 			$voidResponse = $initilaize->voidRequest($void_hash);
-			$this->assertEqual('000',Xml_parser::get_node($voidResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($voidResponse,'message'));
+			$this->assertEqual('000',XmlParser::get_node($voidResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($voidResponse,'message'));
 		}
 
 		function test_3_avs()
@@ -365,11 +364,11 @@ class cert1_Test_alpha extends UnitTestCase
 			  			'cardValidationNum' => '758'));
 			$initilaize = &new LitleOnlineRequest();
 			$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
-			$this->assertEqual('000',Xml_parser::get_node($authorizationResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($authorizationResponse,'message'));
-			$this->assertEqual('33333',Xml_parser::get_node($authorizationResponse,'authCode'));
-			$this->assertEqual('10',Xml_parser::get_node($authorizationResponse,'avsResult'));
-			$this->assertEqual('M',Xml_parser::get_node($authorizationResponse,'cardValidationResult'));
+			$this->assertEqual('000',XmlParser::get_node($authorizationResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($authorizationResponse,'message'));
+			$this->assertEqual('33333',XmlParser::get_node($authorizationResponse,'authCode'));
+			$this->assertEqual('10',XmlParser::get_node($authorizationResponse,'avsResult'));
+			$this->assertEqual('M',XmlParser::get_node($authorizationResponse,'cardValidationResult'));
 		}
 
 		function test_3_sale()
@@ -393,29 +392,29 @@ class cert1_Test_alpha extends UnitTestCase
 
 			$initilaize = &new LitleOnlineRequest();
 			$saleResponse = $initilaize->saleRequest($sale_hash);
-			$this->assertEqual('000',Xml_parser::get_node($saleResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($saleResponse,'message'));
-			$this->assertEqual('33333',Xml_parser::get_node($saleResponse,'authCode'));
-			$this->assertEqual('10',Xml_parser::get_node($saleResponse,'avsResult'));
-			$this->assertEqual('M',Xml_parser::get_node($saleResponse,'cardValidationResult'));
+			$this->assertEqual('000',XmlParser::get_node($saleResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($saleResponse,'message'));
+			$this->assertEqual('33333',XmlParser::get_node($saleResponse,'authCode'));
+			$this->assertEqual('10',XmlParser::get_node($saleResponse,'avsResult'));
+			$this->assertEqual('M',XmlParser::get_node($saleResponse,'cardValidationResult'));
 
 			//test 3B
 			$credit_hash =  array(
-							'litleTxnId' =>(Xml_parser::get_node($saleResponse,'litleTxnId')),
+							'litleTxnId' =>(XmlParser::get_node($saleResponse,'litleTxnId')),
 							'reportGroup'=>'planets');
 			$initilaize = &new LitleOnlineRequest();
 			$creditResponse = $initilaize->creditRequest($credit_hash);
-			$this->assertEqual('000',Xml_parser::get_node($creditResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($creditResponse,'message'));
+			$this->assertEqual('000',XmlParser::get_node($creditResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($creditResponse,'message'));
 
 			//test 3C
 			$void_hash =  array(
-							'litleTxnId' =>(Xml_parser::get_node($creditResponse,'litleTxnId')),
+							'litleTxnId' =>(XmlParser::get_node($creditResponse,'litleTxnId')),
 							'reportGroup'=>'planets');
 			$initilaize = &new LitleOnlineRequest();
 			$voidResponse = $initilaize->voidRequest($void_hash);
-			$this->assertEqual('000',Xml_parser::get_node($voidResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($voidResponse,'message'));
+			$this->assertEqual('000',XmlParser::get_node($voidResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($voidResponse,'message'));
 		}
 
 		function test_4_Auth()
@@ -438,37 +437,37 @@ class cert1_Test_alpha extends UnitTestCase
 
 			$initilaize = &new LitleOnlineRequest();
 			$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
-			$this->assertEqual('000',Xml_parser::get_node($authorizationResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($authorizationResponse,'message'));
-			$this->assertEqual('44444',Xml_parser::get_node($authorizationResponse,'authCode'));
-			$this->assertEqual('12',Xml_parser::get_node($authorizationResponse,'avsResult'));
+			$this->assertEqual('000',XmlParser::get_node($authorizationResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($authorizationResponse,'message'));
+			$this->assertEqual('44444',XmlParser::get_node($authorizationResponse,'authCode'));
+			$this->assertEqual('12',XmlParser::get_node($authorizationResponse,'avsResult'));
 
 			//test 4A
 			$capture_hash =  array(
-							'litleTxnId' =>(Xml_parser::get_node($authorizationResponse,'litleTxnId')),
+							'litleTxnId' =>(XmlParser::get_node($authorizationResponse,'litleTxnId')),
 							'reportGroup'=>'planets');
 			$initilaize = &new LitleOnlineRequest();
 			$captureResponse = $initilaize->captureRequest($capture_hash);
-			#$this->assertEqual('000',Xml_parser::get_node($captureResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($captureResponse,'message'));
+			#$this->assertEqual('000',XmlParser::get_node($captureResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($captureResponse,'message'));
 
 			//test 4B
 			$credit_hash =  array(
-							'litleTxnId' =>(Xml_parser::get_node($captureResponse,'litleTxnId')),
+							'litleTxnId' =>(XmlParser::get_node($captureResponse,'litleTxnId')),
 							'reportGroup'=>'planets');
 			$initilaize = &new LitleOnlineRequest();
 			$creditResponse = $initilaize->creditRequest($credit_hash);
-			$this->assertEqual('000',Xml_parser::get_node($creditResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($creditResponse,'message'));
+			$this->assertEqual('000',XmlParser::get_node($creditResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($creditResponse,'message'));
 
 			//test 4C
 			$void_hash =  array(
-							'litleTxnId' =>(Xml_parser::get_node($creditResponse,'litleTxnId')),
+							'litleTxnId' =>(XmlParser::get_node($creditResponse,'litleTxnId')),
 							'reportGroup'=>'planets');
 			$initilaize = &new LitleOnlineRequest();
 			$voidResponse = $initilaize->voidRequest($void_hash);
-			$this->assertEqual('000',Xml_parser::get_node($voidResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($voidResponse,'message'));
+			$this->assertEqual('000',XmlParser::get_node($voidResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($voidResponse,'message'));
 		}
 
 		function test_4_avs()
@@ -491,10 +490,10 @@ class cert1_Test_alpha extends UnitTestCase
 
 			$initilaize = &new LitleOnlineRequest();
 			$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
-			$this->assertEqual('000',Xml_parser::get_node($authorizationResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($authorizationResponse,'message'));
-			$this->assertEqual('44444',Xml_parser::get_node($authorizationResponse,'authCode'));
-			$this->assertEqual('12',Xml_parser::get_node($authorizationResponse,'avsResult'));
+			$this->assertEqual('000',XmlParser::get_node($authorizationResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($authorizationResponse,'message'));
+			$this->assertEqual('44444',XmlParser::get_node($authorizationResponse,'authCode'));
+			$this->assertEqual('12',XmlParser::get_node($authorizationResponse,'avsResult'));
 
 		}
 
@@ -518,28 +517,28 @@ class cert1_Test_alpha extends UnitTestCase
 
 			$initilaize = &new LitleOnlineRequest();
 			$saleResponse = $initilaize->saleRequest($sale_hash);
-			$this->assertEqual('000',Xml_parser::get_node($saleResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($saleResponse,'message'));
-			$this->assertEqual('44444',Xml_parser::get_node($saleResponse,'authCode'));
-			$this->assertEqual('12',Xml_parser::get_node($saleResponse,'avsResult'));
+			$this->assertEqual('000',XmlParser::get_node($saleResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($saleResponse,'message'));
+			$this->assertEqual('44444',XmlParser::get_node($saleResponse,'authCode'));
+			$this->assertEqual('12',XmlParser::get_node($saleResponse,'avsResult'));
 
 			//test 4B
 			$credit_hash =  array(
-									'litleTxnId' =>(Xml_parser::get_node($saleResponse,'litleTxnId')),
+									'litleTxnId' =>(XmlParser::get_node($saleResponse,'litleTxnId')),
 									'reportGroup'=>'planets');
 			$initilaize = &new LitleOnlineRequest();
 			$creditResponse = $initilaize->creditRequest($credit_hash);
-			$this->assertEqual('000',Xml_parser::get_node($creditResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($creditResponse,'message'));
+			$this->assertEqual('000',XmlParser::get_node($creditResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($creditResponse,'message'));
 
 			//test 4C
 			$void_hash =  array(
-									'litleTxnId' =>(Xml_parser::get_node($creditResponse,'litleTxnId')),
+									'litleTxnId' =>(XmlParser::get_node($creditResponse,'litleTxnId')),
 									'reportGroup'=>'planets');
 			$initilaize = &new LitleOnlineRequest();
 			$voidResponse = $initilaize->voidRequest($void_hash);
-			$this->assertEqual('000',Xml_parser::get_node($voidResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($voidResponse,'message'));
+			$this->assertEqual('000',XmlParser::get_node($voidResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($voidResponse,'message'));
 		}
 
 		function test_5_auth()
@@ -557,38 +556,38 @@ class cert1_Test_alpha extends UnitTestCase
 
 			$initilaize = &new LitleOnlineRequest();
 			$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
-			$this->assertEqual('000',Xml_parser::get_node($authorizationResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($authorizationResponse,'message'));
-			$this->assertEqual('55555 ',Xml_parser::get_node($authorizationResponse,'authCode'));
-			$this->assertEqual('32',Xml_parser::get_node($authorizationResponse,'avsResult'));
-			$this->assertEqual('N',Xml_parser::get_node($authorizationResponse,'cardValidationResult'));
+			$this->assertEqual('000',XmlParser::get_node($authorizationResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($authorizationResponse,'message'));
+			$this->assertEqual('55555 ',XmlParser::get_node($authorizationResponse,'authCode'));
+			$this->assertEqual('32',XmlParser::get_node($authorizationResponse,'avsResult'));
+			$this->assertEqual('N',XmlParser::get_node($authorizationResponse,'cardValidationResult'));
 
 			//test 5A
 			$capture_hash =  array(
-									'litleTxnId' =>(Xml_parser::get_node($authorizationResponse,'litleTxnId')),
+									'litleTxnId' =>(XmlParser::get_node($authorizationResponse,'litleTxnId')),
 									'reportGroup'=>'planets');
 			$initilaize = &new LitleOnlineRequest();
 			$captureResponse = $initilaize->captureRequest($capture_hash);
-			$this->assertEqual('000',Xml_parser::get_node($captureResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($captureResponse,'message'));
+			$this->assertEqual('000',XmlParser::get_node($captureResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($captureResponse,'message'));
 
 			//test 5B
 			$credit_hash =  array(
-									'litleTxnId' =>(Xml_parser::get_node($captureResponse,'litleTxnId')),
+									'litleTxnId' =>(XmlParser::get_node($captureResponse,'litleTxnId')),
 									'reportGroup'=>'planets');
 			$initilaize = &new LitleOnlineRequest();
 			$creditResponse = $initilaize->creditRequest($credit_hash);
-			$this->assertEqual('000',Xml_parser::get_node($creditResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($creditResponse,'message'));
+			$this->assertEqual('000',XmlParser::get_node($creditResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($creditResponse,'message'));
 
 			//test 5C
 			$void_hash =  array(
-									'litleTxnId' =>(Xml_parser::get_node($creditResponse,'litleTxnId')),
+									'litleTxnId' =>(XmlParser::get_node($creditResponse,'litleTxnId')),
 									'reportGroup'=>'planets');
 			$initilaize = &new LitleOnlineRequest();
 			$voidResponse = $initilaize->voidRequest($void_hash);
-			$this->assertEqual('000',Xml_parser::get_node($voidResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($voidResponse,'message'));
+			$this->assertEqual('000',XmlParser::get_node($voidResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($voidResponse,'message'));
 		}
 
 		function test_5_avs()
@@ -606,11 +605,11 @@ class cert1_Test_alpha extends UnitTestCase
 
 			$initilaize = &new LitleOnlineRequest();
 			$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
-			$this->assertEqual('000',Xml_parser::get_node($authorizationResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($authorizationResponse,'message'));
-			$this->assertEqual('55555 ',Xml_parser::get_node($authorizationResponse,'authCode'));
-			$this->assertEqual('32',Xml_parser::get_node($authorizationResponse,'avsResult'));
-			$this->assertEqual('N',Xml_parser::get_node($authorizationResponse,'cardValidationResult'));
+			$this->assertEqual('000',XmlParser::get_node($authorizationResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($authorizationResponse,'message'));
+			$this->assertEqual('55555 ',XmlParser::get_node($authorizationResponse,'authCode'));
+			$this->assertEqual('32',XmlParser::get_node($authorizationResponse,'avsResult'));
+			$this->assertEqual('N',XmlParser::get_node($authorizationResponse,'cardValidationResult'));
 		}
 
 		function test_5_sale()
@@ -628,29 +627,28 @@ class cert1_Test_alpha extends UnitTestCase
 
 			$initilaize = &new LitleOnlineRequest();
 			$saleResponse = $initilaize->saleRequest($sale_hash);
-			$this->assertEqual('000',Xml_parser::get_node($saleResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($saleResponse,'message'));
-			$this->assertEqual('55555 ',Xml_parser::get_node($saleResponse,'authCode'));
-			$this->assertEqual('32',Xml_parser::get_node($saleResponse,'avsResult'));
-			$this->assertEqual('N',Xml_parser::get_node($saleResponse,'cardValidationResult'));
+			$this->assertEqual('000',XmlParser::get_node($saleResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($saleResponse,'message'));
+			$this->assertEqual('55555 ',XmlParser::get_node($saleResponse,'authCode'));
+			$this->assertEqual('32',XmlParser::get_node($saleResponse,'avsResult'));
+			$this->assertEqual('N',XmlParser::get_node($saleResponse,'cardValidationResult'));
 
 			//test 5B
 			$credit_hash =  array(
-								'litleTxnId' =>(Xml_parser::get_node($saleResponse,'litleTxnId')),
+								'litleTxnId' =>(XmlParser::get_node($saleResponse,'litleTxnId')),
 								'reportGroup'=>'planets');
 			$initilaize = &new LitleOnlineRequest();
 			$creditResponse = $initilaize->creditRequest($credit_hash);
-			$this->assertEqual('000',Xml_parser::get_node($creditResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($creditResponse,'message'));
+			$this->assertEqual('000',XmlParser::get_node($creditResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($creditResponse,'message'));
 
 			//test 5C
 			$void_hash =  array(
-								'litleTxnId' =>(Xml_parser::get_node($creditResponse,'litleTxnId')),
+								'litleTxnId' =>(XmlParser::get_node($creditResponse,'litleTxnId')),
 								'reportGroup'=>'planets');
 			$initilaize = &new LitleOnlineRequest();
 			$voidResponse = $initilaize->voidRequest($void_hash);
-			$this->assertEqual('000',Xml_parser::get_node($voidResponse,'response'));
-			$this->assertEqual('Approved',Xml_parser::get_node($voidResponse,'message'));
+			$this->assertEqual('000',XmlParser::get_node($voidResponse,'response'));
+			$this->assertEqual('Approved',XmlParser::get_node($voidResponse,'message'));
 		}
 }
-?>

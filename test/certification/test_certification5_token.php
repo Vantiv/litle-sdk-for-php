@@ -1,28 +1,27 @@
 <?php
-// =begin
-// Copyright (c) 2011 Litle & Co.
-
-// Permission is hereby granted, free of charge, to any person
-// obtaining a copy of this software and associated documentation
-// files (the "Software"), to deal in the Software without
-// restriction, including without limitation the rights to use,
-// copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the
-// Software is furnished to do so, subject to the following
-// conditions:
-
-// The above copyright notice and this permission notice shall be
-// included in all copies or substantial portions of the Software.
-
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-// OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-// HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-// WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-// OTHER DEALINGS IN THE SOFTWARE.
-// =end
+/*
+* Copyright (c) 2011 Litle & Co.
+*
+* Permission is hereby granted, free of charge, to any person
+* obtaining a copy of this software and associated documentation
+* files (the "Software"), to deal in the Software without
+* restriction, including without limitation the rights to use,
+* copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the
+* Software is furnished to do so, subject to the following
+* conditions:
+*
+* The above copyright notice and this permission notice shall be
+* included in all copies or substantial portions of the Software.
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND
+* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+* OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+* NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+* HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+* WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+* OTHER DEALINGS IN THE SOFTWARE.
+*/
 
 require_once("../../simpletest/autorun.php");
 require_once('../../simpletest/unit_tester.php');
@@ -39,11 +38,11 @@ class cert5_Test extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$registerTokenResponse = $initilaize->registerTokenRequest($token_hash);
-		$this->assertEqual('445711',Xml_parser::get_node($registerTokenResponse,'bin'));
-		$this->assertEqual('VI',Xml_parser::get_node($registerTokenResponse,'type'));
-		$this->assertEqual('801',Xml_parser::get_node($registerTokenResponse,'response'));
-		$this->assertEqual('1111222233330123',Xml_parser::get_node($registerTokenResponse,'litleToken'));
-		$this->assertEqual('Account number was successfully registered',Xml_parser::get_node($registerTokenResponse,'message'));
+		$this->assertEqual('445711',XMLParser::get_node($registerTokenResponse,'bin'));
+		$this->assertEqual('VI',XMLParser::get_node($registerTokenResponse,'type'));
+		$this->assertEqual('801',XMLParser::get_node($registerTokenResponse,'response'));
+		$this->assertEqual('1111222233330123',XMLParser::get_node($registerTokenResponse,'litleToken'));
+		$this->assertEqual('Account number was successfully registered',XMLParser::get_node($registerTokenResponse,'message'));
 	}
 	
 	function test_51()
@@ -54,8 +53,8 @@ class cert5_Test extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$registerTokenResponse = $initilaize->registerTokenRequest($token_hash);
-		$this->assertEqual('820',Xml_parser::get_node($registerTokenResponse,'response'));
-		$this->assertEqual('Credit card number was invalid',Xml_parser::get_node($registerTokenResponse,'message'));
+		$this->assertEqual('820',XMLParser::get_node($registerTokenResponse,'response'));
+		$this->assertEqual('Credit card number was invalid',XMLParser::get_node($registerTokenResponse,'message'));
 	}
 	
 	function test_52()
@@ -66,11 +65,11 @@ class cert5_Test extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$registerTokenResponse = $initilaize->registerTokenRequest($token_hash);
-		$this->assertEqual('445711',Xml_parser::get_node($registerTokenResponse,'bin'));
-		$this->assertEqual('VI',Xml_parser::get_node($registerTokenResponse,'type'));
-		$this->assertEqual('802',Xml_parser::get_node($registerTokenResponse,'response'));
-		$this->assertEqual('1111222233330123',Xml_parser::get_node($registerTokenResponse,'litleToken'));
-		$this->assertEqual('Account number was previously registered',Xml_parser::get_node($registerTokenResponse,'message'));
+		$this->assertEqual('445711',XMLParser::get_node($registerTokenResponse,'bin'));
+		$this->assertEqual('VI',XMLParser::get_node($registerTokenResponse,'type'));
+		$this->assertEqual('802',XMLParser::get_node($registerTokenResponse,'response'));
+		$this->assertEqual('1111222233330123',XMLParser::get_node($registerTokenResponse,'litleToken'));
+		$this->assertEqual('Account number was previously registered',XMLParser::get_node($registerTokenResponse,'message'));
 	}
 	
 	function test_53() #merchant is not authorized for echeck tokens
@@ -81,11 +80,11 @@ class cert5_Test extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$registerTokenResponse = $initilaize->registerTokenRequest($token_hash);
-		$this->assertEqual('EC',Xml_parser::get_node($registerTokenResponse,'type'));
-		$this->assertEqual('998',Xml_parser::get_node($registerTokenResponse,'eCheckAccountSuffix'));
-		$this->assertEqual('801',Xml_parser::get_node($registerTokenResponse,'response'));
-		$this->assertEqual('111922223333000998',Xml_parser::get_node($registerTokenResponse,'litleToken'));
-		$this->assertEqual('Account number was successfully registered',Xml_parser::get_node($registerTokenResponse,'message'));
+		$this->assertEqual('EC',XMLParser::get_node($registerTokenResponse,'type'));
+		$this->assertEqual('998',XMLParser::get_node($registerTokenResponse,'eCheckAccountSuffix'));
+		$this->assertEqual('801',XMLParser::get_node($registerTokenResponse,'response'));
+		$this->assertEqual('111922223333000998',XMLParser::get_node($registerTokenResponse,'litleToken'));
+		$this->assertEqual('Account number was successfully registered',XMLParser::get_node($registerTokenResponse,'message'));
 	}
 	
 	function test_54() #merchant is not authorized for echeck tokens
@@ -96,8 +95,8 @@ class cert5_Test extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$registerTokenResponse = $initilaize->registerTokenRequest($token_hash);
-		$this->assertEqual('900',Xml_parser::get_node($registerTokenResponse,'response'));
-		$this->assertEqual('Invalid bank routing number',Xml_parser::get_node($registerTokenResponse,'message'));
+		$this->assertEqual('900',XMLParser::get_node($registerTokenResponse,'response'));
+		$this->assertEqual('Invalid bank routing number',XMLParser::get_node($registerTokenResponse,'message'));
 	}
 	
 	function test_55() 
@@ -110,12 +109,12 @@ class cert5_Test extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$registerTokenResponse = $initilaize->authorizationRequest($token_hash);
-		$this->assertEqual('MC',Xml_parser::get_node($registerTokenResponse,'type'));
-		$this->assertEqual('801',Xml_parser::get_node($registerTokenResponse,'tokenResponseCode'));
-		$this->assertEqual('000',Xml_parser::get_node($registerTokenResponse,'response'));
-		$this->assertEqual('Account number was successfully registered',Xml_parser::get_node($registerTokenResponse,'tokenMessage'));
-		$this->assertEqual('Approved',Xml_parser::get_node($registerTokenResponse,'message'));
-		$this->assertEqual('543510',Xml_parser::get_node($registerTokenResponse,'bin'));
+		$this->assertEqual('MC',XMLParser::get_node($registerTokenResponse,'type'));
+		$this->assertEqual('801',XMLParser::get_node($registerTokenResponse,'tokenResponseCode'));
+		$this->assertEqual('000',XMLParser::get_node($registerTokenResponse,'response'));
+		$this->assertEqual('Account number was successfully registered',XMLParser::get_node($registerTokenResponse,'tokenMessage'));
+		$this->assertEqual('Approved',XMLParser::get_node($registerTokenResponse,'message'));
+		$this->assertEqual('543510',XMLParser::get_node($registerTokenResponse,'bin'));
 	}
 	
 	function test_56() 
@@ -128,8 +127,8 @@ class cert5_Test extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$registerTokenResponse = $initilaize->authorizationRequest($token_hash);
-		$this->assertEqual('301',Xml_parser::get_node($registerTokenResponse,'response'));
-		$this->assertEqual('Invalid account number',Xml_parser::get_node($registerTokenResponse,'message'));
+		$this->assertEqual('301',XMLParser::get_node($registerTokenResponse,'response'));
+		$this->assertEqual('Invalid account number',XMLParser::get_node($registerTokenResponse,'message'));
 	}
 	
 	function test_57()
@@ -142,12 +141,12 @@ class cert5_Test extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$registerTokenResponse = $initilaize->authorizationRequest($token_hash);
-		$this->assertEqual('MC',Xml_parser::get_node($registerTokenResponse,'type'));
-		$this->assertEqual('802',Xml_parser::get_node($registerTokenResponse,'tokenResponseCode'));
-		$this->assertEqual('000',Xml_parser::get_node($registerTokenResponse,'response'));
-		$this->assertEqual('Account number was previously registered',Xml_parser::get_node($registerTokenResponse,'tokenMessage'));
-		$this->assertEqual('Approved',Xml_parser::get_node($registerTokenResponse,'message'));
-		$this->assertEqual('543510',Xml_parser::get_node($registerTokenResponse,'bin'));
+		$this->assertEqual('MC',XMLParser::get_node($registerTokenResponse,'type'));
+		$this->assertEqual('802',XMLParser::get_node($registerTokenResponse,'tokenResponseCode'));
+		$this->assertEqual('000',XMLParser::get_node($registerTokenResponse,'response'));
+		$this->assertEqual('Account number was previously registered',XMLParser::get_node($registerTokenResponse,'tokenMessage'));
+		$this->assertEqual('Approved',XMLParser::get_node($registerTokenResponse,'message'));
+		$this->assertEqual('543510',XMLParser::get_node($registerTokenResponse,'bin'));
 	}
 	
 	function test_59()
@@ -160,8 +159,8 @@ class cert5_Test extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($token_hash);
-		$this->assertEqual('822',Xml_parser::get_node($authorizationResponse,'response'));
-		$this->assertEqual('Token was not found',Xml_parser::get_node($authorizationResponse,'message'));
+		$this->assertEqual('822',XMLParser::get_node($authorizationResponse,'response'));
+		$this->assertEqual('Token was not found',XMLParser::get_node($authorizationResponse,'message'));
 	}
 	
 	function test_60()
@@ -174,8 +173,8 @@ class cert5_Test extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($token_hash);
-		$this->assertEqual('823',Xml_parser::get_node($authorizationResponse,'response'));
-		$this->assertEqual('Token was invalid',Xml_parser::get_node($authorizationResponse,'message'));
+		$this->assertEqual('823',XMLParser::get_node($authorizationResponse,'response'));
+		$this->assertEqual('Token was invalid',XMLParser::get_node($authorizationResponse,'message'));
 	}
 	
 	# test 61-64 need echecksale to support token. merchantid not authoried.
@@ -192,11 +191,11 @@ class cert5_Test extends UnitTestCase
 	
 			$initilaize = &new LitleOnlineRequest();
 			$registerTokenResponse = $initilaize->echeckSaleRequest($token_hash);
-			$this->assertEqual('801',Xml_parser::get_node($registerTokenResponse,'tokenResponseCode'));
-			$this->assertEqual('Account number was successfully registered',Xml_parser::get_node($registerTokenResponse,'tokenMessage'));
-			$this->assertEqual('EC',Xml_parser::get_node($registerTokenResponse,'type'));
-			$this->assertEqual('003',Xml_parser::get_node($registerTokenResponse,'eCheckAccountSuffix'));
-			$this->assertEqual('111922223333444003',Xml_parser::get_node($registerTokenResponse,'litleToken'));
+			$this->assertEqual('801',XMLParser::get_node($registerTokenResponse,'tokenResponseCode'));
+			$this->assertEqual('Account number was successfully registered',XMLParser::get_node($registerTokenResponse,'tokenMessage'));
+			$this->assertEqual('EC',XMLParser::get_node($registerTokenResponse,'type'));
+			$this->assertEqual('003',XMLParser::get_node($registerTokenResponse,'eCheckAccountSuffix'));
+			$this->assertEqual('111922223333444003',XMLParser::get_node($registerTokenResponse,'litleToken'));
 		}
 		
 		function test_62()
@@ -212,11 +211,11 @@ class cert5_Test extends UnitTestCase
 		
 			$initilaize = &new LitleOnlineRequest();
 			$registerTokenResponse = $initilaize->echeckSaleRequest($token_hash);
-			$this->assertEqual('801',Xml_parser::get_node($registerTokenResponse,'tokenResponseCode'));
-			$this->assertEqual('Account number was successfully registered',Xml_parser::get_node($registerTokenResponse,'tokenMessage'));
-			$this->assertEqual('EC',Xml_parser::get_node($registerTokenResponse,'type'));
-			$this->assertEqual('999',Xml_parser::get_node($registerTokenResponse,'eCheckAccountSuffix'));
-			$this->assertEqual('111922223333444999',Xml_parser::get_node($registerTokenResponse,'litleToken'));
+			$this->assertEqual('801',XMLParser::get_node($registerTokenResponse,'tokenResponseCode'));
+			$this->assertEqual('Account number was successfully registered',XMLParser::get_node($registerTokenResponse,'tokenMessage'));
+			$this->assertEqual('EC',XMLParser::get_node($registerTokenResponse,'type'));
+			$this->assertEqual('999',XMLParser::get_node($registerTokenResponse,'eCheckAccountSuffix'));
+			$this->assertEqual('111922223333444999',XMLParser::get_node($registerTokenResponse,'litleToken'));
 		}
 		
 		
@@ -233,13 +232,12 @@ class cert5_Test extends UnitTestCase
 				
 		$initilaize = &new LitleOnlineRequest();
 		$registerTokenResponse = $initilaize->echeckSaleRequest($token_hash);
-		$this->assertEqual('801',Xml_parser::get_node($registerTokenResponse,'tokenResponseCode'));
-		$this->assertEqual('Account number was successfully registered',Xml_parser::get_node($registerTokenResponse,'tokenMessage'));
-		$this->assertEqual('EC',Xml_parser::get_node($registerTokenResponse,'type'));
-		$this->assertEqual('999',Xml_parser::get_node($registerTokenResponse,'eCheckAccountSuffix'));
-		$this->assertEqual('111922223333555999',Xml_parser::get_node($registerTokenResponse,'litleToken'));
+		$this->assertEqual('801',XMLParser::get_node($registerTokenResponse,'tokenResponseCode'));
+		$this->assertEqual('Account number was successfully registered',XMLParser::get_node($registerTokenResponse,'tokenMessage'));
+		$this->assertEqual('EC',XMLParser::get_node($registerTokenResponse,'type'));
+		$this->assertEqual('999',XMLParser::get_node($registerTokenResponse,'eCheckAccountSuffix'));
+		$this->assertEqual('111922223333555999',XMLParser::get_node($registerTokenResponse,'litleToken'));
 		}
 		
 	
 }
-?>

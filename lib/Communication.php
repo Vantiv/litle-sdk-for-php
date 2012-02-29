@@ -22,34 +22,36 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-require_once("../../simpletest/autorun.php");
-require_once('../../simpletest/unit_tester.php');
-require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
+class Communication{
+	function httpRequest($req){
+		$config = Communication::getConfig();
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_PROXY,$config['proxy']);
+		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: text/xml'));
+		curl_setopt($ch, CURLOPT_URL, $config['url']);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $req);
+		curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, true);
+		curl_setopt($ch,CURLOPT_TIMEOUT, $config['timeout']);
+		curl_setopt($ch, CURLOPT_SSLVERIFYPEER, true);
+		curl_setopt($ch, CURLOPT_SSLVERIFYHOST,2);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		$output = curl_exec($ch);
+		$responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		if (! $output){
+			throw new Exception (curl_error($ch));
+		}
+		else
+		{
+			curl_close($ch);
+			return $output;
+		}
 
-class authReversal_FunctionalTest extends UnitTestCase
-{
-	function test_simple_Authreversal()
-	{
-		$hash_in = array(
-				'litleTxnId'=>'12345678000','amount'=>'123',
-		      'payPalNotes'=>'Notes');
-
-		$initilaize = &new LitleOnlineRequest();
-		$authReversalResponse = $initilaize->authReversalRequest($hash_in);
-		$response = XMLParser::get_node($authReversalResponse,'response');
-		$this->assertEqual('000',$response);
 	}
 
-function test_simple_Authreversal_filedsOutoforder()
+	private function getConfig()
 	{
-		$hash_in = array(
-				'amount'=>'123',
-		      'payPalNotes'=>'Notes','litleTxnId'=>'12345678000',);
-
-		$initilaize = &new LitleOnlineRequest();
-		$authReversalResponse = $initilaize->authReversalRequest($hash_in);
-		$response = XMLParser::get_node($authReversalResponse,'response');
-		$this->assertEqual('000',$response);
+		$configArray =parse_ini_file('litle_SDK_config.ini');
+		return $configArray;
 	}
-	
 }

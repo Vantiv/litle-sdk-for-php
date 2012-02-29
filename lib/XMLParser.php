@@ -1,4 +1,7 @@
 <?php
+#error_reporting(E_ALL);
+#ini_set('display_errors', '1');
+
 // =begin
 // Copyright (c) 2011 Litle & Co.
 
@@ -23,38 +26,33 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
 // =end
+// class and methods to parse a XML document into an object
+class XMLParser{
 
-class communication{
-	function httpRequest($req){
-		$config = communication::get_config();
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_PROXY,$config['proxy']);
-		curl_setopt($ch, CURLOPT_POST, true);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: text/xml'));
-		curl_setopt($ch, CURLOPT_URL, $config['url']);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $req);
-		curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, true);
-		curl_setopt($ch,CURLOPT_TIMEOUT, $config['timeout']);
-		curl_setopt($ch, CURLOPT_SSLVERIFYPEER, true);
-		curl_setopt($ch, CURLOPT_SSLVERIFYHOST,2);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		$output = curl_exec($ch);
-		$response_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-		if (! $output){
-			throw new Exception (curl_error($ch));
+	function domParser($xml)
+	{
+		#$doc = new DomDocument($xml);
+		$doc = new DOMDocument();
+		$doc->loadXML($xml);
+		return $doc;
+	}
+	
+	function get_node($xml, $string)
+	{
+		$books = $xml->getElementsByTagName($string);
+		#echo $books->nodeValue, PHP_EOL;
+		$val = "";
+		foreach ($books as $book) {
+			$val = $book->nodeValue;
 		}
-		else
-		{
-			curl_close($ch);
-			return $output;
-		}
-
+		return $val;
 	}
 
-	private function get_config()
+	function get_attribute($in_domDoc,$element, $attributeName)
 	{
-		$config_array =parse_ini_file('litle_SDK_config.ini');
-		return $config_array;
+		$books = $in_domDoc->getElementsByTagName($element)->item(0);
+		$val = $books->getAttribute($attributeName);
+		return $val;
 	}
 }
 ?>

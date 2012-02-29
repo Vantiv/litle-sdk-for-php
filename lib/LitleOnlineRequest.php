@@ -1,28 +1,27 @@
 <?php
-// =begin
-// Copyright (c) 2011 Litle & Co.
-
-// Permission is hereby granted, free of charge, to any person
-// obtaining a copy of this software and associated documentation
-// files (the "Software"), to deal in the Software without
-// restriction, including without limitation the rights to use,
-// copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the
-// Software is furnished to do so, subject to the following
-// conditions:
-
-// The above copyright notice and this permission notice shall be
-// included in all copies or substantial portions of the Software.
-
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-// OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-// HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-// WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-// OTHER DEALINGS IN THE SOFTWARE.
-// =end
+/*
+ * Copyright (c) 2011 Litle & Co.
+ * 
+ * Permission is hereby granted, free of charge, to any person
+ * obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without
+ * restriction, including without limitation the rights to use,
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following
+ * conditions:
+ * 
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ * OTHER DEALINGS IN THE SOFTWARE.
+ */
 
 require_once realpath(dirname(__FILE__)) . '/LitleOnlineRequest.php';
 
@@ -40,9 +39,9 @@ class LitleOnlineRequest
 		}
 		else {
 		$hash_out = array(
-			'orderId'=> Checker::required_field($hash_in['orderId']),
-			'amount'=>Checker::required_field($hash_in['amount']),
-			'orderSource'=>Checker::required_field($hash_in['orderSource']),
+			'orderId'=> Checker::requiredField($hash_in['orderId']),
+			'amount'=>Checker::requiredField($hash_in['amount']),
+			'orderSource'=>Checker::requiredField($hash_in['orderSource']),
 			'customerInfo'=>(XMLFields::customerInfo($hash_in['customerInfo'])),
 			'billToAddress'=>(XMLFields::contact($hash_in['billToAddress'])),
 			'shipToAddress'=>(XMLFields::contact($hash_in['shipToAddress'])),
@@ -74,9 +73,9 @@ class LitleOnlineRequest
 	{
 		$hash_out = array(
 		'litleTxnId' => $hash_in['litleTxnId'],
-		'orderId' =>Checker::required_field($hash_in['orderId']),
-		'amount' =>Checker::required_field($hash_in['amount']),
-		'orderSource'=>Checker::required_field($hash_in['orderSource']),
+		'orderId' =>Checker::requiredField($hash_in['orderId']),
+		'amount' =>Checker::requiredField($hash_in['amount']),
+		'orderSource'=>Checker::requiredField($hash_in['orderSource']),
 		'customerInfo'=>XMLFields::customerInfo($hash_in['customerInfo']),
 		'billToAddress'=>XMLFields::contact($hash_in['billToAddress']),
 		'shipToAddress'=>XMLFields::contact($hash_in['shipToAddress']),
@@ -110,7 +109,7 @@ class LitleOnlineRequest
 	public function authReversalRequest($hash_in)
 	{
 		$hash_out = array(
-			'litleTxnId' => Checker::required_field($hash_in['litleTxnId']),
+			'litleTxnId' => Checker::requiredField($hash_in['litleTxnId']),
 			'amount' =>$hash_in['amount'],
 			'payPalNotes'=>$hash_in['payPalNotes'],
 			'actionReason'=>$hash_in['actionReason']);
@@ -160,9 +159,9 @@ class LitleOnlineRequest
 	public function forceCaptureRequest($hash_in)
 	{
 		$hash_out = array(
-		'orderId' =>Checker::required_field($hash_in['orderId']),
+		'orderId' =>Checker::requiredField($hash_in['orderId']),
 		'amount' =>$hash_in['amount'],
-		'orderSource'=>Checker::required_field($hash_in['orderSource']),
+		'orderSource'=>Checker::requiredField($hash_in['orderSource']),
 		'billToAddress'=>XMLFields::contact($hash_in['billToAddress']),
 		'card'=> XMLFields::cardType($hash_in['card']),
 		'token'=>XMLFields::cardTokenType($hash_in['token']),
@@ -183,7 +182,7 @@ class LitleOnlineRequest
 	{
 		$hash_out = array(
 		'partial'=>$hash_in['partial'],
-	    'litleTxnId' => Checker::required_field($hash_in['litleTxnId']),
+	    'litleTxnId' => Checker::requiredField($hash_in['litleTxnId']),
 		'amount' =>($hash_in['amount']),
 		'enhancedData'=>XMLFields::enhancedData($hash_in['enhancedData']),
 		'processingInstructions'=>XMLFields::processingInstructions($hash_in['processingInstructions']),
@@ -197,10 +196,10 @@ class LitleOnlineRequest
 	{
 	
 		$hash_out = array(
-		'orderId'=>Checker::required_field($hash_in['orderId']),
+		'orderId'=>Checker::requiredField($hash_in['orderId']),
 		'authInformation'=>XMLFields::authInformation($hash_in['authInformation']),
-		'amount' =>Checker::required_field($hash_in['amount']),
-		'orderSource'=>Checker::required_field($hash_in['orderSource']),
+		'amount' =>Checker::requiredField($hash_in['amount']),
+		'orderSource'=>Checker::requiredField($hash_in['orderSource']),
 		'billToAddress'=>XMLFields::contact($hash_in['billToAddress']),
 		'shipToAddress'=>XMLFields::contact($hash_in['shipToAddress']),
 		'card'=> XMLFields::cardType($hash_in['card']),
@@ -223,7 +222,7 @@ class LitleOnlineRequest
 	public function echeckRedepositRequest($hash_in)
 	{
 		$hash_out = array(
-		'litleTxnId' => Checker::required_field($hash_in['litleTxnId']),
+		'litleTxnId' => Checker::requiredField($hash_in['litleTxnId']),
 		'echeck'=>XMLFields::echeckType($hash_in['echeck']),
 		'echeckToken'=>XMLFields::echeckTokenType($hash_in['echeckToken']));
 
@@ -273,9 +272,9 @@ class LitleOnlineRequest
 	{
 		$hash_out = array(
 			'litleTxnId'=>$hash_in['litleTxnId'],
-			'orderId'=>Checker::required_field($hash_in['orderId']),
-			'amount'=>Checker::required_field($hash_in['amount']),
-			'orderSource'=>Checker::required_field($hash_in['orderSource']),
+			'orderId'=>Checker::requiredField($hash_in['orderId']),
+			'amount'=>Checker::requiredField($hash_in['amount']),
+			'orderSource'=>Checker::requiredField($hash_in['orderSource']),
 			'billToAddress'=>XMLFields::contact($hash_in['billToAddress']),
 			'echeck'=>XMLFields::echeckType($hash_in['echeck']),
 			'echeckToken'=>XMLFields::echeckTokenType($hash_in['echeckToken']));
@@ -290,14 +289,14 @@ class LitleOnlineRequest
 	public function voidRequest($hash_in)
 	{
 		$hash_out = array(
-		'litleTxnId' => Checker::required_field($hash_in['litleTxnId']),
+		'litleTxnId' => Checker::requiredField($hash_in['litleTxnId']),
 	    'processingInstructions'=>XMLFields::processingInstructions($hash_in['processingInstructions']));
 
 		$voidResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'void');
 		return $voidResponse;
 	}
 	
-	private function overide_Config($hash_in)
+	private function overideConfig($hash_in)
 	{
 		$hash_out = array(
 		'user'=>$hash_in['user'],
@@ -311,7 +310,7 @@ class LitleOnlineRequest
 	
 	private function processRequest($hash_out, $hash_in, $type, $choice1 = null, $choice2 = null)
 	{
-		$hash_config = LitleOnlineRequest::overide_config($hash_in);
+		$hash_config = LitleOnlineRequest::overideconfig($hash_in);
 		Checker::choice($choice1);
 		Checker::choice($choice2);
 		$request = Obj2xml::toXml($hash_out,$hash_config, $type);
@@ -322,4 +321,4 @@ class LitleOnlineRequest
 	
 	
 }
-?>
+

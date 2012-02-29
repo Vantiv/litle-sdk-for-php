@@ -1,33 +1,27 @@
 <?php
-
-// =begin
-// Copyright (c) 2011 Litle & Co.
-
-// Permission is hereby granted, free of charge, to any person
-// obtaining a copy of this software and associated documentation
-// files (the "Software"), to deal in the Software without
-// restriction, including without limitation the rights to use,
-// copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the
-// Software is furnished to do so, subject to the following
-// conditions:
-
-// The above copyright notice and this permission notice shall be
-// included in all copies or substantial portions of the Software.
-
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-// OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-// HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-// WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-// OTHER DEALINGS IN THE SOFTWARE.
-// =end
-
-#
-# Contains all of the underlying XML fields and specifications needed to create the transaction set
-#
+/*
+* Copyright (c) 2011 Litle & Co.
+*
+* Permission is hereby granted, free of charge, to any person
+* obtaining a copy of this software and associated documentation
+* files (the "Software"), to deal in the Software without
+* restriction, including without limitation the rights to use,
+* copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the
+* Software is furnished to do so, subject to the following
+* conditions:
+*
+* The above copyright notice and this permission notice shall be
+* included in all copies or substantial portions of the Software.
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND
+* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+* OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+* NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+* HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+* WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+* OTHER DEALINGS IN THE SOFTWARE.
+*/
 require_once realpath(dirname(__FILE__)) . "/LitleOnline.php";
 
 class XMLFields
@@ -117,8 +111,8 @@ class XMLFields
 		if (isset($hash_in))
 		{
 			$hash_out = array(
-		"authDate"=>(Checker::required_field($hash_in["authDate"])),
-		"authCode"=>(Checker::required_field($hash_in["authCode"])),
+		"authDate"=>(Checker::requiredField($hash_in["authDate"])),
+		"authCode"=>(Checker::requiredField($hash_in["authCode"])),
 		"fraudResult"=>XMLFields::fraudResult($hash_in["detailTax"]),
 		"authAmount"=>$hash_in["authAmount"]);
 			return $hash_out;
@@ -168,9 +162,9 @@ class XMLFields
 		if (isset($hash_in))
 		{
 			$hash_out = array(
-		"capability"=>(Checker::required_field($hash_in["capability"])),
-		"entryMode"=>(Checker::required_field($hash_in["entryMode"])),
-		"cardholderId"=>(Checker::required_field($hash_in["cardholderId"])));
+		"capability"=>(Checker::requiredField($hash_in["capability"])),
+		"entryMode"=>(Checker::requiredField($hash_in["entryMode"])),
+		"cardholderId"=>(Checker::requiredField($hash_in["cardholderId"])));
 			return $hash_out;
 			echo 'here';
 		}
@@ -264,7 +258,7 @@ class XMLFields
 		if (isset($hash_in))
 		{
 			$hash_out = array(
-		"litleToken"=>(Checker::required_field($hash_in["litleToken"])),
+		"litleToken"=>(Checker::requiredField($hash_in["litleToken"])),
 		"expDate"=>$hash_in["expDate"],
 		"cardValidationNum"=>$hash_in["cardValidationNumber"],
 		"type"=>$hash_in["type"]);
@@ -277,7 +271,7 @@ class XMLFields
 		if (isset($hash_in))
 		{
 			$hash_out = array(
-		"paypageRegistrationId"=>(Checker::required_field($hash_in["paypageRegistrationId"])),
+		"paypageRegistrationId"=>(Checker::requiredField($hash_in["paypageRegistrationId"])),
 		"expDate"=>$hash_in["expDate"] ,
 		"cardValidationNum"=>$hash_in["cardValidationNumber"],
 		"type"=>$hash_in["type"]);
@@ -290,9 +284,9 @@ class XMLFields
 		if (isset($hash_in))
 		{
 			$hash_out = array(
-		"payerId"=>(Checker::required_field($hash_in["payerId"])),
+		"payerId"=>(Checker::requiredField($hash_in["payerId"])),
 		"token"=>$hash_in["token"],
-		"transactionId"=>(Checker::required_field($hash_in["transactionId"])));
+		"transactionId"=>(Checker::requiredField($hash_in["transactionId"])));
 			return $hash_out;
 		}
 	}
@@ -303,8 +297,8 @@ class XMLFields
 		if (isset($hash_in))
 		{
 			$hash_out = array(
-		"payerId"=>(Checker::required_field($hash_in["payerId"])),
-		"payerEmail" =>(Checker::required_field($hash_in["payerEmail"])));
+		"payerId"=>(Checker::requiredField($hash_in["payerId"])),
+		"payerEmail" =>(Checker::requiredField($hash_in["payerEmail"])));
 			return $hash_out;
 		}
 	}
@@ -327,9 +321,9 @@ class XMLFields
 		if (isset($hash_in))
 		{
 			$hash_out = array(
-		"taxAuthority"=>(Checker::required_field($hash_in["taxAuthority"])),
-		"state" =>(Checker::required_field($hash_in["state"])),
-		"govtTxnType" =>(Checker::required_field($hash_in["govtTxnType"])));
+		"taxAuthority"=>(Checker::requiredField($hash_in["taxAuthority"])),
+		"state" =>(Checker::requiredField($hash_in["state"])),
+		"govtTxnType" =>(Checker::requiredField($hash_in["govtTxnType"])));
 			return $hash_out;
 		}
 	}
@@ -349,8 +343,8 @@ class XMLFields
 		if (isset($hash_in))
 		{
 			$hash_out = array(
-			"accNum"=>(Checker::required_field($hash_in["accNum"])),
-			"routingNum" =>(Checker::required_field($hash_in["routingNum"])));
+			"accNum"=>(Checker::requiredField($hash_in["accNum"])),
+			"routingNum" =>(Checker::requiredField($hash_in["routingNum"])));
 			return $hash_out;
 		}
 	}
@@ -372,9 +366,9 @@ class XMLFields
 		if (isset($hash_in))
 		{
 			$hash_out = array(
-			"accType"=>(Checker::required_field($hash_in["accType"])),
-			"accNum" =>(Checker::required_field($hash_in["accNum"])),
-			"routingNum" =>(Checker::required_field($hash_in["routingNum"])),
+			"accType"=>(Checker::requiredField($hash_in["accType"])),
+			"accNum" =>(Checker::requiredField($hash_in["accNum"])),
+			"routingNum" =>(Checker::requiredField($hash_in["routingNum"])),
 			"checkNum" =>$hash_in["checkNum"]);
 			return $hash_out;
 		}
@@ -385,9 +379,9 @@ class XMLFields
 		if (isset($hash_in))
 		{
 			$hash_out = array(
-				"litleToken"=>(Checker::required_field($hash_in["litleToken"])),
-				"routingNum" =>(Checker::required_field($hash_in["routingNum"])),
-				"accType" =>(Checker::required_field($hash_in["accType"])),
+				"litleToken"=>(Checker::requiredField($hash_in["litleToken"])),
+				"routingNum" =>(Checker::requiredField($hash_in["routingNum"])),
+				"accType" =>(Checker::requiredField($hash_in["accType"])),
 				"checkNum" =>$hash_in["checkNum"]);
 			return $hash_out;
 		}
@@ -398,13 +392,10 @@ class XMLFields
 		if (isset($hash_in))
 		{
 			$hash_out = array(
-				"recyleBy"=>(Checker::required_field($hash_in["recyleBy"])));
+				"recyleBy"=>(Checker::requiredField($hash_in["recyleBy"])));
 			return $hash_out;
 		}
 	}
 
 
 }
-
-
-?>

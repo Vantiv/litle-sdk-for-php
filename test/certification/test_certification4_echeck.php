@@ -1,28 +1,27 @@
 <?php
-// =begin
-// Copyright (c) 2011 Litle & Co.
-
-// Permission is hereby granted, free of charge, to any person
-// obtaining a copy of this software and associated documentation
-// files (the "Software"), to deal in the Software without
-// restriction, including without limitation the rights to use,
-// copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the
-// Software is furnished to do so, subject to the following
-// conditions:
-
-// The above copyright notice and this permission notice shall be
-// included in all copies or substantial portions of the Software.
-
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-// OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-// HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-// WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-// OTHER DEALINGS IN THE SOFTWARE.
-// =end
+/*
+* Copyright (c) 2011 Litle & Co.
+*
+* Permission is hereby granted, free of charge, to any person
+* obtaining a copy of this software and associated documentation
+* files (the "Software"), to deal in the Software without
+* restriction, including without limitation the rights to use,
+* copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the
+* Software is furnished to do so, subject to the following
+* conditions:
+*
+* The above copyright notice and this permission notice shall be
+* included in all copies or substantial portions of the Software.
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND
+* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+* OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+* NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+* HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+* WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+* OTHER DEALINGS IN THE SOFTWARE.
+*/
 
 require_once("../../simpletest/autorun.php");
 require_once('../../simpletest/unit_tester.php');
@@ -47,8 +46,8 @@ class cert4_Test extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$echeckVerificationResponse = $initilaize->echeckVerificationRequest($echeck_hash);
-		$this->assertEqual('301',Xml_parser::get_node($echeckVerificationResponse,'response'));
-		$this->assertEqual('Invalid Account Number',Xml_parser::get_node($echeckVerificationResponse,'message'));
+		$this->assertEqual('301',XMLParser::get_node($echeckVerificationResponse,'response'));
+		$this->assertEqual('Invalid Account Number',XMLParser::get_node($echeckVerificationResponse,'message'));
 	}
 	
 	function test_38()
@@ -68,8 +67,8 @@ class cert4_Test extends UnitTestCase
 		$initilaize = &new LitleOnlineRequest();
 		
 		$echeckVerificationResponse = $initilaize->echeckVerificationRequest($echeck_hash);
-		$this->assertEqual('000',Xml_parser::get_node($echeckVerificationResponse,'response'));
-		$this->assertEqual('Approved',Xml_parser::get_node($echeckVerificationResponse,'message'));
+		$this->assertEqual('000',XMLParser::get_node($echeckVerificationResponse,'response'));
+		$this->assertEqual('Approved',XMLParser::get_node($echeckVerificationResponse,'message'));
 	}
 	
 	function test_39()
@@ -90,8 +89,8 @@ class cert4_Test extends UnitTestCase
 		
 		$initilaize = &new LitleOnlineRequest();
 		$echeckVerificationResponse = $initilaize->echeckVerificationRequest($echeck_hash);
-		$this->assertEqual('950',Xml_parser::get_node($echeckVerificationResponse,'response'));
-		$this->assertEqual('Declined - Negative Information on File',Xml_parser::get_node($echeckVerificationResponse,'message'));
+		$this->assertEqual('950',XMLParser::get_node($echeckVerificationResponse,'response'));
+		$this->assertEqual('Declined - Negative Information on File',XMLParser::get_node($echeckVerificationResponse,'message'));
 	}
 	
 	function test_40()
@@ -112,8 +111,8 @@ class cert4_Test extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$echeckVerificationResponse = $initilaize->echeckVerificationRequest($echeck_hash);
-		$this->assertEqual('951',Xml_parser::get_node($echeckVerificationResponse,'response'));
-		$this->assertEqual('Absolute Decline',Xml_parser::get_node($echeckVerificationResponse,'message'));
+		$this->assertEqual('951',XMLParser::get_node($echeckVerificationResponse,'response'));
+		$this->assertEqual('Absolute Decline',XMLParser::get_node($echeckVerificationResponse,'message'));
 	}
 	
 	#41-44 echecksales
@@ -134,8 +133,8 @@ class cert4_Test extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$echeckSaleResponse = $initilaize->echeckSaleRequest($echeck_hash);
-		$this->assertEqual('301',Xml_parser::get_node($echeckSaleResponse,'response'));
-		$this->assertEqual('Invalid Account Number',Xml_parser::get_node($echeckSaleResponse,'message'));
+		$this->assertEqual('301',XMLParser::get_node($echeckSaleResponse,'response'));
+		$this->assertEqual('Invalid Account Number',XMLParser::get_node($echeckSaleResponse,'message'));
 	}
 	
 	function test_42()
@@ -154,8 +153,8 @@ class cert4_Test extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$echeckSaleResponse = $initilaize->echeckSaleRequest($echeck_hash);
-		$this->assertEqual('000',Xml_parser::get_node($echeckSaleResponse,'response'));
-		$this->assertEqual('Approved',Xml_parser::get_node($echeckSaleResponse,'message'));
+		$this->assertEqual('000',XMLParser::get_node($echeckSaleResponse,'response'));
+		$this->assertEqual('Approved',XMLParser::get_node($echeckSaleResponse,'message'));
 	}
 	
 	function test_43()
@@ -175,8 +174,8 @@ class cert4_Test extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$echeckSaleResponse = $initilaize->echeckSaleRequest($echeck_hash);
-		$this->assertEqual('000',Xml_parser::get_node($echeckSaleResponse,'response'));
-		$this->assertEqual('Approved',Xml_parser::get_node($echeckSaleResponse,'message'));
+		$this->assertEqual('000',XMLParser::get_node($echeckSaleResponse,'response'));
+		$this->assertEqual('Approved',XMLParser::get_node($echeckSaleResponse,'message'));
 	}
 	
 	function test_44()
@@ -196,8 +195,8 @@ class cert4_Test extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$echeckSaleResponse = $initilaize->echeckSaleRequest($echeck_hash);
-		$this->assertEqual('900',Xml_parser::get_node($echeckSaleResponse,'response'));
-		$this->assertEqual('Invalid Bank Routing Number',Xml_parser::get_node($echeckSaleResponse,'message'));
+		$this->assertEqual('900',XMLParser::get_node($echeckSaleResponse,'response'));
+		$this->assertEqual('Invalid Bank Routing Number',XMLParser::get_node($echeckSaleResponse,'message'));
 	}
 	
 	#test 45- 49 echeckCredit
@@ -217,7 +216,7 @@ class cert4_Test extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$echeckCreditResponse = $initilaize->echeckCreditRequest($echeck_hash);
-		$this->assertEqual('301',Xml_parser::get_node($echeckCreditResponse,'response'));
+		$this->assertEqual('301',XMLParser::get_node($echeckCreditResponse,'response'));
 	}
 	
 	function test_46()
@@ -237,8 +236,8 @@ class cert4_Test extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$echeckCreditResponse = $initilaize->echeckCreditRequest($echeck_hash);
-		$this->assertEqual('000',Xml_parser::get_node($echeckCreditResponse,'response'));
-		$this->assertEqual('Approved',Xml_parser::get_node($echeckCreditResponse,'message'));
+		$this->assertEqual('000',XMLParser::get_node($echeckCreditResponse,'response'));
+		$this->assertEqual('Approved',XMLParser::get_node($echeckCreditResponse,'message'));
 	}
 	
 	function test_47()
@@ -258,8 +257,8 @@ class cert4_Test extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$echeckCreditResponse = $initilaize->echeckCreditRequest($echeck_hash);
-		$this->assertEqual('000',Xml_parser::get_node($echeckCreditResponse,'response'));
-		$this->assertEqual('Approved',Xml_parser::get_node($echeckCreditResponse,'message'));
+		$this->assertEqual('000',XMLParser::get_node($echeckCreditResponse,'response'));
+		$this->assertEqual('Approved',XMLParser::get_node($echeckCreditResponse,'message'));
 	}
 	
 	function test_48()
@@ -268,8 +267,8 @@ class cert4_Test extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$echeckCreditResponse = $initilaize->echeckCreditRequest($echeck_hash);
-		$this->assertEqual('000',Xml_parser::get_node($echeckCreditResponse,'response'));
-		$this->assertEqual('Approved',Xml_parser::get_node($echeckCreditResponse,'message'));
+		$this->assertEqual('000',XMLParser::get_node($echeckCreditResponse,'response'));
+		$this->assertEqual('Approved',XMLParser::get_node($echeckCreditResponse,'message'));
 	}
 	
 	function test_49()
@@ -278,8 +277,7 @@ class cert4_Test extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$echeckCreditResponse = $initilaize->echeckCreditRequest($echeck_hash);
-		$this->assertEqual('360',Xml_parser::get_node($echeckCreditResponse,'response'));
-		$this->assertEqual('No transaction found with specified litleTxnId',Xml_parser::get_node($echeckCreditResponse,'message'));
+		$this->assertEqual('360',XMLParser::get_node($echeckCreditResponse,'response'));
+		$this->assertEqual('No transaction found with specified litleTxnId',XMLParser::get_node($echeckCreditResponse,'message'));
 	}
 }
-?>

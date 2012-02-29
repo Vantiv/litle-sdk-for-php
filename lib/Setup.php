@@ -1,5 +1,27 @@
 <?php
-
+/*
+ * Copyright (c) 2011 Litle & Co.
+ * 
+ * Permission is hereby granted, free of charge, to any person
+ * obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without
+ * restriction, including without limitation the rights to use,
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following
+ * conditions:
+ * 
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ * OTHER DEALINGS IN THE SOFTWARE.
+ */
 function initialize(){
 
 	$line = array();
@@ -13,7 +35,7 @@ function initialize(){
 		print "Please input your merchantId: ";
 		$line['merchantId'] = trim(fgets(STDIN));
 		print "Please choose Litle url from the following list (example: 'cert') or directly input another URL: \nsandbox => https://www.testlitle.com/sandbox/communicator/online \ncert => https://cert.litle.com/vap/communicator/online \nprecert => https://precert.litle.com/vap/communicator/online \nproduction1 => https://payments.litle.com/vap/communicator/online \nproduction2 => https://payments2.litle.com/vap/communicator/online" . PHP_EOL;
-		$url = url_mapper(trim(fgets(STDIN)));
+		$url = urlMapper(trim(fgets(STDIN)));
 		$line['url'] = $url;
 		print "Please input the proxy, if no proxy hit enter key: ";
 		$line['proxy'] = trim(fgets(STDIN));
@@ -23,7 +45,6 @@ function initialize(){
 			fwrite($handle, PHP_EOL);
 		}
 		fwrite($handle, "version = '8.10'" .  PHP_EOL);
-		fwrite($handle, "printxml =  false".  PHP_EOL);
 		fwrite($handle, "timeout =  65".  PHP_EOL);
 		fwrite($handle, "id =  10".  PHP_EOL);
 		fwrite($handle, "reportGroup = planets".  PHP_EOL);
@@ -34,22 +55,21 @@ function initialize(){
 
 }
 
-function url_mapper($litle_env){
-	$litle_online_ctx = 'vap/communicator/online';
-	if ($litle_env == "sandbox")
+function urlMapper($litleEnv){
+	$litleOnlineCtx = 'vap/communicator/online';
+	if ($litleEnv == "sandbox")
 		return 'https://www.testlitle.com/sandbox/communicator/online';
 	elseif ($litle_env == "cert")
-		return 'https://cert.litle.com/' . $litle_online_ctx;
-	elseif ($litle_env == "precert")
-		return 'https://precert.litle.com/' . $litle_online_ctx;
-	elseif ($litle_env == "production1")
-		return 'https://payments.litle.com/' . $litle_online_ctx;
-	elseif ($litle_env == "production2")
-		return 'https://payments2.litle.com/' . $litle_online_ctx;
+		return 'https://cert.litle.com/' . $litleOnlineCtx;
+	elseif ($litleEnv == "precert")
+		return 'https://precert.litle.com/' . $litleOnlineCtx;
+	elseif ($litleEnv == "production1")
+		return 'https://payments.litle.com/' . $litleOnlineCtx;
+	elseif ($litleEnv == "production2")
+		return 'https://payments2.litle.com/' . $litleOnlineCtx;
 	else
 		return 'https://www.testlitle.com/sandbox/communicator/online';
 }
 
 initialize();
 
-?>
