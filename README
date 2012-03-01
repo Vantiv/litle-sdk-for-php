@@ -37,34 +37,31 @@ Running the above commands will create a configuration file in the lib directory
 
 3.) Create a php file similar to:  
 
-```php
-require 'LitleOnline'
+```PHP
+require_once realpath(dirname(__FILE__)) . '/../lib/LitleOnline.php';  
+    // Visa $10.00 sale
+    $hash_in = array(
+	      'amount'=>'106',
+	      'orderId' => '123213',
+	      'orderSource'=>'ecommerce',
+	      'card'=>array(
+	      'type'=>'VI',
+	      'number' =>'4100000000000001',
+	     'expDate' =>'1000')
+	      );
+//Perform the transaction on the Litle Platform
+$initilaize = &new LitleOnlineRequest();
+$saleResponse = $initilaize->saleRequest($hash_in);
 
-# Visa $10 Sale
-litleSaleTxn = {
-    'reportGroup'=>'rpt_grp',
-    'orderId'=>'1234567',
-    'card'=>{
-        'type'=>'VI',
-        'number' =>'4100000000000001',
-        'expDate' =>'1212'},
-        'orderSource'=>'ecommerce',
-        'amount'=>'1000'
-    }
-
-# Peform the transaction on the Litle Platform
-response = LitleOnlineRequest.sale(litleSaleTxn)
-
-# display result
-puts "Message: "+ response.message
-puts "Litle Transaction ID: "+ response.saleResponse.litleTxnId
+// Display Result 
+echo ("Message: " . XMLParser::get_node($saleResponse,'message') . "<br>");
+echo ("Litle Transaction ID: " . XMLParser::get_node($saleResponse,'litleTxnId'));
 ```
-
-3) Next run this file using ruby. You should see the following result provided you have connectivity to the Litle certification environment.  You will see an HTTP error if you don't have access to the Litle URL
+3) Next run this file using php on the command line or inside a browser. You should see the following result provided you have connectivity to the Litle certification environment.  You will see an HTTP error if you don't have access to the Litle URL
 
     Message: Valid Format
     Litle Transaction ID: <your-numeric-litle-txn-id>
 
 
-Please contact Lilte & Co. with any further questions.   You can reach us at RubySupport@litle.com.
+Please contact Lilte & Co. with any further questions.   You can reach us at MerchantSDKSupport@litle.com
 
