@@ -22,18 +22,23 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-require_once realpath(dirname(__FILE__)) . '/../lib/LitleOnline.php';
-
-	$hash_in = array(
-	      'litleTxnId'=>'123456',
+require_once realpath(dirname(__FILE__)) . '/../lib/LitleOnline.php';  
+    // Visa $10.00 sale
+    $hash_in = array(
 	      'amount'=>'106',
+	      'orderId' => '123213',
 	      'orderSource'=>'ecommerce',
 	      'card'=>array(
 	      'type'=>'VI',
 	      'number' =>'4100000000000001',
-	      'expDate' =>'1210')
+	     'expDate' =>'1000')
 	      );
-$litleTest = &new LitleOnlineRequest();
-$retOb = $litleTest->saleRequest($hash_in);
-echo '1'
+//Perform the transaction on the Litle Platform
+$initilaize = &new LitleOnlineRequest();
+$saleResponse = $initilaize->saleRequest($hash_in);
+
+// Display Result 
+echo ("Message: " . XMLParser::get_node($saleResponse,'message') . "<br>");
+echo ("Litle Transaction ID: " . XMLParser::get_node($saleResponse,'litleTxnId'));
+
 ?>
