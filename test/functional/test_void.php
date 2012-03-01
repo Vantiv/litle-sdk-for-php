@@ -34,7 +34,7 @@ class void_FunctionalTest extends UnitTestCase
 		$hash_in = array('litleTxnId'=> '123456789012345678');
 		$initilaize = &new LitleOnlineRequest();
 		$voidResponse = $initilaize->voidRequest($hash_in);
-		$response = XMLParser::get_attribute($voidResponse,'litleOnlineResponse','response');
+		$response = XmlParser::getAttribute($voidResponse,'litleOnlineResponse','response');
 		$this->assertEqual('1',$response);
 	}
 

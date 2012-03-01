@@ -45,7 +45,7 @@ class captureGivenAuth_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$captureGivenAuthResponse = $initilaize->captureGivenAuthRequest($hash_in);
-		$message = XMLParser::get_node($captureGivenAuthResponse,'message');
+		$message = XmlParser::getNode($captureGivenAuthResponse,'message');
 		$this->assertEqual('Approved',$message);
 	}
 	
@@ -65,7 +65,7 @@ class captureGivenAuth_FunctionalTest extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$captureGivenAuthResponse = $initilaize->captureGivenAuthRequest($hash_in);
-		$message = XMLParser::get_node($captureGivenAuthResponse,'message');
+		$message = XmlParser::getNode($captureGivenAuthResponse,'message');
 		$this->assertEqual('Approved',$message);
 	}
 	
@@ -87,7 +87,7 @@ class captureGivenAuth_FunctionalTest extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$captureGivenAuthResponse = $initilaize->captureGivenAuthRequest($hash_in);
-		$message = XMLParser::get_node($captureGivenAuthResponse,'message');
+		$message = XmlParser::getNode($captureGivenAuthResponse,'message');
 		$this->assertEqual('Approved',$message);
 	}
 	
@@ -108,7 +108,7 @@ class captureGivenAuth_FunctionalTest extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$captureGivenAuthResponse = $initilaize->captureGivenAuthRequest($hash_in);
-		$message = XMLParser::get_node($captureGivenAuthResponse,'message');
+		$message = XmlParser::getNode($captureGivenAuthResponse,'message');
 		$this->assertEqual('Approved',$message);
 	}
 	

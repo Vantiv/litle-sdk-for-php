@@ -44,7 +44,7 @@ class credit_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
-		$response = XMLParser::get_node($creditResponse,'response');
+		$response = XmlParser::getNode($creditResponse,'response');
 		$this->assertEqual('000',$response);
 	}
 
@@ -61,7 +61,7 @@ class credit_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
-		$message= XMLParser::get_attribute($creditResponse,'litleOnlineResponse','message');
+		$message= XmlParser::getAttribute($creditResponse,'litleOnlineResponse','message');
 		$this->assertPattern('/Error validating xml data against the schema/',$message);
 	}
 	
@@ -71,7 +71,7 @@ class credit_FunctionalTest extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
-		$message= XMLParser::get_attribute($creditResponse,'litleOnlineResponse','response');
+		$message= XmlParser::getAttribute($creditResponse,'litleOnlineResponse','response');
 		$this->assertEqual("1",$message);
 	}
 	function test_paypal_notes()
@@ -90,7 +90,7 @@ class credit_FunctionalTest extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
-		$response = XMLParser::get_node($creditResponse,'response');
+		$response = XmlParser::getNode($creditResponse,'response');
 		$this->assertEqual('000',$response);
 	}
 	function test_amexAggregator()
@@ -108,7 +108,7 @@ class credit_FunctionalTest extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
-		$response = XMLParser::get_node($creditResponse,'response');
+		$response = XmlParser::getNode($creditResponse,'response');
 		$this->assertEqual('000',$response);
 	}
 

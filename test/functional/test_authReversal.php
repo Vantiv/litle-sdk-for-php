@@ -36,7 +36,7 @@ class authReversal_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$authReversalResponse = $initilaize->authReversalRequest($hash_in);
-		$response = XMLParser::get_node($authReversalResponse,'response');
+		$response = XmlParser::getNode($authReversalResponse,'response');
 		$this->assertEqual('000',$response);
 	}
 
@@ -48,7 +48,7 @@ function test_simple_authreversal_fields_out_of_order()
 
 		$initilaize = &new LitleOnlineRequest();
 		$authReversalResponse = $initilaize->authReversalRequest($hash_in);
-		$response = XMLParser::get_node($authReversalResponse,'response');
+		$response = XmlParser::getNode($authReversalResponse,'response');
 		$this->assertEqual('000',$response);
 	}
 	

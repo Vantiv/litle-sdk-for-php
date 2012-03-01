@@ -47,7 +47,7 @@ class forceCapture_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$forceCaptureResponse = $initilaize->forceCaptureRequest($hash_in);
-		$response = XMLParser::get_attribute($forceCaptureResponse,'litleOnlineResponse','response');
+		$response = XmlParser::getAttribute($forceCaptureResponse,'litleOnlineResponse','response');
 		$this->assertEqual('000',$response);
 	}
 	
@@ -70,7 +70,7 @@ class forceCapture_FunctionalTest extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$forceCaptureResponse = $initilaize->forceCaptureRequest($hash_in);
-		$message = XMLParser::get_attribute($forceCaptureResponse,'litleOnlineResponse','message');
+		$message = XmlParser::getAttribute($forceCaptureResponse,'litleOnlineResponse','message');
 		$this->assertEqual('Valid Format',$message);
 	}
 	

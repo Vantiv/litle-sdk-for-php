@@ -27,7 +27,7 @@ require_once("../../simpletest/autorun.php");
 require_once('../../simpletest/unit_tester.php');
 require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
 
-require realpath(dirname(__FILE__)) . '/test_xmlfields.php';
+require realpath(dirname(__FILE__)) . '/test_XmlFields.php';
 require realpath(dirname(__FILE__)) .  '/test_sale.php';
 require realpath(dirname(__FILE__)) .  '/test_auth.php';
 require realpath(dirname(__FILE__)) .  '/test_authReversal.php';

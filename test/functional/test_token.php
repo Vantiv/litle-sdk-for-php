@@ -39,7 +39,7 @@ class token_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$registerTokenResponse = $initilaize->registerTokenRequest($hash_in);
-		$message = XMLParser::get_attribute($registerTokenResponse,'litleOnlineResponse','message');
+		$message = XmlParser::getAttribute($registerTokenResponse,'litleOnlineResponse','message');
 		$this->assertEqual('Valid Format',$message);
 	}
 
@@ -54,7 +54,7 @@ class token_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$registerTokenResponse = $initilaize->registerTokenRequest($hash_in);
-		$message = XMLParser::get_attribute($registerTokenResponse,'litleOnlineResponse','message');
+		$message = XmlParser::getAttribute($registerTokenResponse,'litleOnlineResponse','message');
 		$this->assertEqual('Valid Format',$message);
 	}
 	
@@ -69,7 +69,7 @@ class token_FunctionalTest extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$registerTokenResponse = $initilaize->registerTokenRequest($hash_in);
-		$message = XMLParser::get_attribute($registerTokenResponse,'litleOnlineResponse','message');
+		$message = XmlParser::getAttribute($registerTokenResponse,'litleOnlineResponse','message');
 		$this->assertEqual('Valid Format',$message);
 	}
 	

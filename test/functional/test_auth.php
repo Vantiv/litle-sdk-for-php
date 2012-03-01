@@ -44,7 +44,7 @@ class auth_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($hash_in);
-		$response = XMLParser::get_node($authorizationResponse,'response');
+		$response = XmlParser::getNode($authorizationResponse,'response');
 		$this->assertEqual('000',$response);
 	}
 
@@ -61,7 +61,7 @@ class auth_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($hash_in);
-		$message = XMLParser::get_node($authorizationResponse,'message');
+		$message = XmlParser::getNode($authorizationResponse,'message');
 		$this->assertEqual('Approved',$message);
 	}
 	
@@ -71,7 +71,7 @@ class auth_FunctionalTest extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($hash_in);
-		$message= XMLParser::get_attribute($authorizationResponse,'litleOnlineResponse','message');
+		$message= XmlParser::getAttribute($authorizationResponse,'litleOnlineResponse','message');
 		$this->assertEqual("Valid Format",$message);
 	}
 	function test_illegal_orderSource()
@@ -87,7 +87,7 @@ class auth_FunctionalTest extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($hash_in);
-		$message= XMLParser::get_attribute($authorizationResponse,'litleOnlineResponse','message');
+		$message= XmlParser::getAttribute($authorizationResponse,'litleOnlineResponse','message');
 		$this->assertPattern('/Error validating xml data against the schema/',$message);
 	}
 	function test_fields_out_of_order()
@@ -103,7 +103,7 @@ class auth_FunctionalTest extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($hash_in);
-		$message = XMLParser::get_node($authorizationResponse,'message');
+		$message = XmlParser::getNode($authorizationResponse,'message');
 		$this->assertEqual('Approved',$message);
 	}
 	function test_invalid_field()
@@ -120,7 +120,7 @@ class auth_FunctionalTest extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($hash_in);
-		$message = XMLParser::get_node($authorizationResponse,'message');
+		$message = XmlParser::getNode($authorizationResponse,'message');
 		$this->assertEqual('Approved',$message);
 	}
 

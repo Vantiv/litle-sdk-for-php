@@ -27,7 +27,7 @@ require_once("../../simpletest/autorun.php");
 require_once('../../simpletest/unit_tester.php');
 require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
 
-class xmlfields_FunctionalTest extends UnitTestCase
+class XmlFields_FunctionalTest extends UnitTestCase
 {
 	function test_card_no_type_or_track()
 	{
@@ -47,7 +47,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$saleResponse = $initilaize->saleRequest($hash_in);
-		$message= XMLParser::get_attribute($saleResponse,'litleOnlineResponse','message');
+		$message= XmlParser::getAttribute($saleResponse,'litleOnlineResponse','message');
 		$this->assertPattern('/Error validating xml data against the schema/',$message);
 	}
 
@@ -72,7 +72,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$saleResponse = $initilaize->saleRequest($hash_in);
-		$message = XMLParser::get_attribute($saleResponse,'litleOnlineResponse','message');
+		$message = XmlParser::getAttribute($saleResponse,'litleOnlineResponse','message');
 		$this->assertEqual('Valid Format',$message);
 	}
 
@@ -97,7 +97,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$saleResponse = $initilaize->saleRequest($hash_in);
-		$response= XMLParser::get_attribute($saleResponse,'litleOnlineResponse','response');
+		$response= XmlParser::getAttribute($saleResponse,'litleOnlineResponse','response');
 		$this->assertEqual("000",$response);
 	}
 
@@ -119,7 +119,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$saleResponse = $initilaize->saleRequest($hash_in);
-		$message= XMLParser::get_attribute($saleResponse,'litleOnlineResponse','message');
+		$message= XmlParser::getAttribute($saleResponse,'litleOnlineResponse','message');
 		$this->assertEqual("Valid Format",$message);
 	}
 
@@ -139,7 +139,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($hash_in);
-		$message= XMLParser::get_attribute($authorizationResponse,'litleOnlineResponse','message');
+		$message= XmlParser::getAttribute($authorizationResponse,'litleOnlineResponse','message');
 		$this->assertEqual("Valid Format",$message);
 	}
 
@@ -159,7 +159,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($hash_in);
-		$message= XMLParser::get_attribute($authorizationResponse,'litleOnlineResponse','message');
+		$message= XmlParser::getAttribute($authorizationResponse,'litleOnlineResponse','message');
 		$this->assertEqual("Valid Format",$message);
 	}
 
@@ -179,7 +179,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($hash_in);
-		$message= XMLParser::get_attribute($authorizationResponse,'litleOnlineResponse','message');
+		$message= XmlParser::getAttribute($authorizationResponse,'litleOnlineResponse','message');
 		$this->assertEqual("Valid Format",$message);
 	}
 
@@ -200,7 +200,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$saleResponse = $initilaize->saleRequest($hash_in);
-		$message= XMLParser::get_attribute($saleResponse,'litleOnlineResponse','message');
+		$message= XmlParser::getAttribute($saleResponse,'litleOnlineResponse','message');
 		$this->assertPattern('/Error validating xml data against the schema/',$message);
 	}
 
@@ -220,7 +220,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
-		$message= XMLParser::get_attribute($creditResponse,'litleOnlineResponse','message');
+		$message= XmlParser::getAttribute($creditResponse,'litleOnlineResponse','message');
 		$this->assertEqual("Valid Format",$message);
 	}
 
@@ -241,7 +241,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
-		$message= XMLParser::get_attribute($creditResponse,'litleOnlineResponse','message');
+		$message= XmlParser::getAttribute($creditResponse,'litleOnlineResponse','message');
 		$this->assertPattern('/Error validating xml data against the schema/',$message);
 	}
 
@@ -268,7 +268,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
-		$message= XMLParser::get_attribute($creditResponse,'litleOnlineResponse','message');
+		$message= XmlParser::getAttribute($creditResponse,'litleOnlineResponse','message');
 		$this->assertEqual("Valid Format",$message);
 	}
 
@@ -295,7 +295,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
-		$message= XMLParser::get_attribute($creditResponse,'litleOnlineResponse','message');
+		$message= XmlParser::getAttribute($creditResponse,'litleOnlineResponse','message');
 		$this->assertPattern('/Error validating xml data against the schema/',$message);
 	}
 
@@ -322,7 +322,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
-		$message= XMLParser::get_attribute($creditResponse,'litleOnlineResponse','message');
+		$message= XmlParser::getAttribute($creditResponse,'litleOnlineResponse','message');
 		$this->assertEqual("Valid Format",$message);
 	}
 
@@ -356,7 +356,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
-		$message= XMLParser::get_attribute($creditResponse,'litleOnlineResponse','message');
+		$message= XmlParser::getAttribute($creditResponse,'litleOnlineResponse','message');
 		$this->assertEqual("Valid Format",$message);
 	}
 
@@ -376,7 +376,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
-		$message= XMLParser::get_attribute($creditResponse,'litleOnlineResponse','message');
+		$message= XmlParser::getAttribute($creditResponse,'litleOnlineResponse','message');
 		$this->assertEqual("Valid Format",$message);
 	}
 
@@ -396,7 +396,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
-		$message= XMLParser::get_attribute($creditResponse,'litleOnlineResponse','message');
+		$message= XmlParser::getAttribute($creditResponse,'litleOnlineResponse','message');
 		$this->assertPattern('/Error validating xml data against the schema/',$message);
 	}
 
@@ -414,7 +414,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
-		$message= XMLParser::get_attribute($creditResponse,'litleOnlineResponse','message');
+		$message= XmlParser::getAttribute($creditResponse,'litleOnlineResponse','message');
 		$this->assertEqual("Valid Format",$message);
 	}
 
@@ -434,7 +434,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
-		$message= XMLParser::get_attribute($creditResponse,'litleOnlineResponse','message');
+		$message= XmlParser::getAttribute($creditResponse,'litleOnlineResponse','message');
 		$this->assertEqual("Valid Format",$message);
 	}
 
@@ -452,7 +452,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
-		$message= XMLParser::get_attribute($creditResponse,'litleOnlineResponse','message');
+		$message= XmlParser::getAttribute($creditResponse,'litleOnlineResponse','message');
 		$this->assertEqual("Valid Format",$message);
 	}
 

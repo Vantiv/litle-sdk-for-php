@@ -44,7 +44,7 @@ class sale_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$saleResponse = $initilaize->saleRequest($hash_in);
-		$response = XMLParser::get_node($saleResponse,'response');
+		$response = XmlParser::getNode($saleResponse,'response');
 		$this->assertEqual('000',$response);
 	}
 
@@ -61,7 +61,7 @@ class sale_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$saleResponse = $initilaize->saleRequest($hash_in);
-		$response = XMLParser::get_node($saleResponse,'response');
+		$response = XmlParser::getNode($saleResponse,'response');
 		$this->assertEqual('000',$response);
 	}
 
@@ -78,7 +78,7 @@ class sale_FunctionalTest extends UnitTestCase
 							'amount'=>'123');
 		$initilaize = &new LitleOnlineRequest();
 		$saleResponse = $initilaize->saleRequest($hash_in);
-		$message= XMLParser::get_attribute($saleResponse,'litleOnlineResponse','message');
+		$message= XmlParser::getAttribute($saleResponse,'litleOnlineResponse','message');
 		$this->assertPattern('/Error validating xml data against the schema/',$message);
 	}
 
@@ -97,7 +97,7 @@ class sale_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$saleResponse = $initilaize->saleRequest($hash_in);
-		$message= XMLParser::get_attribute($saleResponse,'litleOnlineResponse','message');
+		$message= XmlParser::getAttribute($saleResponse,'litleOnlineResponse','message');
 		$this->assertPattern('/Error validating xml data against the schema/',$message);
 	}
 	function no_reportGroup()
@@ -115,7 +115,7 @@ class sale_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$saleResponse = $initilaize->saleRequest($hash_in);
-		$response = XMLParser::get_node($saleResponse,'response');
+		$response = XmlParser::getNode($saleResponse,'response');
 		$this->assertEqual('000',$response);
 	}
 
@@ -132,7 +132,7 @@ class sale_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$saleResponse = $initilaize->saleRequest($hash_in);
-		$response = XMLParser::get_node($saleResponse,'response');
+		$response = XmlParser::getNode($saleResponse,'response');
 		$this->assertEqual('000',$response);
 	}
 
@@ -150,7 +150,7 @@ class sale_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$saleResponse = $initilaize->saleRequest($hash_in);
-		$message = XMLParser::get_node($saleResponse,'message');
+		$message = XmlParser::getNode($saleResponse,'message');
 		$this->assertEqual('Approved',$message);
 	}
 
@@ -168,7 +168,7 @@ class sale_FunctionalTest extends UnitTestCase
       'number' =>'4100000000000002'));
 		$initilaize = &new LitleOnlineRequest();
 		$saleResponse = $initilaize->saleRequest($hash_in);
-		$message= XMLParser::get_attribute($saleResponse,'litleOnlineResponse','message');
+		$message= XmlParser::getAttribute($saleResponse,'litleOnlineResponse','message');
 		$this->assertPattern('/Error validating xml data against the schema/',$message);
 	}
 }

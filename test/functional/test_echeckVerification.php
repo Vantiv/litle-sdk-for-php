@@ -42,7 +42,7 @@ class echeckVerification_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$echeckVerifcationResponse = $initilaize->echeckVerificationRequest($hash_in);
-		$response = XMLParser::get_node($echeckVerifcationResponse,'response');
+		$response = XmlParser::getNode($echeckVerifcationResponse,'response');
 		$this->assertEqual('000',$response);
 	}
 
@@ -58,7 +58,7 @@ class echeckVerification_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$echeckVerifcationResponse = $initilaize->echeckVerificationRequest($hash_in);
-		$response = XMLParser::get_node($echeckVerifcationResponse,'response');
+		$response = XmlParser::getNode($echeckVerifcationResponse,'response');
 		$this->assertEqual('000',$response);
 	}
 

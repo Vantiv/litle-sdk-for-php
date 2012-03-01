@@ -42,7 +42,7 @@ class echeckSale_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$echeckSaleResponse = $initilaize->echeckSaleRequest($hash_in);
-		$response = XMLParser::get_node($echeckSaleResponse,'response');
+		$response =XmlParser::getNode($echeckSaleResponse,'response');
 		$this->assertEqual('000',$response);
 	}
 
@@ -58,7 +58,7 @@ class echeckSale_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$echeckSaleResponse = $initilaize->echeckSaleRequest($hash_in);
-		$response = XMLParser::get_node($echeckSaleResponse,'response');
+		$response = XmlParser::getNode($echeckSaleResponse,'response');
 		$this->assertEqual('000',$response);
 	}
 
@@ -73,7 +73,7 @@ class echeckSale_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$echeckSaleResponse = $initilaize->echeckSaleRequest($hash_in);
-		$message= XMLParser::get_attribute($echeckSaleResponse,'litleOnlineResponse','message');
+		$message= XmlParser::getAttribute($echeckSaleResponse,'litleOnlineResponse','message');
 		$this->assertPattern('/Error validating xml data against the schema/',$message);
 	}
 	function test_echeckSale_with_shipto()
@@ -89,7 +89,7 @@ class echeckSale_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$echeckSaleResponse = $initilaize->echeckSaleRequest($hash_in);
-		$response = XMLParser::get_node($echeckSaleResponse,'response');
+		$response = XmlParser::getNode($echeckSaleResponse,'response');
 		$this->assertEqual('000',$response);
 	}
 

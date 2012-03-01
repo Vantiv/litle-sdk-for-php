@@ -37,7 +37,7 @@ class echeckCredit_FunctionalTest extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$echeckCreditResponse = $initilaize->echeckCreditRequest($hash_in);
-		$response = XMLParser::get_node($echeckCreditResponse,'response');
+		$response = XmlParser::getNode($echeckCreditResponse,'response');
 		$this->assertEqual('000',$response);
 	}
 
@@ -46,7 +46,7 @@ class echeckCredit_FunctionalTest extends UnitTestCase
 		$hash_in = array();
 		$initilaize = &new LitleOnlineRequest();
 		$echeckCreditResponse = $initilaize->echeckCreditRequest($hash_in);
-		$message= XMLParser::get_attribute($echeckCreditResponse,'litleOnlineResponse','message');
+		$message= XmlParser::getAttribute($echeckCreditResponse,'litleOnlineResponse','message');
 		$this->assertPattern('/Error validating xml data against the schema/',$message);
 	}
 	
@@ -62,7 +62,7 @@ class echeckCredit_FunctionalTest extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$echeckCreditResponse = $initilaize->echeckCreditRequest($hash_in);
-		$response = XMLParser::get_node($echeckCreditResponse,'message');
+		$response = XmlParser::getNode($echeckCreditResponse,'message');
 		$this->assertEqual('Approved',$response);
 	}
 	
@@ -78,7 +78,7 @@ class echeckCredit_FunctionalTest extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$echeckCreditResponse = $initilaize->echeckCreditRequest($hash_in);
-		$response = XMLParser::get_node($echeckCreditResponse,'message');
+		$response = XmlParser::getNode($echeckCreditResponse,'message');
 		$this->assertEqual('Approved',$response);
 	}
 	function test_echeckCredit_missing_billing()
@@ -92,7 +92,7 @@ class echeckCredit_FunctionalTest extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$echeckCreditResponse = $initilaize->echeckCreditRequest($hash_in);
-		$message= XMLParser::get_attribute($echeckCreditResponse,'litleOnlineResponse','message');
+		$message= XmlParser::getAttribute($echeckCreditResponse,'litleOnlineResponse','message');
 		$this->assertPattern('/Error validating xml data against the schema/',$message);
 	}
 
