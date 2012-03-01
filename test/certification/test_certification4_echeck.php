@@ -46,8 +46,8 @@ class cert4_Test extends UnitTestCase
 
 		$initilaize = &new LitleOnlineRequest();
 		$echeckVerificationResponse = $initilaize->echeckVerificationRequest($echeck_hash);
-		$this->assertEqual('301',XMLParser::get_node($echeckVerificationResponse,'response'));
-		$this->assertEqual('Invalid Account Number',XMLParser::get_node($echeckVerificationResponse,'message'));
+		$this->assertEqual('301',XMLParser::getNode($echeckVerificationResponse,'response'));
+		$this->assertEqual('Invalid Account Number',XMLParser::getNode($echeckVerificationResponse,'message'));
 	}
 	
 	function test_38()
@@ -67,8 +67,8 @@ class cert4_Test extends UnitTestCase
 		$initilaize = &new LitleOnlineRequest();
 		
 		$echeckVerificationResponse = $initilaize->echeckVerificationRequest($echeck_hash);
-		$this->assertEqual('000',XMLParser::get_node($echeckVerificationResponse,'response'));
-		$this->assertEqual('Approved',XMLParser::get_node($echeckVerificationResponse,'message'));
+		$this->assertEqual('000',XMLParser::getNode($echeckVerificationResponse,'response'));
+		$this->assertEqual('Approved',XMLParser::getNode($echeckVerificationResponse,'message'));
 	}
 	
 	function test_39()
@@ -89,8 +89,8 @@ class cert4_Test extends UnitTestCase
 		
 		$initilaize = &new LitleOnlineRequest();
 		$echeckVerificationResponse = $initilaize->echeckVerificationRequest($echeck_hash);
-		$this->assertEqual('950',XMLParser::get_node($echeckVerificationResponse,'response'));
-		$this->assertEqual('Declined - Negative Information on File',XMLParser::get_node($echeckVerificationResponse,'message'));
+		$this->assertEqual('950',XMLParser::getNode($echeckVerificationResponse,'response'));
+		$this->assertEqual('Declined - Negative Information on File',XMLParser::getNode($echeckVerificationResponse,'message'));
 	}
 	
 	function test_40()
@@ -111,8 +111,8 @@ class cert4_Test extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$echeckVerificationResponse = $initilaize->echeckVerificationRequest($echeck_hash);
-		$this->assertEqual('951',XMLParser::get_node($echeckVerificationResponse,'response'));
-		$this->assertEqual('Absolute Decline',XMLParser::get_node($echeckVerificationResponse,'message'));
+		$this->assertEqual('951',XMLParser::getNode($echeckVerificationResponse,'response'));
+		$this->assertEqual('Absolute Decline',XMLParser::getNode($echeckVerificationResponse,'message'));
 	}
 	
 	#41-44 echecksales
@@ -133,8 +133,8 @@ class cert4_Test extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$echeckSaleResponse = $initilaize->echeckSaleRequest($echeck_hash);
-		$this->assertEqual('301',XMLParser::get_node($echeckSaleResponse,'response'));
-		$this->assertEqual('Invalid Account Number',XMLParser::get_node($echeckSaleResponse,'message'));
+		$this->assertEqual('301',XMLParser::getNode($echeckSaleResponse,'response'));
+		$this->assertEqual('Invalid Account Number',XMLParser::getNode($echeckSaleResponse,'message'));
 	}
 	
 	function test_42()
@@ -153,8 +153,8 @@ class cert4_Test extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$echeckSaleResponse = $initilaize->echeckSaleRequest($echeck_hash);
-		$this->assertEqual('000',XMLParser::get_node($echeckSaleResponse,'response'));
-		$this->assertEqual('Approved',XMLParser::get_node($echeckSaleResponse,'message'));
+		$this->assertEqual('000',XMLParser::getNode($echeckSaleResponse,'response'));
+		$this->assertEqual('Approved',XMLParser::getNode($echeckSaleResponse,'message'));
 	}
 	
 	function test_43()
@@ -174,8 +174,8 @@ class cert4_Test extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$echeckSaleResponse = $initilaize->echeckSaleRequest($echeck_hash);
-		$this->assertEqual('000',XMLParser::get_node($echeckSaleResponse,'response'));
-		$this->assertEqual('Approved',XMLParser::get_node($echeckSaleResponse,'message'));
+		$this->assertEqual('000',XMLParser::getNode($echeckSaleResponse,'response'));
+		$this->assertEqual('Approved',XMLParser::getNode($echeckSaleResponse,'message'));
 	}
 	
 	function test_44()
@@ -195,8 +195,8 @@ class cert4_Test extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$echeckSaleResponse = $initilaize->echeckSaleRequest($echeck_hash);
-		$this->assertEqual('900',XMLParser::get_node($echeckSaleResponse,'response'));
-		$this->assertEqual('Invalid Bank Routing Number',XMLParser::get_node($echeckSaleResponse,'message'));
+		$this->assertEqual('900',XMLParser::getNode($echeckSaleResponse,'response'));
+		$this->assertEqual('Invalid Bank Routing Number',XMLParser::getNode($echeckSaleResponse,'message'));
 	}
 	
 	#test 45- 49 echeckCredit
@@ -216,7 +216,7 @@ class cert4_Test extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$echeckCreditResponse = $initilaize->echeckCreditRequest($echeck_hash);
-		$this->assertEqual('301',XMLParser::get_node($echeckCreditResponse,'response'));
+		$this->assertEqual('301',XMLParser::getNode($echeckCreditResponse,'response'));
 	}
 	
 	function test_46()
@@ -236,8 +236,8 @@ class cert4_Test extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$echeckCreditResponse = $initilaize->echeckCreditRequest($echeck_hash);
-		$this->assertEqual('000',XMLParser::get_node($echeckCreditResponse,'response'));
-		$this->assertEqual('Approved',XMLParser::get_node($echeckCreditResponse,'message'));
+		$this->assertEqual('000',XMLParser::getNode($echeckCreditResponse,'response'));
+		$this->assertEqual('Approved',XMLParser::getNode($echeckCreditResponse,'message'));
 	}
 	
 	function test_47()
@@ -257,8 +257,8 @@ class cert4_Test extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$echeckCreditResponse = $initilaize->echeckCreditRequest($echeck_hash);
-		$this->assertEqual('000',XMLParser::get_node($echeckCreditResponse,'response'));
-		$this->assertEqual('Approved',XMLParser::get_node($echeckCreditResponse,'message'));
+		$this->assertEqual('000',XMLParser::getNode($echeckCreditResponse,'response'));
+		$this->assertEqual('Approved',XMLParser::getNode($echeckCreditResponse,'message'));
 	}
 	
 	function test_48()
@@ -267,8 +267,8 @@ class cert4_Test extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$echeckCreditResponse = $initilaize->echeckCreditRequest($echeck_hash);
-		$this->assertEqual('000',XMLParser::get_node($echeckCreditResponse,'response'));
-		$this->assertEqual('Approved',XMLParser::get_node($echeckCreditResponse,'message'));
+		$this->assertEqual('000',XMLParser::getNode($echeckCreditResponse,'response'));
+		$this->assertEqual('Approved',XMLParser::getNode($echeckCreditResponse,'message'));
 	}
 	
 	function test_49()
@@ -277,7 +277,7 @@ class cert4_Test extends UnitTestCase
 	
 		$initilaize = &new LitleOnlineRequest();
 		$echeckCreditResponse = $initilaize->echeckCreditRequest($echeck_hash);
-		$this->assertEqual('360',XMLParser::get_node($echeckCreditResponse,'response'));
-		$this->assertEqual('No transaction found with specified litleTxnId',XMLParser::get_node($echeckCreditResponse,'message'));
+		$this->assertEqual('360',XMLParser::getNode($echeckCreditResponse,'response'));
+		$this->assertEqual('No transaction found with specified litleTxnId',XMLParser::getNode($echeckCreditResponse,'message'));
 	}
 }
