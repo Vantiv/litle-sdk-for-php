@@ -1,11 +1,70 @@
-Litle & Co. powers the payment processing engines for leading companies that sell directly to consumers through internet retail, direct response marketing (TV, radio and telephone), and online services. Litle & Co. is the leading, independent authority in card-not-present (CNP) commerce, transaction processing and merchant services.
+Litle Online PHP SDK
+=====================
 
-The Litle Online API is a PHP implementation of the Litle & Co. XML API. This API supports the HTTPS interface and requires coordination with the Litle team in order to be provided with credentials for accessing our systems.  Note that you will get separate credentials for our test system and require certification before being granted production access.
+About Litle
+------------
+[Litle &amp; Co.](http://www.litle.com) powers the payment processing engines for leading companies that sell directly to consumers through  internet retail, direct response marketing (TV, radio and telephone), and online services. Litle & Co. is the leading, independent authority in card-not-present (CNP) commerce, transaction processing and merchant services.
 
-Our PHP API supports all of the functionality present in Litle XML v8. Please request a copy of the XSD for Litle XML from your implementations coordinator at Litle.
 
-This API is implemented to support the PHP programming language and was created by Litle & Co. It is intended use is for online transactions processing on the Litle payments engine. This API is currently in the alpha testing phase and is not generally available or supported by Litle.  Litle will support this API during the on-boarding process.
+About this SDK
+--------------
+The Litle PHP SDK is a Ruby implementation of the [Litle &amp; Co.](http://www.litle.com). XML API. This SDK was created to make it as easy as possible to connect process your payments with Litle.  This SDK utilizes  the HTTPS protocol to securely connect to Litle.  Using the SDK requires coordination with the Litle team in order to be provided with credentials for accessing our systems.
 
-Source Code available from : https://github.com/litleco/LitleOnline_XML_v8_PHP
+Our Ruby PHP supports all of the functionality present in Litle XML v8. Please see the online copy of our XSD for Litle XML to get more details on what is supported by the Litle payments engine.
 
-Please contact Litle & Co. to receive valid merchant credentials in order to run tests successfully.
+This SDK is implemented to support the Ruby programming language and was created by Litle & Co. It is intended use is for online transactions processing utilizing your account on the Litle payments engine.
+
+See LICENSE file for details on using this software.
+
+Source Code available from : https://github.com/LitleCo/litle-sdk-for-php
+
+Please contact [Litle &amp; Co.](http://www.litle.com) to receive valid merchant credentials in order to run tests successfully or if you require assistance in any way.  We are reachable at MerchantSDKSupport@litle.com
+
+Setup
+-----
+
+1) Install the LitleOnline PHP SDK from git. 
+
+>git clone git://github.com/LitleCo/litle-sdk-for-php.git
+
+
+2) Once the SDK is downloaded run our setup program to generate a configuration file.
+
+> cd litle-sdk-for-php/lib
+>php Setup.php
+
+Running the above commands will create a configuration file in the lib directory. 
+
+3.) Create a php file similar to:  
+
+```php
+require 'LitleOnline'
+
+# Visa $10 Sale
+litleSaleTxn = {
+    'reportGroup'=>'rpt_grp',
+    'orderId'=>'1234567',
+    'card'=>{
+        'type'=>'VI',
+        'number' =>'4100000000000001',
+        'expDate' =>'1212'},
+        'orderSource'=>'ecommerce',
+        'amount'=>'1000'
+    }
+
+# Peform the transaction on the Litle Platform
+response = LitleOnlineRequest.sale(litleSaleTxn)
+
+# display result
+puts "Message: "+ response.message
+puts "Litle Transaction ID: "+ response.saleResponse.litleTxnId
+```
+
+3) Next run this file using ruby. You should see the following result provided you have connectivity to the Litle certification environment.  You will see an HTTP error if you don't have access to the Litle URL
+
+    Message: Valid Format
+    Litle Transaction ID: <your-numeric-litle-txn-id>
+
+
+Please contact Lilte & Co. with any further questions.   You can reach us at RubySupport@litle.com.
+
