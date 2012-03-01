@@ -71,7 +71,7 @@ class captureGivenAuth_UnitTest extends UnitTestCase
 		$retOb = $litleTest->captureGivenAuthRequest($hash_in);
 	}
 
-	function test_BothChoicesCardandToken()
+	function test_both_choices_card_and_token()
 	{
 		$hash_in = array(
       	'reportGroup'=>'Planets',
@@ -94,7 +94,7 @@ class captureGivenAuth_UnitTest extends UnitTestCase
 		$this->expectException(new Exception("Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!"));
 		$retOb = $litleTest->captureGivenAuthRequest($hash_in);
 	}
-	function test_allChoices()
+	function test_all_choices()
 	{
 		$hash_in = array(
 			      'reportGroup'=>'Planets',

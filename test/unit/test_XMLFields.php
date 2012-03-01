@@ -61,7 +61,7 @@ class Tests_XMLFIELDS extends UnitTestCase{
 		$this->assertEqual($hash_out["incomeAmount"],"tomuchforamonkey");
 	}
 
-	function test_simple_BillMeLaterRequest()
+	function test_simple_billMeLaterRequest()
 	{
 		$hash=array(
 			"bmlMerchantId"=>"101",
@@ -341,7 +341,7 @@ class Tests_XMLFIELDS extends UnitTestCase{
 		$this->assertEqual($hash_out["checkNum"], NUll);
 	}
 
-	function test_recyclingRequestType_withmissing()
+	function test_recyclingRequestType_with_missing()
 	{
 		$hash = array();
 		$hash_out = XMLFields::recyclingRequestType($hash);

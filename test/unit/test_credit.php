@@ -41,7 +41,7 @@ function test_credit()
 		$retOb = $litleTest->creditRequest($hash_in);
 	}
 	
-	function test_BothChoicesCardandPaypal()
+	function test_both_choices_card_and_paypal()
 	{
 		$hash_in = array(
 	      'reportGroup'=>'Planets',
@@ -63,7 +63,7 @@ function test_credit()
 		$retOb = $litleTest->creditRequest($hash_in);
 	}
 	
-	function test_threeChoicesCardandPaypageandPaypal()
+	function test_three_choices_card_and_paypage_and_paypal()
 	{
 		$hash_in = array(
 	      'reportGroup'=>'Planets',
@@ -91,7 +91,7 @@ function test_credit()
 	
 	}
 	
-	function test_allChoicesCardandPaypageandPaypalandToken()
+	function test_all_choices_card_and_paypage_and_paypal_and_token()
 	{
 		$hash_in = array(
 	      'reportGroup'=>'Planets',

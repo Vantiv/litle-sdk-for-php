@@ -71,7 +71,7 @@ class echeckVerification_UnitTest extends UnitTestCase
 		$this->expectException(new Exception("Missing Required Field: /orderSource/"));
 		$retOb = $litleTest->echeckVerificationRequest($hash_in);
 	}
-	function test_both_Choices()
+	function test_both_choices()
 	{
 		$hash_in = array('reportGroup'=>'Planets','amount'=>'123','orderId'=>'123','orderSource'=>'ecommerce',
 		'echeckToken' => array('accType'=>'Checking','routingNum'=>'123123','litleToken'=>'1234565789012','checkNum'=>'123455'),

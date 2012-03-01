@@ -55,7 +55,7 @@ class sale_UnitTest extends UnitTestCase
 	}
 
 	
-	function test_noOrderId()
+	function test_no_orderId()
 	{
 		$hash_in = array('merchantId' => '101',
 	      'version'=>'8.8',
@@ -75,7 +75,7 @@ class sale_UnitTest extends UnitTestCase
 		
 	}
 	
-	function test_noAmount()
+	function test_no_amount()
 	{
 		$hash_in = array('merchantId' => '101',
 	      'version'=>'8.8',
@@ -94,7 +94,7 @@ class sale_UnitTest extends UnitTestCase
 	
 	}
 	
-	function test_noOrderSource()
+	function test_no_orderSource()
 	{
 		$hash_in = array('merchantId' => '101',
 	      'version'=>'8.8',
@@ -113,7 +113,7 @@ class sale_UnitTest extends UnitTestCase
 	
 	}
 	
-	function test_BothChoicesCardandPaypal()
+	function test_both_choices_card_and_paypal()
 	{
 		$hash_in = array('merchantId' => '101',
 	      'version'=>'8.8',
@@ -137,7 +137,7 @@ class sale_UnitTest extends UnitTestCase
 	
 	}
 	
-	function test_threeChoicesCardandPaypageandPaypal()
+	function test_three_choices_card_and_paypage_and_paypal()
 	{
 		$hash_in = array('merchantId' => '101',
 	      'version'=>'8.8',
@@ -166,7 +166,7 @@ class sale_UnitTest extends UnitTestCase
 	
 	}
 	
-	function test_allChoicesCardandPaypageandPaypalandToken()
+	function test_all_choices_card_and_paypage_and_paypal_and_token()
 	{
 		$hash_in = array('merchantId' => '101',
 	      'version'=>'8.8',
