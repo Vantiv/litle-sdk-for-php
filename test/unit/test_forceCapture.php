@@ -107,7 +107,7 @@ class forceCapture_UnitTest extends UnitTestCase
 		$this->expectException(new Exception("Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!"));
 		$retOb = $litleTest->forceCaptureRequest($hash_in);
 	}
-	function test_allChoices()
+	function test_all_choices()
 	{
 		$hash_in = array(
 

@@ -68,7 +68,7 @@ class echeckRedeposit_UnitTest extends UnitTestCase
 		$retOb = $litleTest->echeckRedepositRequest($hash_in);
 	}
 	
-	function test_bothChoices()
+	function test_both_choices()
 	{
 		$hash_in = array('reportGroup'=>'Planets','litleTxnId'=>'123456',
 		'echeckToken' => array('accType'=>'Checking','routingNum'=>'123123','litleToken'=>'1234565789012','checkNum'=>'123455'),

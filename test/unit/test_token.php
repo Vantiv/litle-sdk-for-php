@@ -46,7 +46,7 @@ class token_UnitTest extends UnitTestCase
 	}
 
 
-	function test_accountNumandPaypage()
+	function test_accountNum_and_paypage()
 	{
 		$hash_in = array('merchantId' => '101',
       'version'=>'8.8',
@@ -60,7 +60,7 @@ class token_UnitTest extends UnitTestCase
 
 	}
 
-	function test_echeckandPaypagel()
+	function test_echeck_and_paypagel()
 	{
 		$hash_in = array('merchantId' => '101',
       'version'=>'8.8',
@@ -74,7 +74,7 @@ class token_UnitTest extends UnitTestCase
 
 	}
 
-	function test_echeckandPaypageandaccountnum()
+	function test_echeck_and_paypage_and_accountnum()
 	{
 		$hash_in = array('merchantId' => '101',
       'version'=>'8.8',

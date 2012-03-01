@@ -41,12 +41,12 @@ class cert2_Test extends UnitTestCase
 	      'type' => 'VI'));
 		$initilaize = &new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
-		$this->assertEqual('000',XmlParser::get_node($authorizationResponse,'response'));
-		$this->assertEqual('Approved',XmlParser::get_node($authorizationResponse,'message'));
-		$this->assertEqual('PREPAID',XmlParser::get_node($authorizationResponse,'type'));
-		$this->assertEqual('2000',XmlParser::get_node($authorizationResponse,'availableBalance'));
-		$this->assertEqual('NO',XmlParser::get_node($authorizationResponse,'reloadable'));
-		$this->assertEqual('GIFT',XmlParser::get_node($authorizationResponse,'prepaidCardType'));
+		$this->assertEqual('000',XmlParser::getNode($authorizationResponse,'response'));
+		$this->assertEqual('Approved',XmlParser::getNode($authorizationResponse,'message'));
+		$this->assertEqual('PREPAID',XmlParser::getNode($authorizationResponse,'type'));
+		$this->assertEqual('2000',XmlParser::getNode($authorizationResponse,'availableBalance'));
+		$this->assertEqual('NO',XmlParser::getNode($authorizationResponse,'reloadable'));
+		$this->assertEqual('GIFT',XmlParser::getNode($authorizationResponse,'prepaidCardType'));
 
 	}
 
@@ -62,12 +62,12 @@ class cert2_Test extends UnitTestCase
 				      'type' => 'MC'));
 		$initilaize = &new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
-		$this->assertEqual('000',XmlParser::get_node($authorizationResponse,'response'));
-		$this->assertEqual('Approved',XmlParser::get_node($authorizationResponse,'message'));
-		$this->assertEqual('PREPAID',XmlParser::get_node($authorizationResponse,'type'));
-		$this->assertEqual('2000',XmlParser::get_node($authorizationResponse,'availableBalance'));
-		$this->assertEqual('YES',XmlParser::get_node($authorizationResponse,'reloadable'));
-		$this->assertEqual('PAYROLL',XmlParser::get_node($authorizationResponse,'prepaidCardType'));
+		$this->assertEqual('000',XmlParser::getNode($authorizationResponse,'response'));
+		$this->assertEqual('Approved',XmlParser::getNode($authorizationResponse,'message'));
+		$this->assertEqual('PREPAID',XmlParser::getNode($authorizationResponse,'type'));
+		$this->assertEqual('2000',XmlParser::getNode($authorizationResponse,'availableBalance'));
+		$this->assertEqual('YES',XmlParser::getNode($authorizationResponse,'reloadable'));
+		$this->assertEqual('PAYROLL',XmlParser::getNode($authorizationResponse,'prepaidCardType'));
 
 	}
 
@@ -83,12 +83,12 @@ class cert2_Test extends UnitTestCase
 					      'type' => 'MC'));
 		$initilaize = &new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
-		$this->assertEqual('000',XmlParser::get_node($authorizationResponse,'response'));
-		$this->assertEqual('Approved',XmlParser::get_node($authorizationResponse,'message'));
-		$this->assertEqual('PREPAID',XmlParser::get_node($authorizationResponse,'type'));
-		$this->assertEqual('0',XmlParser::get_node($authorizationResponse,'availableBalance'));
-		$this->assertEqual('YES',XmlParser::get_node($authorizationResponse,'reloadable'));
-		$this->assertEqual('PAYROLL',XmlParser::get_node($authorizationResponse,'prepaidCardType'));
+		$this->assertEqual('000',XmlParser::getNode($authorizationResponse,'response'));
+		$this->assertEqual('Approved',XmlParser::getNode($authorizationResponse,'message'));
+		$this->assertEqual('PREPAID',XmlParser::getNode($authorizationResponse,'type'));
+		$this->assertEqual('0',XmlParser::getNode($authorizationResponse,'availableBalance'));
+		$this->assertEqual('YES',XmlParser::getNode($authorizationResponse,'reloadable'));
+		$this->assertEqual('PAYROLL',XmlParser::getNode($authorizationResponse,'prepaidCardType'));
 
 	}
 
@@ -104,12 +104,12 @@ class cert2_Test extends UnitTestCase
 					      'type' => 'MC'));
 		$initilaize = &new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
-		$this->assertEqual('000',XmlParser::get_node($authorizationResponse,'response'));
-		$this->assertEqual('Approved',XmlParser::get_node($authorizationResponse,'message'));
-		$this->assertEqual('PREPAID',XmlParser::get_node($authorizationResponse,'type'));
-		$this->assertEqual('6500',XmlParser::get_node($authorizationResponse,'availableBalance'));
-		$this->assertEqual('YES',XmlParser::get_node($authorizationResponse,'reloadable'));
-		$this->assertEqual('PAYROLL',XmlParser::get_node($authorizationResponse,'prepaidCardType'));
+		$this->assertEqual('000',XmlParser::getNode($authorizationResponse,'response'));
+		$this->assertEqual('Approved',XmlParser::getNode($authorizationResponse,'message'));
+		$this->assertEqual('PREPAID',XmlParser::getNode($authorizationResponse,'type'));
+		$this->assertEqual('6500',XmlParser::getNode($authorizationResponse,'availableBalance'));
+		$this->assertEqual('YES',XmlParser::getNode($authorizationResponse,'reloadable'));
+		$this->assertEqual('PAYROLL',XmlParser::getNode($authorizationResponse,'prepaidCardType'));
 
 	}
 
@@ -125,12 +125,12 @@ class cert2_Test extends UnitTestCase
 					      'type' => 'MC'));
 		$initilaize = &new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
-		$this->assertEqual('000',XmlParser::get_node($authorizationResponse,'response'));
-		$this->assertEqual('Approved',XmlParser::get_node($authorizationResponse,'message'));
-		$this->assertEqual('PREPAID',XmlParser::get_node($authorizationResponse,'type'));
-		$this->assertEqual('12200',XmlParser::get_node($authorizationResponse,'availableBalance'));
-		$this->assertEqual('YES',XmlParser::get_node($authorizationResponse,'reloadable'));
-		$this->assertEqual('PAYROLL',XmlParser::get_node($authorizationResponse,'prepaidCardType'));
+		$this->assertEqual('000',XmlParser::getNode($authorizationResponse,'response'));
+		$this->assertEqual('Approved',XmlParser::getNode($authorizationResponse,'message'));
+		$this->assertEqual('PREPAID',XmlParser::getNode($authorizationResponse,'type'));
+		$this->assertEqual('12200',XmlParser::getNode($authorizationResponse,'availableBalance'));
+		$this->assertEqual('YES',XmlParser::getNode($authorizationResponse,'reloadable'));
+		$this->assertEqual('PAYROLL',XmlParser::getNode($authorizationResponse,'prepaidCardType'));
 
 	}
 
@@ -146,12 +146,12 @@ class cert2_Test extends UnitTestCase
 					      'type' => 'MC'));
 		$initilaize = &new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
-		$this->assertEqual('000',XmlParser::get_node($authorizationResponse,'response'));
-		$this->assertEqual('Approved',XmlParser::get_node($authorizationResponse,'message'));
-		$this->assertEqual('PREPAID',XmlParser::get_node($authorizationResponse,'type'));
-		$this->assertEqual('20000',XmlParser::get_node($authorizationResponse,'availableBalance'));
-		$this->assertEqual('YES',XmlParser::get_node($authorizationResponse,'reloadable'));
-		$this->assertEqual('PAYROLL',XmlParser::get_node($authorizationResponse,'prepaidCardType'));
+		$this->assertEqual('000',XmlParser::getNode($authorizationResponse,'response'));
+		$this->assertEqual('Approved',XmlParser::getNode($authorizationResponse,'message'));
+		$this->assertEqual('PREPAID',XmlParser::getNode($authorizationResponse,'type'));
+		$this->assertEqual('20000',XmlParser::getNode($authorizationResponse,'availableBalance'));
+		$this->assertEqual('YES',XmlParser::getNode($authorizationResponse,'reloadable'));
+		$this->assertEqual('PAYROLL',XmlParser::getNode($authorizationResponse,'prepaidCardType'));
 
 	}
 
@@ -167,12 +167,12 @@ class cert2_Test extends UnitTestCase
 						      'type' => 'MC'));
 		$initilaize = &new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
-		$this->assertEqual('000',XmlParser::get_node($authorizationResponse,'response'));
-		$this->assertEqual('Approved',XmlParser::get_node($authorizationResponse,'message'));
-		$this->assertEqual('PREPAID',XmlParser::get_node($authorizationResponse,'type'));
-		$this->assertEqual('10050',XmlParser::get_node($authorizationResponse,'availableBalance'));
-		$this->assertEqual('YES',XmlParser::get_node($authorizationResponse,'reloadable'));
-		$this->assertEqual('PAYROLL',XmlParser::get_node($authorizationResponse,'prepaidCardType'));
+		$this->assertEqual('000',XmlParser::getNode($authorizationResponse,'response'));
+		$this->assertEqual('Approved',XmlParser::getNode($authorizationResponse,'message'));
+		$this->assertEqual('PREPAID',XmlParser::getNode($authorizationResponse,'type'));
+		$this->assertEqual('10050',XmlParser::getNode($authorizationResponse,'availableBalance'));
+		$this->assertEqual('YES',XmlParser::getNode($authorizationResponse,'reloadable'));
+		$this->assertEqual('PAYROLL',XmlParser::getNode($authorizationResponse,'prepaidCardType'));
 
 	}
 
@@ -188,9 +188,9 @@ class cert2_Test extends UnitTestCase
 						      'type' => 'VI'));
 		$initilaize = &new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
-		$this->assertEqual('000',XmlParser::get_node($authorizationResponse,'response'));
-		$this->assertEqual('Approved',XmlParser::get_node($authorizationResponse,'message'));
-		$this->assertEqual('AFFLUENT',XmlParser::get_node($authorizationResponse,'affluence'));
+		$this->assertEqual('000',XmlParser::getNode($authorizationResponse,'response'));
+		$this->assertEqual('Approved',XmlParser::getNode($authorizationResponse,'message'));
+		$this->assertEqual('AFFLUENT',XmlParser::getNode($authorizationResponse,'affluence'));
 
 	}
 
@@ -206,9 +206,9 @@ class cert2_Test extends UnitTestCase
 							      'type' => 'VI'));
 		$initilaize = &new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
-		$this->assertEqual('000',XmlParser::get_node($authorizationResponse,'response'));
-		$this->assertEqual('Approved',XmlParser::get_node($authorizationResponse,'message'));
-		$this->assertEqual('MASS AFFLUENT',XmlParser::get_node($authorizationResponse,'affluence'));
+		$this->assertEqual('000',XmlParser::getNode($authorizationResponse,'response'));
+		$this->assertEqual('Approved',XmlParser::getNode($authorizationResponse,'message'));
+		$this->assertEqual('MASS AFFLUENT',XmlParser::getNode($authorizationResponse,'affluence'));
 
 	}
 
@@ -224,9 +224,9 @@ class cert2_Test extends UnitTestCase
 							      'type' => 'MC'));
 		$initilaize = &new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
-		$this->assertEqual('000',XmlParser::get_node($authorizationResponse,'response'));
-		$this->assertEqual('Approved',XmlParser::get_node($authorizationResponse,'message'));
-		$this->assertEqual('AFFLUENT',XmlParser::get_node($authorizationResponse,'affluence'));
+		$this->assertEqual('000',XmlParser::getNode($authorizationResponse,'response'));
+		$this->assertEqual('Approved',XmlParser::getNode($authorizationResponse,'message'));
+		$this->assertEqual('AFFLUENT',XmlParser::getNode($authorizationResponse,'affluence'));
 
 	}
 
@@ -242,9 +242,9 @@ class cert2_Test extends UnitTestCase
 							      'type' => 'MC'));
 		$initilaize = &new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
-		$this->assertEqual('000',XmlParser::get_node($authorizationResponse,'response'));
-		$this->assertEqual('Approved',XmlParser::get_node($authorizationResponse,'message'));
-		$this->assertEqual('MASS AFFLUENT',XmlParser::get_node($authorizationResponse,'affluence'));
+		$this->assertEqual('000',XmlParser::getNode($authorizationResponse,'response'));
+		$this->assertEqual('Approved',XmlParser::getNode($authorizationResponse,'message'));
+		$this->assertEqual('MASS AFFLUENT',XmlParser::getNode($authorizationResponse,'affluence'));
 
 	}
 
@@ -260,9 +260,9 @@ class cert2_Test extends UnitTestCase
 							      'type' => 'VI'));
 		$initilaize = &new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
-		$this->assertEqual('000',XmlParser::get_node($authorizationResponse,'response'));
-		$this->assertEqual('Approved',XmlParser::get_node($authorizationResponse,'message'));
-		$this->assertEqual('BRA',XmlParser::get_node($authorizationResponse,'issuerCountry'));
+		$this->assertEqual('000',XmlParser::getNode($authorizationResponse,'response'));
+		$this->assertEqual('Approved',XmlParser::getNode($authorizationResponse,'message'));
+		$this->assertEqual('BRA',XmlParser::getNode($authorizationResponse,'issuerCountry'));
 
 	}
 
@@ -287,8 +287,8 @@ class cert2_Test extends UnitTestCase
 		));
 		$initilaize = &new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
-		$this->assertEqual('341',XmlParser::get_node($authorizationResponse,'response'));
-		$this->assertEqual('Invalid healthcare amounts',XmlParser::get_node($authorizationResponse,'message'));
+		$this->assertEqual('341',XmlParser::getNode($authorizationResponse,'response'));
+		$this->assertEqual('Invalid healthcare amounts',XmlParser::getNode($authorizationResponse,'message'));
 
 	}
 
@@ -310,8 +310,8 @@ class cert2_Test extends UnitTestCase
 			      'IIASFlag' => 'Y'));
 		$initilaize = &new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
-		$this->assertEqual('341',XmlParser::get_node($authorizationResponse,'response'));
-		$this->assertEqual('Invalid healthcare amounts',XmlParser::get_node($authorizationResponse,'message'));
+		$this->assertEqual('341',XmlParser::getNode($authorizationResponse,'response'));
+		$this->assertEqual('Invalid healthcare amounts',XmlParser::getNode($authorizationResponse,'message'));
 
 	}
 
@@ -335,8 +335,8 @@ class cert2_Test extends UnitTestCase
 				      'IIASFlag' => 'Y'));
 		$initilaize = &new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
-		$this->assertEqual('000',XmlParser::get_node($authorizationResponse,'response'));
-		$this->assertEqual('Approved',XmlParser::get_node($authorizationResponse,'message'));
+		$this->assertEqual('000',XmlParser::getNode($authorizationResponse,'response'));
+		$this->assertEqual('Approved',XmlParser::getNode($authorizationResponse,'message'));
 
 	}
 
@@ -361,8 +361,8 @@ class cert2_Test extends UnitTestCase
 					      'IIASFlag' => 'Y'));
 		$initilaize = &new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
-		$this->assertEqual('341',XmlParser::get_node($authorizationResponse,'response'));
-		$this->assertEqual('Invalid healthcare amounts',XmlParser::get_node($authorizationResponse,'message'));
+		$this->assertEqual('341',XmlParser::getNode($authorizationResponse,'response'));
+		$this->assertEqual('Invalid healthcare amounts',XmlParser::getNode($authorizationResponse,'message'));
 
 	}
 
@@ -387,8 +387,8 @@ class cert2_Test extends UnitTestCase
 					      'IIASFlag' => 'Y'));
 		$initilaize = &new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
-		$this->assertEqual('341',XmlParser::get_node($authorizationResponse,'response'));
-		$this->assertEqual('Invalid healthcare amounts',XmlParser::get_node($authorizationResponse,'message'));
+		$this->assertEqual('341',XmlParser::getNode($authorizationResponse,'response'));
+		$this->assertEqual('Invalid healthcare amounts',XmlParser::getNode($authorizationResponse,'message'));
 
 	}
 
@@ -411,9 +411,9 @@ class cert2_Test extends UnitTestCase
 					      'IIASFlag' => 'Y'));
 		$initilaize = &new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
-		$this->assertEqual('010',XmlParser::get_node($authorizationResponse,'response'));
-		$this->assertEqual('Partially Approved',XmlParser::get_node($authorizationResponse,'message'));
-		$this->assertEqual('18699',XmlParser::get_node($authorizationResponse,'approvedAmount'));
+		$this->assertEqual('010',XmlParser::getNode($authorizationResponse,'response'));
+		$this->assertEqual('Partially Approved',XmlParser::getNode($authorizationResponse,'message'));
+		$this->assertEqual('18699',XmlParser::getNode($authorizationResponse,'approvedAmount'));
 	}
 
 
