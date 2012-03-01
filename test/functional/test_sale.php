@@ -29,7 +29,7 @@ require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
 
 class sale_FunctionalTest extends UnitTestCase
 {
-	function test_simple_salewithCard()
+	function test_simple_sale_with_card()
 	{
 		$hash_in = array(
 			'card'=>array('type'=>'VI',
@@ -48,7 +48,7 @@ class sale_FunctionalTest extends UnitTestCase
 		$this->assertEqual('000',$response);
 	}
 
-	function test_simple_sale_withpaypal()
+	function test_simple_sale_with_paypal()
 	{
 		$hash_in = array(
 				'paypal'=>array("payerId"=>'123',"token"=>'12321312',
@@ -66,7 +66,7 @@ class sale_FunctionalTest extends UnitTestCase
 	}
 
 
-	function test_illegal_ordersource()
+	function test_illegal_orderSource()
 	{
 		$hash_in = array(
 							'paypal'=>array("payerId"=>'123',"token"=>'12321312',
@@ -136,7 +136,7 @@ class sale_FunctionalTest extends UnitTestCase
 		$this->assertEqual('000',$response);
 	}
 
-	function test_invalidField()
+	function test_invalid_field()
 	{
 		$hash_in = array(
 							'paypal'=>array("payerId"=>'123',"token"=>'12321312',
@@ -154,7 +154,7 @@ class sale_FunctionalTest extends UnitTestCase
 		$this->assertEqual('Approved',$message);
 	}
 
-	function test_illegal_embeddedFields()
+	function test_illegal_embedded_fields()
 	{
 		$hash_in =array(
       'litleTxnId'=>'123456',

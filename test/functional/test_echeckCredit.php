@@ -29,7 +29,7 @@ require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
 
 class echeckCredit_FunctionalTest extends UnitTestCase
 {
-	function test_simple_echeckcredit()
+	function test_simple_echeckCredit()
 	{
 		$hash_in = array(
 			'litleTxnId'=>'123456789012345678',
@@ -50,7 +50,7 @@ class echeckCredit_FunctionalTest extends UnitTestCase
 		$this->assertPattern('/Error validating xml data against the schema/',$message);
 	}
 	
-	function test_echeckcredit_with_echeck()
+	function test_echeckCredit_with_echeck()
 	{
 		$hash_in = array(
       'amount'=>'123456',
@@ -66,7 +66,7 @@ class echeckCredit_FunctionalTest extends UnitTestCase
 		$this->assertEqual('Approved',$response);
 	}
 	
-	function test_echeckcredit_with_echecktoken()
+	function test_echeckCredit_with_echeckToken()
 	{
 		$hash_in = array(
 	      'amount'=>'123456',
@@ -81,7 +81,7 @@ class echeckCredit_FunctionalTest extends UnitTestCase
 		$response = XMLParser::get_node($echeckCreditResponse,'message');
 		$this->assertEqual('Approved',$response);
 	}
-	function test_echeckcredit_missing_Billing()
+	function test_echeckCredit_missing_billing()
 	{
 		$hash_in = array(
 		      'amount'=>'123456',

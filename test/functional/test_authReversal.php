@@ -28,7 +28,7 @@ require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
 
 class authReversal_FunctionalTest extends UnitTestCase
 {
-	function test_simple_Authreversal()
+	function test_simple_authReversal()
 	{
 		$hash_in = array(
 				'litleTxnId'=>'12345678000','amount'=>'123',
@@ -40,7 +40,7 @@ class authReversal_FunctionalTest extends UnitTestCase
 		$this->assertEqual('000',$response);
 	}
 
-function test_simple_Authreversal_filedsOutoforder()
+function test_simple_authreversal_fields_out_of_order()
 	{
 		$hash_in = array(
 				'amount'=>'123',

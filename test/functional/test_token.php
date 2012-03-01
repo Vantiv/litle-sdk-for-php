@@ -28,7 +28,7 @@ require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
 
 class token_FunctionalTest extends UnitTestCase
 {
-	function test_simpleToken()
+	function test_simple_token()
 	{
 		$hash_in = array(
 			'merchantId' => '101',
@@ -43,7 +43,7 @@ class token_FunctionalTest extends UnitTestCase
 		$this->assertEqual('Valid Format',$message);
 	}
 
-	function test_simpleTokenwithpaypage()
+	function test_simple_token_with_paypage()
 	{
 		$hash_in = array(
 		'merchantId' => '101',
@@ -58,7 +58,7 @@ class token_FunctionalTest extends UnitTestCase
 		$this->assertEqual('Valid Format',$message);
 	}
 	
-	function test_simpleTokenecheck()
+	function test_simple_token_with_echeck()
 	{
 		$hash_in = array(
 			'reportGroup'=>'Planets',
@@ -73,7 +73,7 @@ class token_FunctionalTest extends UnitTestCase
 		$this->assertEqual('Valid Format',$message);
 	}
 	
-	function test_Tokenecheckmissingrequired()
+	function test_token_echeck_missing_required()
 	{
 		$hash_in = array('merchantId' => '101',
       'version'=>'8.8',

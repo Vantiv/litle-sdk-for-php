@@ -29,7 +29,7 @@ require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
 
 class forceCapture_FunctionalTest extends UnitTestCase
 {
-	function test_simple_forceCapturewithCard()
+	function test_simple_forceCapture_with_card()
 	{
 		$hash_in = array(
 		  'merchantId' => '101',
@@ -51,7 +51,7 @@ class forceCapture_FunctionalTest extends UnitTestCase
 		$this->assertEqual('000',$response);
 	}
 	
-	function test_simple_forceCapturewithtoken()
+	function test_simple_forceCapture_with_token()
 	{
 		$hash_in = array(
 		'merchantId' => '101',

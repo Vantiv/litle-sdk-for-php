@@ -29,7 +29,7 @@ require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
 
 class credit_FunctionalTest extends UnitTestCase
 {
-	function test_simple_credit_withCard()
+	function test_simple_credit_with_card()
 	{
 		$hash_in = array(
 			'card'=>array('type'=>'VI',
@@ -48,7 +48,7 @@ class credit_FunctionalTest extends UnitTestCase
 		$this->assertEqual('000',$response);
 	}
 
-	function test_simple_credit_withpaypal()
+	function test_simple_credit_with_paypal()
 	{
 		$hash_in = array(
 				'paypal'=>array("payerId"=>'123','payerEmail'=>'12321321',
@@ -65,7 +65,7 @@ class credit_FunctionalTest extends UnitTestCase
 		$this->assertPattern('/Error validating xml data against the schema/',$message);
 	}
 	
-	function test_simple_credit_withlitleTxnId()
+	function test_simple_credit_with_litleTxnId()
 	{
 		$hash_in = array('reportGroup'=>'planets','litleTxnId'=>'1234567891234567891');
 	
@@ -93,7 +93,7 @@ class credit_FunctionalTest extends UnitTestCase
 		$response = XMLParser::get_node($creditResponse,'response');
 		$this->assertEqual('000',$response);
 	}
-	function testamexAggregator()
+	function test_amexAggregator()
 	{
 		$hash_in = array(
 		  'amount'=>'2000',

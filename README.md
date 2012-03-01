@@ -31,7 +31,7 @@ Setup
 2) Once the SDK is downloaded run our setup program to generate a configuration file.
 
 > cd litle-sdk-for-php/lib
->php Setup.php
+> php Setup.php
 
 Running the above commands will create a configuration file in the lib directory. 
 

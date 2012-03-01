@@ -29,7 +29,7 @@ require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
 
 class xmlfields_FunctionalTest extends UnitTestCase
 {
-	function test_cardnoRequiredtypeortrack()
+	function test_card_no_type_or_track()
 	{
 		$hash_in = array(
 			'merchantId' => '101',
@@ -53,7 +53,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 
 
 
-	function test_simpleCustomBilling()
+	function test_simple_customBilling()
 	{
 		$hash_in = array(
 				'merchantId' => '101',
@@ -78,7 +78,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 
 
 
-	function test_simple_Auth_withlitleTxnId()
+	function test_simple_auth_with_litleTxnId()
 	{
 		$hash_in = array('merchantId' => '101',
 	      'version'=>'8.8',
@@ -101,7 +101,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 		$this->assertEqual("000",$response);
 	}
 
-	function test_CustomerInfo()
+	function test_customerInfo()
 	{
 		$hash_in = array('merchantId' => '101',
 	      'version'=>'8.8',
@@ -123,7 +123,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 		$this->assertEqual("Valid Format",$message);
 	}
 
-	function test_simplebilltoAddress()
+	function test_simple_billtoAddress()
 	{
 		$hash_in = array('merchantId' => '101',
       'version'=>'8.8',
@@ -183,7 +183,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 		$this->assertEqual("Valid Format",$message);
 	}
 
-	function test_poswithinvalidentryMode()
+	function test_pos_with_invalid_entryMode()
 	{
 		$hash_in = array(
 			'merchantId' => '101',
@@ -204,7 +204,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 		$this->assertPattern('/Error validating xml data against the schema/',$message);
 	}
 
-	function test_amexData()
+	function test_amexAggregatorData()
 	{
 		$hash_in = array('merchantId' => '101',
       'version'=>'8.8',
@@ -224,7 +224,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 		$this->assertEqual("Valid Format",$message);
 	}
 
-	function test_amexDatamissingsellerId()
+	function test_amexAggregatorData_missing_sellerId()
 	{
 		$hash_in = array(
 				  'merchantId' => '101',
@@ -246,7 +246,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 	}
 
 
-	function test_simpleEnhancedData()
+	function test_simple_enhancedData()
 	{
 		$hash_in = array( 'merchantId' => '101',
       'version'=>'8.8',
@@ -272,7 +272,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 		$this->assertEqual("Valid Format",$message);
 	}
 
-	function test_simpleEnhancedDataincorrectEnumforCountryCode()
+	function test_simple_enhancedData_incorrect_enum_for_countryCode()
 	{
 		$hash_in = array(
 					  'merchantId' => '101',
@@ -299,7 +299,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 		$this->assertPattern('/Error validating xml data against the schema/',$message);
 	}
 
-	function test_EnhancedDatawithdetailtax()
+	function test_enhancedData_with_detailtax()
 	{
 		$hash_in = array(  'merchantId' => '101',
 	      'version'=>'8.8',
@@ -326,7 +326,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 		$this->assertEqual("Valid Format",$message);
 	}
 
-	function test_EnhancedDatawithlineItem()
+	function test_enhancedData_with_lineItem()
 	{
 		$hash_in = array('merchantId' => '101',
 	      'version'=>'8.8',
@@ -360,7 +360,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 		$this->assertEqual("Valid Format",$message);
 	}
 
-	function test_simpletoken()
+	function test_simple_token()
 	{
 		$hash_in = array('merchantId' => '101',
       'version'=>'8.8',
@@ -380,7 +380,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 		$this->assertEqual("Valid Format",$message);
 	}
 
-	function test_tokenwithincorrecttokenLength()
+	function test_token_with_incorrect_token_length()
 	{
 		$hash_in = array( 'merchantId' => '101',
       'version'=>'8.8',
@@ -400,7 +400,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 		$this->assertPattern('/Error validating xml data against the schema/',$message);
 	}
 
-	function test_tokenmissingexpDatandvalidNum()
+	function test_token_missing_expDat_and_validationNum()
 	{
 		$hash_in = array('merchantId' => '101',
       'version'=>'8.8',
@@ -418,7 +418,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 		$this->assertEqual("Valid Format",$message);
 	}
 
-	function test_simplePaypage()
+	function test_simple_paypage()
 	{
 		$hash_in = array( 'merchantId' => '101',
       'version'=>'8.8',
@@ -438,7 +438,7 @@ class xmlfields_FunctionalTest extends UnitTestCase
 		$this->assertEqual("Valid Format",$message);
 	}
 
-	function test_paypagemissingexpDatandvalidNum()
+	function test_paypage_missing_expDate_and_validationNum()
 	{
 		$hash_in = array('merchantId' => '101',
 	      'version'=>'8.8',

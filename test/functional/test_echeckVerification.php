@@ -46,7 +46,7 @@ class echeckVerification_FunctionalTest extends UnitTestCase
 		$this->assertEqual('000',$response);
 	}
 
-	function test_echeckVerification_with_echecktoken()
+	function test_echeckVerification_with_echeckToken()
 	{
 		$hash_in = array(
 	      'amount'=>'123456',

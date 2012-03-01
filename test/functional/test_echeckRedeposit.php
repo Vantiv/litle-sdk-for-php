@@ -41,7 +41,7 @@ class echeckRedeopist_FunctionalTest extends UnitTestCase
 		$this->assertEqual('000',$response);
 	}
 
-	function test_echeckredepoist_with_echeck()
+	function test_echeckRedepoist_with_echeck()
 	{
 		$hash_in = array(
       'amount'=>'123456',
@@ -58,7 +58,7 @@ class echeckRedeopist_FunctionalTest extends UnitTestCase
 		$this->assertEqual('000',$response);
 	}
 	
-	function test_echeckredepoist_with_echecktoken()
+	function test_echeckRedepoist_with_echeckToken()
 	{
 		$hash_in = array(
 	      'amount'=>'123456',
@@ -74,7 +74,7 @@ class echeckRedeopist_FunctionalTest extends UnitTestCase
 		$response = XMLParser::get_node($echeckRedepositResponse,'response');
 		$this->assertEqual('000',$response);
 	}
-	function test_echeckredepoist_missing_litleTxnId()
+	function test_echeckRedepoist_missing_litleTxnId()
 	{
 		$hash_in = array(
 		      'amount'=>'123456',

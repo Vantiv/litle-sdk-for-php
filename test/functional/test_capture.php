@@ -57,7 +57,7 @@ class capture_FunctionalTest extends UnitTestCase
 		$this->assertEqual('1',$message);
 	}
 
-	function test_simple_capture_withPartial()
+	function test_simple_capture_with_partial()
 	{
 		$hash_in = array(
 			'litleTxnId'=>'1234567891234567891',

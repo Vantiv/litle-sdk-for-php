@@ -29,7 +29,7 @@ require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
 
 class auth_FunctionalTest extends UnitTestCase
 {
-	function test_simple_AuthwithCard()
+	function test_simple_auth_with_card()
 	{
 		$hash_in = array(
 			'card'=>array('type'=>'VI',
@@ -48,7 +48,7 @@ class auth_FunctionalTest extends UnitTestCase
 		$this->assertEqual('000',$response);
 	}
 
-	function test_simple_Authwithpaypal()
+	function test_simple_auth_with_paypal()
 	{
 		$hash_in = array(
 				'paypal'=>array("payerId"=>'123',"token"=>'12321312',
@@ -65,7 +65,7 @@ class auth_FunctionalTest extends UnitTestCase
 		$this->assertEqual('Approved',$message);
 	}
 	
-	function test_simple_Auth_withlitleTxnId()
+	function test_simple_auth_with_litleTxnId()
 	{
 		$hash_in = array('reportGroup'=>'planets','litleTxnId'=>'1234567891234567891');
 	
@@ -74,7 +74,7 @@ class auth_FunctionalTest extends UnitTestCase
 		$message= XMLParser::get_attribute($authorizationResponse,'litleOnlineResponse','message');
 		$this->assertEqual("Valid Format",$message);
 	}
-	function test_illegal_ordersource()
+	function test_illegal_orderSource()
 	{
 		$hash_in = array(
 							'paypal'=>array("payerId"=>'123',"token"=>'12321312',
@@ -106,7 +106,7 @@ class auth_FunctionalTest extends UnitTestCase
 		$message = XMLParser::get_node($authorizationResponse,'message');
 		$this->assertEqual('Approved',$message);
 	}
-	function test_invalidField()
+	function test_invalid_field()
 	{
 		$hash_in = array(
 							'paypal'=>array("payerId"=>'123',"token"=>'12321312',
