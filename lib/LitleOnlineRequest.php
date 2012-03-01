@@ -42,26 +42,26 @@ class LitleOnlineRequest
 			'orderId'=> Checker::requiredField($hash_in['orderId']),
 			'amount'=>Checker::requiredField($hash_in['amount']),
 			'orderSource'=>Checker::requiredField($hash_in['orderSource']),
-			'customerInfo'=>(XMLFields::customerInfo($hash_in['customerInfo'])),
-			'billToAddress'=>(XMLFields::contact($hash_in['billToAddress'])),
-			'shipToAddress'=>(XMLFields::contact($hash_in['shipToAddress'])),
-			'card'=> (XMLFields::cardType($hash_in['card'])),
-			'paypal'=>(XMLFields::payPal($hash_in['paypal'])),
-			'token'=>(XMLFields::cardTokenType($hash_in['token'])),
-			'paypage'=>(XMLFields::cardPaypageType($hash_in['paypage'])),
-			'billMeLaterRequest'=>(XMLFields::billMeLaterRequest($hash_in['billMeLaterRequest'])),
-			'cardholderAuthentication'=>(XMLFields::fraudCheckType($hash_in['cardholderAuthentication'])),
-			'processingInstructions'=>(XMLFields::processingInstructions($hash_in['processingInstructions'])),
-			'pos'=>(XMLFields::pos($hash_in['pos'])),
-			'customBilling'=>(XMLFields::customBilling($hash_in['customBilling'])),
-			'taxBilling'=>(XMLFields::taxBilling($hash_in['taxBilling'])),
-			'enhancedData'=>(XMLFields::enhancedData($hash_in['enhancedData'])),
-			'amexAggregatorData'=>(XMLFields::amexAggregatorData($hash_in['amexAggregatorData'])),
+			'customerInfo'=>(XmlFields::customerInfo($hash_in['customerInfo'])),
+			'billToAddress'=>(XmlFields::contact($hash_in['billToAddress'])),
+			'shipToAddress'=>(XmlFields::contact($hash_in['shipToAddress'])),
+			'card'=> (XmlFields::cardType($hash_in['card'])),
+			'paypal'=>(XmlFields::payPal($hash_in['paypal'])),
+			'token'=>(XmlFields::cardTokenType($hash_in['token'])),
+			'paypage'=>(XmlFields::cardPaypageType($hash_in['paypage'])),
+			'billMeLaterRequest'=>(XmlFields::billMeLaterRequest($hash_in['billMeLaterRequest'])),
+			'cardholderAuthentication'=>(XmlFields::fraudCheckType($hash_in['cardholderAuthentication'])),
+			'processingInstructions'=>(XmlFields::processingInstructions($hash_in['processingInstructions'])),
+			'pos'=>(XmlFields::pos($hash_in['pos'])),
+			'customBilling'=>(XmlFields::customBilling($hash_in['customBilling'])),
+			'taxBilling'=>(XmlFields::taxBilling($hash_in['taxBilling'])),
+			'enhancedData'=>(XmlFields::enhancedData($hash_in['enhancedData'])),
+			'amexAggregatorData'=>(XmlFields::amexAggregatorData($hash_in['amexAggregatorData'])),
 			'allowPartialAuth'=>$hash_in['allowPartialAuth'],
-			'healthcareIIAS'=>(XMLFields::healthcareIIAS($hash_in['healthcareIIAS'])),
-			'filtering'=>(XMLFields::filteringType($hash_in['filtering'])),
-			'merchantData'=>(XMLFields::filteringType($hash_in['merchantData'])),
-			'recyclingRequest'=>(XMLFields::recyclingRequestType($hash_in['recyclingRequest'])));
+			'healthcareIIAS'=>(XmlFields::healthcareIIAS($hash_in['healthcareIIAS'])),
+			'filtering'=>(XmlFields::filteringType($hash_in['filtering'])),
+			'merchantData'=>(XmlFields::filteringType($hash_in['merchantData'])),
+			'recyclingRequest'=>(XmlFields::recyclingRequestType($hash_in['recyclingRequest'])));
 		}
 
 		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
@@ -76,29 +76,29 @@ class LitleOnlineRequest
 		'orderId' =>Checker::requiredField($hash_in['orderId']),
 		'amount' =>Checker::requiredField($hash_in['amount']),
 		'orderSource'=>Checker::requiredField($hash_in['orderSource']),
-		'customerInfo'=>XMLFields::customerInfo($hash_in['customerInfo']),
-		'billToAddress'=>XMLFields::contact($hash_in['billToAddress']),
-		'shipToAddress'=>XMLFields::contact($hash_in['shipToAddress']),
-		'card'=> XMLFields::cardType($hash_in['card']),
-		'paypal'=>XMLFields::payPal($hash_in['paypal']),
-		'token'=>XMLFields::cardTokenType($hash_in['token']),
-		'paypage'=>XMLFields::cardPaypageType($hash_in['paypage']),
-		'billMeLaterRequest'=>XMLFields::billMeLaterRequest($hash_in['billMeLaterRequest']),
-		'fraudCheck'=>XMLFields::fraudCheckType($hash_in['fraudCheck']),
-		'cardholderAuthentication'=>XMLFields::fraudCheckType($hash_in['cardholderAuthentication']),
-		'customBilling'=>XMLFields::customBilling($hash_in['customBilling']),
-		'taxBilling'=>XMLFields::taxBilling($hash_in['taxBilling']),
-		'enhancedData'=>XMLFields::enhancedData($hash_in['enhancedData']),
-		'processingInstructions'=>XMLFields::processingInstructions($hash_in['processingInstructions']),
-		'pos'=>XMLFields::pos($hash_in['pos']),
+		'customerInfo'=>XmlFields::customerInfo($hash_in['customerInfo']),
+		'billToAddress'=>XmlFields::contact($hash_in['billToAddress']),
+		'shipToAddress'=>XmlFields::contact($hash_in['shipToAddress']),
+		'card'=> XmlFields::cardType($hash_in['card']),
+		'paypal'=>XmlFields::payPal($hash_in['paypal']),
+		'token'=>XmlFields::cardTokenType($hash_in['token']),
+		'paypage'=>XmlFields::cardPaypageType($hash_in['paypage']),
+		'billMeLaterRequest'=>XmlFields::billMeLaterRequest($hash_in['billMeLaterRequest']),
+		'fraudCheck'=>XmlFields::fraudCheckType($hash_in['fraudCheck']),
+		'cardholderAuthentication'=>XmlFields::fraudCheckType($hash_in['cardholderAuthentication']),
+		'customBilling'=>XmlFields::customBilling($hash_in['customBilling']),
+		'taxBilling'=>XmlFields::taxBilling($hash_in['taxBilling']),
+		'enhancedData'=>XmlFields::enhancedData($hash_in['enhancedData']),
+		'processingInstructions'=>XmlFields::processingInstructions($hash_in['processingInstructions']),
+		'pos'=>XmlFields::pos($hash_in['pos']),
 		'payPalOrderComplete'=> $hash_in['paypalOrderComplete'],
 		'payPalNotes'=> $hash_in['paypalNotesType'],
-		'amexAggregatorData'=>XMLFields::amexAggregatorData($hash_in['amexAggregatorData']),
+		'amexAggregatorData'=>XmlFields::amexAggregatorData($hash_in['amexAggregatorData']),
 		'allowPartialAuth'=>$hash_in['allowPartialAuth'],
-		'healthcareIIAS'=>XMLFields::healthcareIIAS($hash_in['healthcareIIAS']),
-		'filtering'=>XMLFields::filteringType($hash_in['filtering']),
-		'merchantData'=>XMLFields::filteringType($hash_in['merchantData']),
-		'recyclingRequest'=>XMLFields::recyclingRequestType($hash_in['recyclingRequest']));
+		'healthcareIIAS'=>XmlFields::healthcareIIAS($hash_in['healthcareIIAS']),
+		'filtering'=>XmlFields::filteringType($hash_in['filtering']),
+		'merchantData'=>XmlFields::filteringType($hash_in['merchantData']),
+		'recyclingRequest'=>XmlFields::recyclingRequestType($hash_in['recyclingRequest']));
 
 		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
 		$choice2_hash= array($hash_out['fraudCheck'],$hash_out['cardholderAuthentication']);
@@ -124,18 +124,18 @@ class LitleOnlineRequest
 			'orderId' =>$hash_in['orderId'],
 			'amount' =>$hash_in['amount'],
 			'orderSource'=>$hash_in['orderSource'],
-			'billToAddress'=>XMLFields::contact($hash_in['billToAddress']),
-			'card'=> XMLFields::cardType($hash_in['card']),
-			'paypal'=>XMLFields::credit_payPal($hash_in['paypal']),
-			'token'=>XMLFields::cardTokenType($hash_in['token']),
-			'paypage'=>XMLFields::cardPaypageType($hash_in['paypage']),
-			'customBilling'=>XMLFields::customBilling($hash_in['customBilling']),
-			'taxBilling'=>XMLFields::taxBilling($hash_in['taxBilling']),
-			'billMeLaterRequest'=>XMLFields::billMeLaterRequest($hash_in['billMeLaterRequest']),
-			'enhancedData'=>XMLFields::enhancedData($hash_in['enhancedData']),
-			'processingInstructions'=>XMLFields::processingInstructions($hash_in['processingInstructions']),
-			'pos'=>XMLFields::pos($hash_in['pos']),
-			'amexAggregatorData'=>XMLFields::amexAggregatorData($hash_in['amexAggregatorData']),
+			'billToAddress'=>XmlFields::contact($hash_in['billToAddress']),
+			'card'=> XmlFields::cardType($hash_in['card']),
+			'paypal'=>XmlFields::credit_payPal($hash_in['paypal']),
+			'token'=>XmlFields::cardTokenType($hash_in['token']),
+			'paypage'=>XmlFields::cardPaypageType($hash_in['paypage']),
+			'customBilling'=>XmlFields::customBilling($hash_in['customBilling']),
+			'taxBilling'=>XmlFields::taxBilling($hash_in['taxBilling']),
+			'billMeLaterRequest'=>XmlFields::billMeLaterRequest($hash_in['billMeLaterRequest']),
+			'enhancedData'=>XmlFields::enhancedData($hash_in['enhancedData']),
+			'processingInstructions'=>XmlFields::processingInstructions($hash_in['processingInstructions']),
+			'pos'=>XmlFields::pos($hash_in['pos']),
+			'amexAggregatorData'=>XmlFields::amexAggregatorData($hash_in['amexAggregatorData']),
 			'payPalNotes' =>$hash_in['payPalNotes']);
 
 		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
@@ -148,7 +148,7 @@ class LitleOnlineRequest
 		$hash_out = array(
 		'orderId'=>$hash_in['orderId'],
 		'accountNumber'=>$hash_in['accountNumber'],
-		'echeckForToken'=>XMLFields::echeckForTokenType($hash_in['echeckForToken']),
+		'echeckForToken'=>XmlFields::echeckForTokenType($hash_in['echeckForToken']),
 		'paypageRegistrationId'=>$hash_in['paypageRegistrationId']);
 
 		$choice_hash = array($hash_out['accountNumber'],$hash_out['echeckForToken'],$hash_out['paypageRegistrationId']);
@@ -162,16 +162,16 @@ class LitleOnlineRequest
 		'orderId' =>Checker::requiredField($hash_in['orderId']),
 		'amount' =>$hash_in['amount'],
 		'orderSource'=>Checker::requiredField($hash_in['orderSource']),
-		'billToAddress'=>XMLFields::contact($hash_in['billToAddress']),
-		'card'=> XMLFields::cardType($hash_in['card']),
-		'token'=>XMLFields::cardTokenType($hash_in['token']),
-		'paypage'=>XMLFields::cardPaypageType($hash_in['paypage']),
-		'customBilling'=>XMLFields::customBilling($hash_in['customBilling']),
-		'taxBilling'=>XMLFields::taxBilling($hash_in['taxBilling']),
-		'enhancedData'=>XMLFields::enhancedData($hash_in['enhancedData']),
-		'processingInstructions'=>XMLFields::processingInstructions($hash_in['processingInstructions']),
-		'pos'=>XMLFields::pos($hash_in['pos']),
-		'amexAggregatorData'=>XMLFields::amexAggregatorData($hash_in['amexAggregatorData']));
+		'billToAddress'=>XmlFields::contact($hash_in['billToAddress']),
+		'card'=> XmlFields::cardType($hash_in['card']),
+		'token'=>XmlFields::cardTokenType($hash_in['token']),
+		'paypage'=>XmlFields::cardPaypageType($hash_in['paypage']),
+		'customBilling'=>XmlFields::customBilling($hash_in['customBilling']),
+		'taxBilling'=>XmlFields::taxBilling($hash_in['taxBilling']),
+		'enhancedData'=>XmlFields::enhancedData($hash_in['enhancedData']),
+		'processingInstructions'=>XmlFields::processingInstructions($hash_in['processingInstructions']),
+		'pos'=>XmlFields::pos($hash_in['pos']),
+		'amexAggregatorData'=>XmlFields::amexAggregatorData($hash_in['amexAggregatorData']));
 
 		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
 		$forceCaptureResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'forceCapture',$choice_hash);
@@ -184,8 +184,8 @@ class LitleOnlineRequest
 		'partial'=>$hash_in['partial'],
 	    'litleTxnId' => Checker::requiredField($hash_in['litleTxnId']),
 		'amount' =>($hash_in['amount']),
-		'enhancedData'=>XMLFields::enhancedData($hash_in['enhancedData']),
-		'processingInstructions'=>XMLFields::processingInstructions($hash_in['processingInstructions']),
+		'enhancedData'=>XmlFields::enhancedData($hash_in['enhancedData']),
+		'processingInstructions'=>XmlFields::processingInstructions($hash_in['processingInstructions']),
 		'payPalOrderComplete'=>$hash_in['payPalOrderComplete'],
 		'payPalNotes' =>$hash_in['payPalNotes']);
 		$captureResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'capture');
@@ -197,21 +197,21 @@ class LitleOnlineRequest
 	
 		$hash_out = array(
 		'orderId'=>Checker::requiredField($hash_in['orderId']),
-		'authInformation'=>XMLFields::authInformation($hash_in['authInformation']),
+		'authInformation'=>XmlFields::authInformation($hash_in['authInformation']),
 		'amount' =>Checker::requiredField($hash_in['amount']),
 		'orderSource'=>Checker::requiredField($hash_in['orderSource']),
-		'billToAddress'=>XMLFields::contact($hash_in['billToAddress']),
-		'shipToAddress'=>XMLFields::contact($hash_in['shipToAddress']),
-		'card'=> XMLFields::cardType($hash_in['card']),
-		'token'=>XMLFields::cardTokenType($hash_in['token']),
-		'paypage'=>XMLFields::cardPaypageType($hash_in['paypage']),
-		'customBilling'=>XMLFields::customBilling($hash_in['customBilling']),
-		'taxBilling'=>XMLFields::taxBilling($hash_in['taxBilling']),
-		'billMeLaterRequest'=>XMLFields::billMeLaterRequest($hash_in['billMeLaterRequest']),
-		'enhancedData'=>XMLFields::enhancedData($hash_in['enhancedData']),
-		'processingInstructions'=>XMLFields::processingInstructions($hash_in['processingInstructions']),
-		'pos'=>XMLFields::pos($hash_in['pos']),
-		'amexAggregatorData'=>XMLFields::amexAggregatorData($hash_in['amexAggregatorData']));
+		'billToAddress'=>XmlFields::contact($hash_in['billToAddress']),
+		'shipToAddress'=>XmlFields::contact($hash_in['shipToAddress']),
+		'card'=> XmlFields::cardType($hash_in['card']),
+		'token'=>XmlFields::cardTokenType($hash_in['token']),
+		'paypage'=>XmlFields::cardPaypageType($hash_in['paypage']),
+		'customBilling'=>XmlFields::customBilling($hash_in['customBilling']),
+		'taxBilling'=>XmlFields::taxBilling($hash_in['taxBilling']),
+		'billMeLaterRequest'=>XmlFields::billMeLaterRequest($hash_in['billMeLaterRequest']),
+		'enhancedData'=>XmlFields::enhancedData($hash_in['enhancedData']),
+		'processingInstructions'=>XmlFields::processingInstructions($hash_in['processingInstructions']),
+		'pos'=>XmlFields::pos($hash_in['pos']),
+		'amexAggregatorData'=>XmlFields::amexAggregatorData($hash_in['amexAggregatorData']));
 
 		
 		$choice_hash = array($hash_out['card'],$hash_out['token'],$hash_out['paypage']);
@@ -223,8 +223,8 @@ class LitleOnlineRequest
 	{
 		$hash_out = array(
 		'litleTxnId' => Checker::requiredField($hash_in['litleTxnId']),
-		'echeck'=>XMLFields::echeckType($hash_in['echeck']),
-		'echeckToken'=>XMLFields::echeckTokenType($hash_in['echeckToken']));
+		'echeck'=>XmlFields::echeckType($hash_in['echeck']),
+		'echeckToken'=>XmlFields::echeckTokenType($hash_in['echeckToken']));
 
 		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
 		$echeckRedepositResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'echeckRedeposit',$choice_hash);
@@ -239,11 +239,11 @@ class LitleOnlineRequest
 		'verify'=>$hash_in['verify'],
 		'amount'=>$hash_in['amount'],
 		'orderSource'=>$hash_in['orderSource'],
-		'billToAddress'=>XMLFields::contact($hash_in['billToAddress']),
-		'shipToAddress'=>XMLFields::contact($hash_in['shipToAddress']),
-		'echeck'=>XMLFields::echeckType($hash_in['echeck']),
-		'echeckToken'=>XMLFields::echeckTokenType($hash_in['echeckToken']),
-		'customBilling'=>XMLFields::customBilling($hash_in['customBilling']));
+		'billToAddress'=>XmlFields::contact($hash_in['billToAddress']),
+		'shipToAddress'=>XmlFields::contact($hash_in['shipToAddress']),
+		'echeck'=>XmlFields::echeckType($hash_in['echeck']),
+		'echeckToken'=>XmlFields::echeckTokenType($hash_in['echeckToken']),
+		'customBilling'=>XmlFields::customBilling($hash_in['customBilling']));
 
 		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
 
@@ -258,10 +258,10 @@ class LitleOnlineRequest
 			'orderId'=>$hash_in['orderId'],
 			'amount'=>$hash_in['amount'],
 			'orderSource'=>$hash_in['orderSource'],
-			'billToAddress'=>XMLFields::contact($hash_in['billToAddress']),
-			'echeck'=>XMLFields::echeckType($hash_in['echeck']),
-			'echeckToken'=>XMLFields::echeckTokenType($hash_in['echeckToken']),
-			'customBilling'=>XMLFields::customBilling($hash_in['customBilling']));
+			'billToAddress'=>XmlFields::contact($hash_in['billToAddress']),
+			'echeck'=>XmlFields::echeckType($hash_in['echeck']),
+			'echeckToken'=>XmlFields::echeckTokenType($hash_in['echeckToken']),
+			'customBilling'=>XmlFields::customBilling($hash_in['customBilling']));
 
 		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
 		$echeckCreditResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'echeckCredit',$choice_hash);
@@ -275,9 +275,9 @@ class LitleOnlineRequest
 			'orderId'=>Checker::requiredField($hash_in['orderId']),
 			'amount'=>Checker::requiredField($hash_in['amount']),
 			'orderSource'=>Checker::requiredField($hash_in['orderSource']),
-			'billToAddress'=>XMLFields::contact($hash_in['billToAddress']),
-			'echeck'=>XMLFields::echeckType($hash_in['echeck']),
-			'echeckToken'=>XMLFields::echeckTokenType($hash_in['echeckToken']));
+			'billToAddress'=>XmlFields::contact($hash_in['billToAddress']),
+			'echeck'=>XmlFields::echeckType($hash_in['echeck']),
+			'echeckToken'=>XmlFields::echeckTokenType($hash_in['echeckToken']));
 
 
 		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
@@ -290,7 +290,7 @@ class LitleOnlineRequest
 	{
 		$hash_out = array(
 		'litleTxnId' => Checker::requiredField($hash_in['litleTxnId']),
-	    'processingInstructions'=>XMLFields::processingInstructions($hash_in['processingInstructions']));
+	    'processingInstructions'=>XmlFields::processingInstructions($hash_in['processingInstructions']));
 
 		$voidResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'void');
 		return $voidResponse;

@@ -28,9 +28,9 @@ error_reporting(E_ALL ^ E_NOTICE);
 ini_set('display_errors', '1');
 
 require_once realpath(dirname(__FILE__)) . '/LitleXmlMapper.php';
-require_once realpath(dirname(__FILE__)) . '/XMLFields.php';
+require_once realpath(dirname(__FILE__)) . '/XmlFields.php';
 require_once realpath(dirname(__FILE__)) . '/Communication.php';
-require_once realpath(dirname(__FILE__)) . '/XMLParser.php';
+require_once realpath(dirname(__FILE__)) . '/XmlParser.php';
 require_once realpath(dirname(__FILE__)) . '/Obj2xml.php';
 require_once realpath(dirname(__FILE__)) . "/Checker.php";
 require_once realpath(dirname(__FILE__)) . '/LitleOnlineRequest.php';
