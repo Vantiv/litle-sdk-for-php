@@ -26,15 +26,15 @@ class Communication{
 	function httpRequest($req){
 		$config = Communication::getConfig();
 		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_PROXY,$config['proxy']);
+		curl_setopt($ch, CURLOPT_PROXY, $config['proxy']);
 		curl_setopt($ch, CURLOPT_POST, true);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: text/xml'));
 		curl_setopt($ch, CURLOPT_URL, $config['url']);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $req);
 		curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, true);
 		curl_setopt($ch,CURLOPT_TIMEOUT, $config['timeout']);
-		curl_setopt($ch, CURLOPT_SSLVERIFYPEER, true);
-		curl_setopt($ch, CURLOPT_SSLVERIFYHOST,2);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST,2);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		$output = curl_exec($ch);
 		$responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
