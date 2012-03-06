@@ -70,4 +70,4 @@ echo ("Litle Transaction ID: " . XMLParser::get_node($saleResponse,'litleTxnId')
     Litle Transaction ID: <your-numeric-litle-txn-id>
 
 
-Please contact Lilte & Co. with any further questions.   You can reach us at MerchantSDKSupport@litle.com
+Please contact Lilte & Co. with any further questions.   You can reach us at SDKSupport@litle.com
