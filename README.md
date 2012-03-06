@@ -20,7 +20,7 @@ Source Code available from : https://github.com/LitleCo/litle-sdk-for-php
 
 Please contact [Litle &amp; Co.](http://www.litle.com) to receive valid merchant credentials in order to run tests successfully or if you require assistance in any way.  We are reachable at MerchantSDKSupport@litle.com
 
-SDK Dependancies
+SDK Dependencies
 --------------
 -pdo
 -xml
