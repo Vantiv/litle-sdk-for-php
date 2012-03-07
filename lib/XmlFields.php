@@ -123,7 +123,7 @@ class XmlFields
 			$hash_out = array(
 						"authDate"=>(Checker::requiredField(XmlFields::returnArrayValue($hash_in, "authDate"))),
 						"authCode"=>(Checker::requiredField(XmlFields::returnArrayValue($hash_in, "authCode"))),
-						"fraudResult"=>XmlFields::fraudResult(returnArrayValue($hash_in, "fraudResult")),
+						"fraudResult"=>XmlFields::fraudResult(XmlFields::returnArrayValue($hash_in, "fraudResult")),
 						"authAmount"=>XmlFields::returnArrayValue($hash_in, "authAmount")
 			);
 			return $hash_out;
@@ -215,7 +215,7 @@ class XmlFields
 						"itemDiscountAmount"=>XmlFields::returnArrayValue($hash_in, "itemDiscountAmount"),
 						"commodityCode"=>XmlFields::returnArrayValue($hash_in, "commodityCode"),
 						"unitCost"=>XmlFields::returnArrayValue($hash_in, "unitCost"),
-						"detailTax"=>(XmlFields::detailTax(returnArrayValue($hash_in, "detailTax")))
+						"detailTax"=>(XmlFields::detailTax(XmlFields::returnArrayValue($hash_in, "detailTax")))
 			);
 			return $hash_out;
 		}
@@ -238,8 +238,8 @@ class XmlFields
 						"destinationCountryCode"=>XmlFields::returnArrayValue($hash_in, "destinationCountryCode"),
 						"invoiceReferenceNumber"=>XmlFields::returnArrayValue($hash_in, "invoiceReferenceNumber"),
 						"orderDate"=>XmlFields::returnArrayValue($hash_in, "orderDate"),
-						"detailTax"=>(XmlFields::detailTax(returnArrayValue($hash_in, "detailTax"))),
-						"lineItemData"=>(XmlFields::lineItemData(returnArrayValue($hash_in, "lineItemData")))
+						"detailTax"=>(XmlFields::detailTax(XmlFields::returnArrayValue($hash_in, "detailTax"))),
+						"lineItemData"=>(XmlFields::lineItemData(XmlFields::returnArrayValue($hash_in, "lineItemData")))
 			);
 			return $hash_out;
 		}
