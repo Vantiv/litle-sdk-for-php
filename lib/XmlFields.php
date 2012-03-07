@@ -123,8 +123,8 @@ class XmlFields
 			$hash_out = array(
 						"authDate"=>(Checker::requiredField(XmlFields::returnArrayValue($hash_in, "authDate"))),
 						"authCode"=>(Checker::requiredField(XmlFields::returnArrayValue($hash_in, "authCode"))),
-						"fraudResult"=>XmlFields::fraudResult(XmlFields::returnArrayValue($hash_in, "fraudResult")),
-						"authAmount"=>XmlFields::returnArrayValue($hash_in, "authAmount")
+						"fraudResult"=>XmlFields::fraudResult($hash_in["fraudResult"]),
+						"authAmount"=>$hash_in['authAmount']
 			);
 			return $hash_out;
 		}
