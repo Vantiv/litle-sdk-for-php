@@ -51,7 +51,7 @@ class Obj2xml {
 			if ($value == "REQUIRED"){
 				throw new Exception("Missing Required Field: /$key/");
 			}
-			elseif (((is_string($value)) || is_numeric($value)) && value != NULL) {
+			elseif (((is_string($value)) || is_numeric($value)) && $value != NULL) {
 				$transacType->addChild($key,$value);
 			}
 			elseif(is_array($value))

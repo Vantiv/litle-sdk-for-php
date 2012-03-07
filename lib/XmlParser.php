@@ -27,32 +27,30 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 // =end
 // class and methods to parse a XML document into an object
-class XmlParser{
-
-	function domParser($xml)
+class XMLParser{
+	
+	public static function domParser($xml)
 	{
-		#$doc = new DomDocument($xml);
 		$doc = new DOMDocument();
 		$doc->loadXML($xml);
 		return $doc;
 	}
 	
-	function getNode($xml, $string)
+	public static function getNode($dom, $elementName)
 	{
-		$books = $xml->getElementsByTagName($string);
-		#echo $books->nodeValue, PHP_EOL;
-		$val = "";
-		foreach ($books as $book) {
-			$val = $book->nodeValue;
+		$elements = $dom->getElementsByTagName($elementName);
+		$retVal = "";
+		foreach ($elements as $element) {
+			$retVal = $element->nodeValue;
 		}
-		return $val;
+		return $retVal;
 	}
 
-	function getAttribute($in_domDoc,$element, $attributeName)
+	public static function getAttribute($dom, $elementName, $attributeName)
 	{
-		$books = $in_domDoc->getElementsByTagName($element)->item(0);
-		$val = $books->getAttribute($attributeName);
-		return $val;
+		$attributes = $dom->getElementsByTagName($elementName)->item(0);
+		$retVal = $attributes->getAttribute($attributeName);
+		return $retVal;
 	}
 }
 ?>

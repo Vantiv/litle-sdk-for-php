@@ -32,12 +32,9 @@ class LitleXmlMapper
 	
 	public function request($request)
 	{
-		#echo $request;
 	    $response = Communication::httpRequest($request);
-		#echo $response;
-		$respOb = XmlParser::domParser($response);
-		#var_dump($respOb);
-		return $respOb;
+	    $respOb = XmlParser::domParser($response);
+	    return $respOb;
 	}
 
 }

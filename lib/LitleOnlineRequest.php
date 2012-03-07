@@ -23,8 +23,6 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-require_once realpath(dirname(__FILE__)) . '/LitleOnlineRequest.php';
-
 class LitleOnlineRequest
 {
 	public function __construct()
@@ -120,23 +118,24 @@ class LitleOnlineRequest
 	public function creditRequest($hash_in)
 	{
 		$hash_out = array(
-			'litleTxnId' => $hash_in['litleTxnId'],
-			'orderId' =>$hash_in['orderId'],
-			'amount' =>$hash_in['amount'],
-			'orderSource'=>$hash_in['orderSource'],
-			'billToAddress'=>XmlFields::contact($hash_in['billToAddress']),
-			'card'=> XmlFields::cardType($hash_in['card']),
-			'paypal'=>XmlFields::credit_payPal($hash_in['paypal']),
-			'token'=>XmlFields::cardTokenType($hash_in['token']),
-			'paypage'=>XmlFields::cardPaypageType($hash_in['paypage']),
-			'customBilling'=>XmlFields::customBilling($hash_in['customBilling']),
-			'taxBilling'=>XmlFields::taxBilling($hash_in['taxBilling']),
-			'billMeLaterRequest'=>XmlFields::billMeLaterRequest($hash_in['billMeLaterRequest']),
-			'enhancedData'=>XmlFields::enhancedData($hash_in['enhancedData']),
-			'processingInstructions'=>XmlFields::processingInstructions($hash_in['processingInstructions']),
-			'pos'=>XmlFields::pos($hash_in['pos']),
-			'amexAggregatorData'=>XmlFields::amexAggregatorData($hash_in['amexAggregatorData']),
-			'payPalNotes' =>$hash_in['payPalNotes']);
+					'litleTxnId' => XmlFields::returnArrayValue($hash_in, 'litleTxnId'),
+					'orderId' =>XmlFields::returnArrayValue($hash_in, 'orderId'),
+					'amount' =>XmlFields::returnArrayValue($hash_in, 'amount'),
+					'orderSource'=>XmlFields::returnArrayValue($hash_in, 'orderSource'),
+					'billToAddress'=>XmlFields::contact(XMLFields::returnArrayValue($hash_in, 'billToAddress')),
+					'card'=>XmlFields::cardType(XMLFields::returnArrayValue($hash_in, 'card')),
+					'paypal'=>XmlFields::credit_payPal(XMLFields::returnArrayValue($hash_in, 'paypal')),
+					'token'=>XmlFields::cardTokenType(XMLFields::returnArrayValue($hash_in, 'token')),
+					'paypage'=>XmlFields::cardPaypageType(XMLFields::returnArrayValue($hash_in, 'paypage')),
+					'customBilling'=>XmlFields::customBilling(XMLFields::returnArrayValue($hash_in, 'customBilling')),
+					'taxBilling'=>XmlFields::taxBilling(XMLFields::returnArrayValue($hash_in, 'taxBilling')),
+					'billMeLaterRequest'=>XmlFields::billMeLaterRequest(XMLFields::returnArrayValue($hash_in, 'billMeLaterRequest')),
+					'enhancedData'=>XmlFields::enhancedData(XMLFields::returnArrayValue($hash_in, 'enhancedData')),
+					'processingInstructions'=>XmlFields::processingInstructions(XMLFields::returnArrayValue($hash_in, 'processingInstructions')),
+					'pos'=>XmlFields::pos(XMLFields::returnArrayValue($hash_in, 'pos')),
+					'amexAggregatorData'=>XmlFields::amexAggregatorData(XMLFields::returnArrayValue($hash_in, 'amexAggregatorData')),
+					'payPalNotes' =>XmlFields::returnArrayValue($hash_in, 'payPalNotes')
+		);
 
 		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
 		$creditResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'credit',$choice_hash);
@@ -182,7 +181,7 @@ class LitleOnlineRequest
 	{
 		$hash_out = array(
 		'partial'=>$hash_in['partial'],
-	    'litleTxnId' => Checker::requiredField($hash_in['litleTxnId']),
+	    	'litleTxnId' => Checker::requiredField($hash_in['litleTxnId']),
 		'amount' =>($hash_in['amount']),
 		'enhancedData'=>XmlFields::enhancedData($hash_in['enhancedData']),
 		'processingInstructions'=>XmlFields::processingInstructions($hash_in['processingInstructions']),
@@ -194,7 +193,6 @@ class LitleOnlineRequest
 
 	public function captureGivenAuthRequest($hash_in)
 	{
-	
 		$hash_out = array(
 		'orderId'=>Checker::requiredField($hash_in['orderId']),
 		'authInformation'=>XmlFields::authInformation($hash_in['authInformation']),
@@ -213,7 +211,6 @@ class LitleOnlineRequest
 		'pos'=>XmlFields::pos($hash_in['pos']),
 		'amexAggregatorData'=>XmlFields::amexAggregatorData($hash_in['amexAggregatorData']));
 
-		
 		$choice_hash = array($hash_out['card'],$hash_out['token'],$hash_out['paypage']);
 		$captureGivenAuthResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'captureGivenAuth',$choice_hash);
 		return $captureGivenAuthResponse;
@@ -317,8 +314,6 @@ class LitleOnlineRequest
 		$litleOnlineResponse = $this->newXML->request($request);
 		return $litleOnlineResponse;
 	}
-	
-	
 	
 }
 
