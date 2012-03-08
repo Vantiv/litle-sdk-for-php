@@ -44,7 +44,7 @@ function initialize(){
 			fwrite($handle, $keys .' = '. $values);
 			fwrite($handle, PHP_EOL);
 		}
-		fwrite($handle, "version = '8.10'" .  PHP_EOL);
+		fwrite($handle, "version = 8.10" .  PHP_EOL);
 		fwrite($handle, "timeout =  65".  PHP_EOL);
 		fwrite($handle, "id =  10".  PHP_EOL);
 		fwrite($handle, "reportGroup = planets".  PHP_EOL);
