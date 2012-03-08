@@ -181,7 +181,7 @@ class LitleOnlineRequest
 	{
 		$hash_out = array(
 		'partial'=>$hash_in['partial'],
-	    	'litleTxnId' => Checker::requiredField($hash_in['litleTxnId']),
+	    'litleTxnId' => Checker::requiredField($hash_in['litleTxnId']),
 		'amount' =>($hash_in['amount']),
 		'enhancedData'=>XmlFields::enhancedData($hash_in['enhancedData']),
 		'processingInstructions'=>XmlFields::processingInstructions($hash_in['processingInstructions']),
