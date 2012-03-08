@@ -161,8 +161,8 @@ class sale_FunctionalTest extends UnitTestCase
       'orderId'=>'12344',
       'amount'=>'106',
       'orderSource'=>'ecommerce',
-      'fraudCheck'=>'one',
-      'cardholderAuthentication'=>'two',
+      'fraudCheck'=>array('noexistant' => 'one'),
+      'cardholderAuthentication'=>array('alsoNonexistant'=>'two'),
       'card'=>array(
       'type'=>'VI',
       'number' =>'4100000000000002'));

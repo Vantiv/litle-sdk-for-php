@@ -29,87 +29,87 @@ require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
 
 class captureGivenAuth_FunctionalTest extends UnitTestCase
 {
-	function test_simple_captureGivenAuth()
-	{
-		$hash_in = array(
-      'orderId'=>'12344',
-      'amount'=>'106',
-      'authInformation' => array(
-      'authDate'=>'2002-10-09','authCode'=>'543216',
-      'authAmount'=>'12345'),
-      'orderSource'=>'ecommerce',
-      'card'=>array(
-      'type'=>'VI',
-      'number' =>'4100000000000001',
-      'expDate' =>'1210'));
+ 	function test_simple_captureGivenAuth()
+ 	{
+ 		$hash_in = array(
+       'orderId'=>'12344',
+       'amount'=>'106',
+       'authInformation' => array(
+       'authDate'=>'2002-10-09','authCode'=>'543216',
+       'authAmount'=>'12345'),
+       'orderSource'=>'ecommerce',
+       'card'=>array(
+       'type'=>'VI',
+       'number' =>'4100000000000001',
+       'expDate' =>'1210'));
 
-		$initilaize = &new LitleOnlineRequest();
-		$captureGivenAuthResponse = $initilaize->captureGivenAuthRequest($hash_in);
-		$message = XmlParser::getNode($captureGivenAuthResponse,'message');
-		$this->assertEqual('Approved',$message);
-	}
+ 		$initilaize = &new LitleOnlineRequest();
+ 		$captureGivenAuthResponse = $initilaize->captureGivenAuthRequest($hash_in);
+ 		$message = XmlParser::getNode($captureGivenAuthResponse,'message');
+ 		$this->assertEqual('Approved',$message);
+ 	}
 	
-	function test_simple_captureGivenAuth_with_token()
-	{
-		$hash_in = array(
-	      'orderId'=>'12344',
-	      'amount'=>'106',
-	      'authInformation' => array(
-	      'authDate'=>'2002-10-09','authCode'=>'543216',
-	      'authAmount'=>'12345'),
-	      'orderSource'=>'ecommerce',
-	      'token'=>array(
-	      'type'=>'VI',
-	      'litleToken' =>'123456789101112',
-	      'expDate' =>'1210'));
+ 	function test_simple_captureGivenAuth_with_token()
+ 	{
+ 		$hash_in = array(
+ 	      'orderId'=>'12344',
+ 	      'amount'=>'106',
+ 	      'authInformation' => array(
+ 	      'authDate'=>'2002-10-09','authCode'=>'543216',
+ 	      'authAmount'=>'12345'),
+ 	      'orderSource'=>'ecommerce',
+ 	      'token'=>array(
+ 	      'type'=>'VI',
+ 	      'litleToken' =>'123456789101112',
+ 	      'expDate' =>'1210'));
 	
-		$initilaize = &new LitleOnlineRequest();
-		$captureGivenAuthResponse = $initilaize->captureGivenAuthRequest($hash_in);
-		$message = XmlParser::getNode($captureGivenAuthResponse,'message');
-		$this->assertEqual('Approved',$message);
-	}
+ 		$initilaize = &new LitleOnlineRequest();
+ 		$captureGivenAuthResponse = $initilaize->captureGivenAuthRequest($hash_in);
+ 		$message = XmlParser::getNode($captureGivenAuthResponse,'message');
+ 		$this->assertEqual('Approved',$message);
+ 	}
 	
-	function test_complex_captureGivenAuth()
-	{
-		$hash_in = array(
-	'orderId'=>'12344',
-      'amount'=>'106',
-      'authInformation' => array(
-      'authDate'=>'2002-10-09','authCode'=>'543216',
-      'authAmount'=>'12345'),
-      'billToAddress'=>array('name'=>'Bob','city'=>'lowell','state'=>'MA','email'=>'litle.com'),
-      'processingInstructions'=>array('bypassVelocityCheck'=>'true'),
-      'orderSource'=>'ecommerce',
-      'card'=>array(
-      'type'=>'VI',
-      'number' =>'4100000000000001',
-      'expDate' =>'1210'));
-	
-		$initilaize = &new LitleOnlineRequest();
-		$captureGivenAuthResponse = $initilaize->captureGivenAuthRequest($hash_in);
-		$message = XmlParser::getNode($captureGivenAuthResponse,'message');
-		$this->assertEqual('Approved',$message);
-	}
-	
-	function test_authInfo()
-	{
-		$hash_in = array(
-		'orderId'=>'12344',
-	      'amount'=>'106',
-	      'authInformation' => array(
-    	  'authDate'=>'2002-10-09','authCode'=>'543216',
-     	 'authAmount'=>'12345','fraudResult'=>array('avsResult'=>'12','cardValidationResult'=>'123','authenticationResult'=>'1',
-      	'advancedAVSResult'=>'123')),
-	      'orderSource'=>'ecommerce',
-	      'card'=>array(
-	      'type'=>'VI',
-	      'number' =>'4100000000000001',
-	      'expDate' =>'1210'));
+ 	function test_complex_captureGivenAuth()
+ 	{
+ 		$hash_in = array(
+ 	'orderId'=>'12344',
+       'amount'=>'106',
+       'authInformation' => array(
+       'authDate'=>'2002-10-09','authCode'=>'543216',
+       'authAmount'=>'12345'),
+       'billToAddress'=>array('name'=>'Bob','city'=>'lowell','state'=>'MA','email'=>'litle.com'),
+       'processingInstructions'=>array('bypassVelocityCheck'=>'true'),
+       'orderSource'=>'ecommerce',
+       'card'=>array(
+       'type'=>'VI',
+       'number' =>'4100000000000001',
+       'expDate' =>'1210'));
 	
 		$initilaize = &new LitleOnlineRequest();
-		$captureGivenAuthResponse = $initilaize->captureGivenAuthRequest($hash_in);
-		$message = XmlParser::getNode($captureGivenAuthResponse,'message');
-		$this->assertEqual('Approved',$message);
-	}
+ 		$captureGivenAuthResponse = $initilaize->captureGivenAuthRequest($hash_in);
+ 		$message = XmlParser::getNode($captureGivenAuthResponse,'message');
+ 		$this->assertEqual('Approved',$message);
+ 	}
+	
+ 	function test_authInfo()
+ 	{
+ 		$hash_in = array(
+ 		'orderId'=>'12344',
+ 	      'amount'=>'106',
+ 	      'authInformation' => array(
+     	  'authDate'=>'2002-10-09','authCode'=>'543216',
+      	 'authAmount'=>'12345','fraudResult'=>array('avsResult'=>'12','cardValidationResult'=>'123','authenticationResult'=>'1',
+       	'advancedAVSResult'=>'123')),
+ 	      'orderSource'=>'ecommerce',
+ 	      'card'=>array(
+ 	      'type'=>'VI',
+ 	      'number' =>'4100000000000001',
+ 	      'expDate' =>'1210'));
+	
+ 		$initilaize = &new LitleOnlineRequest();
+ 		$captureGivenAuthResponse = $initilaize->captureGivenAuthRequest($hash_in);
+ 		$message = XmlParser::getNode($captureGivenAuthResponse,'message');
+ 		$this->assertEqual('Approved',$message);
+ 	}
 	
 }

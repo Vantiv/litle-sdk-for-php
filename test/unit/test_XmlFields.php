@@ -90,10 +90,9 @@ class Tests_XmlFields extends UnitTestCase{
 
 	function test_simple_authInformation()
 	{
-		#$hash["detailTax"] = array("avsResult" => "1234");
 		$hash=array(
 			"authDate"=>"123",
-			"detailTax"=>(array("avsResult" => "1234")),
+			"fraudResult"=>(array("avsResult" => "1234")),
 			"authAmount"=>"123");
 	$hash_out = XmlFields::authInformation($hash);
 	$this->assertEqual($hash_out["authDate"],"123");
@@ -345,14 +344,14 @@ class Tests_XmlFields extends UnitTestCase{
 	{
 		$hash = array();
 		$hash_out = XmlFields::recyclingRequestType($hash);
-		$this->assertEqual($hash_out["recyleBy"], "REQUIRED");
+		$this->assertEqual($hash_out["recycleBy"], "REQUIRED");
 	}
 	function test_recyclingRequestType()
 	{
 		$hash = array(
-		"recyleBy" => "recylingbin");
+		"recycleBy" => "recylingbin");
 		$hash_out = XmlFields::recyclingRequestType($hash);
-		$this->assertEqual($hash_out["recyleBy"], "recylingbin");
+		$this->assertEqual($hash_out["recycleBy"], "recylingbin");
 	}
 }
 

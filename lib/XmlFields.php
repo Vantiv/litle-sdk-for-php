@@ -136,7 +136,7 @@ class XmlFields
 		{
 			$hash_out= 	array(
 						"avsResult"=>XmlFields::returnArrayValue($hash_in, "avsResult"),
-						"ardValidationResult"=>XmlFields::returnArrayValue($hash_in, "cardValidationResult"),
+						"cardValidationResult"=>XmlFields::returnArrayValue($hash_in, "cardValidationResult"),
 						"authenticationResult"=>XmlFields::returnArrayValue($hash_in, "authenticationResult"),
 						"advancedAVSResult"=>XmlFields::returnArrayValue($hash_in, "advancedAVSResult")
 			);
