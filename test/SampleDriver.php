@@ -1,44 +1,29 @@
 <?php
-/*
- * Copyright (c) 2011 Litle & Co.
- * 
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
- * 
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
- */
-require_once realpath(dirname(__FILE__)) . '/../lib/LitleOnline.php';  
-    // Visa $10.00 sale
-    $hash_in = array(
-	      'amount'=>'106',
-	      'orderId' => '123213',
-	      'orderSource'=>'ecommerce',
-	      'card'=>array(
-	      'type'=>'VI',
-	      'number' =>'4100000000000001',
-	     'expDate' =>'1000')
-	      );
-//Perform the transaction on the Litle Platform
-$initilaize = &new LitleOnlineRequest();
-$saleResponse = $initilaize->saleRequest($hash_in);
+require_once realpath(dirname(__FILE__)) . '/../lib/LitleOnline.php';
 
-// Display Result 
-echo ("Message: " . XMLParser::get_node($saleResponse,'message') . "<br>");
-echo ("Litle Transaction ID: " . XMLParser::get_node($saleResponse,'litleTxnId'));
+#Sale
+$sale_info = array(
+        	  'orderId' => '1',
+		      'amount' => '10010',
+		      'orderSource'=>'ecommerce',
+		      'billToAddress'=>array(
+		      'name' => 'John Smith',
+		      'addressLine1' => '1 Main St.',
+		      'city' => 'Burlington',
+		      'state' => 'MA',
+		      'zip' => '01803-3747',
+		      'country' => 'US'),
+		      'card'=>array(
+		      'number' =>'5112010000000003',
+		      'expDate' => '0112',
+		      'cardValidationNum' => '349',
+		      'type' => 'MC')
+			);
 
-?>
+$initilaize = &new LitleOnlineRequest(); 
+$saleResponse = $initilaize->saleRequest($sale_info);
+
+#display results
+echo ("Response: " . (XmlParser::getNode($saleResponse,'response')) . "<br>");
+echo ("Message: " . XmlParser::getNode($saleResponse,'message') . "<br>");
+echo ("Litle Transaction ID: " . XmlParser::getNode($saleResponse,'litleTxnId'));
