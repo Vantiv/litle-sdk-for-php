@@ -43,9 +43,12 @@ Setup
 > cd litle-sdk-for-php/lib
 > php Setup.php
 
-Running the above commands will create a configuration file in the lib directory. 
+3) Create a simlink to the SDK
 
-3.) Create a php file similar to:  
+>ln -s /path/to/sdk /var/www/html/nameOfLink
+
+Running the above commands will create a configuration file in the lib directory. 
+4.) Create a php file similar to:  
 
 ```php
 require_once realpath(dirname(__FILE__)) . '/../lib/LitleOnline.php';  
@@ -67,7 +70,7 @@ $saleResponse = $initilaize->saleRequest($hash_in);
 echo ("Message: " . XMLParser::get_node($saleResponse,'message') . "<br>");
 echo ("Litle Transaction ID: " . XMLParser::get_node($saleResponse,'litleTxnId'));
 ```
-3) Next run this file using php on the command line or inside a browser. You should see the following result provided you have connectivity to the Litle certification environment.  You will see an HTTP error if you don't have access to the Litle URL
+5) Next run this file using php on the command line or inside a browser. You should see the following result provided you have connectivity to the Litle certification environment.  You will see an HTTP error if you don't have access to the Litle URL
 
     Message: Valid Format
     Litle Transaction ID: <your-numeric-litle-txn-id>
