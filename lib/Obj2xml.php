@@ -65,7 +65,7 @@ class Obj2xml {
 	private function getConfig($data)
 	{	
 		$config_array =parse_ini_file('litle_SDK_config.ini');
-		$names = array('user','password','merchantId','id','reportGroup','version');
+		$names = array('user','password','id','reportGroup','version');
 		foreach($names as $name)
 		{ 
 			if (isset($data[$name]))
@@ -77,7 +77,10 @@ class Obj2xml {
 			{
 				$config[$name] = $config_array[$name];
 			}
+			
+					
 		}
+		$config['merchantId'] = $config_array['currency_merchant_map']['DEFAULT'];
 		return $config;
 	}
 }

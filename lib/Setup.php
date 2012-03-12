@@ -24,13 +24,15 @@
 */
 function writeConfig($line,$handle){
 	foreach ($line as $keys => $values){
-		fwrite($handle, $keys. '=');
+		fwrite($handle, $keys. '');
 		if (is_array($values)){
-			fwrite($handle,"\n");
-			writeConfig($values,$handle);
+			foreach ($values as $key2 => $value2){
+				fwrite($handle,"['" . $key2 . "'] =" . $value2 .  PHP_EOL);
+			}
+			//writeConfig($values,$handle);
 		}
 		else{
-			fwrite($handle,$values);
+			fwrite($handle,' =' . $values);
 			fwrite($handle, PHP_EOL);
 		}
 	}
@@ -48,7 +50,6 @@ function initialize(){
 		$line['password'] = trim(fgets(STDIN));
 		print "Please input your merchantId: ";
 		$line['currency_merchant_map ']['DEFAULT'] = trim(fgets(STDIN));
-		echo $line['currency_merchant_map ']['DEFAULT'];
 		print "Please choose Litle url from the following list (example: 'cert') or directly input another URL: \nsandbox => https://www.testlitle.com/sandbox/communicator/online \ncert => https://cert.litle.com/vap/communicator/online \nprecert => https://precert.litle.com/vap/communicator/online \nproduction1 => https://payments.litle.com/vap/communicator/online \nproduction2 => https://payments2.litle.com/vap/communicator/online" . PHP_EOL;
 		$url = urlMapper(trim(fgets(STDIN)));
 		$line['url'] = $url;
