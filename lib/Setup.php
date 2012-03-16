@@ -29,7 +29,6 @@ function writeConfig($line,$handle){
 			foreach ($values as $key2 => $value2){
 				fwrite($handle,"['" . $key2 . "'] =" . $value2 .  PHP_EOL);
 			}
-			//writeConfig($values,$handle);
 		}
 		else{
 			fwrite($handle,' =' . $values);
@@ -70,7 +69,7 @@ function urlMapper($litleEnv){
 	$litleOnlineCtx = 'vap/communicator/online';
 	if ($litleEnv == "sandbox")
 	return 'https://www.testlitle.com/sandbox/communicator/online';
-	elseif ($litle_env == "cert")
+	elseif ($litleEnv == "cert")
 	return 'https://cert.litle.com/' . $litleOnlineCtx;
 	elseif ($litleEnv == "precert")
 	return 'https://precert.litle.com/' . $litleOnlineCtx;
