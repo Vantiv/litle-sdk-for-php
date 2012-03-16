@@ -88,7 +88,7 @@ class cert1_Test_alpha extends UnitTestCase
 		{
 			$auth_hash = array(
 				      'orderId' => '1',
-				      'amount' => '10010',
+				      'amount' => '0',
 				      'orderSource'=>'ecommerce',
 				      'billToAddress'=>array(
 				      'name' => 'John Smith',
@@ -215,7 +215,7 @@ class cert1_Test_alpha extends UnitTestCase
 		{
 			$auth_hash = array(
 				'orderId' => '2',
-		  		'amount' => '20020',
+		  		'amount' => '0',
 		  		'orderSource'=>'ecommerce',
 		  		'billToAddress'=> array(
 		  			'name' => 'Mike J. Hammer',
@@ -348,7 +348,7 @@ class cert1_Test_alpha extends UnitTestCase
 		{
 			$auth_hash = array(
 						'orderId' => '3',
-				  		'amount' => '30030',
+				  		'amount' => '0',
 				  		'orderSource'=>'ecommerce',
 			  			'billToAddress'=>array(
 			  			'name' => 'Eileen Jones',
@@ -474,7 +474,7 @@ class cert1_Test_alpha extends UnitTestCase
 		{
 			$auth_hash = array(
 					'orderId' => '4',
-			        'amount' => '40040',
+			        'amount' => '0',
 			        'orderSource'=>'ecommerce',
 			        'billToAddress'=>array(
 			        'name' => 'Bob Black',
@@ -594,7 +594,7 @@ class cert1_Test_alpha extends UnitTestCase
 		{
 			$auth_hash = array(
 						'orderId' => '5',
-			    		'amount' => '50050',
+			    		'amount' => '0',
 			    		'orderSource'=>'ecommerce',
 			    		'card'=>array(
 			    		'number' =>'4457010200000007',
