@@ -1,27 +1,27 @@
 <?php
 /*
  * Copyright (c) 2011 Litle & Co.
- * 
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
- * 
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
- */
+*
+* Permission is hereby granted, free of charge, to any person
+* obtaining a copy of this software and associated documentation
+* files (the "Software"), to deal in the Software without
+* restriction, including without limitation the rights to use,
+* copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the
+* Software is furnished to do so, subject to the following
+* conditions:
+*
+* The above copyright notice and this permission notice shall be
+* included in all copies or substantial portions of the Software.
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND
+* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+* OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+* NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+* HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+* WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+* OTHER DEALINGS IN THE SOFTWARE.
+*/
 
 class LitleOnlineRequest
 {
@@ -36,7 +36,7 @@ class LitleOnlineRequest
 			$hash_out = array('litleTxnId'=> ($hash_in['litleTxnId']));
 		}
 		else {
-		$hash_out = array(
+			$hash_out = array(
 			'orderId'=> Checker::requiredField($hash_in['orderId']),
 			'amount'=>Checker::requiredField($hash_in['amount']),
 			'orderSource'=>Checker::requiredField($hash_in['orderSource']),
@@ -292,7 +292,16 @@ class LitleOnlineRequest
 		$voidResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'void');
 		return $voidResponse;
 	}
-	
+
+	public function echeckVoidRequest($hash_in)
+	{
+		$hash_out = array(
+		'litleTxnId' => Checker::requiredField($hash_in['litleTxnId']),
+		);
+		$echeckVoidResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,"echeckVoid");
+		return $echeckVoidResponse;
+	}
+
 	private function overideConfig($hash_in)
 	{
 		$hash_out = array(
@@ -304,7 +313,7 @@ class LitleOnlineRequest
 		'version'=>$hash_in['version']);
 		return $hash_out;
 	}
-	
+
 	private function processRequest($hash_out, $hash_in, $type, $choice1 = null, $choice2 = null)
 	{
 		$hash_config = LitleOnlineRequest::overideconfig($hash_in);
@@ -314,6 +323,6 @@ class LitleOnlineRequest
 		$litleOnlineResponse = $this->newXML->request($request);
 		return $litleOnlineResponse;
 	}
-	
+
 }
 
