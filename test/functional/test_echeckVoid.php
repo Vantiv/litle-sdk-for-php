@@ -31,11 +31,11 @@ class echeckVoid_FunctionalTest extends UnitTestCase
 {
 	function test_simple_echeckVoid()
 	{
-		#$hash_in = array('litleTxnId'=> '123456789012345678');
-		#$initilaize = &new LitleOnlineRequest();
-		#$echeckVoidResponse = $initilaize->echeckVoidRequest($hash_in);
-		#$response = XmlParser::getAttribute($echeckVoidResponse,'litleOnlineResponse','response');
-		#$this->assertEqual('1',$response);
+		$hash_in = array('litleTxnId'=> '123456789012345678');
+		$initilaize = &new LitleOnlineRequest();
+		$echeckVoidResponse = $initilaize->echeckVoidRequest($hash_in);
+		$response = XmlParser::getAttribute($echeckVoidResponse,'litleOnlineResponse','response');
+		$this->assertEqual('0',$response);
 	}
 
 }
