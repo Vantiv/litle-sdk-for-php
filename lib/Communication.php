@@ -51,7 +51,7 @@ class Communication{
 	private function getConfig()
 	{
 		$path = realpath(dirname(__FILE__)) . '/litle_SDK_config.ini';
-		if (file_exists(path){
+		if (file_exists(path)){
 			$configArray =parse_ini_file('litle_SDK_config.ini');
 			return $configArray;
 		}else{
