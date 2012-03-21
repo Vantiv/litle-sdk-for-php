@@ -70,28 +70,27 @@ class Obj2xml {
 
 	public function getConfig($data)
 	{
-		if (file_exists(realpath(dirname(__FILE__)) . '/litle_SDK_config.ini'))
-		{
-			 	$config_array =parse_ini_file('litle_SDK_config.ini');
-				$names = array('user','password','merchantId','id','reportGroup','version','url','proxy');
-				foreach($names as $name)
-				{
-					if (isset($data[$name]))
-					{
-						$config[$name] = $data[$name];
 
-					}else{
-						if ($name == 'merchantId'){
-							$config['merchantId'] = $config_array['currency_merchant_map']['DEFAULT'];
-						}else {
-							$config[$name] = $config_array[$name];
-						}
+		@$config_array =parse_ini_file('litle_SDK_config.ini');
+		$names = array('user','password','merchantId','timeout','proxy','reportGroup','version','url');
+		foreach($names as $name)
+		{
+			if (isset($data[$name]))
+			{
+				$config[$name] = $data[$name];
+
+			}else{
+				if ($name == 'merchantId'){
+					$config['merchantId'] = $config_array['currency_merchant_map']['DEFAULT'];
+				}else {
+					if ((!isset($config_array[$name])) and ($name != 'proxy')){
+						throw new Exception("Missing Field /$name/");
 					}
+					$config[$name] = $config_array[$name];
 				}
-				return $config;
-		}else{
-			throw new Exception("Missing Configuration File, please Run Setup.php");
+			}
 		}
+		return $config;
 	}
 }
 
