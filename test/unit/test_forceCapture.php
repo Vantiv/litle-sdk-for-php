@@ -35,7 +35,6 @@ class forceCapture_UnitTest extends UnitTestCase
 	{
 		$hash_in = array(
 	 'orderId'=>'123',
-      'reportGroup'=>'Planets',
       'litleTxnId'=>'123456',
       'amount'=>'106',
       'orderSource'=>'ecommerce',
@@ -46,7 +45,7 @@ class forceCapture_UnitTest extends UnitTestCase
       'type'=>'VI'));
 		$mappTest = &new MockLitleXmlMapper();
 		$commTest = &new Mockcommunication();
-		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<token><litleToken>123456789101112.*<expDate>1210.*/')));
+		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<token><litleToken>123456789101112.*<expDate>1210.*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"id"=>NULL,"version"=>NULL,"url"=>NULL,"proxy"=>NULL)));
 		$litleTest = &new LitleOnlineRequest();
 		$litleTest->newXML = $mappTest;
 		$retOb = $litleTest->forceCaptureRequest($hash_in);

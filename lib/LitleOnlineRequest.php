@@ -222,7 +222,7 @@ class LitleOnlineRequest
 		'litleTxnId' => Checker::requiredField($hash_in['litleTxnId']),
 		'echeck'=>XmlFields::echeckType($hash_in['echeck']),
 		'echeckToken'=>XmlFields::echeckTokenType($hash_in['echeckToken']));
-
+		
 		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
 		$echeckRedepositResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'echeckRedeposit',$choice_hash);
 		return $echeckRedepositResponse;
@@ -267,6 +267,7 @@ class LitleOnlineRequest
 
 	public function echeckVerificationRequest($hash_in)
 	{
+		
 		$hash_out = array(
 			'litleTxnId'=>$hash_in['litleTxnId'],
 			'orderId'=>Checker::requiredField($hash_in['orderId']),
@@ -275,8 +276,7 @@ class LitleOnlineRequest
 			'billToAddress'=>XmlFields::contact($hash_in['billToAddress']),
 			'echeck'=>XmlFields::echeckType($hash_in['echeck']),
 			'echeckToken'=>XmlFields::echeckTokenType($hash_in['echeckToken']));
-
-
+		
 		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
 		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
 		$echeckVerificationResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'echeckVerification',$choice_hash);
@@ -310,17 +310,21 @@ class LitleOnlineRequest
 		'merchantId'=>$hash_in['merchantId'],
 		'reportGroup'=>$hash_in['reportGroup'],
 		'id'=>$hash_in['id'],
-		'version'=>$hash_in['version']);
+		'version'=>$hash_in['version'],
+		'url'=>$hash_in['url'],
+		'proxy'=>$hash_in['proxy']);
 		return $hash_out;
 	}
 
 	private function processRequest($hash_out, $hash_in, $type, $choice1 = null, $choice2 = null)
 	{
+	
 		$hash_config = LitleOnlineRequest::overideconfig($hash_in);
 		Checker::choice($choice1);
 		Checker::choice($choice2);
 		$request = Obj2xml::toXml($hash_out,$hash_config, $type);
-		$litleOnlineResponse = $this->newXML->request($request);
+	
+		$litleOnlineResponse = $this->newXML->request($request,$hash_config);
 		return $litleOnlineResponse;
 	}
 

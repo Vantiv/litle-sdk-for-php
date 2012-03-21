@@ -68,12 +68,12 @@ class Obj2xml {
 		}
 	}
 
-	private function getConfig($data)
+	public function getConfig($data)
 	{
 		if (file_exists(realpath(dirname(__FILE__)) . '/litle_SDK_config.ini'))
 		{
 			 	$config_array =parse_ini_file('litle_SDK_config.ini');
-				$names = array('user','password','merchantId','id','reportGroup','version');
+				$names = array('user','password','merchantId','id','reportGroup','version','url','proxy');
 				foreach($names as $name)
 				{
 					if (isset($data[$name]))

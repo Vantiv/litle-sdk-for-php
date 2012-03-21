@@ -35,7 +35,7 @@ class authReversal_UnitTest extends UnitTestCase
 		$hash_in = array('litleTxnId'=> '1234567890','reportGroup'=>'Planets', 'amount'=>'5000');
 		$mappTest = &new MockLitleXmlMapper();
 		$commTest = &new Mockcommunication();
-		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<litleTxnId>1234567890.*<amount>5000.*/')));
+		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<litleTxnId>1234567890.*<amount>5000.*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>"Planets","id"=>NULL,"version"=>NULL,"url"=>NULL,"proxy"=>NULL)));
 		$litleTest = &new LitleOnlineRequest();
 		$litleTest->newXML = $mappTest;
 		$retOb = $litleTest->authReversalRequest($hash_in);

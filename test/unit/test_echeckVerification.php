@@ -34,11 +34,12 @@ class echeckVerification_UnitTest extends UnitTestCase
 {
 	function test_simple_echeckVerification()
 	{
-	     $hash_in = array('reportGroup'=>'Planets','amount'=>'123','orderId'=>'123','orderSource'=>'ecommerce',
+	     $hash_in = array('amount'=>'123','orderId'=>'123','orderSource'=>'ecommerce',
 		'echeckToken' => array('accType'=>'Checking','routingNum'=>'123123','litleToken'=>'1234565789012','checkNum'=>'123455'));
 		$mappTest = &new MockLitleXmlMapper();
 		$commTest = &new Mockcommunication();
-		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<echeckToken>.*<accType>Checking.*/')));
+	
+		$mappTest->expectOnce('request',array((new PatternExpectation('/.*<echeckToken>.*<accType>Checking.*/')),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"id"=>NULL,"version"=>NULL,"url"=>NULL,"proxy"=>NULL)));
 		$litleTest = &new LitleOnlineRequest();
 		$litleTest->newXML = $mappTest;
 		$retOb = $litleTest->echeckVerificationRequest($hash_in);

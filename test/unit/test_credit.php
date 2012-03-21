@@ -35,7 +35,7 @@ function test_credit()
 		$hash_in = array('litleTxnId'=> '12312312','reportGroup'=>'Planets', 'amount'=>'123');
 		$mappTest = &new MockLitleXmlMapper();
 		$commTest = &new Mockcommunication();
-		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<litleTxnId>12312312.*<amount>123.*/')));
+		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<litleTxnId>12312312.*<amount>123.*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>"Planets","id"=>NULL,"version"=>NULL,"url"=>NULL,"proxy"=>NULL)));
 		$litleTest = &new LitleOnlineRequest();
 		$litleTest->newXML = $mappTest;
 		$retOb = $litleTest->creditRequest($hash_in);

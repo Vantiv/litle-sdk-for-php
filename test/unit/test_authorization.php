@@ -33,22 +33,17 @@ class auth_UnitTest extends UnitTestCase
 {
 	function test_auth_with_card()
 	{
-		$hash_in = array('usr'=>'IMPTEST',
-			'password'=>'cert3d6Z',
-			'merchantId'=>'087900',
-			'version'=>'8.8',
+		$hash_in = array(
 			'card'=>array('type'=>'VI',
 					'number'=>'4100000000000001',
 					'expDate'=>'1213',
 					'cardValidationNum' => '1213'),
-			'id'=>'1211',
 			'orderId'=> '2111',
-			'reportGroup'=>'Planets',
 			'orderSource'=>'ecommerce',
 			'amount'=>'123');
 		$mappTest = &new MockLitleXmlMapper();
 		$commTest = &new Mockcommunication();
-		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<card><type>VI.*<number>4100000000000001.*<expDate>1213.*<cardValidationNum>1213.*/')));
+		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<card><type>VI.*<number>4100000000000001.*<expDate>1213.*<cardValidationNum>1213.*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"id"=>NULL,"version"=>NULL,"url"=>NULL,"proxy"=>NULL)));
 		$litleTest = &new LitleOnlineRequest();
 		$litleTest->newXML = $mappTest;
 		$retOb = $litleTest->authorizationRequest($hash_in);

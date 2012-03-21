@@ -33,10 +33,10 @@ class echeckCredit_UnitTest extends UnitTestCase
 {
 	function test_simple_echeckCredit()
 	{
-		$hash_in = array('litleTxnId' =>'123123','reportGroup'=>'Planets');
+		$hash_in = array('litleTxnId' =>'123123');
 		$mappTest = &new MockLitleXmlMapper();
 		$commTest = &new Mockcommunication();
-		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<litleTxnId>123123.*/')));
+		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<litleTxnId>123123.*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"id"=>NULL,"version"=>NULL,"url"=>NULL,"proxy"=>NULL)));
 		$litleTest = &new LitleOnlineRequest();
 		$litleTest->newXML = $mappTest;
 		$retOb = $litleTest->echeckCreditRequest($hash_in);
