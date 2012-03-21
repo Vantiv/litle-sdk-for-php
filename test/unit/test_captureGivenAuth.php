@@ -46,7 +46,7 @@ class captureGivenAuth_UnitTest extends UnitTestCase
        'expDate' =>'1210'));
 		$mappTest = &new MockLitleXmlMapper();
 		$commTest = &new Mockcommunication();
-		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<authInformation><authDate>2002-10-09.*<authCode>543216.*><authAmount>12345.*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"id"=>NULL,"version"=>NULL,"url"=>NULL,"proxy"=>NULL)));
+		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<authInformation><authDate>2002-10-09.*<authCode>543216.*><authAmount>12345.*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"id"=>NULL,"version"=>NULL,"url"=>NULL,"timeout"=>NULL,"proxy"=>NULL)));
 		$litleTest = &new LitleOnlineRequest();
 		$litleTest->newXML = $mappTest;
 		$retOb = $litleTest->captureGivenAuthRequest($hash_in);

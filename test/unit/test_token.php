@@ -38,7 +38,7 @@ class token_UnitTest extends UnitTestCase
 			'accountNumber'=>'123456789101112');
 		$mappTest = &new MockLitleXmlMapper();
 		$commTest = &new Mockcommunication();
-		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<accountNumber>123456789101112*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"id"=>NULL,"version"=>NULL,"url"=>NULL,"proxy"=>NULL)));
+		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<accountNumber>123456789101112*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"id"=>NULL,"version"=>NULL,"url"=>NULL,"timeout"=>NULL,"proxy"=>NULL)));
 		$litleTest = &new LitleOnlineRequest();
 		$litleTest->newXML = $mappTest;
 		$retOb = $litleTest->registerTokenRequest($hash_in);

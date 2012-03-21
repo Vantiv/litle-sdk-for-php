@@ -43,7 +43,7 @@ class auth_UnitTest extends UnitTestCase
 			'amount'=>'123');
 		$mappTest = &new MockLitleXmlMapper();
 		$commTest = &new Mockcommunication();
-		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<card><type>VI.*<number>4100000000000001.*<expDate>1213.*<cardValidationNum>1213.*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"id"=>NULL,"version"=>NULL,"url"=>NULL,"proxy"=>NULL)));
+		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<card><type>VI.*<number>4100000000000001.*<expDate>1213.*<cardValidationNum>1213.*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"id"=>NULL,"version"=>NULL,"url"=>NULL,"timeout"=>NULL,"proxy"=>NULL)));
 		$litleTest = &new LitleOnlineRequest();
 		$litleTest->newXML = $mappTest;
 		$retOb = $litleTest->authorizationRequest($hash_in);

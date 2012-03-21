@@ -312,6 +312,7 @@ class LitleOnlineRequest
 		'id'=>$hash_in['id'],
 		'version'=>$hash_in['version'],
 		'url'=>$hash_in['url'],
+		'timeout'=>$hash_in['timeout'],
 		'proxy'=>$hash_in['proxy']);
 		return $hash_out;
 	}
