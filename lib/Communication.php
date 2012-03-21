@@ -50,11 +50,12 @@ class Communication{
 	}
 	private function getConfig()
 	{
-		if (file_exists(realpath(dirname(__FILE__)) . '/litle_SDK_config.ini')){
+		path = realpath(dirname(__FILE__)) . '/litle_SDK_config.ini');
+		if (file_exists(path){
 			$configArray =parse_ini_file('litle_SDK_config.ini');
 			return $configArray;
 		}else{
-			throw new Exception("Missing Configuration File, please Run Setup.php");
+			throw new Exception("Missing Configuration File " . $path . ", please Run Setup.php");
 		}
 
 	}
