@@ -22,7 +22,7 @@
 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 * OTHER DEALINGS IN THE SOFTWARE.
 */
-require_once realpath(dirname(__FILE__)) . '/UrlMapper.php';
+require_once realpath(dirname(__FILE__)) . '/LitleOnline.php';
 
 function writeConfig($line,$handle){
 	foreach ($line as $keys => $values){
@@ -59,7 +59,7 @@ function initialize(){
 		writeConfig($line,$handle);
 		fwrite($handle, "version = 8.10" .  PHP_EOL);
 		fwrite($handle, "timeout =  65".  PHP_EOL);
-		fwrite($handle, "reportGroup = planets".  PHP_EOL);
+		fwrite($handle, "reportGroup = Default Report Group".  PHP_EOL);
 	}
 	fclose($handle);
 	print "The Litle configuration file has been generated, the file is located in the lib directory". PHP_EOL;

@@ -22,6 +22,7 @@
 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 * OTHER DEALINGS IN THE SOFTWARE.
 */
+require_once realpath(dirname(__FILE__)) . '/LitleOnline.php';
 class Obj2xml {
 
 	public static function toXml($data, $hash_config, $type, $rootNodeName = 'litleOnlineRequest', $xml=null)
@@ -82,6 +83,10 @@ class Obj2xml {
 			}else{
 				if ($name == 'merchantId'){
 					$config['merchantId'] = $config_array['currency_merchant_map']['DEFAULT'];
+				}else if ($name == 'version'){
+					$config['version'] = isset($config_array['version'])? $config_array['version']:CURRENT_XML_VERSION;
+				}else if ($name == 'timeout'){
+						$config['timeout'] = isset($config_array['timeout'])? $config_array['timeout']:'65';
 				}else {
 					if ((!isset($config_array[$name])) and ($name != 'proxy')){
 						throw new Exception("Missing Field /$name/");
