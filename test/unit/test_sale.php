@@ -195,8 +195,26 @@ class sale_UnitTest extends UnitTestCase
 		);
 		$litleTest = &new LitleOnlineRequest();
 		$this->expectException(new Exception("Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!"));
-		$retOb = $litleTest->saleRequest($hash_in);
-	
+		$retOb = $litleTest->saleRequest($hash_in);	
 	}
+	
+	function test_merchant_data()
+	{
+		$hash_in = array(
+					'orderId'=> '2111',
+					'orderSource'=>'ecommerce',
+					'amount'=>'123',
+					'merchantData'=>array(
+						'affiliate'=>'bar'
+		)
+		);
+		$mappTest = &new MockLitleXmlMapper();
+		$commTest = &new Mockcommunication();
+		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<merchantData>.*?<affiliate>bar<\/affiliate>.*?<\/merchantData>.*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"id"=>NULL,"version"=>NULL,"url"=>NULL,"timeout"=>NULL,"proxy"=>NULL)));
+		$litleTest = &new LitleOnlineRequest();
+		$litleTest->newXML = $mappTest;
+		$retOb = $litleTest->saleRequest($hash_in);
+	}
+	
 
 }

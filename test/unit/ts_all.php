@@ -40,3 +40,4 @@ require realpath(dirname(__FILE__)) .  '/test_echeckRedeposit.php';
 require realpath(dirname(__FILE__)) .  '/test_echeckSale.php';
 require realpath(dirname(__FILE__)) .  '/test_echeckCredit.php';
 require realpath(dirname(__FILE__)) .  '/test_echeckVerification.php';
+require realpath(dirname(__FILE__)) .  '/test_litleOnlineRequest.php';

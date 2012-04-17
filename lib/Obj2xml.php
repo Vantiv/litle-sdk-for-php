@@ -31,6 +31,8 @@ class Obj2xml {
 		$xml = simplexml_load_string("<?xml version='1.0' encoding='utf-8'?><$rootNodeName />");
 		$xml-> addAttribute('merchantId',$config["merchantId"]);
 		$xml-> addAttribute('version',$config["version"]);
+		$xml-> addAttribute('merchantSdk',$data['merchantSdk']);
+		unset($data['merchantSdk']);
 		$xml-> addAttribute('xmlns:xmlns','http://www.litle.com/schema');// does not show up on browser docs
 		$authentication = $xml->addChild('authentication');
 		$authentication->addChild('user',$config["user"]);
@@ -40,7 +42,6 @@ class Obj2xml {
 			($transacType-> addAttribute('partial',$data["partial"]));
 		};
 		unset($data['partial']);
-		#merchant SDK attribute $transacType-> addAttribute('partial',$data["partial"])
 		if(isset($config['customerId'])) {
 			($transacType-> addAttribute('customerId',$config["customerId"]));
 		};

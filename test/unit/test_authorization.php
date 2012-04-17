@@ -191,4 +191,21 @@ class auth_UnitTest extends UnitTestCase
 		$retOb = $litleTest->authorizationRequest($hash_in);
 	}
 
+	function test_merchant_data()
+	{
+		$hash_in = array(
+				'orderId'=> '2111',
+				'orderSource'=>'ecommerce',
+				'amount'=>'123',
+				'merchantData'=>array(
+					'campaign'=>'foo'
+				)
+		);
+		$mappTest = &new MockLitleXmlMapper();
+		$commTest = &new Mockcommunication();
+		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<merchantData>.*?<campaign>foo<\/campaign>.*?<\/merchantData>.*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"id"=>NULL,"version"=>NULL,"url"=>NULL,"timeout"=>NULL,"proxy"=>NULL)));
+		$litleTest = &new LitleOnlineRequest();
+		$litleTest->newXML = $mappTest;
+		$retOb = $litleTest->authorizationRequest($hash_in);
+	}
 }

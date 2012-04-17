@@ -58,7 +58,7 @@ class LitleOnlineRequest
 			'allowPartialAuth'=>$hash_in['allowPartialAuth'],
 			'healthcareIIAS'=>(XmlFields::healthcareIIAS($hash_in['healthcareIIAS'])),
 			'filtering'=>(XmlFields::filteringType($hash_in['filtering'])),
-			'merchantData'=>(XmlFields::filteringType($hash_in['merchantData'])),
+			'merchantData'=>(XmlFields::merchantData($hash_in['merchantData'])),
 			'recyclingRequest'=>(XmlFields::recyclingRequestType($hash_in['recyclingRequest'])));
 		}
 
@@ -95,7 +95,7 @@ class LitleOnlineRequest
 		'allowPartialAuth'=>$hash_in['allowPartialAuth'],
 		'healthcareIIAS'=>XmlFields::healthcareIIAS($hash_in['healthcareIIAS']),
 		'filtering'=>XmlFields::filteringType($hash_in['filtering']),
-		'merchantData'=>XmlFields::filteringType($hash_in['merchantData']),
+		'merchantData'=>XmlFields::merchantData($hash_in['merchantData']),
 		'recyclingRequest'=>XmlFields::recyclingRequestType($hash_in['recyclingRequest']));
 
 		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
@@ -134,7 +134,8 @@ class LitleOnlineRequest
 					'processingInstructions'=>XmlFields::processingInstructions(XMLFields::returnArrayValue($hash_in, 'processingInstructions')),
 					'pos'=>XmlFields::pos(XMLFields::returnArrayValue($hash_in, 'pos')),
 					'amexAggregatorData'=>XmlFields::amexAggregatorData(XMLFields::returnArrayValue($hash_in, 'amexAggregatorData')),
-					'payPalNotes' =>XmlFields::returnArrayValue($hash_in, 'payPalNotes')
+					'payPalNotes' =>XmlFields::returnArrayValue($hash_in, 'payPalNotes'),
+					'actionReason'=>XmlFields::returnArrayValue($hash_in, 'actionReason')
 		);
 
 		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
@@ -321,6 +322,12 @@ class LitleOnlineRequest
 	{
 	
 		$hash_config = LitleOnlineRequest::overideconfig($hash_in);
+		if(isset($hash_in['merchantSdk'])) {
+			$hash_out['merchantSdk'] = $hash_in['merchantSdk'];
+		}
+		else {
+			$hash_out['merchantSdk'] = 'PHP;8.12.0';
+		}		
 		Checker::choice($choice1);
 		Checker::choice($choice2);
 		$request = Obj2xml::toXml($hash_out,$hash_config, $type);

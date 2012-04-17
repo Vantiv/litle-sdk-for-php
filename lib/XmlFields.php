@@ -116,6 +116,20 @@ class XmlFields
 		}
 	}
 
+	public static function merchantData($hash_in)
+	{
+		if (isset($hash_in))
+		{
+			$hash_out =	array(
+						"campaign"=>XmlFields::returnArrayValue($hash_in, "campaign"),
+						"affiliate"=>XmlFields::returnArrayValue($hash_in, "affiliate"),
+						"merchantGroupingId"=>XmlFields::returnArrayValue($hash_in, "merchantGroupingId")
+			);
+			return $hash_out;
+		}
+	}
+	
+	
 	public static function authInformation($hash_in)
 	{
 		if (isset($hash_in))
