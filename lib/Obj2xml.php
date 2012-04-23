@@ -76,7 +76,7 @@ class Obj2xml {
 	{
 
 		@$config_array =parse_ini_file('litle_SDK_config.ini');
-		$names = array('user','password','merchantId','timeout','proxy','reportGroup','version','url','id');
+		$names = array('user','password','merchantId','timeout','proxy','reportGroup','version','url');
 		foreach($names as $name)
 		{
 			if (isset($data[$name]))

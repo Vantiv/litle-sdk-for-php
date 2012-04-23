@@ -310,7 +310,6 @@ class LitleOnlineRequest
 		'password'=>$hash_in['password'],
 		'merchantId'=>$hash_in['merchantId'],
 		'reportGroup'=>$hash_in['reportGroup'],
-		'id'=>$hash_in['id'],
 		'version'=>$hash_in['version'],
 		'url'=>$hash_in['url'],
 		'timeout'=>$hash_in['timeout'],
@@ -324,7 +323,7 @@ class LitleOnlineRequest
 			$hash_out['merchantSdk'] = $hash_in['merchantSdk'];
 		}
 		else {
-			$hash_out['merchantSdk'] = 'PHP;8.12.0';
+			$hash_out['merchantSdk'] = 'PHP;8.12.1';
 		}
 		if(isset($hash_in['id'])) {
 			$hash_out['id'] = $hash_in['id'];
