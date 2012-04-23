@@ -42,15 +42,17 @@ class Obj2xml {
 			($transacType-> addAttribute('partial',$data["partial"]));
 		};
 		unset($data['partial']);
-		if(isset($config['customerId'])) {
-			($transacType-> addAttribute('customerId',$config["customerId"]));
+		if(isset($data['customerId'])) {
+			($transacType-> addAttribute('customerId',$data["customerId"]));
 		};
+		unset($data['customerId']);
 		if(isset($config['reportGroup'])) {
 			($transacType-> addAttribute('reportGroup',$config["reportGroup"]));
 		};
-		if(isset($config['id'])) {
-			($transacType-> addAttribute('id',$config["id"]));
+		if(isset($data['id'])) {
+			($transacType-> addAttribute('id',$data["id"]));
 		};
+		unset($data['id']);
 		Obj2xml::iterateChildren($data,$transacType);
 		return $xml->asXML();
 	}
@@ -74,7 +76,7 @@ class Obj2xml {
 	{
 
 		@$config_array =parse_ini_file('litle_SDK_config.ini');
-		$names = array('user','password','merchantId','timeout','proxy','reportGroup','version','url');
+		$names = array('user','password','merchantId','timeout','proxy','reportGroup','version','url','id');
 		foreach($names as $name)
 		{
 			if (isset($data[$name]))

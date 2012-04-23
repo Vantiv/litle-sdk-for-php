@@ -317,20 +317,33 @@ class LitleOnlineRequest
 		'proxy'=>$hash_in['proxy']);
 		return $hash_out;
 	}
-
-	private function processRequest($hash_out, $hash_in, $type, $choice1 = null, $choice2 = null)
-	{
 	
-		$hash_config = LitleOnlineRequest::overideconfig($hash_in);
+	private function getOptionalAttributes($hash_in,$hash_out)
+	{
 		if(isset($hash_in['merchantSdk'])) {
 			$hash_out['merchantSdk'] = $hash_in['merchantSdk'];
 		}
 		else {
 			$hash_out['merchantSdk'] = 'PHP;8.12.0';
-		}		
+		}
+		if(isset($hash_in['id'])) {
+			$hash_out['id'] = $hash_in['id'];
+		}
+		if(isset($hash_in['customerId'])) {
+			$hash_out['customerId'] = $hash_in['customerId'];
+		}
+		return $hash_out;
+	}
+
+	private function processRequest($hash_out, $hash_in, $type, $choice1 = null, $choice2 = null)
+	{
+	
+		$hash_config = LitleOnlineRequest::overideconfig($hash_in);
+		
+		$hash = LitleOnlineRequest::getOptionalAttributes($hash_in,$hash_out);
 		Checker::choice($choice1);
 		Checker::choice($choice2);
-		$request = Obj2xml::toXml($hash_out,$hash_config, $type);
+		$request = Obj2xml::toXml($hash,$hash_config, $type);
 	
 		$litleOnlineResponse = $this->newXML->request($request,$hash_config);
 		return $litleOnlineResponse;
