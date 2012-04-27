@@ -33,7 +33,7 @@ class sale_FunctionalTest extends UnitTestCase
 	{
 		$hash_in = array(
 			'card'=>array('type'=>'VI',
-					'number'=>'4100000000000001',
+					'number'=>'4100000000000000',
 					'expDate'=>'1213',
 					'cardValidationNum' => '1213'),
 			'id'=>'1211',
@@ -86,7 +86,7 @@ class sale_FunctionalTest extends UnitTestCase
 	{
 		$hash_in = array(
 				'card'=>array('type'=>'DK',
-						'number'=>'4100000000000001',
+						'number'=>'4100000000000000',
 						'expDate'=>'1213',
 						'cardValidationNum' => '1213'),
 				'id'=>'1211',
@@ -104,7 +104,7 @@ class sale_FunctionalTest extends UnitTestCase
 	{
 		$hash_in = array(
 					'card'=>array('type'=>'VI',
-							'number'=>'4100000000000001',
+							'number'=>'4100000000000000',
 							'expDate'=>'1213',
 							'cardValidationNum' => '1213'),
 					'id'=>'1211',

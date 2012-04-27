@@ -40,7 +40,7 @@ class XmlFields_FunctionalTest extends UnitTestCase
 	      'amount'=>'106',
 	      'orderSource'=>'ecommerce',
 	      'card'=>array(
-	      'number' =>'4100000000000001',
+	      'number' =>'4100000000000000',
 	      'expDate' =>'1210',
 	      'cardValidationNum'=> '123'
 		));
@@ -66,7 +66,7 @@ class XmlFields_FunctionalTest extends UnitTestCase
 	      'customBilling'=>array('phone'=>'123456789','descriptor'=>'good'),
 	      'card'=>array(
 	      'type'=>'VI',
-	      'number' =>'4100000000000001',
+	      'number' =>'4100000000000000',
 	      'expDate' =>'1210')
 		);
 
@@ -91,7 +91,7 @@ class XmlFields_FunctionalTest extends UnitTestCase
 	      'customerPhoneChnaged'=>'False','itemCategoryCode'=>'2'),
 	      'card'=>array(
 	      'type'=>'VI',
-	      'number' =>'4100000000000002',
+	      'number' =>'4100000000000000',
 	      'expDate' =>'1210'
 		));
 
@@ -113,7 +113,7 @@ class XmlFields_FunctionalTest extends UnitTestCase
 	      'CustomerInfo'=>array('ssn'=>'12345','incomeAmount'=>'12345','incomeCurrency'=>'dollar','yearsAtResidence'=>'2'),
 	      'card'=>array(
 	      'type'=>'VI',
-	      'number' =>'4100000000000001',
+	      'number' =>'4100000000000000',
 	      'expDate' =>'1210'
 		));
 
@@ -134,7 +134,7 @@ class XmlFields_FunctionalTest extends UnitTestCase
       'billToAddress'=>array('name'=>'Bob','city'=>'lowell','state'=>'MA','email'=>'litle.com'),
       'card'=>array(
       'type'=>'VI',
-      'number' =>'4100000000000001',
+      'number' =>'4100000000000000',
       'expDate' =>'1210'));
 
 		$initilaize = &new LitleOnlineRequest();
@@ -154,7 +154,7 @@ class XmlFields_FunctionalTest extends UnitTestCase
       'processingInstructions'=>array('bypassVelocityCheck'=>'true'),
       'card'=>array(
       'type'=>'VI',
-      'number' =>'4100000000000001',
+      'number' =>'4100000000000000',
       'expDate' =>'1210'));
 
 		$initilaize = &new LitleOnlineRequest();
@@ -174,7 +174,7 @@ class XmlFields_FunctionalTest extends UnitTestCase
       'pos'=>array('capability'=>'notused','entryMode'=>'track1','cardholderId'=>'pin'),
       'card'=>array(
       'type'=>'VI',
-      'number' =>'4100000000000001',
+      'number' =>'4100000000000000',
       'expDate' =>'1210'));
 
 		$initilaize = &new LitleOnlineRequest();
@@ -195,7 +195,7 @@ class XmlFields_FunctionalTest extends UnitTestCase
       'pos'=>array('entryMode'=>'none','cardholderId'=>'pin','capability'=>'notused'),
       'card'=>array(
       'type'=>'VI',
-      'number' =>'4100000000000001',
+      'number' =>'4100000000000000',
       'expDate' =>'1210'));
 
 		$initilaize = &new LitleOnlineRequest();
@@ -213,7 +213,7 @@ class XmlFields_FunctionalTest extends UnitTestCase
       'amount'=>'106',
       'card'=>array(
       'type'=>'VI',
-      'number' =>'4100000000000001',
+      'number' =>'4100000000000000',
       'expDate' =>'1210'),
       'orderSource'=>'ecommerce',
       'amexAggregatorData'=>array('sellerMerchantCategoryCode'=>'1234','sellerId'=>'1234Id'));
@@ -235,7 +235,7 @@ class XmlFields_FunctionalTest extends UnitTestCase
 	      'orderSource'=>'ecommerce',
 	      'card'=>array(
 	      'type'=>'VI',
-	      'number' =>'4100000000000001',
+	      'number' =>'4100000000000000',
 	      'expDate' =>'1210'),
 	      'amexAggregatorData'=>array('sellerMerchantCategoryCode'=>'1234'));
 
@@ -255,7 +255,7 @@ class XmlFields_FunctionalTest extends UnitTestCase
       'amount'=>'106',
       'card'=>array(
       'type'=>'VI',
-      'number' =>'4100000000000001',
+      'number' =>'4100000000000000',
       'expDate' =>'1210'),
       'orderSource'=>'ecommerce',
       'enhancedData'=>array(
@@ -282,7 +282,7 @@ class XmlFields_FunctionalTest extends UnitTestCase
 	      'amount'=>'106',
 	      'card'=>array(
 	      'type'=>'VI',
-	      'number' =>'4100000000000001',
+	      'number' =>'4100000000000000',
 	      'expDate' =>'1210'),
 	      'orderSource'=>'ecommerce',
 	      'enhancedData'=>array(
@@ -308,7 +308,7 @@ class XmlFields_FunctionalTest extends UnitTestCase
 	      'amount'=>'106',
 	      'card'=>array(
 	      'type'=>'VI',
-	      'number' =>'4100000000000001',
+	      'number' =>'4100000000000000',
 	      'expDate' =>'1210'),
 	      'orderSource'=>'ecommerce',
 	      'enhancedData'=>array(
@@ -335,7 +335,7 @@ class XmlFields_FunctionalTest extends UnitTestCase
 	      'amount'=>'106',
 	      'card'=>array(
 	      'type'=>'VI',
-	      'number' =>'4100000000000001',
+	      'number' =>'4100000000000000',
 	      'expDate' =>'1210'), 
 	      'processingInstructions'=>array('bypassVelocityCheck'=>'true'),
 	      'orderSource'=>'ecommerce',

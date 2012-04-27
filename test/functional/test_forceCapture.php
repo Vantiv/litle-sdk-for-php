@@ -41,7 +41,7 @@ class forceCapture_FunctionalTest extends UnitTestCase
 	      'orderSource'=>'ecommerce',
 	      'card'=>array(
 	      'type'=>'VI',
-	      'number' =>'4100000000000001',
+	      'number' =>'4100000000000000',
 	      'expDate' =>'1210'
 		));
 
