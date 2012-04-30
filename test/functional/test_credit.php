@@ -72,7 +72,7 @@ class credit_FunctionalTest extends UnitTestCase
 		$initilaize = &new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
 		$message= XmlParser::getAttribute($creditResponse,'litleOnlineResponse','response');
-		$this->assertEqual("1",$message);
+		$this->assertEqual("0",$message);
 	}
 	function test_paypal_notes()
 	{

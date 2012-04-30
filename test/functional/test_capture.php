@@ -38,7 +38,7 @@ class capture_FunctionalTest extends UnitTestCase
 		$initilaize = &new LitleOnlineRequest();
 		$captureResponse = $initilaize->captureRequest($hash_in);
 		$message = XmlParser::getAttribute($captureResponse,'litleOnlineResponse','response');
-		$this->assertEqual('1',$message);
+		$this->assertEqual('0',$message);
 	}
 
 	function test_complex_capture()
@@ -54,7 +54,7 @@ class capture_FunctionalTest extends UnitTestCase
 		$initilaize = &new LitleOnlineRequest();
 		$captureResponse = $initilaize->captureRequest($hash_in);
 		$message = XmlParser::getAttribute($captureResponse,'litleOnlineResponse','response');
-		$this->assertEqual('1',$message);
+		$this->assertEqual('0',$message);
 	}
 
 	function test_simple_capture_with_partial()
@@ -67,6 +67,6 @@ class capture_FunctionalTest extends UnitTestCase
 		$initilaize = &new LitleOnlineRequest();
 		$captureResponse = $initilaize->captureRequest($hash_in);
 		$message = XmlParser::getAttribute($captureResponse,'litleOnlineResponse','response');
-		$this->assertEqual('1',$message);
+		$this->assertEqual('0',$message);
 	}
 }
