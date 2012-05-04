@@ -33,7 +33,7 @@ class echeckCredit_FunctionalTest extends UnitTestCase
 	{
 		$hash_in = array(
 			'litleTxnId'=>'123456789012345678',
-			'amount'=>'123');
+			'amount'=>'1000');
 
 		$initilaize = &new LitleOnlineRequest();
 		$echeckCreditResponse = $initilaize->echeckCreditRequest($hash_in);
