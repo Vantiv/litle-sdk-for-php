@@ -58,7 +58,7 @@ class LitleOnlineRequest
 			'allowPartialAuth'=>$hash_in['allowPartialAuth'],
 			'healthcareIIAS'=>(XmlFields::healthcareIIAS($hash_in['healthcareIIAS'])),
 			'filtering'=>(XmlFields::filteringType($hash_in['filtering'])),
-			'merchantData'=>(XmlFields::filteringType($hash_in['merchantData'])),
+			'merchantData'=>(XmlFields::merchantData($hash_in['merchantData'])),
 			'recyclingRequest'=>(XmlFields::recyclingRequestType($hash_in['recyclingRequest'])));
 		}
 
@@ -95,7 +95,7 @@ class LitleOnlineRequest
 		'allowPartialAuth'=>$hash_in['allowPartialAuth'],
 		'healthcareIIAS'=>XmlFields::healthcareIIAS($hash_in['healthcareIIAS']),
 		'filtering'=>XmlFields::filteringType($hash_in['filtering']),
-		'merchantData'=>XmlFields::filteringType($hash_in['merchantData']),
+		'merchantData'=>XmlFields::merchantData($hash_in['merchantData']),
 		'recyclingRequest'=>XmlFields::recyclingRequestType($hash_in['recyclingRequest']));
 
 		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
@@ -134,7 +134,8 @@ class LitleOnlineRequest
 					'processingInstructions'=>XmlFields::processingInstructions(XMLFields::returnArrayValue($hash_in, 'processingInstructions')),
 					'pos'=>XmlFields::pos(XMLFields::returnArrayValue($hash_in, 'pos')),
 					'amexAggregatorData'=>XmlFields::amexAggregatorData(XMLFields::returnArrayValue($hash_in, 'amexAggregatorData')),
-					'payPalNotes' =>XmlFields::returnArrayValue($hash_in, 'payPalNotes')
+					'payPalNotes' =>XmlFields::returnArrayValue($hash_in, 'payPalNotes'),
+					'actionReason'=>XmlFields::returnArrayValue($hash_in, 'actionReason')
 		);
 
 		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
@@ -309,11 +310,27 @@ class LitleOnlineRequest
 		'password'=>$hash_in['password'],
 		'merchantId'=>$hash_in['merchantId'],
 		'reportGroup'=>$hash_in['reportGroup'],
-		'id'=>$hash_in['id'],
 		'version'=>$hash_in['version'],
 		'url'=>$hash_in['url'],
 		'timeout'=>$hash_in['timeout'],
 		'proxy'=>$hash_in['proxy']);
+		return $hash_out;
+	}
+	
+	private function getOptionalAttributes($hash_in,$hash_out)
+	{
+		if(isset($hash_in['merchantSdk'])) {
+			$hash_out['merchantSdk'] = $hash_in['merchantSdk'];
+		}
+		else {
+			$hash_out['merchantSdk'] = 'PHP;8.12.1';
+		}
+		if(isset($hash_in['id'])) {
+			$hash_out['id'] = $hash_in['id'];
+		}
+		if(isset($hash_in['customerId'])) {
+			$hash_out['customerId'] = $hash_in['customerId'];
+		}
 		return $hash_out;
 	}
 
@@ -321,9 +338,11 @@ class LitleOnlineRequest
 	{
 	
 		$hash_config = LitleOnlineRequest::overideconfig($hash_in);
+		
+		$hash = LitleOnlineRequest::getOptionalAttributes($hash_in,$hash_out);
 		Checker::choice($choice1);
 		Checker::choice($choice2);
-		$request = Obj2xml::toXml($hash_out,$hash_config, $type);
+		$request = Obj2xml::toXml($hash,$hash_config, $type);
 	
 		$litleOnlineResponse = $this->newXML->request($request,$hash_config);
 		return $litleOnlineResponse;

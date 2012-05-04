@@ -22,6 +22,8 @@
 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 * OTHER DEALINGS IN THE SOFTWARE.
 */
+require_once realpath(dirname(__FILE__)) . '/LitleOnline.php';
+
 function writeConfig($line,$handle){
 	foreach ($line as $keys => $values){
 		fwrite($handle, $keys. '');
@@ -50,35 +52,17 @@ function initialize(){
 		print "Please input your merchantId: ";
 		$line['currency_merchant_map ']['DEFAULT'] = trim(fgets(STDIN));
 		print "Please choose Litle url from the following list (example: 'cert') or directly input another URL: \nsandbox => https://www.testlitle.com/sandbox/communicator/online \ncert => https://cert.litle.com/vap/communicator/online \nprecert => https://precert.litle.com/vap/communicator/online \nproduction1 => https://payments.litle.com/vap/communicator/online \nproduction2 => https://payments2.litle.com/vap/communicator/online" . PHP_EOL;
-		$url = urlMapper(trim(fgets(STDIN)));
+		$url = UrlMapper::getUrl(trim(fgets(STDIN)));
 		$line['url'] = $url;
 		print "Please input the proxy, if no proxy hit enter key: ";
 		$line['proxy'] = trim(fgets(STDIN));
 		writeConfig($line,$handle);
-		fwrite($handle, "version = 8.10" .  PHP_EOL);
+		fwrite($handle, "version = 8.12" .  PHP_EOL);
 		fwrite($handle, "timeout =  65".  PHP_EOL);
-		fwrite($handle, "reportGroup = planets".  PHP_EOL);
+		fwrite($handle, "reportGroup = Default Report Group".  PHP_EOL);
 	}
 	fclose($handle);
 	print "The Litle configuration file has been generated, the file is located in the lib directory". PHP_EOL;
-}
-
-
-
-function urlMapper($litleEnv){
-	$litleOnlineCtx = 'vap/communicator/online';
-	if ($litleEnv == "sandbox")
-	return 'https://www.testlitle.com/sandbox/communicator/online';
-	elseif ($litleEnv == "cert")
-	return 'https://cert.litle.com/' . $litleOnlineCtx;
-	elseif ($litleEnv == "precert")
-	return 'https://precert.litle.com/' . $litleOnlineCtx;
-	elseif ($litleEnv == "production1")
-	return 'https://payments.litle.com/' . $litleOnlineCtx;
-	elseif ($litleEnv == "production2")
-	return 'https://payments2.litle.com/' . $litleOnlineCtx;
-	else
-	return 'https://www.testlitle.com/sandbox/communicator/online';
 }
 
 initialize();

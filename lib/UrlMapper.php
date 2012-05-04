@@ -22,22 +22,21 @@
 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 * OTHER DEALINGS IN THE SOFTWARE.
 */
-
-require_once("../../simpletest/autorun.php");
-require_once('../../simpletest/unit_tester.php');
-require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
-
-require realpath(dirname(__FILE__)) . '/test_XmlFields.php';
-require realpath(dirname(__FILE__)) .  '/test_sale.php';
-require realpath(dirname(__FILE__)) .  '/test_authorization.php';
-require realpath(dirname(__FILE__)) .  '/test_authReversal.php';
-require realpath(dirname(__FILE__)) .  '/test_credit.php';
-require realpath(dirname(__FILE__)) .  '/test_token.php';
-require realpath(dirname(__FILE__)) .  '/test_forceCapture.php';
-require realpath(dirname(__FILE__)) .  '/test_capture.php';
-require realpath(dirname(__FILE__)) .  '/test_captureGivenAuth.php';
-require realpath(dirname(__FILE__)) .  '/test_echeckRedeposit.php';
-require realpath(dirname(__FILE__)) .  '/test_echeckSale.php';
-require realpath(dirname(__FILE__)) .  '/test_echeckCredit.php';
-require realpath(dirname(__FILE__)) .  '/test_echeckVerification.php';
-require realpath(dirname(__FILE__)) .  '/test_litleOnlineRequest.php';
+class UrlMapper
+{
+	public static function getUrl($litleEnv){
+		$litleOnlineCtx = 'vap/communicator/online';
+		if ($litleEnv == "sandbox")
+			return 'https://www.testlitle.com/sandbox/communicator/online';
+		elseif ($litleEnv == "cert")
+			return 'https://cert.litle.com/' . $litleOnlineCtx;
+		elseif ($litleEnv == "precert")
+			return 'https://precert.litle.com/' . $litleOnlineCtx;
+		elseif ($litleEnv == "production1")
+			return 'https://payments.litle.com/' . $litleOnlineCtx;
+		elseif ($litleEnv == "production2")
+			return 'https://payments2.litle.com/' . $litleOnlineCtx;
+		else
+			return 'https://www.testlitle.com/sandbox/communicator/online';
+	}
+}

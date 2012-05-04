@@ -36,7 +36,7 @@ class capture_UnitTest extends UnitTestCase
 		$hash_in = array('litleTxnId'=> '12312312', 'amount'=>'123');
 		$mappTest = &new MockLitleXmlMapper();
 		$commTest = &new Mockcommunication();
-		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<litleTxnId>12312312.*<amount>123.*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"id"=>NULL,"version"=>NULL,"url"=>NULL,"timeout"=>NULL,"proxy"=>NULL)));
+		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<litleTxnId>12312312.*<amount>123.*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"version"=>NULL,"url"=>NULL,"timeout"=>NULL,"proxy"=>NULL)));
 		$litleTest = &new LitleOnlineRequest();
 		$litleTest->newXML = $mappTest;
 		$retOb = $litleTest->captureRequest($hash_in);

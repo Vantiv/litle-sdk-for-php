@@ -40,10 +40,11 @@ class auth_UnitTest extends UnitTestCase
 					'cardValidationNum' => '1213'),
 			'orderId'=> '2111',
 			'orderSource'=>'ecommerce',
+			'id'=>'654',
 			'amount'=>'123');
 		$mappTest = &new MockLitleXmlMapper();
 		$commTest = &new Mockcommunication();
-		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<card><type>VI.*<number>4100000000000001.*<expDate>1213.*<cardValidationNum>1213.*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"id"=>NULL,"version"=>NULL,"url"=>NULL,"timeout"=>NULL,"proxy"=>NULL)));
+		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<card><type>VI.*<number>4100000000000001.*<expDate>1213.*<cardValidationNum>1213.*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"version"=>NULL,"url"=>NULL,"timeout"=>NULL,"proxy"=>NULL)));
 		$litleTest = &new LitleOnlineRequest();
 		$litleTest->newXML = $mappTest;
 		$retOb = $litleTest->authorizationRequest($hash_in);
@@ -191,4 +192,57 @@ class auth_UnitTest extends UnitTestCase
 		$retOb = $litleTest->authorizationRequest($hash_in);
 	}
 
+	function test_merchant_data()
+	{
+		$hash_in = array(
+				'orderId'=> '2111',
+				'orderSource'=>'ecommerce',
+				'amount'=>'123',
+				'merchantData'=>array(
+					'campaign'=>'foo'
+				)
+		);
+		$mappTest = &new MockLitleXmlMapper();
+		$commTest = &new Mockcommunication();
+		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<merchantData>.*?<campaign>foo<\/campaign>.*?<\/merchantData>.*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"version"=>NULL,"url"=>NULL,"timeout"=>NULL,"proxy"=>NULL)));
+		$litleTest = &new LitleOnlineRequest();
+		$litleTest->newXML = $mappTest;
+		$retOb = $litleTest->authorizationRequest($hash_in);
+	}
+	
+	function test_customer_id() {
+		$hash_in = array(
+				'card'=>array('type'=>'VI',
+						'number'=>'4100000000000001',
+						'expDate'=>'1213',
+						'cardValidationNum' => '1213'),
+				'orderId'=> '2111',
+				'orderSource'=>'ecommerce',
+				'customerId'=>'gdake@litle.com',
+				'amount'=>'123');
+		$mappTest = &new MockLitleXmlMapper();
+		$commTest = &new Mockcommunication();
+		$mappTest->expectOnce('request',array(new PatternExpectation('/.*customerId="gdake@litle.com"*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"version"=>NULL,"url"=>NULL,"timeout"=>NULL,"proxy"=>NULL)));
+		$litleTest = &new LitleOnlineRequest();
+		$litleTest->newXML = $mappTest;
+		$retOb = $litleTest->authorizationRequest($hash_in);
+	}
+	
+	function test_id() {
+		$hash_in = array(
+					'card'=>array('type'=>'VI',
+							'number'=>'4100000000000001',
+							'expDate'=>'1213',
+							'cardValidationNum' => '1213'),
+					'orderId'=> '2111',
+					'orderSource'=>'ecommerce',
+					'id'=>'64575',
+					'amount'=>'123');
+		$mappTest = &new MockLitleXmlMapper();
+		$commTest = &new Mockcommunication();
+		$mappTest->expectOnce('request',array(new PatternExpectation('/.*id="64575"*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"version"=>NULL,"url"=>NULL,"timeout"=>NULL,"proxy"=>NULL)));
+		$litleTest = &new LitleOnlineRequest();
+		$litleTest->newXML = $mappTest;
+		$retOb = $litleTest->authorizationRequest($hash_in);
+	}
 }

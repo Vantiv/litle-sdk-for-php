@@ -33,7 +33,7 @@ class auth_FunctionalTest extends UnitTestCase
 	{
 		$hash_in = array(
 			'card'=>array('type'=>'VI',
-					'number'=>'4100000000000001',
+					'number'=>'4100000000000000',
 					'expDate'=>'1213',
 					'cardValidationNum' => '1213'),
 			'id'=>'1211',
@@ -134,7 +134,7 @@ class auth_FunctionalTest extends UnitTestCase
         'pos'=>array('entryMode'=>'123'),
         'card'=>array(
         'type'=>'VI',
-        'number' =>'4100000000000001',
+        'number' =>'4100000000000000',
         'expDate' =>'1210'));
 		$litleTest = &new LitleOnlineRequest();
 		$this->expectException(new Exception("Missing Required Field: /capability/"));

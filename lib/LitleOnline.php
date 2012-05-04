@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-
+define('CURRENT_XML_VERSION', '8.12');
 error_reporting(E_ALL ^ E_NOTICE);
 //ini_set('display_errors', '1');
 require_once realpath(dirname(__FILE__)) . '/LitleXmlMapper.php';
@@ -33,3 +33,4 @@ require_once realpath(dirname(__FILE__)) . '/XmlParser.php';
 require_once realpath(dirname(__FILE__)) . '/Obj2xml.php';
 require_once realpath(dirname(__FILE__)) . '/Checker.php';
 require_once realpath(dirname(__FILE__)) . '/LitleOnlineRequest.php';
+require_once realpath(dirname(__FILE__)) . '/UrlMapper.php';

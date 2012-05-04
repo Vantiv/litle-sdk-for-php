@@ -33,7 +33,7 @@ class credit_FunctionalTest extends UnitTestCase
 	{
 		$hash_in = array(
 			'card'=>array('type'=>'VI',
-					'number'=>'4100000000000001',
+					'number'=>'4100000000000000',
 					'expDate'=>'1213',
 					'cardValidationNum' => '1213'),
 			'id'=>'1211',
@@ -72,13 +72,13 @@ class credit_FunctionalTest extends UnitTestCase
 		$initilaize = &new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
 		$message= XmlParser::getAttribute($creditResponse,'litleOnlineResponse','response');
-		$this->assertEqual("1",$message);
+		$this->assertEqual("0",$message);
 	}
 	function test_paypal_notes()
 	{
 		$hash_in = array(
 				'card'=>array('type'=>'VI',
-						'number'=>'4100000000000001',
+						'number'=>'4100000000000000',
 						'expDate'=>'1213',
 						'cardValidationNum' => '1213'),
 				'id'=>'1211',
@@ -102,7 +102,7 @@ class credit_FunctionalTest extends UnitTestCase
 	      'processingInstuctions'=>array('bypassVelocityCheck'=>'yes'),
 	      'card'=>array(
 	      'type'=>'VI',
-	      'number' =>'4100000000000001',
+	      'number' =>'4100000000000000',
 	      'expDate' =>'1210'),
 	      'amexAggregatorData'=>array('sellerMerchantCategoryCode'=>'1234','sellerId'=>'1234Id'));
 	

@@ -22,37 +22,44 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-
 require_once("../../simpletest/autorun.php");
 require_once('../../simpletest/unit_tester.php');
 require_once('../../simpletest/mock_objects.php');
-
 require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
-
 Mock::generate('communication');
 Mock::generate('LitleXmlMapper');
 
-class echeckSale_UnitTest extends UnitTestCase
+class LitleOnlineRequest_UnitTest extends UnitTestCase
 {
-	function test_simple_echeckSale()
+	function test_set_merchant_sdk_integration()
 	{
-		$hash_in = array('litleTxnId' =>'123123');
+		$hash_in = array(
+			'merchantSdk'=>'Magento;8.14.3',
+			'orderId'=> '2111',
+			'id'=>'654',
+			'orderSource'=>'ecommerce',
+			'amount'=>'123');
 		$mappTest = &new MockLitleXmlMapper();
 		$commTest = &new Mockcommunication();
-		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<litleTxnId>123123.*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"version"=>NULL,"url"=>NULL,"timeout"=>NULL,"proxy"=>NULL)));
+		$mappTest->expectOnce('request',array(new PatternExpectation('/.*merchantSdk="Magento;8.14.3".*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"version"=>NULL,"url"=>NULL,"timeout"=>NULL,"proxy"=>NULL,)));
 		$litleTest = &new LitleOnlineRequest();
 		$litleTest->newXML = $mappTest;
-		$retOb = $litleTest->echeckSaleRequest($hash_in);
+		$retOb = $litleTest->authorizationRequest($hash_in);
 	}
 
-	function test_both_choices()
+	function test_set_merchant_sdk_default()
 	{
-		$hash_in = array('reportGroup'=>'Planets','litleTxnId'=>'123456',
-		'echeckToken' => array('accType'=>'Checking','routingNum'=>'123123','litleToken'=>'1234565789012','checkNum'=>'123455'),
-		'echeck' => array('accType'=>'Checking','routingNum'=>'123123','accNum'=>'12345657890','checkNum'=>'123455'));
+		$hash_in = array(
+				'orderId'=> '2111',
+				'id'=>'654',
+				'orderSource'=>'ecommerce',
+				'amount'=>'123');
+		$mappTest = &new MockLitleXmlMapper();
+		$commTest = &new Mockcommunication();
+		$mappTest->expectOnce('request',array(new PatternExpectation('/.*merchantSdk="PHP;8.12.1".*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"version"=>NULL,"url"=>NULL,"timeout"=>NULL,"proxy"=>NULL,)));
 		$litleTest = &new LitleOnlineRequest();
-		$this->expectException(new Exception("Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!"));
-		$retOb = $litleTest->echeckSaleRequest($hash_in);
+		$litleTest->newXML = $mappTest;
+		$retOb = $litleTest->authorizationRequest($hash_in);
 	}
 	
 }

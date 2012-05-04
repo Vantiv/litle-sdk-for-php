@@ -39,7 +39,7 @@ class echeckVerification_UnitTest extends UnitTestCase
 		$mappTest = &new MockLitleXmlMapper();
 		$commTest = &new Mockcommunication();
 	
-		$mappTest->expectOnce('request',array((new PatternExpectation('/.*<echeckToken>.*<accType>Checking.*/')),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"id"=>NULL,"version"=>NULL,"url"=>NULL,"timeout"=>NULL,"proxy"=>NULL)));
+		$mappTest->expectOnce('request',array((new PatternExpectation('/.*<echeckToken>.*<accType>Checking.*/')),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"version"=>NULL,"url"=>NULL,"timeout"=>NULL,"proxy"=>NULL)));
 		$litleTest = &new LitleOnlineRequest();
 		$litleTest->newXML = $mappTest;
 		$retOb = $litleTest->echeckVerificationRequest($hash_in);

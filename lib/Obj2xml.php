@@ -22,6 +22,7 @@
 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 * OTHER DEALINGS IN THE SOFTWARE.
 */
+require_once realpath(dirname(__FILE__)) . '/LitleOnline.php';
 class Obj2xml {
 
 	public static function toXml($data, $hash_config, $type, $rootNodeName = 'litleOnlineRequest', $xml=null)
@@ -30,6 +31,8 @@ class Obj2xml {
 		$xml = simplexml_load_string("<?xml version='1.0' encoding='utf-8'?><$rootNodeName />");
 		$xml-> addAttribute('merchantId',$config["merchantId"]);
 		$xml-> addAttribute('version',$config["version"]);
+		$xml-> addAttribute('merchantSdk',$data['merchantSdk']);
+		unset($data['merchantSdk']);
 		$xml-> addAttribute('xmlns:xmlns','http://www.litle.com/schema');// does not show up on browser docs
 		$authentication = $xml->addChild('authentication');
 		$authentication->addChild('user',$config["user"]);
@@ -39,16 +42,17 @@ class Obj2xml {
 			($transacType-> addAttribute('partial',$data["partial"]));
 		};
 		unset($data['partial']);
-		#merchant SDK attribute $transacType-> addAttribute('partial',$data["partial"])
-		if(isset($config['customerId'])) {
-			($transacType-> addAttribute('customerId',$config["customerId"]));
+		if(isset($data['customerId'])) {
+			($transacType-> addAttribute('customerId',$data["customerId"]));
 		};
+		unset($data['customerId']);
 		if(isset($config['reportGroup'])) {
 			($transacType-> addAttribute('reportGroup',$config["reportGroup"]));
 		};
-		if(isset($config['id'])) {
-			($transacType-> addAttribute('id',$config["id"]));
+		if(isset($data['id'])) {
+			($transacType-> addAttribute('id',$data["id"]));
 		};
+		unset($data['id']);
 		Obj2xml::iterateChildren($data,$transacType);
 		return $xml->asXML();
 	}
@@ -82,6 +86,10 @@ class Obj2xml {
 			}else{
 				if ($name == 'merchantId'){
 					$config['merchantId'] = $config_array['currency_merchant_map']['DEFAULT'];
+				}else if ($name == 'version'){
+					$config['version'] = isset($config_array['version'])? $config_array['version']:CURRENT_XML_VERSION;
+				}else if ($name == 'timeout'){
+						$config['timeout'] = isset($config_array['timeout'])? $config_array['timeout']:'65';
 				}else {
 					if ((!isset($config_array[$name])) and ($name != 'proxy')){
 						throw new Exception("Missing Field /$name/");
