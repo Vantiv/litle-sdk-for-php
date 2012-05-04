@@ -56,7 +56,7 @@ class Obj2xml {
 	private function iterateChildren($data,$transacType){
 		foreach($data as $key => $value)
 		{
-			if ($value == "REQUIRED"){
+			if ($value === "REQUIRED"){
 				throw new Exception("Missing Required Field: /$key/");
 			}elseif (((is_string($value)) || is_numeric($value))) {
 				$transacType->addChild($key,$value);
