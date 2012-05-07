@@ -49,6 +49,33 @@ class auth_UnitTest extends UnitTestCase
 		$litleTest->newXML = $mappTest;
 		$retOb = $litleTest->authorizationRequest($hash_in);
 	}
+	
+	function test_muliple_lineItemData()
+	{
+		$lineItemData = array(
+		array('itemSequenceNumber' => '1','itemDescription'=>'desc'),
+		array('itemSequenceNumber' => '2','itemDescription'=>'desc2'));
+		
+		$hash_in = array(
+					'card'=>array('type'=>'VI',
+							'number'=>'4100000000000001',
+							'expDate'=>'1213',
+							'cardValidationNum' => '1213'),
+					'orderId'=> '2111',
+					'orderSource'=>'ecommerce',
+					'id'=>'654',
+					'enhancedData'=>array('salesTax'=> '123',
+					'shippingAmount'=>'123',	
+					$lineItemData),
+					'amount'=>'123');
+		
+		$mappTest = &new MockLitleXmlMapper();
+		$commTest = &new Mockcommunication();
+		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<enhancedData>.*<lineItemData>.*<itemSequenceNumber>.*<lineItemData>.*<itemSequenceNumber>.*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"version"=>NULL,"url"=>NULL,"timeout"=>NULL,"proxy"=>NULL)));
+		$litleTest = &new LitleOnlineRequest();
+		$litleTest->newXML = $mappTest;
+		$retOb = $litleTest->authorizationRequest($hash_in);
+	}
 
 	
 	function test_no_orderId()

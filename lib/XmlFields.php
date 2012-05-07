@@ -252,9 +252,18 @@ class XmlFields
 						"destinationCountryCode"=>XmlFields::returnArrayValue($hash_in, "destinationCountryCode"),
 						"invoiceReferenceNumber"=>XmlFields::returnArrayValue($hash_in, "invoiceReferenceNumber"),
 						"orderDate"=>XmlFields::returnArrayValue($hash_in, "orderDate"),
-						"detailTax"=>(XmlFields::detailTax(XmlFields::returnArrayValue($hash_in, "detailTax"))),
-						"lineItemData"=>(XmlFields::lineItemData(XmlFields::returnArrayValue($hash_in, "lineItemData")))
+						"detailTax"=>(XmlFields::detailTax(XmlFields::returnArrayValue($hash_in, "detailTax")))
 			);
+			foreach ($hash_in as $key => $value){
+				$lineItem = array();
+				if ($key == 'lineItemData'){
+					for($j=0; $j<count($value); $j++){
+						$lineItem[('lineItemData' . (string)$j)] = XmlFields::lineItemData($value[$j]);
+					}
+				$hash_out = array_merge($lineItem,$hash_out);
+				}
+			}
+			
 			return $hash_out;
 		}
 	}

@@ -62,6 +62,9 @@ class Obj2xml {
 		{
 			if ($value === "REQUIRED"){
 				throw new Exception("Missing Required Field: /$key/");
+			}elseif (substr($key,0,-1) == 'lineItemData'){
+				$temp_node = $transacType->addChild('lineItemData');
+				Obj2xml::iterateChildren($value,$temp_node);
 			}elseif (((is_string($value)) || is_numeric($value))) {
 				$transacType->addChild($key,$value);
 			}elseif(is_array($value))

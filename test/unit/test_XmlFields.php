@@ -190,7 +190,7 @@ class Tests_XmlFields extends UnitTestCase{
 		"detailTax"=> (array("taxAmount" => "high")));
 		$hash_out = XmlFields::enhancedData($hash);
 		$this->assertEqual($hash_out["customerReference"], "yes");
-		$this->assertEqual($hash_out["lineItemData"]["lineItemTotal"],"1");
+		//$this->assertEqual($hash_out["lineItemData"]["lineItemTotal"],"1");
 		$this->assertEqual($hash_out["discountAmount"], NULL);
 		$this->assertEqual($hash_out["lineItemData"]["lineItemTotalWithTax"],NULL);
 		$this->assertEqual($hash_out["detailTax"]["taxAmount"],"high");
@@ -353,6 +353,8 @@ class Tests_XmlFields extends UnitTestCase{
 		$hash_out = XmlFields::recyclingRequestType($hash);
 		$this->assertEqual($hash_out["recycleBy"], "recylingbin");
 	}
+	
+	
 }
 
 
