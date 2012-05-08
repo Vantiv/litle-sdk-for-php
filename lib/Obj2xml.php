@@ -65,6 +65,9 @@ class Obj2xml {
 			}elseif (substr($key,0,-1) == 'lineItemData'){
 				$temp_node = $transacType->addChild('lineItemData');
 				Obj2xml::iterateChildren($value,$temp_node);
+			}elseif (substr($key,0,-1) == 'detailTax'){
+				$temp_node = $transacType->addChild('detailTax');
+				Obj2xml::iterateChildren($value,$temp_node);
 			}elseif (((is_string($value)) || is_numeric($value))) {
 				$transacType->addChild($key,$value);
 			}elseif(is_array($value))
