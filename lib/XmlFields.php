@@ -353,23 +353,6 @@ class XmlFields
 		}
 	}
 
-	public static function shortenUrl($url){
-		if (strlen($url)>13){
-			$url = str_replace('http://','',$url);
-			$url = str_replace('https://','',$url);
-			$url = str_replace('www.','',$url);
-			$url_temp = explode('/',$url);
-			$url = $url_temp['0'];
-			if (strlen($url)>13){
-				$url = str_replace('.com','',$url);
-				$url = str_replace('.org','',$url);
-				$url = str_replace('.gov','',$url);
-				$url = str_replace('.net','',$url);
-			}
-			$url = substr($url,0,12);
-		}
-		return $url;
-	}
 
 	public static function customBilling($hash_in)
 	{
@@ -378,7 +361,7 @@ class XmlFields
 			$hash_out = array(
 						"phone"=>XmlFields::returnArrayValue($hash_in, "phone"),
 						"city" =>XmlFields::returnArrayValue($hash_in, "city"),
-						"url" =>XmlFields::shortenUrl(XmlFields::returnArrayValue($hash_in, "url")),
+						"url" =>XmlFields::returnArrayValue($hash_in, "url"),
 						"descriptor" =>XmlFields::returnArrayValue($hash_in, "descriptor")
 			);
 			return $hash_out;
