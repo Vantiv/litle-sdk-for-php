@@ -66,12 +66,39 @@ class auth_UnitTest extends UnitTestCase
 					'id'=>'654',
 					'enhancedData'=>array('salesTax'=> '123',
 					'shippingAmount'=>'123',	
-					$lineItemData),
+					'lineItemData'=>$lineItemData),
 					'amount'=>'123');
 		
 		$mappTest = &new MockLitleXmlMapper();
 		$commTest = &new Mockcommunication();
 		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<enhancedData>.*<lineItemData>.*<itemSequenceNumber>.*<lineItemData>.*<itemSequenceNumber>.*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"version"=>NULL,"url"=>NULL,"timeout"=>NULL,"proxy"=>NULL)));
+		$litleTest = &new LitleOnlineRequest();
+		$litleTest->newXML = $mappTest;
+		$retOb = $litleTest->authorizationRequest($hash_in);
+	}
+	
+	function test_muliple_detailTax()
+	{
+		$detailTax = array(
+		array('taxAmount' => '0', 'cardAcceptorTaxId' => '0'),
+		array('taxAmount' => '1', 'cardAcceptorTaxId' => '1'));
+	
+		$hash_in = array(
+						'card'=>array('type'=>'VI',
+								'number'=>'4100000000000001',
+								'expDate'=>'1213',
+								'cardValidationNum' => '1213'),
+						'orderId'=> '2111',
+						'orderSource'=>'ecommerce',
+						'id'=>'654',
+						'enhancedData'=>array('salesTax'=> '123',
+						'shippingAmount'=>'123',	
+						'detailTax'=>$detailTax),
+						'amount'=>'123');
+	
+		$mappTest = &new MockLitleXmlMapper();
+		$commTest = &new Mockcommunication();
+		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<enhancedData>.*<detailTax>.*<taxAmount>.*<detailTax>.*<taxAmount>.*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"version"=>NULL,"url"=>NULL,"timeout"=>NULL,"proxy"=>NULL)));
 		$litleTest = &new LitleOnlineRequest();
 		$litleTest->newXML = $mappTest;
 		$retOb = $litleTest->authorizationRequest($hash_in);
