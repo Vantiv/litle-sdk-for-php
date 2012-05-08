@@ -1,6 +1,6 @@
 <?php
 /*
-* Copyright (c) 2011 Litle & Co.
+ * Copyright (c) 2011 Litle & Co.
 *
 * Permission is hereby granted, free of charge, to any person
 * obtaining a copy of this software and associated documentation
@@ -128,8 +128,8 @@ class XmlFields
 			return $hash_out;
 		}
 	}
-	
-	
+
+
 	public static function authInformation($hash_in)
 	{
 		if (isset($hash_in))
@@ -267,7 +267,7 @@ class XmlFields
 					}
 				}
 			}
-			
+				
 			return $hash_out;
 		}
 	}
@@ -353,6 +353,24 @@ class XmlFields
 		}
 	}
 
+	public static function shortenUrl($url){
+		if (strlen($url)>13){
+			$url = str_replace('http://','',$url);
+			$url = str_replace('https://','',$url);
+			$url = str_replace('www.','',$url);
+			$url_temp = explode('/',$url);
+			$url = $url_temp['0'];
+			if (strlen($url)>13){
+				$url = str_replace('.com','',$url);
+				$url = str_replace('.org','',$url);
+				$url = str_replace('.gov','',$url);
+				$url = str_replace('.net','',$url);
+			}
+			$url = substr($url,0,12);
+		}
+		return $url;
+	}
+
 	public static function customBilling($hash_in)
 	{
 		if (isset($hash_in))
@@ -360,7 +378,7 @@ class XmlFields
 			$hash_out = array(
 						"phone"=>XmlFields::returnArrayValue($hash_in, "phone"),
 						"city" =>XmlFields::returnArrayValue($hash_in, "city"),
-						"url" =>XmlFields::returnArrayValue($hash_in, "url"),
+						"url" =>XmlFields::shortenUrl(XmlFields::returnArrayValue($hash_in, "url")),
 						"descriptor" =>XmlFields::returnArrayValue($hash_in, "descriptor")
 			);
 			return $hash_out;
