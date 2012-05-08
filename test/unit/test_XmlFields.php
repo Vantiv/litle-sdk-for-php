@@ -192,9 +192,9 @@ class Tests_XmlFields extends UnitTestCase{
 		$this->assertEqual($hash_out["customerReference"], "yes");
 		//$this->assertEqual($hash_out["lineItemData"]["lineItemTotal"],"1");
 		$this->assertEqual($hash_out["discountAmount"], NULL);
-		$this->assertEqual($hash_out["lineItemData"]["lineItemTotalWithTax"],NULL);
-		$this->assertEqual($hash_out["detailTax"]["taxAmount"],"high");
-		$this->assertEqual($hash_out["detailTax"]["taxRate"],NULL);
+		//$this->assertEqual($hash_out["lineItemData"]["lineItemTotalWithTax"],NULL);
+		//$this->assertEqual($hash_out["detailTax"]["taxAmount"],"high");
+		//$this->assertEqual($hash_out["detailTax"]["taxRate"],NULL);
 	}
 	function test_simple_amexAggregatorData()
 	{
