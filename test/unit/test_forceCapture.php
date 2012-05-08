@@ -22,14 +22,9 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-require_once("../../simpletest/autorun.php");
-require_once('../../simpletest/unit_tester.php');
-require_once('../../simpletest/mock_objects.php');
 require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
-Mock::generate('communication');
-Mock::generate('LitleXmlMapper');
 
-class forceCapture_UnitTest extends UnitTestCase
+class forceCapture_UnitTest extends PHPUnit_Framework_TestCase
 {
 	function test_simple_forcCapture()
 	{
@@ -43,12 +38,14 @@ class forceCapture_UnitTest extends UnitTestCase
       'expDate'=>'1210',
       'cardValidationNum'=>'555',
       'type'=>'VI'));
-		$mappTest = &new MockLitleXmlMapper();
-		$commTest = &new Mockcommunication();
-		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<token><litleToken>123456789101112.*<expDate>1210.*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"version"=>NULL,"url"=>NULL,"timeout"=>NULL,"proxy"=>NULL)));
-		$litleTest = &new LitleOnlineRequest();
-		$litleTest->newXML = $mappTest;
-		$retOb = $litleTest->forceCaptureRequest($hash_in);
+		$mock = $this->getMock('LitleXmlMapper');
+		$mock->expects($this->once())
+		->method('request')
+		->with($this->matchesRegularExpression('/.*<token><litleToken>123456789101112.*<expDate>1210.*/'));
+		
+		$litleTest = new LitleOnlineRequest();
+		$litleTest->newXML = $mock;
+		$litleTest->forceCaptureRequest($hash_in);
 	}
 	function test_no_orderId()
 	{
@@ -62,8 +59,8 @@ class forceCapture_UnitTest extends UnitTestCase
        'expDate'=>'1210',
        'cardValidationNum'=>'555',
        'type'=>'VI'));
-		$litleTest = &new LitleOnlineRequest();
-		$this->expectException(new Exception("Missing Required Field: /orderId/"));
+		$litleTest = new LitleOnlineRequest();
+		$this->setExpectedException('InvalidArgumentException',"Missing Required Field: /orderId/");
 		$retOb = $litleTest->forceCaptureRequest($hash_in);
 	}
 	function test_no_orderSource()
@@ -78,8 +75,8 @@ class forceCapture_UnitTest extends UnitTestCase
 	       'expDate'=>'1210',
 	       'cardValidationNum'=>'555',
 	       'type'=>'VI'));
-		$litleTest = &new LitleOnlineRequest();
-		$this->expectException(new Exception("Missing Required Field: /orderSource/"));
+		$litleTest = new LitleOnlineRequest();
+		$this->setExpectedException('InvalidArgumentException',"Missing Required Field: /orderSource/");
 		$retOb = $litleTest->forceCaptureRequest($hash_in);
 	}
 	function test_both_card_and_token()
@@ -102,8 +99,8 @@ class forceCapture_UnitTest extends UnitTestCase
       'expDate'=>'1210',
       'cardValidationNum'=>'555',
       'type'=>'VI'));
-		$litleTest = &new LitleOnlineRequest();
-		$this->expectException(new Exception("Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!"));
+		$litleTest = new LitleOnlineRequest();
+		$this->setExpectedException('InvalidArgumentException',"Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
 		$retOb = $litleTest->forceCaptureRequest($hash_in);
 	}
 	function test_all_choices()
@@ -131,8 +128,8 @@ class forceCapture_UnitTest extends UnitTestCase
 	      'expDate'=>'1210',
 	      'cardValidationNum'=>'555',
 	      'type'=>'VI'));
-		$litleTest = &new LitleOnlineRequest();
-		$this->expectException(new Exception("Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!"));
+		$litleTest = new LitleOnlineRequest();
+		$this->setExpectedException('InvalidArgumentException',"Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
 		$retOb = $litleTest->forceCaptureRequest($hash_in);
 	}
 }

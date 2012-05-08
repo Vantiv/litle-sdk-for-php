@@ -23,11 +23,9 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-require_once("../../simpletest/autorun.php");
-require_once('../../simpletest/unit_tester.php');
 require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
 
-class capture_FunctionalTest extends UnitTestCase
+class capture_FunctionalTest extends PHPUnit_Framework_TestCase
 {
 	function test_simple_capture()
 	{
@@ -35,10 +33,10 @@ class capture_FunctionalTest extends UnitTestCase
 			'litleTxnId'=>'1234567891234567891',
 			'amount'=>'123');
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$captureResponse = $initilaize->captureRequest($hash_in);
 		$message = XmlParser::getAttribute($captureResponse,'litleOnlineResponse','response');
-		$this->assertEqual('0',$message);
+		$this->assertEquals('0',$message);
 	}
 
 	function test_complex_capture()
@@ -51,10 +49,10 @@ class capture_FunctionalTest extends UnitTestCase
      		 'deliveryType'=>'TBD'),
     		  'payPalOrderComplete'=>'true');
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$captureResponse = $initilaize->captureRequest($hash_in);
 		$message = XmlParser::getAttribute($captureResponse,'litleOnlineResponse','response');
-		$this->assertEqual('0',$message);
+		$this->assertEquals('0',$message);
 	}
 
 	function test_simple_capture_with_partial()
@@ -64,9 +62,9 @@ class capture_FunctionalTest extends UnitTestCase
 			'patial'=>'true',
 			'amount'=>'123');
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$captureResponse = $initilaize->captureRequest($hash_in);
 		$message = XmlParser::getAttribute($captureResponse,'litleOnlineResponse','response');
-		$this->assertEqual('0',$message);
+		$this->assertEquals('0',$message);
 	}
 }

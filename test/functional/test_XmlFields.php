@@ -23,11 +23,9 @@
 * OTHER DEALINGS IN THE SOFTWARE.
 */
 
-require_once("../../simpletest/autorun.php");
-require_once('../../simpletest/unit_tester.php');
 require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
 
-class XmlFields_FunctionalTest extends UnitTestCase
+class XmlFields_FunctionalTest extends PHPUnit_Framework_TestCase
 {
 	function test_card_no_type_or_track()
 	{
@@ -45,10 +43,10 @@ class XmlFields_FunctionalTest extends UnitTestCase
 	      'cardValidationNum'=> '123'
 		));
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$saleResponse = $initilaize->saleRequest($hash_in);
 		$message= XmlParser::getAttribute($saleResponse,'litleOnlineResponse','message');
-		$this->assertPattern('/Error validating xml data against the schema/',$message);
+		$this->assertRegExp('/Error validating xml data against the schema/',$message);
 	}
 
 
@@ -70,10 +68,10 @@ class XmlFields_FunctionalTest extends UnitTestCase
 	      'expDate' =>'1210')
 		);
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$saleResponse = $initilaize->saleRequest($hash_in);
 		$message = XmlParser::getAttribute($saleResponse,'litleOnlineResponse','message');
-		$this->assertEqual('Valid Format',$message);
+		$this->assertEquals('Valid Format',$message);
 	}
 
 
@@ -95,10 +93,10 @@ class XmlFields_FunctionalTest extends UnitTestCase
 	      'expDate' =>'1210'
 		));
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$saleResponse = $initilaize->saleRequest($hash_in);
 		$response= XmlParser::getAttribute($saleResponse,'litleOnlineResponse','response');
-		$this->assertEqual("000",$response);
+		$this->assertEquals("000",$response);
 	}
 
 	function test_customerInfo()
@@ -117,10 +115,10 @@ class XmlFields_FunctionalTest extends UnitTestCase
 	      'expDate' =>'1210'
 		));
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$saleResponse = $initilaize->saleRequest($hash_in);
 		$message= XmlParser::getAttribute($saleResponse,'litleOnlineResponse','message');
-		$this->assertEqual("Valid Format",$message);
+		$this->assertEquals("Valid Format",$message);
 	}
 
 	function test_simple_billtoAddress()
@@ -137,10 +135,10 @@ class XmlFields_FunctionalTest extends UnitTestCase
       'number' =>'4100000000000000',
       'expDate' =>'1210'));
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($hash_in);
 		$message= XmlParser::getAttribute($authorizationResponse,'litleOnlineResponse','message');
-		$this->assertEqual("Valid Format",$message);
+		$this->assertEquals("Valid Format",$message);
 	}
 
 	function test_processingInstructions()
@@ -157,10 +155,10 @@ class XmlFields_FunctionalTest extends UnitTestCase
       'number' =>'4100000000000000',
       'expDate' =>'1210'));
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($hash_in);
 		$message= XmlParser::getAttribute($authorizationResponse,'litleOnlineResponse','message');
-		$this->assertEqual("Valid Format",$message);
+		$this->assertEquals("Valid Format",$message);
 	}
 
 	function test_pos()
@@ -177,10 +175,10 @@ class XmlFields_FunctionalTest extends UnitTestCase
       'number' =>'4100000000000000',
       'expDate' =>'1210'));
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($hash_in);
 		$message= XmlParser::getAttribute($authorizationResponse,'litleOnlineResponse','message');
-		$this->assertEqual("Valid Format",$message);
+		$this->assertEquals("Valid Format",$message);
 	}
 
 	function test_pos_with_invalid_entryMode()
@@ -198,10 +196,10 @@ class XmlFields_FunctionalTest extends UnitTestCase
       'number' =>'4100000000000000',
       'expDate' =>'1210'));
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$saleResponse = $initilaize->saleRequest($hash_in);
 		$message= XmlParser::getAttribute($saleResponse,'litleOnlineResponse','message');
-		$this->assertPattern('/Error validating xml data against the schema/',$message);
+		$this->assertRegExp('/Error validating xml data against the schema/',$message);
 	}
 
 	function test_amexAggregatorData()
@@ -218,10 +216,10 @@ class XmlFields_FunctionalTest extends UnitTestCase
       'orderSource'=>'ecommerce',
       'amexAggregatorData'=>array('sellerMerchantCategoryCode'=>'1234','sellerId'=>'1234Id'));
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
 		$message= XmlParser::getAttribute($creditResponse,'litleOnlineResponse','message');
-		$this->assertEqual("Valid Format",$message);
+		$this->assertEquals("Valid Format",$message);
 	}
 
 	function test_amexAggregatorData_missing_sellerId()
@@ -239,10 +237,10 @@ class XmlFields_FunctionalTest extends UnitTestCase
 	      'expDate' =>'1210'),
 	      'amexAggregatorData'=>array('sellerMerchantCategoryCode'=>'1234'));
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
 		$message= XmlParser::getAttribute($creditResponse,'litleOnlineResponse','message');
-		$this->assertPattern('/Error validating xml data against the schema/',$message);
+		$this->assertRegExp('/Error validating xml data against the schema/',$message);
 	}
 
 
@@ -266,10 +264,10 @@ class XmlFields_FunctionalTest extends UnitTestCase
       'shipFromPostalCode'=>'01741',
       'destinationPostalCode'=>'01742'));
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
 		$message= XmlParser::getAttribute($creditResponse,'litleOnlineResponse','message');
-		$this->assertEqual("Valid Format",$message);
+		$this->assertEquals("Valid Format",$message);
 	}
 
 	function test_simple_enhancedData_incorrect_enum_for_countryCode()
@@ -293,10 +291,10 @@ class XmlFields_FunctionalTest extends UnitTestCase
 	      'shipFromPostalCode'=>'01741',
 	      'destinationPostalCode'=>'01742'));
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
 		$message= XmlParser::getAttribute($creditResponse,'litleOnlineResponse','message');
-		$this->assertPattern('/Error validating xml data against the schema/',$message);
+		$this->assertRegExp('/Error validating xml data against the schema/',$message);
 	}
 
 	function test_enhancedData_with_detailtax()
@@ -320,10 +318,10 @@ class XmlFields_FunctionalTest extends UnitTestCase
 	      'shipFromPostalCode'=>'01741',
 	      'destinationPostalCode'=>'01742'));
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
 		$message= XmlParser::getAttribute($creditResponse,'litleOnlineResponse','message');
-		$this->assertEqual("Valid Format",$message);
+		$this->assertEquals("Valid Format",$message);
 	}
 
 	function test_enhancedData_with_lineItem()
@@ -354,10 +352,10 @@ class XmlFields_FunctionalTest extends UnitTestCase
 	      'shipFromPostalCode'=>'01741',
 	      'destinationPostalCode'=>'01742'));
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
 		$message= XmlParser::getAttribute($creditResponse,'litleOnlineResponse','message');
-		$this->assertEqual("Valid Format",$message);
+		$this->assertEquals("Valid Format",$message);
 	}
 
 	function test_simple_token()
@@ -374,10 +372,10 @@ class XmlFields_FunctionalTest extends UnitTestCase
       'cardValidationNum'=>'555',
       'type'=>'VI'));
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
 		$message= XmlParser::getAttribute($creditResponse,'litleOnlineResponse','message');
-		$this->assertEqual("Valid Format",$message);
+		$this->assertEquals("Valid Format",$message);
 	}
 
 	function test_token_with_incorrect_token_length()
@@ -394,10 +392,10 @@ class XmlFields_FunctionalTest extends UnitTestCase
       'cardValidationNum'=>'555',
       'type'=>'VI'));
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
 		$message= XmlParser::getAttribute($creditResponse,'litleOnlineResponse','message');
-		$this->assertPattern('/Error validating xml data against the schema/',$message);
+		$this->assertRegExp('/Error validating xml data against the schema/',$message);
 	}
 
 	function test_token_missing_expDat_and_validationNum()
@@ -412,10 +410,10 @@ class XmlFields_FunctionalTest extends UnitTestCase
       'litleToken'=>'123456789101112',
       'type'=>'VI'));
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
 		$message= XmlParser::getAttribute($creditResponse,'litleOnlineResponse','message');
-		$this->assertEqual("Valid Format",$message);
+		$this->assertEquals("Valid Format",$message);
 	}
 
 	function test_simple_paypage()
@@ -432,10 +430,10 @@ class XmlFields_FunctionalTest extends UnitTestCase
       'cardValidationNum'=>'555',
       'type'=>'VI'));
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
 		$message= XmlParser::getAttribute($creditResponse,'litleOnlineResponse','message');
-		$this->assertEqual("Valid Format",$message);
+		$this->assertEquals("Valid Format",$message);
 	}
 
 	function test_paypage_missing_expDate_and_validationNum()
@@ -450,10 +448,10 @@ class XmlFields_FunctionalTest extends UnitTestCase
 	      'paypageRegistrationId'=>'123456789101112',
 	      'type'=>'VI'));
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
 		$message= XmlParser::getAttribute($creditResponse,'litleOnlineResponse','message');
-		$this->assertEqual("Valid Format",$message);
+		$this->assertEquals("Valid Format",$message);
 	}
 
 

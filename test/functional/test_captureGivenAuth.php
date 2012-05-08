@@ -23,11 +23,9 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-require_once("../../simpletest/autorun.php");
-require_once('../../simpletest/unit_tester.php');
 require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
 
-class captureGivenAuth_FunctionalTest extends UnitTestCase
+class captureGivenAuth_FunctionalTest extends PHPUnit_Framework_TestCase
 {
  	function test_simple_captureGivenAuth()
  	{
@@ -43,10 +41,10 @@ class captureGivenAuth_FunctionalTest extends UnitTestCase
        'number' =>'4100000000000000',
        'expDate' =>'1210'));
 
- 		$initilaize = &new LitleOnlineRequest();
+ 		$initilaize = new LitleOnlineRequest();
  		$captureGivenAuthResponse = $initilaize->captureGivenAuthRequest($hash_in);
  		$message = XmlParser::getNode($captureGivenAuthResponse,'message');
- 		$this->assertEqual('Approved',$message);
+ 		$this->assertEquals('Approved',$message);
  	}
 	
  	function test_simple_captureGivenAuth_with_token()
@@ -63,10 +61,10 @@ class captureGivenAuth_FunctionalTest extends UnitTestCase
  	      'litleToken' =>'123456789101112',
  	      'expDate' =>'1210'));
 	
- 		$initilaize = &new LitleOnlineRequest();
+ 		$initilaize = new LitleOnlineRequest();
  		$captureGivenAuthResponse = $initilaize->captureGivenAuthRequest($hash_in);
  		$message = XmlParser::getNode($captureGivenAuthResponse,'message');
- 		$this->assertEqual('Approved',$message);
+ 		$this->assertEquals('Approved',$message);
  	}
 	
  	function test_complex_captureGivenAuth()
@@ -85,10 +83,10 @@ class captureGivenAuth_FunctionalTest extends UnitTestCase
        'number' =>'4100000000000000',
        'expDate' =>'1210'));
 	
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
  		$captureGivenAuthResponse = $initilaize->captureGivenAuthRequest($hash_in);
  		$message = XmlParser::getNode($captureGivenAuthResponse,'message');
- 		$this->assertEqual('Approved',$message);
+ 		$this->assertEquals('Approved',$message);
  	}
 	
  	function test_authInfo()
@@ -106,10 +104,10 @@ class captureGivenAuth_FunctionalTest extends UnitTestCase
  	      'number' =>'4100000000000000',
  	      'expDate' =>'1210'));
 	
- 		$initilaize = &new LitleOnlineRequest();
+ 		$initilaize = new LitleOnlineRequest();
  		$captureGivenAuthResponse = $initilaize->captureGivenAuthRequest($hash_in);
  		$message = XmlParser::getNode($captureGivenAuthResponse,'message');
- 		$this->assertEqual('Approved',$message);
+ 		$this->assertEquals('Approved',$message);
  	}
 	
 }

@@ -22,24 +22,21 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-require_once("../../simpletest/autorun.php");
-require_once('../../simpletest/unit_tester.php');
-require_once('../../simpletest/mock_objects.php');
 require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
-Mock::generate('communication');
-Mock::generate('LitleXmlMapper');
 
-class echeckCredit_UnitTest extends UnitTestCase
+class echeckCredit_UnitTest extends PHPUnit_Framework_TestCase
 {
 	function test_simple_echeckCredit()
 	{
 		$hash_in = array('litleTxnId' =>'123123');
-		$mappTest = &new MockLitleXmlMapper();
-		$commTest = &new Mockcommunication();
-		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<litleTxnId>123123.*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"version"=>NULL,"url"=>NULL,"timeout"=>NULL,"proxy"=>NULL)));
-		$litleTest = &new LitleOnlineRequest();
-		$litleTest->newXML = $mappTest;
-		$retOb = $litleTest->echeckCreditRequest($hash_in);
+		$mock = $this->getMock('LitleXmlMapper');
+		$mock->expects($this->once())
+		->method('request')
+		->with($this->matchesRegularExpression('/.*<litleTxnId>123123.*/'));
+		
+		$litleTest = new LitleOnlineRequest();
+		$litleTest->newXML = $mock;
+		$litleTest->echeckCreditRequest($hash_in);
 	}
 
 	
@@ -48,8 +45,8 @@ class echeckCredit_UnitTest extends UnitTestCase
 		$hash_in = array('reportGroup'=>'Planets','litleTxnId'=>'123456',
 		'echeckToken' => array('accType'=>'Checking','routingNum'=>'123123','litleToken'=>'1234565789012','checkNum'=>'123455'),
 		'echeck' => array('accType'=>'Checking','routingNum'=>'123123','accNum'=>'12345657890','checkNum'=>'123455'));
-		$litleTest = &new LitleOnlineRequest();
-		$this->expectException(new Exception("Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!"));
+		$litleTest = new LitleOnlineRequest();
+		$this->setExpectedException('InvalidArgumentException',"Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
 		$retOb = $litleTest->echeckCreditRequest($hash_in);
 	}
 	

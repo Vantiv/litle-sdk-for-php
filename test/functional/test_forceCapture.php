@@ -23,11 +23,9 @@
 * OTHER DEALINGS IN THE SOFTWARE.
 */
 
-require_once("../../simpletest/autorun.php");
-require_once('../../simpletest/unit_tester.php');
 require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
 
-class forceCapture_FunctionalTest extends UnitTestCase
+class forceCapture_FunctionalTest extends PHPUnit_Framework_TestCase
 {
 	function test_simple_forceCapture_with_card()
 	{
@@ -45,10 +43,10 @@ class forceCapture_FunctionalTest extends UnitTestCase
 	      'expDate' =>'1210'
 		));
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$forceCaptureResponse = $initilaize->forceCaptureRequest($hash_in);
 		$response = XmlParser::getAttribute($forceCaptureResponse,'litleOnlineResponse','response');
-		$this->assertEqual('000',$response);
+		$this->assertEquals('000',$response);
 	}
 	
 	function test_simple_forceCapture_with_token()
@@ -68,10 +66,10 @@ class forceCapture_FunctionalTest extends UnitTestCase
       'type'=>'VI'
 		));
 	
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$forceCaptureResponse = $initilaize->forceCaptureRequest($hash_in);
 		$message = XmlParser::getAttribute($forceCaptureResponse,'litleOnlineResponse','message');
-		$this->assertEqual('Valid Format',$message);
+		$this->assertEquals('Valid Format',$message);
 	}
 	
 	

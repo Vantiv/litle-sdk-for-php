@@ -23,11 +23,9 @@
 * OTHER DEALINGS IN THE SOFTWARE.
 */
 
-require_once("../../simpletest/autorun.php");
-require_once('../../simpletest/unit_tester.php');
 require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
 
-class echeckSale_FunctionalTest extends UnitTestCase
+class echeckSale_FunctionalTest extends PHPUnit_Framework_TestCase
 {
 
 	function test_echeckSale_with_echeck()
@@ -40,10 +38,10 @@ class echeckSale_FunctionalTest extends UnitTestCase
       'echeck' => array('accType'=>'Checking','accNum'=>'12345657890','routingNum'=>'123456789','checkNum'=>'123455'),
       'billToAddress'=>array('name'=>'Bob','city'=>'lowell','state'=>'MA','email'=>'litle.com'));
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$echeckSaleResponse = $initilaize->echeckSaleRequest($hash_in);
 		$response =XmlParser::getNode($echeckSaleResponse,'response');
-		$this->assertEqual('000',$response);
+		$this->assertEquals('000',$response);
 	}
 
 	function test_echeckSale_with_echeckToken()
@@ -56,10 +54,10 @@ class echeckSale_FunctionalTest extends UnitTestCase
 	      	'echeckToken' => array('accType'=>'Checking','litleToken'=>'1234565789012','routingNum'=>'123456789','checkNum'=>'123455'),
 	      'billToAddress'=>array('name'=>'Bob','city'=>'lowell','state'=>'MA','email'=>'litle.com'));
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$echeckSaleResponse = $initilaize->echeckSaleRequest($hash_in);
 		$response = XmlParser::getNode($echeckSaleResponse,'response');
-		$this->assertEqual('000',$response);
+		$this->assertEquals('000',$response);
 	}
 
 	function test_echeckSale_missing_amount()
@@ -71,10 +69,10 @@ class echeckSale_FunctionalTest extends UnitTestCase
 		      	'echeckToken' => array('accType'=>'Checking','litleToken'=>'1234565789012','routingNum'=>'123456789','checkNum'=>'123455'),
 		      'billToAddress'=>array('name'=>'Bob','city'=>'lowell','state'=>'MA','email'=>'litle.com'));
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$echeckSaleResponse = $initilaize->echeckSaleRequest($hash_in);
 		$message= XmlParser::getAttribute($echeckSaleResponse,'litleOnlineResponse','message');
-		$this->assertPattern('/Error validating xml data against the schema/',$message);
+		$this->assertRegExp('/Error validating xml data against the schema/',$message);
 	}
 	function test_echeckSale_with_shipto()
 	{
@@ -87,10 +85,10 @@ class echeckSale_FunctionalTest extends UnitTestCase
 	      'billToAddress'=>array('name'=>'Bob','city'=>'lowell','state'=>'MA','email'=>'litle.com'),
 		  'shipToAddress'=>array('name'=>'Bob','city'=>'lowell','state'=>'MA','email'=>'litle.com'));
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$echeckSaleResponse = $initilaize->echeckSaleRequest($hash_in);
 		$response = XmlParser::getNode($echeckSaleResponse,'response');
-		$this->assertEqual('000',$response);
+		$this->assertEquals('000',$response);
 	}
 
 }

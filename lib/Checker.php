@@ -46,7 +46,7 @@ class Checker
 		}
 		if ( $i > 1)
 		{
-			throw new Exception("Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
+			throw new InvalidArgumentException("Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
 		}
 	}
 }

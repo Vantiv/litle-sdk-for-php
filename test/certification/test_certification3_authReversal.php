@@ -23,11 +23,9 @@
 * OTHER DEALINGS IN THE SOFTWARE.
 */
 
-require_once("../../simpletest/autorun.php");
-require_once('../../simpletest/unit_tester.php');
 require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
 
-class cert3_Test extends UnitTestCase
+class cert3_Test extends PHPUnit_Framework_TestCase
 {
 	function test_32()
 	{
@@ -47,30 +45,30 @@ class cert3_Test extends UnitTestCase
       'expDate' => '0112',
       'cardValidationNum' => '349',
       'type' => 'VI'));
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
-		$this->assertEqual('000',XmlParser::getNode($authorizationResponse,'response'));
-		$this->assertEqual('Approved',XmlParser::getNode($authorizationResponse,'message'));
-		$this->assertEqual('11111 ',XmlParser::getNode($authorizationResponse,'authCode'));
-		$this->assertEqual('01',XmlParser::getNode($authorizationResponse,'avsResult'));
-		$this->assertEqual('M',XmlParser::getNode($authorizationResponse,'cardValidationResult'));
+		$this->assertEquals('000',XmlParser::getNode($authorizationResponse,'response'));
+		$this->assertEquals('Approved',XmlParser::getNode($authorizationResponse,'message'));
+		$this->assertEquals('11111 ',XmlParser::getNode($authorizationResponse,'authCode'));
+		$this->assertEquals('01',XmlParser::getNode($authorizationResponse,'avsResult'));
+		$this->assertEquals('M',XmlParser::getNode($authorizationResponse,'cardValidationResult'));
 
 		//test 32A
 		$capture_hash =  array(
 		'litleTxnId' =>(XmlParser::getNode($authorizationResponse,'litleTxnId')),
 		'reportGroup'=>'planets');
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$captureResponse = $initilaize->captureRequest($capture_hash);
-		$this->assertEqual('000',XmlParser::getNode($captureResponse,'response'));
-		$this->assertEqual('Approved',XmlParser::getNode($captureResponse,'message'));
+		$this->assertEquals('000',XmlParser::getNode($captureResponse,'response'));
+		$this->assertEquals('Approved',XmlParser::getNode($captureResponse,'message'));
 		//test32B
 		$authReversal_hash =  array(
 		'litleTxnId' =>(XmlParser::getNode($authorizationResponse,'litleTxnId')),
 		'reportGroup'=>'planets', 'amount' => '5005');
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$authReversalResponse = $initilaize->authReversalRequest($authReversal_hash);
-		$this->assertEqual('111',XmlParser::getNode($authReversalResponse,'response'));
-		$this->assertEqual('Authorization amount has already been depleted',XmlParser::getNode($authReversalResponse,'message'));
+		$this->assertEquals('111',XmlParser::getNode($authReversalResponse,'response'));
+		$this->assertEquals('Authorization amount has already been depleted',XmlParser::getNode($authReversalResponse,'message'));
 	}
 
 	function test_33()
@@ -93,22 +91,22 @@ class cert3_Test extends UnitTestCase
       'cardValidationNum' => '261',
       'type' => 'MC'),
       'cardholderAuthentication' => array('authenticationValue'=> 'BwABBJQ1AgAAAAAgJDUCAAAAAAA=' ));
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
-		$this->assertEqual('000',XmlParser::getNode($authorizationResponse,'response'));
-		$this->assertEqual('Approved',XmlParser::getNode($authorizationResponse,'message'));
-		$this->assertEqual('22222',XmlParser::getNode($authorizationResponse,'authCode'));
-		$this->assertEqual('10',XmlParser::getNode($authorizationResponse,'avsResult'));
-		$this->assertEqual('M',XmlParser::getNode($authorizationResponse,'cardValidationResult'));
+		$this->assertEquals('000',XmlParser::getNode($authorizationResponse,'response'));
+		$this->assertEquals('Approved',XmlParser::getNode($authorizationResponse,'message'));
+		$this->assertEquals('22222',XmlParser::getNode($authorizationResponse,'authCode'));
+		$this->assertEquals('10',XmlParser::getNode($authorizationResponse,'avsResult'));
+		$this->assertEquals('M',XmlParser::getNode($authorizationResponse,'cardValidationResult'));
 	
 		//test 33A
 		$authReversal_hash =  array(
 		'litleTxnId' =>(XmlParser::getNode($authorizationResponse,'litleTxnId')),
 		'reportGroup'=>'planets');
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$authReversalResponse = $initilaize->authReversalRequest($authReversal_hash);
-		$this->assertEqual('000',XmlParser::getNode($authReversalResponse,'response'));
-		$this->assertEqual('Approved',XmlParser::getNode($authReversalResponse,'message'));
+		$this->assertEquals('000',XmlParser::getNode($authReversalResponse,'response'));
+		$this->assertEquals('Approved',XmlParser::getNode($authReversalResponse,'message'));
 	}
 
 	function test_34()
@@ -129,22 +127,22 @@ class cert3_Test extends UnitTestCase
       'expDate' => '0312',
       'cardValidationNum' => '758',
       'type' => 'DI'));
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
-		$this->assertEqual('000',XmlParser::getNode($authorizationResponse,'response'));
-		$this->assertEqual('Approved',XmlParser::getNode($authorizationResponse,'message'));
-		$this->assertEqual('33333',XmlParser::getNode($authorizationResponse,'authCode'));
-		$this->assertEqual('10',XmlParser::getNode($authorizationResponse,'avsResult'));
-		$this->assertEqual('M',XmlParser::getNode($authorizationResponse,'cardValidationResult'));
+		$this->assertEquals('000',XmlParser::getNode($authorizationResponse,'response'));
+		$this->assertEquals('Approved',XmlParser::getNode($authorizationResponse,'message'));
+		$this->assertEquals('33333',XmlParser::getNode($authorizationResponse,'authCode'));
+		$this->assertEquals('10',XmlParser::getNode($authorizationResponse,'avsResult'));
+		$this->assertEquals('M',XmlParser::getNode($authorizationResponse,'cardValidationResult'));
 	
 		//test 34A
 	    $authReversal_hash =  array(
 		'litleTxnId' =>(XmlParser::getNode($authorizationResponse,'litleTxnId')),
 		'reportGroup'=>'planets');
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$authReversalResponse = $initilaize->authReversalRequest($authReversal_hash);
-		$this->assertEqual('000',XmlParser::getNode($authReversalResponse,'response'));
-		$this->assertEqual('Approved',XmlParser::getNode($authReversalResponse,'message'));
+		$this->assertEquals('000',XmlParser::getNode($authReversalResponse,'response'));
+		$this->assertEquals('Approved',XmlParser::getNode($authReversalResponse,'message'));
 	}
 	
 	function test_35()
@@ -164,29 +162,29 @@ class cert3_Test extends UnitTestCase
       'number' =>'375001000000005',
       'expDate' => '0412',
       'type' => 'AX'));
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
-		$this->assertEqual('000',XmlParser::getNode($authorizationResponse,'response'));
-		$this->assertEqual('Approved',XmlParser::getNode($authorizationResponse,'message'));
-		$this->assertEqual('44444',XmlParser::getNode($authorizationResponse,'authCode'));
-		$this->assertEqual('12',XmlParser::getNode($authorizationResponse,'avsResult'));
+		$this->assertEquals('000',XmlParser::getNode($authorizationResponse,'response'));
+		$this->assertEquals('Approved',XmlParser::getNode($authorizationResponse,'message'));
+		$this->assertEquals('44444',XmlParser::getNode($authorizationResponse,'authCode'));
+		$this->assertEquals('12',XmlParser::getNode($authorizationResponse,'avsResult'));
 	
 		//test 35A
 		$capture_hash =  array(
 			'litleTxnId' =>(XmlParser::getNode($authorizationResponse,'litleTxnId')),
 			'reportGroup'=>'planets', 'amount' => '20020');
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$captureResponse = $initilaize->captureRequest($capture_hash);
-		$this->assertEqual('000',XmlParser::getNode($captureResponse,'response'));
-		$this->assertEqual('Approved',XmlParser::getNode($captureResponse,'message'));
+		$this->assertEquals('000',XmlParser::getNode($captureResponse,'response'));
+		$this->assertEquals('Approved',XmlParser::getNode($captureResponse,'message'));
 		//test35B
 		$authReversal_hash =  array(
 		'litleTxnId' =>(XmlParser::getNode($authorizationResponse,'litleTxnId')),
 		'reportGroup'=>'planets', 'amount' => '20020');
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$authReversalResponse = $initilaize->authReversalRequest($authReversal_hash);
-		$this->assertEqual('000',XmlParser::getNode($authReversalResponse,'response'));
-		$this->assertEqual('Approved',XmlParser::getNode($authReversalResponse,'message'));
+		$this->assertEquals('000',XmlParser::getNode($authReversalResponse,'response'));
+		$this->assertEquals('Approved',XmlParser::getNode($authReversalResponse,'message'));
 	}
 
 	function test_36()
@@ -199,18 +197,18 @@ class cert3_Test extends UnitTestCase
       'number' =>'375000026600004',
       'expDate' => '0512',
       'type' => 'AX'));
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($auth_hash);
-		$this->assertEqual('000',XmlParser::getNode($authorizationResponse,'response'));
-		$this->assertEqual('Approved',XmlParser::getNode($authorizationResponse,'message'));
+		$this->assertEquals('000',XmlParser::getNode($authorizationResponse,'response'));
+		$this->assertEquals('Approved',XmlParser::getNode($authorizationResponse,'message'));
 		
 		//test 33A
 		$authReversal_hash =  array(
 		'litleTxnId' =>(XmlParser::getNode($authorizationResponse,'litleTxnId')),
 		'reportGroup'=>'planets', 'amount' => '10000');
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$authReversalResponse = $initilaize->authReversalRequest($authReversal_hash);
-		$this->assertEqual('336',XmlParser::getNode($authReversalResponse,'response'));
-		$this->assertEqual('Reversal Amount does not match Authorization amount',XmlParser::getNode($authReversalResponse,'message'));
+		$this->assertEquals('336',XmlParser::getNode($authReversalResponse,'response'));
+		$this->assertEquals('Reversal Amount does not match Authorization amount',XmlParser::getNode($authReversalResponse,'message'));
 	}
 }

@@ -22,11 +22,9 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-require_once("../../simpletest/autorun.php");
-require_once('../../simpletest/unit_tester.php');
 require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
 
-class authReversal_FunctionalTest extends UnitTestCase
+class authReversal_FunctionalTest extends PHPUnit_Framework_TestCase
 {
 	function test_simple_authReversal()
 	{
@@ -34,10 +32,10 @@ class authReversal_FunctionalTest extends UnitTestCase
 				'litleTxnId'=>'12345678000','amount'=>'123',
 		      'payPalNotes'=>'Notes');
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$authReversalResponse = $initilaize->authReversalRequest($hash_in);
 		$response = XmlParser::getNode($authReversalResponse,'response');
-		$this->assertEqual('000',$response);
+		$this->assertEquals('000',$response);
 	}
 
 function test_simple_authreversal_fields_out_of_order()
@@ -46,10 +44,10 @@ function test_simple_authreversal_fields_out_of_order()
 				'amount'=>'123',
 		      'payPalNotes'=>'Notes','litleTxnId'=>'12345678000',);
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$authReversalResponse = $initilaize->authReversalRequest($hash_in);
 		$response = XmlParser::getNode($authReversalResponse,'response');
-		$this->assertEqual('000',$response);
+		$this->assertEquals('000',$response);
 	}
 	
 }

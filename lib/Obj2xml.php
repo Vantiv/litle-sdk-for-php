@@ -61,7 +61,7 @@ class Obj2xml {
 		foreach($data as $key => $value)
 		{
 			if ($value === "REQUIRED"){
-				throw new Exception("Missing Required Field: /$key/");
+				throw new InvalidArgumentException("Missing Required Field: /$key/");
 			}elseif (substr($key,0,-1) == 'lineItemData'){
 				$temp_node = $transacType->addChild('lineItemData');
 				Obj2xml::iterateChildren($value,$temp_node);
@@ -98,7 +98,7 @@ class Obj2xml {
 						$config['timeout'] = isset($config_array['timeout'])? $config_array['timeout']:'65';
 				}else {
 					if ((!isset($config_array[$name])) and ($name != 'proxy')){
-						throw new Exception("Missing Field /$name/");
+						throw new InvalidArgumentException("Missing Field /$name/");
 					}
 					$config[$name] = $config_array[$name];
 				}

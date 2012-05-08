@@ -23,30 +23,27 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-require_once("../../simpletest/autorun.php");
-require_once('../../simpletest/unit_tester.php');
-require_once('../../simpletest/mock_objects.php');
 require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
-Mock::generate('communication');
-Mock::generate('LitleXmlMapper');
 
-class void_UnitTest extends UnitTestCase
+class void_UnitTest extends PHPUnit_Framework_TestCase
 {
 	function test_simple_echeckRedeposit()
 	{
 		$hash_in = array('litleTxnId' =>'123123','reportGroup'=>'Planets');
-		$mappTest = &new MockLitleXmlMapper();
-		$commTest = &new Mockcommunication();
-		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<litleTxnId>123123.*/')));
-		$litleTest = &new LitleOnlineRequest();
-		$litleTest->newXML = $mappTest;
-		$retOb = $litleTest->voidRequest($hash_in);
+		$mock = $this->getMock('LitleXmlMapper');
+		$mock->expects($this->once())
+		->method('request')
+		->with($this->matchesRegularExpression('/.*<litleTxnId>123123.*/'));
+		
+		$litleTest = new LitleOnlineRequest();
+		$litleTest->newXML = $mock;
+		$litleTest->voidRequest($hash_in);		
 	}
 	function test_no_litleTxnId()
 	{
 		$hash_in = array('reportGroup'=>'Planets');
-		$litleTest = &new LitleOnlineRequest();
-		$this->expectException(new Exception("Missing Required Field: /litleTxnId/"));
+		$litleTest = new LitleOnlineRequest();
+		$this->setExpectedException('InvalidArgumentException',"Missing Required Field: /litleTxnId/");
 		$retOb = $litleTest->voidRequest($hash_in);
 	}
 }

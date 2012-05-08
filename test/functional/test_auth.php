@@ -23,11 +23,9 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-require_once("../../simpletest/autorun.php");
-require_once('../../simpletest/unit_tester.php');
 require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
 
-class auth_FunctionalTest extends UnitTestCase
+class auth_FunctionalTest extends PHPUnit_Framework_TestCase
 {
 	function test_simple_auth_with_card()
 	{
@@ -42,10 +40,10 @@ class auth_FunctionalTest extends UnitTestCase
 			'orderSource'=>'ecommerce',
 			'amount'=>'123');
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($hash_in);
 		$response = XmlParser::getNode($authorizationResponse,'response');
-		$this->assertEqual('000',$response);
+		$this->assertEquals('000',$response);
 	}
 
 	function test_simple_auth_with_paypal()
@@ -59,20 +57,20 @@ class auth_FunctionalTest extends UnitTestCase
 				'orderSource'=>'ecommerce',
 				'amount'=>'123');
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($hash_in);
 		$message = XmlParser::getNode($authorizationResponse,'message');
-		$this->assertEqual('Approved',$message);
+		$this->assertEquals('Approved',$message);
 	}
 	
 	function test_simple_auth_with_litleTxnId()
 	{
 		$hash_in = array('reportGroup'=>'planets','litleTxnId'=>'1234567891234567891');
 	
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($hash_in);
 		$message= XmlParser::getAttribute($authorizationResponse,'litleOnlineResponse','message');
-		$this->assertEqual("Valid Format",$message);
+		$this->assertEquals("Valid Format",$message);
 	}
 	function test_illegal_orderSource()
 	{
@@ -85,10 +83,10 @@ class auth_FunctionalTest extends UnitTestCase
 							'orderSource'=>'notecommerce',
 							'amount'=>'123');
 	
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($hash_in);
 		$message= XmlParser::getAttribute($authorizationResponse,'litleOnlineResponse','message');
-		$this->assertPattern('/Error validating xml data against the schema/',$message);
+		$this->assertRegExp('/Error validating xml data against the schema/',$message);
 	}
 	function test_fields_out_of_order()
 	{
@@ -101,10 +99,10 @@ class auth_FunctionalTest extends UnitTestCase
 						'orderSource'=>'ecommerce',
 						'amount'=>'123');
 	
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($hash_in);
 		$message = XmlParser::getNode($authorizationResponse,'message');
-		$this->assertEqual('Approved',$message);
+		$this->assertEquals('Approved',$message);
 	}
 	function test_invalid_field()
 	{
@@ -118,10 +116,10 @@ class auth_FunctionalTest extends UnitTestCase
 							'orderSource'=>'ecommerce',
 							'amount'=>'123');
 	
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($hash_in);
 		$message = XmlParser::getNode($authorizationResponse,'message');
-		$this->assertEqual('Approved',$message);
+		$this->assertEquals('Approved',$message);
 	}
 
 	function test_pos_missing_field()
@@ -136,8 +134,8 @@ class auth_FunctionalTest extends UnitTestCase
         'type'=>'VI',
         'number' =>'4100000000000000',
         'expDate' =>'1210'));
-		$litleTest = &new LitleOnlineRequest();
-		$this->expectException(new Exception("Missing Required Field: /capability/"));
+		$litleTest = new LitleOnlineRequest();
+		$this->setExpectedException('InvalidArgumentException','Missing Required Field: /capability/');
 		$retOb = $litleTest->authorizationRequest($hash_in);
 	}
 }

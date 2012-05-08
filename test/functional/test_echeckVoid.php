@@ -23,19 +23,17 @@
 * OTHER DEALINGS IN THE SOFTWARE.
 */
 
-require_once("../../simpletest/autorun.php");
-require_once('../../simpletest/unit_tester.php');
 require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
 
-class echeckVoid_FunctionalTest extends UnitTestCase
+class echeckVoid_FunctionalTest extends PHPUnit_Framework_TestCase
 {
 	function test_simple_echeckVoid()
 	{
 		$hash_in = array('litleTxnId'=> '123456789012345678');
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$echeckVoidResponse = $initilaize->echeckVoidRequest($hash_in);
 		$response = XmlParser::getAttribute($echeckVoidResponse,'litleOnlineResponse','response');
-		$this->assertEqual('0',$response);
+		$this->assertEquals('0',$response);
 	}
 
 }

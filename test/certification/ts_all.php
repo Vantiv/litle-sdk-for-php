@@ -23,8 +23,6 @@
 * OTHER DEALINGS IN THE SOFTWARE.
 */
 
-require_once("../../simpletest/autorun.php");
-require_once('../../simpletest/unit_tester.php');
 require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
 
 require realpath(dirname(__FILE__)) .  '/test_certification1_base-alpha.php';
@@ -33,3 +31,18 @@ require realpath(dirname(__FILE__)) .  '/test_certification2_authenhanced.php';
 require realpath(dirname(__FILE__)) .  '/test_certification3_authReversal.php';
 require realpath(dirname(__FILE__)) .  '/test_certification4_echeck.php';
 require realpath(dirname(__FILE__)) .  '/test_certification5_token.php';
+
+class CertificationTests
+{
+	public static function suite()
+	{
+		$suite = new PHPUnit_Framework_TestSuite('PHPUnit');
+		$suite->addTestSuite('cert1_Test_alpha');
+		$suite->addTestSuite('cert1_Test_beta');
+		$suite->addTestSuite('cert2_Test');
+		$suite->addTestSuite('cert3_Test');
+		$suite->addTestSuite('cert4_Test');
+		$suite->addTestSuite('cert5_Test');
+		return $suite;
+	}
+}

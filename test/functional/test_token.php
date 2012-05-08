@@ -22,11 +22,9 @@
 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 * OTHER DEALINGS IN THE SOFTWARE.
 */
-require_once("../../simpletest/autorun.php");
-require_once('../../simpletest/unit_tester.php');
 require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
 
-class token_FunctionalTest extends UnitTestCase
+class token_FunctionalTest extends PHPUnit_Framework_TestCase
 {
 	function test_simple_token()
 	{
@@ -37,10 +35,10 @@ class token_FunctionalTest extends UnitTestCase
 	      'orderId'=>'12344',
 	      'accountNumber'=>'1233456789103801');
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$registerTokenResponse = $initilaize->registerTokenRequest($hash_in);
 		$message = XmlParser::getAttribute($registerTokenResponse,'litleOnlineResponse','message');
-		$this->assertEqual('Valid Format',$message);
+		$this->assertEquals('Valid Format',$message);
 	}
 
 	function test_simple_token_with_paypage()
@@ -52,10 +50,10 @@ class token_FunctionalTest extends UnitTestCase
       'orderId'=>'12344',
       'paypageRegistrationId'=>'1233456789101112');
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$registerTokenResponse = $initilaize->registerTokenRequest($hash_in);
 		$message = XmlParser::getAttribute($registerTokenResponse,'litleOnlineResponse','message');
-		$this->assertEqual('Valid Format',$message);
+		$this->assertEquals('Valid Format',$message);
 	}
 	
 	function test_simple_token_with_echeck()
@@ -67,10 +65,10 @@ class token_FunctionalTest extends UnitTestCase
 	      'orderId'=>'12344',
 	      'echeckForToken'=>array('accNum'=>'12344565','routingNum'=>'123476545'));
 	
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$registerTokenResponse = $initilaize->registerTokenRequest($hash_in);
 		$message = XmlParser::getAttribute($registerTokenResponse,'litleOnlineResponse','message');
-		$this->assertEqual('Valid Format',$message);
+		$this->assertEquals('Valid Format',$message);
 	}
 	
 	function test_token_echeck_missing_required()
@@ -81,8 +79,8 @@ class token_FunctionalTest extends UnitTestCase
       'orderId'=>'12344',
       'echeckForToken'=>array('routingNum'=>'132344565'));
 	
-		$litleTest = &new LitleOnlineRequest();
-		$this->expectException(new Exception("Missing Required Field: /accNum/"));
+		$litleTest = new LitleOnlineRequest();
+		$this->setExpectedException('InvalidArgumentException','Missing Required Field: /accNum/');
 		$retOb = $litleTest->registerTokenRequest($hash_in);
 	}
 	

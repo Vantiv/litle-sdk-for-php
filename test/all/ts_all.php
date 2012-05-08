@@ -1,6 +1,6 @@
 <?php
 /*
-* Copyright (c) 2011 Litle & Co.
+ * Copyright (c) 2011 Litle & Co.
 *
 * Permission is hereby granted, free of charge, to any person
 * obtaining a copy of this software and associated documentation
@@ -23,10 +23,22 @@
 * OTHER DEALINGS IN THE SOFTWARE.
 */
 
-require_once("../../simpletest/autorun.php");
-require_once('../../simpletest/unit_tester.php');
 require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
 
 require realpath(dirname(__FILE__)) .  '/../unit/ts_all.php';
 require realpath(dirname(__FILE__)) .  '/../functional/ts_all.php';
 require realpath(dirname(__FILE__)) .  '/../certification/ts_all.php';
+
+class AllTests
+{
+	public static function suite()
+	{
+		$suite = new PHPUnit_Framework_TestSuite('PHPUnit Framework');
+
+		$suite->addTestSuite('UnitTests');
+		$suite->addTestSuite('FunctionalTests');
+		$suite->addTestSuite('CertificationTests');
+		
+		return $suite;
+	}
+}

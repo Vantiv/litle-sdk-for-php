@@ -1,35 +1,30 @@
 <?php
 /*
  * Copyright (c) 2011 Litle & Co.
- * 
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
- * 
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
- */
-require_once("../../simpletest/autorun.php");
-require_once('../../simpletest/unit_tester.php');
-require_once('../../simpletest/mock_objects.php');
+*
+* Permission is hereby granted, free of charge, to any person
+* obtaining a copy of this software and associated documentation
+* files (the "Software"), to deal in the Software without
+* restriction, including without limitation the rights to use,
+* copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the
+* Software is furnished to do so, subject to the following
+* conditions:
+*
+* The above copyright notice and this permission notice shall be
+* included in all copies or substantial portions of the Software.
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND
+* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+* OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+* NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+* HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+* WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+* OTHER DEALINGS IN THE SOFTWARE.
+*/
 require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
-Mock::generate('communication');
-Mock::generate('LitleXmlMapper');
 
-class auth_UnitTest extends UnitTestCase
+class auth_UnitTest extends PHPUnit_Framework_TestCase
 {
 	function test_auth_with_card()
 	{
@@ -42,20 +37,22 @@ class auth_UnitTest extends UnitTestCase
 			'orderSource'=>'ecommerce',
 			'id'=>'654',
 			'amount'=>'123');
-		$mappTest = &new MockLitleXmlMapper();
-		$commTest = &new Mockcommunication();
-		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<card><type>VI.*<number>4100000000000001.*<expDate>1213.*<cardValidationNum>1213.*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"version"=>NULL,"url"=>NULL,"timeout"=>NULL,"proxy"=>NULL)));
-		$litleTest = &new LitleOnlineRequest();
-		$litleTest->newXML = $mappTest;
-		$retOb = $litleTest->authorizationRequest($hash_in);
+		$mock = $this->getMock('LitleXmlMapper');
+		$mock	->expects($this->once())
+		->method('request')
+		->with($this->matchesRegularExpression('/.*<card><type>VI.*<number>4100000000000001.*<expDate>1213.*<cardValidationNum>1213.*/'));
+
+		$litleTest = new LitleOnlineRequest();
+		$litleTest->newXML = $mock;
+		$litleTest->authorizationRequest($hash_in);
 	}
-	
+
 	function test_muliple_lineItemData()
 	{
 		$lineItemData = array(
 		array('itemSequenceNumber' => '1','itemDescription'=>'desc'),
 		array('itemSequenceNumber' => '2','itemDescription'=>'desc2'));
-		
+
 		$hash_in = array(
 					'card'=>array('type'=>'VI',
 							'number'=>'4100000000000001',
@@ -68,21 +65,23 @@ class auth_UnitTest extends UnitTestCase
 					'shippingAmount'=>'123',	
 					'lineItemData'=>$lineItemData),
 					'amount'=>'123');
-		
-		$mappTest = &new MockLitleXmlMapper();
-		$commTest = &new Mockcommunication();
-		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<enhancedData>.*<lineItemData>.*<itemSequenceNumber>1<\/itemSequenceNumber>.*<itemDescription>desc<\/itemDescription>.*<\/lineItemData>.*<lineItemData>.*<itemSequenceNumber>2<\/itemSequenceNumber>.*<itemDescription>desc2<\/itemDescription>.*<\/lineItemData>.*<\/enhancedData>.*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"version"=>NULL,"url"=>NULL,"timeout"=>NULL,"proxy"=>NULL)));
-		$litleTest = &new LitleOnlineRequest();
-		$litleTest->newXML = $mappTest;
-		$retOb = $litleTest->authorizationRequest($hash_in);
+
+		$mock = $this->getMock('LitleXmlMapper');
+		$mock	->expects($this->once())
+		->method('request')
+		->with($this->matchesRegularExpression('/.*<enhancedData>.*<lineItemData>.*<itemSequenceNumber>1<\/itemSequenceNumber>.*<itemDescription>desc<\/itemDescription>.*<\/lineItemData>.*<lineItemData>.*<itemSequenceNumber>2<\/itemSequenceNumber>.*<itemDescription>desc2<\/itemDescription>.*<\/lineItemData>.*<\/enhancedData>.*/'));
+
+		$litleTest = new LitleOnlineRequest();
+		$litleTest->newXML = $mock;
+		$litleTest->authorizationRequest($hash_in);
 	}
-	
+
 	function test_muliple_detailTax()
 	{
 		$detailTax = array(
 		array('taxAmount' => '0', 'cardAcceptorTaxId' => '0'),
 		array('taxAmount' => '1', 'cardAcceptorTaxId' => '1'));
-	
+
 		$hash_in = array(
 						'card'=>array('type'=>'VI',
 								'number'=>'4100000000000001',
@@ -95,16 +94,18 @@ class auth_UnitTest extends UnitTestCase
 						'shippingAmount'=>'123',	
 						'detailTax'=>$detailTax),
 						'amount'=>'123');
-	
-		$mappTest = &new MockLitleXmlMapper();
-		$commTest = &new Mockcommunication();
-		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<enhancedData>.*<detailTax>.*<taxAmount>.*<detailTax>.*<taxAmount>.*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"version"=>NULL,"url"=>NULL,"timeout"=>NULL,"proxy"=>NULL)));
-		$litleTest = &new LitleOnlineRequest();
-		$litleTest->newXML = $mappTest;
-		$retOb = $litleTest->authorizationRequest($hash_in);
+
+		$mock = $this->getMock('LitleXmlMapper');
+		$mock	->expects($this->once())
+		->method('request')
+		->with($this->matchesRegularExpression('/.*<enhancedData>.*<detailTax>.*<taxAmount>.*<detailTax>.*<taxAmount>.*/'));
+
+		$litleTest = new LitleOnlineRequest();
+		$litleTest->newXML = $mock;
+		$litleTest->authorizationRequest($hash_in);
 	}
 
-	
+
 	function test_no_orderId()
 	{
 		$hash_in = array('merchantId' => '101',
@@ -116,13 +117,12 @@ class auth_UnitTest extends UnitTestCase
 	      'type'=>'VI',
 	      'number' =>'4100000000000001',
 	      'expDate' =>'1210')
-	      );
-		$litleTest = &new LitleOnlineRequest();
-		$this->expectException(new Exception("Missing Required Field: /orderId/"));
+		);
+		$litleTest = new LitleOnlineRequest();
+		$this->setExpectedException('InvalidArgumentException','Missing Required Field: /orderId/');
 		$retOb = $litleTest->authorizationRequest($hash_in);
-		
- 	}
-	
+	}
+
 	function test_no_amount()
 	{
 		$hash_in = array('merchantId' => '101',
@@ -135,12 +135,11 @@ class auth_UnitTest extends UnitTestCase
 	      'number' =>'4100000000000001',
 	      'expDate' =>'1210')
 		);
-		$litleTest = &new LitleOnlineRequest();
-		$this->expectException(new Exception("Missing Required Field: /amount/"));
+		$litleTest = new LitleOnlineRequest();
+		$this->setExpectedException('InvalidArgumentException','Missing Required Field: /amount/');
 		$retOb = $litleTest->authorizationRequest($hash_in);
-	
 	}
-	
+
 	function test_no_orderSource()
 	{
 		$hash_in = array('merchantId' => '101',
@@ -153,12 +152,12 @@ class auth_UnitTest extends UnitTestCase
 	      'number' =>'4100000000000001',
 	      'expDate' =>'1210')
 		);
-		$litleTest = &new LitleOnlineRequest();
-	$this->expectException(new Exception("Missing Required Field: /orderSource/"));
+		$litleTest = new LitleOnlineRequest();
+		$this->setExpectedException('InvalidArgumentException','Missing Required Field: /orderSource/');
 		$retOb = $litleTest->authorizationRequest($hash_in);
-	
+
 	}
-	
+
 	function test_both_choices_card_and_paypal()
 	{
 		$hash_in = array('merchantId' => '101',
@@ -171,17 +170,17 @@ class auth_UnitTest extends UnitTestCase
 	      'type'=>'VI',
 	      'number' =>'4100000000000001',
 	      'expDate' =>'1210'
-	      ),
+		),
 	      'paypal'=>array(
 	      'payerId'=>'1234',
 	      'token'=>'1234',
 	      'transactionId'=>'123456')
 		);
-		$litleTest = &new LitleOnlineRequest();
-		$this->expectException(new Exception("Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!"));
+		$litleTest = new LitleOnlineRequest();
+		$this->setExpectedException('InvalidArgumentException','Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!');
 		$retOb = $litleTest->authorizationRequest($hash_in);
 	}
-	
+
 	function test_three_choices_card_and_paypage_and_paypal()
 	{
 		$hash_in = array('merchantId' => '101',
@@ -194,7 +193,7 @@ class auth_UnitTest extends UnitTestCase
 	      'type'=>'VI',
 	      'number' =>'4100000000000001',
 	      'expDate' =>'1210'
-	      ),
+		),
 	      'paypage'=> array(
 	      'paypageRegistrationId'=>'1234',
 	      'expDate'=>'1210',
@@ -205,12 +204,11 @@ class auth_UnitTest extends UnitTestCase
 	      'token'=>'1234',
 	      'transactionId'=>'123456')
 		);
-		$litleTest = &new LitleOnlineRequest();
-		$this->expectException(new Exception("Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!"));
+		$litleTest = new LitleOnlineRequest();
+		$this->setExpectedException('InvalidArgumentException','Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!');
 		$retOb = $litleTest->authorizationRequest($hash_in);
-	
 	}
-	
+
 	function test_all_choices_card_and_paypage_and_paypal_and_token()
 	{
 		$hash_in = array('merchantId' => '101',
@@ -225,7 +223,7 @@ class auth_UnitTest extends UnitTestCase
 	      'type'=>'VI',
 	      'number' =>'4100000000000001',
 	      'expDate' =>'1210'
-	      ),
+		),
 	      'paypage'=> array(
 	      'paypageRegistrationId'=>'1234',
 	      'expDate'=>'1210',
@@ -241,8 +239,8 @@ class auth_UnitTest extends UnitTestCase
 	      'cardValidationNum'=>'555',
 	      'type'=>'VI')
 		);
-		$litleTest = &new LitleOnlineRequest();
-		$this->expectException(new Exception("Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!"));
+		$litleTest = new LitleOnlineRequest();
+		$this->setExpectedException('InvalidArgumentException','Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!');
 		$retOb = $litleTest->authorizationRequest($hash_in);
 	}
 
@@ -254,16 +252,18 @@ class auth_UnitTest extends UnitTestCase
 				'amount'=>'123',
 				'merchantData'=>array(
 					'campaign'=>'foo'
-				)
+		)
 		);
-		$mappTest = &new MockLitleXmlMapper();
-		$commTest = &new Mockcommunication();
-		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<merchantData>.*?<campaign>foo<\/campaign>.*?<\/merchantData>.*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"version"=>NULL,"url"=>NULL,"timeout"=>NULL,"proxy"=>NULL)));
-		$litleTest = &new LitleOnlineRequest();
-		$litleTest->newXML = $mappTest;
-		$retOb = $litleTest->authorizationRequest($hash_in);
+		$mock = $this->getMock('LitleXmlMapper');
+		$mock	->expects($this->once())
+		->method('request')
+		->with($this->matchesRegularExpression('/.*<merchantData>.*?<campaign>foo<\/campaign>.*?<\/merchantData>.*/'));
+
+		$litleTest = new LitleOnlineRequest();
+		$litleTest->newXML = $mock;
+		$litleTest->authorizationRequest($hash_in);
 	}
-	
+
 	function test_customer_id() {
 		$hash_in = array(
 				'card'=>array('type'=>'VI',
@@ -274,14 +274,16 @@ class auth_UnitTest extends UnitTestCase
 				'orderSource'=>'ecommerce',
 				'customerId'=>'gdake@litle.com',
 				'amount'=>'123');
-		$mappTest = &new MockLitleXmlMapper();
-		$commTest = &new Mockcommunication();
-		$mappTest->expectOnce('request',array(new PatternExpectation('/.*customerId="gdake@litle.com"*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"version"=>NULL,"url"=>NULL,"timeout"=>NULL,"proxy"=>NULL)));
-		$litleTest = &new LitleOnlineRequest();
-		$litleTest->newXML = $mappTest;
-		$retOb = $litleTest->authorizationRequest($hash_in);
+		$mock = $this->getMock('LitleXmlMapper');
+		$mock	->expects($this->once())
+		->method('request')
+		->with($this->matchesRegularExpression('/.*customerId="gdake@litle.com"*/'));
+
+		$litleTest = new LitleOnlineRequest();
+		$litleTest->newXML = $mock;
+		$litleTest->authorizationRequest($hash_in);
 	}
-	
+
 	function test_id() {
 		$hash_in = array(
 					'card'=>array('type'=>'VI',
@@ -292,11 +294,13 @@ class auth_UnitTest extends UnitTestCase
 					'orderSource'=>'ecommerce',
 					'id'=>'64575',
 					'amount'=>'123');
-		$mappTest = &new MockLitleXmlMapper();
-		$commTest = &new Mockcommunication();
-		$mappTest->expectOnce('request',array(new PatternExpectation('/.*id="64575"*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"version"=>NULL,"url"=>NULL,"timeout"=>NULL,"proxy"=>NULL)));
-		$litleTest = &new LitleOnlineRequest();
-		$litleTest->newXML = $mappTest;
-		$retOb = $litleTest->authorizationRequest($hash_in);
+		$mock = $this->getMock('LitleXmlMapper');
+		$mock	->expects($this->once())
+		->method('request')
+		->with($this->matchesRegularExpression('/.*id="64575"*/'));
+
+		$litleTest = new LitleOnlineRequest();
+		$litleTest->newXML = $mock;
+		$litleTest->authorizationRequest($hash_in);
 	}
 }

@@ -23,11 +23,9 @@
 * OTHER DEALINGS IN THE SOFTWARE.
 */
 
-require_once("../../simpletest/autorun.php");
-require_once('../../simpletest/unit_tester.php');
 require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
 
-class echeckCredit_FunctionalTest extends UnitTestCase
+class echeckCredit_FunctionalTest extends PHPUnit_Framework_TestCase
 {
 	function test_simple_echeckCredit()
 	{
@@ -35,19 +33,19 @@ class echeckCredit_FunctionalTest extends UnitTestCase
 			'litleTxnId'=>'123456789012345678',
 			'amount'=>'1000');
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$echeckCreditResponse = $initilaize->echeckCreditRequest($hash_in);
 		$response = XmlParser::getNode($echeckCreditResponse,'response');
-		$this->assertEqual('000',$response);
+		$this->assertEquals('000',$response);
 	}
 
 	function test_no_amount()
 	{
 		$hash_in = array();
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$echeckCreditResponse = $initilaize->echeckCreditRequest($hash_in);
 		$message= XmlParser::getAttribute($echeckCreditResponse,'litleOnlineResponse','message');
-		$this->assertPattern('/Error validating xml data against the schema/',$message);
+		$this->assertRegExp('/Error validating xml data against the schema/',$message);
 	}
 	
 	function test_echeckCredit_with_echeck()
@@ -60,10 +58,10 @@ class echeckCredit_FunctionalTest extends UnitTestCase
       'echeck' => array('accType'=>'Checking','accNum'=>'12345657890','routingNum'=>'123456789','checkNum'=>'123455'),
       'billToAddress'=>array('name'=>'Bob','city'=>'lowell','state'=>'MA','email'=>'litle.com'));
 	
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$echeckCreditResponse = $initilaize->echeckCreditRequest($hash_in);
 		$response = XmlParser::getNode($echeckCreditResponse,'message');
-		$this->assertEqual('Approved',$response);
+		$this->assertEquals('Approved',$response);
 	}
 	
 	function test_echeckCredit_with_echeckToken()
@@ -76,10 +74,10 @@ class echeckCredit_FunctionalTest extends UnitTestCase
 	      	'echeckToken' => array('accType'=>'Checking','litleToken'=>'1234565789012','routingNum'=>'123456789','checkNum'=>'123455'),
 	      'billToAddress'=>array('name'=>'Bob','city'=>'lowell','state'=>'MA','email'=>'litle.com'));
 	
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$echeckCreditResponse = $initilaize->echeckCreditRequest($hash_in);
 		$response = XmlParser::getNode($echeckCreditResponse,'message');
-		$this->assertEqual('Approved',$response);
+		$this->assertEquals('Approved',$response);
 	}
 	function test_echeckCredit_missing_billing()
 	{
@@ -90,10 +88,10 @@ class echeckCredit_FunctionalTest extends UnitTestCase
 		      'orderSource'=>'ecommerce',
 		      	'echeckToken' => array('accType'=>'Checking','litleToken'=>'1234565789012','routingNum'=>'123456789','checkNum'=>'123455'));
 	
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$echeckCreditResponse = $initilaize->echeckCreditRequest($hash_in);
 		$message= XmlParser::getAttribute($echeckCreditResponse,'litleOnlineResponse','message');
-		$this->assertPattern('/Error validating xml data against the schema/',$message);
+		$this->assertRegExp('/Error validating xml data against the schema/',$message);
 	}
 
 }

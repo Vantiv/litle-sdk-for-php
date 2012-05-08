@@ -22,29 +22,24 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-require_once("../../simpletest/autorun.php");
-require_once('../../simpletest/unit_tester.php');
-require_once('../../simpletest/mock_objects.php');
+require_once realpath(dirname(__FILE__)) . '/../../lib/Checker.php';
 
-require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
-
-class checker_UnitTest extends UnitTestCase
-
+class checker_UnitTest extends PHPUnit_Framework_TestCase
 {
 	function test_required()
 	{
-		$hash1 = null;
-		$hash2 = Checker::required_field($hash2);
-		$this->assertEqual($hash2,'REQUIRED');
+		$checker = new Checker();
+		$this->assertEquals('REQUIRED',$checker->requiredField(null));
 	}
 	
 	function test_choice()
 	{
+		$checker = new Checker();
 		$hash1= null;
 		$hash2= array('21321','214323');
 		$hash3 = array('143543','78987');
 		$hash4 = array($hash1,$hash2,$hash3);
-		$this->expectException(new Exception("Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!"));
-		Checker::choice($hash4);
+		$this->setExpectedException('InvalidArgumentException',"Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
+		$checker->choice($hash4);
 	}
 }

@@ -23,25 +23,22 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-require_once("../../simpletest/autorun.php");
-require_once('../../simpletest/unit_tester.php');
-require_once('../../simpletest/mock_objects.php');
 require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
-Mock::generate('communication');
-Mock::generate('LitleXmlMapper');
-class token_UnitTest extends UnitTestCase
+class token_UnitTest extends PHPUnit_Framework_TestCase
 {
 	function test_token()
 	{
 		$hash_in = array(
 			'orderId'=>'1',
 			'accountNumber'=>'123456789101112');
-		$mappTest = &new MockLitleXmlMapper();
-		$commTest = &new Mockcommunication();
-		$mappTest->expectOnce('request',array(new PatternExpectation('/.*<accountNumber>123456789101112*/'),array("user"=>NULL,"password"=>NULL,"merchantId"=>NULL,"reportGroup"=>NULL,"version"=>NULL,"url"=>NULL,"timeout"=>NULL,"proxy"=>NULL)));
-		$litleTest = &new LitleOnlineRequest();
-		$litleTest->newXML = $mappTest;
-		$retOb = $litleTest->registerTokenRequest($hash_in);
+		$mock = $this->getMock('LitleXmlMapper');
+		$mock->expects($this->once())
+		->method('request')
+		->with($this->matchesRegularExpression('/.*<accountNumber>123456789101112*/'));
+		
+		$litleTest = new LitleOnlineRequest();
+		$litleTest->newXML = $mock;
+		$litleTest->registerTokenRequest($hash_in);
 	}
 
 
@@ -53,8 +50,8 @@ class token_UnitTest extends UnitTestCase
       'orderId'=>'12344',
       'accountNumber'=>'1233456789101112',
       'paypageRegistrationId'=>'1233456789101112');
-		$litleTest = &new LitleOnlineRequest();
-		$this->expectException(new Exception("Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!"));
+		$litleTest = new LitleOnlineRequest();
+		$this->setExpectedException('InvalidArgumentException',"Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
 		$retOb = $litleTest->registerTokenRequest($hash_in);
 
 	}
@@ -67,8 +64,8 @@ class token_UnitTest extends UnitTestCase
       'orderId'=>'12344',
       'echeckForToken'=>array('accNum'=>'12344565','routingNum'=>'123476545'),
       'paypageRegistrationId'=>'1233456789101112');
-		$litleTest = &new LitleOnlineRequest();
-		$this->expectException(new Exception("Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!"));
+		$litleTest = new LitleOnlineRequest();
+		$this->setExpectedException('InvalidArgumentException',"Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
 		$retOb = $litleTest->registerTokenRequest($hash_in);
 
 	}
@@ -82,8 +79,8 @@ class token_UnitTest extends UnitTestCase
       'accountNumber'=>'1233456789101112',
       'echeckForToken'=>array('accNum'=>'12344565','routingNum'=>'123476545'),
       'paypageRegistrationId'=>'1233456789101112');
-		$litleTest = &new LitleOnlineRequest();
-		$this->expectException(new Exception("Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!"));
+		$litleTest = new LitleOnlineRequest();
+		$this->setExpectedException('InvalidArgumentException',"Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
 		$retOb = $litleTest->registerTokenRequest($hash_in);
 
 	}

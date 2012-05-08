@@ -23,8 +23,6 @@
 * OTHER DEALINGS IN THE SOFTWARE.
 */
 
-require_once("../../simpletest/autorun.php");
-require_once('../../simpletest/unit_tester.php');
 require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
 
 require realpath(dirname(__FILE__)) . '/test_XmlFields.php';
@@ -36,7 +34,33 @@ require realpath(dirname(__FILE__)) .  '/test_token.php';
 require realpath(dirname(__FILE__)) .  '/test_forceCapture.php';
 require realpath(dirname(__FILE__)) .  '/test_capture.php';
 require realpath(dirname(__FILE__)) .  '/test_captureGivenAuth.php';
+require realpath(dirname(__FILE__)) .  '/test_void.php';
 require realpath(dirname(__FILE__)) .  '/test_echeckRedeposit.php';
 require realpath(dirname(__FILE__)) .  '/test_echeckSale.php';
 require realpath(dirname(__FILE__)) .  '/test_echeckCredit.php';
 require realpath(dirname(__FILE__)) .  '/test_echeckVerification.php';
+require realpath(dirname(__FILE__)) .  '/test_echeckVoid.php';
+
+class FunctionalTests
+{
+	public static function suite()
+	{
+		$suite = new PHPUnit_Framework_TestSuite('PHPUnit');
+		$suite->addTestSuite('auth_FunctionalTest');
+		$suite->addTestSuite('authReversal_FunctionalTest');
+		$suite->addTestSuite('capture_FunctionalTest');
+		$suite->addTestSuite('captureGivenAuth_FunctionalTest');
+		$suite->addTestSuite('credit_FunctionalTest');
+		$suite->addTestSuite('echeckCredit_FunctionalTest');
+		$suite->addTestSuite('echeckRedeopist_FunctionalTest');
+		$suite->addTestSuite('echeckSale_FunctionalTest');
+		$suite->addTestSuite('echeckVerification_FunctionalTest');
+		$suite->addTestSuite('echeckVoid_FunctionalTest');
+		$suite->addTestSuite('forceCapture_FunctionalTest');
+		$suite->addTestSuite('sale_FunctionalTest');
+		$suite->addTestSuite('token_FunctionalTest');
+		$suite->addTestSuite('void_FunctionalTest');
+		$suite->addTestSuite('XmlFields_FunctionalTest');
+		return $suite;
+	}
+}

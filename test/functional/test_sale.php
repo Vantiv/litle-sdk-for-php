@@ -23,11 +23,9 @@
 * OTHER DEALINGS IN THE SOFTWARE.
 */
 
-require_once("../../simpletest/autorun.php");
-require_once('../../simpletest/unit_tester.php');
 require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
 
-class sale_FunctionalTest extends UnitTestCase
+class sale_FunctionalTest extends PHPUnit_Framework_TestCase
 {
 	function test_simple_sale_with_card()
 	{
@@ -42,10 +40,10 @@ class sale_FunctionalTest extends UnitTestCase
 			'orderSource'=>'ecommerce',
 			'amount'=>'123');
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$saleResponse = $initilaize->saleRequest($hash_in);
 		$response = XmlParser::getNode($saleResponse,'response');
-		$this->assertEqual('000',$response);
+		$this->assertEquals('000',$response);
 	}
 
 	function test_simple_sale_with_paypal()
@@ -59,10 +57,10 @@ class sale_FunctionalTest extends UnitTestCase
 				'orderSource'=>'ecommerce',
 				'amount'=>'123');
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$saleResponse = $initilaize->saleRequest($hash_in);
 		$response = XmlParser::getNode($saleResponse,'response');
-		$this->assertEqual('000',$response);
+		$this->assertEquals('000',$response);
 	}
 
 
@@ -76,10 +74,10 @@ class sale_FunctionalTest extends UnitTestCase
 							'reportGroup'=>'Planets',
 							'orderSource'=>'notecommerce',
 							'amount'=>'123');
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$saleResponse = $initilaize->saleRequest($hash_in);
 		$message= XmlParser::getAttribute($saleResponse,'litleOnlineResponse','message');
-		$this->assertPattern('/Error validating xml data against the schema/',$message);
+		$this->assertRegExp('/Error validating xml data against the schema/',$message);
 	}
 
 	function test_illegal_card_type()
@@ -95,10 +93,10 @@ class sale_FunctionalTest extends UnitTestCase
 				'orderSource'=>'ecommerce',
 				'amount'=>'123');
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$saleResponse = $initilaize->saleRequest($hash_in);
 		$message= XmlParser::getAttribute($saleResponse,'litleOnlineResponse','message');
-		$this->assertPattern('/Error validating xml data against the schema/',$message);
+		$this->assertRegExp('/Error validating xml data against the schema/',$message);
 	}
 	function no_reportGroup()
 	{
@@ -113,10 +111,10 @@ class sale_FunctionalTest extends UnitTestCase
 					'orderSource'=>'ecommerce',
 					'amount'=>'123');
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$saleResponse = $initilaize->saleRequest($hash_in);
 		$response = XmlParser::getNode($saleResponse,'response');
-		$this->assertEqual('000',$response);
+		$this->assertEquals('000',$response);
 	}
 
 	function test_fields_out_of_order()
@@ -130,10 +128,10 @@ class sale_FunctionalTest extends UnitTestCase
 						'orderSource'=>'ecommerce',
 						'amount'=>'123');
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$saleResponse = $initilaize->saleRequest($hash_in);
 		$response = XmlParser::getNode($saleResponse,'response');
-		$this->assertEqual('000',$response);
+		$this->assertEquals('000',$response);
 	}
 
 	function test_invalid_field()
@@ -148,10 +146,10 @@ class sale_FunctionalTest extends UnitTestCase
 							'orderSource'=>'ecommerce',
 							'amount'=>'123');
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$saleResponse = $initilaize->saleRequest($hash_in);
 		$message = XmlParser::getNode($saleResponse,'message');
-		$this->assertEqual('Approved',$message);
+		$this->assertEquals('Approved',$message);
 	}
 
 	function test_illegal_embedded_fields()
@@ -166,9 +164,9 @@ class sale_FunctionalTest extends UnitTestCase
       'card'=>array(
       'type'=>'VI',
       'number' =>'4100000000000002'));
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$saleResponse = $initilaize->saleRequest($hash_in);
 		$message= XmlParser::getAttribute($saleResponse,'litleOnlineResponse','message');
-		$this->assertPattern('/Error validating xml data against the schema/',$message);
+		$this->assertRegExp('/Error validating xml data against the schema/',$message);
 	}
 }

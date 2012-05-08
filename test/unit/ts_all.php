@@ -23,8 +23,6 @@
 * OTHER DEALINGS IN THE SOFTWARE.
 */
 
-require_once("../../simpletest/autorun.php");
-require_once('../../simpletest/unit_tester.php');
 require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
 
 require realpath(dirname(__FILE__)) . '/test_XmlFields.php';
@@ -41,3 +39,31 @@ require realpath(dirname(__FILE__)) .  '/test_echeckSale.php';
 require realpath(dirname(__FILE__)) .  '/test_echeckCredit.php';
 require realpath(dirname(__FILE__)) .  '/test_echeckVerification.php';
 require realpath(dirname(__FILE__)) .  '/test_litleOnlineRequest.php';
+require realpath(dirname(__FILE__)) .  '/test_void.php';
+require realpath(dirname(__FILE__)) .  '/test_Checker.php';
+
+class UnitTests
+{
+	public static function suite()
+	{
+		$suite = new PHPUnit_Framework_TestSuite('PHPUnit');
+		$suite->addTestSuite('auth_UnitTest');
+		$suite->addTestSuite('authReversal_UnitTest');
+		$suite->addTestSuite('capture_UnitTest');
+		$suite->addTestSuite('captureGivenAuth_UnitTest');
+		$suite->addTestSuite('checker_UnitTest');
+		$suite->addTestSuite('credit_UnitTest');
+		$suite->addTestSuite('echeckCredit_UnitTest');
+		$suite->addTestSuite('echeckRedeposit_UnitTest');
+		$suite->addTestSuite('echeckSale_UnitTest');
+		$suite->addTestSuite('echeckVerification_UnitTest');
+		$suite->addTestSuite('forceCapture_UnitTest');
+		$suite->addTestSuite('LitleOnlineRequest_UnitTest');
+		$suite->addTestSuite('sale_UnitTest');
+		$suite->addTestSuite('token_UnitTest');
+		$suite->addTestSuite('void_UnitTest');
+		$suite->addTestSuite('Tests_XmlFields');
+		return $suite;
+	}
+}
+

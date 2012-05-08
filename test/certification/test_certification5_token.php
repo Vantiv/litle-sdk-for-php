@@ -23,11 +23,9 @@
 * OTHER DEALINGS IN THE SOFTWARE.
 */
 
-require_once("../../simpletest/autorun.php");
-require_once('../../simpletest/unit_tester.php');
 require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
 
-class cert5_Test extends UnitTestCase
+class cert5_Test extends PHPUnit_Framework_TestCase
 {
 	#### test token transactions with merchantid 087902 username IMPTKN, password cert3d6Z#####
 	function test_50()
@@ -36,13 +34,13 @@ class cert5_Test extends UnitTestCase
 		'orderId' => '50',
 	      'accountNumber' => '4457119922390123');
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$registerTokenResponse = $initilaize->registerTokenRequest($token_hash);
-		$this->assertEqual('445711',XMLParser::getNode($registerTokenResponse,'bin'));
-		$this->assertEqual('VI',XMLParser::getNode($registerTokenResponse,'type'));
-		$this->assertEqual('801',XMLParser::getNode($registerTokenResponse,'response'));
-		$this->assertEqual('1111222233330123',XMLParser::getNode($registerTokenResponse,'litleToken'));
-		$this->assertEqual('Account number was successfully registered',XMLParser::getNode($registerTokenResponse,'message'));
+		$this->assertEquals('445711',XMLParser::getNode($registerTokenResponse,'bin'));
+		$this->assertEquals('VI',XMLParser::getNode($registerTokenResponse,'type'));
+		$this->assertEquals('801',XMLParser::getNode($registerTokenResponse,'response'));
+		$this->assertEquals('1111222233330123',XMLParser::getNode($registerTokenResponse,'litleToken'));
+		$this->assertEquals('Account number was successfully registered',XMLParser::getNode($registerTokenResponse,'message'));
 	}
 	
 	function test_51()
@@ -51,10 +49,10 @@ class cert5_Test extends UnitTestCase
 			'orderId' => '51',
 		      'accountNumber' => '4457119999999999');
 	
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$registerTokenResponse = $initilaize->registerTokenRequest($token_hash);
-		$this->assertEqual('820',XMLParser::getNode($registerTokenResponse,'response'));
-		$this->assertEqual('Credit card number was invalid',XMLParser::getNode($registerTokenResponse,'message'));
+		$this->assertEquals('820',XMLParser::getNode($registerTokenResponse,'response'));
+		$this->assertEquals('Credit card number was invalid',XMLParser::getNode($registerTokenResponse,'message'));
 	}
 	
 	function test_52()
@@ -63,13 +61,13 @@ class cert5_Test extends UnitTestCase
 			'orderId' => '52',
 		      'accountNumber' => '4457119922390123');
 	
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$registerTokenResponse = $initilaize->registerTokenRequest($token_hash);
-		$this->assertEqual('445711',XMLParser::getNode($registerTokenResponse,'bin'));
-		$this->assertEqual('VI',XMLParser::getNode($registerTokenResponse,'type'));
-		$this->assertEqual('802',XMLParser::getNode($registerTokenResponse,'response'));
-		$this->assertEqual('1111222233330123',XMLParser::getNode($registerTokenResponse,'litleToken'));
-		$this->assertEqual('Account number was previously registered',XMLParser::getNode($registerTokenResponse,'message'));
+		$this->assertEquals('445711',XMLParser::getNode($registerTokenResponse,'bin'));
+		$this->assertEquals('VI',XMLParser::getNode($registerTokenResponse,'type'));
+		$this->assertEquals('802',XMLParser::getNode($registerTokenResponse,'response'));
+		$this->assertEquals('1111222233330123',XMLParser::getNode($registerTokenResponse,'litleToken'));
+		$this->assertEquals('Account number was previously registered',XMLParser::getNode($registerTokenResponse,'message'));
 	}
 	
 	function test_53() #merchant is not authorized for echeck tokens
@@ -78,13 +76,13 @@ class cert5_Test extends UnitTestCase
 				'orderId' => '53',
 			      'echeckForToken'=>array('accNum'=>'1099999998','routingNum'=>'114567895'));
 	
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$registerTokenResponse = $initilaize->registerTokenRequest($token_hash);
-		$this->assertEqual('EC',XMLParser::getNode($registerTokenResponse,'type'));
-		$this->assertEqual('998',XMLParser::getNode($registerTokenResponse,'eCheckAccountSuffix'));
-		$this->assertEqual('801',XMLParser::getNode($registerTokenResponse,'response'));
-		$this->assertEqual('111922223333000998',XMLParser::getNode($registerTokenResponse,'litleToken'));
-		$this->assertEqual('Account number was successfully registered',XMLParser::getNode($registerTokenResponse,'message'));
+		$this->assertEquals('EC',XMLParser::getNode($registerTokenResponse,'type'));
+		$this->assertEquals('998',XMLParser::getNode($registerTokenResponse,'eCheckAccountSuffix'));
+		$this->assertEquals('801',XMLParser::getNode($registerTokenResponse,'response'));
+		$this->assertEquals('111922223333000998',XMLParser::getNode($registerTokenResponse,'litleToken'));
+		$this->assertEquals('Account number was successfully registered',XMLParser::getNode($registerTokenResponse,'message'));
 	}
 	
 	function test_54() #merchant is not authorized for echeck tokens
@@ -93,10 +91,10 @@ class cert5_Test extends UnitTestCase
 				'orderId' => '54',
 			      'echeckForToken'=>array('accNum'=>'1022222102','routingNum'=>'1145_7895'));
 	
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$registerTokenResponse = $initilaize->registerTokenRequest($token_hash);
-		$this->assertEqual('900',XMLParser::getNode($registerTokenResponse,'response'));
-		$this->assertEqual('Invalid bank routing number',XMLParser::getNode($registerTokenResponse,'message'));
+		$this->assertEquals('900',XMLParser::getNode($registerTokenResponse,'response'));
+		$this->assertEquals('Invalid bank routing number',XMLParser::getNode($registerTokenResponse,'message'));
 	}
 	
 	function test_55() 
@@ -107,14 +105,14 @@ class cert5_Test extends UnitTestCase
 	      'orderSource' => 'ecommerce',
 	      'card' => array('number' => '5435101234510196', 'expDate' => '1112', 'cardValidationNum' => '987', 'type' => 'MC'));
 	
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$registerTokenResponse = $initilaize->authorizationRequest($token_hash);
-		$this->assertEqual('MC',XMLParser::getNode($registerTokenResponse,'type'));
-		$this->assertEqual('801',XMLParser::getNode($registerTokenResponse,'tokenResponseCode'));
-		$this->assertEqual('000',XMLParser::getNode($registerTokenResponse,'response'));
-		$this->assertEqual('Account number was successfully registered',XMLParser::getNode($registerTokenResponse,'tokenMessage'));
-		$this->assertEqual('Approved',XMLParser::getNode($registerTokenResponse,'message'));
-		$this->assertEqual('543510',XMLParser::getNode($registerTokenResponse,'bin'));
+		$this->assertEquals('MC',XMLParser::getNode($registerTokenResponse,'type'));
+		$this->assertEquals('801',XMLParser::getNode($registerTokenResponse,'tokenResponseCode'));
+		$this->assertEquals('000',XMLParser::getNode($registerTokenResponse,'response'));
+		$this->assertEquals('Account number was successfully registered',XMLParser::getNode($registerTokenResponse,'tokenMessage'));
+		$this->assertEquals('Approved',XMLParser::getNode($registerTokenResponse,'message'));
+		$this->assertEquals('543510',XMLParser::getNode($registerTokenResponse,'bin'));
 	}
 	
 	function test_56() 
@@ -125,10 +123,10 @@ class cert5_Test extends UnitTestCase
       'orderSource' => 'ecommerce',
       'card' => array('number' => '5435109999999999', 'expDate' => '1112', 'cardValidationNum' => '987', 'type' => 'MC'));
 	
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$registerTokenResponse = $initilaize->authorizationRequest($token_hash);
-		$this->assertEqual('301',XMLParser::getNode($registerTokenResponse,'response'));
-		$this->assertEqual('Invalid account number',XMLParser::getNode($registerTokenResponse,'message'));
+		$this->assertEquals('301',XMLParser::getNode($registerTokenResponse,'response'));
+		$this->assertEquals('Invalid account number',XMLParser::getNode($registerTokenResponse,'message'));
 	}
 	
 	function test_57()
@@ -139,14 +137,14 @@ class cert5_Test extends UnitTestCase
 	      'orderSource' => 'ecommerce',
 	      'card' => array('number' => '5435101234510196', 'expDate' => '1112', 'cardValidationNum' => '987', 'type' => 'MC'));
 	
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$registerTokenResponse = $initilaize->authorizationRequest($token_hash);
-		$this->assertEqual('MC',XMLParser::getNode($registerTokenResponse,'type'));
-		$this->assertEqual('802',XMLParser::getNode($registerTokenResponse,'tokenResponseCode'));
-		$this->assertEqual('000',XMLParser::getNode($registerTokenResponse,'response'));
-		$this->assertEqual('Account number was previously registered',XMLParser::getNode($registerTokenResponse,'tokenMessage'));
-		$this->assertEqual('Approved',XMLParser::getNode($registerTokenResponse,'message'));
-		$this->assertEqual('543510',XMLParser::getNode($registerTokenResponse,'bin'));
+		$this->assertEquals('MC',XMLParser::getNode($registerTokenResponse,'type'));
+		$this->assertEquals('802',XMLParser::getNode($registerTokenResponse,'tokenResponseCode'));
+		$this->assertEquals('000',XMLParser::getNode($registerTokenResponse,'response'));
+		$this->assertEquals('Account number was previously registered',XMLParser::getNode($registerTokenResponse,'tokenMessage'));
+		$this->assertEquals('Approved',XMLParser::getNode($registerTokenResponse,'message'));
+		$this->assertEquals('543510',XMLParser::getNode($registerTokenResponse,'bin'));
 	}
 	
 	function test_59()
@@ -157,10 +155,10 @@ class cert5_Test extends UnitTestCase
 	      'orderSource' => 'ecommerce',
 	      'token' => array('litleToken' => '1712990000040196', 'expDate' => '1112'));
 	
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($token_hash);
-		$this->assertEqual('822',XMLParser::getNode($authorizationResponse,'response'));
-		$this->assertEqual('Token was not found',XMLParser::getNode($authorizationResponse,'message'));
+		$this->assertEquals('822',XMLParser::getNode($authorizationResponse,'response'));
+		$this->assertEquals('Token was not found',XMLParser::getNode($authorizationResponse,'message'));
 	}
 	
 	function test_60()
@@ -171,10 +169,10 @@ class cert5_Test extends UnitTestCase
 		      'orderSource' => 'ecommerce',
 		      'token' => array('litleToken' => '1712999999999999', 'expDate' => '1112'));
 	
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$authorizationResponse = $initilaize->authorizationRequest($token_hash);
-		$this->assertEqual('823',XMLParser::getNode($authorizationResponse,'response'));
-		$this->assertEqual('Token was invalid',XMLParser::getNode($authorizationResponse,'message'));
+		$this->assertEquals('823',XMLParser::getNode($authorizationResponse,'response'));
+		$this->assertEquals('Token was invalid',XMLParser::getNode($authorizationResponse,'message'));
 	}
 	
 	# test 61-64 need echecksale to support token. merchantid not authoried.
@@ -189,13 +187,13 @@ class cert5_Test extends UnitTestCase
 	      'lastName' => 'Black'),
 	      'echeck' => array('accType' => 'Checking', 'accNum' => '1099999003', 'routingNum' => '114567895'));
 	
-			$initilaize = &new LitleOnlineRequest();
+			$initilaize = new LitleOnlineRequest();
 			$registerTokenResponse = $initilaize->echeckSaleRequest($token_hash);
-			$this->assertEqual('801',XMLParser::getNode($registerTokenResponse,'tokenResponseCode'));
-			$this->assertEqual('Account number was successfully registered',XMLParser::getNode($registerTokenResponse,'tokenMessage'));
-			$this->assertEqual('EC',XMLParser::getNode($registerTokenResponse,'type'));
-			$this->assertEqual('003',XMLParser::getNode($registerTokenResponse,'eCheckAccountSuffix'));
-			$this->assertEqual('111922223333444003',XMLParser::getNode($registerTokenResponse,'litleToken'));
+			$this->assertEquals('801',XMLParser::getNode($registerTokenResponse,'tokenResponseCode'));
+			$this->assertEquals('Account number was successfully registered',XMLParser::getNode($registerTokenResponse,'tokenMessage'));
+			$this->assertEquals('EC',XMLParser::getNode($registerTokenResponse,'type'));
+			$this->assertEquals('003',XMLParser::getNode($registerTokenResponse,'eCheckAccountSuffix'));
+			$this->assertEquals('111922223333444003',XMLParser::getNode($registerTokenResponse,'litleToken'));
 		}
 		
 		function test_62()
@@ -209,13 +207,13 @@ class cert5_Test extends UnitTestCase
 			      'lastName' => 'Black'),
 			      'echeck' => array('accType' => 'Checking', 'accNum' => '1099999999', 'routingNum' => '114567895'));
 		
-			$initilaize = &new LitleOnlineRequest();
+			$initilaize = new LitleOnlineRequest();
 			$registerTokenResponse = $initilaize->echeckSaleRequest($token_hash);
-			$this->assertEqual('801',XMLParser::getNode($registerTokenResponse,'tokenResponseCode'));
-			$this->assertEqual('Account number was successfully registered',XMLParser::getNode($registerTokenResponse,'tokenMessage'));
-			$this->assertEqual('EC',XMLParser::getNode($registerTokenResponse,'type'));
-			$this->assertEqual('999',XMLParser::getNode($registerTokenResponse,'eCheckAccountSuffix'));
-			$this->assertEqual('111922223333444999',XMLParser::getNode($registerTokenResponse,'litleToken'));
+			$this->assertEquals('801',XMLParser::getNode($registerTokenResponse,'tokenResponseCode'));
+			$this->assertEquals('Account number was successfully registered',XMLParser::getNode($registerTokenResponse,'tokenMessage'));
+			$this->assertEquals('EC',XMLParser::getNode($registerTokenResponse,'type'));
+			$this->assertEquals('999',XMLParser::getNode($registerTokenResponse,'eCheckAccountSuffix'));
+			$this->assertEquals('111922223333444999',XMLParser::getNode($registerTokenResponse,'litleToken'));
 		}
 		
 		
@@ -230,13 +228,13 @@ class cert5_Test extends UnitTestCase
 					      'lastName' => 'Black'),
 					      'echeck' => array('accType' => 'Checking', 'accNum' => '1099999999', 'routingNum' => '214567892'));
 				
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$registerTokenResponse = $initilaize->echeckSaleRequest($token_hash);
-		$this->assertEqual('801',XMLParser::getNode($registerTokenResponse,'tokenResponseCode'));
-		$this->assertEqual('Account number was successfully registered',XMLParser::getNode($registerTokenResponse,'tokenMessage'));
-		$this->assertEqual('EC',XMLParser::getNode($registerTokenResponse,'type'));
-		$this->assertEqual('999',XMLParser::getNode($registerTokenResponse,'eCheckAccountSuffix'));
-		$this->assertEqual('111922223333555999',XMLParser::getNode($registerTokenResponse,'litleToken'));
+		$this->assertEquals('801',XMLParser::getNode($registerTokenResponse,'tokenResponseCode'));
+		$this->assertEquals('Account number was successfully registered',XMLParser::getNode($registerTokenResponse,'tokenMessage'));
+		$this->assertEquals('EC',XMLParser::getNode($registerTokenResponse,'type'));
+		$this->assertEquals('999',XMLParser::getNode($registerTokenResponse,'eCheckAccountSuffix'));
+		$this->assertEquals('111922223333555999',XMLParser::getNode($registerTokenResponse,'litleToken'));
 		}
 		
 	

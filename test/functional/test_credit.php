@@ -23,11 +23,9 @@
 * OTHER DEALINGS IN THE SOFTWARE.
 */
 
-require_once("../../simpletest/autorun.php");
-require_once('../../simpletest/unit_tester.php');
 require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
 
-class credit_FunctionalTest extends UnitTestCase
+class credit_FunctionalTest extends PHPUnit_Framework_TestCase
 {
 	function test_simple_credit_with_card()
 	{
@@ -42,10 +40,10 @@ class credit_FunctionalTest extends UnitTestCase
 			'orderSource'=>'ecommerce',
 			'amount'=>'123');
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
 		$response = XmlParser::getNode($creditResponse,'response');
-		$this->assertEqual('000',$response);
+		$this->assertEquals('000',$response);
 	}
 
 	function test_simple_credit_with_paypal()
@@ -59,20 +57,20 @@ class credit_FunctionalTest extends UnitTestCase
 				'orderSource'=>'ecommerce',
 				'amount'=>'123');
 
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
 		$message= XmlParser::getAttribute($creditResponse,'litleOnlineResponse','message');
-		$this->assertPattern('/Error validating xml data against the schema/',$message);
+		$this->assertRegExp('/Error validating xml data against the schema/',$message);
 	}
 	
 	function test_simple_credit_with_litleTxnId()
 	{
 		$hash_in = array('reportGroup'=>'planets','litleTxnId'=>'1234567891234567891');
 	
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
 		$message= XmlParser::getAttribute($creditResponse,'litleOnlineResponse','response');
-		$this->assertEqual("0",$message);
+		$this->assertEquals("0",$message);
 	}
 	function test_paypal_notes()
 	{
@@ -88,10 +86,10 @@ class credit_FunctionalTest extends UnitTestCase
 				'orderSource'=>'ecommerce',
 				'amount'=>'123');
 	
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
 		$response = XmlParser::getNode($creditResponse,'response');
-		$this->assertEqual('000',$response);
+		$this->assertEquals('000',$response);
 	}
 	function test_amexAggregator()
 	{
@@ -106,10 +104,10 @@ class credit_FunctionalTest extends UnitTestCase
 	      'expDate' =>'1210'),
 	      'amexAggregatorData'=>array('sellerMerchantCategoryCode'=>'1234','sellerId'=>'1234Id'));
 	
-		$initilaize = &new LitleOnlineRequest();
+		$initilaize = new LitleOnlineRequest();
 		$creditResponse = $initilaize->creditRequest($hash_in);
 		$response = XmlParser::getNode($creditResponse,'response');
-		$this->assertEqual('000',$response);
+		$this->assertEquals('000',$response);
 	}
 
 
