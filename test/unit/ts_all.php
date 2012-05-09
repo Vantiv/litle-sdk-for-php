@@ -41,7 +41,6 @@ require realpath(dirname(__FILE__)) .  '/test_echeckVerification.php';
 require realpath(dirname(__FILE__)) .  '/test_litleOnlineRequest.php';
 require realpath(dirname(__FILE__)) .  '/test_void.php';
 require realpath(dirname(__FILE__)) .  '/test_Checker.php';
-require realpath(dirname(__FILE__)) .  '/test_shortenUrl.php';
 
 class UnitTests
 {
@@ -64,7 +63,6 @@ class UnitTests
 		$suite->addTestSuite('token_UnitTest');
 		$suite->addTestSuite('void_UnitTest');
 		$suite->addTestSuite('Tests_XmlFields');
-		$suite->addTestSuite('shortenUrl_UnitTest');
 		return $suite;
 	}
 }
