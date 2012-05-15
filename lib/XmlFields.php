@@ -306,7 +306,7 @@ class XmlFields
 			$hash_out = array(
 						"litleToken"=>(Checker::requiredField(XmlFields::returnArrayValue($hash_in, "litleToken"))),
 						"expDate"=>XmlFields::returnArrayValue($hash_in, "expDate"),
-						"cardValidationNum"=>XmlFields::returnArrayValue($hash_in, "cardValidationNumber"),
+						"cardValidationNum"=>XmlFields::returnArrayValue($hash_in, "cardValidationNum"),
 						"type"=>XmlFields::returnArrayValue($hash_in, "type")
 			);
 			return $hash_out;
@@ -320,7 +320,7 @@ class XmlFields
 			$hash_out = array(
 						"paypageRegistrationId"=>(Checker::requiredField(XmlFields::returnArrayValue($hash_in, "paypageRegistrationId"))),
 						"expDate"=>XmlFields::returnArrayValue($hash_in, "expDate"),
-						"cardValidationNum"=>XmlFields::returnArrayValue($hash_in, "cardValidationNumber"),
+						"cardValidationNum"=>XmlFields::returnArrayValue($hash_in, "cardValidationNum"),
 						"type"=>XmlFields::returnArrayValue($hash_in, "type")
 			);
 			return $hash_out;
