@@ -225,7 +225,7 @@ class Tests_XmlFields extends PHPUnit_Framework_TestCase{
 	{
 		$hash = array(
       "expDate"=>"2013",
-      "cardValidationNumber"=>"123",
+      "cardValidationNum"=>"123",
       "type"=>"VISA");
 		$hash_out = XmlFields::cardTokenType($hash);
 		$this->assertEquals($hash_out["type"], "VISA");
@@ -239,7 +239,7 @@ class Tests_XmlFields extends PHPUnit_Framework_TestCase{
 	{
 		$hash = array(
 	      "expDate"=>"2013",
-	      "cardValidationNumber"=>"123",
+	      "cardValidationNum"=>"123",
 	      "type"=>"VISA");
 		$hash_out = XmlFields::cardPaypageType($hash);
 		$this->assertEquals($hash_out["type"], "VISA");
