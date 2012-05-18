@@ -59,7 +59,8 @@ class LitleOnlineRequest
 			'healthcareIIAS'=>(XmlFields::healthcareIIAS($hash_in['healthcareIIAS'])),
 			'filtering'=>(XmlFields::filteringType($hash_in['filtering'])),
 			'merchantData'=>(XmlFields::merchantData($hash_in['merchantData'])),
-			'recyclingRequest'=>(XmlFields::recyclingRequestType($hash_in['recyclingRequest'])));
+			'recyclingRequest'=>(XmlFields::recyclingRequestType($hash_in['recyclingRequest'])),
+			'fraudFilterOverride'=> $hash_in['fraudFilterOverride']);
 		}
 
 		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
@@ -96,7 +97,8 @@ class LitleOnlineRequest
 		'healthcareIIAS'=>XmlFields::healthcareIIAS($hash_in['healthcareIIAS']),
 		'filtering'=>XmlFields::filteringType($hash_in['filtering']),
 		'merchantData'=>XmlFields::merchantData($hash_in['merchantData']),
-		'recyclingRequest'=>XmlFields::recyclingRequestType($hash_in['recyclingRequest']));
+		'recyclingRequest'=>XmlFields::recyclingRequestType($hash_in['recyclingRequest']),
+		'fraudFilterOverride'=> $hash_in['fraudFilterOverride']);		
 
 		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
 		$choice2_hash= array($hash_out['fraudCheck'],$hash_out['cardholderAuthentication']);
@@ -323,7 +325,7 @@ class LitleOnlineRequest
 			$hash_out['merchantSdk'] = $hash_in['merchantSdk'];
 		}
 		else {
-			$hash_out['merchantSdk'] = 'PHP;8.12.2';
+			$hash_out['merchantSdk'] = 'PHP;8.13.0';
 		}
 		if(isset($hash_in['id'])) {
 			$hash_out['id'] = $hash_in['id'];

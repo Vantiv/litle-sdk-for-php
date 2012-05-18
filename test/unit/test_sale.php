@@ -208,6 +208,31 @@ class sale_UnitTest extends PHPUnit_Framework_TestCase
 		$litleTest->newXML = $mock;
 		$litleTest->saleRequest($hash_in);
 	}
+	
+	function test_fraud_filter_override() {
+		$hash_in = array(
+	 			'card'=>array(	
+	 				'type'=>'VI',
+	 				'number'=>'4100000000000001',
+	 				'expDate'=>'1213',
+	 				'cardValidationNum' => '1213'
+	 			),
+	 			'orderId'=> '2111',
+	 			'orderSource'=>'ecommerce',
+	 			'id'=>'64575',
+	 			'amount'=>'123',
+	 			'fraudFilterOverride'=>'false'
+		);
+		$mock = $this->getMock('LitleXmlMapper');
+		$mock	->expects($this->once())
+		->method('request')
+		->with($this->matchesRegularExpression('/.*<sale.*?<fraudFilterOverride>false<\/fraudFilterOverride>.*?<\/sale>.*/'));
+			
+		$litleTest = new LitleOnlineRequest();
+		$litleTest->newXML = $mock;
+		$litleTest->saleRequest($hash_in);
+	}
+	
 
 
 }

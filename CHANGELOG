@@ -1,0 +1,23 @@
+= LitleOnline CHANGELOG
+
+== Version 8.13 (May 18, 2012)
+
+* Feature: Authorizations and Sales can accept an optional fraudFilterOverride parameter
+
+== Version 8.12.2 (May 8, 2012)
+
+* Bugfix: Add support for line item data and tax detail to enhanced data
+
+== Version 8.12.1 (April 23, 2012)
+
+* Bugfix: Add support for id, customerid and reportgroup
+
+== Version 8.12 (April 17, 2012)
+
+* Bugfix: Add support for MerchantData on auth and sale
+* Feature: Add support for actionReason on credit
+* Feature: Track SDK Usage
+
+== Version 8.10.0 (April 2, 2012)
+
+* Initial release
