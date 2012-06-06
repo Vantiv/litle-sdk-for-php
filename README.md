@@ -33,7 +33,7 @@ SDK PHP Dependencies
 Setup
 -----
 
-1) Install the LitleOnline PHP SDK from git. 
+1) Install the LitleOnline PHP SDK from git.
 
 >git clone git://github.com/LitleCo/litle-sdk-for-php.git
 
@@ -44,7 +44,7 @@ Setup
 
 > php Setup.php
 
-Running the above commands will create a configuration file in the lib directory. 
+Running the above commands will create a configuration file in the lib directory.
 
 
 3) Create a symlink to the SDK
@@ -52,10 +52,10 @@ Running the above commands will create a configuration file in the lib directory
 >ln -s /path/to/sdk /var/www/html/nameOfLink
 
 
-4.) Create a php file similar to: 
+4.) Create a php file similar to:
 
 ```php
-require_once realpath(dirname(__FILE__)) . '/../lib/LitleOnline.php';  
+require_once realpath(dirname(__FILE__)) . '/../lib/LitleOnline.php';
     // Visa $10.00 sale
     $hash_in = array(
 	      'amount'=>'106',
@@ -67,12 +67,12 @@ require_once realpath(dirname(__FILE__)) . '/../lib/LitleOnline.php';
 	     'expDate' =>'1000')
 	      );
 //Perform the transaction on the Litle Platform
-$initilaize = &new LitleOnlineRequest();
-$saleResponse = $initilaize->saleRequest($hash_in);
+$initialize = &new LitleOnlineRequest();
+$saleResponse = $initialize->saleRequest($hash_in);
 
-// Display Result 
-echo ("Message: " . XMLParser::get_node($saleResponse,'message') . "<br>");
-echo ("Litle Transaction ID: " . XMLParser::get_node($saleResponse,'litleTxnId'));
+// Display Result
+echo ("Message: " . $saleResponse->saleResponse->message . "<br>");
+echo ("Litle Transaction ID: " . $saleResponse->saleResponse->litleTxnId);
 ```
 NOTE: you may have to change the path to match that of your filesystems
 
