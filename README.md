@@ -82,4 +82,4 @@ NOTE: you may have to change the path to match that of your filesystems
     Litle Transaction ID: <your-numeric-litle-txn-id>
 
 
-Please contact Lilte & Co. with any further questions.   You can reach us at SDKSupport@litle.com
+Please contact Litle & Co. with any further questions.   You can reach us at SDKSupport@litle.com
