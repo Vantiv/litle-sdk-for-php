@@ -184,8 +184,10 @@ class Tests_XmlFields extends PHPUnit_Framework_TestCase{
 		"salesTax"=>"5",
 		"deliveryType"=>"ups",
 		"taxExempt"=>"no",
-		"lineItemData" => (array("lineItemTotal"=>"1",
-		"itemDiscountAmount"=>"3")),
+		"lineItemData" => (array(
+			"lineItemTotal"=>"1",
+			"itemDiscountAmount"=>"3")
+		),
 		"detailTax"=> (array("taxAmount" => "high")));
 		$hash_out = XmlFields::enhancedData($hash);
 		$this->assertEquals($hash_out["customerReference"], "yes");

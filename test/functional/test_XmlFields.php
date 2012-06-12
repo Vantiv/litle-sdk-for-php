@@ -328,7 +328,7 @@ class XmlFields_FunctionalTest extends PHPUnit_Framework_TestCase
 	{
 		$hash_in = array('merchantId' => '101',
 	      'version'=>'8.8',
-	      'reportGroup'=>'Planets',
+	      'reportGroup'=>'LINEITEM',
 	      'orderId'=>'12344',
 	      'amount'=>'106',
 	      'card'=>array(

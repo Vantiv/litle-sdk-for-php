@@ -24,8 +24,6 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 define('CURRENT_XML_VERSION', '8.13');
-error_reporting(E_ALL ^ E_NOTICE);
-//ini_set('display_errors', '1');
 require_once realpath(dirname(__FILE__)) . '/LitleXmlMapper.php';
 require_once realpath(dirname(__FILE__)) . '/XmlFields.php';
 require_once realpath(dirname(__FILE__)) . '/Communication.php';

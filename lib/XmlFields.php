@@ -257,13 +257,15 @@ class XmlFields
 				if ($key == 'lineItemData' && $key != NULL){
 					$lineItem = array();
 					for($j=0; $j<count($value); $j++){
-						$hash_out[('lineItemData' . (string)$j)] = XmlFields::lineItemData($value[$j]);
+						$outIndex = ('lineItemData') . (string)$j;
+						$hash_out[$outIndex] = XmlFields::lineItemData(XmlFields::returnArrayValue($value,$j));
 					}
 				}
 				elseif ($key == 'detailTax' & $key != NULL){
 					$detailtax = array();
 					for($j=0; $j<count($value); $j++){
-						$hash_out[('detailTax' . (string)$j)] = XmlFields::detailTax($value[$j]);
+						$outIndex = ('detailTax') . (string)$j;
+						$hash_out[$outIndex] = XmlFields::detailTax(XmlFields::returnArrayValue($value,$j));
 					}
 				}
 			}

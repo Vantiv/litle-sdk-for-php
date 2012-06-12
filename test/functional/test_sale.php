@@ -151,22 +151,4 @@ class sale_FunctionalTest extends PHPUnit_Framework_TestCase
 		$message = XmlParser::getNode($saleResponse,'message');
 		$this->assertEquals('Approved',$message);
 	}
-
-	function test_illegal_embedded_fields()
-	{
-		$hash_in =array(
-      'litleTxnId'=>'123456',
-      'orderId'=>'12344',
-      'amount'=>'106',
-      'orderSource'=>'ecommerce',
-      'fraudCheck'=>array('noexistant' => 'one'),
-      'cardholderAuthentication'=>array('alsoNonexistant'=>'two'),
-      'card'=>array(
-      'type'=>'VI',
-      'number' =>'4100000000000002'));
-		$initilaize = new LitleOnlineRequest();
-		$saleResponse = $initilaize->saleRequest($hash_in);
-		$message= XmlParser::getAttribute($saleResponse,'litleOnlineResponse','message');
-		$this->assertRegExp('/Error validating xml data against the schema/',$message);
-	}
 }
