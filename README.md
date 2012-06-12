@@ -74,6 +74,30 @@ $saleResponse = $initilaize->saleRequest($hash_in);
 echo ("Message: " . XMLParser::get_node($saleResponse,'message') . "<br>");
 echo ("Litle Transaction ID: " . XMLParser::get_node($saleResponse,'litleTxnId'));
 ```
+
+As of 8.13.1, you may also use a tree-oriented style to get the response values:
+```php
+require_once realpath(dirname(__FILE__)) . '/../lib/LitleOnline.php';  
+    // Visa $10.00 sale
+    $hash_in = array(
+	      'amount'=>'106',
+	      'orderId' => '123213',
+	      'orderSource'=>'ecommerce',
+	      'card'=>array(
+	      'type'=>'VI',
+	      'number' =>'4100000000000001',
+	     'expDate' =>'1000')
+	      );
+//Perform the transaction on the Litle Platform
+$initilaize = &new LitleOnlineRequest($treeResponse=true);
+$saleResponse = $initilaize->saleRequest($hash_in);
+
+// Display Result 
+echo ("Message: " . $saleResponse->saleResponse->message . "<br>");
+echo ("Litle Transaction ID: " . $saleResponse->saleResponse->litleTxnId);
+```
+
+
 NOTE: you may have to change the path to match that of your filesystems
 
 5) Next run this file using php on the command line or inside a browser. You should see the following result provided you have connectivity to the Litle certification environment.  You will see an HTTP error if you don't have access to the Litle URL

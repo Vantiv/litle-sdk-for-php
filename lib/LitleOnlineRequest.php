@@ -25,8 +25,11 @@
 
 class LitleOnlineRequest
 {
-	public function __construct()
+	private $useSimpleXml = false;
+	
+	public function __construct($treeResponse=false)
 	{
+		$this->useSimpleXml = $treeResponse;	
 		$this->newXML = new LitleXmlMapper();
 	}
 
@@ -250,6 +253,10 @@ class LitleOnlineRequest
 		$echeckSaleResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'echeckSale',$choice_hash);
 		return $echeckSaleResponse;
 	}
+	
+	public function echeckSaleRequestObject(EcheckSale $echeckSale) {
+		//TODO Can I overload?  What are php's rules?
+	}
 
 	public function echeckCreditRequest($hash_in)
 	{
@@ -346,7 +353,7 @@ class LitleOnlineRequest
 		Checker::choice($choice2);
 		$request = Obj2xml::toXml($hash,$hash_config, $type);
 	
-		$litleOnlineResponse = $this->newXML->request($request,$hash_config);
+		$litleOnlineResponse = $this->newXML->request($request,$hash_config,$this->useSimpleXml);
 		return $litleOnlineResponse;
 	}
 

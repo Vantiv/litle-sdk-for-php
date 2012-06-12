@@ -40,6 +40,7 @@ require realpath(dirname(__FILE__)) .  '/test_echeckSale.php';
 require realpath(dirname(__FILE__)) .  '/test_echeckCredit.php';
 require realpath(dirname(__FILE__)) .  '/test_echeckVerification.php';
 require realpath(dirname(__FILE__)) .  '/test_echeckVoid.php';
+require realpath(dirname(__FILE__)) .  '/test_treeResponse.php';
 
 class FunctionalTests
 {
@@ -61,6 +62,7 @@ class FunctionalTests
 		$suite->addTestSuite('token_FunctionalTest');
 		$suite->addTestSuite('void_FunctionalTest');
 		$suite->addTestSuite('XmlFields_FunctionalTest');
+		$suite->addTestSuite('treeResponse_FunctionalTest');
 		return $suite;
 	}
 }
