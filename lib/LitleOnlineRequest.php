@@ -98,7 +98,7 @@ class LitleOnlineRequest
 		'filtering'=>XmlFields::filteringType($hash_in['filtering']),
 		'merchantData'=>XmlFields::merchantData($hash_in['merchantData']),
 		'recyclingRequest'=>XmlFields::recyclingRequestType($hash_in['recyclingRequest']),
-		'fraudFilterOverride'=> $hash_in['fraudFilterOverride']);		
+		'fraudFilterOverride'=> $hash_in['fraudFilterOverride']);
 
 		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
 		$choice2_hash= array($hash_out['fraudCheck'],$hash_out['cardholderAuthentication']);
@@ -225,7 +225,7 @@ class LitleOnlineRequest
 		'litleTxnId' => Checker::requiredField($hash_in['litleTxnId']),
 		'echeck'=>XmlFields::echeckType($hash_in['echeck']),
 		'echeckToken'=>XmlFields::echeckTokenType($hash_in['echeckToken']));
-		
+
 		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
 		$echeckRedepositResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'echeckRedeposit',$choice_hash);
 		return $echeckRedepositResponse;
@@ -255,12 +255,7 @@ class LitleOnlineRequest
 	{
 		$hash_out = array(
 			'litleTxnId'=>$hash_in['litleTxnId'],
-			'orderId'=>$hash_in['orderId'],
 			'amount'=>$hash_in['amount'],
-			'orderSource'=>$hash_in['orderSource'],
-			'billToAddress'=>XmlFields::contact($hash_in['billToAddress']),
-			'echeck'=>XmlFields::echeckType($hash_in['echeck']),
-			'echeckToken'=>XmlFields::echeckTokenType($hash_in['echeckToken']),
 			'customBilling'=>XmlFields::customBilling($hash_in['customBilling']));
 
 		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
@@ -270,7 +265,7 @@ class LitleOnlineRequest
 
 	public function echeckVerificationRequest($hash_in)
 	{
-		
+
 		$hash_out = array(
 			'litleTxnId'=>$hash_in['litleTxnId'],
 			'orderId'=>Checker::requiredField($hash_in['orderId']),
@@ -279,7 +274,7 @@ class LitleOnlineRequest
 			'billToAddress'=>XmlFields::contact($hash_in['billToAddress']),
 			'echeck'=>XmlFields::echeckType($hash_in['echeck']),
 			'echeckToken'=>XmlFields::echeckTokenType($hash_in['echeckToken']));
-		
+
 		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
 		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
 		$echeckVerificationResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'echeckVerification',$choice_hash);
@@ -318,7 +313,7 @@ class LitleOnlineRequest
 		'proxy'=>$hash_in['proxy']);
 		return $hash_out;
 	}
-	
+
 	private function getOptionalAttributes($hash_in,$hash_out)
 	{
 		if(isset($hash_in['merchantSdk'])) {
@@ -338,17 +333,16 @@ class LitleOnlineRequest
 
 	private function processRequest($hash_out, $hash_in, $type, $choice1 = null, $choice2 = null)
 	{
-	
+
 		$hash_config = LitleOnlineRequest::overideconfig($hash_in);
-		
+
 		$hash = LitleOnlineRequest::getOptionalAttributes($hash_in,$hash_out);
 		Checker::choice($choice1);
 		Checker::choice($choice2);
 		$request = Obj2xml::toXml($hash,$hash_config, $type);
-	
+
 		$litleOnlineResponse = $this->newXML->request($request,$hash_config);
 		return $litleOnlineResponse;
 	}
 
 }
-
