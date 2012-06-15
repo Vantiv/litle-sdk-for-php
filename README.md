@@ -47,7 +47,7 @@ Setup
 Running the above commands will create a configuration file in the lib directory. 
 
 
-3) Create a simlink to the SDK
+3) Create a symlink to the SDK
 
 >ln -s /path/to/sdk /var/www/html/nameOfLink
 
@@ -106,4 +106,4 @@ NOTE: you may have to change the path to match that of your filesystems
     Litle Transaction ID: <your-numeric-litle-txn-id>
 
 
-Please contact Lilte & Co. with any further questions.   You can reach us at SDKSupport@litle.com
+Please contact Litle & Co. with any further questions.   You can reach us at SDKSupport@litle.com
