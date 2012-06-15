@@ -67,7 +67,7 @@ require_once realpath(dirname(__FILE__)) . '/../lib/LitleOnline.php';
 	     'expDate' =>'1000')
 	      );
 //Perform the transaction on the Litle Platform
-$initilaize = &new LitleOnlineRequest();
+$initilaize = new LitleOnlineRequest();
 $saleResponse = $initilaize->saleRequest($hash_in);
 
 // Display Result 
@@ -89,7 +89,7 @@ require_once realpath(dirname(__FILE__)) . '/../lib/LitleOnline.php';
 	     'expDate' =>'1000')
 	      );
 //Perform the transaction on the Litle Platform
-$initilaize = &new LitleOnlineRequest($treeResponse=true);
+$initilaize = new LitleOnlineRequest($treeResponse=true);
 $saleResponse = $initilaize->saleRequest($hash_in);
 
 // Display Result 
