@@ -1,5 +1,9 @@
 = LitleOnline CHANGELOG
 
+== Version 8.13.1 (June 15, 2012)
+
+* Feature: Add support for accessing response as a tree using simplexml.  Access is provided if $treeResponse=true is passed to the LitleOnlineRequest constructor
+
 == Version 8.13 (May 18, 2012)
 
 * Feature: Authorizations and Sales can accept an optional fraudFilterOverride parameter
