@@ -52,5 +52,10 @@ class XMLParser{
 		$retVal = $attributes->getAttribute($attributeName);
 		return $retVal;
 	}
+	
+	public static function getDomDocumentAsString($dom)
+	{
+		return $dom->saveXML($dom);
+	}
 }
 ?>
