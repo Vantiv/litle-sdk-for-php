@@ -24,7 +24,7 @@
  */
 class Checker
 {
-	function requiredField($value)
+	static function requiredField($value)
 	{
 		if ($value != null)
 		{
@@ -36,7 +36,7 @@ class Checker
 		}
 	}
 
-	function choice($choiceArray)
+	static function choice($choiceArray)
 	{
 		$i= 0;
 		for($y=0;$y<count($choiceArray);$y++){
