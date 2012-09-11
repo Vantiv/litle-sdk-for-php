@@ -27,7 +27,6 @@ require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
 
 class cert5_Test extends PHPUnit_Framework_TestCase
 {
-	#### test token transactions with merchantid 087902 username IMPTKN, password cert3d6Z#####
 	function test_50()
 	{
 		$token_hash = array(
