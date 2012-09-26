@@ -62,7 +62,7 @@ class Obj2xml {
 		{
 			if ($value === "REQUIRED"){
 				throw new InvalidArgumentException("Missing Required Field: /$key/");
-			}elseif (substr($key,0,-1) == 'lineItemData'){
+			}elseif (substr($key, 0, 12) === 'lineItemData'){
 				$temp_node = $transacType->addChild('lineItemData');
 				Obj2xml::iterateChildren($value,$temp_node);
 			}elseif (substr($key,0,-1) == 'detailTax'){
