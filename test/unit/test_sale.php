@@ -233,6 +233,26 @@ class sale_UnitTest extends PHPUnit_Framework_TestCase
 		$litleTest->saleRequest($hash_in);
 	}
 	
-
+	function test_loggedInUser()
+	{
+		$hash_in = array(
+				'loggedInUser'=>'gdake',
+				'card'=>array('type'=>'VI',
+						'number'=>'4100000000000001',
+						'expDate'=>'1213',
+						'cardValidationNum' => '1213'),
+				'id'=>'654',
+				'orderId'=> '2111',
+				'orderSource'=>'ecommerce',
+				'amount'=>'123');
+		$mock = $this->getMock('LitleXmlMapper');
+		$mock->expects($this->once())
+		->method('request')
+ 		->with($this->matchesRegularExpression('/.*merchantSdk="PHP;8.14.0".*loggedInUser="gdake" xmlns=.*>.*/'));
+			
+		$litleTest = new LitleOnlineRequest();
+		$litleTest->newXML = $mock;
+		$litleTest->saleRequest($hash_in);
+	}
 
 }

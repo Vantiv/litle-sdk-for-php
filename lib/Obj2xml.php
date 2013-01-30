@@ -33,6 +33,10 @@ class Obj2xml {
 		$xml-> addAttribute('version',$config["version"]);
 		$xml-> addAttribute('merchantSdk',$data['merchantSdk']);
 		unset($data['merchantSdk']);
+		if(isset($data['loggedInUser'])) {
+			$xml->addAttribute('loggedInUser',$data["loggedInUser"]);
+		};
+		unset($data['loggedInUser']);
 		$xml-> addAttribute('xmlns:xmlns','http://www.litle.com/schema');// does not show up on browser docs
 		$authentication = $xml->addChild('authentication');
 		$authentication->addChild('user',$config["user"]);

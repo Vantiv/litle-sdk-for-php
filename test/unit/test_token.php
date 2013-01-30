@@ -40,7 +40,7 @@ class token_UnitTest extends PHPUnit_Framework_TestCase
 		$litleTest->newXML = $mock;
 		$litleTest->registerTokenRequest($hash_in);
 	}
-
+	
 
 	function test_accountNum_and_paypage()
 	{
@@ -85,7 +85,36 @@ class token_UnitTest extends PHPUnit_Framework_TestCase
 
 	}
 
+	function test_cardValidationNum()
+	{
+		$hash_in = array(
+				'orderId'=>'1',
+				'accountNumber'=>'123456789101112',
+				'cardValidationNum'=>'123');
+		$mock = $this->getMock('LitleXmlMapper');
+		$mock->expects($this->once())
+		->method('request')
+		->with($this->matchesRegularExpression('/.*<accountNumber>123456789101112.*<cardValidationNum>123.*/'));
+	
+		$litleTest = new LitleOnlineRequest();
+		$litleTest->newXML = $mock;
+		$litleTest->registerTokenRequest($hash_in);
+	}
 
-
-
+	function test_loggedInUser()
+	{
+		$hash_in = array(
+				'loggedInUser'=>'gdake',
+				'orderId'=>'1',
+				'accountNumber'=>'123456789101112');
+		$mock = $this->getMock('LitleXmlMapper');
+		$mock->expects($this->once())
+		->method('request')
+ 		->with($this->matchesRegularExpression('/.*merchantSdk="PHP;8.14.0".*loggedInUser="gdake" xmlns=.*>.*/'));
+			
+		$litleTest = new LitleOnlineRequest();
+		$litleTest->newXML = $mock;
+		$litleTest->registerTokenRequest($hash_in);
+	}
+	
 }

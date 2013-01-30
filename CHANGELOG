@@ -1,9 +1,11 @@
 = LitleOnline CHANGELOG
 
-== Version 8.14.0
+== Version 8.14.0 (January 30, 2013)
 
 * Feature: Merged pull request #12 from iToto to make convert DOMDocument to string for debugging
 * Bugfix: Merged pull request #14 from johnholden to truncate strings that are too long, thus preventing some xml validation errors
+* Feature: Temporary storage of card validation num on tokens
+* Feature: Updating card validation numbers on tokens
 
 == Version 8.13.1 (June 15, 2012)
 

@@ -77,5 +77,18 @@ class echeckVerification_UnitTest extends PHPUnit_Framework_TestCase
 		$this->setExpectedException('InvalidArgumentException',"Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
 		$retOb = $litleTest->echeckVerificationRequest($hash_in);
 	}
+	function test_loggedInUser()
+	{
+		$hash_in = array('loggedInUser'=>'gdake','amount'=>'123','orderId'=>'123','orderSource'=>'ecommerce',
+				'echeckToken' => array('accType'=>'Checking','routingNum'=>'123123','litleToken'=>'1234565789012','checkNum'=>'123455'));
+		$mock = $this->getMock('LitleXmlMapper');
+		$mock->expects($this->once())
+		->method('request')
+ 		->with($this->matchesRegularExpression('/.*merchantSdk="PHP;8.14.0".*loggedInUser="gdake" xmlns=.*>.*/'));
+			
+		$litleTest = new LitleOnlineRequest();
+		$litleTest->newXML = $mock;
+		$litleTest->echeckSaleRequest($hash_in);
+	}
 	
 }

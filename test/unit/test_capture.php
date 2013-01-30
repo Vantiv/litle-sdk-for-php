@@ -46,5 +46,18 @@ class capture_UnitTest extends PHPUnit_Framework_TestCase
 		$this->setExpectedException('InvalidArgumentException','Missing Required Field: /litleTxnId/');
 		$litleTest->captureRequest($hash_in);
 	}
+	
+	function test_loggedInUser()
+	{
+		$hash_in = array('litleTxnId'=> '12312312', 'amount'=>'123', 'loggedInUser'=>'gdake');
+		$mock = $this->getMock('LitleXmlMapper');
+		$mock->expects($this->once())
+		->method('request')
+ 		->with($this->matchesRegularExpression('/.*merchantSdk="PHP;8.14.0".*loggedInUser="gdake" xmlns=.*>.*/'));
+			
+		$litleTest = new LitleOnlineRequest();
+		$litleTest->newXML = $mock;
+		$litleTest->captureRequest($hash_in);
+	}
 
 }

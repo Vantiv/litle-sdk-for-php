@@ -50,4 +50,17 @@ class echeckCredit_UnitTest extends PHPUnit_Framework_TestCase
 		$retOb = $litleTest->echeckCreditRequest($hash_in);
 	}
 	
+	function test_loggedInUser()
+	{
+		$hash_in = array('litleTxnId' =>'123123', 'loggedInUser' => 'gdake');
+		$mock = $this->getMock('LitleXmlMapper');
+		$mock->expects($this->once())
+		->method('request')
+ 		->with($this->matchesRegularExpression('/.*merchantSdk="PHP;8.14.0".*loggedInUser="gdake" xmlns=.*>.*/'));
+			
+		$litleTest = new LitleOnlineRequest();
+		$litleTest->newXML = $mock;
+		$litleTest->echeckCreditRequest($hash_in);
+	}
+	
 }

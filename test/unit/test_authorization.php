@@ -325,4 +325,26 @@ class auth_UnitTest extends PHPUnit_Framework_TestCase
  		$litleTest->newXML = $mock;
  		$litleTest->authorizationRequest($hash_in); 		
  	}
+ 	
+ 	function test_loggedInUser()
+ 	{
+ 		$hash_in = array(
+ 				'card'=>array('type'=>'VI',
+ 						'number'=>'4100000000000001',
+ 						'expDate'=>'1213',
+ 						'cardValidationNum' => '1213'),
+ 				'orderId'=> '2111',
+ 				'orderSource'=>'ecommerce',
+ 				'id'=>'654',
+ 				'amount'=>'123',
+ 				'loggedInUser'=>'gdake');
+ 		$mock = $this->getMock('LitleXmlMapper');
+ 		$mock	->expects($this->once())
+ 		->method('request')
+ 		->with($this->matchesRegularExpression('/.*merchantSdk="PHP;8.14.0".*loggedInUser="gdake" xmlns=.*>.*/'));
+ 	
+ 		$litleTest = new LitleOnlineRequest();
+ 		$litleTest->newXML = $mock;
+ 		$litleTest->authorizationRequest($hash_in);
+ 	}
 }

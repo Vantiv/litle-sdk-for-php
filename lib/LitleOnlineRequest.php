@@ -151,10 +151,12 @@ class LitleOnlineRequest
 	public function registerTokenRequest($hash_in)
 	{
 		$hash_out = array(
-		'orderId'=>XmlFields::returnArrayValue($hash_in,'orderId'),
-		'accountNumber'=>XmlFields::returnArrayValue($hash_in,'accountNumber'),
-		'echeckForToken'=>XmlFields::echeckForTokenType(XmlFields::returnArrayValue($hash_in,'echeckForToken')),
-		'paypageRegistrationId'=>XmlFields::returnArrayValue($hash_in,'paypageRegistrationId'));
+			'orderId'=>XmlFields::returnArrayValue($hash_in,'orderId'),
+			'accountNumber'=>XmlFields::returnArrayValue($hash_in,'accountNumber'),
+			'echeckForToken'=>XmlFields::echeckForTokenType(XmlFields::returnArrayValue($hash_in,'echeckForToken')),
+			'paypageRegistrationId'=>XmlFields::returnArrayValue($hash_in,'paypageRegistrationId'),
+			'cardValidationNum'=>XmlFields::returnArrayValue($hash_in,'cardValidationNum'),
+		);
 
 		$choice_hash = array($hash_out['accountNumber'],$hash_out['echeckForToken'],$hash_out['paypageRegistrationId']);
 		$registerTokenResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'registerTokenRequest',$choice_hash);
@@ -254,9 +256,9 @@ class LitleOnlineRequest
 		return $echeckSaleResponse;
 	}
 	
-	public function echeckSaleRequestObject(EcheckSale $echeckSale) {
+	//public function echeckSaleRequestObject(EcheckSale $echeckSale) {
 		//TODO Can I overload?  What are php's rules?
-	}
+	//}
 
 	public function echeckCreditRequest($hash_in)
 	{
@@ -311,7 +313,18 @@ class LitleOnlineRequest
 		$echeckVoidResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,"echeckVoid");
 		return $echeckVoidResponse;
 	}
-
+	
+	public function updateCardValidationNumOnToken($hash_in)
+	{
+		$hash_out = array(
+				'orderId'=>XmlFields::returnArrayValue($hash_in,'orderId'),
+				'litleToken' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleToken')),
+				'cardValidationNum' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'cardValidationNum')),
+		);
+		$updateCardValidationNumOnTokenResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,"updateCardValidationNumOnToken");
+		return $updateCardValidationNumOnTokenResponse;
+	}
+	
 	private function overideConfig($hash_in)
 	{
 		$hash_out = array(
@@ -332,13 +345,16 @@ class LitleOnlineRequest
 			$hash_out['merchantSdk'] = XmlFields::returnArrayValue($hash_in,'merchantSdk');
 		}
 		else {
-			$hash_out['merchantSdk'] = 'PHP;8.13.1';
+			$hash_out['merchantSdk'] = 'PHP;8.14.0';
 		}
 		if(isset($hash_in['id'])) {
 			$hash_out['id'] = XmlFields::returnArrayValue($hash_in,'id');
 		}
 		if(isset($hash_in['customerId'])) {
 			$hash_out['customerId'] = XmlFields::returnArrayValue($hash_in,'customerId');
+		}
+		if(isset($hash_in['loggedInUser'])) {
+			$hash_out['loggedInUser'] = XmlFields::returnArrayValue($hash_in,'loggedInUser');
 		}
 		return $hash_out;
 	}

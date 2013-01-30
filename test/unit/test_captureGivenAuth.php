@@ -120,4 +120,30 @@ class captureGivenAuth_UnitTest extends PHPUnit_Framework_TestCase
 		$this->setExpectedException('InvalidArgumentException',"Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
 		$retOb = $litleTest->captureGivenAuthRequest($hash_in);
 	}
+	
+	function test_loggedInUser()
+	{
+		$hash_in = array(
+				'loggedInUser'=>'gdake',
+				'amount'=>'123',
+				'orderId'=>'12344',
+				'authInformation' => array(
+						'authDate'=>'2002-10-09','authCode'=>'543216',
+						'authAmount'=>'12345'),
+				'orderSource'=>'ecommerce',
+				'card'=>array(
+						'type'=>'VI',
+						'number' =>'4100000000000001',
+						'expDate' =>'1210'));
+		$mock = $this->getMock('LitleXmlMapper');
+		$mock	->expects($this->once())
+		->method('request')
+ 		->with($this->matchesRegularExpression('/.*merchantSdk="PHP;8.14.0".*loggedInUser="gdake" xmlns=.*>.*/'));
+			
+		$litleTest = new LitleOnlineRequest();
+		$litleTest->newXML = $mock;
+		$litleTest->captureGivenAuthRequest($hash_in);
+	
+	}
+	
 }

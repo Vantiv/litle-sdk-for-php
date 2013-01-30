@@ -132,4 +132,27 @@ class forceCapture_UnitTest extends PHPUnit_Framework_TestCase
 		$this->setExpectedException('InvalidArgumentException',"Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
 		$retOb = $litleTest->forceCaptureRequest($hash_in);
 	}
+	
+	function test_loggedInUser()
+	{
+		$hash_in = array(
+				'loggedInUser'=>'gdake',
+				'orderId'=>'123',
+				'litleTxnId'=>'123456',
+				'amount'=>'106',
+				'orderSource'=>'ecommerce',
+				'token'=> array(
+						'litleToken'=>'123456789101112',
+						'expDate'=>'1210',
+						'cardValidationNum'=>'555',
+						'type'=>'VI'));
+		$mock = $this->getMock('LitleXmlMapper');
+		$mock->expects($this->once())
+		->method('request')
+ 		->with($this->matchesRegularExpression('/.*merchantSdk="PHP;8.14.0".*loggedInUser="gdake" xmlns=.*>.*/'));
+			
+		$litleTest = new LitleOnlineRequest();
+		$litleTest->newXML = $mock;
+		$litleTest->forceCaptureRequest($hash_in);
+	}
 }

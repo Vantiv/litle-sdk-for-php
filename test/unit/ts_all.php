@@ -26,23 +26,24 @@
 require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
 
 require realpath(dirname(__FILE__)) . '/test_XmlFields.php';
-require realpath(dirname(__FILE__)) .  '/test_sale.php';
-require realpath(dirname(__FILE__)) .  '/test_authorization.php';
-require realpath(dirname(__FILE__)) .  '/test_authReversal.php';
-require realpath(dirname(__FILE__)) .  '/test_credit.php';
-require realpath(dirname(__FILE__)) .  '/test_token.php';
-require realpath(dirname(__FILE__)) .  '/test_forceCapture.php';
-require realpath(dirname(__FILE__)) .  '/test_capture.php';
-require realpath(dirname(__FILE__)) .  '/test_captureGivenAuth.php';
-require realpath(dirname(__FILE__)) .  '/test_echeckRedeposit.php';
-require realpath(dirname(__FILE__)) .  '/test_echeckSale.php';
-require realpath(dirname(__FILE__)) .  '/test_echeckCredit.php';
-require realpath(dirname(__FILE__)) .  '/test_echeckVerification.php';
-require realpath(dirname(__FILE__)) .  '/test_litleOnlineRequest.php';
-require realpath(dirname(__FILE__)) .  '/test_void.php';
-require realpath(dirname(__FILE__)) .  '/test_Checker.php';
-require realpath(dirname(__FILE__)) .  '/test_XmlParser.php';
-require realpath(dirname(__FILE__)) .  '/test_Obj2xml.php';
+require realpath(dirname(__FILE__)) . '/test_sale.php';
+require realpath(dirname(__FILE__)) . '/test_authorization.php';
+require realpath(dirname(__FILE__)) . '/test_authReversal.php';
+require realpath(dirname(__FILE__)) . '/test_credit.php';
+require realpath(dirname(__FILE__)) . '/test_token.php';
+require realpath(dirname(__FILE__)) . '/test_forceCapture.php';
+require realpath(dirname(__FILE__)) . '/test_capture.php';
+require realpath(dirname(__FILE__)) . '/test_captureGivenAuth.php';
+require realpath(dirname(__FILE__)) . '/test_echeckRedeposit.php';
+require realpath(dirname(__FILE__)) . '/test_echeckSale.php';
+require realpath(dirname(__FILE__)) . '/test_echeckCredit.php';
+require realpath(dirname(__FILE__)) . '/test_echeckVerification.php';
+require realpath(dirname(__FILE__)) . '/test_litleOnlineRequest.php';
+require realpath(dirname(__FILE__)) . '/test_void.php';
+require realpath(dirname(__FILE__)) . '/test_Checker.php';
+require realpath(dirname(__FILE__)) . '/test_XmlParser.php';
+require realpath(dirname(__FILE__)) . '/test_Obj2xml.php';
+require realpath(dirname(__FILE__)) . '/test_updateCardValidationNumOnToken.php';
 
 class UnitTests
 {
@@ -67,6 +68,7 @@ class UnitTests
 		$suite->addTestSuite('Tests_XmlFields');
 		$suite->addTestSuite('Tests_XmlParser');
 		$suite->addTestSuite('Tests_Obj2xml');
+		$suite->addTestSuite('updateCardValidationNumOnToken_UnitTest');
 		return $suite;
 	}
 }

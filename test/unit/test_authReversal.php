@@ -45,4 +45,17 @@ class authReversal_UnitTest extends PHPUnit_Framework_TestCase
 		$this->setExpectedException('InvalidArgumentException','Missing Required Field: /litleTxnId/');
 		$retOb = $litleTest->authReversalRequest($hash_in);
 	}
+	
+	function test_loggedInUser()
+	{
+		$hash_in = array('litleTxnId'=> '1234567890','reportGroup'=>'Planets', 'amount'=>'5000','loggedInUser'=>'gdake');
+		$mock = $this->getMock('LitleXmlMapper');
+		$mock	->expects($this->once())
+		->method('request')
+ 		->with($this->matchesRegularExpression('/.*merchantSdk="PHP;8.14.0".*loggedInUser="gdake" xmlns=.*>.*/'));
+			
+		$litleTest = new LitleOnlineRequest();
+		$litleTest->newXML = $mock;
+		$litleTest->authReversalRequest($hash_in);
+	}
 }

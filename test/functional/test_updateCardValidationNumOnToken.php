@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2011 Litle & Co.
+* Copyright (c) 2011 Litle & Co.
 *
 * Permission is hereby granted, free of charge, to any person
 * obtaining a copy of this software and associated documentation
@@ -24,41 +24,21 @@
 */
 require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
 
-class LitleOnlineRequest_UnitTest extends PHPUnit_Framework_TestCase
+class updateCardValidationNumOnToken_FunctionalTest extends PHPUnit_Framework_TestCase
 {
-	function test_set_merchant_sdk_integration()
+	function test_simple()
 	{
 		$hash_in = array(
-			'merchantSdk'=>'Magento;8.14.3',
-			'orderId'=> '2111',
-			'id'=>'654',
-			'orderSource'=>'ecommerce',
-			'amount'=>'123');
-		$mock = $this->getMock('LitleXmlMapper');
-		$mock->expects($this->once())
-		->method('request')
-		->with($this->matchesRegularExpression('/.*merchantSdk="Magento;8.14.3".*/'));
+			'merchantId' => '101',
+	      	'version'=>'8.14',
+	      	'reportGroup'=>'Planets',
+	      	'orderId'=>'12344',
+	      	'litleToken'=>'123456789101112',
+			'cardValidationNum'=>'123');
 
-		$litleTest = new LitleOnlineRequest();
-		$litleTest->newXML = $mock;
-		$litleTest->authorizationRequest($hash_in);
+		$initilaize = new LitleOnlineRequest();
+		$registerTokenResponse = $initilaize->updateCardValidationNumOnToken($hash_in);
+		$message = XmlParser::getAttribute($registerTokenResponse,'litleOnlineResponse','message');
+		$this->assertEquals('Valid Format',$message);
 	}
-
-	function test_set_merchant_sdk_default()
-	{
-		$hash_in = array(
-				'orderId'=> '2111',
-				'id'=>'654',
-				'orderSource'=>'ecommerce',
-				'amount'=>'123');
-		$mock = $this->getMock('LitleXmlMapper');
-		$mock->expects($this->once())
-		->method('request')
- 		->with($this->matchesRegularExpression('/.*merchantSdk="PHP;8.14.0".*/'));
-		
-		$litleTest = new LitleOnlineRequest();
-		$litleTest->newXML = $mock;
-		$litleTest->authorizationRequest($hash_in);
-	}
-
 }

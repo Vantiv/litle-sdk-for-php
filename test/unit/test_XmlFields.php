@@ -362,6 +362,110 @@ class Tests_XmlFields extends PHPUnit_Framework_TestCase{
 		$hash_out = XmlFields::contact($hash);
 		$this->assertEquals($input,$hash_out["name"]);
 	}
+	
+	function test_contact_firstname_to_long()
+	{
+		$input = "1234567890123456789012345";
+		$hash = array("firstName" => $input . "1");
+		$hash_out = XmlFields::contact($hash);
+		$this->assertEquals($input,$hash_out["firstName"]);
+	}
+	
+	function test_contact_middleInitial_to_long()
+	{
+		$input = "1";
+		$hash = array("middleInitial" => $input . "1");
+		$hash_out = XmlFields::contact($hash);
+		$this->assertEquals($input,$hash_out["middleInitial"]);
+	}
+	
+	function test_contact_lastname_to_long()
+	{
+		$input = "1234567890123456789012345";
+		$hash = array("lastName" => $input . "1");
+		$hash_out = XmlFields::contact($hash);
+		$this->assertEquals($input,$hash_out["lastName"]);
+	}
+	
+	function test_contact_companyName_to_long()
+	{
+		$input = "1234567890123456789012345678901234567890";
+		$hash = array("companyName" => $input . "1");
+		$hash_out = XmlFields::contact($hash);
+		$this->assertEquals($input,$hash_out["companyName"]);
+	}
+	
+	function test_contact_addressLine1_to_long()
+	{
+		$input = "12345678901234567890123456789012345";
+		$hash = array("addressLine1" => $input . "1");
+		$hash_out = XmlFields::contact($hash);
+		$this->assertEquals($input,$hash_out["addressLine1"]);
+	}
+	
+	function test_contact_addressLine2_to_long()
+	{
+		$input = "12345678901234567890123456789012345";
+		$hash = array("addressLine2" => $input . "1");
+		$hash_out = XmlFields::contact($hash);
+		$this->assertEquals($input,$hash_out["addressLine2"]);
+	}
+	
+	function test_contact_addressLine3_to_long()
+	{
+		$input = "12345678901234567890123456789012345";
+		$hash = array("addressLine3" => $input . "1");
+		$hash_out = XmlFields::contact($hash);
+		$this->assertEquals($input,$hash_out["addressLine3"]);
+	}
+	
+	function test_contact_city_to_long()
+	{
+		$input = "12345678901234567890123456789012345";
+		$hash = array("city" => $input . "1");
+		$hash_out = XmlFields::contact($hash);
+		$this->assertEquals($input,$hash_out["city"]);
+	}
+	
+	function test_contact_state_to_long()
+	{
+		$input = "123456789012345678901234567890";
+		$hash = array("state" => $input . "1");
+		$hash_out = XmlFields::contact($hash);
+		$this->assertEquals($input,$hash_out["state"]);
+	}
+	
+	function test_contact_zip_to_long()
+	{
+		$input = "12345678901234567890";
+		$hash = array("zip" => $input . "1");
+		$hash_out = XmlFields::contact($hash);
+		$this->assertEquals($input,$hash_out["zip"]);
+	}
+	
+	function test_contact_country_to_long()
+	{
+		$input = "123";
+		$hash = array("country" => $input . "1");
+		$hash_out = XmlFields::contact($hash);
+		$this->assertEquals($input,$hash_out["country"]);
+	}
+	
+	function test_contact_email_to_long()
+	{
+		$input = "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890";
+		$hash = array("email" => $input . "1");
+		$hash_out = XmlFields::contact($hash);
+		$this->assertEquals($input,$hash_out["email"]);
+	}
+	
+	function test_contact_phone_to_long()
+	{
+		$input = "12345678901234567890";
+		$hash = array("phone" => $input . "1");
+		$hash_out = XmlFields::contact($hash);
+		$this->assertEquals($input,$hash_out["phone"]);
+	}
 }
 
 

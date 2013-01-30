@@ -24,35 +24,64 @@
  */
 
 require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
-
-class echeckSale_UnitTest extends PHPUnit_Framework_TestCase
+class updateCardValidationNumOnToken_UnitTest extends PHPUnit_Framework_TestCase
 {
-	function test_simple_echeckSale()
+	function test_simple()
 	{
-		$hash_in = array('litleTxnId' =>'123123');
+		$hash_in = array(
+			'orderId'=>'1',
+			'litleToken'=>'123456789101112',
+			'cardValidationNum'=>'123');
 		$mock = $this->getMock('LitleXmlMapper');
 		$mock->expects($this->once())
 		->method('request')
-		->with($this->matchesRegularExpression('/.*<litleTxnId>123123.*/'));
+		->with($this->matchesRegularExpression('/.*<orderId>1.*<litleToken>123456789101112.*<cardValidationNum>123.*/'));
 		
 		$litleTest = new LitleOnlineRequest();
 		$litleTest->newXML = $mock;
-		$litleTest->echeckSaleRequest($hash_in);
+		$litleTest->updateCardValidationNumOnToken($hash_in);
 	}
-
-	function test_both_choices()
+	
+	function test_orderIdIsOptional()
 	{
-		$hash_in = array('reportGroup'=>'Planets','litleTxnId'=>'123456',
-		'echeckToken' => array('accType'=>'Checking','routingNum'=>'123123','litleToken'=>'1234565789012','checkNum'=>'123455'),
-		'echeck' => array('accType'=>'Checking','routingNum'=>'123123','accNum'=>'12345657890','checkNum'=>'123455'));
+		$hash_in = array(
+				'litleToken'=>'123456789101112',
+				'cardValidationNum'=>'123');
+		$mock = $this->getMock('LitleXmlMapper');
+		$mock->expects($this->once())
+		->method('request')
+		->with($this->matchesRegularExpression('/.*<litleToken>123456789101112.*<cardValidationNum>123.*/'));
+	
 		$litleTest = new LitleOnlineRequest();
-		$this->setExpectedException('InvalidArgumentException',"Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
-		$retOb = $litleTest->echeckSaleRequest($hash_in);
+		$litleTest->newXML = $mock;
+		$litleTest->updateCardValidationNumOnToken($hash_in);
+	}
+	
+	function test_litleTokenIsRequired()
+	{
+		$hash_in = array(
+				'cardValidationNum'=>'123');
+		$litleTest = new LitleOnlineRequest();
+		$this->setExpectedException('InvalidArgumentException',"Missing Required Field: /litleToken/");
+		$retOb = $litleTest->updateCardValidationNumOnToken($hash_in);
+	}
+	
+	function test_cardValidationNumIsRequired()
+	{
+		$hash_in = array(
+				'litleToken'=>'123456789101112');
+		$litleTest = new LitleOnlineRequest();
+		$this->setExpectedException('InvalidArgumentException',"Missing Required Field: /cardValidationNum/");
+		$retOb = $litleTest->updateCardValidationNumOnToken($hash_in);
 	}
 	
 	function test_loggedInUser()
 	{
-		$hash_in = array('litleTxnId' =>'123123','loggedInUser'=>'gdake');
+		$hash_in = array(
+				'loggedInUser'=>'gdake',
+				'orderId'=>'1',
+				'litleToken'=>'123456789101112',
+				'cardValidationNum'=>'123');
 		$mock = $this->getMock('LitleXmlMapper');
 		$mock->expects($this->once())
 		->method('request')
@@ -60,7 +89,7 @@ class echeckSale_UnitTest extends PHPUnit_Framework_TestCase
 			
 		$litleTest = new LitleOnlineRequest();
 		$litleTest->newXML = $mock;
-		$litleTest->echeckSaleRequest($hash_in);
+		$litleTest->updateCardValidationNumOnToken($hash_in);
 	}
 	
 }
