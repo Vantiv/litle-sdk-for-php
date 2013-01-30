@@ -355,7 +355,13 @@ class Tests_XmlFields extends PHPUnit_Framework_TestCase{
 		$this->assertEquals($hash_out["recycleBy"], "recylingbin");
 	}
 	
-	
+	function test_contact_name_to_long()
+	{
+		$input = "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890";
+		$hash = array("name" => $input . "1");
+		$hash_out = XmlFields::contact($hash);
+		$this->assertEquals($input,$hash_out["name"]);
+	}
 }
 
 

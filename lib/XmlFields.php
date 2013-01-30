@@ -457,6 +457,4 @@ class XmlFields
 			return $hash_out;
 		}
 	}
-
-
 }

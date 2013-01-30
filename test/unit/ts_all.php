@@ -41,6 +41,8 @@ require realpath(dirname(__FILE__)) .  '/test_echeckVerification.php';
 require realpath(dirname(__FILE__)) .  '/test_litleOnlineRequest.php';
 require realpath(dirname(__FILE__)) .  '/test_void.php';
 require realpath(dirname(__FILE__)) .  '/test_Checker.php';
+require realpath(dirname(__FILE__)) .  '/test_XmlParser.php';
+require realpath(dirname(__FILE__)) .  '/test_Obj2xml.php';
 
 class UnitTests
 {
@@ -63,6 +65,8 @@ class UnitTests
 		$suite->addTestSuite('token_UnitTest');
 		$suite->addTestSuite('void_UnitTest');
 		$suite->addTestSuite('Tests_XmlFields');
+		$suite->addTestSuite('Tests_XmlParser');
+		$suite->addTestSuite('Tests_Obj2xml');
 		return $suite;
 	}
 }

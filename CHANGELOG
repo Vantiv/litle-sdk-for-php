@@ -1,5 +1,10 @@
 = LitleOnline CHANGELOG
 
+== Version 8.14.0
+
+* Feature: Merged pull request #12 from iToto to make convert DOMDocument to string for debugging
+* Bugfix: Merged pull request #14 from johnholden to truncate strings that are too long, thus preventing some xml validation errors
+
 == Version 8.13.1 (June 15, 2012)
 
 * Feature: Add support for accessing response as a tree using simplexml.  Access is provided if $treeResponse=true is passed to the LitleOnlineRequest constructor
