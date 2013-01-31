@@ -143,7 +143,12 @@ class credit_UnitTest extends PHPUnit_Framework_TestCase
 	
 	function test_loggedInUser()
 	{
-		$hash_in = array('litleTxnId'=> '12312312','reportGroup'=>'Planets', 'amount'=>'123', 'loggedInUser'=>'gdake');
+		$hash_in = array(
+				'litleTxnId'=> '12312312',
+				'reportGroup'=>'Planets', 
+				'amount'=>'123',
+				'merchantSdk'=>'PHP;8.14.0',
+				'loggedInUser'=>'gdake');
 		$mock = $this->getMock('LitleXmlMapper');
 		$mock->expects($this->once())
 		->method('request')

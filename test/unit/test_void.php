@@ -49,7 +49,11 @@ class void_UnitTest extends PHPUnit_Framework_TestCase
 	
 	function test_loggedInUser()
 	{
-		$hash_in = array('litleTxnId' =>'123123','reportGroup'=>'Planets','loggedInUser'=>'gdake');
+		$hash_in = array(
+				'litleTxnId' =>'123123',
+ 				'merchantSdk'=>'PHP;8.14.0',
+				'reportGroup'=>'Planets',
+				'loggedInUser'=>'gdake');
 		$mock = $this->getMock('LitleXmlMapper');
 		$mock->expects($this->once())
 		->method('request')

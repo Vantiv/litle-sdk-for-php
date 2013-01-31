@@ -237,6 +237,7 @@ class sale_UnitTest extends PHPUnit_Framework_TestCase
 	{
 		$hash_in = array(
 				'loggedInUser'=>'gdake',
+ 				'merchantSdk'=>'PHP;8.14.0',
 				'card'=>array('type'=>'VI',
 						'number'=>'4100000000000001',
 						'expDate'=>'1213',

@@ -57,7 +57,7 @@ function initialize(){
 		print "Please input the proxy, if no proxy hit enter key: ";
 		$line['proxy'] = trim(fgets(STDIN));
 		writeConfig($line,$handle);
-		fwrite($handle, "version = 8.14" .  PHP_EOL);
+		fwrite($handle, "version = 8.15" .  PHP_EOL);
 		fwrite($handle, "timeout =  65".  PHP_EOL);
 		fwrite($handle, "reportGroup = Default Report Group".  PHP_EOL);
 	}

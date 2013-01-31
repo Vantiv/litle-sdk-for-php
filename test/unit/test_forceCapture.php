@@ -137,6 +137,7 @@ class forceCapture_UnitTest extends PHPUnit_Framework_TestCase
 	{
 		$hash_in = array(
 				'loggedInUser'=>'gdake',
+ 				'merchantSdk'=>'PHP;8.14.0',
 				'orderId'=>'123',
 				'litleTxnId'=>'123456',
 				'amount'=>'106',

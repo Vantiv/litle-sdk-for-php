@@ -49,7 +49,11 @@ class capture_UnitTest extends PHPUnit_Framework_TestCase
 	
 	function test_loggedInUser()
 	{
-		$hash_in = array('litleTxnId'=> '12312312', 'amount'=>'123', 'loggedInUser'=>'gdake');
+		$hash_in = array(
+				'litleTxnId'=> '12312312', 
+ 				'merchantSdk'=>'PHP;8.14.0',
+				'amount'=>'123', 
+				'loggedInUser'=>'gdake');
 		$mock = $this->getMock('LitleXmlMapper');
 		$mock->expects($this->once())
 		->method('request')

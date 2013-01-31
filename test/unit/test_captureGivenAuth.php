@@ -125,6 +125,7 @@ class captureGivenAuth_UnitTest extends PHPUnit_Framework_TestCase
 	{
 		$hash_in = array(
 				'loggedInUser'=>'gdake',
+ 				'merchantSdk'=>'PHP;8.14.0',
 				'amount'=>'123',
 				'orderId'=>'12344',
 				'authInformation' => array(

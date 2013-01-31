@@ -79,7 +79,12 @@ class echeckVerification_UnitTest extends PHPUnit_Framework_TestCase
 	}
 	function test_loggedInUser()
 	{
-		$hash_in = array('loggedInUser'=>'gdake','amount'=>'123','orderId'=>'123','orderSource'=>'ecommerce',
+		$hash_in = array(
+				'loggedInUser'=>'gdake',
+ 				'merchantSdk'=>'PHP;8.14.0',
+				'amount'=>'123',
+				'orderId'=>'123',
+				'orderSource'=>'ecommerce',
 				'echeckToken' => array('accType'=>'Checking','routingNum'=>'123123','litleToken'=>'1234565789012','checkNum'=>'123455'));
 		$mock = $this->getMock('LitleXmlMapper');
 		$mock->expects($this->once())

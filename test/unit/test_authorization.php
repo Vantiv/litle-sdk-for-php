@@ -337,6 +337,7 @@ class auth_UnitTest extends PHPUnit_Framework_TestCase
  				'orderSource'=>'ecommerce',
  				'id'=>'654',
  				'amount'=>'123',
+ 				'merchantSdk'=>'PHP;8.14.0',
  				'loggedInUser'=>'gdake');
  		$mock = $this->getMock('LitleXmlMapper');
  		$mock	->expects($this->once())

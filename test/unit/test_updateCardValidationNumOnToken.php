@@ -79,6 +79,7 @@ class updateCardValidationNumOnToken_UnitTest extends PHPUnit_Framework_TestCase
 	{
 		$hash_in = array(
 				'loggedInUser'=>'gdake',
+ 				'merchantSdk'=>'PHP;8.14.0',
 				'orderId'=>'1',
 				'litleToken'=>'123456789101112',
 				'cardValidationNum'=>'123');

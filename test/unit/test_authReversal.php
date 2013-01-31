@@ -48,7 +48,13 @@ class authReversal_UnitTest extends PHPUnit_Framework_TestCase
 	
 	function test_loggedInUser()
 	{
-		$hash_in = array('litleTxnId'=> '1234567890','reportGroup'=>'Planets', 'amount'=>'5000','loggedInUser'=>'gdake');
+		$hash_in = array(
+				'litleTxnId'=> '1234567890',
+				'reportGroup'=>'Planets', 
+				'amount'=>'5000',
+				'merchantSdk'=>'PHP;8.14.0',
+				'loggedInUser'=>'gdake'
+		);
 		$mock = $this->getMock('LitleXmlMapper');
 		$mock	->expects($this->once())
 		->method('request')
