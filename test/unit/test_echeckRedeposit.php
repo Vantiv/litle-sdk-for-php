@@ -87,6 +87,19 @@ class echeckRedeposit_UnitTest extends PHPUnit_Framework_TestCase
 		$litleTest->newXML = $mock;
 		$litleTest->echeckRedepositRequest($hash_in);
 	}
+
+	function test_merchantData()
+	{
+		$hash_in = array('litleTxnId' =>'123123', 'merchantData'=>array('campaign'=>'camping'));
+		$mock = $this->getMock('LitleXmlMapper');
+		$mock->expects($this->once())
+		->method('request')
+		->with($this->matchesRegularExpression('/.*<litleTxnId>123123<\/litleTxnId>.*<merchantData>.*<campaign>camping<\/campaign>.*<\/merchantData>/'));
+	
+		$litleTest = new LitleOnlineRequest();
+		$litleTest->newXML = $mock;
+		$litleTest->echeckRedepositRequest($hash_in);
+	}
 	
 	
 }

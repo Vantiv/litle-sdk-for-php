@@ -227,9 +227,11 @@ class LitleOnlineRequest
 	public function echeckRedepositRequest($hash_in)
 	{
 		$hash_out = array(
-		'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
-		'echeck'=>XmlFields::echeckType(XmlFields::returnArrayValue($hash_in,'echeck')),
-		'echeckToken'=>XmlFields::echeckTokenType(XmlFields::returnArrayValue($hash_in,'echeckToken')));
+			'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
+			'echeck'=>XmlFields::echeckType(XmlFields::returnArrayValue($hash_in,'echeck')),
+			'echeckToken'=>XmlFields::echeckTokenType(XmlFields::returnArrayValue($hash_in,'echeckToken')),
+			'merchantData'=>(XmlFields::merchantData(XmlFields::returnArrayValue($hash_in,'merchantData')))
+		);
 		
 		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
 		$echeckRedepositResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'echeckRedeposit',$choice_hash);
@@ -287,7 +289,9 @@ class LitleOnlineRequest
 			'orderSource'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'orderSource')),
 			'billToAddress'=>XmlFields::contact(XmlFields::returnArrayValue($hash_in,'billToAddress')),
 			'echeck'=>XmlFields::echeckType(XmlFields::returnArrayValue($hash_in,'echeck')),
-			'echeckToken'=>XmlFields::echeckTokenType(XmlFields::returnArrayValue($hash_in,'echeckToken')));
+			'echeckToken'=>XmlFields::echeckTokenType(XmlFields::returnArrayValue($hash_in,'echeckToken')),
+			'merchantData'=>(XmlFields::merchantData(XmlFields::returnArrayValue($hash_in,'merchantData'))),
+		);
 		
 		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
 		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);

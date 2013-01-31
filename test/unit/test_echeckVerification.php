@@ -88,7 +88,22 @@ class echeckVerification_UnitTest extends PHPUnit_Framework_TestCase
 			
 		$litleTest = new LitleOnlineRequest();
 		$litleTest->newXML = $mock;
-		$litleTest->echeckSaleRequest($hash_in);
+		$litleTest->echeckVerificationRequest($hash_in);
 	}
+	
+	function test_merchantData()
+	{
+		$hash_in = array('amount'=>'123','orderId'=>'123','orderSource'=>'ecommerce','merchantData'=>array('campaign'=>'camping'),
+				'echeckToken' => array('accType'=>'Checking','routingNum'=>'123123','litleToken'=>'1234565789012','checkNum'=>'123455'));
+		$mock = $this->getMock('LitleXmlMapper');
+		$mock->expects($this->once())
+		->method('request')
+		->with($this->matchesRegularExpression('/.*<\/echeckToken>.*<merchantData>.*<campaign>camping<\/campaign>.*<\/merchantData>/'));
+	
+		$litleTest = new LitleOnlineRequest();
+		$litleTest->newXML = $mock;
+		$litleTest->echeckVerificationRequest($hash_in);
+	}
+	
 	
 }
