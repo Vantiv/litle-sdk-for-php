@@ -158,5 +158,116 @@ class credit_UnitTest extends PHPUnit_Framework_TestCase
 		$litleTest->newXML = $mock;
 		$litleTest->creditRequest($hash_in);
 	}
+	
+	function test_surchargeAmount_tied() {
+		$hash_in = array(
+				'amount'=>'2',
+				'surchargeAmount'=>'1',
+				'litleTxnId'=>'3',
+				'processingInstructions'=>array(),
+		);
+		$mock = $this->getMock('LitleXmlMapper');
+		$mock
+		->expects($this->once())
+		->method('request')
+		->with($this->matchesRegularExpression('/.*<litleTxnId>3<\/litleTxnId><amount>2<\/amount><surchargeAmount>1<\/surchargeAmount><processing.*/'));
+	
+		$litleTest = new LitleOnlineRequest();
+		$litleTest->newXML = $mock;
+		$litleTest->creditRequest($hash_in);
+	}
+	
+	function test_surchargeAmount_tied_optional() {
+		$hash_in = array(
+				'amount'=>'2',
+				'litleTxnId'=>'3',
+				'processingInstructions'=>array(),
+		);
+		$mock = $this->getMock('LitleXmlMapper');
+		$mock
+		->expects($this->once())
+		->method('request')
+		->with($this->matchesRegularExpression('/.*<litleTxnId>3<\/litleTxnId><amount>2<\/amount><processing.*/'));
+	
+		$litleTest = new LitleOnlineRequest();
+		$litleTest->newXML = $mock;
+		$litleTest->creditRequest($hash_in);
+	}
+	
+	function test_surchargeAmount_orphan() {
+		$hash_in = array(
+				'amount'=>'2',
+				'surchargeAmount'=>'1',
+				'orderId'=>'3',
+				'orderSource'=>'ecommerce',
+		);
+		$mock = $this->getMock('LitleXmlMapper');
+		$mock
+		->expects($this->once())
+		->method('request')
+		->with($this->matchesRegularExpression('/.*<amount>2<\/amount><surchargeAmount>1<\/surchargeAmount><orderSource>ecommerce<\/orderSource>.*/'));
+	
+		$litleTest = new LitleOnlineRequest();
+		$litleTest->newXML = $mock;
+		$litleTest->creditRequest($hash_in);
+	}
+	
+	function test_surchargeAmount_orphan_optional() {
+		$hash_in = array(
+				'amount'=>'2',
+				'orderId'=>'3',
+				'orderSource'=>'ecommerce',
+		);
+		$mock = $this->getMock('LitleXmlMapper');
+		$mock
+		->expects($this->once())
+		->method('request')
+		->with($this->matchesRegularExpression('/.*<amount>2<\/amount><orderSource>ecommerce<\/orderSource>.*/'));
+	
+		$litleTest = new LitleOnlineRequest();
+		$litleTest->newXML = $mock;
+		$litleTest->creditRequest($hash_in);
+	}
+	
+	function test_pos_tied() {
+		$hash_in = array(
+				'amount'=>'2',
+				'pos'=>array(
+					'terminalId'=>'abc123',
+					'capability'=>'a',
+					'entryMode'=>'b',
+					'cardholderId'=>'c'
+				),
+				'litleTxnId'=>'3',
+				'payPalNotes'=>'notes',
+		);
+		$mock = $this->getMock('LitleXmlMapper');
+		$mock
+		->expects($this->once())
+		->method('request')
+		->with($this->matchesRegularExpression('/.*<litleTxnId>3<\/litleTxnId><amount>2<\/amount><pos>.*<terminalId>abc123<\/terminalId><\/pos><payPalNotes>.*/'));
+	
+		$litleTest = new LitleOnlineRequest();
+		$litleTest->newXML = $mock;
+		$litleTest->creditRequest($hash_in);
+	}
+	
+	function test_pos_tied_optional() {
+		$hash_in = array(
+				'amount'=>'2',
+				'litleTxnId'=>'3',
+				'payPalNotes'=>'notes',
+		);
+		$mock = $this->getMock('LitleXmlMapper');
+		$mock
+		->expects($this->once())
+		->method('request')
+		->with($this->matchesRegularExpression('/.*<litleTxnId>3<\/litleTxnId><amount>2<\/amount><payPalNotes>.*/'));
+	
+		$litleTest = new LitleOnlineRequest();
+		$litleTest->newXML = $mock;
+		$litleTest->creditRequest($hash_in);
+	}
+	
 
 }

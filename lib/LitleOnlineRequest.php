@@ -42,6 +42,7 @@ class LitleOnlineRequest
 			$hash_out = array(
 			'orderId'=> Checker::requiredField(XmlFields::returnArrayValue($hash_in,'orderId')),
 			'amount'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'amount')),
+			'surchargeAmount' =>XmlFields::returnArrayValue($hash_in,'surchargeAmount'),
 			'orderSource'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'orderSource')),
 			'customerInfo'=>(XmlFields::customerInfo(XmlFields::returnArrayValue($hash_in,'customerInfo'))),
 			'billToAddress'=>(XmlFields::contact(XmlFields::returnArrayValue($hash_in,'billToAddress'))),
@@ -77,6 +78,7 @@ class LitleOnlineRequest
 		'litleTxnId' => XmlFields::returnArrayValue($hash_in,'litleTxnId'),
 		'orderId' =>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'orderId')),
 		'amount' =>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'amount')),
+		'surchargeAmount' =>XmlFields::returnArrayValue($hash_in,'surchargeAmount'),
 		'orderSource'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'orderSource')),
 		'customerInfo'=>XmlFields::customerInfo(XmlFields::returnArrayValue($hash_in,'customerInfo')),
 		'billToAddress'=>XmlFields::contact(XmlFields::returnArrayValue($hash_in,'billToAddress')),
@@ -114,6 +116,7 @@ class LitleOnlineRequest
 		$hash_out = array(
 			'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
 			'amount' =>XmlFields::returnArrayValue($hash_in,'amount'),
+			'surchargeAmount' =>XmlFields::returnArrayValue($hash_in,'surchargeAmount'),
 			'payPalNotes'=>XmlFields::returnArrayValue($hash_in,'payPalNotes'),
 			'actionReason'=>XmlFields::returnArrayValue($hash_in,'actionReason'));
 		$authReversalResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'authReversal');
@@ -126,6 +129,7 @@ class LitleOnlineRequest
 					'litleTxnId' => XmlFields::returnArrayValue($hash_in, 'litleTxnId'),
 					'orderId' =>XmlFields::returnArrayValue($hash_in, 'orderId'),
 					'amount' =>XmlFields::returnArrayValue($hash_in, 'amount'),
+					'surchargeAmount' =>XmlFields::returnArrayValue($hash_in,'surchargeAmount'),
 					'orderSource'=>XmlFields::returnArrayValue($hash_in, 'orderSource'),
 					'billToAddress'=>XmlFields::contact(XMLFields::returnArrayValue($hash_in, 'billToAddress')),
 					'card'=>XmlFields::cardType(XMLFields::returnArrayValue($hash_in, 'card')),
@@ -168,6 +172,7 @@ class LitleOnlineRequest
 		$hash_out = array(
 		'orderId' =>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'orderId')),
 		'amount' =>XmlFields::returnArrayValue($hash_in,'amount'),
+		'surchargeAmount' =>XmlFields::returnArrayValue($hash_in,'surchargeAmount'),
 		'orderSource'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'orderSource')),
 		'billToAddress'=>XmlFields::contact(XmlFields::returnArrayValue($hash_in,'billToAddress')),
 		'card'=> XmlFields::cardType(XmlFields::returnArrayValue($hash_in,'card')),
@@ -191,6 +196,7 @@ class LitleOnlineRequest
 		'partial'=>XmlFields::returnArrayValue($hash_in,'partial'),
 	    'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
 		'amount' =>(XmlFields::returnArrayValue($hash_in,'amount')),
+		'surchargeAmount' =>XmlFields::returnArrayValue($hash_in,'surchargeAmount'),
 		'enhancedData'=>XmlFields::enhancedData(XmlFields::returnArrayValue($hash_in,'enhancedData')),
 		'processingInstructions'=>XmlFields::processingInstructions(XmlFields::returnArrayValue($hash_in,'processingInstructions')),
 		'payPalOrderComplete'=>XmlFields::returnArrayValue($hash_in,'payPalOrderComplete'),
@@ -205,6 +211,7 @@ class LitleOnlineRequest
 		'orderId'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'orderId')),
 		'authInformation'=>XmlFields::authInformation(XmlFields::returnArrayValue($hash_in,'authInformation')),
 		'amount' =>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'amount')),
+		'surchargeAmount' =>XmlFields::returnArrayValue($hash_in,'surchargeAmount'),
 		'orderSource'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'orderSource')),
 		'billToAddress'=>XmlFields::contact(XmlFields::returnArrayValue($hash_in,'billToAddress')),
 		'shipToAddress'=>XmlFields::contact(XmlFields::returnArrayValue($hash_in,'shipToAddress')),
@@ -349,7 +356,7 @@ class LitleOnlineRequest
 			$hash_out['merchantSdk'] = XmlFields::returnArrayValue($hash_in,'merchantSdk');
 		}
 		else {
-			$hash_out['merchantSdk'] = 'PHP;8.15.0';
+			$hash_out['merchantSdk'] = 'PHP;8.17.0';
 		}
 		if(isset($hash_in['id'])) {
 			$hash_out['id'] = XmlFields::returnArrayValue($hash_in,'id');
@@ -372,7 +379,7 @@ class LitleOnlineRequest
 		Checker::choice($choice1);
 		Checker::choice($choice2);
 		$request = Obj2xml::toXml($hash,$hash_config, $type);
-	
+		#echo $request;
 		$litleOnlineResponse = $this->newXML->request($request,$hash_config,$this->useSimpleXml);
 		return $litleOnlineResponse;
 	}

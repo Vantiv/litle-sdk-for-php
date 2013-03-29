@@ -64,4 +64,39 @@ class capture_UnitTest extends PHPUnit_Framework_TestCase
 		$litleTest->captureRequest($hash_in);
 	}
 
+	function test_surchargeAmount() {
+ 		$hash_in = array(
+ 			'litleTxnId'=>'3',
+ 			'amount'=>'2',
+ 			'surchargeAmount'=>'1',
+ 			'payPalNotes'=>'notes',
+ 		);
+ 		$mock = $this->getMock('LitleXmlMapper');
+ 		$mock
+ 			->expects($this->once())
+ 			->method('request')
+ 			->with($this->matchesRegularExpression('/.*<amount>2<\/amount><surchargeAmount>1<\/surchargeAmount><payPalNotes>notes<\/payPalNotes>.*/'));
+ 			
+ 		$litleTest = new LitleOnlineRequest();
+ 		$litleTest->newXML = $mock;
+ 		$litleTest->captureRequest($hash_in);
+ 	}
+ 	
+ 	function test_surchargeAmount_optional() {
+ 		$hash_in = array(
+ 				'litleTxnId'=>'3',
+ 				'amount'=>'2',
+ 				'payPalNotes'=>'notes',
+ 		);
+ 		$mock = $this->getMock('LitleXmlMapper');
+ 		$mock
+ 		->expects($this->once())
+ 		->method('request')
+ 		->with($this->matchesRegularExpression('/.*<amount>2<\/amount><payPalNotes>notes<\/payPalNotes>.*/'));
+ 	
+ 		$litleTest = new LitleOnlineRequest();
+ 		$litleTest->newXML = $mock;
+ 		$litleTest->captureRequest($hash_in);
+ 	}
+	
 }

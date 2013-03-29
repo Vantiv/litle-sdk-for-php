@@ -195,7 +195,8 @@ class XmlFields
 			$hash_out = array(
 						"capability"=>(Checker::requiredField(XmlFields::returnArrayValue($hash_in, "capability"))),
 						"entryMode"=>(Checker::requiredField(XmlFields::returnArrayValue($hash_in, "entryMode"))),
-						"cardholderId"=>(Checker::requiredField(XmlFields::returnArrayValue($hash_in, "cardholderId")))
+						"cardholderId"=>(Checker::requiredField(XmlFields::returnArrayValue($hash_in, "cardholderId"))),
+						"terminalId"=>XmlFields::returnArrayValue($hash_in,"terminalId")
 			);
 			return $hash_out;
 		}

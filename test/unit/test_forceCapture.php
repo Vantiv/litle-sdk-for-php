@@ -156,4 +156,39 @@ class forceCapture_UnitTest extends PHPUnit_Framework_TestCase
 		$litleTest->newXML = $mock;
 		$litleTest->forceCaptureRequest($hash_in);
 	}
+	
+	function test_surchargeAmount() {
+ 		$hash_in = array(
+ 			'orderId'=>'3',
+ 			'amount'=>'2',
+ 			'surchargeAmount'=>'1',
+ 			'orderSource'=>'ecommerce',
+ 		);
+ 		$mock = $this->getMock('LitleXmlMapper');
+ 		$mock
+ 			->expects($this->once())
+ 			->method('request')
+ 			->with($this->matchesRegularExpression('/.*<amount>2<\/amount><surchargeAmount>1<\/surchargeAmount><orderSource>ecommerce<\/orderSource>.*/'));
+ 			
+ 		$litleTest = new LitleOnlineRequest();
+ 		$litleTest->newXML = $mock;
+ 		$litleTest->forceCaptureRequest($hash_in);
+ 	}
+ 	
+ 	function test_surchargeAmount_optional() {
+ 		$hash_in = array(
+ 			'orderId'=>'3',
+ 			'amount'=>'2',
+ 			'orderSource'=>'ecommerce',
+ 		);
+ 		$mock = $this->getMock('LitleXmlMapper');
+ 		$mock
+ 		->expects($this->once())
+ 		->method('request')
+ 		->with($this->matchesRegularExpression('/.*<amount>2<\/amount><orderSource>ecommerce<\/orderSource>.*/'));
+ 	
+ 		$litleTest = new LitleOnlineRequest();
+ 		$litleTest->newXML = $mock;
+ 		$litleTest->forceCaptureRequest($hash_in);
+ 	}
 }

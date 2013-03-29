@@ -1,5 +1,11 @@
 = LitleOnline CHANGELOG
 
+== Version 8.17.0 (March 29, 2013)
+* Feature: Add recyling to voidResponse
+* Feature: Add support for surcharging credit card transactions
+* Feature: Add support for specifying the terminalId on a pos transaction
+* Feature: Add support for pos transactions on tied refunds
+
 == Version 8.15.0 (January 31, 2013)
 
 * Feature: Add merchantData to echeck verifications and echeck redeposits

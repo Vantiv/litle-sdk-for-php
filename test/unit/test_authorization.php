@@ -348,4 +348,49 @@ class auth_UnitTest extends PHPUnit_Framework_TestCase
  		$litleTest->newXML = $mock;
  		$litleTest->authorizationRequest($hash_in);
  	}
+ 	
+ 	function test_surchargeAmount() {
+ 		$hash_in = array(
+ 			'card'=>array(
+ 				'type'=>'VI',
+ 				'number'=>'4100000000000001',
+ 				'expDate'=>'1213'
+ 			),
+ 			'orderId'=>'12344',
+ 			'amount'=>'2',
+ 			'surchargeAmount'=>'1',
+ 			'orderSource'=>'ecommerce',
+ 		);
+ 		$mock = $this->getMock('LitleXmlMapper');
+ 		$mock
+ 			->expects($this->once())
+ 			->method('request')
+ 			->with($this->matchesRegularExpression('/.*<amount>2<\/amount><surchargeAmount>1<\/surchargeAmount><orderSource>ecommerce<\/orderSource>.*/'));
+ 			
+ 		$litleTest = new LitleOnlineRequest();
+ 		$litleTest->newXML = $mock;
+ 		$litleTest->authorizationRequest($hash_in);
+ 	}
+ 	
+ 	function test_surchargeAmount_Optional() {
+ 		$hash_in = array(
+ 				'card'=>array(
+ 						'type'=>'VI',
+ 						'number'=>'4100000000000001',
+ 						'expDate'=>'1213'
+ 				),
+ 				'orderId'=>'12344',
+ 				'amount'=>'2',
+ 				'orderSource'=>'ecommerce',
+ 		);
+ 		$mock = $this->getMock('LitleXmlMapper');
+ 		$mock
+ 		->expects($this->once())
+ 		->method('request')
+ 		->with($this->matchesRegularExpression('/.*<amount>2<\/amount><orderSource>ecommerce<\/orderSource>.*/'));
+ 	
+ 		$litleTest = new LitleOnlineRequest();
+ 		$litleTest->newXML = $mock;
+ 		$litleTest->authorizationRequest($hash_in);
+ 	}
 }

@@ -147,4 +147,38 @@ class captureGivenAuth_UnitTest extends PHPUnit_Framework_TestCase
 	
 	}
 	
+	function test_surchargeAmount() {
+ 		$hash_in = array(
+ 			'amount'=>'2',
+ 			'surchargeAmount'=>'1',
+ 			'orderSource'=>'ecommerce',
+ 			'orderId'=>'3'
+ 		);
+ 		$mock = $this->getMock('LitleXmlMapper');
+ 		$mock
+ 			->expects($this->once())
+ 			->method('request')
+ 			->with($this->matchesRegularExpression('/.*<amount>2<\/amount><surchargeAmount>1<\/surchargeAmount><orderSource>ecommerce<\/orderSource>.*/'));
+ 			
+ 		$litleTest = new LitleOnlineRequest();
+ 		$litleTest->newXML = $mock;
+ 		$litleTest->captureGivenAuthRequest($hash_in);
+ 	}
+ 	
+ 	function test_surchargeAmount_optional() {
+ 		$hash_in = array(
+ 				'amount'=>'2',
+ 				'orderSource'=>'ecommerce',
+ 				'orderId'=>'3'
+ 		);
+ 		$mock = $this->getMock('LitleXmlMapper');
+ 		$mock
+ 		->expects($this->once())
+ 		->method('request')
+ 		->with($this->matchesRegularExpression('/.*<amount>2<\/amount><orderSource>ecommerce<\/orderSource>.*/'));
+ 	
+ 		$litleTest = new LitleOnlineRequest();
+ 		$litleTest->newXML = $mock;
+ 		$litleTest->captureGivenAuthRequest($hash_in);
+ 	}
 }
