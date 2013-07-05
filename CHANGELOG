@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+== Version 8.18.0 (July 15, 2013)
+* Feature: Add initial support for recurring to sales
+
 == Version 8.17.0 (March 29, 2013)
 * Feature: Add recyling to voidResponse
 * Feature: Add support for surcharging credit card transactions

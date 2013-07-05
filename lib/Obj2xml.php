@@ -30,7 +30,7 @@ class Obj2xml {
 		$config= Obj2xml::getConfig($hash_config);
 		$xml = simplexml_load_string("<?xml version='1.0' encoding='utf-8'?><$rootNodeName />");
 		$xml-> addAttribute('merchantId',$config["merchantId"]);
-		$xml-> addAttribute('version','8.17');
+		$xml-> addAttribute('version','8.18');
 		$xml-> addAttribute('merchantSdk',$data['merchantSdk']);
 		unset($data['merchantSdk']);
 		if(isset($data['loggedInUser'])) {

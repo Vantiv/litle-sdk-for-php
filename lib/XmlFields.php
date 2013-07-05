@@ -461,4 +461,40 @@ class XmlFields
 			return $hash_out;
 		}
 	}
+	
+	
+	
+	public static function recurringRequestType($hash_in)
+	{
+		if(isset($hash_in))
+		{
+			$hash_out = array(
+					"subscription"=>(XmlFields::recurringSubscriptionType(XmlFields::returnArrayValue($hash_in,"subscription")))
+			);
+			return $hash_out;		
+		}
+	}
+	
+	public static function recurringSubscriptionType($hash_in) {
+		if(isset($hash_in))
+		{
+			$hash_out = array(
+					"planCode"=>(Checker::requiredField(XmlFields::returnArrayValue($hash_in, "planCode"))),
+					"numberOfPaymentsRemaining"=>(Checker::requiredField(XmlFields::returnArrayValue($hash_in, "numberOfPaymentsRemaining")))
+			);
+			return $hash_out;
+		}
+	}
+	
+	public static function litleInternalRecurringRequestType($hash_in)
+	{
+		if(isset($hash_in))
+		{
+			$hash_out = array(
+					"subscriptionId"=>(Checker::requiredField(XmlFields::returnArrayValue($hash_in, "subscriptionId"))),
+					"recurringTxnId"=>(Checker::requiredField(XmlFields::returnArrayValue($hash_in, "recurringTxnId")))
+			);
+			return $hash_out;
+		}
+	}
 }

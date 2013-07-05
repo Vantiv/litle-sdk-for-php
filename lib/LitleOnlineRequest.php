@@ -103,7 +103,9 @@ class LitleOnlineRequest
 		'filtering'=>XmlFields::filteringType(XmlFields::returnArrayValue($hash_in,'filtering')),
 		'merchantData'=>XmlFields::merchantData(XmlFields::returnArrayValue($hash_in,'merchantData')),
 		'recyclingRequest'=>XmlFields::recyclingRequestType(XmlFields::returnArrayValue($hash_in,'recyclingRequest')),
-		'fraudFilterOverride'=> XmlFields::returnArrayValue($hash_in,'fraudFilterOverride'));		
+		'fraudFilterOverride'=> XmlFields::returnArrayValue($hash_in,'fraudFilterOverride'),
+		'recurringRequest'=>XmlFields::recurringRequestType(XmlFields::returnArrayValue($hash_in,'recurringRequest')),
+		'litleInternalRecurringRequest'=>XmlFields::litleInternalRecurringRequestType(XmlFields::returnArrayValue($hash_in,'litleInternalRecurringRequest')));
 
 		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
 		$choice2_hash= array($hash_out['fraudCheck'],$hash_out['cardholderAuthentication']);
@@ -356,7 +358,7 @@ class LitleOnlineRequest
 			$hash_out['merchantSdk'] = XmlFields::returnArrayValue($hash_in,'merchantSdk');
 		}
 		else {
-			$hash_out['merchantSdk'] = 'PHP;8.17.0';
+			$hash_out['merchantSdk'] = 'PHP;8.18.0';
 		}
 		if(isset($hash_in['id'])) {
 			$hash_out['id'] = XmlFields::returnArrayValue($hash_in,'id');
