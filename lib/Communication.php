@@ -23,7 +23,7 @@
 * OTHER DEALINGS IN THE SOFTWARE.
 */
 class Communication{
-	function httpRequest($req,$hash_config=NULL){
+	static function httpRequest($req,$hash_config=NULL){
 		$config = Obj2xml::getConfig($hash_config);
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_PROXY, $config['proxy']);
