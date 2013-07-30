@@ -480,7 +480,9 @@ class XmlFields
 		{
 			$hash_out = array(
 					"planCode"=>(Checker::requiredField(XmlFields::returnArrayValue($hash_in, "planCode"))),
-					"numberOfPaymentsRemaining"=>(Checker::requiredField(XmlFields::returnArrayValue($hash_in, "numberOfPaymentsRemaining")))
+					"numberOfPayments"=>(XmlFields::returnArrayValue($hash_in, "numberOfPayments")),
+					"startDate"=>(XmlFields::returnArrayValue($hash_in, "startDate")),
+					"amount"=>(XmlFields::returnArrayValue($hash_in, "amount")),
 			);
 			return $hash_out;
 		}

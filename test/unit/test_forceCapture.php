@@ -191,4 +191,66 @@ class forceCapture_UnitTest extends PHPUnit_Framework_TestCase
  		$litleTest->newXML = $mock;
  		$litleTest->forceCaptureRequest($hash_in);
  	}
+ 	
+ 	function test_debtRepayment_true() {
+ 		$hash_in = array(
+ 				'amount'=>'2',
+ 				'orderSource'=>'ecommerce',
+ 				'orderId'=>'3',
+ 				'merchantData'=>array(
+ 						'campaign'=>'foo',
+ 				),
+ 				'debtRepayment'=>'true'
+ 		);
+ 		$mock = $this->getMock('LitleXmlMapper');
+ 		$mock
+ 		->expects($this->once())
+ 		->method('request')
+ 		->with($this->matchesRegularExpression('/.*<\/merchantData><debtRepayment>true<\/debtRepayment><\/forceCapture>.*/'));
+ 			
+ 		$litleTest = new LitleOnlineRequest();
+ 		$litleTest->newXML = $mock;
+ 		$litleTest->forceCaptureRequest($hash_in);
+ 	}
+ 	
+ 	function test_debtRepayment_false() {
+ 		$hash_in = array(
+ 				'amount'=>'2',
+ 				'orderSource'=>'ecommerce',
+ 				'orderId'=>'3',
+ 				'merchantData'=>array(
+ 						'campaign'=>'foo',
+ 				),
+ 				'debtRepayment'=>'false'
+ 		);
+ 		$mock = $this->getMock('LitleXmlMapper');
+ 		$mock
+ 		->expects($this->once())
+ 		->method('request')
+ 		->with($this->matchesRegularExpression('/.*<\/merchantData><debtRepayment>false<\/debtRepayment><\/forceCapture>.*/'));
+ 	
+ 		$litleTest = new LitleOnlineRequest();
+ 		$litleTest->newXML = $mock;
+ 		$litleTest->forceCaptureRequest($hash_in);
+ 	}
+ 	
+ 	function test_debtRepayment_optional() {
+ 		$hash_in = array(
+ 				'amount'=>'2',
+ 				'orderSource'=>'ecommerce',
+ 				'orderId'=>'3',
+ 				'merchantData'=>array(
+ 						'campaign'=>'foo',
+ 				),
+ 		);
+ 		$mock = $this->getMock('LitleXmlMapper');
+ 		$mock
+ 		->expects($this->once())
+ 		->method('request')
+ 		->with($this->matchesRegularExpression('/.*<\/merchantData><\/forceCapture>.*/'));
+ 	
+ 		$litleTest = new LitleOnlineRequest();
+ 		$litleTest->newXML = $mock;
+ 		$litleTest->forceCaptureRequest($hash_in);
+ 	}
 }

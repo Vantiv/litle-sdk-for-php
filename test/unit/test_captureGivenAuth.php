@@ -181,4 +181,67 @@ class captureGivenAuth_UnitTest extends PHPUnit_Framework_TestCase
  		$litleTest->newXML = $mock;
  		$litleTest->captureGivenAuthRequest($hash_in);
  	}
+ 	
+ 	function test_debtRepayment_true() {
+ 		$hash_in = array(
+ 				'amount'=>'2',
+ 				'orderSource'=>'ecommerce',
+ 				'orderId'=>'3',
+ 				'merchantData'=>array(
+ 					'campaign'=>'foo',
+ 				),
+ 				'debtRepayment'=>'true'
+ 		);
+ 		$mock = $this->getMock('LitleXmlMapper');
+ 		$mock
+ 		->expects($this->once())
+ 		->method('request')
+ 		->with($this->matchesRegularExpression('/.*<\/merchantData><debtRepayment>true<\/debtRepayment><\/captureGivenAuth>.*/'));
+ 		
+ 		$litleTest = new LitleOnlineRequest();
+ 		$litleTest->newXML = $mock;
+ 		$litleTest->captureGivenAuthRequest($hash_in); 			
+ 	}
+ 	
+ 	function test_debtRepayment_false() {
+ 		$hash_in = array(
+ 				'amount'=>'2',
+ 				'orderSource'=>'ecommerce',
+ 				'orderId'=>'3',
+ 				'merchantData'=>array(
+ 					'campaign'=>'foo',
+ 				),
+ 				'debtRepayment'=>'false'
+ 		);
+ 		$mock = $this->getMock('LitleXmlMapper');
+ 		$mock
+ 		->expects($this->once())
+ 		->method('request')
+ 		->with($this->matchesRegularExpression('/.*<\/merchantData><debtRepayment>false<\/debtRepayment><\/captureGivenAuth>.*/'));
+ 			
+ 		$litleTest = new LitleOnlineRequest();
+ 		$litleTest->newXML = $mock;
+ 		$litleTest->captureGivenAuthRequest($hash_in);
+ 	}
+ 	
+ 	function test_debtRepayment_optional() {
+ 		$hash_in = array(
+ 				'amount'=>'2',
+ 				'orderSource'=>'ecommerce',
+ 				'orderId'=>'3',
+ 				'merchantData'=>array(
+ 						'campaign'=>'foo',
+ 				),
+ 		);
+ 		$mock = $this->getMock('LitleXmlMapper');
+ 		$mock
+ 		->expects($this->once())
+ 		->method('request')
+ 		->with($this->matchesRegularExpression('/.*<\/merchantData><\/captureGivenAuth>.*/'));
+ 	
+ 		$litleTest = new LitleOnlineRequest();
+ 		$litleTest->newXML = $mock;
+ 		$litleTest->captureGivenAuthRequest($hash_in);
+ 	}
+ 	
 }

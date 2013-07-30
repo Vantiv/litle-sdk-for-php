@@ -1,5 +1,10 @@
 = LitleOnline CHANGELOG
 
+== Version 8.19.0 (July 30, 2013)
+* Feature: Added deptRepayment as a choice for authorizations, forceCapture, captureGivenAuth, sale
+* Feature: More initial support for Recurring, including a backwards incompatible changing a field from numberOfPaymentsRemaining to numberOfPayments
+* Feature: Add merchantData to forceRequest and captureGivenAuth
+
 == Version 8.18.0 (July 15, 2013)
 * Feature: Add initial support for recurring to sales
 

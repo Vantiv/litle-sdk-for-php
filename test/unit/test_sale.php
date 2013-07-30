@@ -315,7 +315,7 @@ class sale_UnitTest extends PHPUnit_Framework_TestCase
 				'recurringRequest'=>array(
 						'subscription'=>array(
 								'planCode'=>'abc123',
-								'numberOfPaymentsRemaining'=>'12'
+								'numberOfPayments'=>'12'
 						)
 				)
 		);
@@ -323,7 +323,7 @@ class sale_UnitTest extends PHPUnit_Framework_TestCase
 		$mock
 		->expects($this->once())
 		->method('request')
-		->with($this->matchesRegularExpression('/.*<fraudFilterOverride>true<\/fraudFilterOverride><recurringRequest><subscription><planCode>abc123<\/planCode><numberOfPaymentsRemaining>12<\/numberOfPaymentsRemaining><\/subscription><\/recurringRequest>.*/'));
+		->with($this->matchesRegularExpression('/.*<fraudFilterOverride>true<\/fraudFilterOverride><recurringRequest><subscription><planCode>abc123<\/planCode><numberOfPayments>12<\/numberOfPayments><\/subscription><\/recurringRequest>.*/'));
 		
 		$litleTest = new LitleOnlineRequest();
 		$litleTest->newXML = $mock;
@@ -399,6 +399,71 @@ class sale_UnitTest extends PHPUnit_Framework_TestCase
 		->method('request')
 		->with($this->matchesRegularExpression('/.*<fraudFilterOverride>true<\/fraudFilterOverride><\/sale>.*/'));
 		
+		$litleTest = new LitleOnlineRequest();
+		$litleTest->newXML = $mock;
+		$litleTest->saleRequest($hash_in);
+	}
+	
+	function test_debtRepayment_true() {
+		$hash_in = array(
+				'amount'=>'2',
+				'orderSource'=>'ecommerce',
+				'orderId'=>'3',
+				'litleInternalRecurringRequest'=>array(
+						'subscriptionId'=>'123',
+						'recurringTxnId'=>'456'
+				),
+				'debtRepayment'=>'true'
+		);
+		$mock = $this->getMock('LitleXmlMapper');
+		$mock
+		->expects($this->once())
+		->method('request')
+		->with($this->matchesRegularExpression('/.*<\/litleInternalRecurringRequest><debtRepayment>true<\/debtRepayment><\/sale>.*/'));
+	
+		$litleTest = new LitleOnlineRequest();
+		$litleTest->newXML = $mock;
+		$litleTest->saleRequest($hash_in);
+	}
+	
+	function test_debtRepayment_false() {
+		$hash_in = array(
+				'amount'=>'2',
+				'orderSource'=>'ecommerce',
+				'orderId'=>'3',
+				'litleInternalRecurringRequest'=>array(
+						'subscriptionId'=>'123',
+						'recurringTxnId'=>'456'
+				),
+				'debtRepayment'=>'false'
+		);
+		$mock = $this->getMock('LitleXmlMapper');
+		$mock
+		->expects($this->once())
+		->method('request')
+		->with($this->matchesRegularExpression('/.*<\/litleInternalRecurringRequest><debtRepayment>false<\/debtRepayment><\/sale>.*/'));
+	
+		$litleTest = new LitleOnlineRequest();
+		$litleTest->newXML = $mock;
+		$litleTest->saleRequest($hash_in);
+	}
+	
+	function test_debtRepayment_optional() {
+		$hash_in = array(
+				'amount'=>'2',
+				'orderSource'=>'ecommerce',
+				'orderId'=>'3',
+				'litleInternalRecurringRequest'=>array(
+						'subscriptionId'=>'123',
+						'recurringTxnId'=>'456'
+				),
+		);
+		$mock = $this->getMock('LitleXmlMapper');
+		$mock
+		->expects($this->once())
+		->method('request')
+		->with($this->matchesRegularExpression('/.*<\/litleInternalRecurringRequest><\/sale>.*/'));
+	
 		$litleTest = new LitleOnlineRequest();
 		$litleTest->newXML = $mock;
 		$litleTest->saleRequest($hash_in);

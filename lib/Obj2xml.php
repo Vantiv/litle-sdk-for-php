@@ -30,7 +30,7 @@ class Obj2xml {
 		$config= Obj2xml::getConfig($hash_config);
 		$xml = simplexml_load_string("<?xml version='1.0' encoding='utf-8'?><$rootNodeName />");
 		$xml-> addAttribute('merchantId',$config["merchantId"]);
-		$xml-> addAttribute('version','8.18');
+		$xml-> addAttribute('version','8.19');
 		$xml-> addAttribute('merchantSdk',$data['merchantSdk']);
 		unset($data['merchantSdk']);
 		if(isset($data['loggedInUser'])) {
@@ -84,12 +84,7 @@ class Obj2xml {
 
 	public static function getConfig($data)
 	{
-		if(file_exists('litle_SDK_config.ini')) {
-			@$config_array =parse_ini_file('litle_SDK_config.ini');
-		}
-		else {
-			@$config_array = array();
-		}
+		@$config_array =parse_ini_file('litle_SDK_config.ini'); //TODO Use an empty config_array if the file doesn't exist
 		$names = array('user','password','merchantId','timeout','proxy','reportGroup','version','url');
 		foreach($names as $name)
 		{

@@ -393,4 +393,57 @@ class auth_UnitTest extends PHPUnit_Framework_TestCase
  		$litleTest->newXML = $mock;
  		$litleTest->authorizationRequest($hash_in);
  	}
+ 	
+ 	function test_recurringRequest() {
+ 		$hash_in = array(
+ 			'card'=>array(
+ 				'type'=>'VI',
+ 				'number'=>'4100000000000001',
+ 				'expDate'=>'1213'
+ 			),
+ 			'orderId'=>'12344',
+ 			'amount'=>'2',
+ 			'orderSource'=>'ecommerce',
+ 			'fraudFilterOverride'=>'true',
+ 			'recurringRequest'=>array(
+ 				'subscription'=>array(
+ 					'planCode'=>'abc123',
+ 					'numberOfPayments'=>12
+ 				)
+ 			)
+ 		);
+ 		$mock = $this->getMock('LitleXmlMapper');
+  		$mock
+  		->expects($this->once())
+  		->method('request')
+  		->with($this->matchesRegularExpression('/.*<fraudFilterOverride>true<\/fraudFilterOverride><recurringRequest><subscription><planCode>abc123<\/planCode><numberOfPayments>12<\/numberOfPayments><\/subscription><\/recurringRequest><\/authorization>.*/'));
+ 	
+ 		$litleTest = new LitleOnlineRequest();
+ 		$litleTest->newXML = $mock;
+ 		$litleTest->authorizationRequest($hash_in);
+  	}
+  	
+  	function test_debtRepayment() {
+  		$hash_in = array(
+  				'card'=>array(
+  						'type'=>'VI',
+  						'number'=>'4100000000000001',
+  						'expDate'=>'1213'
+  				),
+  				'orderId'=>'12344',
+  				'amount'=>'2',
+  				'orderSource'=>'ecommerce',
+  				'fraudFilterOverride'=>'true',
+  				'debtRepayment'=>'true'
+  		);
+  		$mock = $this->getMock('LitleXmlMapper');
+  		$mock
+  		->expects($this->once())
+  		->method('request')
+  		->with($this->matchesRegularExpression('/.*<fraudFilterOverride>true<\/fraudFilterOverride><debtRepayment>true<\/debtRepayment><\/authorization>.*/'));
+  	
+  		$litleTest = new LitleOnlineRequest();
+  		$litleTest->newXML = $mock;
+  		$litleTest->authorizationRequest($hash_in);
+  	}
 }
