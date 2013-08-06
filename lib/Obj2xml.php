@@ -61,6 +61,14 @@ class Obj2xml {
 		return $xml->asXML();
 	}
 
+	public static function transactionToXml($data, $type, $report_group){
+		
+		$transac = simplexml_load_string("<$type />");
+		$transac->addAttribute('reportGroup', $report_group);
+		Obj2xml::iterateChildren($data,$transac);
+		return $transac->asXML();
+	}
+
 	private static function iterateChildren($data,$transacType){
 		foreach($data as $key => $value)
 		{
@@ -85,6 +93,7 @@ class Obj2xml {
 	public static function getConfig($data)
 	{
 		@$config_array =parse_ini_file('litle_SDK_config.ini'); //TODO Use an empty config_array if the file doesn't exist
+		echo print_r($config_array);
 		$names = array('user','password','merchantId','timeout','proxy','reportGroup','version','url');
 		foreach($names as $name)
 		{
