@@ -105,6 +105,6 @@ NOTE: you may have to change the path to match that of your filesystems
     Message: Valid Format
     Litle Transaction ID: <your-numeric-litle-txn-id>
 
-More examples can be found here [php Gists](https://gist.github.com/gists/search?q=Litle+php+SDK&page=1)
+More examples can be found here [php Gists])(https://gist.github.com/litleSDK)
 
 Please contact Litle & Co. with any further questions.   You can reach us at SDKSupport@litle.com
