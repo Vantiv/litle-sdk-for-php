@@ -19,15 +19,10 @@ $hash_in = array(
 $batch_request = new BatchRequest('/usr/local/litle-home/ahammond/');
 $batch_request->addSale($hash_in);
 $request->addBatchRequest($batch_request);
+$proc = new LitleResponseProcessor($request->sendToLitleStream());
 
-
-$request->closeRequest();
-
-$request->sendToLitleSFTP();
-$request->sendToLitleStream();
-
-
-$request2 = new LitleRequest();
-$request2->createRFRRequest($hash);
-$request2->sendToLitleSFTP();
-
+while($response = $proc->nextTransaction()){
+	if($response->getName() == "saleResponse"){
+		echo $response->litleTxnId;
+	}
+}

@@ -202,7 +202,7 @@ class LitleRequest{
 		
 		$tcp_url = $this->config['batch_url'];
 		$tcp_port = $this->config['tcp_port'];
-		$tcp_ssl = INT_CAST($this->config['tcp_ssl']);
+		$tcp_ssl = (int)$this->config['tcp_ssl'];
 		$tcp_timeout = $this->config['tcp_timeout'];;
 		
 		if($tcp_ssl){

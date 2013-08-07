@@ -239,19 +239,7 @@ class BatchRequest {
 		$this->counts_and_amounts['updateCardValidationNumOnToken']['count'] += 1;
 		$this->counts_and_amounts['updateCardValidationNumOnToken']['amount'] += $hash_out['amount'];
 		
-	}
-
-	public function addEcheckVerification($hash_in){
-		$hash_out = Transactions::createEcheckVerificationHash($hash_in);
-		
-		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
-		
-		$this->addTransaction($hash_out,$hash_in,'echeckVerification',$choice_hash);
-		$this->counts_and_amounts['echeckVerification']['count'] += 1;
-		$this->counts_and_amounts['echeckVerification']['amount'] += $hash_out['amount'];
-		
-	}
-	
+	}	
 
 	/*
 	 * Adds the XML for the transaction given the appropriate data to the transactions file
