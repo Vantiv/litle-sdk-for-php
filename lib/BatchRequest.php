@@ -310,4 +310,8 @@ class BatchRequest {
 			throw new RuntimeException("Could not open transactions file at $this->transaction_file. Please check your privilege.");
 		}
 	}
+	
+	public function getCountsAndAmounts(){
+		return $this->counts_and_amounts;
+	}
 }
