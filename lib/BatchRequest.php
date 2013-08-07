@@ -241,6 +241,15 @@ class BatchRequest {
 		
 	}	
 
+	public function addAccountUpdate($hash_in){
+		$hash_out = Transactions::createAccountUpdate($hash_in);
+		
+		$choice_hash = array(XmlFields::returnArrayValue($hash_out,'card'),XmlFields::returnArrayValue($hash_out,'token'));
+		
+		$this->addTransaction($hash_out,$hash_in,'accountUpdate',$choice_hash);
+		$this->counts_and_amounts['accountUpdate']['count'] += 1;
+	}
+
 	/*
 	 * Adds the XML for the transaction given the appropriate data to the transactions file
 	 */ 
@@ -248,6 +257,12 @@ class BatchRequest {
 		if($this->isFull()){
 			throw new RuntimeException('The transaction could not be added to the batch. It is full.');
 		}
+		if($type == 'accountUpdate' && $this->counts_and_amounts['accountUpdate']['count'] != $this->total_txns){
+			throw new RuntimeException("The transaction could not be added to the batch. The transaction type $type cannot be mixed with non-Account Updates.");
+		}
+		else if($type != 'accountUpdate' && $this->counts_and_amounts['accountUpdate']['count'] == $this->total_txns && $this->total_txns > 0){
+			throw new RuntimeException("The transaction could not be added to the batch. The transaction type $type cannot be mixed with AccountUpdates.");
+		} 
 		
 		if(isset($hash_in['reportGroup'])){
 			$report_group = $hash_in['reportGroup'];
@@ -256,6 +271,7 @@ class BatchRequest {
 			$conf = Obj2xml::getConfig(array());
 			$report_group = $conf['reportGroup'];
 		}
+		
 		
 		Checker::choice($choice1);
 		Checker::choice($choice2);

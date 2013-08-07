@@ -244,4 +244,14 @@ class Transactions {
 		
 		return $hash_out;
 	}
+
+	public static function createAccountUpdate($hash_in){
+		$hash_out = array(
+				'orderId'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'orderId')),
+				'card'=> XmlFields::cardType(XmlFields::returnArrayValue($hash_in,'card')),
+				'token'=>XmlFields::cardTokenType(XmlFields::returnArrayValue($hash_in,'token')),
+		);		
+		
+		return $hash_out;
+	}
 }

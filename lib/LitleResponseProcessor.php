@@ -7,10 +7,16 @@ class LitleResponseProcessor {
 	 * $response_file is a string corresponding to the path of the response file to be processed.
 	 */ 
 	public function __construct($response_file){
-		//$this->response_file = $response_file;
 		$this->xml_reader = new XMLReader();
 		$this->xml_reader->open("file://" . $response_file);
 		$this->xml_reader->setParserProperty(XMLReader::SUBST_ENTITIES, true);
+		# read onto the root node
+		$this->xml_reader->read();
+		# if the response from litle is non-zero
+		if($this->xml_reader->getAttribute("response") == "1"){
+			$msg = $this->xml_reader->getAttribute('message');
+			throw new RuntimeException("Response file $response_file indicates error: $msg");
+		}
 	}
 	
 	/*
@@ -21,6 +27,7 @@ class LitleResponseProcessor {
 	 */
 	public function nextTransaction($raw = FALSE){
 		$tracked_elements_names = array(
+			"accountUpdateResponse",
 			"authorizationResponse",
 			"authReversalResponse",
 			"captureResponse",
@@ -46,7 +53,7 @@ class LitleResponseProcessor {
 		}
 		else{
 			if($this->xml_reader->read()){
-				return $this->nextTransaction();
+				return $this->nextTransaction($raw);
 			}
 			return false;	
 		}

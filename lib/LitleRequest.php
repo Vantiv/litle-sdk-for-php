@@ -10,6 +10,8 @@ class LitleRequest{
 	
 	private $request_file;
 	
+	private $response_file;
+	
 	private $config;
 	
 	
@@ -34,9 +36,9 @@ class LitleRequest{
 		$ts = str_replace(" ", "", substr(microtime(), 2));
 		$batches_filename = $request_dir . "request_" . $ts . "_batches";
 		$request_filename = $request_dir . "request_" . $ts;
-		
+		$response_filename = $request_dir . "response_" . $ts;
 		// if either file already exists, let's try again!
-		if(file_exists($batches_filename) || file_exists($request_filename)){
+		if(file_exists($batches_filename) || file_exists($request_filename) || file_exists($response_filename)){
 			$this->__construct();
 		}
 		
@@ -51,6 +53,11 @@ class LitleRequest{
 			throw new RuntimeException("A request file could not be written at $request_filename. Please check your privilege.");
 		}
 		$this->request_file = $request_filename;
+		
+		if(file_put_contents($response_filename, "") === FALSE){
+			throw new RuntimeException("A response file could not be written at $response_filename. Please check your privilege.");
+		}
+		$this->response_file = $response_filename;
 	}
 
 	public function wouldFill($addl_txns_count){
@@ -181,7 +188,7 @@ class LitleRequest{
 			echo print_r($files);
 			if(in_array(basename($this->request_file) . '.asc', $files)){
 				# TODO: the replacement needs to be tighter...
-				$session->get('/outbound/' . basename($this->request_file) . '.asc', str_replace("request", "response", $this->request_file));
+				$session->get('/outbound/' . basename($this->request_file) . '.asc', $this->response_file);
 				return str_replace("request", "response", $this->request_file);
 			}
 			else{
@@ -228,13 +235,12 @@ class LitleRequest{
 			else{
 				throw new RuntimeException("Could not open request file at $this->request_file. Please check your privilege.");
 			}
-			$response_file = str_replace("request", "response", $this->request_file);
 			# read from the response socket while there's data
 			while (!feof($sock)) {
-				file_put_contents($response_file, fgets($sock, 128), FILE_APPEND);
+				file_put_contents($this->response_file, fgets($sock, 128), FILE_APPEND);
     		}
 			fclose($sock);
-			return $response_file;
+			return $this->response_file;
 		}
 	}
 }

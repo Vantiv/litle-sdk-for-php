@@ -10,19 +10,22 @@ $hash_in = array(
 					'number'=>'4100000000000000',
 					'expDate'=>'1213',
 					'cardValidationNum' => '1213'),
-			'id'=>'1211',
-			'orderId'=> '2111',
-			'reportGroup'=>'Planets',
-			'orderSource'=>'ecommerce',
-			'amount'=>'123');
+			'orderId'=>'8675309',
+					);
+			
 
 $batch_request = new BatchRequest('/usr/local/litle-home/ahammond/');
-$batch_request->addSale($hash_in);
+$batch_request->addAccountUpdate($hash_in);
 $request->addBatchRequest($batch_request);
 $proc = new LitleResponseProcessor($request->sendToLitleStream());
 
-while($response = $proc->nextTransaction()){
-	if($response->getName() == "saleResponse"){
-		echo $response->litleTxnId;
-	}
+// while($response = $proc->nextTransaction()){
+	// if($response->getName() == "saleResponse"){
+		// print $response->litleTxnId . "\n";
+		// print $response->message . "\n";
+	// }
+// }
+
+while($response = $proc->nextTransaction(true)){
+	print $response;
 }
