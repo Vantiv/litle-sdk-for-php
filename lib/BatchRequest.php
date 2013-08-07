@@ -132,10 +132,125 @@ class BatchRequest {
 		$this->counts_and_amounts['auth']['amount'] += $hash_out['amount'];
 	}
 	
+	public function addAuthReversal($hash_in){
+		$hash_out = Transactions::createAuthReversal($hash_in);
+		
+		$this->addTransaction($hash_out,$hash_in,'authReversal');
+		$this->counts_and_amounts['authReversal']['count'] += 1;
+		$this->counts_and_amounts['authReversal']['amount'] += $hash_out['amount'];
+	}
 	
+	public function addCredit($hash_in){
+		$hash_out = Transactions::createCreditHash($hash_in);
+		
+		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
+		
+		$this->addTransaction($hash_out,$hash_in,'credit',$choice_hash);
+		$this->counts_and_amounts['credit']['count'] += 1;
+		$this->counts_and_amounts['credit']['amount'] += $hash_out['amount'];
+	}
 	
+	public function addRegisterToken($hash_in){
+		$hash_out = Transactions::createRegisterTokenHash($hash_in);
+		
+		$choice_hash = array($hash_out['accountNumber'],$hash_out['echeckForToken'],$hash_out['paypageRegistrationId']);
+		
+		$this->addTransaction($hash_out,$hash_in,'registerTokenRequest',$choice_hash);
+		$this->counts_and_amounts['tokenRegistration']['count'] += 1;
+	}
 	
+	public function addForceCapture($hash_in){
+		$hash_out = Transactions::createForceCaptureHash($hash_in);
+		
+		$choice_hash = array(XmlFields::returnArrayValue($hash_out,'card'),XmlFields::returnArrayValue($hash_out,'paypal'),XmlFields::returnArrayValue($hash_out,'token'),XmlFields::returnArrayValue($hash_out,'paypage'));
+		
+		$this->addTransaction($hash_out,$hash_in,'forceCapture',$choice_hash);
+		$this->counts_and_amounts['forceCapture']['count'] += 1;
+		$this->counts_and_amounts['forceCapture']['amount'] += $hash_out['amount'];
+		
+	}
 	
+	public function addCapture($hash_in){
+		$hash_out = Transactions::createCaptureHash($hash_in);
+		
+		$this->addTransaction($hash_out,$hash_in,'capture');
+		$this->counts_and_amounts['capture']['count'] += 1;
+		$this->counts_and_amounts['capture']['amount'] += $hash_out['amount'];
+		
+	}
+
+	public function addCaptureGivenAuth($hash_in){
+		$hash_out = Transactions::createCaptureGivenAuthHash($hash_in);
+		
+		$choice_hash = array($hash_out['card'],$hash_out['token'],$hash_out['paypage']);
+		
+		$this->addTransaction($hash_out,$hash_in,'captureGivenAuth',$choice_hash);
+		$this->counts_and_amounts['captureGivenAuth']['count'] += 1;
+		$this->counts_and_amounts['captureGivenAuth']['amount'] += $hash_out['amount'];
+		
+	}			
+	
+	public function addEcheckRedeposit($hash_in){
+		$hash_out = Transactions::createEcheckRedepositHash($hash_in);
+		
+		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
+		
+		$this->addTransaction($hash_out,$hash_in,'echeckRedeposit',$choice_hash);
+		$this->counts_and_amounts['echeckRedeposit']['count'] += 1;
+	}	
+	
+	public function addEcheckSale($hash_in){
+		$hash_out = Transactions::createEcheckSaleHash($hash_in);
+		
+		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
+		
+		$this->addTransaction($hash_out,$hash_in,'echeckSale',$choice_hash);
+		$this->counts_and_amounts['echeckSale']['count'] += 1;
+		$this->counts_and_amounts['echeckSale']['amount'] += $hash_out['amount'];
+		
+	}	
+	
+	public function addEcheckCredit($hash_in){
+		$hash_out = Transactions::createEcheckCreditHash($hash_in);
+		
+		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
+		
+		$this->addTransaction($hash_out,$hash_in,'echeckCredit',$choice_hash);
+		$this->counts_and_amounts['echeckCredit']['count'] += 1;
+		$this->counts_and_amounts['echeckCredit']['amount'] += $hash_out['amount'];
+		
+	}
+	
+	public function addEcheckVerification($hash_in){
+		$hash_out = Transactions::createEcheckVerificationHash($hash_in);
+		
+		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
+		
+		$this->addTransaction($hash_out,$hash_in,'echeckVerification',$choice_hash);
+		$this->counts_and_amounts['echeckVerification']['count'] += 1;
+		$this->counts_and_amounts['echeckVerification']['amount'] += $hash_out['amount'];
+		
+	}
+	
+	public function addUpdateCardValidationNumOnTokenHash($hash_in){
+		$hash_out = Transactions::createUpdateCardValidationNumOnTokenHash($hash_in);
+		
+		$this->addTransaction($hash_out,$hash_in,"updateCardValidationNumOnToken");
+		$this->counts_and_amounts['updateCardValidationNumOnToken']['count'] += 1;
+		$this->counts_and_amounts['updateCardValidationNumOnToken']['amount'] += $hash_out['amount'];
+		
+	}
+
+	public function addEcheckVerification($hash_in){
+		$hash_out = Transactions::createEcheckVerificationHash($hash_in);
+		
+		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
+		
+		$this->addTransaction($hash_out,$hash_in,'echeckVerification',$choice_hash);
+		$this->counts_and_amounts['echeckVerification']['count'] += 1;
+		$this->counts_and_amounts['echeckVerification']['amount'] += $hash_out['amount'];
+		
+	}
 	
 
 	/*
