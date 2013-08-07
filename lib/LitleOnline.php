@@ -24,6 +24,8 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 define('CURRENT_XML_VERSION', '8.19');
+define('MAX_TXNS_PER_BATCH', 100000);
+define('MAX_TXNS_PER_REQUEST', 500000);
 require_once realpath(dirname(__FILE__)) . '/LitleXmlMapper.php';
 require_once realpath(dirname(__FILE__)) . '/XmlFields.php';
 require_once realpath(dirname(__FILE__)) . '/Communication.php';

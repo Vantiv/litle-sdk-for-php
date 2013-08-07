@@ -56,6 +56,26 @@ function initialize(){
 		$line['url'] = $url;
 		print "Please input the proxy, if no proxy hit enter key: ";
 		$line['proxy'] = trim(fgets(STDIN));
+	
+		print "Batch processing saves files to disk. \n";
+		print "Please input a directory to save these files. If you are not using batch processing, you may hit enter. ";
+		$dir = trim(fgets(STDIN));
+		$line['batch_requests_path'] = $dir;
+		$line['litle_requests_path'] = $dir;
+		
+		print "Please input your SFTP username. If you are not using SFTP, you may hit enter. ";
+		$line['sftp_username'] = trim(fgets(STDIN));
+		print "Please input your SFTP password. If you are not using SFTP, you may hit enter. ";
+		$line['sftp_password'] = trim(fgets(STDIN));
+		print "Please input the URL for batch processing. If you are not using batch processing, you may hit enter. ";
+		$line['batch_url'] = trim(fgets(STDIN));
+		print "Please input the port for stream batch delivery. If you are not using stream batch delivery, you may hit enter. ";
+		$line['tcp_port'] = trim(fgets(STDIN));
+		print "Please input the timeout (in seconds) for stream batch delivery. If you are not using stream batch delivery, you may hit enter. ";
+		$line['tcp_timeout'] = trim(fgets(STDIN));
+		# ssl should be usd by default
+		$line['tcp_ssl'] = '1';
+		
 		writeConfig($line,$handle);
 		fwrite($handle, "timeout =  65".  PHP_EOL);
 		fwrite($handle, "reportGroup = Default Report Group".  PHP_EOL);

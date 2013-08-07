@@ -3,6 +3,8 @@
 
 require_once realpath(dirname(__FILE__)) . '/lib/LitleOnline.php';
 
+$request = new LitleRequest();
+
 $hash_in = array(
 			'card'=>array('type'=>'VI',
 					'number'=>'4100000000000000',
@@ -16,5 +18,9 @@ $hash_in = array(
 
 $batch_request = new BatchRequest('/usr/local/litle-home/ahammond/');
 $batch_request->addSale($hash_in);
+$request->addBatchRequest($batch_request);
 
 
+$request->closeRequest();
+
+$request->sendToLitleSFTP();
