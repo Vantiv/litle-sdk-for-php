@@ -117,10 +117,21 @@ class BatchRequest {
 		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
 		$choice2_hash= array($hash_out['fraudCheck'],$hash_out['cardholderAuthentication']);
 		
-		$this->addTransaction($hash_out, $hash_in, 'sale');
+		$this->addTransaction($hash_out, $hash_in, 'sale', $choice_hash, $choice2_hash);
 		$this->counts_and_amounts['sale']['count'] += 1;
 		$this->counts_and_amounts['sale']['amount'] += $hash_out['amount'];
 	}
+	
+	public function addAuth($hash_in){
+		$hash_out = Transactions::createAuthHash($hash_in);
+		
+		$choice_hash = array(XmlFields::returnArrayValue($hash_out,'card'),XmlFields::returnArrayValue($hash_out,'paypal'),XmlFields::returnArrayValue($hash_out,'token'),XmlFields::returnArrayValue($hash_out,'paypage'));
+		
+		$this->addTransaction($hash_out, $hash_in, 'authorization', $choice_hash);
+		$this->counts_and_amounts['auth']['count'] += 1;
+		$this->counts_and_amounts['auth']['amount'] += $hash_out['amount'];
+	}
+	
 	
 	
 	

@@ -24,3 +24,10 @@ $request->addBatchRequest($batch_request);
 $request->closeRequest();
 
 $request->sendToLitleSFTP();
+$request->sendToLitleStream();
+
+
+$request2 = new LitleRequest();
+$request2->createRFRRequest($hash);
+$request2->sendToLitleSFTP();
+
