@@ -294,6 +294,31 @@ class batchRequest_FunctionalTest extends PHPUnit_Framework_TestCase
 		
 	}
 	
+	function test_addEcheckCredit()
+	{
+		
+		$hash_in = array(
+			'card'=>array('type'=>'VI',
+					'number'=>'4100000000000000',
+					'expDate'=>'1213',
+					'cardValidationNum' => '1213'),
+			'id'=>'1211',
+			'orderId'=> '2111',
+			'reportGroup'=>'Planets',
+			'orderSource'=>'ecommerce',
+			'amount'=>'123');
+		$batch_request = new BatchRequest($this->direct);
+		$batch_request->addEcheckCredit($hash_in);
+		
+		$this->assertTrue(file_exists($batch_request->batch_file));
+		$this->assertEquals(1, $batch_request->total_txns);
+		
+		$cts = $batch_request->getCountsAndAmounts();
+		$this->assertEquals(1, $cts['echeckCredit']['count']);
+		$this->assertEquals(123, $cts['echeckCredit']['amount']);
+		
+	}
+	
 	function test_addEcheckVerification()
 	{
 		
@@ -443,6 +468,25 @@ class batchRequest_FunctionalTest extends PHPUnit_Framework_TestCase
 		
 		$this->assertEquals(13, $batch->total_txns);
 		$cts = $batch->getCountsAndAmounts();
+		$this->assertEquals(1, $cts['sale']['count']);
+		$this->assertEquals(1, $cts['auth']['count']);
+		$this->assertEquals(1, $cts['credit']['count']);
+		$this->assertEquals(1, $cts['tokenRegistration']['count']);
+		$this->assertEquals(1, $cts['capture']['count']);
+		$this->assertEquals(1, $cts['forceCapture']['count']);
+		$this->assertEquals(1, $cts['echeckRedeposit']['count']);
+		$this->assertEquals(1, $cts['echeckSale']['count']);
+		$this->assertEquals(1, $cts['echeckCredit']['count']);
+		$this->assertEquals(1, $cts['echeckVerification']['count']);
+		$this->assertEquals(1, $cts['updateCardValidationNumOnToken']['count']);
+		
+		$this->assertEquals(123, $cts['sale']['amount']);
+		$this->assertEquals(123, $cts['auth']['amount']);
+		$this->assertEquals(123, $cts['credit']['amount']);
+		$this->assertEquals(123, $cts['capture']['amount']);
+		$this->assertEquals(106, $cts['forceCapture']['amount']);
+		$this->assertEquals(123456, $cts['echeckSale']['amount']);
+		$this->assertEquals(123456, $cts['echeckVerification']['amount']);
 		
 	
 	}
@@ -520,7 +564,6 @@ class batchRequest_FunctionalTest extends PHPUnit_Framework_TestCase
 	}	
 	
 	function test_isFull(){
-		try{
 			$hash_in = array(
 			'card'=>array('type'=>'VI',
 					'number'=>'4100000000000000',
@@ -531,15 +574,14 @@ class batchRequest_FunctionalTest extends PHPUnit_Framework_TestCase
 			'reportGroup'=>'Planets',
 			'orderSource'=>'ecommerce',
 			'amount'=>'123');
+			
+			$this->setExpectedException(
+			'RuntimeException','The transaction could not be added to the batch. It is full.'
+			);
 			$batch_request = new BatchRequest($this->direct);
 			$batch_request->total_txns = MAX_TXNS_PER_BATCH;
 			$batch_request->addSale($hash_in);
-		}
-		catch(RuntimeException $expected){
-			$this->assertEquals($expected->getMessage(), "The transaction could not be added to the batch. It is full.");
-			return;
-		}
-		$this->fail('An excepted exception has not been raised');
+			
 	}
 	function test_addTooManyTransactions()
 	{
