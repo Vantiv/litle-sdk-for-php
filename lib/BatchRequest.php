@@ -133,7 +133,7 @@ class BatchRequest {
 	}
 	
 	public function addAuthReversal($hash_in){
-		$hash_out = Transactions::createAuthReversal($hash_in);
+		$hash_out = Transactions::createAuthReversalHash($hash_in);
 		
 		$this->addTransaction($hash_out,$hash_in,'authReversal');
 		$this->counts_and_amounts['authReversal']['count'] += 1;
@@ -232,12 +232,11 @@ class BatchRequest {
 		
 	}
 	
-	public function addUpdateCardValidationNumOnTokenHash($hash_in){
+	public function addUpdateCardValidationNumOnToken($hash_in){
 		$hash_out = Transactions::createUpdateCardValidationNumOnTokenHash($hash_in);
 		
 		$this->addTransaction($hash_out,$hash_in,"updateCardValidationNumOnToken");
 		$this->counts_and_amounts['updateCardValidationNumOnToken']['count'] += 1;
-		$this->counts_and_amounts['updateCardValidationNumOnToken']['amount'] += $hash_out['amount'];
 		
 	}	
 
