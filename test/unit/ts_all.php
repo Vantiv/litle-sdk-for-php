@@ -44,7 +44,6 @@ require realpath(dirname(__FILE__)) . '/test_Checker.php';
 require realpath(dirname(__FILE__)) . '/test_XmlParser.php';
 require realpath(dirname(__FILE__)) . '/test_Obj2xml.php';
 require realpath(dirname(__FILE__)) . '/test_updateCardValidationNumOnToken.php';
-require realpath(dirname(__FILE__)) . '/test_accountUpdate.php';
 class UnitTests
 {
 	public static function suite()

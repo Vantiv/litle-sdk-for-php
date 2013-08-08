@@ -347,10 +347,7 @@ class batchRequest_FunctionalTest extends PHPUnit_Framework_TestCase
 	} 
 	
 	function test_mechaBatch(){
-		
-		$request = new LitleRequest($this->config);
 			
-		# first batch
 		$batch = new BatchRequest($this->direct);
 		$hash_in = array(
 			'card'=>array('type'=>'VI',
@@ -369,7 +366,6 @@ class batchRequest_FunctionalTest extends PHPUnit_Framework_TestCase
 		$hash_in = array('litleTxnId'=> '12312312', 'amount'=>'123');
 		$batch->addCapture($hash_in);
 		
-		# second batch
 		$hash_in = array(
        'amount'=>'123',
        'orderId'=>'12344',
@@ -389,7 +385,6 @@ class batchRequest_FunctionalTest extends PHPUnit_Framework_TestCase
 		$hash_in = array('litleTxnId' =>'123123');
 		$batch->addEcheckCredit($hash_in);
 		
-		# third batch
 		$hash_in = array('litleTxnId' =>'123123');
 		$batch->addEcheckRedeposit($hash_in);
 		
@@ -411,7 +406,6 @@ class batchRequest_FunctionalTest extends PHPUnit_Framework_TestCase
 	      'billToAddress'=>array('name'=>'Bob','city'=>'lowell','state'=>'MA','email'=>'litle.com'));
 		$batch->addEcheckVerification($hash_in);
 		
-		# fourth batch
 		$hash_in = array(
 			 'orderId'=>'123',
 		      'litleTxnId'=>'123456',
@@ -444,39 +438,13 @@ class batchRequest_FunctionalTest extends PHPUnit_Framework_TestCase
 			'orderId'=>'1',
 			'litleToken'=>'123456789101112',
 			'cardValidationNum'=>'123');
-		$batch->addUpdateCardValidationNumOnTokenHash($hash_in);
+		$batch->addUpdateCardValidationNumOnToken($hash_in);
 		
-		# fifth batch
-		$hash_in = array(
-			'card'=>array('type'=>'VI',
-					'number'=>'4100000000000000',
-					'expDate'=>'1213',
-					'cardValidationNum' => '1213'),
-			'orderId'=>'8675309');
-		$batch->addAccountUpdate($hash_in);
 		
-		$request->addBatchRequest($batch);
+		$this->assertEquals(13, $batch->total_txns);
+		$cts = $batch->getCountsAndAmounts();
 		
-		$resp = new LitleResponseProcessor($request->sendToLitleStream());
-
-		$responses = array();
-		for($i = 0; $i < 14; $i++){
-			array_push($responses, $resp->nextTransaction()->getName());
-		}
-		$this->assertTrue(in_array("authorizationResponse", $responses));
-		$this->assertTrue(in_array("captureResponse", $responses));
-		$this->assertTrue(in_array("authReversalResponse", $responses));
-		$this->assertTrue(in_array("captureGivenAuthResponse", $responses));
-		$this->assertTrue(in_array("creditResponse", $responses));
-		$this->assertTrue(in_array("echeckCreditResponse", $responses));
-		$this->assertTrue(in_array("echeckRedepositResponse", $responses));
-		$this->assertTrue(in_array("echeckSalesResponse", $responses));
-		$this->assertTrue(in_array("echeckVerificationResponse", $responses));
-		$this->assertTrue(in_array("forceCaptureResponse", $responses));
-		$this->assertTrue(in_array("saleResponse", $responses));
-		$this->assertTrue(in_array("registerTokenResponse", $responses));
-		$this->assertTrue(in_array("updateCardValidationNumOnTokenResponse", $responses));
-		$this->assertTrue(in_array("accountUpdateResponse", $responses));		
+	
 	}
 	function test_addAccountUpdate()
 	{
