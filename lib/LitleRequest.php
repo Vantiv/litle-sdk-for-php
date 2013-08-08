@@ -6,20 +6,20 @@ include('Net/SFTP.php');
 class LitleRequest{
 	
 	# file name that holds the batch requests once added
-	private $batches_file;
+	public $batches_file;
 	
-	private $request_file;
+	public $request_file;
 	
-	private $response_file;
+	public $response_file;
 	
 	private $config;
 	
 	
-	private $num_batch_requests = 0;
+	public $num_batch_requests = 0;
 	# note that a single litle request cannot hold more than 500,000 transactions
-	private $total_transactions = 0;
+	public $total_transactions = 0;
 	
-	private $closed = false;
+	public $closed = false;
 	/*
 	 * Creates the intermediate request file and preps it to have batches added
 	 */

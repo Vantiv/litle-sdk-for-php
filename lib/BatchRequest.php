@@ -9,7 +9,7 @@ class BatchRequest {
 	public $closed = false;
 	
 	# file name which holds the transaction markups during the batch process
-	private $transaction_file;
+	public $transaction_file;
 	
 	public $batch_file;
 	
@@ -133,7 +133,7 @@ class BatchRequest {
 	}
 	
 	public function addAuthReversal($hash_in){
-		$hash_out = Transactions::createAuthReversal($hash_in);
+		$hash_out = Transactions::createAuthReversalHash($hash_in);
 		
 		$this->addTransaction($hash_out,$hash_in,'authReversal');
 		$this->counts_and_amounts['authReversal']['count'] += 1;
@@ -237,7 +237,6 @@ class BatchRequest {
 		
 		$this->addTransaction($hash_out,$hash_in,"updateCardValidationNumOnToken");
 		$this->counts_and_amounts['updateCardValidationNumOnToken']['count'] += 1;
-		$this->counts_and_amounts['updateCardValidationNumOnToken']['amount'] += $hash_out['amount'];
 		
 	}	
 
@@ -263,7 +262,9 @@ class BatchRequest {
 		else if($type != 'accountUpdate' && $this->counts_and_amounts['accountUpdate']['count'] == $this->total_txns && $this->total_txns > 0){
 			throw new RuntimeException("The transaction could not be added to the batch. The transaction type $type cannot be mixed with AccountUpdates.");
 		} 
-		
+		if($this->closed){
+			throw new RuntimeException("Could not add the transaction. This batchRequest is closed.");
+		}
 		if(isset($hash_in['reportGroup'])){
 			$report_group = $hash_in['reportGroup'];
 		}

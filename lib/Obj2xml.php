@@ -145,7 +145,7 @@ class Obj2xml {
 		$authentication->addChild('user',$config["user"]);
 		$authentication->addChild('password',$config["password"]);
 		
-		return str_replace("</litleRequest>", "", $xml->asXML());
+		return str_replace("<?xml version=\"1.0\"?>\n", "", str_replace("</litleRequest>", "", $xml->asXML()));
 	}
 
 	private static function iterateChildren($data,$transacType){
