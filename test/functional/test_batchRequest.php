@@ -457,6 +457,16 @@ class batchRequest_FunctionalTest extends PHPUnit_Framework_TestCase
 		
 	}
 	
+	function test_closeRequest_badFile(){
+		$batch_request = new BatchRequest($this->direct);
+		$batch_request->transaction_file = "/usr/NOPERMS";
+		
+		$this->setExpectedException(
+		'RuntimeException', 'Could not open transactions file at /usr/NOPERMS. Please check your privilege.'
+		);
+		$batch_request->closeRequest();
+	}
+	
 	function test_getCountsAndAmounts()
 	{
 		$hash_in = array(
