@@ -452,7 +452,7 @@ class batchRequest_FunctionalTest extends PHPUnit_Framework_TestCase
 	{
 		
 	}
-	function test_closeBatch()
+	function test_closeRequest()
 	{
 		
 	}
