@@ -446,15 +446,65 @@ class batchRequest_FunctionalTest extends PHPUnit_Framework_TestCase
 	}
 	function test_addTooManyTransactions()
 	{
-		
+			$hash_in = array(
+			'card'=>array('type'=>'VI',
+					'number'=>'4100000000000000',
+					'expDate'=>'1213',
+					'cardValidationNum' => '1213'),
+			'id'=>'1211',
+			'orderId'=> '2111',
+			'reportGroup'=>'Planets',
+			'orderSource'=>'ecommerce',
+			'amount'=>'123');
+			$batch_request = new BatchRequest($this->direct);
+			$batch_request->total_txns = MAX_TXNS_PER_BATCH;
+			
+			$this->setExpectedException(
+			'RuntimeException', 'The transaction could not be added to the batch. It is full.'
+			);
+			
+			$batch_request->addSale($hash_in);		
 	}
 	function test_addToClosedBatch()
 	{
-		
+			$hash_in = array(
+			'card'=>array('type'=>'VI',
+					'number'=>'4100000000000000',
+					'expDate'=>'1213',
+					'cardValidationNum' => '1213'),
+			'id'=>'1211',
+			'orderId'=> '2111',
+			'reportGroup'=>'Planets',
+			'orderSource'=>'ecommerce',
+			'amount'=>'123');
+			$batch_request = new BatchRequest($this->direct);
+			$batch_request->closed = TRUE;
+			$this->setExpectedException(
+			'RuntimeException', 'Could not add the transaction. This batchRequest is closed.'
+			);
+			
+			$batch_request->addSale($hash_in);			
 	}
 	function test_closeRequest()
 	{
+		$hash_in = array(
+			'card'=>array('type'=>'VI',
+					'number'=>'4100000000000000',
+					'expDate'=>'1213',
+					'cardValidationNum' => '1213'),
+			'id'=>'1211',
+			'orderId'=> '2111',
+			'reportGroup'=>'Planets',
+			'orderSource'=>'ecommerce',
+			'amount'=>'123');
+		$batch_request = new BatchRequest($this->direct);
+		$batch_request->addSale($hash_in);
+		//$batch_request->closeRequest();
 		
+		$this->assertNotNull($batch_request->transaction_file);
+		print $batch_request->batch_file;
+		$batch_request->closeRequest();
+
 	}
 	
 	function test_closeRequest_badFile(){

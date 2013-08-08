@@ -253,6 +253,10 @@ class BatchRequest {
 	 * Adds the XML for the transaction given the appropriate data to the transactions file
 	 */ 
 	private function addTransaction($hash_out, $hash_in, $type, $choice1 = null, $choice2 = null){
+			
+		if($this->closed){
+			throw new RuntimeException("Could not add the transaction. This batchRequest is closed.");
+		}		
 		if($this->isFull()){
 			throw new RuntimeException('The transaction could not be added to the batch. It is full.');
 		}
@@ -262,9 +266,7 @@ class BatchRequest {
 		else if($type != 'accountUpdate' && $this->counts_and_amounts['accountUpdate']['count'] == $this->total_txns && $this->total_txns > 0){
 			throw new RuntimeException("The transaction could not be added to the batch. The transaction type $type cannot be mixed with AccountUpdates.");
 		} 
-		if($this->closed){
-			throw new RuntimeException("Could not add the transaction. This batchRequest is closed.");
-		}
+
 		if(isset($hash_in['reportGroup'])){
 			$report_group = $hash_in['reportGroup'];
 		}
