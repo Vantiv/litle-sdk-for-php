@@ -184,8 +184,6 @@ class LitleRequest{
 		$time_spent = 0;
 		while($time_spent < $sftp_timeout){	
 			$files = $session->nlist('/outbound');
-			echo "Content of /outbound";
-			echo print_r($files);
 			if(in_array(basename($this->request_file) . '.asc', $files)){
 				# TODO: the replacement needs to be tighter...
 				$session->get('/outbound/' . basename($this->request_file) . '.asc', $this->response_file);
