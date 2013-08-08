@@ -348,6 +348,135 @@ class batchRequest_FunctionalTest extends PHPUnit_Framework_TestCase
 	
 	function test_mechaBatch(){
 		
+		$request = new LitleRequest($this->config);
+			
+		# first batch
+		$batch = new BatchRequest($this->direct);
+		$hash_in = array(
+			'card'=>array('type'=>'VI',
+					'number'=>'4100000000000001',
+					'expDate'=>'1213',
+					'cardValidationNum' => '1213'),
+			'orderId'=> '2111',
+			'orderSource'=>'ecommerce',
+			'id'=>'654',
+			'amount'=>'123');
+		$batch->addAuth($hash_in);
+		
+		$hash_in = array('litleTxnId'=> '1234567890','reportGroup'=>'Planets', 'amount'=>'5000');
+		$batch->addAuthReversal($hash_in);
+		
+		$hash_in = array('litleTxnId'=> '12312312', 'amount'=>'123');
+		$batch->addCapture($hash_in);
+		
+		# second batch
+		$hash_in = array(
+       'amount'=>'123',
+       'orderId'=>'12344',
+       'authInformation' => array(
+       'authDate'=>'2002-10-09','authCode'=>'543216',
+       'authAmount'=>'12345'),
+       'orderSource'=>'ecommerce',
+       'card'=>array(
+       'type'=>'VI',
+       'number' =>'4100000000000001',
+       'expDate' =>'1210'));
+		$batch->addCaptureGivenAuth($hash_in);
+		
+		$hash_in = array('litleTxnId'=> '12312312','reportGroup'=>'Planets', 'amount'=>'123');
+		$batch->addCredit($hash_in);
+		
+		$hash_in = array('litleTxnId' =>'123123');
+		$batch->addEcheckCredit($hash_in);
+		
+		# third batch
+		$hash_in = array('litleTxnId' =>'123123');
+		$batch->addEcheckRedeposit($hash_in);
+		
+		$hash_in = array(
+	      'amount'=>'123456',
+	      'verify'=>'true',
+	      'orderId'=>'12345',
+	      'orderSource'=>'ecommerce',
+	      'echeck' => array('accType'=>'Checking','accNum'=>'12345657890','routingNum'=>'123456789','checkNum'=>'123455'),
+      		'billToAddress'=>array('name'=>'Bob','city'=>'lowell','state'=>'MA','email'=>'litle.com'));
+		$batch->addEcheckSale($hash_in);
+		
+		$hash_in = array(
+	      'amount'=>'123456',
+	      'verify'=>'true',
+	      'orderId'=>'12345',
+	      'orderSource'=>'ecommerce',
+	      'echeck' => array('accType'=>'Checking','accNum'=>'12345657890','routingNum'=>'123456789','checkNum'=>'123455'),
+	      'billToAddress'=>array('name'=>'Bob','city'=>'lowell','state'=>'MA','email'=>'litle.com'));
+		$batch->addEcheckVerification($hash_in);
+		
+		# fourth batch
+		$hash_in = array(
+			 'orderId'=>'123',
+		      'litleTxnId'=>'123456',
+		      'amount'=>'106',
+		      'orderSource'=>'ecommerce',
+		      'token'=> array(
+		      'litleToken'=>'123456789101112',
+		      'expDate'=>'1210',
+		      'cardValidationNum'=>'555',
+		      'type'=>'VI'));
+		$batch->addForceCapture($hash_in);
+		
+		$hash_in = array(
+			'card'=>array('type'=>'VI',
+					'number'=>'4100000000000001',
+					'expDate'=>'1213',
+					'cardValidationNum' => '1213'),
+			'id'=>'654',
+			'orderId'=> '2111',
+			'orderSource'=>'ecommerce',
+			'amount'=>'123');
+		$batch->addSale($hash_in);
+		
+		$hash_in = array(
+	      	'orderId'=>'1',
+			'accountNumber'=>'123456789101112');
+		$batch->addRegisterToken($hash_in);
+		
+		$hash_in = array(
+			'orderId'=>'1',
+			'litleToken'=>'123456789101112',
+			'cardValidationNum'=>'123');
+		$batch->addUpdateCardValidationNumOnTokenHash($hash_in);
+		
+		# fifth batch
+		$hash_in = array(
+			'card'=>array('type'=>'VI',
+					'number'=>'4100000000000000',
+					'expDate'=>'1213',
+					'cardValidationNum' => '1213'),
+			'orderId'=>'8675309');
+		$batch->addAccountUpdate($hash_in);
+		
+		$request->addBatchRequest($batch);
+		
+		$resp = new LitleResponseProcessor($request->sendToLitleStream());
+
+		$responses = array();
+		for($i = 0; $i < 14; $i++){
+			array_push($responses, $resp->nextTransaction()->getName());
+		}
+		$this->assertTrue(in_array("authorizationResponse", $responses));
+		$this->assertTrue(in_array("captureResponse", $responses));
+		$this->assertTrue(in_array("authReversalResponse", $responses));
+		$this->assertTrue(in_array("captureGivenAuthResponse", $responses));
+		$this->assertTrue(in_array("creditResponse", $responses));
+		$this->assertTrue(in_array("echeckCreditResponse", $responses));
+		$this->assertTrue(in_array("echeckRedepositResponse", $responses));
+		$this->assertTrue(in_array("echeckSalesResponse", $responses));
+		$this->assertTrue(in_array("echeckVerificationResponse", $responses));
+		$this->assertTrue(in_array("forceCaptureResponse", $responses));
+		$this->assertTrue(in_array("saleResponse", $responses));
+		$this->assertTrue(in_array("registerTokenResponse", $responses));
+		$this->assertTrue(in_array("updateCardValidationNumOnTokenResponse", $responses));
+		$this->assertTrue(in_array("accountUpdateResponse", $responses));		
 	}
 	function test_addAccountUpdate()
 	{
@@ -499,11 +628,11 @@ class batchRequest_FunctionalTest extends PHPUnit_Framework_TestCase
 			'amount'=>'123');
 		$batch_request = new BatchRequest($this->direct);
 		$batch_request->addSale($hash_in);
-		//$batch_request->closeRequest();
-		
-		$this->assertNotNull($batch_request->transaction_file);
-		print $batch_request->batch_file;
 		$batch_request->closeRequest();
+		
+		$data = file_get_contents($batch_request->batch_file);
+		$this->assertTrue(!(!strpos($data, 'numSales="1"')));
+		$this->assertTrue($batch_request->closed);
 
 	}
 	
@@ -544,7 +673,5 @@ class batchRequest_FunctionalTest extends PHPUnit_Framework_TestCase
 		}
 		rmdir($this->direct);
 	}
-	
-	
 	
 }
