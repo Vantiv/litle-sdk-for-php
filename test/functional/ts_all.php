@@ -43,6 +43,8 @@ require realpath(dirname(__FILE__)) .  '/test_echeckVoid.php';
 require realpath(dirname(__FILE__)) .  '/test_treeResponse.php';
 require realpath(dirname(__FILE__)) .  '/test_updateCardValidationNumOnToken.php';
 require realpath(dirname(__FILE__)) .  '/test_batchRequest.php';
+require realpath(dirname(__FILE__)) .  '/test_litleRequest.php';
+require realpath(dirname(__FILE__)) .  '/test_litleResponseProcessor.php';
 class FunctionalTests
 {
 	public static function suite()
@@ -65,7 +67,9 @@ class FunctionalTests
 		$suite->addTestSuite('XmlFields_FunctionalTest');
 		$suite->addTestSuite('treeResponse_FunctionalTest');
 		$suite->addTestSuite('updateCardValidationNumOnToken_FunctionalTest');
-		$suite->addTestSuite('batchRequest_FunctionalTest');				
+		$suite->addTestSuite('batchRequest_FunctionalTest');
+		$suite->addTestSuite('litleRequest_FunctionalTest');
+		$suite->addTestSuite('litleResponseProcessor_FunctionalTest');				
 		return $suite;
 	}
 }
