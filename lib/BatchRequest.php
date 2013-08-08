@@ -232,7 +232,7 @@ class BatchRequest {
 		
 	}
 	
-	public function addUpdateCardValidationNumOnTokenHash($hash_in){
+	public function addUpdateCardValidationNumOnToken($hash_in){
 		$hash_out = Transactions::createUpdateCardValidationNumOnTokenHash($hash_in);
 		
 		$this->addTransaction($hash_out,$hash_in,"updateCardValidationNumOnToken");
