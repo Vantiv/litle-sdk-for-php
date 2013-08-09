@@ -267,12 +267,15 @@ class transactions_UnitTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($hash_in, array_intersect($hash_in, $hash_out));		
  	}
 	
-	// function test_credit()
-	// {
-		// $hash_in = array('litleTxnId'=> '12312312','reportGroup'=>'Planets', 'amount'=>'123');
-		// $hash_out = Transactions::createCreditHash($hash_in);
-		// $this->assertEquals($hash_in, array_intersect($hash_in, $hash_out));		
-	// }
+	function test_credit()
+	{
+		$hash_in = array('litleTxnId'=> '12312312',
+						 'orderId'=> '2111',
+						 'orderSource'=>'ecommerce',
+						 'amount'=>'123');
+		$hash_out = Transactions::createCreditHash($hash_in);
+		$this->assertEquals($hash_in, array_intersect($hash_in, $hash_out));		
+	}
 	
 	function test_credit_action_reason_on_orphaned_refund()
 	{
