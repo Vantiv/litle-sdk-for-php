@@ -172,11 +172,13 @@ class LitleRequest{
 		echo "Response File " . $this->retrieveFromLitleSFTP();
 	}
 	
-	private function retrieveFromLitleSFTP(){
+	/*
+	 * Given a timeout (defaults to 7200 seconds - two hours), periodically poll the SFTP directory, looking for the response file for this request.
+	 */ 
+	private function retrieveFromLitleSFTP($sftp_timeout=7200){
 		$sftp_url = $this->config['batch_url'];
 		$sftp_username = $this->config['sftp_username'];
 		$sftp_password = $this->config['sftp_password'];
-		$sftp_timeout = 3600; // in seconds
 		$session = new Net_SFTP($sftp_url);
 		if(!$session->login($sftp_username, $sftp_password)){
 			throw new RuntimeException("Failed to SFTP with the username $sftp_username and the password $sftp_password to the host $sftp_url. Check your credentials!");

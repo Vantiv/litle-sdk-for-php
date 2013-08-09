@@ -75,6 +75,7 @@ function initialize(){
 		$line['tcp_timeout'] = trim(fgets(STDIN));
 		# ssl should be usd by default
 		$line['tcp_ssl'] = '1';
+		$line['print_xml'] = '0';
 		
 		writeConfig($line,$handle);
 		fwrite($handle, "timeout =  65".  PHP_EOL);
