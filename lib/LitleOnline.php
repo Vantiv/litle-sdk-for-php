@@ -38,4 +38,5 @@ require_once realpath(dirname(__FILE__)) . '/BatchRequest.php';
 require_once realpath(dirname(__FILE__)) . '/LitleRequest.php';
 require_once realpath(dirname(__FILE__)) . '/Transactions.php';
 require_once realpath(dirname(__FILE__)) . '/LitleResponseProcessor.php';
-set_include_path(dirname(__FILE__) . '/resources/');
+$ssh_path = dirname(__FILE__) . '/resources/';
+set_include_path(get_include_path() . PATH_SEPARATOR . $ssh_path);
