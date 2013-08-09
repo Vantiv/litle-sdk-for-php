@@ -24,7 +24,12 @@
 */
 class Communication{
 	static function httpRequest($req,$hash_config=NULL){
+		
 		$config = Obj2xml::getConfig($hash_config);
+		
+		if((int)$config['print_xml']){
+			echo $req;
+		}
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_PROXY, $config['proxy']);
 		curl_setopt($ch, CURLOPT_POST, true);
@@ -45,6 +50,9 @@ class Communication{
 		else
 		{
 			curl_close($ch);
+			if((int)$config['print_xml']){
+				echo $output;
+			}
 			return $output;
 		}
 

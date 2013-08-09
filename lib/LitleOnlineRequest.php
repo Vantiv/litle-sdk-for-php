@@ -359,7 +359,8 @@ class LitleOnlineRequest
 		'version'=>XmlFields::returnArrayValue($hash_in,'version'),
 		'url'=>XmlFields::returnArrayValue($hash_in,'url'),
 		'timeout'=>XmlFields::returnArrayValue($hash_in,'timeout'),
-		'proxy'=>XmlFields::returnArrayValue($hash_in,'proxy'));
+		'proxy'=>XmlFields::returnArrayValue($hash_in,'proxy'),
+		'print_xml'=>XmlFields::returnArrayValue($hash_in,'print_xml'));
 		return $hash_out;
 	}
 	
@@ -392,7 +393,6 @@ class LitleOnlineRequest
 		Checker::choice($choice1);
 		Checker::choice($choice2);
 		$request = Obj2xml::toXml($hash,$hash_config, $type);
-		#echo $request;
 		$litleOnlineResponse = $this->newXML->request($request,$hash_config,$this->useSimpleXml);
 		return $litleOnlineResponse;
 	}
