@@ -136,7 +136,7 @@ class litleRequest_FunctionalTest extends PHPUnit_Framework_TestCase
 		
 		$expected = '<litleRequest numBatchRequests="1" version="8.19" xmlns="http://www.litle.com/schema">
 		<authentication><user>XXXXX</user><password>XXXXX</password></authentication>
-		<batchRequest merchantId="07103229" authAmount="0" numAuths="0" saleAmount="123" numSales="1" creditAmount="0" numCredits="0" numTokenRegistrations="0" 
+		<batchRequest merchantId="101" authAmount="0" numAuths="0" saleAmount="123" numSales="1" creditAmount="0" numCredits="0" numTokenRegistrations="0" 
 		captureGivenAuthAmount="0" numCaptureGivenAuths="0" forceCaptureAmount="0" numForceCaptures="0" authReversalAmount="0" numAuthReversals="0" 
 		captureAmount="0" numCaptures="0" echeckVerificationAmount="0" numEcheckVerification="0" echeckCreditAmount="0" numEcheckCredit="0" 
 		numEcheckRedeposit="0" echeckSalesAmount="0" numEcheckSales="0" numUpdateCardValidationNumOnTokens="0" numAccountUpdates="0">
