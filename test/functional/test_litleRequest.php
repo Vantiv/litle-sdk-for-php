@@ -95,8 +95,8 @@ class litleRequest_FunctionalTest extends PHPUnit_Framework_TestCase
 					<authentication><user>XXXXXX</user><password>XXXXXX</password></authentication>
 					<RFRRequest><litleSessionId>8675309</litleSessionId></RFRRequest>
 					</litleRequest>';
-		$this->assertEquals(preg_replace(array("[\s]", '@<authentication>[<>/A-Za-z1-9]+</authentication>@'), "", $expected), 
-		preg_replace(array("[\s]", '@<authentication>[<>/A-Za-z1-9]+</authentication>@'), "", file_get_contents($request->request_file)));
+		$this->assertEquals(preg_replace(array("[\s]", '@<authentication>[<>/A-Za-z0-9]+</authentication>@'), "", $expected), 
+		preg_replace(array("[\s]", '@<authentication>[<>/A-Za-z0-9]+</authentication>@'), "", file_get_contents($request->request_file)));
 		$this->assertEquals(0, $request->total_transactions);
 		$this->assertTrue($request->closed);
 	}
@@ -144,8 +144,8 @@ class litleRequest_FunctionalTest extends PHPUnit_Framework_TestCase
 		<card><type>VI</type><number>4100000000000000</number><expDate>1213</expDate><cardValidationNum>1213</cardValidationNum></card></sale>
 		</batchRequest>
 		</litleRequest>';
-		$this->assertEquals(preg_replace(array("[\s]", '@<authentication>[<>/A-Za-z1-9]+</authentication>@'), "", $expected), 
-		preg_replace(array("[\s]", '@<authentication>[<>/A-Za-z1-9]+</authentication>@'), "", file_get_contents($request->request_file)));
+		$this->assertEquals(preg_replace(array("[\s]", '@<authentication>[<>/A-Za-z0-9]+</authentication>@'), "", $expected), 
+		preg_replace(array("[\s]", '@<authentication>[<>/A-Za-z0-9]+</authentication>@'), "", file_get_contents($request->request_file)));
 	}
 	
 	function test_sendToLitle(){
