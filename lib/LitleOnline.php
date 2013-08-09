@@ -38,3 +38,4 @@ require_once realpath(dirname(__FILE__)) . '/BatchRequest.php';
 require_once realpath(dirname(__FILE__)) . '/LitleRequest.php';
 require_once realpath(dirname(__FILE__)) . '/Transactions.php';
 require_once realpath(dirname(__FILE__)) . '/LitleResponseProcessor.php';
+set_include_path(dirname(__FILE__) . '/resources/');

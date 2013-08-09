@@ -1,7 +1,4 @@
 <?php
-set_include_path(dirname(__FILE__) . '/../resources/');
-
-include('Net/SFTP.php');
 
 class LitleRequest{
 	
