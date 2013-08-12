@@ -185,7 +185,7 @@ class litleResponseProcessor_FunctionalTest extends PHPUnit_Framework_TestCase
 			'orderId'=>'1',
 			'litleToken'=>'123456789101112',
 			'cardValidationNum'=>'123');
-		$batch->addUpdateCardValidationNumOnTokenHash($hash_in);
+		$batch->addUpdateCardValidationNumOnToken($hash_in);
 		
 		$request->addBatchRequest($batch);
 		
