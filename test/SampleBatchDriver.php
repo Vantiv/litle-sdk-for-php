@@ -32,7 +32,7 @@ $litle_request->addBatchRequest($batch_request);
 # close the litle request, indicating that we intend to add no more batches
 $litle_request->closeRequest();
 # send the batch to litle via SFTP
-$response_file = $litle_request->sendToLitleStream();
+$response_file = $litle_request->sendToLitle();
 # process the response file 
 $processor = new LitleResponseProcessor($response_file);
 

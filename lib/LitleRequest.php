@@ -146,6 +146,7 @@ class LitleRequest{
 	 */
 	public function sendToLitle(){
 		$this->sendToLitleSFTP();
+		return $this->response_file;
 	}
 	
 	/*
@@ -169,7 +170,9 @@ class LitleRequest{
 		# rename when the file upload is complete
 		$session->rename('/inbound/' . basename($this->request_file) . '.prg', '/inbound/' . basename($this->request_file) . '.asc');
 		
-		echo "Response File " . $this->retrieveFromLitleSFTP();
+		$this->retrieveFromLitleSFTP();
+
+		return $this->response_file;
 	}
 	
 	/*
