@@ -30,7 +30,7 @@ class Obj2xml {
 		$config= Obj2xml::getConfig($hash_config);
 		$xml = simplexml_load_string("<?xml version='1.0' encoding='utf-8'?><$rootNodeName />");
 		$xml-> addAttribute('merchantId',$config["merchantId"]);
-		$xml-> addAttribute('version','8.19');
+		$xml-> addAttribute('version',CURRENT_XML_VERSION);
 		$xml-> addAttribute('merchantSdk',$data['merchantSdk']);
 		unset($data['merchantSdk']);
 		if(isset($data['loggedInUser'])) {
@@ -61,6 +61,93 @@ class Obj2xml {
 		return $xml->asXML();
 	}
 
+	public static function transactionToXml($data, $type, $report_group){
+		
+		$transac = simplexml_load_string("<$type />");
+		$transac->addAttribute('reportGroup', $report_group);
+		Obj2xml::iterateChildren($data,$transac);
+		
+		return str_replace("<?xml version=\"1.0\"?>\n", "", $transac->asXML());
+	}
+	
+	public static function rfrRequestToXml($hash_in){
+		$rfr = simplexml_load_string("<RFRRequest />");
+		if(isset($hash_in['litleSessionId'])){
+			$rfr->addChild('litleSessionId', $hash_in['litleSessionId']);
+		}
+		else if(isset($hash_in['merchantId']) && isset($hash_in['postDay'])){
+			$auFileRequest = $rfr->addChild('accountUpdateFileRequestData');
+			$auFileRequest->addChild('merchantId', $hash_in['merchantId']);
+			$auFileRequest->addChild('postDay', $hash_in['postDay']);
+		}
+		else{
+			throw RuntimeException('To add an RFR Request, either a litleSessionId or a merchantId and a postDay must be set.');
+		}
+		return str_replace("<?xml version=\"1.0\"?>\n", "", $rfr->asXML());
+	}
+
+	public static function generateBatchHeader($counts_and_amounts){
+		$config= Obj2xml::getConfig(array());
+		
+		$xml = simplexml_load_string("<batchRequest />");
+		$xml->addAttribute('merchantId', $config['merchantId']);
+		#$xml->addAttribute('merchantSdk', 'PHP;' . CURRENT_XML_VERSION);
+		
+		
+		$xml->addAttribute('authAmount', $counts_and_amounts['auth']['amount']);
+		$xml->addAttribute('numAuths', $counts_and_amounts['auth']['count']);
+		
+		$xml->addAttribute('saleAmount', $counts_and_amounts['sale']['amount']);
+		$xml->addAttribute('numSales', $counts_and_amounts['sale']['count']);
+		
+		$xml->addAttribute('creditAmount', $counts_and_amounts['credit']['amount']);
+		$xml->addAttribute('numCredits', $counts_and_amounts['credit']['count']);
+		
+		$xml->addAttribute('numTokenRegistrations', $counts_and_amounts['tokenRegistration']['count']);
+		
+		$xml->addAttribute('captureGivenAuthAmount', $counts_and_amounts['captureGivenAuth']['amount']);
+		$xml->addAttribute('numCaptureGivenAuths', $counts_and_amounts['captureGivenAuth']['count']);
+	
+		$xml->addAttribute('forceCaptureAmount', $counts_and_amounts['forceCapture']['amount']);
+		$xml->addAttribute('numForceCaptures', $counts_and_amounts['forceCapture']['count']);
+		
+		$xml->addAttribute('authReversalAmount', $counts_and_amounts['authReversal']['amount']);
+		$xml->addAttribute('numAuthReversals', $counts_and_amounts['authReversal']['count']);
+		
+		$xml->addAttribute('captureAmount', $counts_and_amounts['capture']['amount']);
+		$xml->addAttribute('numCaptures', $counts_and_amounts['capture']['count']);
+		
+		$xml->addAttribute('echeckVerificationAmount', $counts_and_amounts['echeckVerification']['amount']);
+		$xml->addAttribute('numEcheckVerification', $counts_and_amounts['echeckVerification']['count']);
+		
+		$xml->addAttribute('echeckCreditAmount', $counts_and_amounts['echeckCredit']['amount']);
+		$xml->addAttribute('numEcheckCredit', $counts_and_amounts['echeckCredit']['count']);
+		
+		$xml->addAttribute('numEcheckRedeposit', $counts_and_amounts['echeckRedeposit']['count']);
+		
+		$xml->addAttribute('echeckSalesAmount', $counts_and_amounts['echeckSale']['amount']);
+		$xml->addAttribute('numEcheckSales', $counts_and_amounts['echeckSale']['count']);
+		
+		$xml->addAttribute('numUpdateCardValidationNumOnTokens', $counts_and_amounts['updateCardValidationNumOnToken']['count']);
+		
+		$xml->addAttribute('numAccountUpdates', $counts_and_amounts['accountUpdate']['count']);
+		
+		return str_replace("/>", ">", str_replace("<?xml version=\"1.0\"?>\n", "", $xml->asXML()));
+	}
+
+	public static function generateRequestHeader($config, $num_batch_requests){
+		$xml = simplexml_load_string("<litleRequest />");
+		
+		$xml->addAttribute('numBatchRequests', $num_batch_requests);
+		$xml->addAttribute('version', CURRENT_XML_VERSION);
+		$xml->addAttribute('xmlns:xmlns','http://www.litle.com/schema');
+		$authentication = $xml->addChild('authentication');
+		$authentication->addChild('user',$config["user"]);
+		$authentication->addChild('password',$config["password"]);
+		
+		return str_replace("<?xml version=\"1.0\"?>\n", "", str_replace("</litleRequest>", "", $xml->asXML()));
+	}
+
 	private static function iterateChildren($data,$transacType){
 		foreach($data as $key => $value)
 		{
@@ -85,7 +172,8 @@ class Obj2xml {
 	public static function getConfig($data)
 	{
 		@$config_array =parse_ini_file('litle_SDK_config.ini'); //TODO Use an empty config_array if the file doesn't exist
-		$names = array('user','password','merchantId','timeout','proxy','reportGroup','version','url');
+		$names = array('user','password','merchantId','timeout','proxy','reportGroup','version','url', 
+		'litle_requests_path', 'batch_requests_path', 'sftp_username', 'sftp_password', 'batch_url', 'tcp_port', 'tcp_ssl', 'tcp_timeout', 'print_xml');
 		foreach($names as $name)
 		{
 			if (isset($data[$name]))
