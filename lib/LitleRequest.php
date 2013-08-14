@@ -178,16 +178,18 @@ class LitleRequest{
 	/*
 	 * Given a timeout (defaults to 7200 seconds - two hours), periodically poll the SFTP directory, looking for the response file for this request.
 	 */ 
-	private function retrieveFromLitleSFTP($sftp_timeout=7200){
+	public function retrieveFromLitleSFTP($sftp_timeout=7200){
 		$sftp_url = $this->config['batch_url'];
 		$sftp_username = $this->config['sftp_username'];
 		$sftp_password = $this->config['sftp_password'];
-		$session = new Net_SFTP($sftp_url);
-		if(!$session->login($sftp_username, $sftp_password)){
-			throw new RuntimeException("Failed to SFTP with the username $sftp_username and the password $sftp_password to the host $sftp_url. Check your credentials!");
-		}
 		$time_spent = 0;
-		while($time_spent < $sftp_timeout){	
+		while($time_spent < $sftp_timeout){
+			# we'll get booted off periodically; make this a non-issue by periodically reconnecting
+			$session = new Net_SFTP($sftp_url);
+			if(!$session->login($sftp_username, $sftp_password)){
+				throw new RuntimeException("Failed to SFTP with the username $sftp_username and the password $sftp_password to the host $sftp_url. Check your credentials!");
+			}
+				
 			$files = $session->nlist('/outbound');
 			if(in_array(basename($this->request_file) . '.asc', $files)){
 				# TODO: the replacement needs to be tighter...
