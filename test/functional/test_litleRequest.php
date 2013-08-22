@@ -188,45 +188,7 @@ class litleRequest_FunctionalTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals('1864', $resp->orderId);
 	}
 	
-	function test_sendToLitleSFTP(){
-		$request = new LitleRequest($this->config);
-		
-		$batch = new BatchRequest($this->direct);
-		
-		$sale_hash = array(
-			      'orderId' => '1864',
-			      'amount' => '10010',
-			      'orderSource'=>'ecommerce',
-			      'billToAddress'=>array(
-			      'name' => 'John Smith',
-			      'addressLine1' => '1 Main St.',
-			      'city' => 'Burlington',
-			      'state' => 'MA',
-			      'zip' => '01803-3747',
-			      'country' => 'US'),
-			      'card'=>array(
-			      'number' =>'4457010000000009',
-			      'expDate' => '0112',
-			      'cardValidationNum' => '349',
-			      'type' => 'VI'),
-				  'reportGroup' => 'Planets');
-		
-		$batch->addSale($sale_hash);
-		
-		$request->addBatchRequest($batch);
-		
-		$response = $request->sendToLitleSFTP();
-		
-		$this->assertTrue(file_exists($response));
-		$this->assertEquals($response, $request->response_file);
-		
-		$proc = new LitleResponseProcessor($response);
-		
-		$resp = $proc->nextTransaction();
-		$this->assertEquals('saleResponse', $resp->getName());
-		$this->assertEquals('Planets', $resp->attributes()->reportGroup);
-		$this->assertEquals('1864', $resp->orderId);
-	}
+
 	
 	function test_sendToLitleStream(){
 		$request = new LitleRequest($this->config);
