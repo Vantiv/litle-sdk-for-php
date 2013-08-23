@@ -185,10 +185,9 @@ class LitleRequest{
 			if(in_array(basename($this->request_file) . '.asc', $files)){
 				$this->downloadFromLitleSFTP($time_spent, $sftp_timeout);
 			}
-			else{
-				$time_spent += 15;
-				sleep(15);
-			}
+		
+			$time_spent += 20;
+			sleep(20);
 		}
 		
 		throw new Exception("Response file can not be retrieved because of timeout (Duration : 2 hours)");
