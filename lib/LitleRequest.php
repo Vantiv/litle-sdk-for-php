@@ -183,14 +183,11 @@ class LitleRequest{
 		$sftp_username = $this->config['sftp_username'];
 		$sftp_password = $this->config['sftp_password'];
 		$time_spent = 0;
-		$session = new Net_SFTP($sftp_url);
+		$session = $this->createSFTPSession();
 		while($time_spent < $sftp_timeout){
 			# we'll get booted off periodically; make this a non-issue by periodically reconnecting
 			if($time_spent % 180 == 0){
-				$session = new Net_SFTP($sftp_url);
-				if(!$session->login($sftp_username, $sftp_password)){
-					throw new RuntimeException("Failed to SFTP with the username $sftp_username and the password $sftp_password to the host $sftp_url. Check your credentials!");
-				}
+				$session = $this->createSFTPSession();
 			}
 				
 			$files = $session->nlist('/outbound');
@@ -200,10 +197,7 @@ class LitleRequest{
 				while($time_spent < $sftp_timeout){
 					try{
 						if($time_spent % 180 == 0){
-							$session = new Net_SFTP($sftp_url);
-							if(!$session->login($sftp_username, $sftp_password)){
-								throw new RuntimeException("Failed to SFTP with the username $sftp_username and the password $sftp_password to the host $sftp_url. Check your credentials!");
-							}
+							$session = $this->createSFTPSession();
 						}
 						$session->get($sftp_remote_file, $this->response_file);
 						$session->delete($sftp_remote_file);
@@ -226,6 +220,21 @@ class LitleRequest{
 		
 		throw new Exception("Response file can not be retrieved because of timeout (Duration : 2 hours)");
 		
+	}
+	
+	/*
+	 * Creates SFTP Session with given login credentials
+	 */
+	public function createSFTPSession(){
+		$sftp_url = $this->config['batch_url'];
+		$sftp_username = $this->config['sftp_username'];
+		$sftp_password = $this->config['sftp_password'];
+		$session = new Net_SFTP($sftp_url);
+		if(!$session->login($sftp_username, $sftp_password)){
+			throw new RuntimeException("Failed to SFTP with the username $sftp_username and the password $sftp_password to the host $sftp_url. Check your credentials!");
+		}		
+		
+		return $session;
 	}
 	
 	/*
