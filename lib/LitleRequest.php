@@ -157,14 +157,7 @@ class LitleRequest{
 			$this->closeRequest();
 		}
 		
-		$sftp_url = $this->config['batch_url'];
-		$sftp_username = $this->config['sftp_username'];
-		$sftp_password = $this->config['sftp_password'];
-		
-		$session = new Net_SFTP($sftp_url);
-		if(!$session->login($sftp_username, $sftp_password)){
-			throw new RuntimeException("Failed to SFTP with the username $sftp_username and the password $sftp_password to the host $sftp_url. Check your credentials!");
-		}
+		$session = $this->createSFTPSession();
 		# with extension .prg
 		$session->put('/inbound/' . basename($this->request_file) . '.prg', $this->request_file, NET_SFTP_LOCAL_FILE);
 		# rename when the file upload is complete
@@ -179,9 +172,6 @@ class LitleRequest{
 	 * Given a timeout (defaults to 7200 seconds - two hours), periodically poll the SFTP directory, looking for the response file for this request.
 	 */ 
 	public function retrieveFromLitleSFTP($sftp_timeout=7200){
-		$sftp_url = $this->config['batch_url'];
-		$sftp_username = $this->config['sftp_username'];
-		$sftp_password = $this->config['sftp_password'];
 		$time_spent = 0;
 		$session = $this->createSFTPSession();
 		while($time_spent < $sftp_timeout){
@@ -189,28 +179,11 @@ class LitleRequest{
 			if($time_spent % 180 == 0){
 				$session = $this->createSFTPSession();
 			}
-				
+			
 			$files = $session->nlist('/outbound');
+			
 			if(in_array(basename($this->request_file) . '.asc', $files)){
-				# TODO: the replacement needs to be tighter...
-				$sftp_remote_file = '/outbound/' . basename($this->request_file) . '.asc';
-				while($time_spent < $sftp_timeout){
-					try{
-						if($time_spent % 180 == 0){
-							$session = $this->createSFTPSession();
-						}
-						$session->get($sftp_remote_file, $this->response_file);
-						$session->delete($sftp_remote_file);
-						print "Response downloaded successfully!\n";
-						return str_replace("request", "response", $this->request_file);
-					}
-					catch(Exception $exception){
-						$time_spent += 20;
-						sleep(20);
-					}
-				}
-				// $session->get('/outbound/' . basename($this->request_file) . '.asc', $this->response_file);
-				// return str_replace("request", "response", $this->request_file);
+				$this->downloadFromLitleSFTP($time_spent, $sftp_timeout);
 			}
 			else{
 				$time_spent += 15;
@@ -235,6 +208,34 @@ class LitleRequest{
 		}		
 		
 		return $session;
+	}
+	
+	/*
+	 * Downloads the response file from the SFTP server to local system iteratively
+	 */ 
+	public function downloadFromLitleSFTP($time_spent, $sftp_timeout){
+		$sftp_remote_file = '/outbound/' . basename($this->request_file) . '.asc';
+		$session = $this->createSFTPSession();
+		while($time_spent < $sftp_timeout){
+			try{
+				if($time_spent % 180 == 0){
+					$session = $this->createSFTPSession();
+				}
+				$session->get($sftp_remote_file, $this->response_file);
+				$session->delete($sftp_remote_file);
+				return str_replace("request", "response", $this->request_file);
+			}
+			catch(Exception $exception){
+				$message = $exception->getMessage();
+				if(preg_match("/errno=32 broken pipe/i", $message)){
+					$time_spent += 20;
+					sleep(20);
+				}
+				else{
+					throw new Exception($message);
+				}
+			}
+		}
 	}
 	
 	/*
