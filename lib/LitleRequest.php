@@ -205,10 +205,9 @@ class LitleRequest{
 								throw new RuntimeException("Failed to SFTP with the username $sftp_username and the password $sftp_password to the host $sftp_url. Check your credentials!");
 							}
 						}
-						$remote_file_size = $session->size($sftp_remote_file);
 						$session->get($sftp_remote_file, $this->response_file);
+						$session->delete($sftp_remote_file);
 						print "Response downloaded successfully!\n";
-						//return $this->response_file;
 						return str_replace("request", "response", $this->request_file);
 					}
 					catch(Exception $exception){
