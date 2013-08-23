@@ -196,8 +196,28 @@ class LitleRequest{
 			$files = $session->nlist('/outbound');
 			if(in_array(basename($this->request_file) . '.asc', $files)){
 				# TODO: the replacement needs to be tighter...
-				$session->get('/outbound/' . basename($this->request_file) . '.asc', $this->response_file);
-				return str_replace("request", "response", $this->request_file);
+				$sftp_remote_file = '/outbound/' . basename($this->request_file) . '.asc';
+				while($time_spent < $sftp_timeout){
+					try{
+						if($time_spent % 180 == 0){
+							$session = new Net_SFTP($sftp_url);
+							if(!$session->login($sftp_username, $sftp_password)){
+								throw new RuntimeException("Failed to SFTP with the username $sftp_username and the password $sftp_password to the host $sftp_url. Check your credentials!");
+							}
+						}
+						$remote_file_size = $session->size($sftp_remote_file);
+						$session->get($sftp_remote_file, $this->response_file);
+						print "Response downloaded successfully!\n";
+						//return $this->response_file;
+						return str_replace("request", "response", $this->request_file);
+					}
+					catch(Exception $exception){
+						$time_spent += 20;
+						sleep(20);
+					}
+				}
+				// $session->get('/outbound/' . basename($this->request_file) . '.asc', $this->response_file);
+				// return str_replace("request", "response", $this->request_file);
 			}
 			else{
 				$time_spent += 15;
