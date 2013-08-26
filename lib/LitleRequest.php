@@ -164,9 +164,6 @@ class LitleRequest{
 		$session->rename('/inbound/' . basename($this->request_file) . '.prg', '/inbound/' . basename($this->request_file) . '.asc');
 		
 		$this->retrieveFromLitleSFTP();
-		
-		print "retriveFromSFTP executed successfully!!!!\n\n\n";
-
 	}
 	
 	/*
@@ -184,7 +181,6 @@ class LitleRequest{
 			$files = $session->nlist('/outbound');
 			
 			if(in_array(basename($this->request_file) . '.asc', $files)){
-				print "match for the file $this->request_file located successully\n\n\n\n";
 				$this->downloadFromLitleSFTP($time_spent, $sftp_timeout);
 				return;
 			}
@@ -224,16 +220,9 @@ class LitleRequest{
 					$session = $this->createSFTPSession();
 				}
 				$session->get($sftp_remote_file, $this->response_file);
-				print "$sftp_remote_file is successfully downloaded!!!\n\n\n";
 				$session->delete($sftp_remote_file);
-				print "$sftp_remote_file is successfully deleted!!!\n\n\n";
-				
 				$this->response_file = str_replace("request", "response", $this->response_file);
-				print "$this->response_file has been created successfully!!!\n\n\n\n";
-				
 				unset ($session);
-				print "session is closed now!!\n\n\n\n";
-				
 				return;
 			}
 			catch(Exception $exception){
