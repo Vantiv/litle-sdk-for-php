@@ -229,7 +229,7 @@ class LitleRequest{
 				$session->delete($sftp_remote_file);
 				print "$sftp_remote_file is successfully deleted!!!\n\n\n";
 				
-				$this->response_file = str_replace("request", "response", $this->response_file);
+				//$this->response_file = str_replace("request", "response", $this->response_file);
 				print "$response_file has been created successfully!!!\n\n\n\n";
 				
 				unset ($session);
