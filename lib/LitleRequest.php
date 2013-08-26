@@ -163,19 +163,19 @@ class LitleRequest{
 		# rename when the file upload is complete
 		$session->rename('/inbound/' . basename($this->request_file) . '.prg', '/inbound/' . basename($this->request_file) . '.asc');
 		
-		$this->retrieveFromLitleSFTP();
+		$this->retrieveFromLitleSFTP($session);
 	}
 	
 	/*
 	 * Given a timeout (defaults to 7200 seconds - two hours), periodically poll the SFTP directory, looking for the response file for this request.
 	 */ 
-	public function retrieveFromLitleSFTP($sftp_timeout=7200){
+	public function retrieveFromLitleSFTP($session, $sftp_timeout=7200){
 		$time_spent = 0;
-		$session = $this->createSFTPSession();
+		$session = $this->resetSFTPSession();
 		while($time_spent < $sftp_timeout){
 			# we'll get booted off periodically; make this a non-issue by periodically reconnecting
 			if($time_spent % 180 == 0){
-				$session = $this->createSFTPSession();
+				$session = $this->resetSFTPSession();
 			}
 			
 			$files = $session->nlist('/outbound');
@@ -209,15 +209,24 @@ class LitleRequest{
 	}
 	
 	/*
+	 * Resets SFTP Session if Session is unseeted or timed out
+	 */ 
+	 public function resetSFTPSession($session){
+	 	if(!isset($session)){
+	 		$session = $this->createSFTPSession();
+	 	}
+	 }
+	
+	/*
 	 * Downloads the response file from the SFTP server to local system iteratively
 	 */ 
 	public function downloadFromLitleSFTP($time_spent, $sftp_timeout){
 		$sftp_remote_file = '/outbound/' . basename($this->request_file) . '.asc';
-		$session = $this->createSFTPSession();
+		$session = $this->resetSFTPSession();
 		while($time_spent < $sftp_timeout){
 			try{
 				if($time_spent % 180 == 0){
-					$session = $this->createSFTPSession();
+					$session = $this->resetSFTPSession();
 				}
 				$session->get($sftp_remote_file, $this->response_file);
 				$session->delete($sftp_remote_file);
