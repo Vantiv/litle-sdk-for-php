@@ -171,17 +171,17 @@ class LitleRequest{
 	 */ 
 	public function retrieveFromLitleSFTP($session, $sftp_timeout=7200){
 		$time_spent = 0;
-		$session = $this->resetSFTPSession();
+		$this->resetSFTPSession($session);
 		while($time_spent < $sftp_timeout){
 			# we'll get booted off periodically; make this a non-issue by periodically reconnecting
 			if($time_spent % 180 == 0){
-				$session = $this->resetSFTPSession();
+				$this->resetSFTPSession($session);
 			}
 			
 			$files = $session->nlist('/outbound');
 			
 			if(in_array(basename($this->request_file) . '.asc', $files)){
-				$this->downloadFromLitleSFTP($time_spent, $sftp_timeout);
+				$this->downloadFromLitleSFTP($session,$time_spent, $sftp_timeout);
 				return;
 			}
 		
@@ -220,13 +220,13 @@ class LitleRequest{
 	/*
 	 * Downloads the response file from the SFTP server to local system iteratively
 	 */ 
-	public function downloadFromLitleSFTP($time_spent, $sftp_timeout){
+	public function downloadFromLitleSFTP($session, $time_spent, $sftp_timeout){
 		$sftp_remote_file = '/outbound/' . basename($this->request_file) . '.asc';
-		$session = $this->resetSFTPSession();
+		$this->resetSFTPSession($session);
 		while($time_spent < $sftp_timeout){
 			try{
 				if($time_spent % 180 == 0){
-					$session = $this->resetSFTPSession();
+					$this->resetSFTPSession($session);
 				}
 				$session->get($sftp_remote_file, $this->response_file);
 				$session->delete($sftp_remote_file);
