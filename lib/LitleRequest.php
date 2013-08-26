@@ -167,7 +167,6 @@ class LitleRequest{
 		
 		print "retriveFromSFTP executed successfully!!!!\n\n\n";
 
-		return $this->response_file;
 	}
 	
 	/*
