@@ -146,6 +146,7 @@ class LitleRequest{
 	 */
 	public function sendToLitle(){
 		$this->sendToLitleSFTP();
+		print "send to litle sftp completed!!!!\n\n\n\n";
 		return $this->response_file;
 	}
 	
