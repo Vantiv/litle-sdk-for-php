@@ -183,7 +183,7 @@ class LitleRequest{
 			$files = $session->nlist('/outbound');
 			
 			if(in_array(basename($this->request_file) . '.asc', $files)){
-				$this->downloadFromLitleSFTP($time_spent, $sftp_timeout);
+				return $this->downloadFromLitleSFTP($time_spent, $sftp_timeout);
 			}
 		
 			$time_spent += 20;
@@ -226,7 +226,7 @@ class LitleRequest{
 			}
 			catch(Exception $exception){
 				$message = $exception->getMessage();
-				if(preg_match("/errno=32 broken pipe/i", $message)){
+				if(stristr($message, "errno=32 broken pipe")){
 					$time_spent += 20;
 					sleep(20);
 				}
