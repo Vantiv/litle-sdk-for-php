@@ -25,7 +25,7 @@
 require_once realpath(dirname(__FILE__)) . '/LitleOnline.php';
 class Obj2xml {
 
-	public static function toXml($data, $hash_config, $type, $rootNodeName = 'litleOnlineRequest', $xml=null)
+	public static function toXml($data, $hash_config, $type, $rootNodeName = 'litleOnlineRequest')
 	{
 		$config= Obj2xml::getConfig($hash_config);
 		$xml = simplexml_load_string("<?xml version='1.0' encoding='utf-8'?><$rootNodeName />");
@@ -43,18 +43,18 @@ class Obj2xml {
 		$authentication->addChild('password',$config["password"]);
 		$transacType = $xml->addChild($type);
 		if(isset($data['partial'])) {
-			($transacType-> addAttribute('partial',$data["partial"]));
+			$transacType-> addAttribute('partial',$data["partial"]);
 		};
 		unset($data['partial']);
 		if(isset($data['customerId'])) {
-			($transacType-> addAttribute('customerId',$data["customerId"]));
+			$transacType-> addAttribute('customerId',$data["customerId"]);
 		};
 		unset($data['customerId']);
 		if(isset($config['reportGroup'])) {
-			($transacType-> addAttribute('reportGroup',$config["reportGroup"]));
+			$transacType-> addAttribute('reportGroup',$config["reportGroup"]);
 		};
 		if(isset($data['id'])) {
-			($transacType-> addAttribute('id',$data["id"]));
+			$transacType-> addAttribute('id',$data["id"]);
 		};
 		unset($data['id']);
 		Obj2xml::iterateChildren($data,$transacType);
