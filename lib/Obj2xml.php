@@ -81,7 +81,7 @@ class Obj2xml {
 			$auFileRequest->addChild('postDay', $hash_in['postDay']);
 		}
 		else{
-			throw RuntimeException('To add an RFR Request, either a litleSessionId or a merchantId and a postDay must be set.');
+			throw new RuntimeException('To add an RFR Request, either a litleSessionId or a merchantId and a postDay must be set.');
 		}
 		return str_replace("<?xml version=\"1.0\"?>\n", "", $rfr->asXML());
 	}
