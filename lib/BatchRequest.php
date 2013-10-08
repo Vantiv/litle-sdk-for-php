@@ -282,7 +282,7 @@ class BatchRequest {
 		$request = Obj2xml::transactionToXml($hash_out, $type, $report_group);
 		
 		if(file_put_contents($this->transaction_file, $request, FILE_APPEND) === FALSE){
-			throw new RuntimeException("A transaction could not be written to the batch file at $transaction_file. Please check your privilege.");
+			throw new RuntimeException("A transaction could not be written to the batch file at $this->transaction_file. Please check your privilege.");
 		}
 		
 		$this->total_txns += 1;
