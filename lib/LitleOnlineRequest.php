@@ -314,7 +314,6 @@ class LitleOnlineRequest
 		);
 		
 		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
-		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
 		$echeckVerificationResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'echeckVerification',$choice_hash);
 		return $echeckVerificationResponse;
 	}
