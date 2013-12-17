@@ -34,7 +34,7 @@ class litleResponseProcessor_FunctionalTest extends PHPUnit_Framework_TestCase
 	}
 	
 	function test_badResponse(){
-		$malformed_resp = '<litleResponse version="8.19" xmlns="http://www.litle.com/schema" response="1" message="Test test tes test" litleSessionId="819799340147507212">
+		$malformed_resp = '<litleResponse version="8.20" xmlns="http://www.litle.com/schema" response="1" message="Test test tes test" litleSessionId="819799340147507212">
 			<batchResponse litleBatchId="819799340147507220" merchantId="07103229">
 			<saleResponse reportGroup="Planets">
 			    <litleTxnId>819799340147507238</litleTxnId>
@@ -189,7 +189,29 @@ class litleResponseProcessor_FunctionalTest extends PHPUnit_Framework_TestCase
 		
 		$request->addBatchRequest($batch);
 		
-		# fifth batch
+        # fifth batch
+        $batch = new BatchRequest($this->direct);
+        $hash_in = array(
+            'subscriptionId'=>'1',
+            'planCode'=> '2',
+            'billToAddress'=> array (
+                'addressLine1' => '3'
+            ),
+            'card' => array (
+                'type'=>'VI',
+                'number'=>'4100000000000000',
+                'expDate'=>'1213',
+                'cardValidationNum' => '1213'
+            ),
+            'billingDate'=>'2013-12-17');
+        $batch->addUpdateSubscription($hash_in);
+        $hash_in = array(
+            'subscriptionId'=>'2',
+        );
+        $batch->addCancelSubscription($hash_in);        
+        $request->addBatchRequest($batch);
+		
+		# sixth batch
 		$batch = new BatchRequest($this->direct);
 		$hash_in = array(
 			'card'=>array('type'=>'VI',
@@ -200,13 +222,18 @@ class litleResponseProcessor_FunctionalTest extends PHPUnit_Framework_TestCase
 		$batch->addAccountUpdate($hash_in);
 		
 		$request->addBatchRequest($batch);
-		
-		$resp = new LitleResponseProcessor($request->sendToLitleStream());
+        		
+		$resp = $request->sendToLitleStream();
+		$respProcessor = new LitleResponseProcessor($resp);
 
-		$responses = array();
-		for($i = 0; $i < 14; $i++){
-			array_push($responses, $resp->nextTransaction()->getName());
-		}
+        $txnResponse = $respProcessor->nextTransaction();
+        $responses = array();
+        while($txnResponse != FALSE) {
+            $txnResponseName = $txnResponse->getName();
+            array_push($responses, $txnResponseName);
+            $txnResponse = $respProcessor->nextTransaction();
+        }
+
 		$this->assertTrue(in_array("authorizationResponse", $responses));
 		$this->assertTrue(in_array("captureResponse", $responses));
 		$this->assertTrue(in_array("authReversalResponse", $responses));
@@ -220,17 +247,18 @@ class litleResponseProcessor_FunctionalTest extends PHPUnit_Framework_TestCase
 		$this->assertTrue(in_array("saleResponse", $responses));
 		$this->assertTrue(in_array("registerTokenResponse", $responses));
 		$this->assertTrue(in_array("updateCardValidationNumOnTokenResponse", $responses));
+		$this->assertTrue(in_array("updateSubscriptionResponse", $responses));
+		$this->assertTrue(in_array("cancelSubscriptionResponse", $responses));
 		$this->assertTrue(in_array("accountUpdateResponse", $responses));
-		
 	}
 	
 	function tearDown(){
-		$files = glob($this->direct . '/*'); // get all file names
-		foreach($files as $file){ // iterate files
-			if(is_file($file))
-		    	unlink($file); // delete file
-		}
-		rmdir($this->direct);
+//		$files = glob($this->direct . '/*'); // get all file names
+//		foreach($files as $file){ // iterate files
+//			if(is_file($file))
+//		    	unlink($file); // delete file
+//		}
+//		rmdir($this->direct);
 	}
 	
 	

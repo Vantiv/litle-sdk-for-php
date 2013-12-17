@@ -45,6 +45,8 @@ require realpath(dirname(__FILE__)) .  '/test_updateCardValidationNumOnToken.php
 require realpath(dirname(__FILE__)) .  '/test_batchRequest.php';
 require realpath(dirname(__FILE__)) .  '/test_litleRequest.php';
 require realpath(dirname(__FILE__)) .  '/test_litleResponseProcessor.php';
+require realpath(dirname(__FILE__)) .  '/test_cancelSubscription.php';
+require realpath(dirname(__FILE__)) .  '/test_updateSubscription.php';
 class FunctionalTests
 {
 	public static function suite()
@@ -69,7 +71,9 @@ class FunctionalTests
 		$suite->addTestSuite('updateCardValidationNumOnToken_FunctionalTest');
 		$suite->addTestSuite('batchRequest_FunctionalTest');
 		$suite->addTestSuite('litleRequest_FunctionalTest');
-		$suite->addTestSuite('litleResponseProcessor_FunctionalTest');				
+		$suite->addTestSuite('litleResponseProcessor_FunctionalTest');
+		$suite->addTestSuite('updateSubscription_FunctionalTest');
+		$suite->addTestSuite('cancelSubscription_FunctionalTest');
 		return $suite;
 	}
 }

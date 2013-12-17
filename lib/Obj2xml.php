@@ -50,7 +50,8 @@ class Obj2xml {
 			($transacType-> addAttribute('customerId',$data["customerId"]));
 		};
 		unset($data['customerId']);
-		if(isset($config['reportGroup'])) {
+		
+		if(Obj2xml::transactionShouldHaveReportGroup($type, $config) && isset($config['reportGroup'])) {
 			($transacType-> addAttribute('reportGroup',$config["reportGroup"]));
 		};
 		if(isset($data['id'])) {
@@ -60,11 +61,21 @@ class Obj2xml {
 		Obj2xml::iterateChildren($data,$transacType);
 		return $xml->asXML();
 	}
+	
+	public static function transactionShouldHaveReportGroup($transactionType) {
+          $transactionsThatDontHaveReportGroup = array(
+            'updateSubscription',
+            'cancelSubscription'
+        );
+        return (FALSE === array_search($transactionType, $transactionsThatDontHaveReportGroup));
+	}
 
 	public static function transactionToXml($data, $type, $report_group){
 		
 		$transac = simplexml_load_string("<$type />");
-		$transac->addAttribute('reportGroup', $report_group);
+		if(Obj2xml::transactionShouldHaveReportGroup($type)) {
+		    $transac->addAttribute('reportGroup', $report_group);
+		}
 		Obj2xml::iterateChildren($data,$transac);
 		
 		return str_replace("<?xml version=\"1.0\"?>\n", "", $transac->asXML());
@@ -129,6 +140,10 @@ class Obj2xml {
 		$xml->addAttribute('numEcheckSales', $counts_and_amounts['echeckSale']['count']);
 		
 		$xml->addAttribute('numUpdateCardValidationNumOnTokens', $counts_and_amounts['updateCardValidationNumOnToken']['count']);
+		
+		$xml->addAttribute('numUpdateSubscriptions', $counts_and_amounts['updateSubscription']['count']);
+		
+		$xml->addAttribute('numCancelSubscriptions', $counts_and_amounts['cancelSubscription']['count']);
 		
 		$xml->addAttribute('numAccountUpdates', $counts_and_amounts['accountUpdate']['count']);
 		

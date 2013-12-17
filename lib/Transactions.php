@@ -245,6 +245,26 @@ class Transactions {
 		return $hash_out;
 	}
 
+    public static function createUpdateSubscriptionHash($hash_in){
+        $hash_out = array(
+            'subscriptionId'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'subscriptionId')),
+            'planCode'=>XmlFields::returnArrayValue($hash_in,'planCode'),
+            'billToAddress'=>XmlFields::contact(XmlFields::returnArrayValue($hash_in,'billToAddress')),
+            'card'=>XmlFields::cardType(XmlFields::returnArrayValue($hash_in,'card')),
+            'billingDate'=>XmlFields::returnArrayValue($hash_in,'billingDate')
+        );      
+        
+        return $hash_out;
+    }
+    
+    public static function createCancelSubscriptionHash($hash_in){
+        $hash_out = array(
+            'subscriptionId'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'subscriptionId'))
+        );      
+        
+        return $hash_out;
+    }
+
 	public static function createAccountUpdate($hash_in){
 		$hash_out = array(
 				'orderId'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'orderId')),

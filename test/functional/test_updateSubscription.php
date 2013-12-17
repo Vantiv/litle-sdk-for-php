@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2011 Litle & Co.
+* Copyright (c) 2011 Litle & Co.
 *
 * Permission is hereby granted, free of charge, to any person
 * obtaining a copy of this software and associated documentation
@@ -24,41 +24,28 @@
 */
 require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
 
-class LitleOnlineRequest_UnitTest extends PHPUnit_Framework_TestCase
+class updateSubscription_FunctionalTest extends PHPUnit_Framework_TestCase
 {
-	function test_set_merchant_sdk_integration()
+	function test_simple()
 	{
-		$hash_in = array(
-			'merchantSdk'=>'Magento;8.14.3',
-			'orderId'=> '2111',
-			'id'=>'654',
-			'orderSource'=>'ecommerce',
-			'amount'=>'123');
-		$mock = $this->getMock('LitleXmlMapper');
-		$mock->expects($this->once())
-		->method('request')
-		->with($this->matchesRegularExpression('/.*merchantSdk="Magento;8.14.3".*/'));
+	
+	    $hash_in = array(
+            'subscriptionId'=>'1',
+            'planCode'=> '2',
+            'billToAddress'=> array (
+                'addressLine1' => '3'
+            ),
+            'card' => array (
+                'type'=>'VI',
+                'number'=>'4100000000000000',
+                'expDate'=>'1213',
+                'cardValidationNum' => '1213'
+            ),
+            'billingDate'=>'2013-12-17');
 
-		$litleTest = new LitleOnlineRequest();
-		$litleTest->newXML = $mock;
-		$litleTest->authorizationRequest($hash_in);
+		$initialize = new LitleOnlineRequest();
+		$updateSubscriptionResponse = $initialize->updateSubscription($hash_in);
+		$message = XmlParser::getAttribute($updateSubscriptionResponse,'litleOnlineResponse','message');
+		$this->assertEquals('Valid Format',$message);
 	}
-
-	function test_set_merchant_sdk_default()
-	{
-		$hash_in = array(
-				'orderId'=> '2111',
-				'id'=>'654',
-				'orderSource'=>'ecommerce',
-				'amount'=>'123');
-		$mock = $this->getMock('LitleXmlMapper');
-		$mock->expects($this->once())
-		->method('request')
- 		->with($this->matchesRegularExpression('/.*merchantSdk="PHP;8.20.0".*/'));
-		
-		$litleTest = new LitleOnlineRequest();
-		$litleTest->newXML = $mock;
-		$litleTest->authorizationRequest($hash_in);
-	}
-
 }

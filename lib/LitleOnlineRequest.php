@@ -348,6 +348,20 @@ class LitleOnlineRequest
 		$updateCardValidationNumOnTokenResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,"updateCardValidationNumOnToken");
 		return $updateCardValidationNumOnTokenResponse;
 	}
+
+    public function updateSubscription($hash_in)
+    {
+        $hash_out = Transactions::createUpdateSubscriptionHash($hash_in);
+        $updateSubscriptionResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,"updateSubscription");
+        return $updateSubscriptionResponse;
+    }
+
+    public function cancelSubscription($hash_in)
+    {
+        $hash_out = Transactions::createCancelSubscriptionHash($hash_in);
+        $cancelSubscriptionResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,"cancelSubscription");
+        return $cancelSubscriptionResponse;
+    }
 	
 	private function overideConfig($hash_in)
 	{
@@ -370,7 +384,7 @@ class LitleOnlineRequest
 			$hash_out['merchantSdk'] = XmlFields::returnArrayValue($hash_in,'merchantSdk');
 		}
 		else {
-			$hash_out['merchantSdk'] = 'PHP;8.19.0';
+			$hash_out['merchantSdk'] = CURRENT_SDK_VERSION;
 		}
 		if(isset($hash_in['id'])) {
 			$hash_out['id'] = XmlFields::returnArrayValue($hash_in,'id');

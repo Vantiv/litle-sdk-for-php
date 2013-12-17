@@ -45,6 +45,8 @@ require realpath(dirname(__FILE__)) . '/test_XmlParser.php';
 require realpath(dirname(__FILE__)) . '/test_Obj2xml.php';
 require realpath(dirname(__FILE__)) . '/test_updateCardValidationNumOnToken.php';
 require realpath(dirname(__FILE__)) . '/test_transactions.php';
+require realpath(dirname(__FILE__)) . '/test_updateSubscription.php';
+require realpath(dirname(__FILE__)) . '/test_cancelSubscription.php';
 class UnitTests
 {
 	public static function suite()
@@ -70,6 +72,8 @@ class UnitTests
 		$suite->addTestSuite('Tests_Obj2xml');
 		$suite->addTestSuite('updateCardValidationNumOnToken_UnitTest');
 		$suite->addTestSuite('transactions_UnitTest');
+		$suite->addTestSuite('updateSubscription_UnitTest');
+		$suite->addTestSuite('cancelSubscription_UnitTest');
 		
 		return $suite;
 	}

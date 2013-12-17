@@ -371,6 +371,46 @@ class batchRequest_FunctionalTest extends PHPUnit_Framework_TestCase
 		
 	} 
 	
+	function test_addUpdateSubscriptionHash()
+    {
+        $hash_in = array(
+            'subscriptionId'=>'1',
+            'planCode'=> '2',
+            'billToAddress'=> array (
+                'addressLine1' => '3'
+            ),
+            'card' => array (
+                'type'=>'VI',
+                'number'=>'4100000000000000',
+                'expDate'=>'1213',
+                'cardValidationNum' => '1213'
+            ),
+            'billingDate'=>'2013-12-17');
+        $batch_request = new BatchRequest($this->direct);
+        $batch_request->addUpdateSubscription($hash_in);
+        
+        $this->assertTrue(file_exists($batch_request->batch_file));
+        $this->assertEquals(1, $batch_request->total_txns);
+        
+        $cts = $batch_request->getCountsAndAmounts();
+        $this->assertEquals(1, $cts['updateSubscription']['count']);
+    } 
+
+    function test_addCancelSubscriptionHash()
+    {
+        $hash_in = array(
+            'subscriptionId'=>'1'
+        );
+        $batch_request = new BatchRequest($this->direct);
+        $batch_request->addCancelSubscription($hash_in);
+        
+        $this->assertTrue(file_exists($batch_request->batch_file));
+        $this->assertEquals(1, $batch_request->total_txns);
+        
+        $cts = $batch_request->getCountsAndAmounts();
+        $this->assertEquals(1, $cts['cancelSubscription']['count']);
+    } 
+    
 	function test_mechaBatch(){
 			
 		$batch = new BatchRequest($this->direct);

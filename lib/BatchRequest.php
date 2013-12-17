@@ -71,6 +71,12 @@ class BatchRequest {
 			'updateCardValidationNumOnToken' => array(
 				'count' => 0,
 			),
+			'updateSubscription' => array(
+			    'count' => 0,
+			),
+            'cancelSubscription' => array(
+                'count' => 0,
+            ),
 			'accountUpdate' => array(
 				'count' => 0,
 			));
@@ -240,6 +246,22 @@ class BatchRequest {
 		
 	}	
 
+    public function addUpdateSubscription($hash_in){
+        $hash_out = Transactions::createUpdateSubscriptionHash($hash_in);
+        
+        $this->addTransaction($hash_out,$hash_in,"updateSubscription");
+        $this->counts_and_amounts['updateSubscription']['count'] += 1;
+        
+    }   
+
+    public function addCancelSubscription($hash_in){
+        $hash_out = Transactions::createCancelSubscriptionHash($hash_in);
+        
+        $this->addTransaction($hash_out,$hash_in,"cancelSubscription");
+        $this->counts_and_amounts['cancelSubscription']['count'] += 1;
+        
+    }   
+
 	public function addAccountUpdate($hash_in){
 		$hash_out = Transactions::createAccountUpdate($hash_in);
 		
@@ -267,7 +289,7 @@ class BatchRequest {
 			throw new RuntimeException("The transaction could not be added to the batch. The transaction type $type cannot be mixed with AccountUpdates.");
 		} 
 
-		if(isset($hash_in['reportGroup'])){
+    	if(isset($hash_in['reportGroup'])){
 			$report_group = $hash_in['reportGroup'];
 		}
 		else{
