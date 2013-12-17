@@ -411,6 +411,41 @@ class batchRequest_FunctionalTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, $cts['cancelSubscription']['count']);
     } 
     
+    function test_addCreatePlanHash()
+    {
+        $hash_in = array(
+            'planCode'=>'1',
+            'name'=> '2',
+            'intervalType'=>'MONTHLY',
+            'amount'=>'1000'
+        );
+        $batch_request = new BatchRequest($this->direct);
+        $batch_request->addCreatePlan($hash_in);
+        
+        $this->assertTrue(file_exists($batch_request->batch_file));
+        $this->assertEquals(1, $batch_request->total_txns);
+        
+        $cts = $batch_request->getCountsAndAmounts();
+        $this->assertEquals(1, $cts['createPlan']['count']);
+    } 
+
+    function test_addUpdatePlanHash()
+    {
+        $hash_in = array(
+            'planCode'=>'1',
+            'active'=>'false'
+        );
+        $batch_request = new BatchRequest($this->direct);
+        $batch_request->addUpdatePlan($hash_in);
+        
+        $this->assertTrue(file_exists($batch_request->batch_file));
+        $this->assertEquals(1, $batch_request->total_txns);
+        
+        $cts = $batch_request->getCountsAndAmounts();
+        $this->assertEquals(1, $cts['updatePlan']['count']);
+    } 
+
+    
 	function test_mechaBatch(){
 			
 		$batch = new BatchRequest($this->direct);

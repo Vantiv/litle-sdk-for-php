@@ -265,6 +265,32 @@ class Transactions {
         return $hash_out;
     }
 
+    public static function createCreatePlanHash($hash_in){
+        $hash_out = array(
+            'planCode'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'planCode')),
+            'name'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'name')),
+            'description'=>XmlFields::returnArrayValue($hash_in,'description'),
+            'intervalType'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'intervalType')),
+            'amount'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'amount')),
+            'numberOfPayments'=>XmlFields::returnArrayValue($hash_in,'numberOfPayments'),
+            'trialNumberOfIntervals'=>XmlFields::returnArrayValue($hash_in,'trialNumberOfIntervals'),
+            'trialIntervalType'=>XmlFields::returnArrayValue($hash_in,'trialIntervalType'),
+            'active'=>XmlFields::returnArrayValue($hash_in,'active')
+        );      
+        
+        return $hash_out;
+    }
+
+    public static function createUpdatePlanHash($hash_in){
+        $hash_out = array(
+            'planCode'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'planCode')),
+            'active'=>XmlFields::returnArrayValue($hash_in,'active')
+        );      
+        
+        return $hash_out;
+    }
+
+
 	public static function createAccountUpdate($hash_in){
 		$hash_out = array(
 				'orderId'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'orderId')),

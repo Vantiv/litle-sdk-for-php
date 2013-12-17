@@ -77,6 +77,12 @@ class BatchRequest {
             'cancelSubscription' => array(
                 'count' => 0,
             ),
+            'createPlan' => array(
+                'count' => 0,
+            ),
+            'updatePlan' => array(
+                'count' => 0,
+            ),
 			'accountUpdate' => array(
 				'count' => 0,
 			));
@@ -243,7 +249,6 @@ class BatchRequest {
 		
 		$this->addTransaction($hash_out,$hash_in,"updateCardValidationNumOnToken");
 		$this->counts_and_amounts['updateCardValidationNumOnToken']['count'] += 1;
-		
 	}	
 
     public function addUpdateSubscription($hash_in){
@@ -251,7 +256,6 @@ class BatchRequest {
         
         $this->addTransaction($hash_out,$hash_in,"updateSubscription");
         $this->counts_and_amounts['updateSubscription']['count'] += 1;
-        
     }   
 
     public function addCancelSubscription($hash_in){
@@ -259,7 +263,20 @@ class BatchRequest {
         
         $this->addTransaction($hash_out,$hash_in,"cancelSubscription");
         $this->counts_and_amounts['cancelSubscription']['count'] += 1;
+    }   
+
+    public function addCreatePlan($hash_in){
+        $hash_out = Transactions::createCreatePlanHash($hash_in);
         
+        $this->addTransaction($hash_out,$hash_in,"createPlan");
+        $this->counts_and_amounts['createPlan']['count'] += 1;
+    }   
+
+    public function addUpdatePlan($hash_in){
+        $hash_out = Transactions::createUpdatePlanHash($hash_in);
+        
+        $this->addTransaction($hash_out,$hash_in,"updatePlan");
+        $this->counts_and_amounts['updatePlan']['count'] += 1;
     }   
 
 	public function addAccountUpdate($hash_in){

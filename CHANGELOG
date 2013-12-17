@@ -1,5 +1,16 @@
 = LitleOnline CHANGELOG
 
+== Version 8.21.0 (FILL ME IN)
+* Feature: Support for the following new recurring transactions:
+CreatePlan, UpdatePlan
+NOT YET * Feature: Support for the following new gift card transactions:
+Activate, Deactivate, Load, Unload, Balance Inquiry
+NOT YET * Feature: Gift card responses are now returned as part of
+authorzationResponse, authReversalResponse, captureResponse,
+forceCapture, captureGivenAuthResponse, saleResponse, creditResponse
+NOT YET * Feature: fraudResult is now returned as part of captureResponse,
+forceCaptureResponse, captureGivenAuthResponse, creditResponse
+
 == Version 8.20.0 (December 17, 2013)
 * Feature: More initial support for Recurring, including the ability to update or cancel subscriptions
 * Cleanup: Move phpseclib to composer

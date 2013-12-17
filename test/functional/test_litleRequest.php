@@ -58,7 +58,7 @@ class litleRequest_FunctionalTest extends PHPUnit_Framework_TestCase
 		captureGivenAuthAmount="0" numCaptureGivenAuths="0" forceCaptureAmount="0" numForceCaptures="0" authReversalAmount="0" numAuthReversals="0" 
 		captureAmount="0" numCaptures="0" echeckVerificationAmount="0" numEcheckVerification="0" echeckCreditAmount="0" numEcheckCredit="0" 
 		numEcheckRedeposit="0" echeckSalesAmount="0" numEcheckSales="0" numUpdateCardValidationNumOnTokens="0" 
-		numUpdateSubscriptions="0" numCancelSubscriptions="0" numAccountUpdates="0">
+		numUpdateSubscriptions="0" numCancelSubscriptions="0" numCreatePlans="0" numUpdatePlans="0" numAccountUpdates="0">
 		<sale reportGroup="Planets"><orderId>2111</orderId><amount>123</amount><orderSource>ecommerce</orderSource>
 		<card><type>VI</type><number>4100000000000000</number><expDate>1213</expDate><cardValidationNum>1213</cardValidationNum></card></sale>
 		</batchRequest>';
@@ -141,7 +141,7 @@ class litleRequest_FunctionalTest extends PHPUnit_Framework_TestCase
 		captureGivenAuthAmount="0" numCaptureGivenAuths="0" forceCaptureAmount="0" numForceCaptures="0" authReversalAmount="0" numAuthReversals="0" 
 		captureAmount="0" numCaptures="0" echeckVerificationAmount="0" numEcheckVerification="0" echeckCreditAmount="0" numEcheckCredit="0" 
 		numEcheckRedeposit="0" echeckSalesAmount="0" numEcheckSales="0" numUpdateCardValidationNumOnTokens="0" numUpdateSubscriptions="0" 
-		numCancelSubscriptions="0" numAccountUpdates="0">
+		numCancelSubscriptions="0" numCreatePlans="0" numUpdatePlans="0" numAccountUpdates="0">
 		<sale reportGroup="Planets"><orderId>2111</orderId><amount>123</amount><orderSource>ecommerce</orderSource>
 		<card><type>VI</type><number>4100000000000000</number><expDate>1213</expDate><cardValidationNum>1213</cardValidationNum></card></sale>
 		</batchRequest>

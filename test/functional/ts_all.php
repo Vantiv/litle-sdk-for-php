@@ -47,6 +47,8 @@ require realpath(dirname(__FILE__)) .  '/test_litleRequest.php';
 require realpath(dirname(__FILE__)) .  '/test_litleResponseProcessor.php';
 require realpath(dirname(__FILE__)) .  '/test_cancelSubscription.php';
 require realpath(dirname(__FILE__)) .  '/test_updateSubscription.php';
+require realpath(dirname(__FILE__)) .  '/test_createPlan.php';
+require realpath(dirname(__FILE__)) .  '/test_updatePlan.php';
 class FunctionalTests
 {
 	public static function suite()
@@ -74,6 +76,8 @@ class FunctionalTests
 		$suite->addTestSuite('litleResponseProcessor_FunctionalTest');
 		$suite->addTestSuite('updateSubscription_FunctionalTest');
 		$suite->addTestSuite('cancelSubscription_FunctionalTest');
+		$suite->addTestSuite('createPlan_FunctionalTest');
+		$suite->addTestSuite('updatePlan_FunctionalTest');
 		return $suite;
 	}
 }

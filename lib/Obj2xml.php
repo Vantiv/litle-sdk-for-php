@@ -65,7 +65,9 @@ class Obj2xml {
 	public static function transactionShouldHaveReportGroup($transactionType) {
           $transactionsThatDontHaveReportGroup = array(
             'updateSubscription',
-            'cancelSubscription'
+            'cancelSubscription',
+            'createPlan',
+            'updatePlan'
         );
         return (FALSE === array_search($transactionType, $transactionsThatDontHaveReportGroup));
 	}
@@ -144,6 +146,9 @@ class Obj2xml {
 		$xml->addAttribute('numUpdateSubscriptions', $counts_and_amounts['updateSubscription']['count']);
 		
 		$xml->addAttribute('numCancelSubscriptions', $counts_and_amounts['cancelSubscription']['count']);
+		
+		$xml->addAttribute('numCreatePlans', $counts_and_amounts['createPlan']['count']);
+		$xml->addAttribute('numUpdatePlans', $counts_and_amounts['updatePlan']['count']);
 		
 		$xml->addAttribute('numAccountUpdates', $counts_and_amounts['accountUpdate']['count']);
 		

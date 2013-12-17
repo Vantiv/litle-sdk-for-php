@@ -208,7 +208,19 @@ class litleResponseProcessor_FunctionalTest extends PHPUnit_Framework_TestCase
         $hash_in = array(
             'subscriptionId'=>'2',
         );
-        $batch->addCancelSubscription($hash_in);        
+        $batch->addCancelSubscription($hash_in);
+        $hash_in = array(
+            'planCode'=>'1',
+            'name'=> '2',
+            'intervalType'=>'MONTHLY',
+            'amount'=>'1000'
+        );
+        $batch->addCreatePlan($hash_in);
+        $hash_in = array(
+            'planCode'=>'1',
+            'active'=>'false'
+        );
+        $batch->addUpdatePlan($hash_in);            
         $request->addBatchRequest($batch);
 		
 		# sixth batch
@@ -249,16 +261,18 @@ class litleResponseProcessor_FunctionalTest extends PHPUnit_Framework_TestCase
 		$this->assertTrue(in_array("updateCardValidationNumOnTokenResponse", $responses));
 		$this->assertTrue(in_array("updateSubscriptionResponse", $responses));
 		$this->assertTrue(in_array("cancelSubscriptionResponse", $responses));
+		$this->assertTrue(in_array("createPlanResponse", $responses));
+		$this->assertTrue(in_array("updatePlanResponse", $responses));
 		$this->assertTrue(in_array("accountUpdateResponse", $responses));
 	}
 	
 	function tearDown(){
-//		$files = glob($this->direct . '/*'); // get all file names
-//		foreach($files as $file){ // iterate files
-//			if(is_file($file))
-//		    	unlink($file); // delete file
-//		}
-//		rmdir($this->direct);
+		$files = glob($this->direct . '/*'); // get all file names
+		foreach($files as $file){ // iterate files
+			if(is_file($file))
+		    	unlink($file); // delete file
+		}
+		rmdir($this->direct);
 	}
 	
 	

@@ -540,6 +540,29 @@ class transactions_UnitTest extends PHPUnit_Framework_TestCase {
         $hash_out = Transactions::createCancelSubscriptionHash($hash_in);
         $this->assertEquals($hash_in, array_intersect($hash_in, $hash_out));
     }
+    
+    function test_simple_createPlan()
+    {
+        $hash_in = array(
+            'planCode'=>'1',
+            'name'=> '2',
+            'intervalType'=>'MONTHLY',
+            'amount'=>'1000'
+        );
+        $hash_out = Transactions::createCreatePlanHash($hash_in);
+        $this->assertEquals($hash_in, array_intersect($hash_in, $hash_out));
+    }
+
+
+    function test_simple_updatePlan()
+    {
+        $hash_in = array(
+            'planCode'=>'1',
+            'active'=>'false'
+        );
+        $hash_out = Transactions::createUpdatePlanHash($hash_in);
+        $this->assertEquals($hash_in, array_intersect($hash_in, $hash_out));
+    }
 									
 }
 

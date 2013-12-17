@@ -362,6 +362,22 @@ class LitleOnlineRequest
         $cancelSubscriptionResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,"cancelSubscription");
         return $cancelSubscriptionResponse;
     }
+    
+    public function updatePlan($hash_in)
+    {
+        $hash_out = Transactions::createUpdatePlanHash($hash_in);
+        $updatePlanResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,"updatePlan");
+        return $updatePlanResponse;
+    }
+
+    public function createPlan($hash_in)
+    {
+        $hash_out = Transactions::createCreatePlanHash($hash_in);
+        $createPlanResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,"createPlan");
+        return $createPlanResponse;
+    }
+    
+    
 	
 	private function overideConfig($hash_in)
 	{
