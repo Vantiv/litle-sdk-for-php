@@ -1,6 +1,6 @@
 = LitleOnline CHANGELOG
 
-== Version 8.22.0 (December 19, 2013)
+== Version 8.22.0 (December 18, 2013)
 * Feature: Support for the following new gift card transactions:
 ActivateReversal, DeactivateReversal, LoadReversal, RefundReversal,
 UnloadReversal, DepositReversal
