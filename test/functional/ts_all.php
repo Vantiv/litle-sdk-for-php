@@ -54,6 +54,12 @@ require realpath(dirname(__FILE__)) .  '/test_deactivate.php';
 require realpath(dirname(__FILE__)) .  '/test_load.php';
 require realpath(dirname(__FILE__)) .  '/test_unload.php';
 require realpath(dirname(__FILE__)) .  '/test_balanceInquiry.php';
+require realpath(dirname(__FILE__)) .  '/test_depositReversal.php';
+require realpath(dirname(__FILE__)) .  '/test_refundReversal.php';
+require realpath(dirname(__FILE__)) .  '/test_activateReversal.php';
+require realpath(dirname(__FILE__)) .  '/test_deactivateReversal.php';
+require realpath(dirname(__FILE__)) .  '/test_loadReversal.php';
+require realpath(dirname(__FILE__)) .  '/test_unloadReversal.php';
 class FunctionalTests
 {
 	public static function suite()
@@ -88,6 +94,12 @@ class FunctionalTests
         $suite->addTestSuite('load_FunctionalTest');
         $suite->addTestSuite('unload_FunctionalTest');
         $suite->addTestSuite('balanceInquiry_FunctionalTest');
+        $suite->addTestSuite('depositReversal_FunctionalTest');
+        $suite->addTestSuite('refundReversal_FunctionalTest');
+        $suite->addTestSuite('activateReversal_FunctionalTest');
+        $suite->addTestSuite('deactivateReversal_FunctionalTest');
+        $suite->addTestSuite('loadReversal_FunctionalTest');
+        $suite->addTestSuite('unloadReversal_FunctionalTest');
 		return $suite;
 	}
 }

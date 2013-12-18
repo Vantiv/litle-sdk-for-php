@@ -337,6 +337,55 @@ class LitleOnlineRequest
 		$echeckVoidResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,"echeckVoid");
 		return $echeckVoidResponse;
 	}
+
+    public function depositReversalRequest($hash_in)
+    {
+        $hash_out = array(
+        'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
+        );
+        $response = LitleOnlineRequest::processRequest($hash_out,$hash_in,"depositReversal");
+        return $response;
+    }
+    public function refundReversalRequest($hash_in)
+    {
+        $hash_out = array(
+        'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
+        );
+        $response = LitleOnlineRequest::processRequest($hash_out,$hash_in,"refundReversal");
+        return $response;
+    }
+	public function activateReversalRequest($hash_in)
+    {
+        $hash_out = array(
+        'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
+        );
+        $response = LitleOnlineRequest::processRequest($hash_out,$hash_in,"activateReversal");
+        return $response;
+    }
+	public function deactivateReversalRequest($hash_in)
+    {
+        $hash_out = array(
+        'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
+        );
+        $response = LitleOnlineRequest::processRequest($hash_out,$hash_in,"deactivateReversal");
+        return $response;
+    }
+	public function loadReversalRequest($hash_in)
+    {
+        $hash_out = array(
+        'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
+        );
+        $response = LitleOnlineRequest::processRequest($hash_out,$hash_in,"loadReversal");
+        return $response;
+    }
+	public function unloadReversalRequest($hash_in)
+    {
+        $hash_out = array(
+        'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
+        );
+        $response = LitleOnlineRequest::processRequest($hash_out,$hash_in,"unloadReversal");
+        return $response;
+    }
 	
 	public function updateCardValidationNumOnToken($hash_in)
 	{
@@ -352,6 +401,7 @@ class LitleOnlineRequest
     public function updateSubscription($hash_in)
     {
         $hash_out = Transactions::createUpdateSubscriptionHash($hash_in);
+        $choice_hash = array(XmlFields::returnArrayValue($hash_out,'card'),XmlFields::returnArrayValue($hash_out,'token'),XmlFields::returnArrayValue($hash_out,'paypage'));
         $updateSubscriptionResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,"updateSubscription");
         return $updateSubscriptionResponse;
     }

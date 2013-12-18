@@ -251,6 +251,8 @@ class Transactions {
             'planCode'=>XmlFields::returnArrayValue($hash_in,'planCode'),
             'billToAddress'=>XmlFields::contact(XmlFields::returnArrayValue($hash_in,'billToAddress')),
             'card'=>XmlFields::cardType(XmlFields::returnArrayValue($hash_in,'card')),
+            'token'=>XmlFields::cardTokenType(XmlFields::returnArrayValue($hash_in,'token')),
+            'paypage'=>XmlFields::cardPaypageType(XmlFields::returnArrayValue($hash_in,'paypage')),
             'billingDate'=>XmlFields::returnArrayValue($hash_in,'billingDate')
         );      
         

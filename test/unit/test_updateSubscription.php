@@ -128,4 +128,71 @@ class updateSubscription_UnitTest extends PHPUnit_Framework_TestCase
         $litleTest->newXML = $mock;
         $litleTest->updateSubscription($hash_in);
     }
+    
+    function test_choice_card()
+    {
+        $hash_in = array(
+            'subscriptionId'=>'1',
+            'card' => array (
+                'type'=>'VI',
+                'number'=>'4100000000000000',
+                'expDate'=>'1213',
+                'cardValidationNum' => '1213'
+            )
+         );
+        $mock = $this->getMock('LitleXmlMapper');
+
+        $mock->expects($this->once())
+        ->method('request')
+        ->with($this->matchesRegularExpression('/.*card.*type.*VI.*number.*/'));
+        
+        $litleTest = new LitleOnlineRequest();
+        $litleTest->newXML = $mock;
+        $litleTest->updateSubscription($hash_in);
+    }
+
+    function test_choice_token()
+    {
+        $hash_in = array(
+            'subscriptionId'=>'1',
+            'token' => array (
+                'litleToken'=>'1111222233334444',
+                'expDate'=>'1213',
+                'cardValidationNum' => '1213',
+                'type'=>'VI'
+            )
+         );
+        $mock = $this->getMock('LitleXmlMapper');
+
+        $mock->expects($this->once())
+        ->method('request')
+        ->with($this->matchesRegularExpression('/.*litleToken.*1111222233334444.*type.*/'));
+        
+        $litleTest = new LitleOnlineRequest();
+        $litleTest->newXML = $mock;
+        $litleTest->updateSubscription($hash_in);
+    }
+
+    function test_choice_paypage()
+    {
+        $hash_in = array(
+            'subscriptionId'=>'1',
+            'paypage' => array (
+                'paypageRegistrationId'=>'abc123',
+                'expDate'=>'1213',
+                'cardValidationNum' => '1213',
+                'type'=>'VI',
+            )
+         );
+        $mock = $this->getMock('LitleXmlMapper');
+
+        $mock->expects($this->once())
+        ->method('request')
+        ->with($this->matchesRegularExpression('/.*paypage.*paypageRegistrationId.*abc123.*type.*VI.*/'));
+        
+        $litleTest = new LitleOnlineRequest();
+        $litleTest->newXML = $mock;
+        $litleTest->updateSubscription($hash_in);
+    }
+    
 }

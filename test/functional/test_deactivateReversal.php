@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2011 Litle & Co.
+* Copyright (c) 2011 Litle & Co.
 *
 * Permission is hereby granted, free of charge, to any person
 * obtaining a copy of this software and associated documentation
@@ -22,43 +22,18 @@
 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 * OTHER DEALINGS IN THE SOFTWARE.
 */
+
 require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
 
-class LitleOnlineRequest_UnitTest extends PHPUnit_Framework_TestCase
+class deactivateReversal_FunctionalTest extends PHPUnit_Framework_TestCase
 {
-	function test_set_merchant_sdk_integration()
+	function test_simple()
 	{
-		$hash_in = array(
-			'merchantSdk'=>'Magento;8.14.3',
-			'orderId'=> '2111',
-			'id'=>'654',
-			'orderSource'=>'ecommerce',
-			'amount'=>'123');
-		$mock = $this->getMock('LitleXmlMapper');
-		$mock->expects($this->once())
-		->method('request')
-		->with($this->matchesRegularExpression('/.*merchantSdk="Magento;8.14.3".*/'));
-
-		$litleTest = new LitleOnlineRequest();
-		$litleTest->newXML = $mock;
-		$litleTest->authorizationRequest($hash_in);
-	}
-
-	function test_set_merchant_sdk_default()
-	{
-		$hash_in = array(
-				'orderId'=> '2111',
-				'id'=>'654',
-				'orderSource'=>'ecommerce',
-				'amount'=>'123');
-		$mock = $this->getMock('LitleXmlMapper');
-		$mock->expects($this->once())
-		->method('request')
- 		->with($this->matchesRegularExpression('/.*merchantSdk="PHP;8.22.0".*/'));
-		
-		$litleTest = new LitleOnlineRequest();
-		$litleTest->newXML = $mock;
-		$litleTest->authorizationRequest($hash_in);
+		$hash_in = array('litleTxnId'=> '123456789012345678');
+		$initilaize = new LitleOnlineRequest();
+		$deactivateReversalResponse = $initilaize->deactivateReversalRequest($hash_in);
+		$response = XmlParser::getAttribute($deactivateReversalResponse,'litleOnlineResponse','response');
+		$this->assertEquals('0',$response);
 	}
 
 }
