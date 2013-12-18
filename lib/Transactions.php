@@ -290,6 +290,54 @@ class Transactions {
         return $hash_out;
     }
 
+    public static function createActivateHash($hash_in){
+        $hash_out = array(
+            'orderId'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'orderId')),
+            'amount'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'amount')),
+            'orderSource'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'orderSource')),
+            'card'=>Checker::requiredField(XmlFields::cardType(XmlFields::returnArrayValue($hash_in,'card')))
+        );      
+        
+        return $hash_out;
+    }
+    public static function createDeactivateHash($hash_in){
+        $hash_out = array(
+            'orderId'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'orderId')),
+            'orderSource'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'orderSource')),
+            'card'=>Checker::requiredField(XmlFields::cardType(XmlFields::returnArrayValue($hash_in,'card')))
+        );      
+        
+        return $hash_out;
+    }
+    public static function createLoadHash($hash_in){
+        $hash_out = array(
+            'orderId'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'orderId')),
+            'amount'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'amount')),
+            'orderSource'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'orderSource')),
+            'card'=>Checker::requiredField(XmlFields::cardType(XmlFields::returnArrayValue($hash_in,'card')))
+        );      
+        
+        return $hash_out;
+    }
+    public static function createUnloadHash($hash_in){
+        $hash_out = array(
+            'orderId'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'orderId')),
+            'amount'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'amount')),
+            'orderSource'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'orderSource')),
+            'card'=>Checker::requiredField(XmlFields::cardType(XmlFields::returnArrayValue($hash_in,'card')))
+        );      
+        
+        return $hash_out;
+    }
+    public static function createBalanceInquiryHash($hash_in){
+        $hash_out = array(
+            'orderId'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'orderId')),
+            'orderSource'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'orderSource')),
+            'card'=>Checker::requiredField(XmlFields::cardType(XmlFields::returnArrayValue($hash_in,'card')))
+        );      
+        
+        return $hash_out;
+    }
 
 	public static function createAccountUpdate($hash_in){
 		$hash_out = array(

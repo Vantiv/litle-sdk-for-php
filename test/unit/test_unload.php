@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (c) 2011 Litle & Co.
  * 
@@ -23,20 +22,30 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-define('CURRENT_XML_VERSION', '8.21');
-define('CURRENT_SDK_VERSION', 'PHP;8.21.0');
-define('MAX_TXNS_PER_BATCH', 100000);
-define('MAX_TXNS_PER_REQUEST', 500000);
-require_once realpath(dirname(__FILE__)) . '/LitleXmlMapper.php';
-require_once realpath(dirname(__FILE__)) . '/XmlFields.php';
-require_once realpath(dirname(__FILE__)) . '/Communication.php';
-require_once realpath(dirname(__FILE__)) . '/XmlParser.php';
-require_once realpath(dirname(__FILE__)) . '/Obj2xml.php';
-require_once realpath(dirname(__FILE__)) . '/Checker.php';
-require_once realpath(dirname(__FILE__)) . '/LitleOnlineRequest.php';
-require_once realpath(dirname(__FILE__)) . '/UrlMapper.php';
-require_once realpath(dirname(__FILE__)) . '/BatchRequest.php';
-require_once realpath(dirname(__FILE__)) . '/LitleRequest.php';
-require_once realpath(dirname(__FILE__)) . '/Transactions.php';
-require_once realpath(dirname(__FILE__)) . '/LitleResponseProcessor.php';
-require realpath(dirname(__FILE__)) . '/../vendor/autoload.php';
+
+require_once realpath(dirname(__FILE__)) . '/../../lib/LitleOnline.php';
+class unload_UnitTest extends PHPUnit_Framework_TestCase
+{
+    function test_simple()
+    {
+        $hash_in = array(
+            'orderId'=>'1',
+            'amount'=> '2',
+            'orderSource'=>'ECOMMERCE',
+            'card' => array (
+                'type'=>'VI',
+                'number'=>'4100000000000000',
+                'expDate'=>'1213',
+                'cardValidationNum' => '1213'
+            )
+        );
+        $mock = $this->getMock('LitleXmlMapper');
+        $mock->expects($this->once())
+        ->method('request')
+        ->with($this->matchesRegularExpression('/.*<orderId>1.*<amount>2.*<orderSource>ECOMMERCE.*<card.*type.*VI.*/'));
+        
+        $litleTest = new LitleOnlineRequest();
+        $litleTest->newXML = $mock;
+        $litleTest->unload($hash_in);
+    }
+}

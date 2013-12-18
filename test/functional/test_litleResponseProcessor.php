@@ -189,7 +189,7 @@ class litleResponseProcessor_FunctionalTest extends PHPUnit_Framework_TestCase
 		
 		$request->addBatchRequest($batch);
 		
-        # fifth batch
+        # fifth batch - recurring
         $batch = new BatchRequest($this->direct);
         $hash_in = array(
             'subscriptionId'=>'1',
@@ -223,7 +223,7 @@ class litleResponseProcessor_FunctionalTest extends PHPUnit_Framework_TestCase
         $batch->addUpdatePlan($hash_in);            
         $request->addBatchRequest($batch);
 		
-		# sixth batch
+		# sixth batch - au
 		$batch = new BatchRequest($this->direct);
 		$hash_in = array(
 			'card'=>array('type'=>'VI',
@@ -232,8 +232,70 @@ class litleResponseProcessor_FunctionalTest extends PHPUnit_Framework_TestCase
 					'cardValidationNum' => '1213'),
 			'orderId'=>'8675309');
 		$batch->addAccountUpdate($hash_in);
-		
 		$request->addBatchRequest($batch);
+		
+        # seventh batch - gift card		
+        $batch = new BatchRequest($this->direct);
+        $hash_in = array(
+            'orderId'=>'1',
+            'amount'=> '2',
+            'orderSource'=>'ecommerce',
+            'card' => array (
+                'type'=>'VI',
+                'number'=>'4100000000000000',
+                'expDate'=>'1213',
+                'cardValidationNum' => '1213'
+            )
+        );
+        $batch->addActivate($hash_in);
+        $hash_in = array(
+            'orderId'=>'1',
+            'orderSource'=>'ecommerce',
+            'card' => array (
+                'type'=>'VI',
+                'number'=>'4100000000000000',
+                'expDate'=>'1213',
+                'cardValidationNum' => '1213'
+            )
+        );
+        $batch->addDeactivate($hash_in);
+        $hash_in = array(
+            'orderId'=>'1',
+            'amount'=> '2',
+            'orderSource'=>'ecommerce',
+            'card' => array (
+                'type'=>'VI',
+                'number'=>'4100000000000000',
+                'expDate'=>'1213',
+                'cardValidationNum' => '1213'
+            )
+        );
+        $batch->addLoad($hash_in);
+        $hash_in = array(
+            'orderId'=>'1',
+            'amount'=> '2',
+            'orderSource'=>'ecommerce',
+            'card' => array (
+                'type'=>'VI',
+                'number'=>'4100000000000000',
+                'expDate'=>'1213',
+                'cardValidationNum' => '1213'
+            )
+        );
+        $batch->addUnload($hash_in);
+        $hash_in = array(
+            'orderId'=>'1',
+            'orderSource'=>'ecommerce',
+            'card' => array (
+                'type'=>'VI',
+                'number'=>'4100000000000000',
+                'expDate'=>'1213',
+                'cardValidationNum' => '1213'
+            )
+        );
+        $batch->addBalanceInquiry($hash_in);
+        $request->addBatchRequest($batch);            
+
         		
 		$resp = $request->sendToLitleStream();
 		$respProcessor = new LitleResponseProcessor($resp);
@@ -264,6 +326,11 @@ class litleResponseProcessor_FunctionalTest extends PHPUnit_Framework_TestCase
 		$this->assertTrue(in_array("createPlanResponse", $responses));
 		$this->assertTrue(in_array("updatePlanResponse", $responses));
 		$this->assertTrue(in_array("accountUpdateResponse", $responses));
+		$this->assertTrue(in_array("activateResponse", $responses));
+		$this->assertTrue(in_array("deactivateResponse", $responses));
+		$this->assertTrue(in_array("loadResponse", $responses));
+		$this->assertTrue(in_array("unloadResponse", $responses));
+		$this->assertTrue(in_array("balanceInquiryResponse", $responses));
 	}
 	
 	function tearDown(){

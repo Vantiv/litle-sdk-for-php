@@ -553,7 +553,6 @@ class transactions_UnitTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($hash_in, array_intersect($hash_in, $hash_out));
     }
 
-
     function test_simple_updatePlan()
     {
         $hash_in = array(
@@ -563,6 +562,86 @@ class transactions_UnitTest extends PHPUnit_Framework_TestCase {
         $hash_out = Transactions::createUpdatePlanHash($hash_in);
         $this->assertEquals($hash_in, array_intersect($hash_in, $hash_out));
     }
+    
+    function test_simple_activate()
+    {
+        $hash_in = array(
+            'orderId'=>'1',
+            'amount'=> '2',
+            'orderSource'=>'ECOMMERCE',
+            'card' => array (
+                'type'=>'VI',
+                'number'=>'4100000000000000',
+                'expDate'=>'1213',
+                'cardValidationNum' => '1213'
+            )
+        );
+        $hash_out = Transactions::createActivateHash($hash_in);
+        $this->assertEquals($hash_in, array_intersect($hash_in, $hash_out));
+    }
+    function test_simple_deactivate()
+    {
+        $hash_in = array(
+            'orderId'=>'1',
+            'orderSource'=>'ECOMMERCE',
+            'card' => array (
+                'type'=>'VI',
+                'number'=>'4100000000000000',
+                'expDate'=>'1213',
+                'cardValidationNum' => '1213'
+            )
+        );
+        $hash_out = Transactions::createDeactivateHash($hash_in);
+        $this->assertEquals($hash_in, array_intersect($hash_in, $hash_out));
+    }
+    function test_simple_load()
+    {
+        $hash_in = array(
+            'orderId'=>'1',
+            'amount'=> '2',
+            'orderSource'=>'ECOMMERCE',
+            'card' => array (
+                'type'=>'VI',
+                'number'=>'4100000000000000',
+                'expDate'=>'1213',
+                'cardValidationNum' => '1213'
+            )
+        );
+        $hash_out = Transactions::createLoadHash($hash_in);
+        $this->assertEquals($hash_in, array_intersect($hash_in, $hash_out));
+    }
+    function test_simple_unload()
+    {
+        $hash_in = array(
+            'orderId'=>'1',
+            'amount'=> '2',
+            'orderSource'=>'ECOMMERCE',
+            'card' => array (
+                'type'=>'VI',
+                'number'=>'4100000000000000',
+                'expDate'=>'1213',
+                'cardValidationNum' => '1213'
+            )
+        );
+        $hash_out = Transactions::createUnloadHash($hash_in);
+        $this->assertEquals($hash_in, array_intersect($hash_in, $hash_out));
+    }
+    function test_simple_balanceInquiry()
+    {
+        $hash_in = array(
+            'orderId'=>'1',
+            'orderSource'=>'ECOMMERCE',
+            'card' => array (
+                'type'=>'VI',
+                'number'=>'4100000000000000',
+                'expDate'=>'1213',
+                'cardValidationNum' => '1213'
+            )
+        );
+        $hash_out = Transactions::createBalanceInquiryHash($hash_in);
+        $this->assertEquals($hash_in, array_intersect($hash_in, $hash_out));
+    }
+    
 									
 }
 

@@ -444,6 +444,118 @@ class batchRequest_FunctionalTest extends PHPUnit_Framework_TestCase
         $cts = $batch_request->getCountsAndAmounts();
         $this->assertEquals(1, $cts['updatePlan']['count']);
     } 
+    
+    function test_addActivateHash()
+    {
+        $hash_in = array(
+            'orderId'=>'1',
+            'amount'=> '2',
+            'orderSource'=>'ECOMMERCE',
+            'card' => array (
+                'type'=>'VI',
+                'number'=>'4100000000000000',
+                'expDate'=>'1213',
+                'cardValidationNum' => '1213'
+            )
+        );
+        $batch_request = new BatchRequest($this->direct);
+        $batch_request->addActivate($hash_in);
+        
+        $this->assertTrue(file_exists($batch_request->batch_file));
+        $this->assertEquals(1, $batch_request->total_txns);
+        
+        $cts = $batch_request->getCountsAndAmounts();
+        $this->assertEquals(1, $cts['activate']['count']);
+        $this->assertEquals(2, $cts['activate']['amount']);
+    } 
+    function test_addDeactivateHash()
+    {
+        $hash_in = array(
+            'orderId'=>'1',
+            'orderSource'=>'ECOMMERCE',
+            'card' => array (
+                'type'=>'VI',
+                'number'=>'4100000000000000',
+                'expDate'=>'1213',
+                'cardValidationNum' => '1213'
+            )
+        );
+        $batch_request = new BatchRequest($this->direct);
+        $batch_request->addDeactivate($hash_in);
+        
+        $this->assertTrue(file_exists($batch_request->batch_file));
+        $this->assertEquals(1, $batch_request->total_txns);
+        
+        $cts = $batch_request->getCountsAndAmounts();
+        $this->assertEquals(1, $cts['deactivate']['count']);
+    } 
+    function test_addLoadHash()
+    {
+        $hash_in = array(
+            'orderId'=>'1',
+            'amount'=> '2',
+            'orderSource'=>'ECOMMERCE',
+            'card' => array (
+                'type'=>'VI',
+                'number'=>'4100000000000000',
+                'expDate'=>'1213',
+                'cardValidationNum' => '1213'
+            )
+        );
+        $batch_request = new BatchRequest($this->direct);
+        $batch_request->addLoad($hash_in);
+        
+        $this->assertTrue(file_exists($batch_request->batch_file));
+        $this->assertEquals(1, $batch_request->total_txns);
+        
+        $cts = $batch_request->getCountsAndAmounts();
+        $this->assertEquals(1, $cts['load']['count']);
+        $this->assertEquals(2, $cts['load']['amount']);
+    } 
+    function test_addUnloadHash()
+    {
+        $hash_in = array(
+            'orderId'=>'1',
+            'amount'=> '2',
+            'orderSource'=>'ECOMMERCE',
+            'card' => array (
+                'type'=>'VI',
+                'number'=>'4100000000000000',
+                'expDate'=>'1213',
+                'cardValidationNum' => '1213'
+            )
+        );
+        $batch_request = new BatchRequest($this->direct);
+        $batch_request->addUnload($hash_in);
+        
+        $this->assertTrue(file_exists($batch_request->batch_file));
+        $this->assertEquals(1, $batch_request->total_txns);
+        
+        $cts = $batch_request->getCountsAndAmounts();
+        $this->assertEquals(1, $cts['unload']['count']);
+        $this->assertEquals(2, $cts['unload']['amount']);
+    } 
+    function test_addBalanceInquiryHash()
+    {
+        $hash_in = array(
+            'orderId'=>'1',
+            'orderSource'=>'ECOMMERCE',
+            'card' => array (
+                'type'=>'VI',
+                'number'=>'4100000000000000',
+                'expDate'=>'1213',
+                'cardValidationNum' => '1213'
+            )
+        );
+        $batch_request = new BatchRequest($this->direct);
+        $batch_request->addBalanceInquiry($hash_in);
+        
+        $this->assertTrue(file_exists($batch_request->batch_file));
+        $this->assertEquals(1, $batch_request->total_txns);
+        
+        $cts = $batch_request->getCountsAndAmounts();
+        $this->assertEquals(1, $cts['balanceInquiry']['count']);
+    } 
 
     
 	function test_mechaBatch(){

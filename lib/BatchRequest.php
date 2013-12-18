@@ -83,6 +83,26 @@ class BatchRequest {
             'updatePlan' => array(
                 'count' => 0,
             ),
+            'activate' => array(
+                'count' => 0,
+                'amount' => 0,
+            ),
+            'deactivate' => array(
+                'count' => 0,
+                'amount' => 0,
+            ),
+            'load' => array(
+                'count' => 0,
+                'amount' => 0,
+            ),
+            'unload' => array(
+                'count' => 0,
+                'amount' => 0,
+            ),
+            'balanceInquiry' => array(
+                'count' => 0,
+                'amount' => 0,
+            ),
 			'accountUpdate' => array(
 				'count' => 0,
 			));
@@ -277,6 +297,40 @@ class BatchRequest {
         
         $this->addTransaction($hash_out,$hash_in,"updatePlan");
         $this->counts_and_amounts['updatePlan']['count'] += 1;
+    }   
+
+    public function addActivate($hash_in){
+        $hash_out = Transactions::createActivateHash($hash_in);
+        
+        $this->addTransaction($hash_out,$hash_in,"activate");
+        $this->counts_and_amounts['activate']['count'] += 1;
+        $this->counts_and_amounts['activate']['amount'] += $hash_out['amount'];
+    }   
+    public function addDeactivate($hash_in){
+        $hash_out = Transactions::createDeactivateHash($hash_in);
+        
+        $this->addTransaction($hash_out,$hash_in,"deactivate");
+        $this->counts_and_amounts['deactivate']['count'] += 1;
+    }   
+    public function addLoad($hash_in){
+        $hash_out = Transactions::createLoadHash($hash_in);
+        
+        $this->addTransaction($hash_out,$hash_in,"load");
+        $this->counts_and_amounts['load']['count'] += 1;
+        $this->counts_and_amounts['load']['amount'] += $hash_out['amount'];
+    }   
+    public function addUnload($hash_in){
+        $hash_out = Transactions::createUnloadHash($hash_in);
+        
+        $this->addTransaction($hash_out,$hash_in,"unload");
+        $this->counts_and_amounts['unload']['count'] += 1;
+        $this->counts_and_amounts['unload']['amount'] += $hash_out['amount'];
+    }   
+    public function addBalanceInquiry($hash_in){
+        $hash_out = Transactions::createBalanceInquiryHash($hash_in);
+        
+        $this->addTransaction($hash_out,$hash_in,"balanceInquiry");
+        $this->counts_and_amounts['balanceInquiry']['count'] += 1;
     }   
 
 	public function addAccountUpdate($hash_in){

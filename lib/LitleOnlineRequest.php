@@ -377,7 +377,36 @@ class LitleOnlineRequest
         return $createPlanResponse;
     }
     
-    
+    public function activate($hash_in)
+    {
+        $hash_out = Transactions::createActivateHash($hash_in);
+        $txnResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,"activate");
+        return $txnResponse;
+    }
+    public function deactivate($hash_in)
+    {
+        $hash_out = Transactions::createDeactivateHash($hash_in);
+        $txnResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,"deactivate");
+        return $txnResponse;
+    }
+    public function load($hash_in)
+    {
+        $hash_out = Transactions::createLoadHash($hash_in);
+        $txnResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,"load");
+        return $txnResponse;
+    }
+    public function unload($hash_in)
+    {
+        $hash_out = Transactions::createUnloadHash($hash_in);
+        $txnResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,"unload");
+        return $txnResponse;
+    }
+    public function balanceInquiry($hash_in)
+    {
+        $hash_out = Transactions::createBalanceInquiryHash($hash_in);
+        $txnResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,"balanceInquiry");
+        return $txnResponse;
+    }
 	
 	private function overideConfig($hash_in)
 	{

@@ -49,6 +49,11 @@ require realpath(dirname(__FILE__)) .  '/test_cancelSubscription.php';
 require realpath(dirname(__FILE__)) .  '/test_updateSubscription.php';
 require realpath(dirname(__FILE__)) .  '/test_createPlan.php';
 require realpath(dirname(__FILE__)) .  '/test_updatePlan.php';
+require realpath(dirname(__FILE__)) .  '/test_activate.php';
+require realpath(dirname(__FILE__)) .  '/test_deactivate.php';
+require realpath(dirname(__FILE__)) .  '/test_load.php';
+require realpath(dirname(__FILE__)) .  '/test_unload.php';
+require realpath(dirname(__FILE__)) .  '/test_balanceInquiry.php';
 class FunctionalTests
 {
 	public static function suite()
@@ -78,6 +83,11 @@ class FunctionalTests
 		$suite->addTestSuite('cancelSubscription_FunctionalTest');
 		$suite->addTestSuite('createPlan_FunctionalTest');
 		$suite->addTestSuite('updatePlan_FunctionalTest');
+        $suite->addTestSuite('activate_FunctionalTest');
+        $suite->addTestSuite('deactivate_FunctionalTest');
+        $suite->addTestSuite('load_FunctionalTest');
+        $suite->addTestSuite('unload_FunctionalTest');
+        $suite->addTestSuite('balanceInquiry_FunctionalTest');
 		return $suite;
 	}
 }

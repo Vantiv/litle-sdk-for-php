@@ -104,8 +104,7 @@ class Obj2xml {
 		
 		$xml = simplexml_load_string("<batchRequest />");
 		$xml->addAttribute('merchantId', $config['merchantId']);
-		#$xml->addAttribute('merchantSdk', 'PHP;' . CURRENT_XML_VERSION);
-		
+		$xml->addAttribute('merchantSdk', CURRENT_SDK_VERSION);
 		
 		$xml->addAttribute('authAmount', $counts_and_amounts['auth']['amount']);
 		$xml->addAttribute('numAuths', $counts_and_amounts['auth']['count']);
@@ -149,6 +148,15 @@ class Obj2xml {
 		
 		$xml->addAttribute('numCreatePlans', $counts_and_amounts['createPlan']['count']);
 		$xml->addAttribute('numUpdatePlans', $counts_and_amounts['updatePlan']['count']);
+		
+        $xml->addAttribute('numActivates', $counts_and_amounts['activate']['count']);
+		$xml->addAttribute('activateAmount', $counts_and_amounts['activate']['amount']);
+        $xml->addAttribute('numDeactivates', $counts_and_amounts['deactivate']['count']);
+        $xml->addAttribute('numLoads', $counts_and_amounts['load']['count']);
+		$xml->addAttribute('loadAmount', $counts_and_amounts['load']['amount']);
+        $xml->addAttribute('numUnloads', $counts_and_amounts['unload']['count']);
+		$xml->addAttribute('unloadAmount', $counts_and_amounts['unload']['amount']);
+        $xml->addAttribute('numBalanceInquirys', $counts_and_amounts['balanceInquiry']['count']);
 		
 		$xml->addAttribute('numAccountUpdates', $counts_and_amounts['accountUpdate']['count']);
 		
