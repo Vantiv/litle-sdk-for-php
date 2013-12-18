@@ -23,8 +23,8 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-define('CURRENT_XML_VERSION', '8.22');
-define('CURRENT_SDK_VERSION', 'PHP;8.22.0');
+define('CURRENT_XML_VERSION', '8.23');
+define('CURRENT_SDK_VERSION', 'PHP;8.23.0');
 define('MAX_TXNS_PER_BATCH', 100000);
 define('MAX_TXNS_PER_REQUEST', 500000);
 require_once realpath(dirname(__FILE__)) . '/LitleXmlMapper.php';

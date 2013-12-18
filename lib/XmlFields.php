@@ -196,7 +196,8 @@ class XmlFields
 						"capability"=>(Checker::requiredField(XmlFields::returnArrayValue($hash_in, "capability"))),
 						"entryMode"=>(Checker::requiredField(XmlFields::returnArrayValue($hash_in, "entryMode"))),
 						"cardholderId"=>(Checker::requiredField(XmlFields::returnArrayValue($hash_in, "cardholderId"))),
-						"terminalId"=>XmlFields::returnArrayValue($hash_in,"terminalId")
+						"terminalId"=>XmlFields::returnArrayValue($hash_in,"terminalId"),
+						"catLevel"=>XmlFields::returnArrayValue($hash_in,"catLevel"),
 			);
 			return $hash_out;
 		}
@@ -499,4 +500,16 @@ class XmlFields
 			return $hash_out;
 		}
 	}
+	
+	public static function advancedFraudChecksType($hash_in)
+    {
+        if (isset($hash_in))
+        {
+            $hash_out = array(
+                "threatMetrixSessionId"=>(Checker::requiredField(XmlFields::returnArrayValue($hash_in, "threatMetrixSessionId", 128)))
+            );
+            return $hash_out;
+        }
+    }
+	
 }

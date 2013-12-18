@@ -446,4 +446,53 @@ class auth_UnitTest extends PHPUnit_Framework_TestCase
   		$litleTest->newXML = $mock;
   		$litleTest->authorizationRequest($hash_in);
   	}
+  	
+  	function test_advancedFraudChecks() {
+        $hash_in = array(
+            'card'=>array(
+                    'type'=>'VI',
+                    'number'=>'4100000000000001',
+                    'expDate'=>'1213'
+            ),
+            'orderId'=>'12344',
+            'amount'=>'2',
+            'orderSource'=>'ecommerce',
+            'debtRepayment'=>'true',
+            'advancedFraudChecks'=>array(
+                'threatMetrixSessionId' => 'abc123'
+            )
+        );
+        $mock = $this->getMock('LitleXmlMapper');
+        $mock
+        ->expects($this->once())
+        ->method('request')
+        ->with($this->matchesRegularExpression('/.*<debtRepayment>true<\/debtRepayment><advancedFraudChecks><threatMetrixSessionId>abc123<\/threatMetrixSessionId><\/advancedFraudChecks><\/authorization>.*/'));    
+        $litleTest = new LitleOnlineRequest();
+        $litleTest->newXML = $mock;
+        $litleTest->authorizationRequest($hash_in);
+    }
+    
+    function test_advancedFraudChecks_withoutThreatMetrixSessionId() {
+        //In 8.23, threatMetrixSessionId is optional, but really should be required.  
+        //It will be required in 8.24, so I'm making it required here in the schema.  
+        //There is no good reason to send an advancedFraudChecks element without a threatMetrixSessionId.
+        $hash_in = array(
+            'card'=>array(
+                'type'=>'VI',
+                'number'=>'4100000000000001',
+                'expDate'=>'1213'
+            ),
+            'orderId'=>'12344',
+            'amount'=>'2',
+            'orderSource'=>'ecommerce',
+            'debtRepayment'=>'true',
+            'advancedFraudChecks'=>array(
+            )
+        );
+        
+        $litleTest = new LitleOnlineRequest();
+        $this->setExpectedException('InvalidArgumentException','Missing Required Field: /threatMetrixSessionId/');
+        $retOb = $litleTest->authorizationRequest($hash_in);
+    }
+    
 }

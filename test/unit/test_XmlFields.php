@@ -515,6 +515,20 @@ class Tests_XmlFields extends PHPUnit_Framework_TestCase{
 		$this->assertEquals ( $hash_out ['subscription'] ['startDate'], NULL );
 		$this->assertEquals ( $hash_out ['subscription'] ['amount'], NULL );
 	}
+	
+	function test_pos_has_optional_catLevel()
+    {
+        $hash=array(
+        "capability"=>"123",
+        "entryMode"=>"NO",
+        "catLevel"=>"self service");
+        $hash_out = XmlFields::pos($hash);
+        $this->assertEquals($hash_out["capability"],"123");
+        $this->assertEquals($hash_out["entryMode"], "NO");
+        $this->assertEquals($hash_out["cardholderId"],"REQUIRED");
+        $this->assertEquals($hash_out["catLevel"],"self service");
+    }
+	
 }
 
 

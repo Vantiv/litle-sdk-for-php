@@ -1,5 +1,10 @@
 = LitleOnline CHANGELOG
 
+== Version 8.23.0 (December 18, 2013)
+* Feature: advancedFraudChecks now available in authorization and sale 
+* Feature: catLevel (Cardholder Activated Terminal) now available in pos
+* Feature: advancedFraudResults now available in fraudResult
+
 == Version 8.22.0 (December 18, 2013)
 * Feature: Support for the following new gift card transactions:
 ActivateReversal, DeactivateReversal, LoadReversal, RefundReversal,
