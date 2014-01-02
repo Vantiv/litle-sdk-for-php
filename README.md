@@ -22,20 +22,16 @@ Please contact [Litle &amp; Co.](http://www.litle.com) to receive valid merchant
 
 SDK PHP Dependencies
 --------------
--pdo
-
--xml
-
--mysql
-
--gd
+Up to date list available at [Packagist](https://packagist.org/packages/litle/payments-sdk)
 
 Setup
 -----
 
 1) Install the LitleOnline PHP SDK from git. 
 
->git clone git://github.com/LitleCo/litle-sdk-for-php.git
+> git clone git://github.com/LitleCo/litle-sdk-for-php.git
+
+> php ~/composer.phar install
 
 
 2) Once the SDK is downloaded run our setup program to generate a configuration file.
@@ -55,6 +51,7 @@ Running the above commands will create a configuration file in the lib directory
 4.) Create a php file similar to: 
 
 ```php
+<?php
 require_once realpath(dirname(__FILE__)) . '/../lib/LitleOnline.php';  
     // Visa $10.00 sale
     $hash_in = array(
@@ -77,6 +74,7 @@ echo ("Litle Transaction ID: " . XMLParser::get_node($saleResponse,'litleTxnId')
 
 As of 8.13.1, you may also use a tree-oriented style to get the response values:
 ```php
+<?php
 require_once realpath(dirname(__FILE__)) . '/../lib/LitleOnline.php';  
     // Visa $10.00 sale
     $hash_in = array(
@@ -98,7 +96,19 @@ echo ("Litle Transaction ID: " . $saleResponse->saleResponse->litleTxnId);
 ```
 
 
-NOTE: you may have to change the path to match that of your filesystems
+NOTE: you may have to change the path to match that of your filesystems.  
+
+If you get an error like:
+```bash
+PHP Fatal error:  require_once(): Failed opening required '/home/gdake/git/litle-sdk-for-php/../lib/LitleONline.php' (include_path='.:/usr/share/pear:/usr/share/php') in /home/gdake/git/litle-sdk-for-php/foo.php on line 2
+```
+You need to change the second line of your script to load the real location of LitleOnline.php
+
+If you get an error like:
+```bash
+PHP Fatal error:  require(): Failed opening required '/home/gdake/litle-sdk-for-php/lib/../vendor/autoload.php' (include_path='.:/usr/share/php:/usr/share/pear') in /home/gdake/litle-sdk-for-php/lib/LitleOnline.php on line 42
+```
+You probably had a problem with composer.  You can safely remove line 42 if you are not using batch processing, or you can edit it to point at our dependencies that you've downloaded in another way.
 
 5) Next run this file using php on the command line or inside a browser. You should see the following result provided you have connectivity to the Litle certification environment.  You will see an HTTP error if you don't have access to the Litle URL
 
