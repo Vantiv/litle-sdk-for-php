@@ -39,4 +39,4 @@ require_once realpath(dirname(__FILE__)) . '/BatchRequest.php';
 require_once realpath(dirname(__FILE__)) . '/LitleRequest.php';
 require_once realpath(dirname(__FILE__)) . '/Transactions.php';
 require_once realpath(dirname(__FILE__)) . '/LitleResponseProcessor.php';
-require realpath(dirname(__FILE__)) . '/../vendor/autoload.php';
+// require realpath(dirname(__FILE__)) . '/../vendor/autoload.php';
