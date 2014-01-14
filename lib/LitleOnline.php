@@ -34,6 +34,7 @@ require_once realpath(dirname(__FILE__)) . '/XmlParser.php';
 require_once realpath(dirname(__FILE__)) . '/Obj2xml.php';
 require_once realpath(dirname(__FILE__)) . '/Checker.php';
 require_once realpath(dirname(__FILE__)) . '/LitleOnlineRequest.php';
+require_once realpath(dirname(__FILE__)) . '/LitleOnlineResponse.php';
 require_once realpath(dirname(__FILE__)) . '/UrlMapper.php';
 require_once realpath(dirname(__FILE__)) . '/BatchRequest.php';
 require_once realpath(dirname(__FILE__)) . '/LitleRequest.php';
