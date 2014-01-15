@@ -510,9 +510,9 @@ class LitleOnlineRequest
 		Checker::choice($choice2);
 		$request = Obj2xml::toXml($hash,$hash_config, $type);
 
-		$litleOnlineResponse = $this->newXML->request($request,$hash_config);
+		$litleOnlineResponse = $this->newXML->request($request,$hash_config,($this->responseType ? true : false));
 
-		if ($this->responseType == LitleOnlineRequest::TYPE_LITLE_ONLINE_RESPONSE)
+		if ($this->responseType === LitleOnlineRequest::TYPE_LITLE_ONLINE_RESPONSE)
 		{
 			return new LitleOnlineResponse($litleOnlineResponse);
 		}
