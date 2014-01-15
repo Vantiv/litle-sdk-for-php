@@ -492,7 +492,7 @@ class LitleOnlineRequest
         return $txnResponse;
     }
 	
-	private static function overideConfig($hash_in)
+	private static function overrideConfig($hash_in)
 	{
         $hash_config = array();
         $names = explode(',', LITLE_CONFIG_LIST);
@@ -531,7 +531,7 @@ class LitleOnlineRequest
 	private function processRequest($hash_out, $hash_in, $type, $choice1 = null, $choice2 = null)
 	{
 	
-		$hash_config = LitleOnlineRequest::overideConfig($hash_in);
+		$hash_config = LitleOnlineRequest::overrideConfig($hash_in);
 		
 		$hash = LitleOnlineRequest::getOptionalAttributes($hash_in,$hash_out);
 		Checker::choice($choice1);
