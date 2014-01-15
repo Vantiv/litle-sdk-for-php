@@ -25,17 +25,45 @@
 
 class LitleOnlineRequest
 {
-	private $responseType = false;
-
-    const TYPE_DOM_OBJECT = false;
-    const TYPE_SIMPLE_XML = true;
-    const TYPE_LITLE_ONLINE_RESPONSE = "LitleOnlineResponse";
-
-	public function __construct($responseType = LitleOnlineRequest::TYPE_LITLE_ONLINE_RESPONSE)
+	private $useSimpleXml = false;
+	
+	public function __construct($treeResponse=false)
 	{
-		$this->responseType = $responseType;
+		$this->useSimpleXml = $treeResponse;	
 		$this->newXML = new LitleXmlMapper();
 	}
+
+    public static function getAddressResponse($code)
+    {
+        $codes = array("00" => "5-Digit zip and address match",
+                       "01" => "9-Digit zip and address match",
+                       "02" => "Postal code and address match",
+                       "10" => "5-Digit zip matches, address does not match",
+                       "11" => "9-Digit zip matches, address does not match",
+                       "12" => "Zip does not match, address matches",
+                       "13" => "Postal code does not match, address matches",
+                       "14" => "Postal code matches, address not verified",
+                       "20" => "Neither zip nor address match",
+                       "30" => "AVS service not supported by issuer",
+                       "31" => "AVS system not available",
+                       "32" => "Address unavailable",
+                       "33" => "General error",
+                       "34" => "AVS not performed",
+                       "40" => "Address failed Litle & Co. edit checks");
+
+        return (isset($codes[$code]) ? $codes[$code] : "Unknown Address Response");
+    }
+
+    public static function getCardResponse($code)
+    {
+        $codes = array("M" => "Match",
+                       "N" => "No Match",
+                       "P" => "Not Processed",
+                       "S" => "Security code should be on the card, but the merchant has indicated it is not present",
+                       "U" => "Issuer is not certified for CVV2/CVC2/CID processing");
+
+        return (isset($codes[$code]) ? $codes[$code] : "Unknown Address Response");
+    }
 
 	public function authorizationRequest($hash_in)
 	{
@@ -509,18 +537,8 @@ class LitleOnlineRequest
 		Checker::choice($choice1);
 		Checker::choice($choice2);
 		$request = Obj2xml::toXml($hash,$hash_config, $type);
-
-		$litleOnlineResponse = $this->newXML->request($request,$hash_config,($this->responseType ? true : false));
-
-		if ($this->responseType === LitleOnlineRequest::TYPE_LITLE_ONLINE_RESPONSE)
-		{
-			return new LitleOnlineResponse($litleOnlineResponse);
-		}
-		else
-		{
-			return $litleOnlineResponse;
-		}
+		$litleOnlineResponse = $this->newXML->request($request,$hash_config,$this->useSimpleXml);
+		return $litleOnlineResponse;
 	}
 
 }
-
