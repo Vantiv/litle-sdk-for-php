@@ -199,9 +199,15 @@ class Obj2xml {
 
 	public static function getConfig($data)
 	{
-		@$config_array =parse_ini_file('litle_SDK_config.ini'); //TODO Use an empty config_array if the file doesn't exist
-		$names = array('user','password','merchantId','timeout','proxy','reportGroup','version','url', 
-		'litle_requests_path', 'batch_requests_path', 'sftp_username', 'sftp_password', 'batch_url', 'tcp_port', 'tcp_ssl', 'tcp_timeout', 'print_xml');
+		@$config_array =parse_ini_file('litle_SDK_config.ini');
+
+        if (empty($config_array))
+        {
+            $config_array = array();
+        }
+
+		$names = explode(',', LITLE_CONFIG_LIST);
+
 		foreach($names as $name)
 		{
 			if (isset($data[$name]))

@@ -27,6 +27,7 @@ define('CURRENT_XML_VERSION', '8.23');
 define('CURRENT_SDK_VERSION', 'PHP;8.23.0');
 define('MAX_TXNS_PER_BATCH', 100000);
 define('MAX_TXNS_PER_REQUEST', 500000);
+define('LITLE_CONFIG_LIST', 'user,password,merchantId,timeout,proxy,reportGroup,version,url,litle_requests_path,batch_requests_path,sftp_username,sftp_password,batch_url,tcp_port,tcp_ssl,tcp_timeout,print_xml');
 require_once realpath(dirname(__FILE__)) . '/LitleXmlMapper.php';
 require_once realpath(dirname(__FILE__)) . '/XmlFields.php';
 require_once realpath(dirname(__FILE__)) . '/Communication.php';

@@ -27,13 +27,13 @@ class LitleOnlineRequest
 {
 	private $responseType = false;
 
-    const TYPE_TREE = true;
+    const TYPE_DOM_OBJECT = false;
     const TYPE_SIMPLE_XML = true;
     const TYPE_LITLE_ONLINE_RESPONSE = "LitleOnlineResponse";
 
-	public function __construct($responseType = LitleOnlineRequest)
+	public function __construct($responseType = LitleOnlineRequest::TYPE_LITLE_ONLINE_RESPONSE)
 	{
-		$this->responseType = $treeResponse;
+		$this->responseType = $responseType;
 		$this->newXML = new LitleXmlMapper();
 	}
 
@@ -466,17 +466,18 @@ class LitleOnlineRequest
 	
 	private static function overideConfig($hash_in)
 	{
-		$hash_out = array(
-		'user'=>XmlFields::returnArrayValue($hash_in,'user'),
-		'password'=>XmlFields::returnArrayValue($hash_in,'password'),
-		'merchantId'=>XmlFields::returnArrayValue($hash_in,'merchantId'),
-		'reportGroup'=>XmlFields::returnArrayValue($hash_in,'reportGroup'),
-		'version'=>XmlFields::returnArrayValue($hash_in,'version'),
-		'url'=>XmlFields::returnArrayValue($hash_in,'url'),
-		'timeout'=>XmlFields::returnArrayValue($hash_in,'timeout'),
-		'proxy'=>XmlFields::returnArrayValue($hash_in,'proxy'),
-		'print_xml'=>XmlFields::returnArrayValue($hash_in,'print_xml'));
-		return $hash_out;
+        $hash_config = array();
+        $names = explode(',', LITLE_CONFIG_LIST);
+
+        foreach ($names as $name)
+        {
+            if (array_key_exists($name, $hash_in))
+            {
+                $hash_config[$name] = XmlFields::returnArrayValue($hash_in, $name);
+            }
+        }
+
+        return $hash_config;
 	}
 	
 	private static function getOptionalAttributes($hash_in,$hash_out)
@@ -502,7 +503,7 @@ class LitleOnlineRequest
 	private function processRequest($hash_out, $hash_in, $type, $choice1 = null, $choice2 = null)
 	{
 	
-		$hash_config = LitleOnlineRequest::overideconfig($hash_in);
+		$hash_config = LitleOnlineRequest::overideConfig($hash_in);
 		
 		$hash = LitleOnlineRequest::getOptionalAttributes($hash_in,$hash_out);
 		Checker::choice($choice1);
