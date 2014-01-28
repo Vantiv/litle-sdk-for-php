@@ -199,7 +199,12 @@ class Obj2xml {
 
 	public static function getConfig($data)
 	{
-		@$config_array =parse_ini_file('litle_SDK_config.ini');
+        $config_array = null;
+
+        if (file_exists('litle_SDK_config.ini'))
+        {
+            @$config_array =parse_ini_file('litle_SDK_config.ini');
+        }
 
         if (empty($config_array))
         {
