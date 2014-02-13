@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+== version 8.24.0 (February 13, 2014)
+* Feature: add triggered rules for advancedFraudCheckResult
+
 == Version 8.23.0 (December 18, 2013)
 * Feature: advancedFraudChecks now available in authorization and sale 
 * Feature: catLevel (Cardholder Activated Terminal) now available in pos
