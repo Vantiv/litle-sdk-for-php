@@ -511,4 +511,22 @@ class XmlFields
             return $hash_out;
         }
     }
+
+	public static function mposType($hash_in)
+	{
+		if(isset($hash_in))
+		{
+			$hash_out = array(
+   			"ksn"=>(Checker::requiredField(XmlFields::returnArrayValue($hash_in, "ksn", 1028))),
+			"formatId"=>(Checker::requiredField(XmlFields::returnArrayValue($hash_in, "formatId", 1028))),
+			"encryptedTrack"=>(Checker::requiredField(XmlFields::returnArrayValue($hash_in, "encryptedTrack", 1028))),
+			"track1Status"=>(Checker::requiredField(XmlFields::returnArrayValue($hash_in, "track1Status", 1028))),
+			"track2Status"=>(Checker::requiredField(XmlFields::returnArrayValue($hash_in, "track2Status", 1028)))
+			);	
+			return $hash_out;
+		}		
+		
+
+
+	}
 }

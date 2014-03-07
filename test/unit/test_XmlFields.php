@@ -528,6 +528,21 @@ class Tests_XmlFields extends PHPUnit_Framework_TestCase{
         $this->assertEquals($hash_out["cardholderId"],"REQUIRED");
         $this->assertEquals($hash_out["catLevel"],"self service");
     }
+
+	function test_mpos_required()
+	{
+		$hash_in = array('ksn' => '123', 'formatId' =>'30', 'encryptedTrack' => 'Encrypted Track', 'track1Status' =>'2', 'track2Status' => '1');	
+		$hash_out = XmlFields::mposType($hash_in);
+		$this->assertEquals($hash_out["ksn"],"123");
+		$this->assertEquals($hash_out["formatId"],"30");
+		$this->assertEquals($hash_out["encryptedTrack"],"Encrypted Track");
+		$this->assertEquals($hash_out["track1Status"],"2");
+		$this->assertEquals($hash_out["track2Status"],"1");
+
+
+
+	
+	}
 	
 }
 
