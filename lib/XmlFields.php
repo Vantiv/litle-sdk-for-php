@@ -511,17 +511,4 @@ class XmlFields
             return $hash_out;
         }
     }
-	
-	public static function advacnedFraudCheckResultsType($hash_in)
-	{
-		if (isset($hash_in))
-		{
-			$hash_out = array(
-				"deviceReviewStatus"=>(Checker::requireField(XmlFields::returnArrayValue($hash_in, "deviceReviewStatus"))),
-				"deviceReputationScore"=>(Checker::requireField(XmlFields::returnArrayValue($hash_in, "deviceReputationScore"))),
-				"triggeredRule"=>(Checker::requireField(XmlFields::returnArrayValue($hash_in, "triggeredRule"))),
-			);
-			return $hash_out;
-		};
-	}
 }
