@@ -212,7 +212,7 @@ class Obj2xml {
         }
 
 		$names = explode(',', LITLE_CONFIG_LIST);
-                var_dump($names) 
+                var_dump($names);
 		foreach($names as $name)
 		{
 			if (isset($data[$name]))
