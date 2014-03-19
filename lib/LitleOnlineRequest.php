@@ -33,6 +33,38 @@ class LitleOnlineRequest
 		$this->newXML = new LitleXmlMapper();
 	}
 
+    public static function getAddressResponse($code)
+    {
+        $codes = array("00" => "5-Digit zip and address match",
+                       "01" => "9-Digit zip and address match",
+                       "02" => "Postal code and address match",
+                       "10" => "5-Digit zip matches, address does not match",
+                       "11" => "9-Digit zip matches, address does not match",
+                       "12" => "Zip does not match, address matches",
+                       "13" => "Postal code does not match, address matches",
+                       "14" => "Postal code matches, address not verified",
+                       "20" => "Neither zip nor address match",
+                       "30" => "AVS service not supported by issuer",
+                       "31" => "AVS system not available",
+                       "32" => "Address unavailable",
+                       "33" => "General error",
+                       "34" => "AVS not performed",
+                       "40" => "Address failed Litle & Co. edit checks");
+
+        return (isset($codes[$code]) ? $codes[$code] : "Unknown Address Response");
+    }
+
+    public static function getCardResponse($code)
+    {
+        $codes = array("M" => "Match",
+                       "N" => "No Match",
+                       "P" => "Not Processed",
+                       "S" => "Security code should be on the card, but the merchant has indicated it is not present",
+                       "U" => "Issuer is not certified for CVV2/CVC2/CID processing");
+
+        return (isset($codes[$code]) ? $codes[$code] : "Unknown Address Response");
+    }
+
 	public function authorizationRequest($hash_in)
 	{
 		if (isset($hash_in['litleTxnId'])){
@@ -71,9 +103,8 @@ class LitleOnlineRequest
 			'advancedFraudChecks'=>XmlFields::advancedFraudChecksType(XmlFields::returnArrayValue($hash_in,'advancedFraudChecks')),
 			);
 		}
-
 		$choice_hash = array(XmlFields::returnArrayValue($hash_out,'card'),XmlFields::returnArrayValue($hash_out,'paypal'),XmlFields::returnArrayValue($hash_out,'token'),XmlFields::returnArrayValue($hash_out,'paypage'),XmlFields::returnArrayValue($hash_out,'mpos'));
-		$authorizationResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'authorization',$choice_hash);
+                $authorizationResponse = $this->processRequest($hash_out,$hash_in,'authorization',$choice_hash);
 		return $authorizationResponse;
 	}
 
@@ -118,7 +149,7 @@ class LitleOnlineRequest
 
 		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage'],$hash_out['mpos']);
 		$choice2_hash= array($hash_out['fraudCheck'],$hash_out['cardholderAuthentication']);
-		$saleResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'sale',$choice_hash,$choice2_hash);
+		$saleResponse = $this->processRequest($hash_out,$hash_in,'sale',$choice_hash,$choice2_hash);
 		return $saleResponse;
 	}
 
@@ -130,7 +161,7 @@ class LitleOnlineRequest
 			'surchargeAmount' =>XmlFields::returnArrayValue($hash_in,'surchargeAmount'),
 			'payPalNotes'=>XmlFields::returnArrayValue($hash_in,'payPalNotes'),
 			'actionReason'=>XmlFields::returnArrayValue($hash_in,'actionReason'));
-		$authReversalResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'authReversal');
+		$authReversalResponse = $this->processRequest($hash_out,$hash_in,'authReversal');
 		return $authReversalResponse;
 	}
 
@@ -160,7 +191,7 @@ class LitleOnlineRequest
 		);
 
 		$choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage'],$hash_out['mpos']);
-		$creditResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'credit',$choice_hash);
+		$creditResponse = $this->processRequest($hash_out,$hash_in,'credit',$choice_hash);
 		return $creditResponse;
 	}
 
@@ -175,7 +206,7 @@ class LitleOnlineRequest
 		);
 
 		$choice_hash = array($hash_out['accountNumber'],$hash_out['echeckForToken'],$hash_out['paypageRegistrationId']);
-		$registerTokenResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'registerTokenRequest',$choice_hash);
+		$registerTokenResponse = $this->processRequest($hash_out,$hash_in,'registerTokenRequest',$choice_hash);
 		return $registerTokenResponse;
 	}
 
@@ -202,7 +233,7 @@ class LitleOnlineRequest
 		);
 
 		$choice_hash = array(XmlFields::returnArrayValue($hash_out,'card'),XmlFields::returnArrayValue($hash_out,'paypal'),XmlFields::returnArrayValue($hash_out,'token'),XmlFields::returnArrayValue($hash_out,'paypage'),XmlFields::returnArrayValue($hash_out,'mpos'));
-		$forceCaptureResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'forceCapture',$choice_hash);
+		$forceCaptureResponse = $this->processRequest($hash_out,$hash_in,'forceCapture',$choice_hash);
 		return $forceCaptureResponse;
 	}
 
@@ -217,7 +248,7 @@ class LitleOnlineRequest
 		'processingInstructions'=>XmlFields::processingInstructions(XmlFields::returnArrayValue($hash_in,'processingInstructions')),
 		'payPalOrderComplete'=>XmlFields::returnArrayValue($hash_in,'payPalOrderComplete'),
 		'payPalNotes' =>XmlFields::returnArrayValue($hash_in,'payPalNotes'));
-		$captureResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'capture');
+		$captureResponse = $this->processRequest($hash_out,$hash_in,'capture');
 		return $captureResponse;
 	}
 
@@ -247,7 +278,7 @@ class LitleOnlineRequest
 		);
 
 		$choice_hash = array($hash_out['card'],$hash_out['token'],$hash_out['paypage'],$hash_out['mpos']);
-		$captureGivenAuthResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'captureGivenAuth',$choice_hash);
+		$captureGivenAuthResponse = $this->processRequest($hash_out,$hash_in,'captureGivenAuth',$choice_hash);
 		return $captureGivenAuthResponse;
 	}
 
@@ -261,7 +292,7 @@ class LitleOnlineRequest
 		);
 		
 		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
-		$echeckRedepositResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'echeckRedeposit',$choice_hash);
+		$echeckRedepositResponse = $this->processRequest($hash_out,$hash_in,'echeckRedeposit',$choice_hash);
 		return $echeckRedepositResponse;
 	}
 
@@ -281,7 +312,7 @@ class LitleOnlineRequest
 
 		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
 
-		$echeckSaleResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'echeckSale',$choice_hash);
+		$echeckSaleResponse = $this->processRequest($hash_out,$hash_in,'echeckSale',$choice_hash);
 		return $echeckSaleResponse;
 	}
 	
@@ -302,7 +333,7 @@ class LitleOnlineRequest
 			'customBilling'=>XmlFields::customBilling(XmlFields::returnArrayValue($hash_in,'customBilling')));
 
 		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
-		$echeckCreditResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'echeckCredit',$choice_hash);
+		$echeckCreditResponse = $this->processRequest($hash_out,$hash_in,'echeckCredit',$choice_hash);
 		return $echeckCreditResponse;
 	}
 
@@ -322,7 +353,7 @@ class LitleOnlineRequest
 		
 		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
 		$choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
-		$echeckVerificationResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'echeckVerification',$choice_hash);
+		$echeckVerificationResponse = $this->processRequest($hash_out,$hash_in,'echeckVerification',$choice_hash);
 		return $echeckVerificationResponse;
 	}
 
@@ -332,7 +363,7 @@ class LitleOnlineRequest
 		'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
 	    'processingInstructions'=>XmlFields::processingInstructions(XmlFields::returnArrayValue($hash_in,'processingInstructions')));
 
-		$voidResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,'void');
+		$voidResponse = $this->processRequest($hash_out,$hash_in,'void');
 		return $voidResponse;
 	}
 
@@ -341,7 +372,7 @@ class LitleOnlineRequest
 		$hash_out = array(
 		'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
 		);
-		$echeckVoidResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,"echeckVoid");
+		$echeckVoidResponse = $this->processRequest($hash_out,$hash_in,"echeckVoid");
 		return $echeckVoidResponse;
 	}
 
@@ -350,7 +381,7 @@ class LitleOnlineRequest
         $hash_out = array(
         'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
         );
-        $response = LitleOnlineRequest::processRequest($hash_out,$hash_in,"depositReversal");
+        $response = $this->processRequest($hash_out,$hash_in,"depositReversal");
         return $response;
     }
     public function refundReversalRequest($hash_in)
@@ -358,7 +389,7 @@ class LitleOnlineRequest
         $hash_out = array(
         'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
         );
-        $response = LitleOnlineRequest::processRequest($hash_out,$hash_in,"refundReversal");
+        $response = $this->processRequest($hash_out,$hash_in,"refundReversal");
         return $response;
     }
 	public function activateReversalRequest($hash_in)
@@ -366,7 +397,7 @@ class LitleOnlineRequest
         $hash_out = array(
         'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
         );
-        $response = LitleOnlineRequest::processRequest($hash_out,$hash_in,"activateReversal");
+        $response = $this->processRequest($hash_out,$hash_in,"activateReversal");
         return $response;
     }
 	public function deactivateReversalRequest($hash_in)
@@ -374,7 +405,7 @@ class LitleOnlineRequest
         $hash_out = array(
         'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
         );
-        $response = LitleOnlineRequest::processRequest($hash_out,$hash_in,"deactivateReversal");
+        $response = $this->processRequest($hash_out,$hash_in,"deactivateReversal");
         return $response;
     }
 	public function loadReversalRequest($hash_in)
@@ -382,7 +413,7 @@ class LitleOnlineRequest
         $hash_out = array(
         'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
         );
-        $response = LitleOnlineRequest::processRequest($hash_out,$hash_in,"loadReversal");
+        $response = $this->processRequest($hash_out,$hash_in,"loadReversal");
         return $response;
     }
 	public function unloadReversalRequest($hash_in)
@@ -390,7 +421,7 @@ class LitleOnlineRequest
         $hash_out = array(
         'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
         );
-        $response = LitleOnlineRequest::processRequest($hash_out,$hash_in,"unloadReversal");
+        $response = $this->processRequest($hash_out,$hash_in,"unloadReversal");
         return $response;
     }
 	
@@ -401,7 +432,7 @@ class LitleOnlineRequest
 				'litleToken' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleToken')),
 				'cardValidationNum' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'cardValidationNum')),
 		);
-		$updateCardValidationNumOnTokenResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,"updateCardValidationNumOnToken");
+		$updateCardValidationNumOnTokenResponse = $this->processRequest($hash_out,$hash_in,"updateCardValidationNumOnToken");
 		return $updateCardValidationNumOnTokenResponse;
 	}
 
@@ -409,78 +440,79 @@ class LitleOnlineRequest
     {
         $hash_out = Transactions::createUpdateSubscriptionHash($hash_in);
         $choice_hash = array(XmlFields::returnArrayValue($hash_out,'card'),XmlFields::returnArrayValue($hash_out,'token'),XmlFields::returnArrayValue($hash_out,'paypage'));
-        $updateSubscriptionResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,"updateSubscription");
+        $updateSubscriptionResponse = $this->processRequest($hash_out,$hash_in,"updateSubscription");
         return $updateSubscriptionResponse;
     }
 
     public function cancelSubscription($hash_in)
     {
         $hash_out = Transactions::createCancelSubscriptionHash($hash_in);
-        $cancelSubscriptionResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,"cancelSubscription");
+        $cancelSubscriptionResponse = $this->processRequest($hash_out,$hash_in,"cancelSubscription");
         return $cancelSubscriptionResponse;
     }
     
     public function updatePlan($hash_in)
     {
         $hash_out = Transactions::createUpdatePlanHash($hash_in);
-        $updatePlanResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,"updatePlan");
+        $updatePlanResponse = $this->processRequest($hash_out,$hash_in,"updatePlan");
         return $updatePlanResponse;
     }
 
     public function createPlan($hash_in)
     {
         $hash_out = Transactions::createCreatePlanHash($hash_in);
-        $createPlanResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,"createPlan");
+        $createPlanResponse = $this->processRequest($hash_out,$hash_in,"createPlan");
         return $createPlanResponse;
     }
     
     public function activate($hash_in)
     {
         $hash_out = Transactions::createActivateHash($hash_in);
-        $txnResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,"activate");
+        $txnResponse = $this->processRequest($hash_out,$hash_in,"activate");
         return $txnResponse;
     }
     public function deactivate($hash_in)
     {
         $hash_out = Transactions::createDeactivateHash($hash_in);
-        $txnResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,"deactivate");
+        $txnResponse = $this->processRequest($hash_out,$hash_in,"deactivate");
         return $txnResponse;
     }
     public function load($hash_in)
     {
         $hash_out = Transactions::createLoadHash($hash_in);
-        $txnResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,"load");
+        $txnResponse = $this->processRequest($hash_out,$hash_in,"load");
         return $txnResponse;
     }
     public function unload($hash_in)
     {
         $hash_out = Transactions::createUnloadHash($hash_in);
-        $txnResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,"unload");
+        $txnResponse = $this->processRequest($hash_out,$hash_in,"unload");
         return $txnResponse;
     }
     public function balanceInquiry($hash_in)
     {
         $hash_out = Transactions::createBalanceInquiryHash($hash_in);
-        $txnResponse = LitleOnlineRequest::processRequest($hash_out,$hash_in,"balanceInquiry");
+        $txnResponse = $this->processRequest($hash_out,$hash_in,"balanceInquiry");
         return $txnResponse;
     }
 	
-	private function overideConfig($hash_in)
+	private static function overrideConfig($hash_in)
 	{
-		$hash_out = array(
-		'user'=>XmlFields::returnArrayValue($hash_in,'user'),
-		'password'=>XmlFields::returnArrayValue($hash_in,'password'),
-		'merchantId'=>XmlFields::returnArrayValue($hash_in,'merchantId'),
-		'reportGroup'=>XmlFields::returnArrayValue($hash_in,'reportGroup'),
-		'version'=>XmlFields::returnArrayValue($hash_in,'version'),
-		'url'=>XmlFields::returnArrayValue($hash_in,'url'),
-		'timeout'=>XmlFields::returnArrayValue($hash_in,'timeout'),
-		'proxy'=>XmlFields::returnArrayValue($hash_in,'proxy'),
-		'print_xml'=>XmlFields::returnArrayValue($hash_in,'print_xml'));
-		return $hash_out;
+        $hash_config = array();
+        $names = explode(',', LITLE_CONFIG_LIST);
+
+        foreach ($names as $name)
+        {
+            if (array_key_exists($name, $hash_in))
+            {
+                $hash_config[$name] = XmlFields::returnArrayValue($hash_in, $name);
+            }
+        }
+
+        return $hash_config;
 	}
 	
-	private function getOptionalAttributes($hash_in,$hash_out)
+	private static function getOptionalAttributes($hash_in,$hash_out)
 	{
 		if(isset($hash_in['merchantSdk'])) {
 			$hash_out['merchantSdk'] = XmlFields::returnArrayValue($hash_in,'merchantSdk');
@@ -503,7 +535,7 @@ class LitleOnlineRequest
 	private function processRequest($hash_out, $hash_in, $type, $choice1 = null, $choice2 = null)
 	{
 	
-		$hash_config = LitleOnlineRequest::overideconfig($hash_in);
+		$hash_config = LitleOnlineRequest::overrideConfig($hash_in);
 		
 		$hash = LitleOnlineRequest::getOptionalAttributes($hash_in,$hash_out);
 		Checker::choice($choice1);
@@ -514,4 +546,3 @@ class LitleOnlineRequest
 	}
 
 }
-
