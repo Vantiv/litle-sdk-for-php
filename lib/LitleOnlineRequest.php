@@ -60,7 +60,8 @@ class LitleOnlineRequest
                        "N" => "No Match",
                        "P" => "Not Processed",
                        "S" => "Security code should be on the card, but the merchant has indicated it is not present",
-                       "U" => "Issuer is not certified for CVV2/CVC2/CID processing");
+                       "U" => "Issuer is not certified for CVV2/CVC2/CID processing",
+                       ""  => "Check was not done for an unspecified reason");
 
         return (isset($codes[$code]) ? $codes[$code] : "Unknown Address Response");
     }
