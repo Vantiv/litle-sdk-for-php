@@ -540,7 +540,9 @@ class LitleOnlineRequest
                 if($type == 'updateSubscription' || $type == 'cancelSubscription') {
 
 			if(array_key_exists('reportGroup',$hash_config)) {
-                         $hash_config  = array_diff($hash_config, array("xyz"=>$hash_config['reportGroup']));
+//                         $hash_config  = array_diff($hash_config, array("xyz"=>$hash_config['reportGroup']));
+                         unset($hash_config['reportGroup']);
+                         $hash_config = array_filter($hash_config);   
 			}
 //                      unset($hash_config['reportGroup']);
                 }
