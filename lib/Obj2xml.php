@@ -200,7 +200,8 @@ class Obj2xml {
 	{
         $config_array = null;
 
-        if (file_exists('litle_SDK_config.ini'))
+	$ini_file = realpath(dirname(__FILE__)) . '/litle_SDK_config.ini';
+        if (file_exists($ini_file))
         {
             @$config_array =parse_ini_file('litle_SDK_config.ini');
         }
@@ -211,7 +212,6 @@ class Obj2xml {
         }
 
 		$names = explode(',', LITLE_CONFIG_LIST);
-                var_dump($names);
 		foreach($names as $name)
 		{
 			if (isset($data[$name]))
