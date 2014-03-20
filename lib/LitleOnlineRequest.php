@@ -536,6 +536,10 @@ class LitleOnlineRequest
 	{
 	
 		$hash_config = LitleOnlineRequest::overrideConfig($hash_in);
+
+                if($type == 'updateSubscription' || $type == 'cancelSubscription') {
+                      unset($hash_config['reportGroup']);
+                }
 		
 		$hash = LitleOnlineRequest::getOptionalAttributes($hash_in,$hash_out);
 		Checker::choice($choice1);
