@@ -538,9 +538,9 @@ class LitleOnlineRequest
 		$hash_config = LitleOnlineRequest::overrideConfig($hash_in);
 
                 if($type == 'updateSubscription' || $type == 'cancelSubscription') {
-		      var_dump("Before : " . $hash_config)
+		      var_dump("Before : " . $hash_config);
                       $hash_config  = array_diff($hash_config, array($hash_config['reportGroup']));
-		      var_dump("AFTER : " . $hash_config)
+		      var_dump("AFTER : " . $hash_config);
                 }
 		
 		$hash = LitleOnlineRequest::getOptionalAttributes($hash_in,$hash_out);
