@@ -540,7 +540,7 @@ class LitleOnlineRequest
                 if($type == 'updateSubscription' || $type == 'cancelSubscription') {
 		      var_dump("Before : " . $hash_config['reportGroup']);
 //                      $hash_config  = array_diff($hash_config, array($hash_config['reportGroup']));
-                      unset($hash_config['reportGroup']));
+                      unset($hash_config['reportGroup']);
 		      var_dump("AFTER : " . $hash_config['reportGroup']);
                 }
 		
