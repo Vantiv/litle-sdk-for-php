@@ -233,7 +233,7 @@ class Obj2xml {
 				}
 			}
 		}
-        if($type == 'updateSubscription' || $type == 'cancelSubscription') {
+        if($type == 'updateSubscription' || $type == 'cancelSubscription' || $type == 'createPlan' || $type == 'updatePlan') {
             if(array_key_exists('reportGroup',$config)) {
                 unset($config['reportGroup']);
                 $config = array_filter($config);   
