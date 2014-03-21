@@ -27,7 +27,7 @@ class Obj2xml {
 
 	public static function toXml($data, $hash_config, $type, $rootNodeName = 'litleOnlineRequest')
 	{
-		$config= Obj2xml::getConfig($hash_config);
+		$config= Obj2xml::getConfig($hash_config, $type);
 		$xml = simplexml_load_string("<?xml version='1.0' encoding='utf-8'?><$rootNodeName />");
 		$xml-> addAttribute('merchantId',$config["merchantId"]);
 		$xml-> addAttribute('version',CURRENT_XML_VERSION);
@@ -196,7 +196,7 @@ class Obj2xml {
 		}
 	}
 
-	public static function getConfig($data)
+	public static function getConfig($data, $type=NULL)
 	{
         $config_array = null;
 
@@ -233,6 +233,13 @@ class Obj2xml {
 				}
 			}
 		}
+        if($type == 'updateSubscription' || $type == 'cancelSubscription') {
+            if(array_key_exists('reportGroup',$config)) {
+                unset($config['reportGroup']);
+                $config = array_filter($config);   
+            }
+        }
+		
 		return $config;
 	}
 }
