@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit colors="true">
+	<testsuites>
+		<testsuite name="Unit_Test">
+			<directory>./litle/sdk/Test/unit/</directory>
+		</testsuite>
+		<testsuite name="Functional_Test">
+			<directory>./litle/sdk/Test/functional/</directory>
+		</testsuite>
+		<testsuite name="Certification_Test">
+			<directory>./litle/sdk/Test/certification/</directory>
+		</testsuite>
+	</testsuites>
+</phpunit>
