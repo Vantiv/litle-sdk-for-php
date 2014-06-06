@@ -3,5 +3,6 @@
 
 .DS_Store
 /.buildpath
+reports/
 /vendor
 composer.lock
