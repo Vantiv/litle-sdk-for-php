@@ -68,8 +68,8 @@ $initialize = new LitleOnlineRequest();
 $saleResponse = $initialize->saleRequest($hash_in);
 
 // Display Result 
-echo ("Message: " . XMLParser::get_node($saleResponse,'message') . "<br>");
-echo ("Litle Transaction ID: " . XMLParser::get_node($saleResponse,'litleTxnId'));
+echo ("Message: " . XMLParser::getNode($saleResponse,'message') . "<br>");
+echo ("Litle Transaction ID: " . XMLParser::getNode($saleResponse,'litleTxnId'));
 ```
 
 As of 8.13.1, you may also use a tree-oriented style to get the response values:
