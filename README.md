@@ -36,6 +36,55 @@ If you are using a composer to manage your dependencies, you can do the followin
 2) Install dependencies using the command:
 > php composer.phar install
 
+3) Configure the SDK:
+> cd vendor/litle/payments-sdk/litle/sdk
+> php Setup.php
+
+4) Run the attached sample:
+```
+<?php
+require_once _DIR_.'/vendor/autoload.php';
+#sale
+$sale_info = array(
+             'orderId' => '1',
+             'amount'  => '10010',
+             'orderSource' => 'ecommerce',
+             'billToAddress' => array(
+             'name' => 'John Smith' ,
+             'addressLine1' => ' 1 Main St.',
+             'city' => 'Burlington' ,
+             'state' => 'MA' ,
+             'zip' => '0183-3747',
+             'country' => 'US'),
+             'card' => array(
+             'number' => '5112010000000003',
+             'expDate' => '0112',
+             'cardValidationNum' => '349',
+             'type' => 'MC' )
+            );
+$initilaize = new litle\sdk\LitleOnlineRequest();
+$saleResponse =$initilaize->saleRequest($sale_info);
+#display results
+echo ("Response: " . (litle\sdk\XmlParser::getNode($saleResponse,'response')) . "<br>");
+echo ("Message: " . litle\sdk\XmlParser::getNode($saleResponse,'message') . "<br>");
+echo ("Litle Transaction ID: " . litle\sdk\XmlParser::getNode($saleResponse,'litleTxnId'));
+```
+> php your_sample_name
+
+Using without composer
+-----------------------
+If you're not, you have to add a require for each and every class that's going to be used.
+
+1) Configure the SDK
+> cd into litle/sdk
+> php Setup.php
+
+2) Add the litle folder and require the path for your file
+
+3) run your file 
+
+> php your_file
+
 Clone Repo
 ---------------
 
