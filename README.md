@@ -25,7 +25,19 @@ SDK PHP Dependencies
 Up to date list available at [Packagist](https://packagist.org/packages/litle/payments-sdk)
 
 Setup
------
+============
+Using with composer
+--------------------
+If you are using a composer to manage your dependencies, you can do the following in your project directory:
+
+1) Install the composer using command:
+> curl -sS https://getcomposer.org/install | php
+
+2) Install dependencies using the command:
+> php composer.phar install
+
+Clone Repo
+---------------
 
 1) Install the LitleOnline PHP SDK from git. 
 
