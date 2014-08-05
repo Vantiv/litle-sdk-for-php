@@ -20,10 +20,13 @@ require_once ("Capture/LitleForceCaptureTransaction.php");
 require_once ("Sale/LitleSaleTransaction.php");
 require_once ("Other/LitleAvsOnlyTransaction.php");
 require_once ("Other/LitleVoidTransaction.php");
+require_once ("Other/RawProcessing.php");
+require_once ("Other/RfrRequest.php");
 require_once ("Token/LitleRegisterTokenTransaction.php");
 require_once ("Token/LitleSaleWithTokenTransaction.php");
 require_once ("Batch/SampleBatchDriver.php");
 require_once ("Batch/MechaBatch.php");
+require_once ("Batch/ConfiguredLitleBatchRequestsMaually.php");
 
 
 
