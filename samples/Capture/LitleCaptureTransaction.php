@@ -18,3 +18,5 @@ echo ("Response: " . (XmlParser::getNode($captureResponse,'response')) . "<br>")
 echo ("Message: " . XmlParser::getNode($captureResponse,'message') . "<br>");
 echo ("Litle Transaction ID: " . XmlParser::getNode($captureResponse,'litleTxnId'));
 
+if(XmlParser::getNode($captureResponse,'message')!='Approved')
+ throw new \Exception('LitleCaptureTransaction does not get the right response');

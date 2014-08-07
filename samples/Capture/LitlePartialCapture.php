@@ -20,4 +20,8 @@ $captureResponse = $initilaize->captureRequest($capture_in);
 echo ("Response: " . (XmlParser::getNode($captureResponse,'response')) . "<br>");
 echo ("Message: " . XmlParser::getNode($captureResponse,'message') . "<br>");
 echo ("Litle Transaction ID: " . XmlParser::getNode($captureResponse,'litleTxnId'));   
+
+if(XmlParser::getNode($captureResponse,'message')!='Approved')
+ throw new \Exception('LitlePartialCapture does not get the right response');
+
 ?>

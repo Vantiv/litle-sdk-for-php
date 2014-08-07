@@ -15,3 +15,6 @@ $reversalResponse = $initilaize->authReversalRequest($authRev_info);
 echo ("Response: " . (XmlParser::getNode($reversalResponse,'response')) . "<br>");
 echo ("Message: " . XmlParser::getNode($reversalResponse,'message') . "<br>");
 echo ("Litle Transaction ID: " . XmlParser::getNode($reversalResponse,'litleTxnId'));
+
+if(XmlParser::getNode($reversalResponse,'message')!='Approved')
+ throw new \Exception('LitleAuthReversalTransaction does not get the right response');

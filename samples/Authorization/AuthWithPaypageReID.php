@@ -26,4 +26,7 @@ $auth_info = array(
 $initilaize = new LitleOnlineRequest(); 
 $authResponse = $initilaize->authorizationRequest($auth_info);
 
+echo ("Message: " . XmlParser::getNode($authResponse,'message'));
 
+if(XmlParser::getNode($authResponse,'message')!='Partially Approved')
+ throw new \Exception('AuthWithPaypageReID does not get the right response');

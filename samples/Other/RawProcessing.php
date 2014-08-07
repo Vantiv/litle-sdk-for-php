@@ -27,4 +27,11 @@ $response_file = $request->sendToLitleStream();
 $proc = new LitleResponseProcessor($response_file);
  
 $raw_response = $proc->nextTransaction(true);
+
+$sxe = new \SimpleXMLElement($raw_response);
+echo "name:" .$sxe->message[0]."\n";
 echo "Response Raw XML: " . $raw_response;
+
+if($sxe->message[0]!='Approved')
+ throw new \Exception('RawProcessing does not get the right response');
+

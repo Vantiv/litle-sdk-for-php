@@ -16,3 +16,6 @@ $voidResponse = $initilaize->voidRequest($void_info);
 echo ("Response: " . (XmlParser::getNode($voidResponse ,'response')) . "<br>");
 echo ("Message: " . XmlParser::getNode($voidResponse ,'message') . "<br>");
 echo ("Litle Transaction ID: " . XmlParser::getNode($voidResponse ,'litleTxnId'));
+
+if(XmlParser::getNode($voidResponse,'message')!='Approved')
+ throw new \Exception('LitleVoidTransaction does not get the right response');

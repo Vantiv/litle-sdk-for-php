@@ -49,3 +49,10 @@ $litle_request->closeRequest();
 $response_file = $litle_request->sendToLitleStream();
 # process the response file 
 $processor = new LitleResponseProcessor($response_file);
+
+while($txn = $processor->nextTransaction()){
+	echo "Transaction Type : " . $txn->getName() . "\n";
+	echo "Transaction Id: " . $txn->litleTxnId ." \n";
+	if($txn->message!='Approved')
+ throw new \Exception('ConfiguredLitleBatchRequestsMaually does not get the right response');
+}

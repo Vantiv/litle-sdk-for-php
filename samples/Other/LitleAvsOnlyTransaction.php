@@ -33,3 +33,5 @@ echo ("Message: " . XmlParser::getNode($avsResponse,'message') . "<br>");
 echo ("Litle Transaction ID: " . XmlParser::getNode($avsResponse,'litleTxnId'));
 echo ("AVS Result: " . XmlParser::getNode($avsResponse,'avsResult'));
 
+if(XmlParser::getNode($avsResponse,'message')!='Approved')
+ throw new \Exception('LitleAvsOnlyTransaction does not get the right response');

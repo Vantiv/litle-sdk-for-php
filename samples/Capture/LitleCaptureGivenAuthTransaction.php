@@ -28,3 +28,7 @@ $response = $initilaize->captureGivenAuthRequest($capture_info);
 echo ("Response: " . (XmlParser::getNode($response,'response')) . "<br>");
 echo ("Message: " . XmlParser::getNode($response,'message') . "<br>");
 echo ("Litle Transaction ID: " . XmlParser::getNode($response,'litleTxnId'));
+
+
+if(XmlParser::getNode($response,'message')!='Approved')
+ throw new \Exception('LitleCaptureGivenAuthTransaction does not get the right response');

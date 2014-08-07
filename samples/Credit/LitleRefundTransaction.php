@@ -21,3 +21,7 @@ $creditResponse = $initilaize->creditRequest($credit_info);
 echo ("Response: " . (XmlParser::getNode($creditResponse,'response')) . "<br>");
 echo ("Message: " . XmlParser::getNode($creditResponse,'message') . "<br>");
 echo ("Litle Transaction ID: " . XmlParser::getNode($creditResponse,'litleTxnId'));
+
+if(XmlParser::getNode($creditResponse,'message')!='Approved')
+ throw new \Exception('LitleRefundTransaction does not get the right response');
+

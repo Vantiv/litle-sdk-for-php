@@ -29,3 +29,6 @@ $saleResponse = $initilaize->saleRequest($sale_info);
 echo ("Response: " . (XmlParser::getNode($saleResponse,'response')) . "<br>");
 echo ("Message: " . XmlParser::getNode($saleResponse,'message') . "<br>");
 echo ("Litle Transaction ID: " . XmlParser::getNode($saleResponse,'litleTxnId'));
+
+if(XmlParser::getNode($saleResponse,'message')!='Approved')
+ throw new \Exception('LitleSaleTransaction does not get the right response');

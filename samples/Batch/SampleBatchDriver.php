@@ -40,4 +40,6 @@ $processor = new LitleResponseProcessor($response_file);
 while($txn = $processor->nextTransaction()){
 	echo "Transaction Type : " . $txn->getName() . "\n";
 	echo "Transaction Id: " . $txn->litleTxnId ." \n";
+	if($txn->message!='Approved')
+ throw new \Exception('SampleBatchDriver does not get the right response');
 }

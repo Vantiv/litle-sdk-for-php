@@ -17,3 +17,6 @@ echo ("Response: " . (XmlParser::getNode($tokenResponse ,'response')) . "<br>");
 echo ("Message: " . XmlParser::getNode($tokenResponse ,'message') . "<br>");
 echo ("Litle Transaction ID: " . XmlParser::getNode($tokenResponse ,'litleTxnId'). "<br>");
 echo ("Litle Token: " . XmlParser::getNode($tokenResponse ,'litleToken'));
+
+if(XmlParser::getNode($tokenResponse,'message')!='Account number was successfully registered')
+ throw new \Exception('LitleRegisterTokenTransaction does not get the right response');
