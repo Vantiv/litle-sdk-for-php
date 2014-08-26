@@ -37,7 +37,7 @@ If you are using a composer to manage your dependencies, you can do the followin
 > php composer.phar install
 
 3) Configure the SDK:
-> cd vendor/litle/payments-sdk/litle/sdk
+> cd litle/sdk
 > php Setup.php
 
 4) Run the attached sample:
