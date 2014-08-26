@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+==version 8.27.0(August 26,2014)
+* Feature: add samples for each type of transactions
+
 == version 8.25.1 (June 6, 2014)
 * Feature: Make code PSR-0 compliance
 
