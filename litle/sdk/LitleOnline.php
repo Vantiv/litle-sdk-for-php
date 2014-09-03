@@ -24,8 +24,8 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 namespace litle\sdk;
-define('CURRENT_XML_VERSION', '8.27');
-define('CURRENT_SDK_VERSION', 'PHP;8.27.0');
+define('CURRENT_XML_VERSION', '9.00');
+define('CURRENT_SDK_VERSION', 'PHP;9.00.0');
 define('MAX_TXNS_PER_BATCH', 100000);
 define('MAX_TXNS_PER_REQUEST', 500000);
 define('LITLE_CONFIG_LIST', 'user,password,merchantId,timeout,proxy,reportGroup,version,url,litle_requests_path,batch_requests_path,sftp_username,sftp_password,batch_url,tcp_port,tcp_ssl,tcp_timeout,print_xml');
