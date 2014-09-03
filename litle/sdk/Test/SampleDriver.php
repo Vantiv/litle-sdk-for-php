@@ -25,3 +25,4 @@ $saleResponse = $initilaize->saleRequest($sale_info);
 echo ("Response: " . (XmlParser::getNode($saleResponse,'response')) . "<br>");
 echo ("Message: " . XmlParser::getNode($saleResponse,'message') . "<br>");
 echo ("Litle Transaction ID: " . XmlParser::getNode($saleResponse,'litleTxnId'));
+echo ("All Response :"  . XmlParser::getAttribute($saleResponse,'litleOnlineResponse','version'));

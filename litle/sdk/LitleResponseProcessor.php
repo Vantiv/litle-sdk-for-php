@@ -20,6 +20,12 @@ class LitleResponseProcessor
             throw new \RuntimeException("Response file $response_file indicates error: $msg");
         }
     }
+	
+	public function getXmlReader()
+	{
+		return $this->xml_reader;
+	}
+	
 
     /*
      * If called with either false or no argument, return a SimpleXMLElement corresponding to the next transaction response in the response file.

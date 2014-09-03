@@ -54,6 +54,7 @@ function initialize()
         $line['currency_merchant_map ']['DEFAULT'] = trim(fgets(STDIN));
         print "Please choose Litle url from the following list (example: 'sandbox') or directly input another URL: \nsandbox => https://www.testlitle.com/sandbox/communicator/online \npostlive => https://postlive.litle.com/vap/communicator/online \ntransact-postlive => https://transact-postlive.litle.com/vap/communicator/online \nproduction => https://payments.litle.com/vap/communicator/online \nproduction-transact => https://transact.litle.com/vap/communicator/online \nprelive => https://prelive.litle.com/vap/communicator/online \ntransact-prelive => https://transact-prelive.litle.com/vap/communicator/online" . PHP_EOL;
         $url = UrlMapper::getUrl(trim(fgets(STDIN)));
+		$url ="http://localhost:8080/litle-sandbox/communicator/online";
         $line['url'] = $url;
         print "Please input the proxy, if no proxy hit enter key: ";
         $line['proxy'] = trim(fgets(STDIN));

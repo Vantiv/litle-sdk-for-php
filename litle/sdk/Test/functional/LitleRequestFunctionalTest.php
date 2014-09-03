@@ -101,7 +101,7 @@ class LitleRequestFunctionalTest extends \PHPUnit_Framework_TestCase
 
         $request->createRFRRequest(array('litleSessionId' => '8675309'));
 
-        $expected = '<litleRequest numBatchRequests="0" version="8.24" xmlns="http://www.litle.com/schema">
+        $expected = '<litleRequest numBatchRequests="0" version="9.00" xmlns="http://www.litle.com/schema">
                     <authentication><user>XXXXXX</user><password>XXXXXX</password></authentication>
                     <RFRRequest><litleSessionId>8675309</litleSessionId></RFRRequest>
                     </litleRequest>';
@@ -146,7 +146,7 @@ class LitleRequestFunctionalTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(file_exists($fn1));
         $this->assertTrue(file_exists($request->request_file));
 
-        $expected = '<litleRequest numBatchRequests="1" version="8.24" xmlns="http://www.litle.com/schema">
+        $expected = '<litleRequest numBatchRequests="1" version="9.00" xmlns="http://www.litle.com/schema">
         <authentication><user>XXXXX</user><password>XXXXX</password></authentication>
         <batchRequest merchantId="0180" merchantSdk="PHP;8.24.0" authAmount="0" numAuths="0" saleAmount="123" numSales="1" creditAmount="0" numCredits="0" numTokenRegistrations="0"
         captureGivenAuthAmount="0" numCaptureGivenAuths="0" forceCaptureAmount="0" numForceCaptures="0" authReversalAmount="0" numAuthReversals="0"

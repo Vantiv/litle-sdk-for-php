@@ -24,7 +24,7 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 namespace litle\sdk;
-define('CURRENT_XML_VERSION', '8.24');
+define('CURRENT_XML_VERSION', '9.00');
 define('CURRENT_SDK_VERSION', 'PHP;8.24.0');
 define('MAX_TXNS_PER_BATCH', 100000);
 define('MAX_TXNS_PER_REQUEST', 500000);
