@@ -54,7 +54,7 @@ class LitleOnlineRequestUnitTest extends \PHPUnit_Framework_TestCase
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
         ->method('request')
-        ->with($this->matchesRegularExpression('/.*merchantSdk="PHP;9.00.0".*/'));
+        ->with($this->matchesRegularExpression('/.*merchantSdk="PHP;8.27.1".*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
