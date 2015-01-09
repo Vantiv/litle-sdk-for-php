@@ -205,9 +205,9 @@ class Obj2xml
     {
         $config_array = null;
 
-    $ini_file = realpath(dirname(__FILE__)) . '/litle_SDK_config.ini';
+        $ini_file = realpath(dirname(__FILE__)) . '/litle_SDK_config.ini';
         if (file_exists($ini_file)) {
-            @$config_array =parse_ini_file('litle_SDK_config.ini');
+            @$config_array =parse_ini_file('litle_SDK_config.ini', false, INI_SCANNER_RAW);
         }
 
         if (empty($config_array)) {
