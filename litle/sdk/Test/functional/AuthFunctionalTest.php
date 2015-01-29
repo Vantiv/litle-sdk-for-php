@@ -138,4 +138,70 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('InvalidArgumentException','Missing Required Field: /capability/');
         $retOb = $litleTest->authorizationRequest($hash_in);
     }
+    
+    public function test_auth_with_applepay()
+    {
+    	$hash_in = array(
+    			'applepay'=>array(
+    					'data'=>'string data here',
+    					'header'=> array('applicationData' => '454657413164', 
+    									 'ephemeralPublicKey' => '1',
+    									 'publicKeyHash' => '1234',
+    									 'transactionId' => '12345'),
+    					'signature'=>'signature',
+    					'version' => 'version 1'),
+    			'orderId'=> '2111',
+    			'orderSource'=>'ecommerce',
+    			'id'=>'654',
+    			'amount'=>'1000');
+		
+    	$initilaize = new LitleOnlineRequest();
+        $authorizationResponse = $initilaize->authorizationRequest($hash_in);
+        $response = XmlParser::getNode($authorizationResponse,'response');
+        $this->assertEquals('000',$response);
+    }
+    
+    public function test_auth_with_applepay_issuer_unavailable()
+    {
+    	$hash_in = array(
+    			'applepay'=>array(
+    					'data'=>'string data here',
+    					'header'=> array('applicationData' => '454657413164',
+    							'ephemeralPublicKey' => '1',
+    							'publicKeyHash' => '1234',
+    							'transactionId' => '12345'),
+    					'signature'=>'signature',
+    					'version' => 'version 1'),
+    			'orderId'=> '2111',
+    			'orderSource'=>'ecommerce',
+    			'id'=>'654',
+    			'amount'=>'1101');
+    
+    	$initilaize = new LitleOnlineRequest();
+    	$authorizationResponse = $initilaize->authorizationRequest($hash_in);
+    	$response = XmlParser::getNode($authorizationResponse,'response');
+    	$this->assertEquals('101',$response);
+    }
+    
+    public function test_auth_with_applepay_approved()
+    {
+    	$hash_in = array(
+    			'applepay'=>array(
+    					'data'=>'string data here',
+    					'header'=> array('applicationData' => '454657413164',
+    							'ephemeralPublicKey' => '1',
+    							'publicKeyHash' => '1234',
+    							'transactionId' => '12345'),
+    					'signature'=>'signature',
+    					'version' => 'version 1'),
+    			'orderId'=> '2111',
+    			'orderSource'=>'ecommerce',
+    			'id'=>'654',
+    			'amount'=>'12312');
+    
+    	$initilaize = new LitleOnlineRequest();
+    	$authorizationResponse = $initilaize->authorizationRequest($hash_in);
+    	$response = XmlParser::getNode($authorizationResponse,'response');
+    	$this->assertEquals('000',$response);
+    }
 }

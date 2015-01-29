@@ -64,5 +64,23 @@ class EcheckCreditUnitTest extends \PHPUnit_Framework_TestCase
         $litleTest->newXML = $mock;
         $litleTest->echeckCreditRequest($hash_in);
     }
+    
+    public function test_echeck_credit_secondaryAmount()
+    {
+    	$hash_in = array('amount' => '5000',
+    			'secondaryAmount' => '2000',
+    			'orderSource'=>'ecommerce',
+    			'billToAddress' => array(),
+    			'echeck' => array('accType'=>'Checking','routingNum'=>'123123','accNum'=>'12345657890','checkNum'=>'123455'));
+    	 
+    	$mock = $this->getMock('litle\sdk\LitleXmlMapper');
+    	$mock->expects($this->once())
+    	->method('request')
+    	->with($this->matchesRegularExpression('/.*<amount>5000.*<orderSource>ecommerce.*<accType>Checking.*<accNum>12345657890.*<routingNum>123123.*<checkNum>123455.*/'));
+    	 
+    	$litleTest = new LitleOnlineRequest();
+    	$litleTest->newXML = $mock;
+    	$litleTest->echeckCreditRequest($hash_in);
+    }
 
 }

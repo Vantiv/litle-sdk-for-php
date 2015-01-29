@@ -502,5 +502,49 @@ class AuthUnitTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('InvalidArgumentException','Missing Required Field: /threatMetrixSessionId/');
         $retOb = $litleTest->authorizationRequest($hash_in);
     }
+    
+    public function test_auth_with_applepay()
+    {
+    	$hash_in = array(
+    			'applepay'=>array(
+    					'data'=>'string data here',
+    					'header'=> 'header stuff here',
+    					'signature'=>'signature',
+    					'version' => 'version 1'),
+    			'orderId'=> '2111',
+    			'orderSource'=>'ecommerce',
+    			'id'=>'654',
+    			'amount'=>'123');
+    	$mock = $this->getMock('litle\sdk\LitleXmlMapper');
+    	$mock	->expects($this->once())
+    	->method('request')
+    	->with($this->matchesRegularExpression('/.*<applepay><data>string data here.*<header>header stuff here.*<signature>signature.*<version>version 1.*/'));
+    
+    	$litleTest = new LitleOnlineRequest();
+    	$litleTest->newXML = $mock;
+    	$litleTest->authorizationRequest($hash_in);
+    }
+    
+    public function test_auth_with_card_and_secondary_amount()
+    {
+    	$hash_in = array(
+    			'card'=>array('type'=>'VI',
+    					'number'=>'4100000000000001',
+    					'expDate'=>'1213',
+    					'cardValidationNum' => '1213'),
+    			'secondaryAmount' => '2000',
+    			'orderId'=> '2111',
+    			'orderSource'=>'ecommerce',
+    			'id'=>'654',
+    			'amount'=>'123');
+    	$mock = $this->getMock('litle\sdk\LitleXmlMapper');
+    	$mock	->expects($this->once())
+    	->method('request')
+    	->with($this->matchesRegularExpression('/.*<card><type>VI.*<number>4100000000000001.*<expDate>1213.*<cardValidationNum>1213.*/'));
+    
+    	$litleTest = new LitleOnlineRequest();
+    	$litleTest->newXML = $mock;
+    	$litleTest->authorizationRequest($hash_in);
+    }
 
 }

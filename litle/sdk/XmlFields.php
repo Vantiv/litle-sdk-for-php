@@ -524,4 +524,18 @@ class XmlFields
         }
 
     }
+    
+    public static function applePayType($hash_in)
+    {
+    	if (isset($hash_in)) {
+    		$hash_out = array(
+    				"data"=>(XmlFields::returnArrayValue($hash_in, "data")),
+    				"header"=>Checker::requiredField(XmlFields::returnArrayValue($hash_in, "header")),
+    				"signature"=>XmlFields::returnArrayValue($hash_in, "signature"),
+    				"version"=>XmlFields::returnArrayValue($hash_in, "version")
+    		);
+    
+    		return $hash_out;
+    	}
+    }
 }

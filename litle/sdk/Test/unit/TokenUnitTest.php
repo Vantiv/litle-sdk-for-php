@@ -116,5 +116,24 @@ class TokenUnitTest extends \PHPUnit_Framework_TestCase
         $litleTest->newXML = $mock;
         $litleTest->registerTokenRequest($hash_in);
     }
+    
+    public function test_token_applepay()
+    {
+    	$hash_in = array(
+    			'orderId'=>'1',
+    			'applepay'=>array(
+    					'data'=>'string data here',
+    					'header'=> 'header stuff here',
+    					'signature'=>'signature',
+    					'version' => 'version 1'));
+    	$mock = $this->getMock('litle\sdk\LitleXmlMapper');
+    	$mock->expects($this->once())
+    	->method('request')
+    	->with($this->matchesRegularExpression('/.*<applepay><data>string data here.*<header>header stuff here.*<signature>signature.*<version>version 1.*/'));
+    
+    	$litleTest = new LitleOnlineRequest();
+    	$litleTest->newXML = $mock;
+    	$litleTest->registerTokenRequest($hash_in);
+    }
 
 }

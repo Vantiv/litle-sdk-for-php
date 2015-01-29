@@ -84,5 +84,27 @@ class TokenFunctionalTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('InvalidArgumentException','Missing Required Field: /accNum/');
         $retOb = $litleTest->registerTokenRequest($hash_in);
     }
+    
+    public function test_simple_token_applepay()
+    {
+    	$hash_in = array(
+    			'merchantId' => '101',
+    			'version'=>'8.8',
+    			'reportGroup'=>'Planets',
+    			'orderId'=>'12344',
+    			'applepay'=>array(
+    					'data'=>'string data here',
+    					'header'=> array('applicationData' => '454657413164',
+    							'ephemeralPublicKey' => '1',
+    							'publicKeyHash' => '1234',
+    							'transactionId' => '12345'),
+    					'signature'=>'signature',
+    					'version' => 'version 1'));
+    
+    	$initilaize = new LitleOnlineRequest();
+    	$registerTokenResponse = $initilaize->registerTokenRequest($hash_in);
+    	$message = XmlParser::getAttribute($registerTokenResponse,'litleOnlineResponse','message');
+    	$this->assertEquals('Valid Format',$message);
+    }
 
 }

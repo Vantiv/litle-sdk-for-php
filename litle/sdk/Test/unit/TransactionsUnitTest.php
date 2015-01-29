@@ -662,5 +662,95 @@ class TransactionsUnitTest extends \PHPUnit_Framework_TestCase
         $hash_out = Transactions::createBalanceInquiryHash($hash_in);
         $this->assertEquals($hash_in, array_intersect($hash_in, $hash_out));
     }
+    
+    public function test_auth_with_applepay()
+    {
+    	$hash_in = array(
+    			'orderId'=> '2111',
+    			'amount'=>'123',
+    			'secondaryAmount' => '2000',
+    			'orderSource'=>'ecommerce',
+    			'applepay'=>array(
+    					'data'=>'string data here',
+    					'header'=> 'header stuff here',
+    					'signature'=>'signature',
+    					'version' => 'version 1'));
+    	
+    	$hash_out = Transactions::createAuthHash($hash_in);
+    	$this->assertEquals($hash_in, array_intersect($hash_in, $hash_out));
+    }
+    
+    public function test_sale_with_applepay()
+    {
+    	$hash_in = array(
+    			'orderId'=> '2111',
+    			'amount'=>'123',
+    			'secondaryAmount' => '2000',
+    			'orderSource'=>'ecommerce',
+    			'applepay'=>array(
+    					'data'=>'string data here',
+    					'header'=> 'header stuff here',
+    					'signature'=>'signature',
+    					'version' => 'version 1'));
+    	 
+    	$hash_out = Transactions::createSaleHash($hash_in);
+    	$this->assertEquals($hash_in, array_intersect($hash_in, $hash_out));
+    }
+    
+    public function test_credit_with_secondary_amount()
+    {
+    	$hash_in = array(
+    			'orderId'=> '2111',
+    			'amount'=>'123',
+    			'secondaryAmount' => '2000',
+    			'orderSource'=>'ecommerce',
+    			'card' => array (
+                	'type'=>'VI',
+                	'number'=>'4100000000000000',
+                	'expDate'=>'1213',
+                	'cardValidationNum' => '1213'));
+    	 
+    	$hash_out = Transactions::createCreditHash($hash_in);
+    	$this->assertEquals($hash_in, array_intersect($hash_in, $hash_out));
+    }
+    
+    public function test_token_with_applepay()
+    {
+    	$hash_in = array(
+    			'orderId'=>'1',
+    			'applepay'=>array(
+    					'data'=>'string data here',
+    					'header'=> 'header stuff here',
+    					'signature'=>'signature',
+    					'version' => 'version 1'));
+    
+    	$hash_out = Transactions::createRegisterTokenHash($hash_in);
+    	$this->assertEquals($hash_in, array_intersect($hash_in, $hash_out));
+    }
+    
+    public function test_forcecapture_with_secondary_amount()
+    {
+    	$hash_in = array(
+    			'orderId'=> '2111',
+    			'amount'=>'123',
+    			'secondaryAmount' => '2000',
+    			'orderSource'=>'ecommerce',
+    			'card' => array (
+    					'type'=>'VI',
+    					'number'=>'4100000000000000',
+    					'expDate'=>'1213',
+    					'cardValidationNum' => '1213'));
+    
+    	$hash_out = Transactions::createForceCaptureHash($hash_in);
+    	$this->assertEquals($hash_in, array_intersect($hash_in, $hash_out));
+    }
+    
+    public function test_echeckSale_secondaryamount()
+    {
+    	$hash_in = array('litleTxnId' =>'123123', 'secondaryAmount' => '2000');
+    	$hash_out = Transactions::createEcheckSaleHash($hash_in);
+    	$this->assertEquals($hash_in, array_intersect($hash_in, $hash_out));
+    }
+    
 
 }

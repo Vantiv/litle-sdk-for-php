@@ -275,5 +275,18 @@ class CreditUnitTest extends \PHPUnit_Framework_TestCase
         $litleTest->newXML = $mock;
         $litleTest->creditRequest($hash_in);
     }
+    
+    public function test_credit_with_secondaryAmount()
+    {
+    	$hash_in = array('litleTxnId'=> '12312312','reportGroup'=>'Planets', 'amount'=>'123', 'secondaryAmount' => '3214');
+    	$mock = $this->getMock('litle\sdk\LitleXmlMapper');
+    	$mock->expects($this->once())
+    	->method('request')
+    	->with($this->matchesRegularExpression('/.*<litleTxnId>12312312.*<amount>123.*/'));
+    
+    	$litleTest = new LitleOnlineRequest();
+    	$litleTest->newXML = $mock;
+    	$litleTest->creditRequest($hash_in);
+    }
 
 }

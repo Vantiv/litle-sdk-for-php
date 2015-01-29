@@ -150,4 +150,50 @@ class SaleFunctionalTest extends \PHPUnit_Framework_TestCase
         $message = XmlParser::getNode($saleResponse,'message');
         $this->assertEquals('Approved',$message);
     }
+    
+    public function test_simple_sale_with_applepay()
+    {
+    	$hash_in = array(
+    			'applepay'=>array(
+    					'data'=>'string data here',
+    					'header'=> array('applicationData' => '454657413164',
+    							'ephemeralPublicKey' => '1',
+    							'publicKeyHash' => '1234',
+    							'transactionId' => '12345'),
+    					'signature'=>'signature',
+    					'version' => 'version 1'),
+    			'id'=>'1211',
+    			'orderId'=> '2111',
+    			'reportGroup'=>'Planets',
+    			'orderSource'=>'ecommerce',
+    			'amount'=>'123');
+    
+    	$initilaize = new LitleOnlineRequest();
+    	$saleResponse = $initilaize->saleRequest($hash_in);
+    	$response = XmlParser::getNode($saleResponse,'response');
+    	$this->assertEquals('000',$response);
+    }
+    
+    public function test_simple_sale_with_applepay_insufficient_funds()
+    {
+    	$hash_in = array(
+    			'applepay'=>array(
+    					'data'=>'string data here',
+    					'header'=> array('applicationData' => '454657413164',
+    							'ephemeralPublicKey' => '1',
+    							'publicKeyHash' => '1234',
+    							'transactionId' => '12345'),
+    					'signature'=>'signature',
+    					'version' => 'version 1'),
+    			'id'=>'1211',
+    			'orderId'=> '2111',
+    			'reportGroup'=>'Planets',
+    			'orderSource'=>'ecommerce',
+    			'amount'=>'1110');
+    
+    	$initilaize = new LitleOnlineRequest();
+    	$saleResponse = $initilaize->saleRequest($hash_in);
+    	$response = XmlParser::getNode($saleResponse,'response');
+    	$this->assertEquals('110',$response);
+    }
 }

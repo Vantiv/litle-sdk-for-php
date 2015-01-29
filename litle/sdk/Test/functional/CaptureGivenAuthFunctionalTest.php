@@ -109,5 +109,26 @@ class CaptureGivenAuthFunctionalTest extends \PHPUnit_Framework_TestCase
         $message = XmlParser::getNode($captureGivenAuthResponse,'message');
         $this->assertEquals('Approved',$message);
     }
+    
+    public function test_simple_captureGivenAuth_secondary_amount()
+    {
+    	$hash_in = array(
+    			'orderId'=>'12344',
+    			'amount'=>'106',
+    			'secondaryAmount' => '2000',
+    			'authInformation' => array(
+    					'authDate'=>'2002-10-09','authCode'=>'543216',
+    					'authAmount'=>'12345'),
+    			'orderSource'=>'ecommerce',
+    			'card'=>array(
+    					'type'=>'VI',
+    					'number' =>'4100000000000000',
+    					'expDate' =>'1210'));
+    
+    	$initilaize = new LitleOnlineRequest();
+    	$captureGivenAuthResponse = $initilaize->captureGivenAuthRequest($hash_in);
+    	$message = XmlParser::getNode($captureGivenAuthResponse,'message');
+    	$this->assertEquals('Approved',$message);
+    }
 
 }

@@ -248,5 +248,30 @@ class CaptureGivenAuthUnitTest extends \PHPUnit_Framework_TestCase
         $litleTest->newXML = $mock;
         $litleTest->captureGivenAuthRequest($hash_in);
     }
+    
+    public function test_simple_captureGivenAuth_secondaryAmount()
+    {
+    	$hash_in = array(
+    			'amount'=>'123',
+    			'secondaryAmount' => '2102',
+    			'orderId'=>'12344',
+    			'authInformation' => array(
+    					'authDate'=>'2002-10-09','authCode'=>'543216',
+    					'authAmount'=>'12345'),
+    			'orderSource'=>'ecommerce',
+    			'card'=>array(
+    					'type'=>'VI',
+    					'number' =>'4100000000000001',
+    					'expDate' =>'1210'));
+    	$mock = $this->getMock('litle\sdk\LitleXmlMapper');
+    	$mock	->expects($this->once())
+    	->method('request')
+    	->with($this->matchesRegularExpression('/.*<authInformation><authDate>2002-10-09.*<authCode>543216.*><authAmount>12345.*/'));
+    
+    	$litleTest = new LitleOnlineRequest();
+    	$litleTest->newXML = $mock;
+    	$litleTest->captureGivenAuthRequest($hash_in);
+    
+    }
 
 }

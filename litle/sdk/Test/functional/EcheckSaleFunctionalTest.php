@@ -90,5 +90,21 @@ class EcheckSaleFunctionalTest extends \PHPUnit_Framework_TestCase
         $response = XmlParser::getNode($echeckSaleResponse,'response');
         $this->assertEquals('000',$response);
     }
+    
+    public function test_simple_echeckSale_secondaryAmount()
+    {
+    	$hash_in = array('amount'=>'123456',
+    			'secondaryAmount' => '2000',
+    			'verify'=>'true',
+    			'orderId'=>'12345',
+    			'orderSource'=>'ecommerce',
+    			'echeck' => array('accType'=>'Checking','accNum'=>'12345657890','routingNum'=>'123456789','checkNum'=>'123455'),
+    			'billToAddress'=>array('name'=>'Bob','city'=>'lowell','state'=>'MA','email'=>'litle.com'));
+    
+    	$initilaize = new LitleOnlineRequest();
+    	$echeckCreditResponse = $initilaize->echeckCreditRequest($hash_in);
+    	$response = XmlParser::getNode($echeckCreditResponse,'response');
+    	$this->assertEquals('000',$response);
+    }
 
 }

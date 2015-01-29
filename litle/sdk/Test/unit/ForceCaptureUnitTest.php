@@ -258,4 +258,26 @@ class ForceCaptureUnitTest extends \PHPUnit_Framework_TestCase
         $litleTest->newXML = $mock;
         $litleTest->forceCaptureRequest($hash_in);
     }
+    public function test_simple_forceCapture_secondary_amount()
+    {
+    	$hash_in = array(
+    			'orderId'=>'123',
+    			'litleTxnId'=>'123456',
+    			'amount'=>'106',
+    			'secondaryAmount' => '2000',
+    			'orderSource'=>'ecommerce',
+    			'token'=> array(
+    					'litleToken'=>'123456789101112',
+    					'expDate'=>'1210',
+    					'cardValidationNum'=>'555',
+    					'type'=>'VI'));
+    	$mock = $this->getMock('litle\sdk\LitleXmlMapper');
+    	$mock->expects($this->once())
+    	->method('request')
+    	->with($this->matchesRegularExpression('/.*<token><litleToken>123456789101112.*<expDate>1210.*/'));
+    
+    	$litleTest = new LitleOnlineRequest();
+    	$litleTest->newXML = $mock;
+    	$litleTest->forceCaptureRequest($hash_in);
+    }
 }

@@ -1,6 +1,6 @@
 = LitleOnline CHANGELOG
-==version 9.00.0(Auguest 26,2014)
-* support version 9 now
+==version 8.29.0 (January 22,2014)
+* Feature: Apple pay and secondary amounts now available.
 
 ==version 8.27.0 (Auguest 26,2014)
 * Feature: Added samples for each type of transactions
