@@ -106,7 +106,15 @@ class BatchRequest
             ),
             'accountUpdate' => array(
                 'count' => 0,
-            ));
+            ),
+        	'echeckPreNoteSale' =>array(
+        		'count' => 0,
+        	),
+        	'echeckPreNoteCredit' =>array(
+        		'count' => 0,
+        	)
+        );
+        	
 
         // if a dir to place the request file is not explicitly provided, grab it from the config file
         if (!$request_dir) {
@@ -365,6 +373,22 @@ class BatchRequest
         $this->addTransaction($hash_out,$hash_in,'accountUpdate',$choice_hash);
         $this->counts_and_amounts['accountUpdate']['count'] += 1;
     }
+    
+    public function addEcheckPreNoteSale($hash_in)
+    {
+    	$hash_out = Transactions::createEcheckPreNoteSaleHash($hash_in);
+    	$this->addTransaction($hash_out,$hash_in,'echeckPreNoteSale');
+    	$this->counts_and_amounts['echeckPreNoteSale']['count'] += 1;
+    }
+    
+    public function addEcheckPreNoteCredit($hash_in)
+    {
+    	$hash_out = Transactions::createEcheckPreNoteCreditHash($hash_in);
+    	$this->addTransaction($hash_out,$hash_in,'echeckPreNoteCredit');
+    	$this->counts_and_amounts['echeckPreNoteCredit']['count'] += 1;
+    }
+    
+   
 
     /*
      * Adds the XML for the transaction given the appropriate data to the transactions file

@@ -429,7 +429,9 @@ class XmlFields
                         "accType"=>(Checker::requiredField(XmlFields::returnArrayValue($hash_in, "accType"))),
                         "accNum" =>(Checker::requiredField(XmlFields::returnArrayValue($hash_in, "accNum"))),
                         "routingNum" =>(Checker::requiredField(XmlFields::returnArrayValue($hash_in, "routingNum"))),
-                        "checkNum" =>XmlFields::returnArrayValue($hash_in, "checkNum")
+                        "checkNum" =>XmlFields::returnArrayValue($hash_in, "checkNum"),
+            			"ccdPaymentInformation" =>XmlFields::returnArrayValue($hash_in, "ccdPaymentInformation")
+            		
             );
 
             return $hash_out;
@@ -502,7 +504,12 @@ class XmlFields
     {
         if (isset($hash_in)) {
             $hash_out = array(
-                "threatMetrixSessionId"=>(Checker::requiredField(XmlFields::returnArrayValue($hash_in, "threatMetrixSessionId", 128)))
+                "threatMetrixSessionId"=>(Checker::requiredField(XmlFields::returnArrayValue($hash_in, "threatMetrixSessionId", 128))),
+            	"customAttribute1"=>(XmlFields::returnArrayValue($hash_in, "customAttribute1")),
+            	"customAttribute2"=>(XmlFields::returnArrayValue($hash_in, "customAttribute2")),
+            	"customAttribute3"=>(XmlFields::returnArrayValue($hash_in, "customAttribute3")),
+            	"customAttribute4"=>(XmlFields::returnArrayValue($hash_in, "customAttribute4")),
+            	"customAttribute5"=>(XmlFields::returnArrayValue($hash_in, "customAttribute5"))
             );
 
             return $hash_out;

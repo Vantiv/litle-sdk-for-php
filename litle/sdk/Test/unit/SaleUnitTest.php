@@ -46,6 +46,37 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
         $litleTest->newXML = $mock;
         $litleTest->saleRequest($hash_in);
     }
+    
+    
+    public function test_sale_with_AdvancedFraudCheckWithCustomAttribute()
+    {
+    	$hash_in = array(
+    			'card'=>array('type'=>'VI',
+    					'number'=>'4100000000000001',
+    					'expDate'=>'1213',
+    					'cardValidationNum' => '1213'),
+    			'id'=>'654',
+    			'orderId'=> '2111',
+    			'orderSource'=>'ecommerce',
+    			'amount'=>'123',
+    			'advancedFraudChecks'=>array(
+    				'threatMetrixSessionId' => 'abc123',
+    				'customAttribute1'=>'1',
+    				'customAttribute2'=>'2',
+    				'customAttribute3'=>'3',
+    				'customAttribute4'=>'4',
+    				'customAttribute5'=>'5',
+    			)
+    	);
+    	$mock = $this->getMock('litle\sdk\LitleXmlMapper');
+    	$mock->expects($this->once())
+    	->method('request')
+    	->with($this->matchesRegularExpression('/.*<advancedFraudChecks><threatMetrixSessionId>abc123<\/threatMetrixSessionId><customAttribute1>1<\/customAttribute1>.*?<\/advancedFraudChecks><\/sale>.*/'));
+    
+    	$litleTest = new LitleOnlineRequest();
+    	$litleTest->newXML = $mock;
+    	$litleTest->saleRequest($hash_in);
+    }
 
     public function test_no_orderId()
     {

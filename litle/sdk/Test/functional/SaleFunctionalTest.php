@@ -196,4 +196,29 @@ class SaleFunctionalTest extends \PHPUnit_Framework_TestCase
     	$response = XmlParser::getNode($saleResponse,'response');
     	$this->assertEquals('110',$response);
     }
+    
+    public function test_simple_sale_with_AdvancedFraudCheckWithCustomAttribute()
+    {
+    	$hash_in = array(
+    			'card'=>array('type'=>'VI',
+    					'number'=>'4100000000000001',
+    					'expDate'=>'1213',
+    					'cardValidationNum' => '1213'),
+    			'id'=>'654',
+    			'orderId'=> '2111',
+    			'orderSource'=>'ecommerce',
+    			'amount'=>'123',
+    			'advancedFraudChecks'=>array(
+    				'threatMetrixSessionId' => 'abc123',
+    				'customAttribute1'=>'1',
+    				'customAttribute2'=>'2',
+    				'customAttribute3'=>'3',
+    				'customAttribute4'=>'4',
+    				'customAttribute5'=>'5',
+    			));
+    	$initilaize = new LitleOnlineRequest();
+    	$saleResponse = $initilaize->saleRequest($hash_in);
+    	$response = XmlParser::getNode($saleResponse,'response');
+    	$this->assertEquals('000',$response);
+    }
 }

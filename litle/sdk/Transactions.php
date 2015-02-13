@@ -249,6 +249,30 @@ class Transactions
 
         return $hash_out;
     }
+    
+    public static function createEcheckPreNoteSaleHash($hash_in)
+    {
+    	$hash_out = array(
+    			
+    			'orderId'=>XmlFields::returnArrayValue($hash_in,'orderId'),
+    			'orderSource'=>XmlFields::returnArrayValue($hash_in,'orderSource'),
+    			'billToAddress'=>XmlFields::contact(XmlFields::returnArrayValue($hash_in,'billToAddress')),
+    			'echeck'=>XmlFields::echeckType(XmlFields::returnArrayValue($hash_in,'echeck')),
+    			'merchantData'=>XmlFields::merchantData(XmlFields::returnArrayValue($hash_in,'merchantData')));   
+    	return $hash_out;
+    }
+    
+    public static function createEcheckPreNoteCreditHash($hash_in)
+    {
+    	$hash_out = array(
+    			 
+    			'orderId'=>XmlFields::returnArrayValue($hash_in,'orderId'),
+    			'orderSource'=>XmlFields::returnArrayValue($hash_in,'orderSource'),
+    			'billToAddress'=>XmlFields::contact(XmlFields::returnArrayValue($hash_in,'billToAddress')),
+    			'echeck'=>XmlFields::echeckType(XmlFields::returnArrayValue($hash_in,'echeck')),
+    			'merchantData'=>XmlFields::merchantData(XmlFields::returnArrayValue($hash_in,'merchantData')));
+    	return $hash_out;
+    }
 
     public static function createEcheckVerificationHash($hash_in)
     {

@@ -289,6 +289,49 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(123, $cts['echeckSale']['amount']);
 
     }
+    
+    public function test_addEcheckPreNoteSale()
+    {
+    
+    	$hash_in = array(
+    			'orderId'=> '2111',
+    			'orderSource'=>'ecommerce',
+    			'billToAddress'=> array (
+    					'addressLine1' => '3'),
+    			'echeck' => array('accType'=>'Checking','accNum'=>'12345657890','routingNum'=>'123456789','checkNum'=>'123455'),
+    			);
+    	$batch_request = new BatchRequest($this->direct);
+    	$batch_request->addEcheckPreNoteSale($hash_in);
+    
+    	$this->assertTrue(file_exists($batch_request->batch_file));
+    	$this->assertEquals(1, $batch_request->total_txns);
+    
+    	$cts = $batch_request->getCountsAndAmounts();
+    	$this->assertEquals(1, $cts['echeckPreNoteSale']['count']);
+    
+    }
+    
+    public function test_addEcheckPreNoteCredit()
+    {
+    
+    	$hash_in = array(
+    			'orderId'=> '2111',
+    			'orderSource'=>'ecommerce',
+    			'billToAddress'=> array (
+    					'addressLine1' => '3'),
+    			'echeck' => array('accType'=>'Checking','accNum'=>'12345657890','routingNum'=>'123456789','checkNum'=>'123455'),
+    	);
+    	$batch_request = new BatchRequest($this->direct);
+    	$batch_request->addEcheckPreNoteCredit($hash_in);
+    
+    	$this->assertTrue(file_exists($batch_request->batch_file));
+    	$this->assertEquals(1, $batch_request->total_txns);
+    
+    	$cts = $batch_request->getCountsAndAmounts();
+    	$this->assertEquals(1, $cts['echeckPreNoteCredit']['count']);
+    
+    }
+    
 
     public function test_addEcheckCredit()
     {

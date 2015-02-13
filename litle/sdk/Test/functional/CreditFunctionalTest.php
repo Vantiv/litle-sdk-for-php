@@ -129,5 +129,16 @@ class CreditFunctionalTest extends \PHPUnit_Framework_TestCase
     	$response = XmlParser::getNode($creditResponse,'response');
     	$this->assertEquals('000',$response);
     }
+    
+    public function test_simple_credit_with_litleTxnId_AndSecondaryAmount()
+    {
+    	$hash_in = array('reportGroup'=>'planets','litleTxnId'=>'1234567891234567891','secondaryAmount'=>'100');
+    
+    	$initilaize = new LitleOnlineRequest();
+    	$creditResponse = $initilaize->creditRequest($hash_in);
+    	$message= XmlParser::getAttribute($creditResponse,'litleOnlineResponse','response');
+    	$this->assertEquals("0",$message);
+    }
+    
 
 }
