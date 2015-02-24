@@ -163,6 +163,30 @@ class Obj2xml
         $xml->addAttribute('numBalanceInquirys', $counts_and_amounts['balanceInquiry']['count']);
 
         $xml->addAttribute('numAccountUpdates', $counts_and_amounts['accountUpdate']['count']);
+        
+        $xml->addAttribute('numEcheckPreNoteSale', $counts_and_amounts['echeckPreNoteSale']['count']);
+        $xml->addAttribute('numEcheckPreNoteCredit', $counts_and_amounts['echeckPreNoteCredit']['count']);
+        
+        $xml->addAttribute('submerchantCreditAmount', $counts_and_amounts['submerchantCredit']['amount']);
+        $xml->addAttribute('numSubmerchantCredit', $counts_and_amounts['submerchantCredit']['count']);
+        $xml->addAttribute('payFacCreditAmount', $counts_and_amounts['payFacCredit']['amount']);
+        $xml->addAttribute('numPayFacCredit', $counts_and_amounts['payFacCredit']['count']);
+        $xml->addAttribute('reserveCreditAmount', $counts_and_amounts['reserveCredit']['amount']);
+        $xml->addAttribute('numReserveCredit', $counts_and_amounts['reserveCredit']['count']);
+        $xml->addAttribute('vendorCreditAmount', $counts_and_amounts['vendorCredit']['amount']);
+        $xml->addAttribute('numVendorCredit', $counts_and_amounts['vendorCredit']['count']);
+        $xml->addAttribute('physicalCheckCreditAmount', $counts_and_amounts['physicalCheckCredit']['amount']);
+        $xml->addAttribute('numPhysicalCheckCredit', $counts_and_amounts['physicalCheckCredit']['count']);
+        $xml->addAttribute('submerchantDebitAmount', $counts_and_amounts['submerchantDebit']['amount']);
+        $xml->addAttribute('numSubmerchantDebit', $counts_and_amounts['submerchantDebit']['count']);
+        $xml->addAttribute('payFacDebitAmount', $counts_and_amounts['payFacDebit']['amount']);
+        $xml->addAttribute('numPayFacDebit', $counts_and_amounts['payFacDebit']['count']);
+        $xml->addAttribute('reserveDebitAmount', $counts_and_amounts['reserveDebit']['amount']);
+        $xml->addAttribute('numReserveDebit', $counts_and_amounts['reserveDebit']['count']);
+        $xml->addAttribute('vendorDebitAmount', $counts_and_amounts['vendorDebit']['amount']);
+        $xml->addAttribute('numVendorDebit', $counts_and_amounts['vendorDebit']['count']);
+        $xml->addAttribute('physicalCheckDebitAmount', $counts_and_amounts['physicalCheckDebit']['amount']);
+        $xml->addAttribute('numPhysicalCheckDebit', $counts_and_amounts['physicalCheckDebit']['count']);
 
         return str_replace("/>", ">", str_replace("<?xml version=\"1.0\"?>\n", "", $xml->asXML()));
     }
