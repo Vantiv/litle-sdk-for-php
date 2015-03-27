@@ -80,6 +80,7 @@ function initialize()
         $line['print_xml'] = '0';
 
         writeConfig($line,$handle);
+        #default http timeout set to 500 ms
         fwrite($handle, "timeout =  500".  PHP_EOL);
         fwrite($handle, "reportGroup = Default Report Group".  PHP_EOL);
     }
