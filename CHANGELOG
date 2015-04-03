@@ -1,4 +1,10 @@
 = LitleOnline CHANGELOG
+
+
+==version 8.29.1
+HTTP timeout set to 500ms
+
+
 ==version 8.29.0 (January 22,2014)
 * Feature: Apple pay and secondary amounts now available.
 
