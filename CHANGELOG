@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+==Version 9.3.3
+Update SSL version to 6
+
 ==Version 9.3.2
 HTTP timeout set to 500ms
 
