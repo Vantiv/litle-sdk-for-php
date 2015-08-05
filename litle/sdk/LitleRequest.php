@@ -1,7 +1,8 @@
 <?php
 
-#include('Net/SFTP.php');
+
 namespace litle\sdk;
+include('Net/SFTP.php');
 class LitleRequest
 {
     # file name that holds the batch requests once added
