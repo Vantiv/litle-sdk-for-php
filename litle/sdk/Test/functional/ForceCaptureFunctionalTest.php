@@ -51,7 +51,7 @@ class ForceCaptureFunctionalTest extends \PHPUnit_Framework_TestCase
 
     public function test_simple_forceCapture_with_token()
     {
-        $hash_in = array(
+        $hash_in = array('id'=>'id',
         'merchantId' => '101',
       'version'=>'8.8',
       'reportGroup'=>'Planets',
@@ -75,7 +75,7 @@ class ForceCaptureFunctionalTest extends \PHPUnit_Framework_TestCase
     
     public function test_simple_forceCapture_with_secondary_amount()
     {
-    	$hash_in = array(
+    	$hash_in = array('id'=>'id',
     			'merchantId' => '101',
     			'version'=>'8.8',
     			'reportGroup'=>'Planets',
