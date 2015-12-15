@@ -29,7 +29,7 @@ class TokenUnitTest extends \PHPUnit_Framework_TestCase
     public function test_token()
     {
         $hash_in = array(
-            'orderId'=>'1',
+            'orderId'=>'1','id' => 'id',
             'accountNumber'=>'123456789101112');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
@@ -44,7 +44,7 @@ class TokenUnitTest extends \PHPUnit_Framework_TestCase
     public function test_accountNum_and_paypage()
     {
         $hash_in = array('merchantId' => '101',
-      'version'=>'8.8',
+      'version'=>'8.8','id' => 'id',
       'reportGroup'=>'Planets',
       'orderId'=>'12344',
       'accountNumber'=>'1233456789101112',
@@ -58,7 +58,7 @@ class TokenUnitTest extends \PHPUnit_Framework_TestCase
     public function test_echeck_and_paypagel()
     {
         $hash_in = array('merchantId' => '101',
-      'version'=>'8.8',
+      'version'=>'8.8','id' => 'id',
       'reportGroup'=>'Planets',
       'orderId'=>'12344',
       'echeckForToken'=>array('accNum'=>'12344565','routingNum'=>'123476545'),
@@ -72,7 +72,7 @@ class TokenUnitTest extends \PHPUnit_Framework_TestCase
     public function test_echeck_and_paypage_and_accountnum()
     {
         $hash_in = array('merchantId' => '101',
-      'version'=>'8.8',
+      'version'=>'8.8','id' => 'id',
       'reportGroup'=>'Planets',
       'orderId'=>'12344',
       'accountNumber'=>'1233456789101112',
@@ -87,7 +87,7 @@ class TokenUnitTest extends \PHPUnit_Framework_TestCase
     public function test_cardValidationNum()
     {
         $hash_in = array(
-                'orderId'=>'1',
+                'orderId'=>'1','id' => 'id',
                 'accountNumber'=>'123456789101112',
                 'cardValidationNum'=>'123');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
@@ -103,7 +103,7 @@ class TokenUnitTest extends \PHPUnit_Framework_TestCase
     public function test_loggedInUser()
     {
         $hash_in = array(
-                'loggedInUser'=>'gdake',
+                'loggedInUser'=>'gdake','id' => 'id',
                 'merchantSdk'=>'PHP;8.14.0',
                 'orderId'=>'1',
                 'accountNumber'=>'123456789101112');
@@ -120,7 +120,7 @@ class TokenUnitTest extends \PHPUnit_Framework_TestCase
     public function test_token_applepay()
     {
     	$hash_in = array(
-    			'orderId'=>'1',
+    			'orderId'=>'1','id' => 'id',
     			'applepay'=>array(
     					'data'=>'string data here',
     					'header'=> 'header stuff here',

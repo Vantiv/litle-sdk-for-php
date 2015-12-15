@@ -28,7 +28,7 @@ class UnloadUnitTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
             'orderId'=>'1',
             'amount'=> '2',
             'orderSource'=>'ECOMMERCE',

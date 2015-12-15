@@ -29,7 +29,7 @@ class RefundReversalFunctionalTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple()
     {
-        $hash_in = array('litleTxnId'=> '123456789012345678');
+        $hash_in = array('litleTxnId'=> '123456789012345678','id' => '1211',);
         $initilaize = new LitleOnlineRequest();
         $refundReversalResponse = $initilaize->echeckVoidRequest($hash_in);
         $response = XmlParser::getAttribute($refundReversalResponse,'litleOnlineResponse','response');

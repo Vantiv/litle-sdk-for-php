@@ -29,7 +29,7 @@ use litle\sdk\XmlParser;
 {
     public function test_simple()
     {
-        $hash_in = array(
+        $hash_in = array('id' => '1211',
             'orderId'=>'1',
             'amount'=> '2',
             'orderSource'=>'ecommerce',

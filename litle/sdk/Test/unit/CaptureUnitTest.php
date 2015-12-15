@@ -28,7 +28,7 @@ class CaptureUnitTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple_capture()
     {
-        $hash_in = array('litleTxnId'=> '12312312', 'amount'=>'123');
+        $hash_in = array('litleTxnId'=> '12312312', 'amount'=>'123', 'id' => 'id');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
         ->method('request')
@@ -41,7 +41,7 @@ class CaptureUnitTest extends \PHPUnit_Framework_TestCase
 
     public function test_no_txnid()
     {
-        $hash_in =array('reportGroup'=>'Planets','amount'=>'106');
+        $hash_in =array('reportGroup'=>'Planets','amount'=>'106','id' => 'id');
         $litleTest = new LitleOnlineRequest();
         $this->setExpectedException('InvalidArgumentException','Missing Required Field: /litleTxnId/');
         $litleTest->captureRequest($hash_in);
@@ -51,13 +51,14 @@ class CaptureUnitTest extends \PHPUnit_Framework_TestCase
     {
         $hash_in = array(
                 'litleTxnId'=> '12312312',
-                'merchantSdk'=>'PHP;8.14.0',
+        		'id' => 'id',
+                'merchantSdk'=>'PHP;10.1.0',
                 'amount'=>'123',
                 'loggedInUser'=>'gdake');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
         ->method('request')
-        ->with($this->matchesRegularExpression('/.*merchantSdk="PHP;8.14.0".*loggedInUser="gdake" xmlns=.*>.*/'));
+        ->with($this->matchesRegularExpression('/.*merchantSdk="PHP;10.1.0".*loggedInUser="gdake" xmlns=.*>.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -68,6 +69,7 @@ class CaptureUnitTest extends \PHPUnit_Framework_TestCase
     {
         $hash_in = array(
             'litleTxnId'=>'3',
+        		'id' => 'id',
             'amount'=>'2',
             'surchargeAmount'=>'1',
             'payPalNotes'=>'notes',
@@ -87,6 +89,7 @@ class CaptureUnitTest extends \PHPUnit_Framework_TestCase
     {
         $hash_in = array(
                 'litleTxnId'=>'3',
+        		'id' => 'id',
                 'amount'=>'2',
                 'payPalNotes'=>'notes',
         );

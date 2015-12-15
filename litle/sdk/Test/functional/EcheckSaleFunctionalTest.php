@@ -30,7 +30,7 @@ class EcheckSaleFunctionalTest extends \PHPUnit_Framework_TestCase
 
     public function test_echeckSale_with_echeck()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
       'amount'=>'123456',
       'verify'=>'true',
       'orderId'=>'12345',
@@ -46,7 +46,7 @@ class EcheckSaleFunctionalTest extends \PHPUnit_Framework_TestCase
 
     public function test_echeckSale_with_echeckToken()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
           'amount'=>'123456',
           'verify'=>'true',
           'orderId'=>'12345',
@@ -62,7 +62,7 @@ class EcheckSaleFunctionalTest extends \PHPUnit_Framework_TestCase
 
     public function test_echeckSale_missing_amount()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
               'verify'=>'true',
               'orderId'=>'12345',
               'orderSource'=>'ecommerce',
@@ -76,7 +76,7 @@ class EcheckSaleFunctionalTest extends \PHPUnit_Framework_TestCase
     }
     public function test_echeckSale_with_shipto()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
           'amount'=>'123456',
           'verify'=>'true',
           'orderId'=>'12345',
@@ -93,7 +93,7 @@ class EcheckSaleFunctionalTest extends \PHPUnit_Framework_TestCase
     
     public function test_simple_echeckSale_secondaryAmount()
     {
-    	$hash_in = array('amount'=>'123456',
+    	$hash_in = array('amount'=>'123456','id' => 'id',
     			'secondaryAmount' => '2000',
     			'verify'=>'true',
     			'orderId'=>'12345',
@@ -109,7 +109,7 @@ class EcheckSaleFunctionalTest extends \PHPUnit_Framework_TestCase
     
     public function test_simple_echeckSale_secondaryAmount_With_CCD()
     {
-    	$hash_in = array('amount'=>'123456',
+    	$hash_in = array('amount'=>'123456','id' => 'id',
     			'secondaryAmount' => '2000',
     			'verify'=>'true',
     			'orderId'=>'12345',
@@ -125,7 +125,7 @@ class EcheckSaleFunctionalTest extends \PHPUnit_Framework_TestCase
     
     public function test_simple_echeckSale_secondaryAmount_With_CCD_longerthan80()
     {
-    	$hash_in = array('amount'=>'123456',
+    	$hash_in = array('amount'=>'123456','id' => 'id',
     			'secondaryAmount' => '2000',
     			'verify'=>'true',
     			'orderId'=>'12345',

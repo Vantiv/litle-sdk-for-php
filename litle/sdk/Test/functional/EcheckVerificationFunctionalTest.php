@@ -29,7 +29,7 @@ class EcheckVerificationFunctionalTest extends \PHPUnit_Framework_TestCase
 {
     public function test_echeckVerification_with_echeck()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
       'amount'=>'123456',
       'verify'=>'true',
       'orderId'=>'12345',
@@ -45,7 +45,7 @@ class EcheckVerificationFunctionalTest extends \PHPUnit_Framework_TestCase
 
     public function test_echeckVerification_with_echeckToken()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
           'amount'=>'123456',
           'verify'=>'true',
           'orderId'=>'12345',

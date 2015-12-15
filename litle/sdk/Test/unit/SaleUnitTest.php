@@ -81,7 +81,7 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
     public function test_no_orderId()
     {
         $hash_in = array('merchantId' => '101',
-          'version'=>'8.8',
+          'version'=>'8.8','id' => 'id',
           'reportGroup'=>'Planets',
           'litleTxnId'=>'123456',
           'amount'=>'106',
@@ -99,7 +99,7 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
     public function test_no_amount()
     {
         $hash_in = array('merchantId' => '101',
-          'version'=>'8.8',
+          'version'=>'8.8','id' => 'id',
           'reportGroup'=>'Planets',
           'litleTxnId'=>'123456',
           'orderId'=>'12344',
@@ -117,7 +117,7 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
     public function test_no_orderSource()
     {
         $hash_in = array('merchantId' => '101',
-          'version'=>'8.8',
+          'version'=>'8.8','id' => 'id',
           'reportGroup'=>'Planets',
           'litleTxnId'=>'123456',
           'orderId'=>'12344',
@@ -135,7 +135,7 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
     public function test_both_choices_card_and_paypal()
     {
         $hash_in = array('merchantId' => '101',
-          'version'=>'8.8',
+          'version'=>'8.8','id' => 'id',
           'reportGroup'=>'Planets',
           'orderId'=>'12344',
           'amount'=>'106',
@@ -158,7 +158,7 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
     public function test_three_choices_card_and_paypage_and_paypal()
     {
         $hash_in = array('merchantId' => '101',
-          'version'=>'8.8',
+          'version'=>'8.8','id' => 'id',
           'reportGroup'=>'Planets',
           'orderId'=>'12344',
           'amount'=>'106',
@@ -186,7 +186,7 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
     public function test_all_choices_card_and_paypage_and_paypal_and_token()
     {
         $hash_in = array('merchantId' => '101',
-          'version'=>'8.8',
+          'version'=>'8.8','id' => 'id',
           'reportGroup'=>'Planets',
           'litleTxnId'=>'123456',
           'orderId'=>'12344',
@@ -222,7 +222,7 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
     public function test_merchant_data()
     {
         $hash_in = array(
-                    'orderId'=> '2111',
+                    'orderId'=> '2111','id' => 'id',
                     'orderSource'=>'ecommerce',
                     'amount'=>'123',
                     'merchantData'=>array(
@@ -248,7 +248,7 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
                     'expDate'=>'1213',
                     'cardValidationNum' => '1213'
                 ),
-                'orderId'=> '2111',
+                'orderId'=> '2111','id' => 'id',
                 'orderSource'=>'ecommerce',
                 'id'=>'64575',
                 'amount'=>'123',
@@ -268,7 +268,7 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
     {
         $hash_in = array(
                 'loggedInUser'=>'gdake',
-                'merchantSdk'=>'PHP;8.14.0',
+                'merchantSdk'=>'PHP;8.14.0','id' => 'id',
                 'card'=>array('type'=>'VI',
                         'number'=>'4100000000000001',
                         'expDate'=>'1213',
@@ -295,7 +295,7 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
                         'number'=>'4100000000000001',
                         'expDate'=>'1213'
                 ),
-                'orderId'=>'12344',
+                'orderId'=>'12344','id' => 'id',
                 'amount'=>'2',
                 'surchargeAmount'=>'1',
                 'orderSource'=>'ecommerce',
@@ -319,7 +319,7 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
                         'number'=>'4100000000000001',
                         'expDate'=>'1213'
                 ),
-                'orderId'=>'12344',
+                'orderId'=>'12344','id' => 'id',
                 'amount'=>'2',
                 'orderSource'=>'ecommerce',
         );
@@ -342,7 +342,7 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
                         'number'=>'4100000000000001',
                         'expDate'=>'1213'
                 ),
-                'orderId'=>'12344',
+                'orderId'=>'12344','id' => 'id',
                 'amount'=>'2',
                 'orderSource'=>'ecommerce',
                 'fraudFilterOverride'=>'true',
@@ -372,7 +372,7 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
                         'number'=>'4100000000000001',
                         'expDate'=>'1213'
                 ),
-                'orderId'=>'12344',
+                'orderId'=>'12344','id' => 'id',
                 'amount'=>'2',
                 'orderSource'=>'ecommerce',
                 'fraudFilterOverride'=>'true'
@@ -396,7 +396,7 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
                     'number'=>'4100000000000001',
                     'expDate'=>'1213'
             ),
-            'orderId'=>'12344',
+            'orderId'=>'12344','id' => 'id',
             'amount'=>'2',
             'orderSource'=>'ecommerce',
             'fraudFilterOverride'=>'true',
@@ -425,7 +425,7 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
                     'number'=>'4100000000000001',
                     'expDate'=>'1213'
             ),
-            'orderId'=>'12344',
+            'orderId'=>'12344','id' => 'id',
             'amount'=>'2',
             'orderSource'=>'ecommerce',
             'fraudFilterOverride'=>'true'
@@ -444,7 +444,7 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
     public function test_debtRepayment_true()
     {
         $hash_in = array(
-                'amount'=>'2',
+                'amount'=>'2','id' => 'id',
                 'orderSource'=>'ecommerce',
                 'orderId'=>'3',
                 'litleInternalRecurringRequest'=>array(
@@ -469,7 +469,7 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
         $hash_in = array(
                 'amount'=>'2',
                 'orderSource'=>'ecommerce',
-                'orderId'=>'3',
+                'orderId'=>'3','id' => 'id',
                 'litleInternalRecurringRequest'=>array(
                         'subscriptionId'=>'123',
                         'recurringTxnId'=>'456'
@@ -492,7 +492,7 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
         $hash_in = array(
                 'amount'=>'2',
                 'orderSource'=>'ecommerce',
-                'orderId'=>'3',
+                'orderId'=>'3','id' => 'id',
                 'litleInternalRecurringRequest'=>array(
                         'subscriptionId'=>'123',
                         'recurringTxnId'=>'456'
@@ -517,7 +517,7 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
                     'number'=>'4100000000000001',
                     'expDate'=>'1213'
             ),
-            'orderId'=>'12344',
+            'orderId'=>'12344','id' => 'id',
             'amount'=>'2',
             'orderSource'=>'ecommerce',
             'debtRepayment'=>'true',
@@ -546,7 +546,7 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
                 'number'=>'4100000000000001',
                 'expDate'=>'1213'
             ),
-            'orderId'=>'12344',
+            'orderId'=>'12344','id' => 'id',
             'amount'=>'2',
             'orderSource'=>'ecommerce',
             'debtRepayment'=>'true',

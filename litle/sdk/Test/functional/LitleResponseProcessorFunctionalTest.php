@@ -21,7 +21,7 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 				'batch_requests_path' => $this->direct,
 				'litle_requests_path' => $this->direct 
 		) );
-		$this->sale = array (
+		$this->sale = array ('id' => 'id',
 				'orderId' => '1864',
 				'amount' => '10010',
 				'orderSource' => 'ecommerce',
@@ -67,7 +67,7 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 		
 		// first batch
 		$batch = new BatchRequest ( $this->direct );
-		$hash_in = array (
+		$hash_in = array ('id' => '1211',
 				'card' => array (
 						'type' => 'VI',
 						'number' => '4100000000000001',
@@ -94,7 +94,7 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 		
 		// first batch
 		$batch = new BatchRequest ( $this->direct );
-		$hash_in = array (
+		$hash_in = array ('id' => '1211',
 				'card' => array (
 						'type' => 'VI',
 						'number' => '4100000000000001',
@@ -108,14 +108,14 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 		);
 		$batch->addAuth ( $hash_in );
 		
-		$hash_in = array (
+		$hash_in = array ('id' => '1211',
 				'litleTxnId' => '1234567890',
 				'reportGroup' => 'Planets',
 				'amount' => '5000' 
 		);
 		$batch->addAuthReversal ( $hash_in );
 		
-		$hash_in = array (
+		$hash_in = array ('id' => '1211',
 				'litleTxnId' => '12312312',
 				'amount' => '123' 
 		);
@@ -125,7 +125,7 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 		
 		// second batch
 		$batch = new BatchRequest ( $this->direct );
-		$hash_in = array (
+		$hash_in = array ('id' => '1211',
 				'amount' => '123',
 				'orderId' => '12344',
 				'authInformation' => array (
@@ -142,14 +142,14 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 		);
 		$batch->addCaptureGivenAuth ( $hash_in );
 		
-		$hash_in = array (
+		$hash_in = array ('id' => '1211',
 				'litleTxnId' => '12312312',
 				'reportGroup' => 'Planets',
 				'amount' => '123' 
 		);
 		$batch->addCredit ( $hash_in );
 		
-		$hash_in = array (
+		$hash_in = array ('id' => '1211',
 				'litleTxnId' => '123123' 
 		);
 		$batch->addEcheckCredit ( $hash_in );
@@ -158,12 +158,12 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 		
 		// third batch
 		$batch = new BatchRequest ( $this->direct );
-		$hash_in = array (
+		$hash_in = array ('id' => '1211',
 				'litleTxnId' => '123123' 
 		);
 		$batch->addEcheckRedeposit ( $hash_in );
 		
-		$hash_in = array (
+		$hash_in = array ('id' => '1211',
 				'amount' => '123456',
 				'verify' => 'true',
 				'orderId' => '12345',
@@ -183,7 +183,7 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 		);
 		$batch->addEcheckSale ( $hash_in );
 		
-		$hash_in = array (
+		$hash_in = array ('id' => '1211',
 				'amount' => '123456',
 				'verify' => 'true',
 				'orderId' => '12345',
@@ -207,7 +207,7 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 		
 		// fourth batch
 		$batch = new BatchRequest ( $this->direct );
-		$hash_in = array (
+		$hash_in = array ('id' => '1211',
 				'orderId' => '123',
 				'litleTxnId' => '123456',
 				'amount' => '106',
@@ -221,7 +221,7 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 		);
 		$batch->addForceCapture ( $hash_in );
 		
-		$hash_in = array (
+		$hash_in = array ('id' => '1211',
 				'card' => array (
 						'type' => 'VI',
 						'number' => '4100000000000001',
@@ -235,13 +235,13 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 		);
 		$batch->addSale ( $hash_in );
 		
-		$hash_in = array (
+		$hash_in = array ('id' => '1211',
 				'orderId' => '1',
 				'accountNumber' => '123456789101112' 
 		);
 		$batch->addRegisterToken ( $hash_in );
 		
-		$hash_in = array (
+		$hash_in = array ('id' => '1211',
 				'orderId' => '1',
 				'litleToken' => '123456789101112',
 				'cardValidationNum' => '123' 
@@ -287,7 +287,7 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 		
 		// sixth batch - au
 		$batch = new BatchRequest ( $this->direct );
-		$hash_in = array (
+		$hash_in = array ('id' => '1211',
 				'card' => array (
 						'type' => 'VI',
 						'number' => '4100000000000000',
@@ -301,7 +301,7 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 		
 		// seventh batch - gift card
 		$batch = new BatchRequest ( $this->direct );
-		$hash_in = array (
+		$hash_in = array ('id' => '1211',
 				'orderId' => '1',
 				'amount' => '2',
 				'orderSource' => 'ecommerce',
@@ -313,7 +313,7 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 				) 
 		);
 		$batch->addActivate ( $hash_in );
-		$hash_in = array (
+		$hash_in = array ('id' => '1211',
 				'orderId' => '1',
 				'orderSource' => 'ecommerce',
 				'card' => array (
@@ -324,7 +324,7 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 				) 
 		);
 		$batch->addDeactivate ( $hash_in );
-		$hash_in = array (
+		$hash_in = array ('id' => '1211',
 				'orderId' => '1',
 				'amount' => '2',
 				'orderSource' => 'ecommerce',
@@ -336,7 +336,7 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 				) 
 		);
 		$batch->addLoad ( $hash_in );
-		$hash_in = array (
+		$hash_in = array ('id' => '1211',
 				'orderId' => '1',
 				'amount' => '2',
 				'orderSource' => 'ecommerce',
@@ -348,7 +348,7 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 				) 
 		);
 		$batch->addUnload ( $hash_in );
-		$hash_in = array (
+		$hash_in = array ('id' => '1211',
 				'orderId' => '1',
 				'orderSource' => 'ecommerce',
 				'card' => array (
@@ -428,7 +428,7 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 				'routingNum' => '011100012' 
 		);
 		
-		$echeckPreNoteSaleHashSuccess = array (
+		$echeckPreNoteSaleHashSuccess = array ('id' => '1211',
 				'orderId' => '000',
 				'orderSource' => 'ecommerce',
 				'billToAddress' => $billToAddress,
@@ -436,7 +436,7 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 		);
 		$batch_request->addEcheckPreNoteSale ( $echeckPreNoteSaleHashSuccess );
 		
-		$echeckPreNoteSaleHashRoutErr = array (
+		$echeckPreNoteSaleHashRoutErr = array ('id' => '1211',
 				'orderId' => '900',
 				'orderSource' => 'ecommerce',
 				'billToAddress' => $billToAddress,
@@ -444,7 +444,7 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 		);
 		$batch_request->addEcheckPreNoteSale ( $echeckPreNoteSaleHashRoutErr );
 		
-		$echeckPreNoteSaleHashAccErr = array (
+		$echeckPreNoteSaleHashAccErr = array ('id' => '1211',
 				'orderId' => '301',
 				'orderSource' => 'ecommerce',
 				'billToAddress' => $billToAddress,
@@ -452,7 +452,7 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 		);
 		$batch_request->addEcheckPreNoteSale ( $echeckPreNoteSaleHashAccErr );
 		
-		$echeckPreNoteCreditHashSuccess = array (
+		$echeckPreNoteCreditHashSuccess = array ('id' => '1211',
 				'orderId' => '000',
 				'orderSource' => 'ecommerce',
 				'billToAddress' => $billToAddress,
@@ -460,7 +460,7 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 		);
 		$batch_request->addEcheckPreNoteCredit ( $echeckPreNoteCreditHashSuccess );
 		
-		$echeckPreNoteCreditHashRoutErr = array (
+		$echeckPreNoteCreditHashRoutErr = array ('id' => '1211',
 				'orderId' => '900',
 				'orderSource' => 'ecommerce',
 				'billToAddress' => $billToAddress,
@@ -468,7 +468,7 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 		);
 		$batch_request->addEcheckPreNoteCredit ( $echeckPreNoteCreditHashRoutErr );
 		
-		$echeckPreNoteCreditHashAccErr = array (
+		$echeckPreNoteCreditHashAccErr = array ('id' => '1211',
 				'orderId' => '301',
 				'orderSource' => 'ecommerce',
 				'billToAddress' => $billToAddress,
@@ -501,7 +501,7 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$batch_request = new BatchRequest ( $this->direct );
 		
 		
-		$submerchantCreditHash = array (
+		$submerchantCreditHash = array ('id' => '1211',
 				'fundingSubmerchantId' => '2111',
 				'submerchantName' => '001',
 				'fundsTransferId' => '12345678',
@@ -515,14 +515,14 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 		);
 		$batch_request->addSubmerchantCredit ( $submerchantCreditHash );
 		
-		$payFacCreditHash = array (
+		$payFacCreditHash = array ('id' => '1211',
 				'fundingSubmerchantId' => '2111',
 				'fundsTransferId' => '12345678',
 				'amount' => '13'
 		);
 		$batch_request->addPayFacCredit ( $payFacCreditHash );
 		
-		$vendorCreditHash = array (
+		$vendorCreditHash = array ('id' => '1211',
 				'fundingSubmerchantId' => '2111',
 				'vendorName' => '001',
 				'fundsTransferId' => '12345678',
@@ -536,21 +536,21 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 		);
 		$batch_request->addVendorCredit($vendorCreditHash);
 		
-		$reserveCreditHash = array (
+		$reserveCreditHash = array ('id' => '1211',
 				'fundingSubmerchantId' => '2111',
 				'fundsTransferId' => '12345678',
 				'amount' => '13'
 		);
 		$batch_request->addReserveCredit($reserveCreditHash);
 		
-		$physicalCheckCreditHash = array (
+		$physicalCheckCreditHash = array ('id' => '1211',
 				'fundingSubmerchantId' => '2111',
 				'fundsTransferId' => '12345678',
 				'amount' => '13'
 		);
 		$batch_request->addPhysicalCheckCredit($physicalCheckCreditHash);
 
-		$submerchantDebitHash = array (
+		$submerchantDebitHash = array ('id' => '1211',
 				'fundingSubmerchantId' => '2111',
 				'submerchantName' => '001',
 				'fundsTransferId' => '12345678',
@@ -564,14 +564,14 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 		);
 		$batch_request->addSubmerchantDebit ( $submerchantDebitHash );
 		
-		$payFacDebitHash = array (
+		$payFacDebitHash = array ('id' => '1211',
 				'fundingSubmerchantId' => '2111',
 				'fundsTransferId' => '12345678',
 				'amount' => '13'
 		);
 		$batch_request->addPayFacDebit ( $payFacDebitHash );
 		
-		$vendorDebitHash = array (
+		$vendorDebitHash = array ('id' => '1211',
 				'fundingSubmerchantId' => '2111',
 				'vendorName' => '001',
 				'fundsTransferId' => '12345678',
@@ -585,14 +585,14 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 		);
 		$batch_request->addVendorDebit($vendorDebitHash);
 		
-		$reserveDebitHash = array (
+		$reserveDebitHash = array ('id' => '1211',
 				'fundingSubmerchantId' => '2111',
 				'fundsTransferId' => '12345678',
 				'amount' => '13'
 		);
 		$batch_request->addReserveDebit($reserveDebitHash);
 		
-		$physicalCheckDebitHash = array (
+		$physicalCheckDebitHash = array ('id' => '1211',
 				'fundingSubmerchantId' => '2111',
 				'fundsTransferId' => '12345678',
 				'amount' => '13'
@@ -616,12 +616,4 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals ( $txnCount, 10 );
 	}
 	
-	public function tearDown() {
-		$files = glob ( $this->direct . '/*' ); // get all file names
-		foreach ( $files as $file ) { // iterate files
-			if (is_file ( $file ))
-				unlink ( $file ); // delete file
-		}
-		rmdir ( $this->direct );
-	}
 }

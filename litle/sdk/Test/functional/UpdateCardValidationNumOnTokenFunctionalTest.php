@@ -29,7 +29,7 @@ class UpdateCardValidationNumOnTokenFunctionalTest extends \PHPUnit_Framework_Te
 {
     public function test_simple()
     {
-        $hash_in = array(
+        $hash_in = array('id' => '1211',
             'merchantId' => '101',
               'version'=>'8.14',
               'reportGroup'=>'Planets',

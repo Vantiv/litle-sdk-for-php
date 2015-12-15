@@ -75,6 +75,7 @@ class LitleOnlineRequest
             $hash_out = array(
             'orderId'=> Checker::requiredField(XmlFields::returnArrayValue($hash_in,'orderId')),
             'amount'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'amount')),
+            'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
             'secondaryAmount'=>XmlFields::returnArrayValue($hash_in,'secondaryAmount'),
             'surchargeAmount' =>XmlFields::returnArrayValue($hash_in,'surchargeAmount'),
             'orderSource'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'orderSource')),
@@ -118,6 +119,7 @@ class LitleOnlineRequest
             'litleTxnId' => XmlFields::returnArrayValue($hash_in,'litleTxnId'),
             'orderId' =>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'orderId')),
             'amount' =>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'amount')),
+        	'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
             'secondaryAmount'=>XmlFields::returnArrayValue($hash_in,'secondaryAmount'),
             'surchargeAmount' =>XmlFields::returnArrayValue($hash_in,'surchargeAmount'),
             'orderSource'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'orderSource')),
@@ -164,6 +166,7 @@ class LitleOnlineRequest
     {
         $hash_out = array(
             'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
+        	'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
             'amount' =>XmlFields::returnArrayValue($hash_in,'amount'),
             'surchargeAmount' =>XmlFields::returnArrayValue($hash_in,'surchargeAmount'),
             'payPalNotes'=>XmlFields::returnArrayValue($hash_in,'payPalNotes'),
@@ -177,6 +180,7 @@ class LitleOnlineRequest
     {
         $hash_out = array(
                     'litleTxnId' => XmlFields::returnArrayValue($hash_in, 'litleTxnId'),
+        		    'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
                     'orderId' =>XmlFields::returnArrayValue($hash_in, 'orderId'),
                     'amount' =>XmlFields::returnArrayValue($hash_in, 'amount'),
         		    'secondaryAmount'=>XmlFields::returnArrayValue($hash_in,'secondaryAmount'),
@@ -209,6 +213,7 @@ class LitleOnlineRequest
     {
         $hash_out = array(
             'orderId'=>XmlFields::returnArrayValue($hash_in,'orderId'),
+        	'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
             'accountNumber'=>XmlFields::returnArrayValue($hash_in,'accountNumber'),
             'echeckForToken'=>XmlFields::echeckForTokenType(XmlFields::returnArrayValue($hash_in,'echeckForToken')),
             'paypageRegistrationId'=>XmlFields::returnArrayValue($hash_in,'paypageRegistrationId'),
@@ -226,6 +231,7 @@ class LitleOnlineRequest
     {
         $hash_out = array(
             'orderId' =>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'orderId')),
+        	'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
             'amount' =>XmlFields::returnArrayValue($hash_in,'amount'),
         	'secondaryAmount'=>XmlFields::returnArrayValue($hash_in,'secondaryAmount'),
             'surchargeAmount' =>XmlFields::returnArrayValue($hash_in,'surchargeAmount'),
@@ -255,6 +261,7 @@ class LitleOnlineRequest
     {
         $hash_out = array(
         'partial'=>XmlFields::returnArrayValue($hash_in,'partial'),
+        'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
         'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
         'amount' =>(XmlFields::returnArrayValue($hash_in,'amount')),
         'surchargeAmount' =>XmlFields::returnArrayValue($hash_in,'surchargeAmount'),
@@ -271,6 +278,7 @@ class LitleOnlineRequest
     {
         $hash_out = array(
             'orderId'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'orderId')),
+        	'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
             'authInformation'=>XmlFields::authInformation(XmlFields::returnArrayValue($hash_in,'authInformation')),
             'amount' =>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'amount')),
         	'secondaryAmount'=>XmlFields::returnArrayValue($hash_in,'secondaryAmount'),
@@ -303,6 +311,7 @@ class LitleOnlineRequest
     {
         $hash_out = array(
             'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
+        	'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
             'echeck'=>XmlFields::echeckType(XmlFields::returnArrayValue($hash_in,'echeck')),
             'echeckToken'=>XmlFields::echeckTokenType(XmlFields::returnArrayValue($hash_in,'echeckToken')),
             'merchantData'=>(XmlFields::merchantData(XmlFields::returnArrayValue($hash_in,'merchantData')))
@@ -318,6 +327,7 @@ class LitleOnlineRequest
     {
         $hash_out = array(
         'litleTxnId'=>XmlFields::returnArrayValue($hash_in,'litleTxnId'),
+        'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
         'orderId'=>XmlFields::returnArrayValue($hash_in,'orderId'),
         'verify'=>XmlFields::returnArrayValue($hash_in,'verify'),
         'amount'=>XmlFields::returnArrayValue($hash_in,'amount'),
@@ -344,6 +354,7 @@ class LitleOnlineRequest
     {
         $hash_out = array(
             'litleTxnId'=>XmlFields::returnArrayValue($hash_in,'litleTxnId'),
+        	'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
             'orderId'=>XmlFields::returnArrayValue($hash_in,'orderId'),
             'amount'=>XmlFields::returnArrayValue($hash_in,'amount'),
         	'secondaryAmount'=>XmlFields::returnArrayValue($hash_in,'secondaryAmount'),
@@ -364,6 +375,7 @@ class LitleOnlineRequest
 
         $hash_out = array(
             'litleTxnId'=>XmlFields::returnArrayValue($hash_in,'litleTxnId'),
+        	'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
             'orderId'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'orderId')),
             'amount'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'amount')),
             'orderSource'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'orderSource')),
@@ -383,6 +395,7 @@ class LitleOnlineRequest
     {
         $hash_out = array(
         'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
+        'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
         'processingInstructions'=>XmlFields::processingInstructions(XmlFields::returnArrayValue($hash_in,'processingInstructions')));
         $voidResponse = $this->processRequest($hash_out,$hash_in,'void');
 
@@ -392,6 +405,7 @@ class LitleOnlineRequest
     public function echeckVoidRequest($hash_in)
     {
         $hash_out = array(
+        'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
         'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
         );
         $echeckVoidResponse = $this->processRequest($hash_out,$hash_in,"echeckVoid");
@@ -403,6 +417,7 @@ class LitleOnlineRequest
     {
         $hash_out = array(
         'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
+        'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
         );
         $response = $this->processRequest($hash_out,$hash_in,"depositReversal");
 
@@ -412,6 +427,7 @@ class LitleOnlineRequest
     {
         $hash_out = array(
         'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
+        'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
         );
         $response = $this->processRequest($hash_out,$hash_in,"refundReversal");
 
@@ -421,6 +437,7 @@ class LitleOnlineRequest
     {
         $hash_out = array(
         'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
+        'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
         );
         $response = $this->processRequest($hash_out,$hash_in,"activateReversal");
 
@@ -430,6 +447,7 @@ class LitleOnlineRequest
     {
         $hash_out = array(
         'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
+        'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
         );
         $response = $this->processRequest($hash_out,$hash_in,"deactivateReversal");
 
@@ -439,6 +457,7 @@ class LitleOnlineRequest
     {
         $hash_out = array(
         'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
+        'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
         );
         $response = $this->processRequest($hash_out,$hash_in,"loadReversal");
 
@@ -448,6 +467,7 @@ class LitleOnlineRequest
     {
         $hash_out = array(
         'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
+        'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
         );
         $response = $this->processRequest($hash_out,$hash_in,"unloadReversal");
 
@@ -458,6 +478,7 @@ class LitleOnlineRequest
     {
         $hash_out = array(
                 'orderId'=>XmlFields::returnArrayValue($hash_in,'orderId'),
+        		'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
                 'litleToken' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleToken')),
                 'cardValidationNum' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'cardValidationNum')),
         );

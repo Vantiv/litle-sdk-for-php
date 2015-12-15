@@ -29,7 +29,7 @@ class VoidFunctionalTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple_void()
     {
-        $hash_in = array('litleTxnId'=> '123456789012345678');
+        $hash_in = array('litleTxnId'=> '123456789012345678','id' => '1211',);
         $initilaize = new LitleOnlineRequest();
         $voidResponse = $initilaize->voidRequest($hash_in);
         $response = XmlParser::getAttribute($voidResponse,'litleOnlineResponse','response');

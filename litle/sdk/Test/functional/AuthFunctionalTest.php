@@ -29,7 +29,7 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple_auth_with_card()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
             'card'=>array('type'=>'VI',
                     'number'=>'4100000000000000',
                     'expDate'=>'1213',
@@ -48,7 +48,7 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
 
     public function test_simple_auth_with_paypal()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
                 'paypal'=>array("payerId"=>'123',"token"=>'12321312',
                 "transactionId" => '123123'),
                 'id'=>'1211',
@@ -65,7 +65,7 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
 
     public function test_simple_auth_with_litleTxnId()
     {
-        $hash_in = array('reportGroup'=>'planets','litleTxnId'=>'1234567891234567891');
+        $hash_in = array('id' => 'id','reportGroup'=>'planets','litleTxnId'=>'1234567891234567891');
 
         $initilaize = new LitleOnlineRequest();
         $authorizationResponse = $initilaize->authorizationRequest($hash_in);
@@ -74,7 +74,7 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
     }
     public function test_illegal_orderSource()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
                             'paypal'=>array("payerId"=>'123',"token"=>'12321312',
                             "transactionId" => '123123'),
                             'id'=>'1211',
@@ -90,7 +90,7 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
     }
     public function test_fields_out_of_order()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
                         'paypal'=>array("payerId"=>'123',"token"=>'12321312',
                         "transactionId" => '123123'),
                         'id'=>'1211',
@@ -106,7 +106,7 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
     }
     public function test_invalid_field()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
                             'paypal'=>array("payerId"=>'123',"token"=>'12321312',
                             "transactionId" => '123123'),
                             'id'=>'1211',
@@ -124,7 +124,7 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
 
     public function test_pos_missing_field()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
         'reportGroup'=>'Planets',
         'orderId'=>'12344',
         'amount'=>'106',
@@ -141,7 +141,7 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
     
     public function test_auth_with_applepay()
     {
-    	$hash_in = array(
+    	$hash_in = array('id' => 'id',
     			'applepay'=>array(
     					'data'=>'string data here',
     					'header'=> array('applicationData' => '454657413164', 
@@ -163,7 +163,7 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
     
     public function test_auth_with_applepay_issuer_unavailable()
     {
-    	$hash_in = array(
+    	$hash_in = array('id' => 'id',
     			'applepay'=>array(
     					'data'=>'string data here',
     					'header'=> array('applicationData' => '454657413164',
@@ -185,7 +185,7 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
     
     public function test_auth_with_applepay_approved()
     {
-    	$hash_in = array(
+    	$hash_in = array('id' => 'id',
     			'applepay'=>array(
     					'data'=>'string data here',
     					'header'=> array('applicationData' => '454657413164',

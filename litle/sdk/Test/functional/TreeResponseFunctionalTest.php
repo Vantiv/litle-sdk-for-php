@@ -46,29 +46,29 @@ class TreeResponseFunctionalTest extends \PHPUnit_Framework_TestCase
 
     public function test_authReversal()
     {
-        $hash_in = array(
+        $hash_in = array('id' => '1211',
                     'litleTxnId'=>'12345678000','amount'=>'123',
                   'payPalNotes'=>'Notes');
 
         $litle = new LitleOnlineRequest($treeResponse=true);
         $response = $litle->authReversalRequest($hash_in);
-        $this->assertEquals('000',$response->authReversalResponse->response);
+        $this->assertEquals('001',$response->authReversalResponse->response);
     }
 
     public function test_capture()
     {
-        $hash_in = array(
+        $hash_in = array('id' => '1211',
                 'litleTxnId'=>'1234567891234567891',
                 'amount'=>'123');
 
         $litle = new LitleOnlineRequest($treeResponse=true);
         $response = $litle->captureRequest($hash_in);
-        $this->assertEquals('Approved',$response->captureResponse->message);
+        $this->assertEquals('Transaction Received',$response->captureResponse->message);
     }
 
     public function test_captureGivenAuth()
     {
-        $hash_in = array(
+        $hash_in = array('id' => '1211',
            'orderId'=>'12344',
            'amount'=>'106',
            'authInformation' => array(
@@ -87,7 +87,7 @@ class TreeResponseFunctionalTest extends \PHPUnit_Framework_TestCase
 
     public function test_credit()
     {
-        $hash_in = array(
+        $hash_in = array('id' => '1211',
                 'card'=>array('type'=>'VI',
                         'number'=>'4100000000000000',
                         'expDate'=>'1213',
@@ -100,34 +100,34 @@ class TreeResponseFunctionalTest extends \PHPUnit_Framework_TestCase
 
         $litle = new LitleOnlineRequest($treeResponse=true);
         $response = $litle->creditRequest($hash_in);
-        $this->assertEquals('000',$response->creditResponse->response);
+        $this->assertEquals('001',$response->creditResponse->response);
     }
 
     public function test_echeckCredit()
     {
-        $hash_in = array(
+        $hash_in = array('id' => '1211',
                 'litleTxnId'=>'123456789012345678',
                 'amount'=>'1000');
 
         $litle = new LitleOnlineRequest($treeResponse=true);
         $response = $litle->echeckCreditRequest($hash_in);
-        $this->assertEquals('000',$response->echeckCreditResponse->response);
+        $this->assertEquals('001',$response->echeckCreditResponse->response);
     }
 
     public function test_echeckRedepoist()
     {
-        $hash_in = array(
+        $hash_in = array('id' => '1211',
                 'litleTxnId'=>'123456789012345678',
                 'amount'=>'123');
 
         $litle = new LitleOnlineRequest($treeResponse=true);
         $response = $litle->echeckRedepositRequest($hash_in);
-        $this->assertEquals('000',$response->echeckRedepositResponse->response);
+        $this->assertEquals('001',$response->echeckRedepositResponse->response);
     }
 
     public function test_echeckSale()
     {
-        $hash_in = array(
+        $hash_in = array('id' => '1211',
           'amount'=>'123456',
           'verify'=>'true',
           'orderId'=>'12345',
@@ -142,7 +142,7 @@ class TreeResponseFunctionalTest extends \PHPUnit_Framework_TestCase
 
     public function test_echeckVerification()
     {
-        $hash_in = array(
+        $hash_in = array('id' => '1211',
           'amount'=>'123456',
           'verify'=>'true',
           'orderId'=>'12345',
@@ -157,15 +157,15 @@ class TreeResponseFunctionalTest extends \PHPUnit_Framework_TestCase
 
     public function test_echeckVoid()
     {
-        $hash_in = array('litleTxnId'=> '123456789012345678');
+        $hash_in = array('litleTxnId'=> '123456789012345678','id' => '1211',);
         $litle = new LitleOnlineRequest($treeResponse=true);
         $response = $litle->echeckVoidRequest($hash_in);
-        $this->assertEquals('000',$response->echeckVoidResponse->response);
+        $this->assertEquals('001',$response->echeckVoidResponse->response);
     }
 
     public function test_forceCapture()
     {
-        $hash_in = array(
+        $hash_in = array('id' => '1211',
               'merchantId' => '101',
               'version'=>'8.8',
               'reportGroup'=>'Planets',
@@ -181,12 +181,12 @@ class TreeResponseFunctionalTest extends \PHPUnit_Framework_TestCase
 
         $litle = new LitleOnlineRequest($treeResponse=true);
         $response = $litle->forceCaptureRequest($hash_in);
-        $this->assertEquals('000',$response->forceCaptureResponse->response);
+        $this->assertEquals('001',$response->forceCaptureResponse->response);
     }
 
     public function test_void()
     {
-        $hash_in = array('litleTxnId'=> '123456789012345678');
+        $hash_in = array('litleTxnId'=> '123456789012345678','id' => '1211',);
         $litle = new LitleOnlineRequest($treeResponse=true);
         $response = $litle->voidRequest($hash_in);
         $this->assertEquals('0',$response['response']);

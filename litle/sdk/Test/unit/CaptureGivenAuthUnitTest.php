@@ -31,6 +31,7 @@ class CaptureGivenAuthUnitTest extends \PHPUnit_Framework_TestCase
         $hash_in = array(
        'amount'=>'123',
        'orderId'=>'12344',
+       'id'=> 'id',
        'authInformation' => array(
        'authDate'=>'2002-10-09','authCode'=>'543216',
        'authAmount'=>'12345'),
@@ -55,6 +56,7 @@ class CaptureGivenAuthUnitTest extends \PHPUnit_Framework_TestCase
         $hash_in = array(
        'reportGroup'=>'Planets',
        'orderId'=>'12344',
+       'id'=> 'id',
        'authInformation' => array(
        'authDate'=>'2002-10-09','authCode'=>'543216',
        'authAmount'=>'12345'),
@@ -73,6 +75,7 @@ class CaptureGivenAuthUnitTest extends \PHPUnit_Framework_TestCase
         $hash_in = array(
           'reportGroup'=>'Planets',
           'orderId'=>'1234',
+         'id'=> 'id',
          'amount'=>'106',
          'orderSource'=>'ecommerce',
           'authInformation' => array(
@@ -96,6 +99,7 @@ class CaptureGivenAuthUnitTest extends \PHPUnit_Framework_TestCase
     {
         $hash_in = array(
                   'reportGroup'=>'Planets',
+        		  'id'=> 'id',
                   'litleTxnId'=>'123456',
                   'orderId'=>'12344',
                   'amount'=>'106',
@@ -125,7 +129,8 @@ class CaptureGivenAuthUnitTest extends \PHPUnit_Framework_TestCase
     {
         $hash_in = array(
                 'loggedInUser'=>'gdake',
-                'merchantSdk'=>'PHP;8.14.0',
+        		'id'=> 'id',
+                'merchantSdk'=>'PHP;10.1',
                 'amount'=>'123',
                 'orderId'=>'12344',
                 'authInformation' => array(
@@ -139,7 +144,7 @@ class CaptureGivenAuthUnitTest extends \PHPUnit_Framework_TestCase
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock	->expects($this->once())
         ->method('request')
-        ->with($this->matchesRegularExpression('/.*merchantSdk="PHP;8.14.0".*loggedInUser="gdake" xmlns=.*>.*/'));
+        ->with($this->matchesRegularExpression('/.*merchantSdk="PHP;10.1".*loggedInUser="gdake" xmlns=.*>.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -151,6 +156,7 @@ class CaptureGivenAuthUnitTest extends \PHPUnit_Framework_TestCase
     {
         $hash_in = array(
             'amount'=>'2',
+        	'id'=> 'id',
             'surchargeAmount'=>'1',
             'orderSource'=>'ecommerce',
             'orderId'=>'3'
@@ -170,6 +176,7 @@ class CaptureGivenAuthUnitTest extends \PHPUnit_Framework_TestCase
     {
         $hash_in = array(
                 'amount'=>'2',
+        		'id'=> 'id',
                 'orderSource'=>'ecommerce',
                 'orderId'=>'3'
         );
@@ -188,6 +195,7 @@ class CaptureGivenAuthUnitTest extends \PHPUnit_Framework_TestCase
     {
         $hash_in = array(
                 'amount'=>'2',
+        		'id'=> 'id',
                 'orderSource'=>'ecommerce',
                 'orderId'=>'3',
                 'merchantData'=>array(
@@ -210,6 +218,7 @@ class CaptureGivenAuthUnitTest extends \PHPUnit_Framework_TestCase
     {
         $hash_in = array(
                 'amount'=>'2',
+        		'id'=> 'id',
                 'orderSource'=>'ecommerce',
                 'orderId'=>'3',
                 'merchantData'=>array(
@@ -232,6 +241,7 @@ class CaptureGivenAuthUnitTest extends \PHPUnit_Framework_TestCase
     {
         $hash_in = array(
                 'amount'=>'2',
+        		'id'=> 'id',
                 'orderSource'=>'ecommerce',
                 'orderId'=>'3',
                 'merchantData'=>array(
@@ -253,6 +263,7 @@ class CaptureGivenAuthUnitTest extends \PHPUnit_Framework_TestCase
     {
     	$hash_in = array(
     			'amount'=>'123',
+    			'id'=> 'id',
     			'secondaryAmount' => '2102',
     			'orderId'=>'12344',
     			'authInformation' => array(

@@ -29,19 +29,19 @@ class EcheckCreditFunctionalTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple_echeckCredit()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
             'litleTxnId'=>'123456789012345678',
             'amount'=>'1000');
 
         $initilaize = new LitleOnlineRequest();
         $echeckCreditResponse = $initilaize->echeckCreditRequest($hash_in);
         $response = XmlParser::getNode($echeckCreditResponse,'response');
-        $this->assertEquals('000',$response);
+        $this->assertEquals('001',$response);
     }
 
     public function test_no_amount()
     {
-        $hash_in = array();
+        $hash_in = array('id' => 'id');
         $initilaize = new LitleOnlineRequest();
         $echeckCreditResponse = $initilaize->echeckCreditRequest($hash_in);
         $message= XmlParser::getAttribute($echeckCreditResponse,'litleOnlineResponse','message');
@@ -50,7 +50,7 @@ class EcheckCreditFunctionalTest extends \PHPUnit_Framework_TestCase
 
     public function test_echeckCredit_with_echeck()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
       'amount'=>'123456',
       'verify'=>'true',
       'orderId'=>'12345',
@@ -61,12 +61,12 @@ class EcheckCreditFunctionalTest extends \PHPUnit_Framework_TestCase
         $initilaize = new LitleOnlineRequest();
         $echeckCreditResponse = $initilaize->echeckCreditRequest($hash_in);
         $response = XmlParser::getNode($echeckCreditResponse,'message');
-        $this->assertEquals('Approved',$response);
+        $this->assertEquals('Transaction Received',$response);
     }
 
     public function test_echeckCredit_with_echeckToken()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
           'amount'=>'123456',
           'verify'=>'true',
           'orderId'=>'12345',
@@ -77,11 +77,11 @@ class EcheckCreditFunctionalTest extends \PHPUnit_Framework_TestCase
         $initilaize = new LitleOnlineRequest();
         $echeckCreditResponse = $initilaize->echeckCreditRequest($hash_in);
         $response = XmlParser::getNode($echeckCreditResponse,'message');
-        $this->assertEquals('Approved',$response);
+        $this->assertEquals('Transaction Received',$response);
     }
     public function test_echeckCredit_missing_billing()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
               'amount'=>'123456',
               'verify'=>'true',
               'orderId'=>'12345',
@@ -96,7 +96,7 @@ class EcheckCreditFunctionalTest extends \PHPUnit_Framework_TestCase
 
     public function test_simple_echeckCredit_secondaryAmount()
     {
-    	  $hash_in = array('amount' => '5000',
+    	  $hash_in = array('amount' => '5000','id' => 'id',
     	  	 'secondaryAmount' => '2000',
     	  	 'verify'=>'true',
     	  	 'orderId'=>'12345',
@@ -107,12 +107,12 @@ class EcheckCreditFunctionalTest extends \PHPUnit_Framework_TestCase
     	$initilaize = new LitleOnlineRequest();
     	$echeckCreditResponse = $initilaize->echeckCreditRequest($hash_in);
     	$response = XmlParser::getNode($echeckCreditResponse,'response');
-    	$this->assertEquals('000',$response);
+    	$this->assertEquals('001',$response);
     }
     
     public function test_simple_echeckCredit_With_SecondaryAmount()
     {
-    	$hash_in = array(
+    	$hash_in = array('id' => 'id',
     			'litleTxnId'=>'123456789012345678',
     			'secondaryAmount'=>'100',
     			'amount'=>'1000');
@@ -120,7 +120,7 @@ class EcheckCreditFunctionalTest extends \PHPUnit_Framework_TestCase
     	$initilaize = new LitleOnlineRequest();
     	$echeckCreditResponse = $initilaize->echeckCreditRequest($hash_in);
     	$response = XmlParser::getNode($echeckCreditResponse,'response');
-    	$this->assertEquals('000',$response);
+    	$this->assertEquals('001',$response);
     }
   
     

@@ -29,7 +29,7 @@ class EcheckSaleUnitTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple_echeckSale()
     {
-        $hash_in = array('litleTxnId' =>'123123');
+        $hash_in = array('litleTxnId' =>'123123','id' => 'id');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
         ->method('request')
@@ -42,7 +42,7 @@ class EcheckSaleUnitTest extends \PHPUnit_Framework_TestCase
 
     public function test_both_choices()
     {
-        $hash_in = array('reportGroup'=>'Planets','litleTxnId'=>'123456',
+        $hash_in = array('reportGroup'=>'Planets','litleTxnId'=>'123456','id' => 'id',
         'echeckToken' => array('accType'=>'Checking','routingNum'=>'123123','litleToken'=>'1234565789012','checkNum'=>'123455'),
         'echeck' => array('accType'=>'Checking','routingNum'=>'123123','accNum'=>'12345657890','checkNum'=>'123455'));
         $litleTest = new LitleOnlineRequest();
@@ -54,12 +54,13 @@ class EcheckSaleUnitTest extends \PHPUnit_Framework_TestCase
     {
         $hash_in = array(
                 'litleTxnId' =>'123123',
-                'merchantSdk'=>'PHP;8.14.0',
+        		'id' => 'id',
+                'merchantSdk'=>'PHP;10.1.0',
                 'loggedInUser'=>'gdake');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
         ->method('request')
-        ->with($this->matchesRegularExpression('/.*merchantSdk="PHP;8.14.0".*loggedInUser="gdake" xmlns=.*>.*/'));
+        ->with($this->matchesRegularExpression('/.*merchantSdk="PHP;10.1.0".*loggedInUser="gdake" xmlns=.*>.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -69,6 +70,7 @@ class EcheckSaleUnitTest extends \PHPUnit_Framework_TestCase
     public function test_echeck_sale_secondaryAmount()
     {
     	$hash_in = array('amount' => '5000',
+    			'id' => 'id',
     			'secondaryAmount' => '2000',
     			'orderSource'=>'ecommerce',
     			'billToAddress' => array(),

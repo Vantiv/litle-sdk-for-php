@@ -28,7 +28,7 @@ class VoidUnitTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple_echeckRedeposit()
     {
-        $hash_in = array('litleTxnId' =>'123123','reportGroup'=>'Planets');
+        $hash_in = array('litleTxnId' =>'123123','reportGroup'=>'Planets','id' => 'id',);
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
         ->method('request')
@@ -40,7 +40,7 @@ class VoidUnitTest extends \PHPUnit_Framework_TestCase
     }
     public function test_no_litleTxnId()
     {
-        $hash_in = array('reportGroup'=>'Planets');
+        $hash_in = array('reportGroup'=>'Planets','id' => 'id');
         $litleTest = new LitleOnlineRequest();
         $this->setExpectedException('InvalidArgumentException',"Missing Required Field: /litleTxnId/");
         $retOb = $litleTest->voidRequest($hash_in);
@@ -48,7 +48,7 @@ class VoidUnitTest extends \PHPUnit_Framework_TestCase
 
     public function test_loggedInUser()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
                 'litleTxnId' =>'123123',
                 'merchantSdk'=>'PHP;8.14.0',
                 'reportGroup'=>'Planets',

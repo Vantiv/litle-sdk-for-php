@@ -28,7 +28,7 @@ class CreditUnitTest extends \PHPUnit_Framework_TestCase
 {
     public function test_credit()
     {
-        $hash_in = array('litleTxnId'=> '12312312','reportGroup'=>'Planets', 'amount'=>'123');
+        $hash_in = array('litleTxnId'=> '12312312','reportGroup'=>'Planets', 'amount'=>'123','id' => 'id',);
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
         ->method('request')
@@ -44,6 +44,7 @@ class CreditUnitTest extends \PHPUnit_Framework_TestCase
         $hash_in = array(
           'reportGroup'=>'Planets',
           'orderId'=>'12344',
+          'id' => 'id',
           'amount'=>'106',
           'orderSource'=>'ecommerce',
           'card'=>array(
@@ -67,6 +68,7 @@ class CreditUnitTest extends \PHPUnit_Framework_TestCase
           'reportGroup'=>'Planets',
           'orderId'=>'12344',
           'amount'=>'106',
+          'id' => 'id',
           'orderSource'=>'ecommerce',
           'card'=>array(
           'type'=>'VI',
@@ -93,6 +95,7 @@ class CreditUnitTest extends \PHPUnit_Framework_TestCase
     {
         $hash_in = array(
           'reportGroup'=>'Planets',
+          'id' => 'id',
           'litleTxnId'=>'123456',
           'orderId'=>'12344',
           'amount'=>'106',
@@ -128,6 +131,7 @@ class CreditUnitTest extends \PHPUnit_Framework_TestCase
     {
         $hash_in = array(
                     'orderId'=> '2111',
+        		     'id' => 'id',
                     'orderSource'=>'ecommerce',
                     'amount'=>'123',
                     'actionReason'=>'SUSPECT_FRAUD'
@@ -146,14 +150,15 @@ class CreditUnitTest extends \PHPUnit_Framework_TestCase
     {
         $hash_in = array(
                 'litleTxnId'=> '12312312',
+        		'id' => 'id',
                 'reportGroup'=>'Planets',
                 'amount'=>'123',
-                'merchantSdk'=>'PHP;8.14.0',
+                'merchantSdk'=>'PHP;10.1.0',
                 'loggedInUser'=>'gdake');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
         ->method('request')
-        ->with($this->matchesRegularExpression('/.*merchantSdk="PHP;8.14.0".*loggedInUser="gdake" xmlns=.*>.*/'));
+        ->with($this->matchesRegularExpression('/.*merchantSdk="PHP;10.1.0".*loggedInUser="gdake" xmlns=.*>.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -164,6 +169,7 @@ class CreditUnitTest extends \PHPUnit_Framework_TestCase
     {
         $hash_in = array(
                 'amount'=>'2',
+        		'id' => 'id',
                 'surchargeAmount'=>'1',
                 'litleTxnId'=>'3',
                 'processingInstructions'=>array(),
@@ -183,6 +189,7 @@ class CreditUnitTest extends \PHPUnit_Framework_TestCase
     {
         $hash_in = array(
                 'amount'=>'2',
+        		'id' => 'id',
                 'litleTxnId'=>'3',
                 'processingInstructions'=>array(),
         );
@@ -201,6 +208,7 @@ class CreditUnitTest extends \PHPUnit_Framework_TestCase
     {
         $hash_in = array(
                 'amount'=>'2',
+        		'id' => 'id',
                 'surchargeAmount'=>'1',
                 'orderId'=>'3',
                 'orderSource'=>'ecommerce',
@@ -220,6 +228,7 @@ class CreditUnitTest extends \PHPUnit_Framework_TestCase
     {
         $hash_in = array(
                 'amount'=>'2',
+        		'id' => 'id',
                 'orderId'=>'3',
                 'orderSource'=>'ecommerce',
         );
@@ -238,6 +247,7 @@ class CreditUnitTest extends \PHPUnit_Framework_TestCase
     {
         $hash_in = array(
                 'amount'=>'2',
+        		'id' => 'id',
                 'pos'=>array(
                     'terminalId'=>'abc123',
                     'capability'=>'a',
@@ -262,6 +272,7 @@ class CreditUnitTest extends \PHPUnit_Framework_TestCase
     {
         $hash_in = array(
                 'amount'=>'2',
+        		'id' => 'id',
                 'litleTxnId'=>'3',
                 'payPalNotes'=>'notes',
         );
@@ -278,7 +289,7 @@ class CreditUnitTest extends \PHPUnit_Framework_TestCase
     
     public function test_credit_with_secondaryAmount()
     {
-    	$hash_in = array('litleTxnId'=> '12312312','reportGroup'=>'Planets', 'amount'=>'123', 'secondaryAmount' => '3214');
+    	$hash_in = array('litleTxnId'=> '12312312','reportGroup'=>'Planets', 'amount'=>'123', 'secondaryAmount' => '3214','id' => 'id',);
     	$mock = $this->getMock('litle\sdk\LitleXmlMapper');
     	$mock->expects($this->once())
     	->method('request')

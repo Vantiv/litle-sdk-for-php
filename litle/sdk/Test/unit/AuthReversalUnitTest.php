@@ -27,7 +27,7 @@ namespace litle\sdk;
 {
     public function test_capture()
     {
-        $hash_in = array('litleTxnId'=> '1234567890','reportGroup'=>'Planets', 'amount'=>'5000');
+        $hash_in = array('litleTxnId'=> '1234567890','reportGroup'=>'Planets', 'amount'=>'5000','id' => 'id',);
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock	->expects($this->once())
         ->method('request')
@@ -40,7 +40,7 @@ namespace litle\sdk;
 
     public function test_no_txnid()
     {
-        $hash_in =array('reportGroup'=>'Planets','amount'=>'106');
+        $hash_in =array('reportGroup'=>'Planets','id' => 'id','amount'=>'106');
         $litleTest = new LitleOnlineRequest();
         $this->setExpectedException('InvalidArgumentException','Missing Required Field: /litleTxnId/');
         $retOb = $litleTest->authReversalRequest($hash_in);
@@ -51,6 +51,7 @@ namespace litle\sdk;
         $hash_in = array(
                 'litleTxnId'=> '1234567890',
                 'reportGroup'=>'Planets',
+        		'id' => 'id',
                 'amount'=>'5000',
                 'merchantSdk'=>'PHP;8.14.0',
                 'loggedInUser'=>'gdake'
@@ -70,6 +71,7 @@ namespace litle\sdk;
         $hash_in = array(
             'litleTxnId'=>'3',
             'amount'=>'2',
+        	'id' => 'id',
             'surchargeAmount'=>'1',
             'payPalNotes'=>'notes',
         );
@@ -88,6 +90,7 @@ namespace litle\sdk;
     {
         $hash_in = array(
                 'litleTxnId'=>'3',
+        		'id' => 'id',
                 'amount'=>'2',
                 'payPalNotes'=>'notes',
         );

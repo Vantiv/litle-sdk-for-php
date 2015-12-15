@@ -29,7 +29,7 @@ class TokenFunctionalTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple_token()
     {
-        $hash_in = array(
+        $hash_in = array('id' => '1211',
             'merchantId' => '101',
           'version'=>'8.8',
           'reportGroup'=>'Planets',
@@ -44,7 +44,7 @@ class TokenFunctionalTest extends \PHPUnit_Framework_TestCase
 
     public function test_simple_token_with_paypage()
     {
-        $hash_in = array(
+        $hash_in = array('id' => '1211',
         'merchantId' => '101',
       'version'=>'8.8',
       'reportGroup'=>'Planets',
@@ -59,7 +59,7 @@ class TokenFunctionalTest extends \PHPUnit_Framework_TestCase
 
     public function test_simple_token_with_echeck()
     {
-        $hash_in = array(
+        $hash_in = array('id' => '1211',
             'reportGroup'=>'Planets',
           'merchantId' => '101',
           'version'=>'8.8',
@@ -74,7 +74,7 @@ class TokenFunctionalTest extends \PHPUnit_Framework_TestCase
 
     public function test_token_echeck_missing_required()
     {
-        $hash_in = array('merchantId' => '101',
+        $hash_in = array('merchantId' => '101','id' => '1211',
       'version'=>'8.8',
       'reportGroup'=>'Planets',
       'orderId'=>'12344',
@@ -87,7 +87,7 @@ class TokenFunctionalTest extends \PHPUnit_Framework_TestCase
     
     public function test_simple_token_applepay()
     {
-    	$hash_in = array(
+    	$hash_in = array('id' => '1211',
     			'merchantId' => '101',
     			'version'=>'8.8',
     			'reportGroup'=>'Planets',

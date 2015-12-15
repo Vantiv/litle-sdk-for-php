@@ -30,7 +30,7 @@ class CreditFunctionalTest extends \PHPUnit_Framework_TestCase
     public function test_simple_credit_with_card()
     {
         $hash_in = array(
-            'card'=>array('type'=>'VI',
+            'card'=>array('type'=>'VI','id' => 'id',
                     'number'=>'4100000000000000',
                     'expDate'=>'1213',
                     'cardValidationNum' => '1213'),
@@ -43,12 +43,12 @@ class CreditFunctionalTest extends \PHPUnit_Framework_TestCase
         $initilaize = new LitleOnlineRequest();
         $creditResponse = $initilaize->creditRequest($hash_in);
         $response = XmlParser::getNode($creditResponse,'response');
-        $this->assertEquals('000',$response);
+        $this->assertEquals('001',$response);
     }
 
     public function test_simple_credit_with_paypal()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
                 'paypal'=>array("payerId"=>'123','payerEmail'=>'12321321',
                 "transactionId" => '123123'),
                 'id'=>'1211',
@@ -65,7 +65,7 @@ class CreditFunctionalTest extends \PHPUnit_Framework_TestCase
 
     public function test_simple_credit_with_litleTxnId()
     {
-        $hash_in = array('reportGroup'=>'planets','litleTxnId'=>'1234567891234567891');
+        $hash_in = array('id' => 'id','reportGroup'=>'planets','litleTxnId'=>'1234567891234567891');
 
         $initilaize = new LitleOnlineRequest();
         $creditResponse = $initilaize->creditRequest($hash_in);
@@ -74,7 +74,7 @@ class CreditFunctionalTest extends \PHPUnit_Framework_TestCase
     }
     public function test_paypal_notes()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
                 'card'=>array('type'=>'VI',
                         'number'=>'4100000000000000',
                         'expDate'=>'1213',
@@ -89,11 +89,11 @@ class CreditFunctionalTest extends \PHPUnit_Framework_TestCase
         $initilaize = new LitleOnlineRequest();
         $creditResponse = $initilaize->creditRequest($hash_in);
         $response = XmlParser::getNode($creditResponse,'response');
-        $this->assertEquals('000',$response);
+        $this->assertEquals('001',$response);
     }
     public function test_amexAggregator()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
           'amount'=>'2000',
           'orderId'=>'12344',
           'orderSource'=>'ecommerce',
@@ -107,12 +107,12 @@ class CreditFunctionalTest extends \PHPUnit_Framework_TestCase
         $initilaize = new LitleOnlineRequest();
         $creditResponse = $initilaize->creditRequest($hash_in);
         $response = XmlParser::getNode($creditResponse,'response');
-        $this->assertEquals('000',$response);
+        $this->assertEquals('001',$response);
     }
     
     public function test_simple_credit_with_secondary_amount()
     {
-    	$hash_in = array(
+    	$hash_in = array('id' => 'id',
     			'card'=>array('type'=>'VI',
     					'number'=>'4100000000000000',
     					'expDate'=>'1213',
@@ -127,12 +127,12 @@ class CreditFunctionalTest extends \PHPUnit_Framework_TestCase
     	$initilaize = new LitleOnlineRequest();
     	$creditResponse = $initilaize->creditRequest($hash_in);
     	$response = XmlParser::getNode($creditResponse,'response');
-    	$this->assertEquals('000',$response);
+    	$this->assertEquals('001',$response);
     }
     
     public function test_simple_credit_with_litleTxnId_AndSecondaryAmount()
     {
-    	$hash_in = array('reportGroup'=>'planets','litleTxnId'=>'1234567891234567891','secondaryAmount'=>'100');
+    	$hash_in = array('id' => 'id','reportGroup'=>'planets','litleTxnId'=>'1234567891234567891','secondaryAmount'=>'100');
     
     	$initilaize = new LitleOnlineRequest();
     	$creditResponse = $initilaize->creditRequest($hash_in);

@@ -29,26 +29,26 @@ class AuthReversalFunctionalTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple_authReversal()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
                 'litleTxnId'=>'12345678000','amount'=>'123',
               'payPalNotes'=>'Notes');
 
         $initilaize = new LitleOnlineRequest();
         $authReversalResponse = $initilaize->authReversalRequest($hash_in);
         $response = XmlParser::getNode($authReversalResponse,'response');
-        $this->assertEquals('000',$response);
+        $this->assertEquals('001',$response);
     }
 
 function test_simple_authreversal_fields_out_of_order()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
                 'amount'=>'123',
               'payPalNotes'=>'Notes','litleTxnId'=>'12345678000',);
 
         $initilaize = new LitleOnlineRequest();
         $authReversalResponse = $initilaize->authReversalRequest($hash_in);
         $response = XmlParser::getNode($authReversalResponse,'response');
-        $this->assertEquals('000',$response);
+        $this->assertEquals('001',$response);
     }
 
 }

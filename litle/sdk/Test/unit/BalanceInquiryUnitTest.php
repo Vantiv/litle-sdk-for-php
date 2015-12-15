@@ -31,6 +31,7 @@ class BalanceInquiryUnitTest extends \PHPUnit_Framework_TestCase
         $hash_in = array(
             'orderId'=>'1',
             'orderSource'=>'ECOMMERCE',
+        	'id' => 'id',
             'card' => array (
                 'type'=>'VI',
                 'number'=>'4100000000000000',

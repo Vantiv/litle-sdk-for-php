@@ -30,7 +30,7 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
 {
     public function test_6_Auth()
     {
-        $auth_hash = array(
+        $auth_hash = array('id' => 'id',
             'orderId' => '6',
             'amount' => '60060',
             'orderSource'=>'ecommerce',
@@ -57,7 +57,7 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
 
     public function test_6_sale()
     {
-        $sale_hash = array(
+        $sale_hash = array('id' => 'id',
             'orderId' => '6',
             'amount' => '60060',
             'orderSource'=>'ecommerce',
@@ -81,18 +81,18 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('34',XmlParser::getNode($saleResponse,'avsResult'));
         $this->assertEquals('P',XmlParser::getNode($saleResponse,'cardValidationResult'));
 
-        $void_hash =  array(
+        $void_hash =  array('id' => 'id',
                         'litleTxnId' =>(XmlParser::getNode($saleResponse,'litleTxnId')),
                         'reportGroup'=>'planets');
         $initilaize = new LitleOnlineRequest();
         $voidResponse = $initilaize->voidRequest($void_hash);
-        $this->assertEquals('360',XmlParser::getNode($voidResponse,'response'));
-        $this->assertEquals('No transaction found with specified litleTxnId',XmlParser::getNode($voidResponse,'message'));
+        $this->assertEquals('001',XmlParser::getNode($voidResponse,'response'));
+        $this->assertEquals('Transaction Received',XmlParser::getNode($voidResponse,'message'));
     }
 
     public function test_7_Auth()
     {
-        $auth_hash = array(
+        $auth_hash = array('id' => 'id',
             'orderId' => '7',
             'amount' => '70070',
             'orderSource'=>'ecommerce',
@@ -119,7 +119,7 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
 
     public function test_7_avs()
     {
-        $auth_hash = array(
+        $auth_hash = array('id' => 'id',
                     'orderId' => '7',
                     'amount' => '70070',
                     'orderSource'=>'ecommerce',
@@ -146,7 +146,7 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
 
     public function test_7_sale()
     {
-        $sale_hash = array(
+        $sale_hash = array('id' => 'id',
                     'orderId' => '7',
                     'amount' => '70070',
                     'orderSource'=>'ecommerce',
@@ -173,7 +173,7 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
 
     public function test_8_Auth()
     {
-        $auth_hash = array(
+        $auth_hash = array('id' => 'id',
         'orderId' => '8',
         'amount' => '80080',
         'orderSource'=>'ecommerce',
@@ -199,7 +199,7 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
 
     public function test_8_avs()
     {
-        $auth_hash = array(
+        $auth_hash = array('id' => 'id',
             'orderId' => '8',
             'amount' => '80080',
             'orderSource'=>'ecommerce',
@@ -225,7 +225,7 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
 
     public function test_8_sale()
     {
-        $sale_hash = array(
+        $sale_hash = array('id' => 'id',
             'orderId' => '8',
             'amount' => '80080',
             'orderSource'=>'ecommerce',
@@ -251,7 +251,7 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
 
     public function test_9_Auth()
     {
-        $auth_hash = array(
+        $auth_hash = array('id' => 'id',
         'orderId' => '9',
         'amount' => '90090',
         'orderSource'=>'ecommerce',
@@ -276,7 +276,7 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
 
     public function test_9_avs()
     {
-        $auth_hash = array(
+        $auth_hash = array('id' => 'id',
             'orderId' => '9',
             'amount' => '90090',
             'orderSource'=>'ecommerce',
@@ -301,7 +301,7 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
 
     public function test_9_sale()
     {
-        $sale_hash = array(
+        $sale_hash = array('id' => 'id',
                 'orderId' => '9',
                 'amount' => '90090',
                 'orderSource'=>'ecommerce',
@@ -326,7 +326,7 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
 
     public function test_10()
     {
-        $auth_hash = array(
+        $auth_hash = array('id' => 'id',
         'orderId' => '10',
         'amount' => '40000',
         'orderSource'=>'ecommerce',
@@ -344,7 +344,7 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
 
     public function test_11()
     {
-        $auth_hash = array(
+        $auth_hash = array('id' => 'id',
             'orderId' => '11',
             'amount' => '60000',
             'orderSource'=>'ecommerce',
@@ -362,7 +362,7 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
 
     public function test_12()
     {
-        $auth_hash = array(
+        $auth_hash = array('id' => 'id',
                 'orderId' => '12',
                 'amount' => '50000',
                 'orderSource'=>'ecommerce',
@@ -380,7 +380,7 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
 
     public function test_13()
     {
-        $auth_hash = array(
+        $auth_hash = array('id' => 'id',
         'orderId' => '13',
         'amount' => '15000',
         'orderSource'=>'ecommerce',

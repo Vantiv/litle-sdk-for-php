@@ -29,7 +29,7 @@ class EcheckVoidFunctionalTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple_echeckVoid()
     {
-        $hash_in = array('litleTxnId'=> '123456789012345678');
+        $hash_in = array('litleTxnId'=> '123456789012345678','id'=>'id');
         $initilaize = new LitleOnlineRequest();
         $echeckVoidResponse = $initilaize->echeckVoidRequest($hash_in);
         $response = XmlParser::getAttribute($echeckVoidResponse,'litleOnlineResponse','response');

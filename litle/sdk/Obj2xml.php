@@ -55,9 +55,15 @@ class Obj2xml
             $transacType-> addAttribute('reportGroup',$config["reportGroup"]);
         };
         if (isset($data['id'])) {
-            $transacType-> addAttribute('id',$data["id"]);
+        if ($data['id'] === "REQUIRED") {
+                throw new \InvalidArgumentException("Missing Required Field: id");
+            }
+            else {
+        	$transacType-> addAttribute('id',$data["id"]);
+            }
         };
         unset($data['id']);
+        
         Obj2xml::iterateChildren($data,$transacType);
 
         return $xml->asXML();
@@ -80,7 +86,17 @@ class Obj2xml
         $transac = simplexml_load_string("<$type />");
         if (Obj2xml::transactionShouldHaveReportGroup($type)) {
             $transac->addAttribute('reportGroup', $report_group);
+            if (isset($data['id'])) {
+            	if ($data['id'] === "REQUIRED") {
+            		throw new \InvalidArgumentException("Missing Required Field: id");
+            	}
+            	else {
+            		$transac-> addAttribute('id',$data["id"]);
+            	}
+            };
+            unset($data['id']);
         }
+       
         Obj2xml::iterateChildren($data,$transac);
 
         return str_replace("<?xml version=\"1.0\"?>\n", "", $transac->asXML());
@@ -207,6 +223,7 @@ class Obj2xml
 
     private static function iterateChildren($data,$transacType)
     {
+
         foreach ($data as $key => $value) {
             if ($value === "REQUIRED") {
                 throw new \InvalidArgumentException("Missing Required Field: /$key/");

@@ -29,7 +29,7 @@ class CaptureGivenAuthFunctionalTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple_captureGivenAuth()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
        'orderId'=>'12344',
        'amount'=>'106',
        'authInformation' => array(
@@ -49,7 +49,7 @@ class CaptureGivenAuthFunctionalTest extends \PHPUnit_Framework_TestCase
 
     public function test_simple_captureGivenAuth_with_token()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
           'orderId'=>'12344',
           'amount'=>'106',
           'authInformation' => array(
@@ -69,7 +69,7 @@ class CaptureGivenAuthFunctionalTest extends \PHPUnit_Framework_TestCase
 
     public function test_complex_captureGivenAuth()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
     'orderId'=>'12344',
        'amount'=>'106',
        'authInformation' => array(
@@ -91,7 +91,7 @@ class CaptureGivenAuthFunctionalTest extends \PHPUnit_Framework_TestCase
 
     public function test_authInfo()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
         'orderId'=>'12344',
           'amount'=>'106',
           'authInformation' => array(
@@ -112,7 +112,7 @@ class CaptureGivenAuthFunctionalTest extends \PHPUnit_Framework_TestCase
     
     public function test_simple_captureGivenAuth_secondary_amount()
     {
-    	$hash_in = array(
+    	$hash_in = array('id' => 'id',
     			'orderId'=>'12344',
     			'amount'=>'106',
     			'secondaryAmount' => '2000',

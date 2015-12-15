@@ -28,7 +28,7 @@ class UpdateCardValidationNumOnTokenUnitTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
             'orderId'=>'1',
             'litleToken'=>'123456789101112',
             'cardValidationNum'=>'123');
@@ -44,7 +44,7 @@ class UpdateCardValidationNumOnTokenUnitTest extends \PHPUnit_Framework_TestCase
 
     public function test_orderIdIsOptional()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
                 'litleToken'=>'123456789101112',
                 'cardValidationNum'=>'123');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
@@ -59,7 +59,7 @@ class UpdateCardValidationNumOnTokenUnitTest extends \PHPUnit_Framework_TestCase
 
     public function test_litleTokenIsRequired()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
                 'cardValidationNum'=>'123');
         $litleTest = new LitleOnlineRequest();
         $this->setExpectedException('InvalidArgumentException',"Missing Required Field: /litleToken/");
@@ -68,7 +68,7 @@ class UpdateCardValidationNumOnTokenUnitTest extends \PHPUnit_Framework_TestCase
 
     public function test_cardValidationNumIsRequired()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
                 'litleToken'=>'123456789101112');
         $litleTest = new LitleOnlineRequest();
         $this->setExpectedException('InvalidArgumentException',"Missing Required Field: /cardValidationNum/");
@@ -77,7 +77,7 @@ class UpdateCardValidationNumOnTokenUnitTest extends \PHPUnit_Framework_TestCase
 
     public function test_loggedInUser()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
                 'loggedInUser'=>'gdake',
                 'merchantSdk'=>'PHP;8.14.0',
                 'orderId'=>'1',

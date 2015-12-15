@@ -29,7 +29,8 @@ class CancelSubscriptionUnitTest extends \PHPUnit_Framework_TestCase
     public function test_simple()
     {
         $hash_in = array(
-            'subscriptionId'=>'1');
+            'subscriptionId'=>'1',
+        	'id'=> 'id');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
         ->method('request')

@@ -30,6 +30,7 @@ class ForceCaptureUnitTest extends \PHPUnit_Framework_TestCase
     {
         $hash_in = array(
      'orderId'=>'123',
+      'id' => 'id',
       'litleTxnId'=>'123456',
       'amount'=>'106',
       'orderSource'=>'ecommerce',
@@ -50,7 +51,7 @@ class ForceCaptureUnitTest extends \PHPUnit_Framework_TestCase
     public function test_no_orderId()
     {
         $hash_in = array(
-       'reportGroup'=>'Planets',
+       'reportGroup'=>'Planets','id' => 'id',
        'litleTxnId'=>'123456',
        'amount'=>'107',
        'orderSource'=>'ecommerce',
@@ -66,7 +67,7 @@ class ForceCaptureUnitTest extends \PHPUnit_Framework_TestCase
     public function test_no_orderSource()
     {
         $hash_in = array(
-           'reportGroup'=>'Planets',
+           'reportGroup'=>'Planets','id' => 'id',
            'litleTxnId'=>'123456',
            'amount'=>'107',
            'orderId'=>'123',
@@ -83,7 +84,7 @@ class ForceCaptureUnitTest extends \PHPUnit_Framework_TestCase
     {
         $hash_in = array(
 
-      'reportGroup'=>'Planets',
+      'reportGroup'=>'Planets','id' => 'id',
       'litleTxnId'=>'123456',
       'orderId'=>'12344',
       'amount'=>'106',
@@ -107,7 +108,7 @@ class ForceCaptureUnitTest extends \PHPUnit_Framework_TestCase
     {
         $hash_in = array(
 
-          'reportGroup'=>'Planets',
+          'reportGroup'=>'Planets','id' => 'id',
           'litleTxnId'=>'123456',
           'orderId'=>'12344',
           'amount'=>'106',
@@ -136,8 +137,8 @@ class ForceCaptureUnitTest extends \PHPUnit_Framework_TestCase
     public function test_loggedInUser()
     {
         $hash_in = array(
-                'loggedInUser'=>'gdake',
-                'merchantSdk'=>'PHP;8.14.0',
+                'loggedInUser'=>'gdake','id' => 'id',
+                'merchantSdk'=>'PHP;10.1.0',
                 'orderId'=>'123',
                 'litleTxnId'=>'123456',
                 'amount'=>'106',
@@ -150,7 +151,7 @@ class ForceCaptureUnitTest extends \PHPUnit_Framework_TestCase
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
         ->method('request')
-        ->with($this->matchesRegularExpression('/.*merchantSdk="PHP;8.14.0".*loggedInUser="gdake" xmlns=.*>.*/'));
+        ->with($this->matchesRegularExpression('/.*merchantSdk="PHP;10.1.0".*loggedInUser="gdake" xmlns=.*>.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -160,7 +161,7 @@ class ForceCaptureUnitTest extends \PHPUnit_Framework_TestCase
     public function test_surchargeAmount()
     {
         $hash_in = array(
-            'orderId'=>'3',
+            'orderId'=>'3','id' => 'id',
             'amount'=>'2',
             'surchargeAmount'=>'1',
             'orderSource'=>'ecommerce',
@@ -179,7 +180,7 @@ class ForceCaptureUnitTest extends \PHPUnit_Framework_TestCase
     public function test_surchargeAmount_optional()
     {
         $hash_in = array(
-            'orderId'=>'3',
+            'orderId'=>'3','id' => 'id',
             'amount'=>'2',
             'orderSource'=>'ecommerce',
         );
@@ -197,7 +198,7 @@ class ForceCaptureUnitTest extends \PHPUnit_Framework_TestCase
     public function test_debtRepayment_true()
     {
         $hash_in = array(
-                'amount'=>'2',
+                'amount'=>'2','id' => 'id',
                 'orderSource'=>'ecommerce',
                 'orderId'=>'3',
                 'merchantData'=>array(
@@ -219,7 +220,7 @@ class ForceCaptureUnitTest extends \PHPUnit_Framework_TestCase
     public function test_debtRepayment_false()
     {
         $hash_in = array(
-                'amount'=>'2',
+                'amount'=>'2','id' => 'id',
                 'orderSource'=>'ecommerce',
                 'orderId'=>'3',
                 'merchantData'=>array(
@@ -241,7 +242,7 @@ class ForceCaptureUnitTest extends \PHPUnit_Framework_TestCase
     public function test_debtRepayment_optional()
     {
         $hash_in = array(
-                'amount'=>'2',
+                'amount'=>'2','id' => 'id',
                 'orderSource'=>'ecommerce',
                 'orderId'=>'3',
                 'merchantData'=>array(
@@ -261,7 +262,7 @@ class ForceCaptureUnitTest extends \PHPUnit_Framework_TestCase
     public function test_simple_forceCapture_secondary_amount()
     {
     	$hash_in = array(
-    			'orderId'=>'123',
+    			'orderId'=>'123','id' => 'id',
     			'litleTxnId'=>'123456',
     			'amount'=>'106',
     			'secondaryAmount' => '2000',

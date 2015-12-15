@@ -280,7 +280,7 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals ( 123, $cts ['echeckSale'] ['amount'] );
 	}
 	public function test_addEcheckPreNoteSale() {
-		$hash_in = array (
+		$hash_in = array ('id' =>'id',
 				'orderId' => '2111',
 				'orderSource' => 'ecommerce',
 				'billToAddress' => array (
@@ -303,7 +303,7 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals ( 1, $cts ['echeckPreNoteSale'] ['count'] );
 	}
 	public function test_addEcheckPreNoteCredit() {
-		$hash_in = array (
+		$hash_in = array ('id' =>'id',
 				'orderId' => '2111',
 				'orderSource' => 'ecommerce',
 				'billToAddress' => array (
@@ -327,7 +327,7 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 	}
 	// TODO: check content
 	public function test_addSubmerchantCredit() {
-		$hash_in = array (
+		$hash_in = array ('id' =>'id',
 				'fundingSubmerchantId' => '2111',
 				'submerchantName' => '001',
 				'fundsTransferId' => '12345678',
@@ -350,7 +350,7 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals ( 13, $cts ['submerchantCredit'] ['amount'] );
 	}
 	public function test_addVendorCredit() {
-		$hash_in = array (
+		$hash_in = array ('id' =>'id',
 				'fundingSubmerchantId' => '2111',
 				'vendorName' => '001',
 				'fundsTransferId' => '12345678',
@@ -373,7 +373,7 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals ( 13, $cts ['vendorCredit'] ['amount'] );
 	}
 	public function test_addPayFacCredit() {
-		$hash_in = array (
+		$hash_in = array ('id' =>'id',
 				'fundingSubmerchantId' => '2111',
 				'fundsTransferId' => '12345678',
 				'amount' => '13' 
@@ -389,7 +389,7 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals ( 13, $cts ['payFacCredit'] ['amount'] );
 	}
 	public function test_addReserveCredit() {
-		$hash_in = array (
+		$hash_in = array ('id' =>'id',
 				'fundingSubmerchantId' => '2111',
 				'fundsTransferId' => '12345678',
 				'amount' => '13' 
@@ -405,7 +405,7 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals ( 13, $cts ['reserveCredit'] ['amount'] );
 	}
 	public function test_addPhysicalCheckCredit() {
-		$hash_in = array (
+		$hash_in = array ('id' =>'id',
 				'fundingSubmerchantId' => '2111',
 				'fundsTransferId' => '12345678',
 				'amount' => '13' 
@@ -421,7 +421,7 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals ( 13, $cts ['physicalCheckCredit'] ['amount'] );
 	}
 	public function test_addSubmerchantDebit() {
-		$hash_in = array (
+		$hash_in = array ('id' =>'id',
 				'fundingSubmerchantId' => '2111',
 				'submerchantName' => '001',
 				'fundsTransferId' => '12345678',
@@ -444,7 +444,7 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals ( 13, $cts ['submerchantDebit'] ['amount'] );
 	}
 	public function test_addVendorDebit() {
-		$hash_in = array (
+		$hash_in = array ('id' =>'id',
 				'fundingSubmerchantId' => '2111',
 				'vendorName' => '001',
 				'fundsTransferId' => '12345678',
@@ -467,7 +467,7 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals ( 13, $cts ['vendorDebit'] ['amount'] );
 	}
 	public function test_addPayFacDebit() {
-		$hash_in = array (
+		$hash_in = array ('id' =>'id',
 				'fundingSubmerchantId' => '2111',
 				'fundsTransferId' => '12345678',
 				'amount' => '13' 
@@ -483,7 +483,7 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals ( 13, $cts ['payFacDebit'] ['amount'] );
 	}
 	public function test_addReserveDebit() {
-		$hash_in = array (
+		$hash_in = array ('id' =>'id',
 				'fundingSubmerchantId' => '2111',
 				'fundsTransferId' => '12345678',
 				'amount' => '13' 
@@ -499,7 +499,7 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals ( 13, $cts ['reserveDebit'] ['amount'] );
 	}
 	public function test_addPhysicalCheckDebit() {
-		$hash_in = array (
+		$hash_in = array ('id' =>'id',
 				'fundingSubmerchantId' => '2111',
 				'fundsTransferId' => '12345678',
 				'amount' => '13' 
@@ -515,7 +515,7 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals ( 13, $cts ['physicalCheckDebit'] ['amount'] );
 	}
 	public function test_addEcheckCredit() {
-		$hash_in = array (
+		$hash_in = array ('id' =>'id',
 				'card' => array (
 						'type' => 'VI',
 						'number' => '4100000000000000',
@@ -655,7 +655,7 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals ( 1, $cts ['updatePlan'] ['count'] );
 	}
 	public function test_addActivateHash() {
-		$hash_in = array (
+		$hash_in = array ('id' =>'id',
 				'orderId' => '1',
 				'amount' => '2',
 				'orderSource' => 'ECOMMERCE',
@@ -677,7 +677,7 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals ( 2, $cts ['activate'] ['amount'] );
 	}
 	public function test_addDeactivateHash() {
-		$hash_in = array (
+		$hash_in = array ('id' =>'id',
 				'orderId' => '1',
 				'orderSource' => 'ECOMMERCE',
 				'card' => array (
@@ -697,7 +697,7 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals ( 1, $cts ['deactivate'] ['count'] );
 	}
 	public function test_addLoadHash() {
-		$hash_in = array (
+		$hash_in = array ('id' =>'id',
 				'orderId' => '1',
 				'amount' => '2',
 				'orderSource' => 'ECOMMERCE',
@@ -719,7 +719,7 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals ( 2, $cts ['load'] ['amount'] );
 	}
 	public function test_addUnloadHash() {
-		$hash_in = array (
+		$hash_in = array ('id' =>'id',
 				'orderId' => '1',
 				'amount' => '2',
 				'orderSource' => 'ECOMMERCE',
@@ -741,7 +741,7 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals ( 2, $cts ['unload'] ['amount'] );
 	}
 	public function test_addBalanceInquiryHash() {
-		$hash_in = array (
+		$hash_in = array ('id' =>'id',
 				'orderId' => '1',
 				'orderSource' => 'ECOMMERCE',
 				'card' => array (
@@ -762,7 +762,7 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 	}
 	public function test_mechaBatch() {
 		$batch = new BatchRequest ( $this->direct );
-		$hash_in = array (
+		$hash_in = array ('id' =>'id',
 				'card' => array (
 						'type' => 'VI',
 						'number' => '4100000000000001',
@@ -776,20 +776,20 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		);
 		$batch->addAuth ( $hash_in );
 		
-		$hash_in = array (
+		$hash_in = array ('id' =>'id',
 				'litleTxnId' => '1234567890',
 				'reportGroup' => 'Planets',
 				'amount' => '5000' 
 		);
 		$batch->addAuthReversal ( $hash_in );
 		
-		$hash_in = array (
+		$hash_in = array ('id' =>'id',
 				'litleTxnId' => '12312312',
 				'amount' => '123' 
 		);
 		$batch->addCapture ( $hash_in );
 		
-		$hash_in = array (
+		$hash_in = array ('id' =>'id',
 				'amount' => '123',
 				'orderId' => '12344',
 				'authInformation' => array (
@@ -806,24 +806,24 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		);
 		$batch->addCaptureGivenAuth ( $hash_in );
 		
-		$hash_in = array (
+		$hash_in = array ('id' =>'id',
 				'litleTxnId' => '12312312',
 				'reportGroup' => 'Planets',
 				'amount' => '123' 
 		);
 		$batch->addCredit ( $hash_in );
 		
-		$hash_in = array (
+		$hash_in = array ('id' =>'id',
 				'litleTxnId' => '123123' 
 		);
 		$batch->addEcheckCredit ( $hash_in );
 		
 		$hash_in = array (
-				'litleTxnId' => '123123' 
+				'litleTxnId' => '123123', 'id' =>'id',
 		);
 		$batch->addEcheckRedeposit ( $hash_in );
 		
-		$hash_in = array (
+		$hash_in = array ('id' =>'id',
 				'amount' => '123456',
 				'verify' => 'true',
 				'orderId' => '12345',
@@ -843,7 +843,7 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		);
 		$batch->addEcheckSale ( $hash_in );
 		
-		$hash_in = array (
+		$hash_in = array ('id' =>'id',
 				'amount' => '123456',
 				'verify' => 'true',
 				'orderId' => '12345',
@@ -863,7 +863,7 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		);
 		$batch->addEcheckVerification ( $hash_in );
 		
-		$hash_in = array (
+		$hash_in = array ('id' =>'id',
 				'orderId' => '123',
 				'litleTxnId' => '123456',
 				'amount' => '106',
@@ -891,13 +891,13 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		);
 		$batch->addSale ( $hash_in );
 		
-		$hash_in = array (
+		$hash_in = array ('id' =>'id',
 				'orderId' => '1',
 				'accountNumber' => '123456789101112' 
 		);
 		$batch->addRegisterToken ( $hash_in );
 		
-		$hash_in = array (
+		$hash_in = array ('id' =>'id',
 				'orderId' => '1',
 				'litleToken' => '123456789101112',
 				'cardValidationNum' => '123' 

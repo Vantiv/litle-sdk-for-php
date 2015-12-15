@@ -31,6 +31,7 @@ class LoadUnitTest extends \PHPUnit_Framework_TestCase
         $hash_in = array(
             'orderId'=>'1',
             'amount'=> '2',
+        	'id' => 'id',
             'orderSource'=>'ECOMMERCE',
             'card' => array (
                 'type'=>'VI',

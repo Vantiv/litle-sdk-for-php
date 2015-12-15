@@ -60,8 +60,8 @@ class LitleRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$this->assertFalse ( file_exists ( $fn1 ) );
 		$this->assertFalse ( file_exists ( $fn2 ) );
 		
-		$expected = '<batchRequestmerchantId="0180"merchantSdk="PHP;9.3.3"authAmount="0"numAuths="0"saleAmount="123"numSales="1"creditAmount="0"numCredits="0"numTokenRegistrations="0"captureGivenAuthAmount="0"numCaptureGivenAuths="0"forceCaptureAmount="0"numForceCaptures="0"authReversalAmount="0"numAuthReversals="0"captureAmount="0"numCaptures="0"echeckVerificationAmount="0"numEcheckVerification="0"echeckCreditAmount="0"numEcheckCredit="0"numEcheckRedeposit="0"echeckSalesAmount="0"numEcheckSales="0"numUpdateCardValidationNumOnTokens="0"numUpdateSubscriptions="0"numCancelSubscriptions="0"numCreatePlans="0"numUpdatePlans="0"numActivates="0"activateAmount="0"numDeactivates="0"numLoads="0"loadAmount="0"numUnloads="0"unloadAmount="0"numBalanceInquirys="0"numAccountUpdates="0"numEcheckPreNoteSale="0"numEcheckPreNoteCredit="0"submerchantCreditAmount="0"numSubmerchantCredit="0"payFacCreditAmount="0"numPayFacCredit="0"reserveCreditAmount="0"numReserveCredit="0"vendorCreditAmount="0"numVendorCredit="0"physicalCheckCreditAmount="0"numPhysicalCheckCredit="0"submerchantDebitAmount="0"numSubmerchantDebit="0"payFacDebitAmount="0"numPayFacDebit="0"reserveDebitAmount="0"numReserveDebit="0"vendorDebitAmount="0"numVendorDebit="0"physicalCheckDebitAmount="0"numPhysicalCheckDebit="0">
-        <sale reportGroup="Planets"><orderId>2111</orderId><amount>123</amount><orderSource>ecommerce</orderSource>
+		$expected = '<batchRequestmerchantId="0180"merchantSdk="PHP;10.1"authAmount="0"numAuths="0"saleAmount="123"numSales="1"creditAmount="0"numCredits="0"numTokenRegistrations="0"captureGivenAuthAmount="0"numCaptureGivenAuths="0"forceCaptureAmount="0"numForceCaptures="0"authReversalAmount="0"numAuthReversals="0"captureAmount="0"numCaptures="0"echeckVerificationAmount="0"numEcheckVerification="0"echeckCreditAmount="0"numEcheckCredit="0"numEcheckRedeposit="0"echeckSalesAmount="0"numEcheckSales="0"numUpdateCardValidationNumOnTokens="0"numUpdateSubscriptions="0"numCancelSubscriptions="0"numCreatePlans="0"numUpdatePlans="0"numActivates="0"activateAmount="0"numDeactivates="0"numLoads="0"loadAmount="0"numUnloads="0"unloadAmount="0"numBalanceInquirys="0"numAccountUpdates="0"numEcheckPreNoteSale="0"numEcheckPreNoteCredit="0"submerchantCreditAmount="0"numSubmerchantCredit="0"payFacCreditAmount="0"numPayFacCredit="0"reserveCreditAmount="0"numReserveCredit="0"vendorCreditAmount="0"numVendorCredit="0"physicalCheckCreditAmount="0"numPhysicalCheckCredit="0"submerchantDebitAmount="0"numSubmerchantDebit="0"payFacDebitAmount="0"numPayFacDebit="0"reserveDebitAmount="0"numReserveDebit="0"vendorDebitAmount="0"numVendorDebit="0"physicalCheckDebitAmount="0"numPhysicalCheckDebit="0">
+        <sale reportGroup="Planets" id="1211"><orderId>2111</orderId><amount>123</amount><orderSource>ecommerce</orderSource>
         <card><type>VI</type><number>4100000000000000</number><expDate>1213</expDate><cardValidationNum>1213</cardValidationNum></card></sale>
         </batchRequest>';
 		$this->assertEquals ( preg_replace ( "[\s]", "", $expected ), preg_replace ( "[\s]", "", file_get_contents ( $request->batches_file ) ) );
@@ -93,7 +93,7 @@ class LitleRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 				'litleSessionId' => '8675309' 
 		) );
 		
-		$expected = '<litleRequest numBatchRequests="0" version="9.3" xmlns="http://www.litle.com/schema">
+		$expected = '<litleRequest numBatchRequests="0" version="10.1" xmlns="http://www.litle.com/schema">
                     <authentication><user>XXXXXX</user><password>XXXXXX</password></authentication>
                     <RFRRequest><litleSessionId>8675309</litleSessionId></RFRRequest>
                     </litleRequest>';
@@ -139,10 +139,10 @@ class LitleRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$this->assertFalse ( file_exists ( $fn1 ) );
 		$this->assertTrue ( file_exists ( $request->request_file ) );
 		
-		$expected = '<litleRequest numBatchRequests="1" version="9.3" xmlns="http://www.litle.com/schema">
+		$expected = '<litleRequest numBatchRequests="1" version="10.1" xmlns="http://www.litle.com/schema">
         <authentication><user>XXXXX</user><password>XXXXX</password></authentication>
-        <batchRequestmerchantId="0180"merchantSdk="PHP;9.3.3"authAmount="0"numAuths="0"saleAmount="123"numSales="1"creditAmount="0"numCredits="0"numTokenRegistrations="0"captureGivenAuthAmount="0"numCaptureGivenAuths="0"forceCaptureAmount="0"numForceCaptures="0"authReversalAmount="0"numAuthReversals="0"captureAmount="0"numCaptures="0"echeckVerificationAmount="0"numEcheckVerification="0"echeckCreditAmount="0"numEcheckCredit="0"numEcheckRedeposit="0"echeckSalesAmount="0"numEcheckSales="0"numUpdateCardValidationNumOnTokens="0"numUpdateSubscriptions="0"numCancelSubscriptions="0"numCreatePlans="0"numUpdatePlans="0"numActivates="0"activateAmount="0"numDeactivates="0"numLoads="0"loadAmount="0"numUnloads="0"unloadAmount="0"numBalanceInquirys="0"numAccountUpdates="0"numEcheckPreNoteSale="0"numEcheckPreNoteCredit="0"submerchantCreditAmount="0"numSubmerchantCredit="0"payFacCreditAmount="0"numPayFacCredit="0"reserveCreditAmount="0"numReserveCredit="0"vendorCreditAmount="0"numVendorCredit="0"physicalCheckCreditAmount="0"numPhysicalCheckCredit="0"submerchantDebitAmount="0"numSubmerchantDebit="0"payFacDebitAmount="0"numPayFacDebit="0"reserveDebitAmount="0"numReserveDebit="0"vendorDebitAmount="0"numVendorDebit="0"physicalCheckDebitAmount="0"numPhysicalCheckDebit="0">
-        <sale reportGroup="Planets"><orderId>2111</orderId><amount>123</amount><orderSource>ecommerce</orderSource>
+        <batchRequestmerchantId="0180"merchantSdk="PHP;10.1"authAmount="0"numAuths="0"saleAmount="123"numSales="1"creditAmount="0"numCredits="0"numTokenRegistrations="0"captureGivenAuthAmount="0"numCaptureGivenAuths="0"forceCaptureAmount="0"numForceCaptures="0"authReversalAmount="0"numAuthReversals="0"captureAmount="0"numCaptures="0"echeckVerificationAmount="0"numEcheckVerification="0"echeckCreditAmount="0"numEcheckCredit="0"numEcheckRedeposit="0"echeckSalesAmount="0"numEcheckSales="0"numUpdateCardValidationNumOnTokens="0"numUpdateSubscriptions="0"numCancelSubscriptions="0"numCreatePlans="0"numUpdatePlans="0"numActivates="0"activateAmount="0"numDeactivates="0"numLoads="0"loadAmount="0"numUnloads="0"unloadAmount="0"numBalanceInquirys="0"numAccountUpdates="0"numEcheckPreNoteSale="0"numEcheckPreNoteCredit="0"submerchantCreditAmount="0"numSubmerchantCredit="0"payFacCreditAmount="0"numPayFacCredit="0"reserveCreditAmount="0"numReserveCredit="0"vendorCreditAmount="0"numVendorCredit="0"physicalCheckCreditAmount="0"numPhysicalCheckCredit="0"submerchantDebitAmount="0"numSubmerchantDebit="0"payFacDebitAmount="0"numPayFacDebit="0"reserveDebitAmount="0"numReserveDebit="0"vendorDebitAmount="0"numVendorDebit="0"physicalCheckDebitAmount="0"numPhysicalCheckDebit="0">
+        <sale reportGroup="Planets" id="1211"><orderId>2111</orderId><amount>123</amount><orderSource>ecommerce</orderSource>
         <card><type>VI</type><number>4100000000000000</number><expDate>1213</expDate><cardValidationNum>1213</cardValidationNum></card></sale>
         </batchRequest>
         </litleRequest>';
@@ -158,7 +158,7 @@ class LitleRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$request = new LitleRequest ( $this->config );
 		$batch = new BatchRequest ( $this->direct );
 		
-		$sale_hash = array (
+		$sale_hash = array ('id' => 'id',
 				'orderId' => '1864',
 				'amount' => '10010',
 				'orderSource' => 'ecommerce',
@@ -202,7 +202,7 @@ class LitleRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		
 		$batch = new BatchRequest ( $this->direct );
 		
-		$sale_hash = array (
+		$sale_hash = array ('id' => 'id',
 				'orderId' => '1864',
 				'amount' => '10010',
 				'orderSource' => 'ecommerce',

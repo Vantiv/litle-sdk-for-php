@@ -30,7 +30,7 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
 {
     public function test_14()
     {
-        $auth_hash = array(
+        $auth_hash = array('id' => '1211',
               'orderId' => '14',
           'amount' => '3000',
           'orderSource'=>'ecommerce',
@@ -51,7 +51,7 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
 
     public function test_15()
     {
-        $auth_hash = array(
+        $auth_hash = array('id' => '1211',
                      'orderId' => '15',
                       'amount' => '3000',
                       'orderSource'=>'ecommerce',
@@ -72,7 +72,7 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
 
     public function test_16()
     {
-        $auth_hash = array(
+        $auth_hash = array('id' => '1211',
                          'orderId' => '16',
                           'amount' => '3000',
                           'orderSource'=>'ecommerce',
@@ -93,7 +93,7 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
 
     public function test_17()
     {
-        $auth_hash = array(
+        $auth_hash = array('id' => '1211',
                          'orderId' => '17',
                           'amount' => '3000',
                           'orderSource'=>'ecommerce',
@@ -114,7 +114,7 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
 
     public function test_18()
     {
-        $auth_hash = array(
+        $auth_hash = array('id' => '1211',
                          'orderId' => '18',
                           'amount' => '3000',
                           'orderSource'=>'ecommerce',
@@ -135,7 +135,7 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
 
     public function test_19()
     {
-        $auth_hash = array(
+        $auth_hash = array('id' => '1211',
                          'orderId' => '19',
                           'amount' => '3000',
                           'orderSource'=>'ecommerce',
@@ -156,7 +156,7 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
 
     public function test_20()
     {
-        $auth_hash = array(
+        $auth_hash = array('id' => '1211',
                              'orderId' => '20',
                               'amount' => '3000',
                               'orderSource'=>'ecommerce',
@@ -177,7 +177,7 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
 
     public function test_21()
     {
-        $auth_hash = array(
+        $auth_hash = array('id' => '1211',
                              'orderId' => '21',
                               'amount' => '5000',
                               'orderSource'=>'ecommerce',
@@ -195,7 +195,7 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
 
     public function test_22()
     {
-        $auth_hash = array(
+        $auth_hash = array('id' => '1211',
                                  'orderId' => '22',
                                   'amount' => '5000',
                                   'orderSource'=>'ecommerce',
@@ -213,7 +213,7 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
 
     public function test_23()
     {
-        $auth_hash = array(
+        $auth_hash = array('id' => '1211',
                                  'orderId' => '23',
                                   'amount' => '5000',
                                   'orderSource'=>'ecommerce',
@@ -231,7 +231,7 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
 
     public function test_24()
     {
-        $auth_hash = array(
+        $auth_hash = array('id' => '1211',
                                  'orderId' => '24',
                                   'amount' => '5000',
                                   'orderSource'=>'ecommerce',
@@ -249,7 +249,7 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
 
     public function test_25()
     {
-        $auth_hash = array(
+        $auth_hash = array('id' => '1211',
                                  'orderId' => '25',
                                   'amount' => '5000',
                                   'orderSource'=>'ecommerce',
@@ -268,7 +268,7 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
     # test 26-31 healthcare iias
     public function test_26()
     {
-        $auth_hash = array(
+        $auth_hash = array('id' => '1211',
                                  'orderId' => '26',
               'amount' => '18698',
               'orderSource'=>'ecommerce',
@@ -293,7 +293,7 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
     public function test_27()
     {
         $auth_hash = array(
-                                     'orderId' => '27',
+                                    'id' => '1211', 'orderId' => '27',
                   'amount' => '18698',
                   'orderSource'=>'ecommerce',
                   'card'=>array(
@@ -315,7 +315,7 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
 
     public function test_28()
     {
-        $auth_hash = array(
+        $auth_hash = array('id' => '1211',
         'orderId' => '28',
         'amount' => '15000',
                       'orderSource'=>'ecommerce',
@@ -338,7 +338,7 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
 
     public function test_29()
     {
-        $auth_hash = array(
+        $auth_hash = array('id' => '1211',
             'orderId' => '29',
             'amount' => '18699',
                           'orderSource'=>'ecommerce',
@@ -364,7 +364,7 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
 
     public function test_30()
     {
-        $auth_hash = array(
+        $auth_hash = array('id' => '1211',
             'orderId' => '30',
             'amount' => '20000',
                           'orderSource'=>'ecommerce',
@@ -390,7 +390,7 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
 
     public function test_31()
     {
-        $auth_hash = array(
+        $auth_hash = array('id' => '1211',
             'orderId' => '31',
             'amount' => '25000',
                           'orderSource'=>'ecommerce',

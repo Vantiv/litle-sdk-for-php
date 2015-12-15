@@ -29,7 +29,7 @@ class CaptureFunctionalTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple_capture()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
             'litleTxnId'=>'1234567891234567891',
             'amount'=>'123');
 
@@ -41,7 +41,7 @@ class CaptureFunctionalTest extends \PHPUnit_Framework_TestCase
 
     public function test_complex_capture()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
                 'litleTxnId'=>'1234567891234567891',
                 'amount'=>'123','enhancedData'=>array(
               'customerReference'=>'Litle',
@@ -57,7 +57,7 @@ class CaptureFunctionalTest extends \PHPUnit_Framework_TestCase
 
     public function test_simple_capture_with_partial()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
             'litleTxnId'=>'1234567891234567891',
             'patial'=>'true',
             'amount'=>'123');

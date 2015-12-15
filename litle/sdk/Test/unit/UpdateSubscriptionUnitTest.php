@@ -28,7 +28,7 @@ class UpdateSubscriptionUnitTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
             'subscriptionId'=>'1',
             'planCode'=> '2',
             'billToAddress'=> array (
@@ -53,7 +53,7 @@ class UpdateSubscriptionUnitTest extends \PHPUnit_Framework_TestCase
 
     public function test_PlanCodeIsOptional()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
             'subscriptionId'=>'1',
             'billToAddress'=> array (
                 'addressLine1' => '3'
@@ -78,7 +78,7 @@ class UpdateSubscriptionUnitTest extends \PHPUnit_Framework_TestCase
 
     public function test_BillToAddressIsOptional()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
             'subscriptionId'=>'1',
             'card' => array (
                 'type'=>'VI',
@@ -100,7 +100,7 @@ class UpdateSubscriptionUnitTest extends \PHPUnit_Framework_TestCase
 
     public function test_CardIsOptional()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
             'subscriptionId'=>'1',
             'billingDate'=>'2013-12-17');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
@@ -116,7 +116,7 @@ class UpdateSubscriptionUnitTest extends \PHPUnit_Framework_TestCase
 
     public function test_BillingDateIsOptional()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
             'subscriptionId'=>'1');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
 
@@ -131,7 +131,7 @@ class UpdateSubscriptionUnitTest extends \PHPUnit_Framework_TestCase
 
     public function test_choice_card()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
             'subscriptionId'=>'1',
             'card' => array (
                 'type'=>'VI',
@@ -153,7 +153,7 @@ class UpdateSubscriptionUnitTest extends \PHPUnit_Framework_TestCase
 
     public function test_choice_token()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
             'subscriptionId'=>'1',
             'token' => array (
                 'litleToken'=>'1111222233334444',
@@ -175,7 +175,7 @@ class UpdateSubscriptionUnitTest extends \PHPUnit_Framework_TestCase
 
     public function test_choice_paypage()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
             'subscriptionId'=>'1',
             'paypage' => array (
                 'paypageRegistrationId'=>'abc123',

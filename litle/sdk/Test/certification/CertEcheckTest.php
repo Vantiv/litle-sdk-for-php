@@ -32,7 +32,7 @@ class CertEcheckTest extends \PHPUnit_Framework_TestCase
     #37-40 echeckVerification
     public function test_37()
     {
-        $echeck_hash = array(
+        $echeck_hash = array('id' => 'id',
         'orderId' => '37',
         'amount' => '3001',
         'orderSource'=>'telephone',
@@ -52,7 +52,7 @@ class CertEcheckTest extends \PHPUnit_Framework_TestCase
 
     public function test_38()
     {
-        $echeck_hash = array(
+        $echeck_hash = array('id' => 'id',
         'orderId' => '38',
         'amount' => '3002',
         'orderSource'=>'telephone',
@@ -74,7 +74,7 @@ class CertEcheckTest extends \PHPUnit_Framework_TestCase
     public function test_39()
     {
         $echeck_hash = array(
-        'orderId' => '39',
+        'orderId' => '39','id' => 'id',
         'amount' => '3003',
         'orderSource'=>'telephone',
         'billToAddress'=>array(
@@ -95,7 +95,7 @@ class CertEcheckTest extends \PHPUnit_Framework_TestCase
 
     public function test_40()
     {
-        $echeck_hash = array(
+        $echeck_hash = array('id' => 'id',
         'orderId' => '40',
         'amount' => '3004',
         'orderSource'=>'telephone',
@@ -118,7 +118,7 @@ class CertEcheckTest extends \PHPUnit_Framework_TestCase
     #41-44 echecksales
     public function test_41()
     {
-        $echeck_hash = array(
+        $echeck_hash = array('id' => 'id',
         'orderId' => '41',
         'amount' => '2008',
         'orderSource'=>'telephone',
@@ -139,7 +139,7 @@ class CertEcheckTest extends \PHPUnit_Framework_TestCase
 
     public function test_42()
     {
-        $echeck_hash = array(
+        $echeck_hash = array('id' => 'id',
         'orderId' => '42',
         'amount' => '2004',
         'orderSource'=>'telephone',
@@ -159,7 +159,7 @@ class CertEcheckTest extends \PHPUnit_Framework_TestCase
 
     public function test_43()
     {
-        $echeck_hash = array(
+        $echeck_hash = array('id' => 'id',
         'orderId' => '43',
         'amount' => '2007',
         'orderSource'=>'telephone',
@@ -180,7 +180,7 @@ class CertEcheckTest extends \PHPUnit_Framework_TestCase
 
     public function test_44()
     {
-        $echeck_hash = array(
+        $echeck_hash = array('id' => 'id',
         'orderId' => '44',
         'amount' => '2009',
         'orderSource'=>'telephone',
@@ -202,7 +202,7 @@ class CertEcheckTest extends \PHPUnit_Framework_TestCase
     #test 45- 49 echeckCredit
     public function test_45()
     {
-        $echeck_hash = array(
+        $echeck_hash = array('id' => 'id',
         'orderId' => '45',
         'amount' => '1001',
         'orderSource'=>'telephone',
@@ -216,12 +216,12 @@ class CertEcheckTest extends \PHPUnit_Framework_TestCase
 
         $initilaize = new LitleOnlineRequest();
         $echeckCreditResponse = $initilaize->echeckCreditRequest($echeck_hash);
-        $this->assertEquals('301',XMLParser::getNode($echeckCreditResponse,'response'));
+        $this->assertEquals('001',XMLParser::getNode($echeckCreditResponse,'response'));
     }
 
     public function test_46()
     {
-        $echeck_hash = array(
+        $echeck_hash = array('id' => 'id',
         'orderId' => '46',
         'amount' => '1003',
         'orderSource'=>'telephone',
@@ -236,13 +236,13 @@ class CertEcheckTest extends \PHPUnit_Framework_TestCase
 
         $initilaize = new LitleOnlineRequest();
         $echeckCreditResponse = $initilaize->echeckCreditRequest($echeck_hash);
-        $this->assertEquals('000',XMLParser::getNode($echeckCreditResponse,'response'));
-        $this->assertEquals('Approved',XMLParser::getNode($echeckCreditResponse,'message'));
+        $this->assertEquals('001',XMLParser::getNode($echeckCreditResponse,'response'));
+        $this->assertEquals('Transaction Received',XMLParser::getNode($echeckCreditResponse,'message'));
     }
 
     public function test_47()
     {
-        $echeck_hash = array(
+        $echeck_hash = array('id' => 'id',
         'orderId' => '47',
         'amount' => '1007',
         'orderSource'=>'telephone',
@@ -257,27 +257,27 @@ class CertEcheckTest extends \PHPUnit_Framework_TestCase
 
         $initilaize = new LitleOnlineRequest();
         $echeckCreditResponse = $initilaize->echeckCreditRequest($echeck_hash);
-        $this->assertEquals('000',XMLParser::getNode($echeckCreditResponse,'response'));
-        $this->assertEquals('Approved',XMLParser::getNode($echeckCreditResponse,'message'));
+        $this->assertEquals('001',XMLParser::getNode($echeckCreditResponse,'response'));
+        $this->assertEquals('Transaction Received',XMLParser::getNode($echeckCreditResponse,'message'));
     }
 
     public function test_48()
     {
-        $echeck_hash = array('litleTxnId' => '430000000000000001');
+        $echeck_hash = array('litleTxnId' => '430000000000000001','id' => 'id',);
 
         $initilaize = new LitleOnlineRequest();
         $echeckCreditResponse = $initilaize->echeckCreditRequest($echeck_hash);
-        $this->assertEquals('000',XMLParser::getNode($echeckCreditResponse,'response'));
-        $this->assertEquals('Approved',XMLParser::getNode($echeckCreditResponse,'message'));
+        $this->assertEquals('001',XMLParser::getNode($echeckCreditResponse,'response'));
+        $this->assertEquals('Transaction Received',XMLParser::getNode($echeckCreditResponse,'message'));
     }
 
     public function test_49()
     {
-        $echeck_hash = array('litleTxnId' => '2');
+        $echeck_hash = array('litleTxnId' => '2','id' => 'id',);
 
         $initilaize = new LitleOnlineRequest();
         $echeckCreditResponse = $initilaize->echeckCreditRequest($echeck_hash);
-        $this->assertEquals('360',XMLParser::getNode($echeckCreditResponse,'response'));
-        $this->assertEquals('No transaction found with specified litleTxnId',XMLParser::getNode($echeckCreditResponse,'message'));
+        $this->assertEquals('001',XMLParser::getNode($echeckCreditResponse,'response'));
+        $this->assertEquals('Transaction Received',XMLParser::getNode($echeckCreditResponse,'message'));
     }
 }

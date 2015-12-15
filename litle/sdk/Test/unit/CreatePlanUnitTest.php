@@ -31,6 +31,7 @@ class CreatePlanUnitTest extends \PHPUnit_Framework_TestCase
         $hash_in = array(
             'planCode'=>'1',
             'name'=> '2',
+        		'id' => 'id',
             'description'=>'3',
             'intervalType'=>'MONTHLY',
             'amount'=>'1000',
@@ -54,6 +55,7 @@ class CreatePlanUnitTest extends \PHPUnit_Framework_TestCase
         $hash_in = array(
             'planCode'=>'1',
             'name'=> '2',
+        		'id' => 'id',
             'intervalType'=>'MONTHLY',
             'amount'=>'1000',
             'numberOfPayments'=>'5',
@@ -76,6 +78,7 @@ class CreatePlanUnitTest extends \PHPUnit_Framework_TestCase
         $hash_in = array(
             'planCode'=>'1',
             'name'=> '2',
+        		'id' => 'id',
             'intervalType'=>'MONTHLY',
             'amount'=>'1000',
             'trialNumberOfIntervals'=>'6',
@@ -97,6 +100,7 @@ class CreatePlanUnitTest extends \PHPUnit_Framework_TestCase
         $hash_in = array(
             'planCode'=>'1',
             'name'=> '2',
+        		'id' => 'id',
             'intervalType'=>'MONTHLY',
             'amount'=>'1000',
             'numberOfPayments'=>'5',
@@ -118,6 +122,7 @@ class CreatePlanUnitTest extends \PHPUnit_Framework_TestCase
         $hash_in = array(
             'planCode'=>'1',
             'name'=> '2',
+        		'id' => 'id',
             'intervalType'=>'MONTHLY',
             'amount'=>'1000',
             'numberOfPayments'=>'5',
@@ -139,6 +144,7 @@ class CreatePlanUnitTest extends \PHPUnit_Framework_TestCase
         $hash_in = array(
             'planCode'=>'1',
             'name'=> '2',
+        		'id' => 'id',
             'intervalType'=>'MONTHLY',
             'amount'=>'1000',
             'numberOfPayments'=>'5',

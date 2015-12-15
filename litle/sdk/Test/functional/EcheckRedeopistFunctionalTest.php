@@ -29,19 +29,19 @@ class EcheckRedeopistFunctionalTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple_echeckRedepoist()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
             'litleTxnId'=>'123456789012345678',
             'amount'=>'123');
 
         $initilaize = new LitleOnlineRequest();
         $echeckRedepositResponse = $initilaize->echeckRedepositRequest($hash_in);
         $response = XmlParser::getNode($echeckRedepositResponse,'response');
-        $this->assertEquals('000',$response);
+        $this->assertEquals('001',$response);
     }
 
     public function test_echeckRedepoist_with_echeck()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
       'amount'=>'123456',
       'verify'=>'true',
       'orderId'=>'12345',
@@ -53,12 +53,12 @@ class EcheckRedeopistFunctionalTest extends \PHPUnit_Framework_TestCase
         $initilaize = new LitleOnlineRequest();
         $echeckRedepositResponse = $initilaize->echeckRedepositRequest($hash_in);
         $response = XmlParser::getNode($echeckRedepositResponse,'response');
-        $this->assertEquals('000',$response);
+        $this->assertEquals('001',$response);
     }
 
     public function test_echeckRedepoist_with_echeckToken()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
           'amount'=>'123456',
           'verify'=>'true',
           'orderId'=>'12345',
@@ -70,11 +70,11 @@ class EcheckRedeopistFunctionalTest extends \PHPUnit_Framework_TestCase
         $initilaize = new LitleOnlineRequest();
         $echeckRedepositResponse = $initilaize->echeckRedepositRequest($hash_in);
         $response = XmlParser::getNode($echeckRedepositResponse,'response');
-        $this->assertEquals('000',$response);
+        $this->assertEquals('001',$response);
     }
     public function test_echeckRedepoist_missing_litleTxnId()
     {
-        $hash_in = array(
+        $hash_in = array('id' => 'id',
               'amount'=>'123456',
               'verify'=>'true',
               'orderId'=>'12345',
