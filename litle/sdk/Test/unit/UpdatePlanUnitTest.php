@@ -28,7 +28,7 @@ class UpdatePlanUnitTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple()
     {
-        $hash_in = array('id' => 'id',
+        $hash_in = array(
             'planCode'=>'1',
             'active'=>'true'
         );

@@ -538,7 +538,7 @@ class TransactionsUnitTest extends \PHPUnit_Framework_TestCase
     public function test_simple_updateSubscription()
     {
         $hash_in = array(
-            'subscriptionId'=>'1','id' => 'id',
+            'subscriptionId'=>'1',
             'planCode'=> '2',
             'billToAddress'=> array (
                 'addressLine1' => '3'
@@ -556,7 +556,7 @@ class TransactionsUnitTest extends \PHPUnit_Framework_TestCase
 
     public function test_simple_cancelSubscription()
     {
-        $hash_in = array('id' => 'id',
+        $hash_in = array(
             'subscriptionId'=>'1');
         $hash_out = Transactions::createCancelSubscriptionHash($hash_in);
         $this->assertEquals($hash_in, array_intersect($hash_in, $hash_out));
@@ -564,7 +564,7 @@ class TransactionsUnitTest extends \PHPUnit_Framework_TestCase
 
     public function test_simple_createPlan()
     {
-        $hash_in = array('id' => 'id',
+        $hash_in = array(
             'planCode'=>'1',
             'name'=> '2',
             'intervalType'=>'MONTHLY',
@@ -576,7 +576,7 @@ class TransactionsUnitTest extends \PHPUnit_Framework_TestCase
 
     public function test_simple_updatePlan()
     {
-        $hash_in = array('id' => 'id',
+        $hash_in = array(
             'planCode'=>'1',
             'active'=>'false'
         );
