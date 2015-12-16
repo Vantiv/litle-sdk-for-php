@@ -428,7 +428,8 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 				'routingNum' => '011100012' 
 		);
 		
-		$echeckPreNoteSaleHashSuccess = array ('id' => '1211',
+		$echeckPreNoteSaleHashSuccess = array (
+				'id' => '000',
 				'orderId' => '000',
 				'orderSource' => 'ecommerce',
 				'billToAddress' => $billToAddress,
@@ -436,7 +437,8 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 		);
 		$batch_request->addEcheckPreNoteSale ( $echeckPreNoteSaleHashSuccess );
 		
-		$echeckPreNoteSaleHashRoutErr = array ('id' => '1211',
+		$echeckPreNoteSaleHashRoutErr = array (
+				'id' => '900',
 				'orderId' => '900',
 				'orderSource' => 'ecommerce',
 				'billToAddress' => $billToAddress,
@@ -444,7 +446,7 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 		);
 		$batch_request->addEcheckPreNoteSale ( $echeckPreNoteSaleHashRoutErr );
 		
-		$echeckPreNoteSaleHashAccErr = array ('id' => '1211',
+		$echeckPreNoteSaleHashAccErr = array ('id' => '301',
 				'orderId' => '301',
 				'orderSource' => 'ecommerce',
 				'billToAddress' => $billToAddress,
@@ -452,7 +454,7 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 		);
 		$batch_request->addEcheckPreNoteSale ( $echeckPreNoteSaleHashAccErr );
 		
-		$echeckPreNoteCreditHashSuccess = array ('id' => '1211',
+		$echeckPreNoteCreditHashSuccess = array ('id' => '000',
 				'orderId' => '000',
 				'orderSource' => 'ecommerce',
 				'billToAddress' => $billToAddress,
@@ -460,7 +462,7 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 		);
 		$batch_request->addEcheckPreNoteCredit ( $echeckPreNoteCreditHashSuccess );
 		
-		$echeckPreNoteCreditHashRoutErr = array ('id' => '1211',
+		$echeckPreNoteCreditHashRoutErr = array ('id' => '900',
 				'orderId' => '900',
 				'orderSource' => 'ecommerce',
 				'billToAddress' => $billToAddress,
@@ -468,7 +470,7 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 		);
 		$batch_request->addEcheckPreNoteCredit ( $echeckPreNoteCreditHashRoutErr );
 		
-		$echeckPreNoteCreditHashAccErr = array ('id' => '1211',
+		$echeckPreNoteCreditHashAccErr = array ('id' => '301',
 				'orderId' => '301',
 				'orderSource' => 'ecommerce',
 				'billToAddress' => $billToAddress,
@@ -484,8 +486,8 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$txnResponse = $respProcessor->nextTransaction ();
 		$txnCount = 0;
 		
-		while ( $txnResponse != FALSE ) {
-			$this->assertEquals ( $txnResponse->response, $txnResponse->orderId );
+		while ( $txnResponse != FALSE ) { 
+			$this->assertEquals ( $txnResponse->id, $txnResponse->orderId );
 			$txnCount ++;
 			$txnResponse = $respProcessor->nextTransaction ();
 		}
