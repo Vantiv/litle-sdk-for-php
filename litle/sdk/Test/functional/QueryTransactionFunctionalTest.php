@@ -25,7 +25,7 @@
 namespace litle\sdk\Test\functional;
 use litle\sdk\LitleOnlineRequest;
 use litle\sdk\XmlParser;
-class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
+class QueryTransactionFunctionalTest extends \PHPUnit_Framework_TestCase
 {
     public function testSimpleQueryTransaction()
     {
