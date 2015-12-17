@@ -61,4 +61,11 @@ class XmlParser
     {
         return $dom->saveXML($dom);
     }
+    
+    public static function getNodeWithChildren($dom, $elementName)
+    {
+    	$elements = $dom->getElementsByTagName($elementName)->item(0);
+    	return $elements;
+    }
+    
 }

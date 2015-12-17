@@ -555,6 +555,21 @@ class LitleOnlineRequest
 
         return $txnResponse;
     }
+    
+    public function queryTransaction($hash_in)
+    {
+    	$hash_out = array(
+    			'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+    			'origId'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'origId')),
+    			'origActionType'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'origActionType')),
+    			'origLitleTxnId'=>XmlFields::returnArrayValue($hash_in,'origLitleTxnId'),
+    			'origOrderId'=>XmlFields::returnArrayValue($hash_in,'origOrderId'),
+    			'origAccountNumber'=>XmlFields::returnArrayValue($hash_in,'origAccountNumber'),
+    	);
+    	$queryTransactionResponse = $this->processRequest($hash_out,$hash_in,"queryTransaction");
+    
+    	return $queryTransactionResponse;
+    }
 
     private static function overrideConfig($hash_in)
     {
