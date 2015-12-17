@@ -41,4 +41,4 @@ class AuthUnitTest extends \PHPUnit_Framework_TestCase
         $litleTest->newXML = $mock;
         $litleTest->queryTransaction($hash_in);
     }
-}
+} 
