@@ -24,7 +24,7 @@
 */
 namespace litle\sdk\Test\unit;
 use litle\sdk\LitleOnlineRequest;
-class AuthUnitTest extends \PHPUnit_Framework_TestCase
+class QueryTransaction extends \PHPUnit_Framework_TestCase
 {
     public function testQueryTransactionSimple()
     {
