@@ -171,11 +171,11 @@ PHP Fatal error:  require(): Failed opening required '/home/gdake/litle-sdk-for-
 ```
 You probably had a problem with composer.  You can safely remove line 42 if you are not using batch processing, or you can edit it to point at our dependencies that you've downloaded in another way.
 
-5) Next run this file using php on the command line or inside a browser. You should see the following result provided you have connectivity to the Litle certification environment.  You will see an HTTP error if you don't have access to the Litle URL
+5) Next run this file using php on the command line or inside a browser. You should see the following result provided you have connectivity to the Vantiv eCommerce certification environment.  You will see an HTTP error if you don't have access to the Vantiv eCommerce URL
 
     Message: Valid Format
     Vantiv eCommerce Transaction ID: <your-numeric-txn-id>
 
 More examples can be found here [php Gists])(https://gist.github.com/litleSDK)
 
-Please contact Litle & Co. with any further questions.   You can reach us at SDKSupport@Vantiv.com
+Please contact Vantiv eCommerce with any further questions.   You can reach us at SDKSupport@Vantiv.com
