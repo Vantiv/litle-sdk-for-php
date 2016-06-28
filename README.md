@@ -178,4 +178,4 @@ You probably had a problem with composer.  You can safely remove line 42 if you 
 
 More examples can be found here [php Gists])(https://gist.github.com/litleSDK)
 
-Please contact Litle & Co. with any further questions.   You can reach us at SDKSupport@Vantiv.com
+Please contact Vantiv eCommerce with any further questions. You can reach us at SDKSupport@Vantiv.com
