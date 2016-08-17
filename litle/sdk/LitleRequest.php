@@ -1,6 +1,6 @@
 <?php
 
-#include('Net/SFTP.php');
+
 namespace litle\sdk;
 class LitleRequest
 {

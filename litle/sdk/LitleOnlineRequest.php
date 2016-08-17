@@ -534,6 +534,35 @@ class LitleOnlineRequest
 
         return $txnResponse;
     }
+    
+    public function queryTransaction($hash_in)
+    {
+    	$hash_out = array(
+    			'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+    			'origId'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'origId')),
+    			'origActionType'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'origActionType')),
+    			'origLitleTxnId'=>XmlFields::returnArrayValue($hash_in,'origLitleTxnId'),
+    			'origOrderId'=>XmlFields::returnArrayValue($hash_in,'origOrderId'),
+    			'origAccountNumber'=>XmlFields::returnArrayValue($hash_in,'origAccountNumber'),
+    	);
+    	$queryTransactionResponse = $this->processRequest($hash_out,$hash_in,"queryTransaction");
+    
+    	return $queryTransactionResponse;
+    }
+    
+    public function fraudCheck($hash_in)
+    {
+    	$hash_out = array(
+    			'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+    			'advancedFraudChecks'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'advancedFraudChecks')),
+    			'billToAddress' => XmlFields::contact ( XmlFields::returnArrayValue ( $hash_in, 'billToAddress' ) ),
+    			'shipToAddress' => XmlFields::contact ( XmlFields::returnArrayValue ( $hash_in, 'shipToAddress' ) ),
+    			'amount' => ( XmlFields::returnArrayValue ( $hash_in, 'amount' ) )
+    	);
+    	$fraudCheckResponse = $this->processRequest($hash_out,$hash_in,"fraudCheck");
+    	
+    	return $fraudCheckResponse;
+    }
 
     private static function overrideConfig($hash_in)
     {
@@ -576,8 +605,9 @@ class LitleOnlineRequest
         Checker::choice($choice1);
         Checker::choice($choice2);
         $request = Obj2xml::toXml($hash,$hash_config, $type);
+        print($request);
         $litleOnlineResponse = $this->newXML->request($request,$hash_config,$this->useSimpleXml);
-
+		
         return $litleOnlineResponse;
     }
 
