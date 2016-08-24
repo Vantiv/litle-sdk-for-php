@@ -38,7 +38,7 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
             'orderId'=> '2111',
             'reportGroup'=>'Planets',
             'orderSource'=>'ecommerce',
-            'amount'=>'123');
+            'amount'=>'0');
 
         $initilaize = new LitleOnlineRequest();
         $authorizationResponse = $initilaize->authorizationRequest($hash_in);
