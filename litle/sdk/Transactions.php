@@ -39,8 +39,7 @@ class Transactions {
 				'fraudFilterOverride' => XmlFields::returnArrayValue ( $hash_in, 'fraudFilterOverride' ),
 				'recurringRequest' => XmlFields::recurringRequestType ( XmlFields::returnArrayValue ( $hash_in, 'recurringRequest' ) ),
 				'litleInternalRecurringRequest' => XmlFields::litleInternalRecurringRequestType ( XmlFields::returnArrayValue ( $hash_in, 'litleInternalRecurringRequest' ) ),
-				'debtRepayment' => XmlFields::returnArrayValue ( $hash_in, 'debtRepayment' ),
-				'advancedFraudChecks'=>XmlFields::advancedFraudChecksType(XmlFields::returnArrayValue($hash_in,'advancedFraudChecks'))
+				'debtRepayment' => XmlFields::returnArrayValue ( $hash_in, 'debtRepayment' ) 
 		);
 		
 		return $hash_out;
@@ -76,9 +75,7 @@ class Transactions {
 				'recyclingRequest' => (XmlFields::recyclingRequestType ( XmlFields::returnArrayValue ( $hash_in, 'recyclingRequest' ) )),
 				'fraudFilterOverride' => XmlFields::returnArrayValue ( $hash_in, 'fraudFilterOverride' ),
 				'recurringRequest' => XmlFields::recurringRequestType ( XmlFields::returnArrayValue ( $hash_in, 'recurringRequest' ) ),
-				'debtRepayment' => XmlFields::returnArrayValue ( $hash_in, 'debtRepayment' ),
-				'advancedFraudChecks'=>XmlFields::advancedFraudChecksType(XmlFields::returnArrayValue($hash_in,'advancedFraudChecks'))
-				
+				'debtRepayment' => XmlFields::returnArrayValue ( $hash_in, 'debtRepayment' ) 
 		);
 		
 		return $hash_out;
@@ -495,18 +492,6 @@ class Transactions {
 				'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
 				'card' => XmlFields::cardType ( XmlFields::returnArrayValue ( $hash_in, 'card' ) ),
 				'token' => XmlFields::cardTokenType ( XmlFields::returnArrayValue ( $hash_in, 'token' ) ) 
-		);
-		
-		return $hash_out;
-	}
-	
-	public static function createFraudCheckHash($hash_in) {
-		$hash_out = array (
-				'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
-				'advancedFraudChecks'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'advancedFraudChecks')),
-				'billToAddress' => XmlFields::contact ( XmlFields::returnArrayValue ( $hash_in, 'billToAddress' ) ),
-				'shipToAddress' => XmlFields::contact ( XmlFields::returnArrayValue ( $hash_in, 'shipToAddress' ) ),
-				'amount' => ( XmlFields::returnArrayValue ( $hash_in, 'amount' ) )
 		);
 		
 		return $hash_out;

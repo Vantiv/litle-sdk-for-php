@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+==Version 10.1 (January 14, 2016)
+* Feature: Added supprot for XML v10
+
 ==Version 9.3.3
 Update SSL version to 6
 
