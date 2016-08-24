@@ -42,8 +42,8 @@ class UrlMapper
             return 'https://www.testlitle.com/sandbox/communicator/online';
         elseif ($litleEnv == UrlMapper::POSTLIVE)
             return 'https://postlive.litle.com/' . $litleOnlineCtx;
-        elseif ($litleEnv == UrlMapper::POSTLIVE)
-            return 'https://postlive.litle.com/' . $litleOnlineCtx;
+        elseif ($litleEnv == UrlMapper::BETACERT)
+            return 'https://betacert.litle.com/' . $litleOnlineCtx;
         elseif ($litleEnv == UrlMapper::PRODUCTION)
             return 'https://payments.litle.com/' . $litleOnlineCtx;
         elseif ($litleEnv == UrlMapper::TRANSACT_PRODUCTION)

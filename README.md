@@ -1,24 +1,24 @@
-Vantiv eCommerce PHP SDK
+Litle Online PHP SDK
 =====================
 
-About Vantiv eCommerce
+About Litle
 ------------
-[Vantiv eCommerce](https://developer.vantiv.com/community/ecommerce) powers the payment processing engines for leading companies that sell directly to consumers through  internet retail, direct response marketing (TV, radio and telephone), and online services. Vantiv eCommerce is the leading authority in card-not-present (CNP) commerce, transaction processing and merchant services.
+[Litle &amp; Co.](https://developer.vantiv.com/community/ecommerce) powers the payment processing engines for leading companies that sell directly to consumers through  internet retail, direct response marketing (TV, radio and telephone), and online services. Litle & Co. is the leading, independent authority in card-not-present (CNP) commerce, transaction processing and merchant services.
 
 
 About this SDK
 --------------
-The Vantiv eCommerce PHP SDK is a PHP implementation of the [Vantiv eCommerce](https://developer.vantiv.com/community/ecommerce). XML API. This SDK was created to make it as easy as possible to connect process your payments with Vantiv eCommerce.  This SDK utilizes  the HTTPS protocol to securely connect to Vantiv eCommerce.  Using the SDK requires coordination with the Vantiv eCommerce team in order to be provided with credentials for accessing our systems.
+The Litle PHP SDK is a PHP implementation of the [Litle &amp; Co.](https://developer.vantiv.com/community/ecommerce). XML API. This SDK was created to make it as easy as possible to connect process your payments with Litle.  This SDK utilizes  the HTTPS protocol to securely connect to Litle.  Using the SDK requires coordination with the Litle team in order to be provided with credentials for accessing our systems.
 
-Each PHP SDK release supports all of the functionality present in the associated Vantiv eCommerce XML version (e.g., SDK v9.3.2 supports Vantiv eCommerce XML v9.3). Please see the online copy of our XSD for Vantiv eCommerce XML to get more details on what the Vantiv eCommerce payments engine supports.
+Our PHP supports all of the functionality present in Litle XML v8. Please see the online copy of our [XSD for Litle XML] (https://github.com/LitleCo/litle-xml) to get more details on what is supported by the Litle payments engine.
 
-This SDK was implemented to support the PHP programming language and was created by Vantiv eCommerce. Its intended use is for online transaction processing utilizing your account on the Vantiv eCommerce payments engine.
+This SDK is implemented to support the PHP programming language and was created by Litle & Co. It is intended use is for online transactions processing utilizing your account on the Litle payments engine.
 
 See LICENSE file for details on using this software.
 
 Source Code available from : https://github.com/LitleCo/litle-sdk-for-php
 
-Please contact [Vantiv eCommerce](https://developer.vantiv.com/community/ecommerce) to receive valid merchant credentials in order to run tests successfully or if you require assistance in any way.  We are reachable at sdksupport@Vantiv.com
+Please contact [Litle &amp; Co.](https://developer.vantiv.com/community/ecommerce) to receive valid merchant credentials in order to run tests successfully or if you require assistance in any way.  We are reachable at sdksupport@litle.com
 
 SDK PHP Dependencies
 --------------
@@ -67,7 +67,7 @@ $saleResponse =$initilaize->saleRequest($sale_info);
 #display results
 echo ("Response: " . (litle\sdk\XmlParser::getNode($saleResponse,'response')) . "<br>");
 echo ("Message: " . litle\sdk\XmlParser::getNode($saleResponse,'message') . "<br>");
-echo ("Vantiv eCommerce Transaction ID: " . litle\sdk\XmlParser::getNode($saleResponse,'litleTxnId'));
+echo ("Litle Transaction ID: " . litle\sdk\XmlParser::getNode($saleResponse,'litleTxnId'));
 ```
 > php your_sample_name
 
@@ -124,13 +124,13 @@ require_once realpath(dirname(__FILE__)) . '/../lib/LitleOnline.php';
 	      'number' =>'4100000000000001',
 	     'expDate' =>'1000')
 	      );
-//Perform the transaction on the Vantiv eCommerce Platform
+//Perform the transaction on the Litle Platform
 $initialize = new LitleOnlineRequest();
 $saleResponse = $initialize->saleRequest($hash_in);
 
 // Display Result 
 echo ("Message: " . XMLParser::getNode($saleResponse,'message') . "<br>");
-echo ("Vantiv eCommerce Transaction ID: " . XMLParser::getNode($saleResponse,'litleTxnId'));
+echo ("Litle Transaction ID: " . XMLParser::getNode($saleResponse,'litleTxnId'));
 ```
 
 As of 8.13.1, you may also use a tree-oriented style to get the response values:
@@ -147,13 +147,13 @@ require_once realpath(dirname(__FILE__)) . '/../lib/LitleOnline.php';
 	      'number' =>'4100000000000001',
 	     'expDate' =>'1000')
 	      );
-//Perform the transaction on the Vantiv eCommerce Platform
+//Perform the transaction on the Litle Platform
 $initialize = new LitleOnlineRequest($treeResponse=true);
 $saleResponse = $initialize->saleRequest($hash_in);
 
 // Display Result 
 echo ("Message: " . $saleResponse->saleResponse->message . "<br>");
-echo ("Vantiv eCommerce Transaction ID: " . $saleResponse->saleResponse->litleTxnId);
+echo ("Litle Transaction ID: " . $saleResponse->saleResponse->litleTxnId);
 ```
 
 
@@ -171,11 +171,11 @@ PHP Fatal error:  require(): Failed opening required '/home/gdake/litle-sdk-for-
 ```
 You probably had a problem with composer.  You can safely remove line 42 if you are not using batch processing, or you can edit it to point at our dependencies that you've downloaded in another way.
 
-5) Next run this file using php on the command line or inside a browser. You should see the following result provided you have connectivity to the Vantiv eCommerce certification environment.  You will see an HTTP error if you don't have access to the Vantiv eCommerce URL
+5) Next run this file using php on the command line or inside a browser. You should see the following result provided you have connectivity to the Litle certification environment.  You will see an HTTP error if you don't have access to the Litle URL
 
     Message: Valid Format
-    Vantiv eCommerce Transaction ID: <your-numeric-txn-id>
+    Litle Transaction ID: <your-numeric-litle-txn-id>
 
 More examples can be found here [php Gists])(https://gist.github.com/litleSDK)
 
-Please contact Vantiv eCommerce with any further questions.   You can reach us at SDKSupport@Vantiv.com
+Please contact Litle & Co. with any further questions.   You can reach us at SDKSupport@litle.com
