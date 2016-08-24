@@ -3,12 +3,12 @@ Litle Online PHP SDK
 
 About Litle
 ------------
-[Litle &amp; Co.](https://developer.vantiv.com/community/ecommerce) powers the payment processing engines for leading companies that sell directly to consumers through  internet retail, direct response marketing (TV, radio and telephone), and online services. Litle & Co. is the leading, independent authority in card-not-present (CNP) commerce, transaction processing and merchant services.
+[Litle &amp; Co.](http://www.litle.com) powers the payment processing engines for leading companies that sell directly to consumers through  internet retail, direct response marketing (TV, radio and telephone), and online services. Litle & Co. is the leading, independent authority in card-not-present (CNP) commerce, transaction processing and merchant services.
 
 
 About this SDK
 --------------
-The Litle PHP SDK is a PHP implementation of the [Litle &amp; Co.](https://developer.vantiv.com/community/ecommerce). XML API. This SDK was created to make it as easy as possible to connect process your payments with Litle.  This SDK utilizes  the HTTPS protocol to securely connect to Litle.  Using the SDK requires coordination with the Litle team in order to be provided with credentials for accessing our systems.
+The Litle PHP SDK is a PHP implementation of the [Litle &amp; Co.](http://www.litle.com). XML API. This SDK was created to make it as easy as possible to connect process your payments with Litle.  This SDK utilizes  the HTTPS protocol to securely connect to Litle.  Using the SDK requires coordination with the Litle team in order to be provided with credentials for accessing our systems.
 
 Our PHP supports all of the functionality present in Litle XML v8. Please see the online copy of our [XSD for Litle XML] (https://github.com/LitleCo/litle-xml) to get more details on what is supported by the Litle payments engine.
 
@@ -18,7 +18,7 @@ See LICENSE file for details on using this software.
 
 Source Code available from : https://github.com/LitleCo/litle-sdk-for-php
 
-Please contact [Litle &amp; Co.](https://developer.vantiv.com/community/ecommerce) to receive valid merchant credentials in order to run tests successfully or if you require assistance in any way.  We are reachable at sdksupport@litle.com
+Please contact [Litle &amp; Co.](http://www.litle.com) to receive valid merchant credentials in order to run tests successfully or if you require assistance in any way.  We are reachable at sdksupport@litle.com
 
 SDK PHP Dependencies
 --------------
