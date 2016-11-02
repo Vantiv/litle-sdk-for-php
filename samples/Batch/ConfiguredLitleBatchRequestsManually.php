@@ -1,7 +1,6 @@
 <?php
 namespace litle\sdk;
 require_once realpath(__DIR__) . '/../../vendor/autoload.php';
-
 #Sale
 $sale_info = array(
     'orderId' => '1',
@@ -21,12 +20,26 @@ $sale_info = array(
         'type' => 'MC')
 );
 
-$litle_request = new LitleRequest();
-$batch_request = new BatchRequest();
+
+$config_hash = array(
+    'user' => 'BATCHSDKA',
+    'password' => 'certpass',
+    'merchantId' => '101',
+    'sftp_username' => 'sdk',
+    'sftp_password' => 'Zj8I8Ly5',
+    'batch_url' => 'prelive.litle.com',
+    'batch_requests_path' => '/usr/local/litle-home/twang/git/batches',
+    'litle_requests_path' => '/usr/local/litle-home/twang/git/batches'
+);
+
+$batch_dir = '/usr/local/litle-home/twang/git/batches';
+
+$litle_request = new LitleRequest($config_hash);
+$batch_request = new BatchRequest($batch_dir);
 
 # add a sale to the batch
 $batch_request->addSale($sale_info);
-# close the batch, indicating that we intend to add no more transactions
+# close the batch, indicating that we intend to add no more sales
 $batch_request->closeRequest();
 # add the batch to the litle request
 $litle_request->addBatchRequest($batch_request);
@@ -41,5 +54,5 @@ while ($txn = $processor->nextTransaction()) {
     echo "Transaction Type : " . $txn->getName() . "\n";
     echo "Transaction Id: " . $txn->litleTxnId . " \n";
     if ($txn->message != 'Approved')
-        throw new \Exception('SampleBatchDriver does not get the right response');
+        throw new \Exception('ConfiguredLitleBatchRequestsMaually does not get the right response');
 }

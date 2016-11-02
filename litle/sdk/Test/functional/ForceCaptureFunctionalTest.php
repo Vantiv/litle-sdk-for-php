@@ -23,76 +23,78 @@
 * OTHER DEALINGS IN THE SOFTWARE.
 */
 namespace litle\sdk\Test\functional;
+
 use litle\sdk\LitleOnlineRequest;
 use litle\sdk\XmlParser;
+
 class ForceCaptureFunctionalTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple_forceCapture_with_card()
     {
         $hash_in = array(
-          'merchantId' => '101',
-          'version'=>'8.8',
-          'reportGroup'=>'Planets',
-          'litleTxnId'=>'123456',
-          'orderId'=>'12344',
-          'amount'=>'106',
-          'orderSource'=>'ecommerce',
-          'card'=>array(
-          'type'=>'VI',
-          'number' =>'4100000000000000',
-          'expDate' =>'1210'
-        ));
+            'merchantId' => '101',
+            'version' => '8.8',
+            'reportGroup' => 'Planets',
+            'litleTxnId' => '123456',
+            'orderId' => '12344',
+            'amount' => '106',
+            'orderSource' => 'ecommerce',
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000000',
+                'expDate' => '1210'
+            ));
 
-        $initilaize = new LitleOnlineRequest();
-        $forceCaptureResponse = $initilaize->forceCaptureRequest($hash_in);
-        $response = XmlParser::getAttribute($forceCaptureResponse,'litleOnlineResponse','response');
-        $this->assertEquals('000',$response);
+        $initialize = new LitleOnlineRequest();
+        $forceCaptureResponse = $initialize->forceCaptureRequest($hash_in);
+        $response = XmlParser::getAttribute($forceCaptureResponse, 'litleOnlineResponse', 'response');
+        $this->assertEquals('000', $response);
     }
 
     public function test_simple_forceCapture_with_token()
     {
         $hash_in = array(
-        'merchantId' => '101',
-      'version'=>'8.8',
-      'reportGroup'=>'Planets',
-      'litleTxnId'=>'123456',
-      'orderId'=>'12344',
-      'amount'=>'106',
-      'orderSource'=>'ecommerce',
-      'token'=> array(
-      'litleToken'=>'123456789101112',
-      'expDate'=>'1210',
-      'cardValidationNum'=>'555',
-      'type'=>'VI'
-        ));
+            'merchantId' => '101',
+            'version' => '8.8',
+            'reportGroup' => 'Planets',
+            'litleTxnId' => '123456',
+            'orderId' => '12344',
+            'amount' => '106',
+            'orderSource' => 'ecommerce',
+            'token' => array(
+                'litleToken' => '123456789101112',
+                'expDate' => '1210',
+                'cardValidationNum' => '555',
+                'type' => 'VI'
+            ));
 
-        $initilaize = new LitleOnlineRequest();
-        $forceCaptureResponse = $initilaize->forceCaptureRequest($hash_in);
-        $message = XmlParser::getAttribute($forceCaptureResponse,'litleOnlineResponse','message');
-        $this->assertEquals('Valid Format',$message);
+        $initialize = new LitleOnlineRequest();
+        $forceCaptureResponse = $initialize->forceCaptureRequest($hash_in);
+        $message = XmlParser::getAttribute($forceCaptureResponse, 'litleOnlineResponse', 'message');
+        $this->assertEquals('Valid Format', $message);
     }
 
-    
+
     public function test_simple_forceCapture_with_secondary_amount()
     {
-    	$hash_in = array(
-    			'merchantId' => '101',
-    			'version'=>'8.8',
-    			'reportGroup'=>'Planets',
-    			'litleTxnId'=>'123456',
-    			'orderId'=>'12344',
-    			'amount'=>'106',
-    			'secondaryAmount' => '2000',
-    			'orderSource'=>'ecommerce',
-    			'card'=>array(
-    					'type'=>'VI',
-    					'number' =>'4100000000000000',
-    					'expDate' =>'1210'
-    			));
-    
-    	$initilaize = new LitleOnlineRequest();
-    	$forceCaptureResponse = $initilaize->forceCaptureRequest($hash_in);
-    	$response = XmlParser::getAttribute($forceCaptureResponse,'litleOnlineResponse','response');
-    	$this->assertEquals('000',$response);
+        $hash_in = array(
+            'merchantId' => '101',
+            'version' => '8.8',
+            'reportGroup' => 'Planets',
+            'litleTxnId' => '123456',
+            'orderId' => '12344',
+            'amount' => '106',
+            'secondaryAmount' => '2000',
+            'orderSource' => 'ecommerce',
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000000',
+                'expDate' => '1210'
+            ));
+
+        $initialize = new LitleOnlineRequest();
+        $forceCaptureResponse = $initialize->forceCaptureRequest($hash_in);
+        $response = XmlParser::getAttribute($forceCaptureResponse, 'litleOnlineResponse', 'response');
+        $this->assertEquals('000', $response);
     }
 }

@@ -36,8 +36,8 @@ class Checker
 
     public static function choice($choiceArray)
     {
-        $i= 0;
-        for ($y=0;$y<count($choiceArray);$y++) {
+        $i = 0;
+        for ($y = 0; $y < count($choiceArray); $y++) {
             if (isset($choiceArray[$y])) {
                 $i++;
             }

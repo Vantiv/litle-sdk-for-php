@@ -23,17 +23,19 @@
 * OTHER DEALINGS IN THE SOFTWARE.
 */
 namespace litle\sdk\Test\functional;
+
 use litle\sdk\LitleOnlineRequest;
 use litle\sdk\XmlParser;
+
 class RefundReversalFunctionalTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple()
     {
-        $hash_in = array('litleTxnId'=> '123456789012345678');
-        $initilaize = new LitleOnlineRequest();
-        $refundReversalResponse = $initilaize->echeckVoidRequest($hash_in);
-        $response = XmlParser::getAttribute($refundReversalResponse,'litleOnlineResponse','response');
-        $this->assertEquals('0',$response);
+        $hash_in = array('litleTxnId' => '123456789012345678');
+        $initialize = new LitleOnlineRequest();
+        $refundReversalResponse = $initialize->echeckVoidRequest($hash_in);
+        $response = XmlParser::getAttribute($refundReversalResponse, 'litleOnlineResponse', 'response');
+        $this->assertEquals('0', $response);
     }
 
 }

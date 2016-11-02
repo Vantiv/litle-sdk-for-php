@@ -23,19 +23,21 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 namespace litle\sdk\Test\unit;
+
 use litle\sdk\LitleOnlineRequest;
+
 class UpdatePlanUnitTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple()
     {
         $hash_in = array(
-            'planCode'=>'1',
-            'active'=>'true'
+            'planCode' => '1',
+            'active' => 'true'
         );
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*planCode.*1.*active.*true.*/'));
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*planCode.*1.*active.*true.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;

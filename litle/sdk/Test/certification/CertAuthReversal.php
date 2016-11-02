@@ -47,8 +47,8 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
       'expDate' => '0112',
       'cardValidationNum' => '349',
       'type' => 'VI'));
-        $initilaize = new LitleOnlineRequest();
-        $authorizationResponse = $initilaize->authorizationRequest($auth_hash);
+        $initialize = new LitleOnlineRequest();
+        $authorizationResponse = $initialize->authorizationRequest($auth_hash);
         $this->assertEquals('000',XmlParser::getNode($authorizationResponse,'response'));
         $this->assertEquals('Approved',XmlParser::getNode($authorizationResponse,'message'));
         $this->assertEquals('11111 ',XmlParser::getNode($authorizationResponse,'authCode'));
@@ -59,16 +59,16 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
         $capture_hash =  array(
         'litleTxnId' =>(XmlParser::getNode($authorizationResponse,'litleTxnId')),
         'reportGroup'=>'planets');
-        $initilaize = new LitleOnlineRequest();
-        $captureResponse = $initilaize->captureRequest($capture_hash);
+        $initialize = new LitleOnlineRequest();
+        $captureResponse = $initialize->captureRequest($capture_hash);
         $this->assertEquals('000',XmlParser::getNode($captureResponse,'response'));
         $this->assertEquals('Approved',XmlParser::getNode($captureResponse,'message'));
         //test32B
         $authReversal_hash =  array(
         'litleTxnId' =>(XmlParser::getNode($authorizationResponse,'litleTxnId')),
         'reportGroup'=>'planets', 'amount' => '5005');
-        $initilaize = new LitleOnlineRequest();
-        $authReversalResponse = $initilaize->authReversalRequest($authReversal_hash);
+        $initialize = new LitleOnlineRequest();
+        $authReversalResponse = $initialize->authReversalRequest($authReversal_hash);
         $this->assertEquals('111',XmlParser::getNode($authReversalResponse,'response'));
         $this->assertEquals('Authorization amount has already been depleted',XmlParser::getNode($authReversalResponse,'message'));
     }
@@ -93,8 +93,8 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
       'cardValidationNum' => '261',
       'type' => 'MC'),
       'cardholderAuthentication' => array('authenticationValue'=> 'BwABBJQ1AgAAAAAgJDUCAAAAAAA=' ));
-        $initilaize = new LitleOnlineRequest();
-        $authorizationResponse = $initilaize->authorizationRequest($auth_hash);
+        $initialize = new LitleOnlineRequest();
+        $authorizationResponse = $initialize->authorizationRequest($auth_hash);
         $this->assertEquals('000',XmlParser::getNode($authorizationResponse,'response'));
         $this->assertEquals('Approved',XmlParser::getNode($authorizationResponse,'message'));
         $this->assertEquals('22222',XmlParser::getNode($authorizationResponse,'authCode'));
@@ -105,8 +105,8 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
         $authReversal_hash =  array(
         'litleTxnId' =>(XmlParser::getNode($authorizationResponse,'litleTxnId')),
         'reportGroup'=>'planets');
-        $initilaize = new LitleOnlineRequest();
-        $authReversalResponse = $initilaize->authReversalRequest($authReversal_hash);
+        $initialize = new LitleOnlineRequest();
+        $authReversalResponse = $initialize->authReversalRequest($authReversal_hash);
         $this->assertEquals('000',XmlParser::getNode($authReversalResponse,'response'));
         $this->assertEquals('Approved',XmlParser::getNode($authReversalResponse,'message'));
     }
@@ -129,8 +129,8 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
       'expDate' => '0312',
       'cardValidationNum' => '758',
       'type' => 'DI'));
-        $initilaize = new LitleOnlineRequest();
-        $authorizationResponse = $initilaize->authorizationRequest($auth_hash);
+        $initialize = new LitleOnlineRequest();
+        $authorizationResponse = $initialize->authorizationRequest($auth_hash);
         $this->assertEquals('000',XmlParser::getNode($authorizationResponse,'response'));
         $this->assertEquals('Approved',XmlParser::getNode($authorizationResponse,'message'));
         $this->assertEquals('33333',XmlParser::getNode($authorizationResponse,'authCode'));
@@ -141,8 +141,8 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
         $authReversal_hash =  array(
         'litleTxnId' =>(XmlParser::getNode($authorizationResponse,'litleTxnId')),
         'reportGroup'=>'planets');
-        $initilaize = new LitleOnlineRequest();
-        $authReversalResponse = $initilaize->authReversalRequest($authReversal_hash);
+        $initialize = new LitleOnlineRequest();
+        $authReversalResponse = $initialize->authReversalRequest($authReversal_hash);
         $this->assertEquals('000',XmlParser::getNode($authReversalResponse,'response'));
         $this->assertEquals('Approved',XmlParser::getNode($authReversalResponse,'message'));
     }
@@ -164,8 +164,8 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
       'number' =>'375001000000005',
       'expDate' => '0412',
       'type' => 'AX'));
-        $initilaize = new LitleOnlineRequest();
-        $authorizationResponse = $initilaize->authorizationRequest($auth_hash);
+        $initialize = new LitleOnlineRequest();
+        $authorizationResponse = $initialize->authorizationRequest($auth_hash);
         $this->assertEquals('000',XmlParser::getNode($authorizationResponse,'response'));
         $this->assertEquals('Approved',XmlParser::getNode($authorizationResponse,'message'));
         $this->assertEquals('44444',XmlParser::getNode($authorizationResponse,'authCode'));
@@ -175,16 +175,16 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
         $capture_hash =  array(
             'litleTxnId' =>(XmlParser::getNode($authorizationResponse,'litleTxnId')),
             'reportGroup'=>'planets', 'amount' => '20020');
-        $initilaize = new LitleOnlineRequest();
-        $captureResponse = $initilaize->captureRequest($capture_hash);
+        $initialize = new LitleOnlineRequest();
+        $captureResponse = $initialize->captureRequest($capture_hash);
         $this->assertEquals('000',XmlParser::getNode($captureResponse,'response'));
         $this->assertEquals('Approved',XmlParser::getNode($captureResponse,'message'));
         //test35B
         $authReversal_hash =  array(
         'litleTxnId' =>(XmlParser::getNode($authorizationResponse,'litleTxnId')),
         'reportGroup'=>'planets', 'amount' => '20020');
-        $initilaize = new LitleOnlineRequest();
-        $authReversalResponse = $initilaize->authReversalRequest($authReversal_hash);
+        $initialize = new LitleOnlineRequest();
+        $authReversalResponse = $initialize->authReversalRequest($authReversal_hash);
         $this->assertEquals('000',XmlParser::getNode($authReversalResponse,'response'));
         $this->assertEquals('Approved',XmlParser::getNode($authReversalResponse,'message'));
     }
@@ -199,8 +199,8 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
       'number' =>'375000026600004',
       'expDate' => '0512',
       'type' => 'AX'));
-        $initilaize = new LitleOnlineRequest();
-        $authorizationResponse = $initilaize->authorizationRequest($auth_hash);
+        $initialize = new LitleOnlineRequest();
+        $authorizationResponse = $initialize->authorizationRequest($auth_hash);
         $this->assertEquals('000',XmlParser::getNode($authorizationResponse,'response'));
         $this->assertEquals('Approved',XmlParser::getNode($authorizationResponse,'message'));
 
@@ -208,8 +208,8 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
         $authReversal_hash =  array(
         'litleTxnId' =>(XmlParser::getNode($authorizationResponse,'litleTxnId')),
         'reportGroup'=>'planets', 'amount' => '10000');
-        $initilaize = new LitleOnlineRequest();
-        $authReversalResponse = $initilaize->authReversalRequest($authReversal_hash);
+        $initialize = new LitleOnlineRequest();
+        $authReversalResponse = $initialize->authReversalRequest($authReversal_hash);
         $this->assertEquals('336',XmlParser::getNode($authReversalResponse,'response'));
         $this->assertEquals('Reversal Amount does not match Authorization amount',XmlParser::getNode($authReversalResponse,'message'));
     }

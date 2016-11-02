@@ -23,216 +23,216 @@
 * OTHER DEALINGS IN THE SOFTWARE.
 */
 namespace litle\sdk\Test\unit;
+
 use litle\sdk\LitleOnlineRequest;
+
 class SaleUnitTest extends \PHPUnit_Framework_TestCase
 {
     public function test_sale_with_card()
     {
         $hash_in = array(
-            'card'=>array('type'=>'VI',
-                    'number'=>'4100000000000001',
-                    'expDate'=>'1213',
-                    'cardValidationNum' => '1213'),
-            'id'=>'654',
-            'orderId'=> '2111',
-            'orderSource'=>'ecommerce',
-            'amount'=>'123');
+            'card' => array('type' => 'VI',
+                'number' => '4100000000000001',
+                'expDate' => '1213',
+                'cardValidationNum' => '1213'),
+            'id' => '654',
+            'orderId' => '2111',
+            'orderSource' => 'ecommerce',
+            'amount' => '123');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*<card><type>VI.*<number>4100000000000001.*<expDate>1213.*<cardValidationNum>1213.*/'));
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<card><type>VI.*<number>4100000000000001.*<expDate>1213.*<cardValidationNum>1213.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
         $litleTest->saleRequest($hash_in);
     }
-    
-    
+
     public function test_sale_with_AdvancedFraudCheckWithCustomAttribute()
     {
-    	$hash_in = array(
-    			'card'=>array('type'=>'VI',
-    					'number'=>'4100000000000001',
-    					'expDate'=>'1213',
-    					'cardValidationNum' => '1213'),
-    			'id'=>'654',
-    			'orderId'=> '2111',
-    			'orderSource'=>'ecommerce',
-    			'amount'=>'123',
-    			'advancedFraudChecks'=>array(
-    				'threatMetrixSessionId' => 'abc123',
-    				'customAttribute1'=>'1',
-    				'customAttribute2'=>'2',
-    				'customAttribute3'=>'3',
-    				'customAttribute4'=>'4',
-    				'customAttribute5'=>'5',
-    			)
-    	);
-    	$mock = $this->getMock('litle\sdk\LitleXmlMapper');
-    	$mock->expects($this->once())
-    	->method('request')
-    	->with($this->matchesRegularExpression('/.*<advancedFraudChecks><threatMetrixSessionId>abc123<\/threatMetrixSessionId><customAttribute1>1<\/customAttribute1>.*?<\/advancedFraudChecks><\/sale>.*/'));
-    
-    	$litleTest = new LitleOnlineRequest();
-    	$litleTest->newXML = $mock;
-    	$litleTest->saleRequest($hash_in);
+        $hash_in = array(
+            'card' => array('type' => 'VI',
+                'number' => '4100000000000001',
+                'expDate' => '1213',
+                'cardValidationNum' => '1213'),
+            'id' => '654',
+            'orderId' => '2111',
+            'orderSource' => 'ecommerce',
+            'amount' => '123',
+            'advancedFraudChecks' => array(
+                'threatMetrixSessionId' => 'abc123',
+                'customAttribute1' => '1',
+                'customAttribute2' => '2',
+                'customAttribute3' => '3',
+                'customAttribute4' => '4',
+                'customAttribute5' => '5')
+        );
+        $mock = $this->getMock('litle\sdk\LitleXmlMapper');
+        $mock->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<advancedFraudChecks><threatMetrixSessionId>abc123<\/threatMetrixSessionId><customAttribute1>1<\/customAttribute1>.*?<\/advancedFraudChecks><\/sale>.*/'));
+
+        $litleTest = new LitleOnlineRequest();
+        $litleTest->newXML = $mock;
+        $litleTest->saleRequest($hash_in);
     }
 
     public function test_no_orderId()
     {
         $hash_in = array('merchantId' => '101',
-          'version'=>'8.8',
-          'reportGroup'=>'Planets',
-          'litleTxnId'=>'123456',
-          'amount'=>'106',
-          'orderSource'=>'ecommerce',
-          'card'=>array(
-          'type'=>'VI',
-          'number' =>'4100000000000001',
-          'expDate' =>'1210')
+            'version' => '8.8',
+            'reportGroup' => 'Planets',
+            'litleTxnId' => '123456',
+            'amount' => '106',
+            'orderSource' => 'ecommerce',
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000001',
+                'expDate' => '1210')
         );
         $litleTest = new LitleOnlineRequest();
-        $this->setExpectedException('InvalidArgumentException',"Missing Required Field: /orderId/");
-        $retOb = $litleTest->saleRequest($hash_in);
+        $this->setExpectedException('InvalidArgumentException', "Missing Required Field: /orderId/");
+        $litleTest->saleRequest($hash_in);
     }
 
     public function test_no_amount()
     {
         $hash_in = array('merchantId' => '101',
-          'version'=>'8.8',
-          'reportGroup'=>'Planets',
-          'litleTxnId'=>'123456',
-          'orderId'=>'12344',
-          'orderSource'=>'ecommerce',
-          'card'=>array(
-          'type'=>'VI',
-          'number' =>'4100000000000001',
-          'expDate' =>'1210')
+            'version' => '8.8',
+            'reportGroup' => 'Planets',
+            'litleTxnId' => '123456',
+            'orderId' => '12344',
+            'orderSource' => 'ecommerce',
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000001',
+                'expDate' => '1210')
         );
         $litleTest = new LitleOnlineRequest();
-        $this->setExpectedException('InvalidArgumentException',"Missing Required Field: /amount/");
-        $retOb = $litleTest->saleRequest($hash_in);
+        $this->setExpectedException('InvalidArgumentException', "Missing Required Field: /amount/");
+        $litleTest->saleRequest($hash_in);
     }
 
     public function test_no_orderSource()
     {
         $hash_in = array('merchantId' => '101',
-          'version'=>'8.8',
-          'reportGroup'=>'Planets',
-          'litleTxnId'=>'123456',
-          'orderId'=>'12344',
-          'amount'=>'106',
-          'card'=>array(
-          'type'=>'VI',
-          'number' =>'4100000000000001',
-          'expDate' =>'1210')
+            'version' => '8.8',
+            'reportGroup' => 'Planets',
+            'litleTxnId' => '123456',
+            'orderId' => '12344',
+            'amount' => '106',
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000001',
+                'expDate' => '1210')
         );
         $litleTest = new LitleOnlineRequest();
-        $this->setExpectedException('InvalidArgumentException',"Missing Required Field: /orderSource/");
-        $retOb = $litleTest->saleRequest($hash_in);
+        $this->setExpectedException('InvalidArgumentException', "Missing Required Field: /orderSource/");
+        $litleTest->saleRequest($hash_in);
     }
 
     public function test_both_choices_card_and_paypal()
     {
         $hash_in = array('merchantId' => '101',
-          'version'=>'8.8',
-          'reportGroup'=>'Planets',
-          'orderId'=>'12344',
-          'amount'=>'106',
-          'orderSource'=>'ecommerce',
-          'card'=>array(
-          'type'=>'VI',
-          'number' =>'4100000000000001',
-          'expDate' =>'1210'
-        ),
-          'paypal'=>array(
-          'payerId'=>'1234',
-          'token'=>'1234',
-          'transactionId'=>'123456')
+            'version' => '8.8',
+            'reportGroup' => 'Planets',
+            'orderId' => '12344',
+            'amount' => '106',
+            'orderSource' => 'ecommerce',
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000001',
+                'expDate' => '1210'
+            ),
+            'paypal' => array(
+                'payerId' => '1234',
+                'token' => '1234',
+                'transactionId' => '123456')
         );
         $litleTest = new LitleOnlineRequest();
-        $this->setExpectedException('InvalidArgumentException',"Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
-        $retOb = $litleTest->saleRequest($hash_in);
+        $this->setExpectedException('InvalidArgumentException', "Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
+        $litleTest->saleRequest($hash_in);
     }
 
     public function test_three_choices_card_and_paypage_and_paypal()
     {
         $hash_in = array('merchantId' => '101',
-          'version'=>'8.8',
-          'reportGroup'=>'Planets',
-          'orderId'=>'12344',
-          'amount'=>'106',
-          'orderSource'=>'ecommerce',
-          'card'=>array(
-          'type'=>'VI',
-          'number' =>'4100000000000001',
-          'expDate' =>'1210'
-        ),
-          'paypage'=> array(
-          'paypageRegistrationId'=>'1234',
-          'expDate'=>'1210',
-          'cardValidationNum'=>'555',
-          'type'=>'VI'),
-          'paypal'=>array(
-          'payerId'=>'1234',
-          'token'=>'1234',
-          'transactionId'=>'123456')
+            'version' => '8.8',
+            'reportGroup' => 'Planets',
+            'orderId' => '12344',
+            'amount' => '106',
+            'orderSource' => 'ecommerce',
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000001',
+                'expDate' => '1210'
+            ),
+            'paypage' => array(
+                'paypageRegistrationId' => '1234',
+                'expDate' => '1210',
+                'cardValidationNum' => '555',
+                'type' => 'VI'),
+            'paypal' => array(
+                'payerId' => '1234',
+                'token' => '1234',
+                'transactionId' => '123456')
         );
         $litleTest = new LitleOnlineRequest();
-        $this->setExpectedException('InvalidArgumentException',"Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
-        $retOb = $litleTest->saleRequest($hash_in);
+        $this->setExpectedException('InvalidArgumentException', "Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
+        $litleTest->saleRequest($hash_in);
     }
 
     public function test_all_choices_card_and_paypage_and_paypal_and_token()
     {
         $hash_in = array('merchantId' => '101',
-          'version'=>'8.8',
-          'reportGroup'=>'Planets',
-          'litleTxnId'=>'123456',
-          'orderId'=>'12344',
-          'amount'=>'106',
-          'orderSource'=>'ecommerce',
-          'fraudCheck'=>array('authenticationTransactionId'=>'123'),
-          'bypassVelocityCheckcardholderAuthentication'=>array('authenticationTransactionId'=>'123'),
-          'card'=>array(
-          'type'=>'VI',
-          'number' =>'4100000000000001',
-          'expDate' =>'1210'
-        ),
-          'paypage'=> array(
-          'paypageRegistrationId'=>'1234',
-          'expDate'=>'1210',
-          'cardValidationNum'=>'555',
-          'type'=>'VI'),
-          'paypal'=>array(
-          'payerId'=>'1234',
-          'token'=>'1234',
-          'transactionId'=>'123456'),
-          'token'=> array(
-          'litleToken'=>'1234',
-          'expDate'=>'1210',
-          'cardValidationNum'=>'555',
-          'type'=>'VI')
+            'version' => '8.8',
+            'reportGroup' => 'Planets',
+            'litleTxnId' => '123456',
+            'orderId' => '12344',
+            'amount' => '106',
+            'orderSource' => 'ecommerce',
+            'fraudCheck' => array('authenticationTransactionId' => '123'),
+            'bypassVelocityCheckcardholderAuthentication' => array('authenticationTransactionId' => '123'),
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000001',
+                'expDate' => '1210'
+            ),
+            'paypage' => array(
+                'paypageRegistrationId' => '1234',
+                'expDate' => '1210',
+                'cardValidationNum' => '555',
+                'type' => 'VI'),
+            'paypal' => array(
+                'payerId' => '1234',
+                'token' => '1234',
+                'transactionId' => '123456'),
+            'token' => array(
+                'litleToken' => '1234',
+                'expDate' => '1210',
+                'cardValidationNum' => '555',
+                'type' => 'VI')
         );
         $litleTest = new LitleOnlineRequest();
-        $this->setExpectedException('InvalidArgumentException',"Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
-        $retOb = $litleTest->saleRequest($hash_in);
+        $this->setExpectedException('InvalidArgumentException', "Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
+        $litleTest->saleRequest($hash_in);
     }
 
     public function test_merchant_data()
     {
         $hash_in = array(
-                    'orderId'=> '2111',
-                    'orderSource'=>'ecommerce',
-                    'amount'=>'123',
-                    'merchantData'=>array(
-                        'affiliate'=>'bar'
-        )
+            'orderId' => '2111',
+            'orderSource' => 'ecommerce',
+            'amount' => '123',
+            'merchantData' => array(
+                'affiliate' => 'bar'
+            )
         );
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*<merchantData>.*?<affiliate>bar<\/affiliate>.*?<\/merchantData>.*/'));
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<merchantData>.*?<affiliate>bar<\/affiliate>.*?<\/merchantData>.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -242,22 +242,22 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
     public function test_fraud_filter_override()
     {
         $hash_in = array(
-                'card'=>array(
-                    'type'=>'VI',
-                    'number'=>'4100000000000001',
-                    'expDate'=>'1213',
-                    'cardValidationNum' => '1213'
-                ),
-                'orderId'=> '2111',
-                'orderSource'=>'ecommerce',
-                'id'=>'64575',
-                'amount'=>'123',
-                'fraudFilterOverride'=>'false'
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000001',
+                'expDate' => '1213',
+                'cardValidationNum' => '1213'
+            ),
+            'orderId' => '2111',
+            'orderSource' => 'ecommerce',
+            'id' => '64575',
+            'amount' => '123',
+            'fraudFilterOverride' => 'false'
         );
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
-        $mock	->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*<sale.*?<fraudFilterOverride>false<\/fraudFilterOverride>.*?<\/sale>.*/'));
+        $mock->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<sale.*?<fraudFilterOverride>false<\/fraudFilterOverride>.*?<\/sale>.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -267,20 +267,20 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
     public function test_loggedInUser()
     {
         $hash_in = array(
-                'loggedInUser'=>'gdake',
-                'merchantSdk'=>'PHP;8.14.0',
-                'card'=>array('type'=>'VI',
-                        'number'=>'4100000000000001',
-                        'expDate'=>'1213',
-                        'cardValidationNum' => '1213'),
-                'id'=>'654',
-                'orderId'=> '2111',
-                'orderSource'=>'ecommerce',
-                'amount'=>'123');
+            'loggedInUser' => 'gdake',
+            'merchantSdk' => 'PHP;8.14.0',
+            'card' => array('type' => 'VI',
+                'number' => '4100000000000001',
+                'expDate' => '1213',
+                'cardValidationNum' => '1213'),
+            'id' => '654',
+            'orderId' => '2111',
+            'orderSource' => 'ecommerce',
+            'amount' => '123');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*merchantSdk="PHP;8.14.0".*loggedInUser="gdake" xmlns=.*>.*/'));
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*merchantSdk="PHP;8.14.0".*loggedInUser="gdake" xmlns=.*>.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -290,21 +290,21 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
     public function test_surchargeAmount()
     {
         $hash_in = array(
-                'card'=>array(
-                        'type'=>'VI',
-                        'number'=>'4100000000000001',
-                        'expDate'=>'1213'
-                ),
-                'orderId'=>'12344',
-                'amount'=>'2',
-                'surchargeAmount'=>'1',
-                'orderSource'=>'ecommerce',
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000001',
+                'expDate' => '1213'
+            ),
+            'orderId' => '12344',
+            'amount' => '2',
+            'surchargeAmount' => '1',
+            'orderSource' => 'ecommerce',
         );
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock
-        ->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*<amount>2<\/amount><surchargeAmount>1<\/surchargeAmount><orderSource>ecommerce<\/orderSource>.*/'));
+            ->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<amount>2<\/amount><surchargeAmount>1<\/surchargeAmount><orderSource>ecommerce<\/orderSource>.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -314,20 +314,20 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
     public function test_surchargeAmount_Optional()
     {
         $hash_in = array(
-                'card'=>array(
-                        'type'=>'VI',
-                        'number'=>'4100000000000001',
-                        'expDate'=>'1213'
-                ),
-                'orderId'=>'12344',
-                'amount'=>'2',
-                'orderSource'=>'ecommerce',
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000001',
+                'expDate' => '1213'
+            ),
+            'orderId' => '12344',
+            'amount' => '2',
+            'orderSource' => 'ecommerce',
         );
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock
-        ->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*<amount>2<\/amount><orderSource>ecommerce<\/orderSource>.*/'));
+            ->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<amount>2<\/amount><orderSource>ecommerce<\/orderSource>.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -337,27 +337,27 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
     public function test_recurringRequest()
     {
         $hash_in = array(
-                'card'=>array(
-                        'type'=>'VI',
-                        'number'=>'4100000000000001',
-                        'expDate'=>'1213'
-                ),
-                'orderId'=>'12344',
-                'amount'=>'2',
-                'orderSource'=>'ecommerce',
-                'fraudFilterOverride'=>'true',
-                'recurringRequest'=>array(
-                        'subscription'=>array(
-                                'planCode'=>'abc123',
-                                'numberOfPayments'=>'12'
-                        )
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000001',
+                'expDate' => '1213'
+            ),
+            'orderId' => '12344',
+            'amount' => '2',
+            'orderSource' => 'ecommerce',
+            'fraudFilterOverride' => 'true',
+            'recurringRequest' => array(
+                'subscription' => array(
+                    'planCode' => 'abc123',
+                    'numberOfPayments' => '12'
                 )
+            )
         );
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock
-        ->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*<fraudFilterOverride>true<\/fraudFilterOverride><recurringRequest><subscription><planCode>abc123<\/planCode><numberOfPayments>12<\/numberOfPayments><\/subscription><\/recurringRequest>.*/'));
+            ->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<fraudFilterOverride>true<\/fraudFilterOverride><recurringRequest><subscription><planCode>abc123<\/planCode><numberOfPayments>12<\/numberOfPayments><\/subscription><\/recurringRequest>.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -367,21 +367,21 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
     public function test_recurringRequest_Optional()
     {
         $hash_in = array(
-                'card'=>array(
-                        'type'=>'VI',
-                        'number'=>'4100000000000001',
-                        'expDate'=>'1213'
-                ),
-                'orderId'=>'12344',
-                'amount'=>'2',
-                'orderSource'=>'ecommerce',
-                'fraudFilterOverride'=>'true'
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000001',
+                'expDate' => '1213'
+            ),
+            'orderId' => '12344',
+            'amount' => '2',
+            'orderSource' => 'ecommerce',
+            'fraudFilterOverride' => 'true'
         );
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock
-        ->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*<fraudFilterOverride>true<\/fraudFilterOverride><\/sale>.*/'));
+            ->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<fraudFilterOverride>true<\/fraudFilterOverride><\/sale>.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -391,25 +391,25 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
     public function test_litleInternalRecurringRequest()
     {
         $hash_in = array(
-            'card'=>array(
-                    'type'=>'VI',
-                    'number'=>'4100000000000001',
-                    'expDate'=>'1213'
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000001',
+                'expDate' => '1213'
             ),
-            'orderId'=>'12344',
-            'amount'=>'2',
-            'orderSource'=>'ecommerce',
-            'fraudFilterOverride'=>'true',
-            'litleInternalRecurringRequest'=>array(
-                    'subscriptionId'=>'123',
-                    'recurringTxnId'=>'456'
+            'orderId' => '12344',
+            'amount' => '2',
+            'orderSource' => 'ecommerce',
+            'fraudFilterOverride' => 'true',
+            'litleInternalRecurringRequest' => array(
+                'subscriptionId' => '123',
+                'recurringTxnId' => '456'
             )
         );
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock
-        ->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*<fraudFilterOverride>true<\/fraudFilterOverride><litleInternalRecurringRequest><subscriptionId>123<\/subscriptionId><recurringTxnId>456<\/recurringTxnId><\/litleInternalRecurringRequest>.*/'));
+            ->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<fraudFilterOverride>true<\/fraudFilterOverride><litleInternalRecurringRequest><subscriptionId>123<\/subscriptionId><recurringTxnId>456<\/recurringTxnId><\/litleInternalRecurringRequest>.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -420,21 +420,21 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
     public function test_litleInternalRecurringRequest_Optional()
     {
         $hash_in = array(
-            'card'=>array(
-                    'type'=>'VI',
-                    'number'=>'4100000000000001',
-                    'expDate'=>'1213'
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000001',
+                'expDate' => '1213'
             ),
-            'orderId'=>'12344',
-            'amount'=>'2',
-            'orderSource'=>'ecommerce',
-            'fraudFilterOverride'=>'true'
+            'orderId' => '12344',
+            'amount' => '2',
+            'orderSource' => 'ecommerce',
+            'fraudFilterOverride' => 'true'
         );
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock
-        ->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*<fraudFilterOverride>true<\/fraudFilterOverride><\/sale>.*/'));
+            ->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<fraudFilterOverride>true<\/fraudFilterOverride><\/sale>.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -444,20 +444,20 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
     public function test_debtRepayment_true()
     {
         $hash_in = array(
-                'amount'=>'2',
-                'orderSource'=>'ecommerce',
-                'orderId'=>'3',
-                'litleInternalRecurringRequest'=>array(
-                        'subscriptionId'=>'123',
-                        'recurringTxnId'=>'456'
-                ),
-                'debtRepayment'=>'true'
+            'amount' => '2',
+            'orderSource' => 'ecommerce',
+            'orderId' => '3',
+            'litleInternalRecurringRequest' => array(
+                'subscriptionId' => '123',
+                'recurringTxnId' => '456'
+            ),
+            'debtRepayment' => 'true'
         );
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock
-        ->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*<\/litleInternalRecurringRequest><debtRepayment>true<\/debtRepayment><\/sale>.*/'));
+            ->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<\/litleInternalRecurringRequest><debtRepayment>true<\/debtRepayment><\/sale>.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -467,20 +467,20 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
     public function test_debtRepayment_false()
     {
         $hash_in = array(
-                'amount'=>'2',
-                'orderSource'=>'ecommerce',
-                'orderId'=>'3',
-                'litleInternalRecurringRequest'=>array(
-                        'subscriptionId'=>'123',
-                        'recurringTxnId'=>'456'
-                ),
-                'debtRepayment'=>'false'
+            'amount' => '2',
+            'orderSource' => 'ecommerce',
+            'orderId' => '3',
+            'litleInternalRecurringRequest' => array(
+                'subscriptionId' => '123',
+                'recurringTxnId' => '456'
+            ),
+            'debtRepayment' => 'false'
         );
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock
-        ->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*<\/litleInternalRecurringRequest><debtRepayment>false<\/debtRepayment><\/sale>.*/'));
+            ->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<\/litleInternalRecurringRequest><debtRepayment>false<\/debtRepayment><\/sale>.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -490,46 +490,46 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
     public function test_debtRepayment_optional()
     {
         $hash_in = array(
-                'amount'=>'2',
-                'orderSource'=>'ecommerce',
-                'orderId'=>'3',
-                'litleInternalRecurringRequest'=>array(
-                        'subscriptionId'=>'123',
-                        'recurringTxnId'=>'456'
-                ),
+            'amount' => '2',
+            'orderSource' => 'ecommerce',
+            'orderId' => '3',
+            'litleInternalRecurringRequest' => array(
+                'subscriptionId' => '123',
+                'recurringTxnId' => '456'
+            ),
         );
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock
-        ->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*<\/litleInternalRecurringRequest><\/sale>.*/'));
+            ->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<\/litleInternalRecurringRequest><\/sale>.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
         $litleTest->saleRequest($hash_in);
     }
 
-       function test_advancedFraudChecks()
-       {
+    function test_advancedFraudChecks()
+    {
         $hash_in = array(
-            'card'=>array(
-                    'type'=>'VI',
-                    'number'=>'4100000000000001',
-                    'expDate'=>'1213'
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000001',
+                'expDate' => '1213'
             ),
-            'orderId'=>'12344',
-            'amount'=>'2',
-            'orderSource'=>'ecommerce',
-            'debtRepayment'=>'true',
-            'advancedFraudChecks'=>array(
+            'orderId' => '12344',
+            'amount' => '2',
+            'orderSource' => 'ecommerce',
+            'debtRepayment' => 'true',
+            'advancedFraudChecks' => array(
                 'threatMetrixSessionId' => 'abc123'
             )
         );
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock
-        ->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*<debtRepayment>true<\/debtRepayment><advancedFraudChecks><threatMetrixSessionId>abc123<\/threatMetrixSessionId><\/advancedFraudChecks><\/sale>.*/'));
+            ->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<debtRepayment>true<\/debtRepayment><advancedFraudChecks><threatMetrixSessionId>abc123<\/threatMetrixSessionId><\/advancedFraudChecks><\/sale>.*/'));
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
         $litleTest->saleRequest($hash_in);
@@ -537,69 +537,131 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
 
     public function test_advancedFraudChecks_withoutThreatMetrixSessionId()
     {
-        //In 8.23, threatMetrixSessionId is optional, but really should be required.
-        //It will be required in 8.24, so I'm making it required here in the schema.
-        //There is no good reason to send an advancedFraudChecks element without a threatMetrixSessionId.
         $hash_in = array(
-            'card'=>array(
-                'type'=>'VI',
-                'number'=>'4100000000000001',
-                'expDate'=>'1213'
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000001',
+                'expDate' => '1213'
             ),
-            'orderId'=>'12344',
-            'amount'=>'2',
-            'orderSource'=>'ecommerce',
-            'debtRepayment'=>'true',
-            'advancedFraudChecks'=>array(
-            )
+            'orderId' => '12344',
+            'amount' => '2',
+            'orderSource' => 'ecommerce',
+            'debtRepayment' => 'true',
+            'advancedFraudChecks' => array()
         );
 
         $litleTest = new LitleOnlineRequest();
-        $this->setExpectedException('InvalidArgumentException','Missing Required Field: /threatMetrixSessionId/');
-        $retOb = $litleTest->saleRequest($hash_in);
+        $this->setExpectedException('InvalidArgumentException', 'Missing Required Field: /threatMetrixSessionId/');
+        $litleTest->saleRequest($hash_in);
     }
-    
+
     public function test_sale_with_card_secondaryAmount()
     {
-    	$hash_in = array(
-    			'card'=>array('type'=>'VI',
-    					'number'=>'4100000000000001',
-    					'expDate'=>'1213',
-    					'cardValidationNum' => '1213'),
-    			'id'=>'654',
-    			'orderId'=> '2111',
-    			'orderSource'=>'ecommerce',
-    			'amount'=>'123',
-    			'secondaryAmount' => '1234');
-    	$mock = $this->getMock('litle\sdk\LitleXmlMapper');
-    	$mock->expects($this->once())
-    	->method('request')
-    	->with($this->matchesRegularExpression('/.*<card><type>VI.*<number>4100000000000001.*<expDate>1213.*<cardValidationNum>1213.*/'));
-    
-    	$litleTest = new LitleOnlineRequest();
-    	$litleTest->newXML = $mock;
-    	$litleTest->saleRequest($hash_in);
+        $hash_in = array(
+            'card' => array('type' => 'VI',
+                'number' => '4100000000000001',
+                'expDate' => '1213',
+                'cardValidationNum' => '1213'),
+            'id' => '654',
+            'orderId' => '2111',
+            'orderSource' => 'ecommerce',
+            'amount' => '123',
+            'secondaryAmount' => '1234');
+        $mock = $this->getMock('litle\sdk\LitleXmlMapper');
+        $mock->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<card><type>VI.*<number>4100000000000001.*<expDate>1213.*<cardValidationNum>1213.*/'));
+
+        $litleTest = new LitleOnlineRequest();
+        $litleTest->newXML = $mock;
+        $litleTest->saleRequest($hash_in);
     }
 
     public function test_sale_with_applepay()
     {
-    	$hash_in = array(
-    			'applepay'=>array(
-    					'data'=>'string data here',
-    					'header'=> 'header stuff here',
-    					'signature'=>'signature',
-    					'version' => 'version 1'),
-    			'orderId'=> '2111',
-    			'orderSource'=>'ecommerce',
-    			'id'=>'654',
-    			'amount'=>'123');
-    	$mock = $this->getMock('litle\sdk\LitleXmlMapper');
-    	$mock	->expects($this->once())
-    	->method('request')
-    	->with($this->matchesRegularExpression('/.*<applepay><data>string data here.*<header>header stuff here.*<signature>signature.*<version>version 1.*/'));
-    
-    	$litleTest = new LitleOnlineRequest();
-    	$litleTest->newXML = $mock;
-    	$litleTest->saleRequest($hash_in);
+        $hash_in = array(
+            'applepay' => array(
+                'data' => 'string data here',
+                'header' => 'header stuff here',
+                'signature' => 'signature',
+                'version' => 'version 1'),
+            'orderId' => '2111',
+            'orderSource' => 'ecommerce',
+            'id' => '654',
+            'amount' => '123');
+        $mock = $this->getMock('litle\sdk\LitleXmlMapper');
+        $mock->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<applepay><data>string data here.*<header>header stuff here.*<signature>signature.*<version>version 1.*/'));
+
+        $litleTest = new LitleOnlineRequest();
+        $litleTest->newXML = $mock;
+        $litleTest->saleRequest($hash_in);
+    }
+
+    public function test_sale_with_androidpay()
+    {
+        $hash_in = array(
+            'card' => array('type' => 'VI',
+                'number' => '4100000000000001',
+                'expDate' => '1213',
+                'cardValidationNum' => '1213'),
+            'id' => '654',
+            'orderId' => '2111',
+            'orderSource' => 'androidpay',
+            'amount' => '123');
+        $mock = $this->getMock('litle\sdk\LitleXmlMapper');
+        $mock->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<orderSource>androidpay<\/orderSource>.*<card><type>VI<\/type>.*<number>4100000000000001.*<expDate>1213.*<cardValidationNum>1213.*/'));
+
+        $litleTest = new LitleOnlineRequest();
+        $litleTest->newXML = $mock;
+        $litleTest->saleRequest($hash_in);
+    }
+
+    public function test_sale_with_processing_type()
+    {
+        $hash_in = array(
+            'card' => array('type' => 'VI',
+                'number' => '4100000000000001',
+                'expDate' => '1213',
+                'cardValidationNum' => '1213'),
+            'id' => '654',
+            'orderId' => '2111',
+            'orderSource' => 'ecommerce',
+            'amount' => '123',
+            'processingType' => 'initialRecurring');
+        $mock = $this->getMock('litle\sdk\LitleXmlMapper');
+        $mock->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<orderSource>ecommerce<\/orderSource>.*<processingType>initialRecurring<\/processingType>.*/'));
+
+        $litleTest = new LitleOnlineRequest();
+        $litleTest->newXML = $mock;
+        $litleTest->saleRequest($hash_in);
+    }
+
+    public function test_sale_with_orig_txn_id_and_orig_amount()
+    {
+        $hash_in = array(
+            'card' => array('type' => 'VI',
+                'number' => '4100000000000001',
+                'expDate' => '1213',
+                'cardValidationNum' => '1213'),
+            'id' => '654',
+            'orderId' => '2111',
+            'orderSource' => 'ecommerce',
+            'amount' => '123',
+            'originalNetworkTransactionId' => '01234567890123456789',
+            'originalTransactionAmount' => '1456');
+        $mock = $this->getMock('litle\sdk\LitleXmlMapper');
+        $mock->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<originalNetworkTransactionId>01234567890123456789<\/originalNetworkTransactionId>.*<originalTransactionAmount>1456<\/originalTransactionAmount>.*/'));
+
+        $litleTest = new LitleOnlineRequest();
+        $litleTest->newXML = $mock;
+        $litleTest->saleRequest($hash_in);
     }
 }

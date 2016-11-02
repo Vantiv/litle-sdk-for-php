@@ -23,26 +23,28 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 namespace litle\sdk\Test\unit;
+
 use litle\sdk\LitleOnlineRequest;
+
 class LoadUnitTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple()
     {
         $hash_in = array(
-            'orderId'=>'1',
-            'amount'=> '2',
-            'orderSource'=>'ECOMMERCE',
-            'card' => array (
-                'type'=>'VI',
-                'number'=>'4100000000000000',
-                'expDate'=>'1213',
+            'orderId' => '1',
+            'amount' => '2',
+            'orderSource' => 'ECOMMERCE',
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000000',
+                'expDate' => '1213',
                 'cardValidationNum' => '1213'
             )
         );
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*<orderId>1.*<amount>2.*<orderSource>ECOMMERCE.*<card.*type.*VI.*/'));
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<orderId>1.*<amount>2.*<orderSource>ECOMMERCE.*<card.*type.*VI.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;

@@ -24,7 +24,9 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 namespace litle\sdk\Test\unit;
+
 use litle\sdk\XmlParser;
+
 class XmlParserTest extends \PHPUnit_Framework_TestCase
 {
     public function test_round_trip_xml_to_dom_and_back()
@@ -32,8 +34,8 @@ class XmlParserTest extends \PHPUnit_Framework_TestCase
         $orig = '<foo>bar</foo>';
         $dom = XmlParser::domParser($orig);
         $after = XmlParser::getDomDocumentAsString($dom);
-        $cleanedUp = str_replace('<?xml version="1.0" encoding="UTF-8"?>','',$after);
-        $cleanedUp = str_replace("\n",'',$cleanedUp);
-        $this->assertEquals($orig,$cleanedUp);
+        $cleanedUp = str_replace('<?xml version="1.0" encoding="UTF-8"?>', '', $after);
+        $cleanedUp = str_replace("\n", '', $cleanedUp);
+        $this->assertEquals($orig, $cleanedUp);
     }
 }

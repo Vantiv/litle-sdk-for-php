@@ -23,28 +23,30 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 namespace litle\sdk\Test\unit;
+
 use litle\sdk\LitleOnlineRequest;
+
 class UpdateSubscriptionUnitTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple()
     {
         $hash_in = array(
-            'subscriptionId'=>'1',
-            'planCode'=> '2',
-            'billToAddress'=> array (
+            'subscriptionId' => '1',
+            'planCode' => '2',
+            'billToAddress' => array(
                 'addressLine1' => '3'
             ),
-            'card' => array (
-                'type'=>'VI',
-                'number'=>'4100000000000000',
-                'expDate'=>'1213',
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000000',
+                'expDate' => '1213',
                 'cardValidationNum' => '1213'
             ),
-            'billingDate'=>'2013-12-17');
+            'billingDate' => '2013-12-17');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*<subscriptionId>1.*<planCode>2.*<billToAddress.*<addressLine1>3.*<card.*type.*VI.*billingDate.*2013-12-17.*/'));
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<subscriptionId>1.*<planCode>2.*<billToAddress.*<addressLine1>3.*<card.*type.*VI.*billingDate.*2013-12-17.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -54,22 +56,22 @@ class UpdateSubscriptionUnitTest extends \PHPUnit_Framework_TestCase
     public function test_PlanCodeIsOptional()
     {
         $hash_in = array(
-            'subscriptionId'=>'1',
-            'billToAddress'=> array (
+            'subscriptionId' => '1',
+            'billToAddress' => array(
                 'addressLine1' => '3'
             ),
-            'card' => array (
-                'type'=>'VI',
-                'number'=>'4100000000000000',
-                'expDate'=>'1213',
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000000',
+                'expDate' => '1213',
                 'cardValidationNum' => '1213'
             ),
-            'billingDate'=>'2013-12-17');
+            'billingDate' => '2013-12-17');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
 
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->logicalNot($this->matchesRegularExpression('/.*planCode.*/')));
+            ->method('request')
+            ->with($this->logicalNot($this->matchesRegularExpression('/.*planCode.*/')));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -79,19 +81,19 @@ class UpdateSubscriptionUnitTest extends \PHPUnit_Framework_TestCase
     public function test_BillToAddressIsOptional()
     {
         $hash_in = array(
-            'subscriptionId'=>'1',
-            'card' => array (
-                'type'=>'VI',
-                'number'=>'4100000000000000',
-                'expDate'=>'1213',
+            'subscriptionId' => '1',
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000000',
+                'expDate' => '1213',
                 'cardValidationNum' => '1213'
             ),
-            'billingDate'=>'2013-12-17');
+            'billingDate' => '2013-12-17');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
 
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->logicalNot($this->matchesRegularExpression('/.*billToAddress.*/')));
+            ->method('request')
+            ->with($this->logicalNot($this->matchesRegularExpression('/.*billToAddress.*/')));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -101,13 +103,13 @@ class UpdateSubscriptionUnitTest extends \PHPUnit_Framework_TestCase
     public function test_CardIsOptional()
     {
         $hash_in = array(
-            'subscriptionId'=>'1',
-            'billingDate'=>'2013-12-17');
+            'subscriptionId' => '1',
+            'billingDate' => '2013-12-17');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
 
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->logicalNot($this->matchesRegularExpression('/.*card.*/')));
+            ->method('request')
+            ->with($this->logicalNot($this->matchesRegularExpression('/.*card.*/')));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -117,12 +119,12 @@ class UpdateSubscriptionUnitTest extends \PHPUnit_Framework_TestCase
     public function test_BillingDateIsOptional()
     {
         $hash_in = array(
-            'subscriptionId'=>'1');
+            'subscriptionId' => '1');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
 
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->logicalNot($this->matchesRegularExpression('/.*billingDate.*/')));
+            ->method('request')
+            ->with($this->logicalNot($this->matchesRegularExpression('/.*billingDate.*/')));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -132,19 +134,19 @@ class UpdateSubscriptionUnitTest extends \PHPUnit_Framework_TestCase
     public function test_choice_card()
     {
         $hash_in = array(
-            'subscriptionId'=>'1',
-            'card' => array (
-                'type'=>'VI',
-                'number'=>'4100000000000000',
-                'expDate'=>'1213',
+            'subscriptionId' => '1',
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000000',
+                'expDate' => '1213',
                 'cardValidationNum' => '1213'
             )
-         );
+        );
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
 
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*card.*type.*VI.*number.*/'));
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*card.*type.*VI.*number.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -154,19 +156,19 @@ class UpdateSubscriptionUnitTest extends \PHPUnit_Framework_TestCase
     public function test_choice_token()
     {
         $hash_in = array(
-            'subscriptionId'=>'1',
-            'token' => array (
-                'litleToken'=>'1111222233334444',
-                'expDate'=>'1213',
+            'subscriptionId' => '1',
+            'token' => array(
+                'litleToken' => '1111222233334444',
+                'expDate' => '1213',
                 'cardValidationNum' => '1213',
-                'type'=>'VI'
+                'type' => 'VI'
             )
-         );
+        );
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
 
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*litleToken.*1111222233334444.*type.*/'));
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*litleToken.*1111222233334444.*type.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -176,19 +178,19 @@ class UpdateSubscriptionUnitTest extends \PHPUnit_Framework_TestCase
     public function test_choice_paypage()
     {
         $hash_in = array(
-            'subscriptionId'=>'1',
-            'paypage' => array (
-                'paypageRegistrationId'=>'abc123',
-                'expDate'=>'1213',
+            'subscriptionId' => '1',
+            'paypage' => array(
+                'paypageRegistrationId' => 'abc123',
+                'expDate' => '1213',
                 'cardValidationNum' => '1213',
-                'type'=>'VI',
+                'type' => 'VI',
             )
-         );
+        );
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
 
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*paypage.*paypageRegistrationId.*abc123.*type.*VI.*/'));
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*paypage.*paypageRegistrationId.*abc123.*type.*VI.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;

@@ -23,18 +23,20 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 namespace litle\sdk\Test\unit;
+
 use litle\sdk\LitleOnlineRequest;
+
 class TokenUnitTest extends \PHPUnit_Framework_TestCase
 {
     public function test_token()
     {
         $hash_in = array(
-            'orderId'=>'1',
-            'accountNumber'=>'123456789101112');
+            'orderId' => '1',
+            'accountNumber' => '123456789101112');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*<accountNumber>123456789101112*/'));
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<accountNumber>123456789101112*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -44,13 +46,13 @@ class TokenUnitTest extends \PHPUnit_Framework_TestCase
     public function test_accountNum_and_paypage()
     {
         $hash_in = array('merchantId' => '101',
-      'version'=>'8.8',
-      'reportGroup'=>'Planets',
-      'orderId'=>'12344',
-      'accountNumber'=>'1233456789101112',
-      'paypageRegistrationId'=>'1233456789101112');
+            'version' => '8.8',
+            'reportGroup' => 'Planets',
+            'orderId' => '12344',
+            'accountNumber' => '1233456789101112',
+            'paypageRegistrationId' => '1233456789101112');
         $litleTest = new LitleOnlineRequest();
-        $this->setExpectedException('InvalidArgumentException',"Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
+        $this->setExpectedException('InvalidArgumentException', "Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
         $retOb = $litleTest->registerTokenRequest($hash_in);
 
     }
@@ -58,13 +60,13 @@ class TokenUnitTest extends \PHPUnit_Framework_TestCase
     public function test_echeck_and_paypagel()
     {
         $hash_in = array('merchantId' => '101',
-      'version'=>'8.8',
-      'reportGroup'=>'Planets',
-      'orderId'=>'12344',
-      'echeckForToken'=>array('accNum'=>'12344565','routingNum'=>'123476545'),
-      'paypageRegistrationId'=>'1233456789101112');
+            'version' => '8.8',
+            'reportGroup' => 'Planets',
+            'orderId' => '12344',
+            'echeckForToken' => array('accNum' => '12344565', 'routingNum' => '123476545'),
+            'paypageRegistrationId' => '1233456789101112');
         $litleTest = new LitleOnlineRequest();
-        $this->setExpectedException('InvalidArgumentException',"Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
+        $this->setExpectedException('InvalidArgumentException', "Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
         $retOb = $litleTest->registerTokenRequest($hash_in);
 
     }
@@ -72,14 +74,14 @@ class TokenUnitTest extends \PHPUnit_Framework_TestCase
     public function test_echeck_and_paypage_and_accountnum()
     {
         $hash_in = array('merchantId' => '101',
-      'version'=>'8.8',
-      'reportGroup'=>'Planets',
-      'orderId'=>'12344',
-      'accountNumber'=>'1233456789101112',
-      'echeckForToken'=>array('accNum'=>'12344565','routingNum'=>'123476545'),
-      'paypageRegistrationId'=>'1233456789101112');
+            'version' => '8.8',
+            'reportGroup' => 'Planets',
+            'orderId' => '12344',
+            'accountNumber' => '1233456789101112',
+            'echeckForToken' => array('accNum' => '12344565', 'routingNum' => '123476545'),
+            'paypageRegistrationId' => '1233456789101112');
         $litleTest = new LitleOnlineRequest();
-        $this->setExpectedException('InvalidArgumentException',"Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
+        $this->setExpectedException('InvalidArgumentException', "Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
         $retOb = $litleTest->registerTokenRequest($hash_in);
 
     }
@@ -87,13 +89,13 @@ class TokenUnitTest extends \PHPUnit_Framework_TestCase
     public function test_cardValidationNum()
     {
         $hash_in = array(
-                'orderId'=>'1',
-                'accountNumber'=>'123456789101112',
-                'cardValidationNum'=>'123');
+            'orderId' => '1',
+            'accountNumber' => '123456789101112',
+            'cardValidationNum' => '123');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*<accountNumber>123456789101112.*<cardValidationNum>123.*/'));
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<accountNumber>123456789101112.*<cardValidationNum>123.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -103,37 +105,37 @@ class TokenUnitTest extends \PHPUnit_Framework_TestCase
     public function test_loggedInUser()
     {
         $hash_in = array(
-                'loggedInUser'=>'gdake',
-                'merchantSdk'=>'PHP;8.14.0',
-                'orderId'=>'1',
-                'accountNumber'=>'123456789101112');
+            'loggedInUser' => 'gdake',
+            'merchantSdk' => 'PHP;8.14.0',
+            'orderId' => '1',
+            'accountNumber' => '123456789101112');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*merchantSdk="PHP;8.14.0".*loggedInUser="gdake" xmlns=.*>.*/'));
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*merchantSdk="PHP;8.14.0".*loggedInUser="gdake" xmlns=.*>.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
         $litleTest->registerTokenRequest($hash_in);
     }
-    
+
     public function test_token_applepay()
     {
-    	$hash_in = array(
-    			'orderId'=>'1',
-    			'applepay'=>array(
-    					'data'=>'string data here',
-    					'header'=> 'header stuff here',
-    					'signature'=>'signature',
-    					'version' => 'version 1'));
-    	$mock = $this->getMock('litle\sdk\LitleXmlMapper');
-    	$mock->expects($this->once())
-    	->method('request')
-    	->with($this->matchesRegularExpression('/.*<applepay><data>string data here.*<header>header stuff here.*<signature>signature.*<version>version 1.*/'));
-    
-    	$litleTest = new LitleOnlineRequest();
-    	$litleTest->newXML = $mock;
-    	$litleTest->registerTokenRequest($hash_in);
+        $hash_in = array(
+            'orderId' => '1',
+            'applepay' => array(
+                'data' => 'string data here',
+                'header' => 'header stuff here',
+                'signature' => 'signature',
+                'version' => 'version 1'));
+        $mock = $this->getMock('litle\sdk\LitleXmlMapper');
+        $mock->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<applepay><data>string data here.*<header>header stuff here.*<signature>signature.*<version>version 1.*/'));
+
+        $litleTest = new LitleOnlineRequest();
+        $litleTest->newXML = $mock;
+        $litleTest->registerTokenRequest($hash_in);
     }
 
 }

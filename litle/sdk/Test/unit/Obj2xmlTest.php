@@ -24,28 +24,30 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 namespace litle\sdk\Test\unit;
+
 use litle\sdk\Obj2xml;
+
 class Obj2xmlTest extends \PHPUnit_Framework_TestCase
 {
     public function test_enhanced_data_more_than_10_line_items()
     {
-        $hash=
-            array("merchantSdk"=>'',"enhancedData" =>
-            array(
-                "lineItemData1" =>  (array("itemSequenceNumber"=>"1","itemDescription"=>"First")),
-                "lineItemData2" =>  (array("itemSequenceNumber"=>"2","itemDescription"=>"Second")),
-                "lineItemData3" =>  (array("itemSequenceNumber"=>"3","itemDescription"=>"Third")),
-                "lineItemData4" =>  (array("itemSequenceNumber"=>"4","itemDescription"=>"Fourth")),
-                "lineItemData5" =>  (array("itemSequenceNumber"=>"5","itemDescription"=>"Fifth")),
-                "lineItemData6" =>  (array("itemSequenceNumber"=>"6","itemDescription"=>"Sixth")),
-                "lineItemData7" =>  (array("itemSequenceNumber"=>"7","itemDescription"=>"Seventh")),
-                "lineItemData8" =>  (array("itemSequenceNumber"=>"8","itemDescription"=>"Eighth")),
-                "lineItemData9" =>  (array("itemSequenceNumber"=>"9","itemDescription"=>"Ninth")),
-                "lineItemData10" =>  (array("itemSequenceNumber"=>"10","itemDescription"=>"Tenth")),
-                "lineItemData11" =>  (array("itemSequenceNumber"=>"11","itemDescription"=>"Eleventh"))
-            ));
-        $outputxml = Obj2xml::toXml($hash,array(),'authorization');
+        $hash =
+            array("merchantSdk" => '', "enhancedData" =>
+                array(
+                    "lineItemData1" => (array("itemSequenceNumber" => "1", "itemDescription" => "First")),
+                    "lineItemData2" => (array("itemSequenceNumber" => "2", "itemDescription" => "Second")),
+                    "lineItemData3" => (array("itemSequenceNumber" => "3", "itemDescription" => "Third")),
+                    "lineItemData4" => (array("itemSequenceNumber" => "4", "itemDescription" => "Fourth")),
+                    "lineItemData5" => (array("itemSequenceNumber" => "5", "itemDescription" => "Fifth")),
+                    "lineItemData6" => (array("itemSequenceNumber" => "6", "itemDescription" => "Sixth")),
+                    "lineItemData7" => (array("itemSequenceNumber" => "7", "itemDescription" => "Seventh")),
+                    "lineItemData8" => (array("itemSequenceNumber" => "8", "itemDescription" => "Eighth")),
+                    "lineItemData9" => (array("itemSequenceNumber" => "9", "itemDescription" => "Ninth")),
+                    "lineItemData10" => (array("itemSequenceNumber" => "10", "itemDescription" => "Tenth")),
+                    "lineItemData11" => (array("itemSequenceNumber" => "11", "itemDescription" => "Eleventh"))
+                ));
+        $outputxml = Obj2xml::toXml($hash, array(), 'authorization');
         //Finding this means the schema will fail validation
-        $this->assertTrue(FALSE === strpos($outputxml,'lineItemData11'));
+        $this->assertTrue(FALSE === strpos($outputxml, 'lineItemData11'));
     }
 }

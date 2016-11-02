@@ -23,16 +23,18 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 namespace litle\sdk\Test\unit;
+
 use litle\sdk\LitleOnlineRequest;
+
 class EcheckRedepositUnitTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple_echeckRedeposit()
     {
-        $hash_in = array('litleTxnId' =>'123123');
+        $hash_in = array('litleTxnId' => '123123');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*<litleTxnId>123123.*/'));
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<litleTxnId>123123.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -41,50 +43,50 @@ class EcheckRedepositUnitTest extends \PHPUnit_Framework_TestCase
 
     public function test_no_litleTxnId()
     {
-        $hash_in = array('reportGroup'=>'Planets');
+        $hash_in = array('reportGroup' => 'Planets');
         $litleTest = new LitleOnlineRequest();
-        $this->setExpectedException('InvalidArgumentException',"Missing Required Field: /litleTxnId/");
+        $this->setExpectedException('InvalidArgumentException', "Missing Required Field: /litleTxnId/");
         $retOb = $litleTest->echeckRedepositRequest($hash_in);
     }
 
     public function test_no_routingNum_echeck()
     {
-        $hash_in = array('reportGroup'=>'Planets','litleTxnId'=>'123456',
-         'echeck' => array('accType'=>'Checking','accNum'=>'12345657890','checkNum'=>'123455'));
+        $hash_in = array('reportGroup' => 'Planets', 'litleTxnId' => '123456',
+            'echeck' => array('accType' => 'Checking', 'accNum' => '12345657890', 'checkNum' => '123455'));
         $litleTest = new LitleOnlineRequest();
-        $this->setExpectedException('InvalidArgumentException',"Missing Required Field: /routingNum/");
+        $this->setExpectedException('InvalidArgumentException', "Missing Required Field: /routingNum/");
         $retOb = $litleTest->echeckRedepositRequest($hash_in);
     }
 
     public function test_no_routingNum_echeckToken()
     {
-        $hash_in = array('reportGroup'=>'Planets','litleTxnId'=>'123456',
-        'echeckToken' => array('accType'=>'Checking','litleToken'=>'1234565789012','checkNum'=>'123455'));
+        $hash_in = array('reportGroup' => 'Planets', 'litleTxnId' => '123456',
+            'echeckToken' => array('accType' => 'Checking', 'litleToken' => '1234565789012', 'checkNum' => '123455'));
         $litleTest = new LitleOnlineRequest();
-        $this->setExpectedException('InvalidArgumentException',"Missing Required Field: /routingNum/");
+        $this->setExpectedException('InvalidArgumentException', "Missing Required Field: /routingNum/");
         $retOb = $litleTest->echeckRedepositRequest($hash_in);
     }
 
     public function test_both_choices()
     {
-        $hash_in = array('reportGroup'=>'Planets','litleTxnId'=>'123456',
-        'echeckToken' => array('accType'=>'Checking','routingNum'=>'123123','litleToken'=>'1234565789012','checkNum'=>'123455'),
-        'echeck' => array('accType'=>'Checking','routingNum'=>'123123','accNum'=>'12345657890','checkNum'=>'123455'));
+        $hash_in = array('reportGroup' => 'Planets', 'litleTxnId' => '123456',
+            'echeckToken' => array('accType' => 'Checking', 'routingNum' => '123123', 'litleToken' => '1234565789012', 'checkNum' => '123455'),
+            'echeck' => array('accType' => 'Checking', 'routingNum' => '123123', 'accNum' => '12345657890', 'checkNum' => '123455'));
         $litleTest = new LitleOnlineRequest();
-        $this->setExpectedException('InvalidArgumentException',"Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
+        $this->setExpectedException('InvalidArgumentException', "Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
         $retOb = $litleTest->echeckRedepositRequest($hash_in);
     }
 
     public function test_loggedInUser()
     {
         $hash_in = array(
-                'litleTxnId' =>'123123',
-                'merchantSdk'=>'PHP;8.14.0',
-                'loggedInUser'=>'gdake');
+            'litleTxnId' => '123123',
+            'merchantSdk' => 'PHP;8.14.0',
+            'loggedInUser' => 'gdake');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*merchantSdk="PHP;8.14.0".*loggedInUser="gdake" xmlns=.*>.*/'));
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*merchantSdk="PHP;8.14.0".*loggedInUser="gdake" xmlns=.*>.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -94,12 +96,12 @@ class EcheckRedepositUnitTest extends \PHPUnit_Framework_TestCase
     public function test_merchantData()
     {
         $hash_in = array(
-                'litleTxnId' =>'123123',
-                'merchantData'=>array('campaign'=>'camping'));
+            'litleTxnId' => '123123',
+            'merchantData' => array('campaign' => 'camping'));
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*<litleTxnId>123123<\/litleTxnId>.*<merchantData>.*<campaign>camping<\/campaign>.*<\/merchantData>/'));
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<litleTxnId>123123<\/litleTxnId>.*<merchantData>.*<campaign>camping<\/campaign>.*<\/merchantData>/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;

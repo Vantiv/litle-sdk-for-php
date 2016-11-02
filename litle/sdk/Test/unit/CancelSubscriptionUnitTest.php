@@ -23,17 +23,19 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 namespace litle\sdk\Test\unit;
+
 use litle\sdk\LitleOnlineRequest;
+
 class CancelSubscriptionUnitTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple()
     {
         $hash_in = array(
-            'subscriptionId'=>'1');
+            'subscriptionId' => '1');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*<subscriptionId>1.*/'));
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<subscriptionId>1.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;

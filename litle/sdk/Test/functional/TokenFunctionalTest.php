@@ -23,88 +23,108 @@
 * OTHER DEALINGS IN THE SOFTWARE.
 */
 namespace litle\sdk\Test\functional;
+
 use litle\sdk\LitleOnlineRequest;
 use litle\sdk\XmlParser;
+
 class TokenFunctionalTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple_token()
     {
         $hash_in = array(
             'merchantId' => '101',
-          'version'=>'8.8',
-          'reportGroup'=>'Planets',
-          'orderId'=>'12344',
-          'accountNumber'=>'1233456789103801');
+            'version' => '8.8',
+            'reportGroup' => 'Planets',
+            'orderId' => '12344',
+            'accountNumber' => '1233456789103801');
 
-        $initilaize = new LitleOnlineRequest();
-        $registerTokenResponse = $initilaize->registerTokenRequest($hash_in);
-        $message = XmlParser::getAttribute($registerTokenResponse,'litleOnlineResponse','message');
-        $this->assertEquals('Valid Format',$message);
+        $initialize = new LitleOnlineRequest();
+        $registerTokenResponse = $initialize->registerTokenRequest($hash_in);
+        $message = XmlParser::getAttribute($registerTokenResponse, 'litleOnlineResponse', 'message');
+        $this->assertEquals('Valid Format', $message);
     }
 
     public function test_simple_token_with_paypage()
     {
         $hash_in = array(
-        'merchantId' => '101',
-      'version'=>'8.8',
-      'reportGroup'=>'Planets',
-      'orderId'=>'12344',
-      'paypageRegistrationId'=>'1233456789101112');
+            'merchantId' => '101',
+            'version' => '8.8',
+            'reportGroup' => 'Planets',
+            'orderId' => '12344',
+            'paypageRegistrationId' => '1233456789101112');
 
-        $initilaize = new LitleOnlineRequest();
-        $registerTokenResponse = $initilaize->registerTokenRequest($hash_in);
-        $message = XmlParser::getAttribute($registerTokenResponse,'litleOnlineResponse','message');
-        $this->assertEquals('Valid Format',$message);
+        $initialize = new LitleOnlineRequest();
+        $registerTokenResponse = $initialize->registerTokenRequest($hash_in);
+        $message = XmlParser::getAttribute($registerTokenResponse, 'litleOnlineResponse', 'message');
+        $this->assertEquals('Valid Format', $message);
     }
 
     public function test_simple_token_with_echeck()
     {
         $hash_in = array(
-            'reportGroup'=>'Planets',
-          'merchantId' => '101',
-          'version'=>'8.8',
-          'orderId'=>'12344',
-          'echeckForToken'=>array('accNum'=>'12344565','routingNum'=>'123476545'));
+            'reportGroup' => 'Planets',
+            'merchantId' => '101',
+            'version' => '8.8',
+            'orderId' => '12344',
+            'echeckForToken' => array('accNum' => '12344565', 'routingNum' => '123476545'));
 
-        $initilaize = new LitleOnlineRequest();
-        $registerTokenResponse = $initilaize->registerTokenRequest($hash_in);
-        $message = XmlParser::getAttribute($registerTokenResponse,'litleOnlineResponse','message');
-        $this->assertEquals('Valid Format',$message);
+        $initialize = new LitleOnlineRequest();
+        $registerTokenResponse = $initialize->registerTokenRequest($hash_in);
+        $message = XmlParser::getAttribute($registerTokenResponse, 'litleOnlineResponse', 'message');
+        $this->assertEquals('Valid Format', $message);
     }
 
     public function test_token_echeck_missing_required()
     {
         $hash_in = array('merchantId' => '101',
-      'version'=>'8.8',
-      'reportGroup'=>'Planets',
-      'orderId'=>'12344',
-      'echeckForToken'=>array('routingNum'=>'132344565'));
+            'version' => '8.8',
+            'reportGroup' => 'Planets',
+            'orderId' => '12344',
+            'echeckForToken' => array('routingNum' => '132344565'));
 
         $litleTest = new LitleOnlineRequest();
-        $this->setExpectedException('InvalidArgumentException','Missing Required Field: /accNum/');
+        $this->setExpectedException('InvalidArgumentException', 'Missing Required Field: /accNum/');
         $retOb = $litleTest->registerTokenRequest($hash_in);
     }
-    
+
     public function test_simple_token_applepay()
     {
-    	$hash_in = array(
-    			'merchantId' => '101',
-    			'version'=>'8.8',
-    			'reportGroup'=>'Planets',
-    			'orderId'=>'12344',
-    			'applepay'=>array(
-    					'data'=>'string data here',
-    					'header'=> array('applicationData' => '454657413164',
-    							'ephemeralPublicKey' => '1',
-    							'publicKeyHash' => '1234',
-    							'transactionId' => '12345'),
-    					'signature'=>'signature',
-    					'version' => 'version 1'));
-    
-    	$initilaize = new LitleOnlineRequest();
-    	$registerTokenResponse = $initilaize->registerTokenRequest($hash_in);
-    	$message = XmlParser::getAttribute($registerTokenResponse,'litleOnlineResponse','message');
-    	$this->assertEquals('Valid Format',$message);
+        $hash_in = array(
+            'merchantId' => '101',
+            'version' => '8.8',
+            'reportGroup' => 'Planets',
+            'orderId' => '12344',
+            'applepay' => array(
+                'data' => 'string data here',
+                'header' => array('applicationData' => '454657413164',
+                    'ephemeralPublicKey' => '1',
+                    'publicKeyHash' => '1234',
+                    'transactionId' => '12345'),
+                'signature' => 'signature',
+                'version' => 'version 1'));
+
+        $initialize = new LitleOnlineRequest();
+        $registerTokenResponse = $initialize->registerTokenRequest($hash_in);
+        $message = XmlParser::getAttribute($registerTokenResponse, 'litleOnlineResponse', 'message');
+        $this->assertEquals('Valid Format', $message);
+    }
+
+    public function test_token_with_android_pay()
+    {
+        $hash_in = array(
+            'merchantId' => '101',
+            'version' => '8.8',
+            'reportGroup' => 'Planets',
+            'orderId' => 'androidpay',
+            'accountNumber' => '1233456789103801');
+
+        $initialize = new LitleOnlineRequest();
+        $registerTokenResponse = $initialize->registerTokenRequest($hash_in);
+        $message = XmlParser::getAttribute($registerTokenResponse, 'litleOnlineResponse', 'message');
+        $this->assertEquals('Valid Format', $message);
+        $this->assertEquals('01', XmlParser::getNode($registerTokenResponse, 'expMonth'));
+        $this->assertEquals('2050', XmlParser::getNode($registerTokenResponse, 'expYear'));
+        $this->assertEquals('aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1kUXc0dzlXZ1hjUQ0K', XmlParser::getNode($registerTokenResponse, 'cryptogram'));
     }
 
 }

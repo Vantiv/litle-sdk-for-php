@@ -23,72 +23,79 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 namespace litle\sdk\Test\unit;
+
 use litle\sdk\LitleOnlineRequest;
+
 class EcheckVerificationUnitTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple_echeckVerification()
     {
-         $hash_in = array('amount'=>'123','orderId'=>'123','orderSource'=>'ecommerce',
-        'echeckToken' => array('accType'=>'Checking','routingNum'=>'123123','litleToken'=>'1234565789012','checkNum'=>'123455'));
-         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
-         $mock->expects($this->once())
-         ->method('request')
-         ->with($this->matchesRegularExpression('/.*<echeckToken>.*<accType>Checking.*/'));
+        $hash_in = array('amount' => '123', 'orderId' => '123', 'orderSource' => 'ecommerce',
+            'echeckToken' => array('accType' => 'Checking', 'routingNum' => '123123', 'litleToken' => '1234565789012', 'checkNum' => '123455'));
+        $mock = $this->getMock('litle\sdk\LitleXmlMapper');
+        $mock->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<echeckToken>.*<accType>Checking.*/'));
 
-         $litleTest = new LitleOnlineRequest();
-         $litleTest->newXML = $mock;
-         $litleTest->echeckSaleRequest($hash_in);
+        $litleTest = new LitleOnlineRequest();
+        $litleTest->newXML = $mock;
+        $litleTest->echeckSaleRequest($hash_in);
     }
+
     public function test_no_amount()
     {
         $hash_in = array(
-        'reportGroup'=>'Planets',
-        'orderId'=>'12344');
+            'reportGroup' => 'Planets',
+            'orderId' => '12344');
         $litleTest = new LitleOnlineRequest();
-        $this->setExpectedException('InvalidArgumentException',"Missing Required Field: /amount/");
+        $this->setExpectedException('InvalidArgumentException', "Missing Required Field: /amount/");
         $retOb = $litleTest->echeckVerificationRequest($hash_in);
     }
+
     public function test_no_orderId()
     {
         $hash_in = array(
-            'reportGroup'=>'Planets',
-            'amount'=>'123');
+            'reportGroup' => 'Planets',
+            'amount' => '123');
         $litleTest = new LitleOnlineRequest();
-        $this->setExpectedException('InvalidArgumentException',"Missing Required Field: /orderId/");
+        $this->setExpectedException('InvalidArgumentException', "Missing Required Field: /orderId/");
         $retOb = $litleTest->echeckVerificationRequest($hash_in);
     }
+
     public function test_no_orderSounce()
     {
         $hash_in = array(
-            'reportGroup'=>'Planets',
-            'amount'=>'123',
-            'orderId'=>'12344');
+            'reportGroup' => 'Planets',
+            'amount' => '123',
+            'orderId' => '12344');
         $litleTest = new LitleOnlineRequest();
-        $this->setExpectedException('InvalidArgumentException',"Missing Required Field: /orderSource/");
+        $this->setExpectedException('InvalidArgumentException', "Missing Required Field: /orderSource/");
         $retOb = $litleTest->echeckVerificationRequest($hash_in);
     }
+
     public function test_both_choices()
     {
-        $hash_in = array('reportGroup'=>'Planets','amount'=>'123','orderId'=>'123','orderSource'=>'ecommerce',
-        'echeckToken' => array('accType'=>'Checking','routingNum'=>'123123','litleToken'=>'1234565789012','checkNum'=>'123455'),
-        'echeck' => array('accType'=>'Checking','routingNum'=>'123123','accNum'=>'12345657890','checkNum'=>'123455'));
+        $hash_in = array('reportGroup' => 'Planets', 'amount' => '123', 'orderId' => '123', 'orderSource' => 'ecommerce',
+            'echeckToken' => array('accType' => 'Checking', 'routingNum' => '123123', 'litleToken' => '1234565789012', 'checkNum' => '123455'),
+            'echeck' => array('accType' => 'Checking', 'routingNum' => '123123', 'accNum' => '12345657890', 'checkNum' => '123455'));
         $litleTest = new LitleOnlineRequest();
-        $this->setExpectedException('InvalidArgumentException',"Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
+        $this->setExpectedException('InvalidArgumentException', "Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
         $retOb = $litleTest->echeckVerificationRequest($hash_in);
     }
+
     public function test_loggedInUser()
     {
         $hash_in = array(
-                'loggedInUser'=>'gdake',
-                'merchantSdk'=>'PHP;8.14.0',
-                'amount'=>'123',
-                'orderId'=>'123',
-                'orderSource'=>'ecommerce',
-                'echeckToken' => array('accType'=>'Checking','routingNum'=>'123123','litleToken'=>'1234565789012','checkNum'=>'123455'));
+            'loggedInUser' => 'gdake',
+            'merchantSdk' => 'PHP;8.14.0',
+            'amount' => '123',
+            'orderId' => '123',
+            'orderSource' => 'ecommerce',
+            'echeckToken' => array('accType' => 'Checking', 'routingNum' => '123123', 'litleToken' => '1234565789012', 'checkNum' => '123455'));
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*merchantSdk="PHP;8.14.0".*loggedInUser="gdake" xmlns=.*>.*/'));
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*merchantSdk="PHP;8.14.0".*loggedInUser="gdake" xmlns=.*>.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -97,12 +104,12 @@ class EcheckVerificationUnitTest extends \PHPUnit_Framework_TestCase
 
     public function test_merchantData()
     {
-        $hash_in = array('amount'=>'123','orderId'=>'123','orderSource'=>'ecommerce','merchantData'=>array('campaign'=>'camping'),
-                'echeckToken' => array('accType'=>'Checking','routingNum'=>'123123','litleToken'=>'1234565789012','checkNum'=>'123455'));
+        $hash_in = array('amount' => '123', 'orderId' => '123', 'orderSource' => 'ecommerce', 'merchantData' => array('campaign' => 'camping'),
+            'echeckToken' => array('accType' => 'Checking', 'routingNum' => '123123', 'litleToken' => '1234565789012', 'checkNum' => '123455'));
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*<\/echeckToken>.*<merchantData>.*<campaign>camping<\/campaign>.*<\/merchantData>/'));
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<\/echeckToken>.*<merchantData>.*<campaign>camping<\/campaign>.*<\/merchantData>/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;

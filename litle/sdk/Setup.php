@@ -25,20 +25,21 @@
 namespace litle\sdk;
 require_once realpath(dirname(__FILE__)) . '/UrlMapper.php';
 
-function writeConfig($line,$handle)
+function writeConfig($line, $handle)
 {
     foreach ($line as $keys => $values) {
-        fwrite($handle, $keys. '');
+        fwrite($handle, $keys . '');
         if (is_array($values)) {
             foreach ($values as $key2 => $value2) {
-                fwrite($handle,"['" . $key2 . "'] =" . $value2 .  PHP_EOL);
+                fwrite($handle, "['" . $key2 . "'] =" . $value2 . PHP_EOL);
             }
         } else {
-            fwrite($handle,' =' . $values);
+            fwrite($handle, ' =' . $values);
             fwrite($handle, PHP_EOL);
         }
     }
 }
+
 function initialize()
 {
     $line = array();
@@ -54,7 +55,7 @@ function initialize()
         $line['currency_merchant_map ']['DEFAULT'] = trim(fgets(STDIN));
         print "Please choose Litle url from the following list (example: 'sandbox') or directly input another URL: \nsandbox => https://www.testlitle.com/sandbox/communicator/online \npostlive => https://postlive.litle.com/vap/communicator/online \ntransact-postlive => https://transact-postlive.litle.com/vap/communicator/online \nproduction => https://payments.litle.com/vap/communicator/online \nproduction-transact => https://transact.litle.com/vap/communicator/online \nprelive => https://prelive.litle.com/vap/communicator/online \ntransact-prelive => https://transact-prelive.litle.com/vap/communicator/online" . PHP_EOL;
         $url = UrlMapper::getUrl(trim(fgets(STDIN)));
-	
+
         $line['url'] = $url;
         print "Please input the proxy, if no proxy hit enter key: ";
         $line['proxy'] = trim(fgets(STDIN));
@@ -79,13 +80,13 @@ function initialize()
         $line['tcp_ssl'] = '1';
         $line['print_xml'] = '0';
 
-        writeConfig($line,$handle);
+        writeConfig($line, $handle);
         #default http timeout set to 500 ms
-        fwrite($handle, "timeout =  500".  PHP_EOL);
-        fwrite($handle, "reportGroup = Default Report Group".  PHP_EOL);
+        fwrite($handle, "timeout =  500" . PHP_EOL);
+        fwrite($handle, "reportGroup = Default Report Group" . PHP_EOL);
     }
     fclose($handle);
-    print "The Litle configuration file has been generated, the file is located in the lib directory". PHP_EOL;
+    print "The Litle configuration file has been generated, the file is located in the lib directory" . PHP_EOL;
 }
 
 initialize();
