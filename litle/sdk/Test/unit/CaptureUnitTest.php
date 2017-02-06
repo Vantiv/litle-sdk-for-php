@@ -103,5 +103,18 @@ class CaptureUnitTest extends \PHPUnit_Framework_TestCase
         $litleTest->newXML = $mock;
         $litleTest->captureRequest($hash_in);
     }
-
+  
+    public function test_simple_capture_withPin()
+    {
+    	$hash_in = array('litleTxnId'=> '12312312', 'amount'=>'123', 'id' => 'id','pin' => '02139');
+    	$mock = $this->getMock('litle\sdk\LitleXmlMapper');
+    	$mock->expects($this->once())
+    	->method('request')
+    	->with($this->matchesRegularExpression('/.*<pin>02139.*/'));
+    
+    	$litleTest = new LitleOnlineRequest();
+    	$litleTest->newXML = $mock;
+    	$litleTest->captureRequest($hash_in);
+    }
+    
 }
