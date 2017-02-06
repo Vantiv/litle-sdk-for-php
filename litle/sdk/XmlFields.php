@@ -304,6 +304,22 @@ class XmlFields
             return $hash_out;
         }
     }
+    
+    public static function giftCardCardType($hash_in)
+    {
+    	if (isset($hash_in)) {
+    		$hash_out= 	array(
+    				"type"=>XmlFields::returnArrayValue($hash_in, "type"),
+    				"track"=>XmlFields::returnArrayValue($hash_in, "track"),
+    				"number"=>XmlFields::returnArrayValue($hash_in, "number"),
+    				"expDate"=>XmlFields::returnArrayValue($hash_in, "expDate"),
+    				"cardValidationNum"=>XmlFields::returnArrayValue($hash_in, "cardValidationNum"),
+    				"pin"=>XmlFields::returnArrayValue($hash_in, "pin")
+    		);
+    
+    		return $hash_out;
+    	}
+    }
 
     public static function cardTokenType($hash_in)
     {
