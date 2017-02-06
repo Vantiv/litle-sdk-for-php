@@ -546,5 +546,32 @@ class AuthUnitTest extends \PHPUnit_Framework_TestCase
     	$litleTest->newXML = $mock;
     	$litleTest->authorizationRequest($hash_in);
     }
+    
+    public function test_auth_with_processingType()
+    {
+    	$hash_in = array(
+    			'card'=>array('type'=>'VI',
+    					'number'=>'4100000000000001',
+    					'expDate'=>'1213',
+    					'cardValidationNum' => '1213'),
+    			'id' => 'id',
+    			'orderId'=> '2111',
+    			'orderSource'=>'ecommerce',
+    			'amount' => '1000',
+    			'processingType' => 'accountFunding',
+    			 'originalNetworkTransactionId' => 'abcdefgh',
+    			'originalTransactionAmount' => '1000' 
+    	);
+    	$mock = $this->getMock('litle\sdk\LitleXmlMapper');
+    	$mock	->expects($this->once())
+    	->method('request')
+    	->with($this->matchesRegularExpression('/.*<processingType>accountFunding.*<originalNetworkTransactionId>abcdefgh.*<originalTransactionAmount>1000.*/'));
+    
+    	$litleTest = new LitleOnlineRequest();
+    	$litleTest->newXML = $mock;
+    	$litleTest->authorizationRequest($hash_in);
+    }
+    
+    
 
 }
