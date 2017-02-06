@@ -187,6 +187,23 @@ class LitleOnlineRequest
 
         return $authReversalResponse;
     }
+    
+    public function giftCardAuthReversalRequest($hash_in)
+    {
+    	$hash_out = array( 
+    			'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
+    			'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+    			'card'=> XmlFields::giftCardCardType(XmlFields::returnArrayValue($hash_in,'card')),
+    			'originalRefCode' =>XmlFields::returnArrayValue($hash_in,'originalRefCode'),
+    			'originalAmount' =>XmlFields::returnArrayValue($hash_in,'originalAmount'),
+    			'originalTxnTime'=>XmlFields::returnArrayValue($hash_in,'originalTxnTime'),
+    			'originalSystemTraceId'=>XmlFields::returnArrayValue($hash_in,'originalSystemTraceId'),
+    			'originalSequenceNumber'=>XmlFields::returnArrayValue($hash_in,'originalSequenceNumber')
+    	);
+    	$giftCardAuthReversalResponse = $this->processRequest($hash_out,$hash_in,'giftCardAuthReversal');
+    
+    	return $giftCardAuthReversalResponse;
+    }
 
     public function creditRequest($hash_in)
     {
