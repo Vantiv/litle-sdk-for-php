@@ -105,13 +105,9 @@ class LitleOnlineRequest
             'recurringRequest'=>XmlFields::recurringRequestType(XmlFields::returnArrayValue($hash_in,'recurringRequest')),
             'debtRepayment' => XmlFields::returnArrayValue ( $hash_in, 'debtRepayment' ),
 			'advancedFraudChecks' => XmlFields::advancedFraudChecksType ( XmlFields::returnArrayValue ( $hash_in, 'advancedFraudChecks' ) ),
-					 ## Changes start by Chahat Sharma || 02/03/2017 ##
 			'processingType' => XmlFields::returnArrayValue ( $hash_in, 'processingType' ),
 			'originalNetworkTransactionId' => XmlFields::returnArrayValue ( $hash_in, 'originalNetworkTransactionId' ),
-			'originalTransactionAmount' => XmlFields::returnArrayValue ( $hash_in, 'originalTransactionAmount' ),
-            		## Changes end by Chahat Sharma || 02/03/2017 ##
-            
-            		
+			'originalTransactionAmount' => XmlFields::returnArrayValue ( $hash_in, 'originalTransactionAmount' ),		
             );
         }
         $choice_hash = array(XmlFields::returnArrayValue($hash_out,'card'),XmlFields::returnArrayValue($hash_out,'paypal'),XmlFields::returnArrayValue($hash_out,'token'),XmlFields::returnArrayValue($hash_out,'paypage'),XmlFields::returnArrayValue($hash_out,'applepay'),XmlFields::returnArrayValue($hash_out,'mpos'));
@@ -160,11 +156,10 @@ class LitleOnlineRequest
             'litleInternalRecurringRequest'=>XmlFields::litleInternalRecurringRequestType(XmlFields::returnArrayValue($hash_in,'litleInternalRecurringRequest')),
             'debtRepayment'=>XmlFields::returnArrayValue($hash_in,'debtRepayment'),
             'advancedFraudChecks'=>XmlFields::advancedFraudChecksType(XmlFields::returnArrayValue($hash_in,'advancedFraudChecks')),
-        		## Changes start by Chahat Sharma || 02/03/2017 ##
-        		'processingType' => XmlFields::returnArrayValue ( $hash_in, 'processingType' ),
-        		'originalNetworkTransactionId' => XmlFields::returnArrayValue ( $hash_in, 'originalNetworkTransactionId' ),
-        		'originalTransactionAmount' => XmlFields::returnArrayValue ( $hash_in, 'originalTransactionAmount' ),
-        		## Changes end by Chahat Sharma || 02/03/2017 ##
+        	'processingType' => XmlFields::returnArrayValue ( $hash_in, 'processingType' ),
+        	'originalNetworkTransactionId' => XmlFields::returnArrayValue ( $hash_in, 'originalNetworkTransactionId' ),
+        	'originalTransactionAmount' => XmlFields::returnArrayValue ( $hash_in, 'originalTransactionAmount' ),
+
         );
 
         $choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage'],$hash_out['applepay'],$hash_out['mpos']);
@@ -230,9 +225,7 @@ class LitleOnlineRequest
                     'amexAggregatorData'=>XmlFields::amexAggregatorData(XMLFields::returnArrayValue($hash_in, 'amexAggregatorData')),
                     'payPalNotes' =>XmlFields::returnArrayValue($hash_in, 'payPalNotes'),
                     'actionReason'=>XmlFields::returnArrayValue($hash_in, 'actionReason'),
-        			## Changes start by Chahat Sharma || 02/03/2017 ##
         			'pin' =>XmlFields::returnArrayValue($hash_in,'pin')
-        			## Changes end by Chahat Sharma || 02/03/2017 ##
         );
 
         $choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage'],$hash_out['mpos']);
@@ -281,9 +274,7 @@ class LitleOnlineRequest
             'amexAggregatorData'=>XmlFields::amexAggregatorData(XmlFields::returnArrayValue($hash_in,'amexAggregatorData')),
             'merchantData'=>(XmlFields::merchantData(XmlFields::returnArrayValue($hash_in,'merchantData'))),
             'debtRepayment'=>XmlFields::returnArrayValue($hash_in,'debtRepayment'),
-        		## Changes start by Chahat Sharma || 02/03/2017 ##
-        	'processingType'=>XmlFields::returnArrayValue($hash_in,'processingType'),
-        		## Changes end by Chahat Sharma || 02/03/2017 ##
+        	'processingType'=>XmlFields::returnArrayValue($hash_in,'processingType')
         );
 
         $choice_hash = array(XmlFields::returnArrayValue($hash_out,'card'),XmlFields::returnArrayValue($hash_out,'paypal'),XmlFields::returnArrayValue($hash_out,'token'),XmlFields::returnArrayValue($hash_out,'paypage'),XmlFields::returnArrayValue($hash_out,'mpos'));
@@ -304,9 +295,7 @@ class LitleOnlineRequest
         'processingInstructions'=>XmlFields::processingInstructions(XmlFields::returnArrayValue($hash_in,'processingInstructions')),
         'payPalOrderComplete'=>XmlFields::returnArrayValue($hash_in,'payPalOrderComplete'),
         'payPalNotes' =>XmlFields::returnArrayValue($hash_in,'payPalNotes'),
-        		## Changes start by Chahat Sharma || 02/03/2017 ##
         'pin' =>XmlFields::returnArrayValue($hash_in,'pin')
-        		## Changes end by Chahat Sharma || 02/03/2017 ##
         );
         $captureResponse = $this->processRequest($hash_out,$hash_in,'capture');
 
@@ -338,12 +327,9 @@ class LitleOnlineRequest
             'amexAggregatorData'=>XmlFields::amexAggregatorData(XmlFields::returnArrayValue($hash_in,'amexAggregatorData')),
             'merchantData'=>(XmlFields::merchantData(XmlFields::returnArrayValue($hash_in,'merchantData'))),
             'debtRepayment'=>XmlFields::returnArrayValue($hash_in,'debtRepayment'),
-        		## Changes start by Chahat Sharma || 02/03/2017 ##
         	'processingType' => XmlFields::returnArrayValue ( $hash_in, 'processingType' ),
         	'originalNetworkTransactionId' => XmlFields::returnArrayValue ( $hash_in, 'originalNetworkTransactionId' ),
-        	'originalTransactionAmount' => XmlFields::returnArrayValue ( $hash_in, 'originalTransactionAmount' ),
-        		## Changes end by Chahat Sharma || 02/03/2017 ##
-        		
+        	'originalTransactionAmount' => XmlFields::returnArrayValue ( $hash_in, 'originalTransactionAmount' )
         );
 
         $choice_hash = array($hash_out['card'],$hash_out['token'],$hash_out['paypage'],$hash_out['mpos']);
