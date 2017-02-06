@@ -15,7 +15,7 @@ class LitleResponseProcessor {
 		// read onto the root node
 		$this->xml_reader->read ();
 		// if the response from litle is non-zero
-		if ($this->xml_reader->getAttribute ( "response" ) == "1") {
+		if ($this->xml_reader->getAttribute ( "response" ) != "0") {
 			$msg = $this->xml_reader->getAttribute ( 'message' );
 			throw new \RuntimeException ( "Response file $response_file indicates error: $msg" );
 		}
@@ -67,7 +67,8 @@ class LitleResponseProcessor {
 				"reserveDebitResponse",
 				"vendorDebitResponse",
 				"physicalCheckDebitResponse",
-				"fraudCheckResponse"
+				"fraudCheckResponse",
+				"giftCardAuthReversalResponse"
 		);
 		
 		if (in_array ( $this->xml_reader->localName, $tracked_elements_names ) && $this->xml_reader->nodeType != \XMLReader::END_ELEMENT) {
