@@ -233,6 +233,22 @@ class LitleOnlineRequest
 
         return $creditResponse;
     }
+    
+    public function giftCardCreditRequest($hash_in)
+    {
+    	$hash_out = array(
+    			'litleTxnId' => XmlFields::returnArrayValue($hash_in, 'litleTxnId'),   			
+    			'orderId' =>XmlFields::returnArrayValue($hash_in, 'orderId'),
+    			'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+    			'creditAmount' =>XmlFields::returnArrayValue($hash_in, 'creditAmount'),
+    			'orderSource'=>XmlFields::returnArrayValue($hash_in, 'orderSource'),
+    			'card'=>XmlFields::giftCardCardType(XMLFields::returnArrayValue($hash_in, 'card'))
+    	);
+    
+    	$giftCardCreditResponse = $this->processRequest($hash_out,$hash_in,'giftCardCredit');
+    
+    	return $giftCardCreditResponse;
+    }
 
     public function registerTokenRequest($hash_in)
     {
@@ -247,7 +263,7 @@ class LitleOnlineRequest
         );
 
         $choice_hash = array($hash_out['accountNumber'],$hash_out['echeckForToken'],$hash_out['paypageRegistrationId'],$hash_out['applepay']);
-        $registerTokenResponse = $this->processRequest($hash_out,$hash_in,'registerTokenRequest',$choice_hash);
+        $registerTokenResponse = $this->processRequest($hash_out,$hash_in,'registerToken',$choice_hash);
 
         return $registerTokenResponse;
     }
