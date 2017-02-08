@@ -140,5 +140,21 @@ class CreditFunctionalTest extends \PHPUnit_Framework_TestCase
     	$this->assertEquals("0",$message);
     }
     
-
+    public function test_simple_credit_with_pin()
+    {
+    	$hash_in = array(
+    			'litleTxnId'=> '12312312',
+    			'id' => 'id',
+    			'reportGroup'=>'Planets', 
+    			'amount'=>'123', 
+    			'secondaryAmount' => '3214',
+    			'surchargeAmount'=>'1',
+    			'pin' => '3333'
+    	);
+    
+    	$initilaize = new LitleOnlineRequest();
+    	$creditResponse = $initilaize->creditRequest($hash_in);
+    	$message= XmlParser::getAttribute($creditResponse,'litleOnlineResponse','response');
+    	$this->assertEquals("0",$message);
+    }
 }
