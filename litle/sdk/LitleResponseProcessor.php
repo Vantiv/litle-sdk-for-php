@@ -69,7 +69,8 @@ class LitleResponseProcessor {
 				"physicalCheckDebitResponse",
 				"fraudCheckResponse",
 				"giftCardAuthReversalResponse",
-				"giftCardCreditResponse"
+				"giftCardCreditResponse",
+				"giftCardCaptureResponse"
 		);
 		
 		if (in_array ( $this->xml_reader->localName, $tracked_elements_names ) && $this->xml_reader->nodeType != \XMLReader::END_ELEMENT) {
