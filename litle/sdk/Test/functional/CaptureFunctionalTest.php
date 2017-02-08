@@ -79,6 +79,6 @@ class CaptureFunctionalTest extends \PHPUnit_Framework_TestCase
     	$message = XmlParser::getAttribute($captureResponse,'litleOnlineResponse','response');
     	$this->assertEquals('0',$message);
     }
-    
+     
     
 }
