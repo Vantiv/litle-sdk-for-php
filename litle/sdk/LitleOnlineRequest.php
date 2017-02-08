@@ -138,6 +138,7 @@ class LitleOnlineRequest {
 				'token' => XmlFields::cardTokenType ( XmlFields::returnArrayValue ( $hash_in, 'token' ) ),
 				'paypage' => XmlFields::cardPaypageType ( XmlFields::returnArrayValue ( $hash_in, 'paypage' ) ),
 				'applepay' => (XmlFields::applepayType ( XmlFields::returnArrayValue ( $hash_in, 'applepay' ) )),
+				'sepaDirectDebit' => (XmlFields::sepaDirectDebitType ( XmlFields::returnArrayValue ( $hash_in, 'sepaDirectDebit' ) )),
 				'mpos' => (XmlFields::mposType ( XmlFields::returnArrayValue ( $hash_in, 'mpos' ) )),
 				'billMeLaterRequest' => XmlFields::billMeLaterRequest ( XmlFields::returnArrayValue ( $hash_in, 'billMeLaterRequest' ) ),
 				'fraudCheck' => XmlFields::fraudCheckType ( XmlFields::returnArrayValue ( $hash_in, 'fraudCheck' ) ),
