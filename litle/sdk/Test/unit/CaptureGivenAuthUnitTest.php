@@ -284,5 +284,36 @@ class CaptureGivenAuthUnitTest extends \PHPUnit_Framework_TestCase
     	$litleTest->captureGivenAuthRequest($hash_in);
     
     }
-
+    
+    public function test_simple_captureGivenAuth_processingType()
+    {
+    	$hash_in = array(
+    			'amount'=>'123',
+    			'orderId'=>'12344',
+    			'id'=> 'id',
+    			'authInformation' => array(
+    					'authDate'=>'2002-10-09','authCode'=>'543216',
+    					'authAmount'=>'12345'),
+    			'orderSource'=>'ecommerce',
+    			'card'=>array(
+    					'type'=>'VI',
+    					'number' =>'4100000000000001',
+    					'expDate' =>'1210'),
+    			'processingType' => 'accountFunding',
+    			'originalNetworkTransactionId' => 'abcdefgh',
+    			'originalTransactionAmount' => '1000'
+    	);
+    	$mock = $this->getMock('litle\sdk\LitleXmlMapper');
+    	$mock	->expects($this->once())
+    	->method('request')
+    	->with($this->matchesRegularExpression('/.*<processingType>accountFunding.*<originalNetworkTransactionId>abcdefgh.*<originalTransactionAmount>1000.*/'));
+    
+    	$litleTest = new LitleOnlineRequest();
+    	$litleTest->newXML = $mock;
+    	$litleTest->captureGivenAuthRequest($hash_in);
+    
+    }
+ 
+ 
+   
 }
