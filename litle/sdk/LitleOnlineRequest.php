@@ -209,6 +209,7 @@ class LitleOnlineRequest
                     'amount' =>XmlFields::returnArrayValue($hash_in, 'amount'),
         		    'secondaryAmount'=>XmlFields::returnArrayValue($hash_in,'secondaryAmount'),
                     'surchargeAmount' =>XmlFields::returnArrayValue($hash_in,'surchargeAmount'),
+        			'pin' =>XmlFields::returnArrayValue($hash_in,'pin'),
                     'orderSource'=>XmlFields::returnArrayValue($hash_in, 'orderSource'),
                     'billToAddress'=>XmlFields::contact(XMLFields::returnArrayValue($hash_in, 'billToAddress')),
                     'card'=>XmlFields::cardType(XMLFields::returnArrayValue($hash_in, 'card')),
@@ -224,8 +225,7 @@ class LitleOnlineRequest
                     'pos'=>XmlFields::pos(XMLFields::returnArrayValue($hash_in, 'pos')),
                     'amexAggregatorData'=>XmlFields::amexAggregatorData(XMLFields::returnArrayValue($hash_in, 'amexAggregatorData')),
                     'payPalNotes' =>XmlFields::returnArrayValue($hash_in, 'payPalNotes'),
-                    'actionReason'=>XmlFields::returnArrayValue($hash_in, 'actionReason'),
-        			'pin' =>XmlFields::returnArrayValue($hash_in,'pin')
+                    'actionReason'=>XmlFields::returnArrayValue($hash_in, 'actionReason')
         );
 
         $choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage'],$hash_out['mpos']);

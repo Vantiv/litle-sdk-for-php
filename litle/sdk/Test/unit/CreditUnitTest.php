@@ -299,5 +299,48 @@ class CreditUnitTest extends \PHPUnit_Framework_TestCase
     	$litleTest->newXML = $mock;
     	$litleTest->creditRequest($hash_in);
     }
+    
+    public function test_pin_tied()
+    {
+    	$hash_in = array(
+    			'litleTxnId'=> '1234567890',
+    			'id' => 'id',
+    			'reportGroup'=>'Planets', 
+    			'amount'=>'123', 
+    			'secondaryAmount' => '3214',
+    			'surchargeAmount'=>'1',
+    			'pin' => '3333'
+    	);
+    	$mock = $this->getMock('litle\sdk\LitleXmlMapper');
+    	$mock
+    	->expects($this->once())
+    	->method('request')
+    	->with($this->matchesRegularExpression('/.*<pin>3333*/'));
+    
+    	$litleTest = new LitleOnlineRequest();
+    	$litleTest->newXML = $mock;
+    	$litleTest->creditRequest($hash_in);
+    }
+    
+    public function test_pin_tied_optional()
+    {
+    	$hash_in = array(
+    			'litleTxnId'=> '1234567890',
+    			'id' => 'id',
+    			'reportGroup'=>'Planets',
+    			'amount'=>'123',
+    			'secondaryAmount' => '3214',
+    			'surchargeAmount'=>'1'
+    	);
+    	$mock = $this->getMock('litle\sdk\LitleXmlMapper');
+    	$mock
+    	->expects($this->once())
+    	->method('request')
+    	->with($this->matchesRegularExpression('/.*<litleTxnId>1234567890.*<amount>123.*<secondaryAmount>3214.*<surchargeAmount>1.*/'));
+    
+    	$litleTest = new LitleOnlineRequest();
+    	$litleTest->newXML = $mock;
+    	$litleTest->creditRequest($hash_in);
+    }
 
 }
