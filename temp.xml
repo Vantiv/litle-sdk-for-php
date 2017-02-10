@@ -1,0 +1,22 @@
+<litleOnlineRequest merchantId="0180" version="11.0"
+	merchantSdk="PHP;11.0" xmlns="http://www.litle.com/schema">
+	<authentication>
+		<user>BATCHSDKA</user>
+		<password>certpass</password>
+	</authentication>
+	<authorization reportGroup="Planets" id="1211">
+		<orderId>2111</orderId>
+		<amount>0</amount>
+		<orderSource>ecommerce</orderSource>
+		<card>
+			<type>VI</type>
+			<number>4100000000000000</number>
+			<expDate>1213</expDate>
+			<cardValidationNum>1213</cardValidationNum>
+		</card>
+		<processingType>initialRecurring</processingType>
+		<originalNetworkTransactionId>abcdefghijklmnopqrstuvwxyz
+		</originalNetworkTransactionId>
+		<originalTransactionAmount>1000</originalTransactionAmount>
+	</authorization>
+</litleOnlineRequest>

@@ -230,7 +230,8 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
     
     public function test_simple_auth_with_networkTransactionId()
     {
-    	$hash_in = array('id' => 'id',
+    	$hash_in = array(
+    			'id' => 'id',
     			'card'=>array('type'=>'VI',
     					'number'=>'4100000000000000',
     					'expDate'=>'1213',
@@ -251,6 +252,39 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
     	$this->assertEquals('63225578415568556365452427825',$response);
     }
     
+    public function test_simple_auth_with_enhancedAuthResponse()
+    {
+    	$hash_in = array(
+    			'id' => 'id',
+    			'card'=>array(
+    					'type'=>'VI',
+    					'number'=>'4100800000000000',
+    					'expDate'=>'1213',
+    					'cardValidationNum' => '1213'
+    					
+    			),
+    			'id'=>'1211',
+    			'orderId'=> '2111',
+    			'reportGroup'=>'Planets',
+    			'orderSource'=>'ecommerce',
+    			'amount'=>'0',
+    			'processingType' => 'initialRecurring',
+    			'originalNetworkTransactionId' => 'abcdefghijklmnopqrstuvwxyz',
+    			'originalTransactionAmount' => '1000'
+    	);
     
+    	$initialize = new LitleOnlineRequest();
+    	$authorizationResponse = $initialize->authorizationRequest($hash_in);
+    	$endpoint = XmlParser::getNode($authorizationResponse,'endpoint');
+    	$fieldValue = XmlParser::getNode($authorizationResponse,'fieldValue');
+    	$fieldNumber = XmlParser::getAttribute($authorizationResponse, 'networkField', 'fieldNumber');
+    	$fieldName = XmlParser::getAttribute($authorizationResponse, 'networkField', 'fieldName');
+
+    	$this->assertEquals('visa',$endpoint);
+    	$this->assertEquals('135798642',$fieldValue);
+    	$this->assertEquals('4',$fieldNumber);
+    	$this->assertEquals('Transaction Amount',$fieldName);
+		
+    }
 
 }
