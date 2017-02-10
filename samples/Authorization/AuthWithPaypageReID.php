@@ -23,8 +23,8 @@ $auth_info = array(
 	)
 );
  
-$initilaize = new LitleOnlineRequest(); 
-$authResponse = $initilaize->authorizationRequest($auth_info);
+$initialize = new LitleOnlineRequest(); 
+$authResponse = $initialize->authorizationRequest($auth_info);
 
 echo ("Message: " . XmlParser::getNode($authResponse,'message'));
 

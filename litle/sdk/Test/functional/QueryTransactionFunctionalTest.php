@@ -34,8 +34,8 @@ class QueryTransactionFunctionalTest extends \PHPUnit_Framework_TestCase
             'origId'=> '2111',
             'origActionType'=>'A');
 
-        $initilaize = new LitleOnlineRequest();
-        $queryTransactionResponse = $initilaize->queryTransaction($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $queryTransactionResponse = $initialize->queryTransaction($hash_in);
         $response = XmlParser::getNode($queryTransactionResponse,'response');
         $this->assertEquals('000',$response);
         $matchCount = XmlParser::getNode($queryTransactionResponse,'matchCount');
@@ -58,8 +58,8 @@ class QueryTransactionFunctionalTest extends \PHPUnit_Framework_TestCase
     			'origId'=> 'ABC',
     			'origActionType'=>'A');
     
-    	$initilaize = new LitleOnlineRequest();
-    	$queryTransactionResponse = $initilaize->queryTransaction($hash_in);
+    	$initialize = new LitleOnlineRequest();
+    	$queryTransactionResponse = $initialize->queryTransaction($hash_in);
     	$response = XmlParser::getNode($queryTransactionResponse,'response');
     	$message = XmlParser::getNode($queryTransactionResponse,'message');
     	$this->assertEquals('152',$response);
@@ -73,8 +73,8 @@ class QueryTransactionFunctionalTest extends \PHPUnit_Framework_TestCase
     			'origId'=> '2112',
     			'origActionType'=>'A');
     
-    	$initilaize = new LitleOnlineRequest();
-    	$queryTransactionResponse = $initilaize->queryTransaction($hash_in);
+    	$initialize = new LitleOnlineRequest();
+    	$queryTransactionResponse = $initialize->queryTransaction($hash_in);
     	$response = XmlParser::getNode($queryTransactionResponse,'response');
     	$matchCount = XmlParser::getNode($queryTransactionResponse,'matchCount');
     	$this->assertEquals('000',$response);
@@ -97,8 +97,8 @@ class QueryTransactionFunctionalTest extends \PHPUnit_Framework_TestCase
     			'origId'=> 'ABCD0',
     			'origActionType'=>'A');
     
-    	$initilaize = new LitleOnlineRequest();
-    	$queryTransactionResponse = $initilaize->queryTransaction($hash_in);
+    	$initialize = new LitleOnlineRequest();
+    	$queryTransactionResponse = $initialize->queryTransaction($hash_in);
     	$response = XmlParser::getNode($queryTransactionResponse,'response');
     	$message = XmlParser::getNode($queryTransactionResponse,'message');
     	$this->assertEquals('151',$response);

@@ -40,8 +40,8 @@ class SaleFunctionalTest extends \PHPUnit_Framework_TestCase
             'orderSource'=>'ecommerce',
             'amount'=>'123');
 
-        $initilaize = new LitleOnlineRequest();
-        $saleResponse = $initilaize->saleRequest($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $saleResponse = $initialize->saleRequest($hash_in);
         $response = XmlParser::getNode($saleResponse,'response');
         $this->assertEquals('000',$response);
     }
@@ -57,8 +57,8 @@ class SaleFunctionalTest extends \PHPUnit_Framework_TestCase
                 'orderSource'=>'ecommerce',
                 'amount'=>'123');
 
-        $initilaize = new LitleOnlineRequest();
-        $saleResponse = $initilaize->saleRequest($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $saleResponse = $initialize->saleRequest($hash_in);
         $response = XmlParser::getNode($saleResponse,'response');
         $this->assertEquals('000',$response);
     }
@@ -73,8 +73,8 @@ class SaleFunctionalTest extends \PHPUnit_Framework_TestCase
                             'reportGroup'=>'Planets',
                             'orderSource'=>'notecommerce',
                             'amount'=>'123');
-        $initilaize = new LitleOnlineRequest();
-        $saleResponse = $initilaize->saleRequest($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $saleResponse = $initialize->saleRequest($hash_in);
         $message= XmlParser::getAttribute($saleResponse,'litleOnlineResponse','message');
         $this->assertRegExp('/Error validating xml data against the schema/',$message);
     }
@@ -92,8 +92,8 @@ class SaleFunctionalTest extends \PHPUnit_Framework_TestCase
                 'orderSource'=>'ecommerce',
                 'amount'=>'123');
 
-        $initilaize = new LitleOnlineRequest();
-        $saleResponse = $initilaize->saleRequest($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $saleResponse = $initialize->saleRequest($hash_in);
         $message= XmlParser::getAttribute($saleResponse,'litleOnlineResponse','message');
         $this->assertRegExp('/Error validating xml data against the schema/',$message);
     }
@@ -110,8 +110,8 @@ class SaleFunctionalTest extends \PHPUnit_Framework_TestCase
                     'orderSource'=>'ecommerce',
                     'amount'=>'123');
 
-        $initilaize = new LitleOnlineRequest();
-        $saleResponse = $initilaize->saleRequest($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $saleResponse = $initialize->saleRequest($hash_in);
         $response = XmlParser::getNode($saleResponse,'response');
         $this->assertEquals('000',$response);
     }
@@ -127,8 +127,8 @@ class SaleFunctionalTest extends \PHPUnit_Framework_TestCase
                         'orderSource'=>'ecommerce',
                         'amount'=>'123');
 
-        $initilaize = new LitleOnlineRequest();
-        $saleResponse = $initilaize->saleRequest($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $saleResponse = $initialize->saleRequest($hash_in);
         $response = XmlParser::getNode($saleResponse,'response');
         $this->assertEquals('000',$response);
     }
@@ -145,8 +145,8 @@ class SaleFunctionalTest extends \PHPUnit_Framework_TestCase
                             'orderSource'=>'ecommerce',
                             'amount'=>'123');
 
-        $initilaize = new LitleOnlineRequest();
-        $saleResponse = $initilaize->saleRequest($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $saleResponse = $initialize->saleRequest($hash_in);
         $message = XmlParser::getNode($saleResponse,'message');
         $this->assertEquals('Approved',$message);
     }
@@ -168,8 +168,8 @@ class SaleFunctionalTest extends \PHPUnit_Framework_TestCase
     			'orderSource'=>'ecommerce',
     			'amount'=>'123');
     
-    	$initilaize = new LitleOnlineRequest();
-    	$saleResponse = $initilaize->saleRequest($hash_in);
+    	$initialize = new LitleOnlineRequest();
+    	$saleResponse = $initialize->saleRequest($hash_in);
     	$response = XmlParser::getNode($saleResponse,'response');
     	$this->assertEquals('000',$response);
     }
@@ -191,8 +191,8 @@ class SaleFunctionalTest extends \PHPUnit_Framework_TestCase
     			'orderSource'=>'ecommerce',
     			'amount'=>'1110');
     
-    	$initilaize = new LitleOnlineRequest();
-    	$saleResponse = $initilaize->saleRequest($hash_in);
+    	$initialize = new LitleOnlineRequest();
+    	$saleResponse = $initialize->saleRequest($hash_in);
     	$response = XmlParser::getNode($saleResponse,'response');
     	$this->assertEquals('110',$response);
     }
@@ -216,8 +216,8 @@ class SaleFunctionalTest extends \PHPUnit_Framework_TestCase
     				'customAttribute4'=>'4',
     				'customAttribute5'=>'5',
     			));
-    	$initilaize = new LitleOnlineRequest();
-    	$saleResponse = $initilaize->saleRequest($hash_in);
+    	$initialize = new LitleOnlineRequest();
+    	$saleResponse = $initialize->saleRequest($hash_in);
     	$response = XmlParser::getNode($saleResponse,'response');
     	$this->assertEquals('000',$response);
     }
@@ -239,8 +239,8 @@ class SaleFunctionalTest extends \PHPUnit_Framework_TestCase
     			'orderSource'=>'ecommerce',
     			'amount'=>'123');
     
-    	$initilaize = new LitleOnlineRequest();
-    	$saleResponse = $initilaize->saleRequest($hash_in);
+    	$initialize = new LitleOnlineRequest();
+    	$saleResponse = $initialize->saleRequest($hash_in);
     	$response = XmlParser::getNode($saleResponse,'response');
     	$this->assertEquals('000',$response);
     }
@@ -262,8 +262,8 @@ class SaleFunctionalTest extends \PHPUnit_Framework_TestCase
     			'orderSource'=>'ecommerce',
     			'amount'=>'110000000');
     
-    			$initilaize = new LitleOnlineRequest();
-    			$saleResponse = $initilaize->saleRequest($hash_in);
+    			$initialize = new LitleOnlineRequest();
+    			$saleResponse = $initialize->saleRequest($hash_in);
     			$response = XmlParser::getNode($saleResponse,'response');
     			$this->assertEquals('000',$response);
     } */

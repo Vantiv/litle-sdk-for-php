@@ -21,8 +21,8 @@ $capture_info = array(
   )
 );
  
-$initilaize = &new LitleOnlineRequest();
-$response = $initilaize->captureGivenAuthRequest($capture_info);
+$initialize = &new LitleOnlineRequest();
+$response = $initialize->captureGivenAuthRequest($capture_info);
  
 #display results
 echo ("Response: " . (XmlParser::getNode($response,'response')) . "<br>");

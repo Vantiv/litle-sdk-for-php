@@ -46,8 +46,8 @@ class GiftCardCreditFunctionalTest extends \PHPUnit_Framework_TestCase
         		
         );
 
-        $initilaize = new LitleOnlineRequest();
-        $giftCardCreditResponse = $initilaize->giftCardCreditRequest($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $giftCardCreditResponse = $initialize->giftCardCreditRequest($hash_in);
         $response = XmlParser::getNode($giftCardCreditResponse,'response');
         $this->assertEquals('001',$response);
     }

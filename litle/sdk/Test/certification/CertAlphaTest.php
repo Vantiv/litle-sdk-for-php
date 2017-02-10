@@ -48,8 +48,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
               'expDate' => '0112',
               'cardValidationNum' => '349',
               'type' => 'VI'));
-            $initilaize = new LitleOnlineRequest();
-            $authorizationResponse = $initilaize->authorizationRequest($auth_hash);
+            $initialize = new LitleOnlineRequest();
+            $authorizationResponse = $initialize->authorizationRequest($auth_hash);
             $this->assertEquals('000',XmlParser::getNode($authorizationResponse,'response'));
             $this->assertEquals('Approved',XmlParser::getNode($authorizationResponse,'message'));
             $this->assertEquals('11111 ',XmlParser::getNode($authorizationResponse,'authCode'));
@@ -60,8 +60,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
             $capture_hash =  array(
             'litleTxnId' =>(XmlParser::getNode($authorizationResponse,'litleTxnId')),
             'reportGroup'=>'planets','id' => '1211',);
-            $initilaize = new LitleOnlineRequest();
-            $captureResponse = $initilaize->captureRequest($capture_hash);
+            $initialize = new LitleOnlineRequest();
+            $captureResponse = $initialize->captureRequest($capture_hash);
             $this->assertEquals('001',XmlParser::getNode($captureResponse,'response'));
             $this->assertEquals('Transaction Received',XmlParser::getNode($captureResponse,'message'));
 
@@ -69,8 +69,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
             $credit_hash =  array(
             'litleTxnId' =>(XmlParser::getNode($captureResponse,'litleTxnId')),
             'reportGroup'=>'planets','id' => '1211',);
-            $initilaize = new LitleOnlineRequest();
-            $creditResponse = $initilaize->creditRequest($credit_hash);
+            $initialize = new LitleOnlineRequest();
+            $creditResponse = $initialize->creditRequest($credit_hash);
             $this->assertEquals('001',XmlParser::getNode($creditResponse,'response'));
             $this->assertEquals('Transaction Received',XmlParser::getNode($creditResponse,'message'));
 
@@ -78,8 +78,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
             $void_hash =  array(
             'litleTxnId' =>(XmlParser::getNode($creditResponse,'litleTxnId')),
             'reportGroup'=>'planets','id' => '1211',);
-            $initilaize = new LitleOnlineRequest();
-            $voidResponse = $initilaize->voidRequest($void_hash);
+            $initialize = new LitleOnlineRequest();
+            $voidResponse = $initialize->voidRequest($void_hash);
             $this->assertEquals('001',XmlParser::getNode($voidResponse,'response'));
             $this->assertEquals('Transaction Received',XmlParser::getNode($voidResponse,'message'));
         }
@@ -102,8 +102,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
                       'expDate' => '0112',
                       'cardValidationNum' => '349',
                       'type' => 'VI'));
-            $initilaize = new LitleOnlineRequest();
-            $authorizationResponse = $initilaize->authorizationRequest($auth_hash);
+            $initialize = new LitleOnlineRequest();
+            $authorizationResponse = $initialize->authorizationRequest($auth_hash);
             $this->assertEquals('000',XmlParser::getNode($authorizationResponse,'response'));
             $this->assertEquals('Approved',XmlParser::getNode($authorizationResponse,'message'));
             $this->assertEquals('11111 ',XmlParser::getNode($authorizationResponse,'authCode'));
@@ -129,8 +129,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
                   'expDate' => '0112',
                   'cardValidationNum' => '349',
                   'type' => 'VI'));
-            $initilaize = new LitleOnlineRequest();
-            $saleResponse = $initilaize->saleRequest($sale_hash);
+            $initialize = new LitleOnlineRequest();
+            $saleResponse = $initialize->saleRequest($sale_hash);
             $this->assertEquals('000',XmlParser::getNode($saleResponse,'response'));
             $this->assertEquals('Approved',XmlParser::getNode($saleResponse,'message'));
             $this->assertEquals('11111 ',XmlParser::getNode($saleResponse,'authCode'));
@@ -140,16 +140,16 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
             $credit_hash =  array(
                 'litleTxnId' =>(XmlParser::getNode($saleResponse,'litleTxnId')),
                 'reportGroup'=>'planets','id' => '1211',);
-            $initilaize = new LitleOnlineRequest();
-            $creditResponse = $initilaize->creditRequest($credit_hash);
+            $initialize = new LitleOnlineRequest();
+            $creditResponse = $initialize->creditRequest($credit_hash);
             $this->assertEquals('001',XmlParser::getNode($creditResponse,'response'));
             $this->assertEquals('Transaction Received',XmlParser::getNode($creditResponse,'message'));
 
             $void_hash =  array(
                 'litleTxnId' =>(XmlParser::getNode($creditResponse,'litleTxnId')),
                 'reportGroup'=>'planets','id' => '1211',);
-            $initilaize = new LitleOnlineRequest();
-            $voidResponse = $initilaize->voidRequest($void_hash);
+            $initialize = new LitleOnlineRequest();
+            $voidResponse = $initialize->voidRequest($void_hash);
             $this->assertEquals('001',XmlParser::getNode($voidResponse,'response'));
             $this->assertEquals('Transaction Received',XmlParser::getNode($voidResponse,'message'));
         }
@@ -175,8 +175,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
             'type' => 'MC'),
             'cardholderAuthentication' => array('authenticationValue'=>'BwABBJQ1AgAAAAAgJDUCAAAAAAA=' ));
 
-            $initilaize = new LitleOnlineRequest();
-            $authorizationResponse = $initilaize->authorizationRequest($auth_hash);
+            $initialize = new LitleOnlineRequest();
+            $authorizationResponse = $initialize->authorizationRequest($auth_hash);
             $this->assertEquals('000',XmlParser::getNode($authorizationResponse,'response'));
             $this->assertEquals('Approved',XmlParser::getNode($authorizationResponse,'message'));
             $this->assertEquals('22222',XmlParser::getNode($authorizationResponse,'authCode'));
@@ -187,8 +187,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
             $capture_hash =  array('id' => '1211',
                 'litleTxnId' =>(XmlParser::getNode($authorizationResponse,'litleTxnId')),
                 'reportGroup'=>'planets');
-            $initilaize = new LitleOnlineRequest();
-            $captureResponse = $initilaize->captureRequest($capture_hash);
+            $initialize = new LitleOnlineRequest();
+            $captureResponse = $initialize->captureRequest($capture_hash);
             $this->assertEquals('001',XmlParser::getNode($captureResponse,'response'));
             $this->assertEquals('Transaction Received',XmlParser::getNode($captureResponse,'message'));
 
@@ -196,8 +196,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
             $credit_hash =  array('id' => '1211',
                 'litleTxnId' =>(XmlParser::getNode($captureResponse,'litleTxnId')),
                 'reportGroup'=>'planets');
-            $initilaize = new LitleOnlineRequest();
-            $creditResponse = $initilaize->creditRequest($credit_hash);
+            $initialize = new LitleOnlineRequest();
+            $creditResponse = $initialize->creditRequest($credit_hash);
             $this->assertEquals('001',XmlParser::getNode($creditResponse,'response'));
             $this->assertEquals('Transaction Received',XmlParser::getNode($creditResponse,'message'));
 
@@ -205,8 +205,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
             $void_hash =  array('id' => '1211',
                 'litleTxnId' =>(XmlParser::getNode($creditResponse,'litleTxnId')),
                 'reportGroup'=>'planets');
-            $initilaize = new LitleOnlineRequest();
-            $voidResponse = $initilaize->voidRequest($void_hash);
+            $initialize = new LitleOnlineRequest();
+            $voidResponse = $initialize->voidRequest($void_hash);
             $this->assertEquals('001',XmlParser::getNode($voidResponse,'response'));
             $this->assertEquals('Transaction Received',XmlParser::getNode($voidResponse,'message'));
         }
@@ -232,8 +232,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
                 'type' => 'MC'),
                 'cardholderAuthentication' => array('authenticationValue'=>'BwABBJQ1AgAAAAAgJDUCAAAAAAA=' ));
 
-            $initilaize = new LitleOnlineRequest();
-            $authorizationResponse = $initilaize->authorizationRequest($auth_hash);
+            $initialize = new LitleOnlineRequest();
+            $authorizationResponse = $initialize->authorizationRequest($auth_hash);
             $this->assertEquals('000',XmlParser::getNode($authorizationResponse,'response'));
             $this->assertEquals('Approved',XmlParser::getNode($authorizationResponse,'message'));
             $this->assertEquals('22222',XmlParser::getNode($authorizationResponse,'authCode'));
@@ -262,8 +262,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
                 'type' => 'MC'),
                 'cardholderAuthentication' => array('authenticationValue'=>'BwABBJQ1AgAAAAAgJDUCAAAAAAA=' ));
 
-            $initilaize = new LitleOnlineRequest();
-            $saleResponse = $initilaize->saleRequest($sale_hash);
+            $initialize = new LitleOnlineRequest();
+            $saleResponse = $initialize->saleRequest($sale_hash);
             $this->assertEquals('000',XmlParser::getNode($saleResponse,'response'));
             $this->assertEquals('Approved',XmlParser::getNode($saleResponse,'message'));
             $this->assertEquals('22222',XmlParser::getNode($saleResponse,'authCode'));
@@ -274,8 +274,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
             $credit_hash =  array('id' => '1211',
                     'litleTxnId' =>(XmlParser::getNode($saleResponse,'litleTxnId')),
                     'reportGroup'=>'planets');
-            $initilaize = new LitleOnlineRequest();
-            $creditResponse = $initilaize->creditRequest($credit_hash);
+            $initialize = new LitleOnlineRequest();
+            $creditResponse = $initialize->creditRequest($credit_hash);
             $this->assertEquals('001',XmlParser::getNode($creditResponse,'response'));
             $this->assertEquals('Transaction Received',XmlParser::getNode($creditResponse,'message'));
 
@@ -283,8 +283,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
             $void_hash =  array('id' => '1211',
                     'litleTxnId' =>(XmlParser::getNode($creditResponse,'litleTxnId')),
                     'reportGroup'=>'planets');
-            $initilaize = new LitleOnlineRequest();
-            $voidResponse = $initilaize->voidRequest($void_hash);
+            $initialize = new LitleOnlineRequest();
+            $voidResponse = $initialize->voidRequest($void_hash);
             $this->assertEquals('001',XmlParser::getNode($voidResponse,'response'));
             $this->assertEquals('Transaction Received',XmlParser::getNode($voidResponse,'message'));
         }
@@ -308,8 +308,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
                 'type' => 'DI',
                 'cardValidationNum' => '758'));
 
-            $initilaize = new LitleOnlineRequest();
-            $authorizationResponse = $initilaize->authorizationRequest($auth_hash);
+            $initialize = new LitleOnlineRequest();
+            $authorizationResponse = $initialize->authorizationRequest($auth_hash);
             $this->assertEquals('000',XmlParser::getNode($authorizationResponse,'response'));
             $this->assertEquals('Approved',XmlParser::getNode($authorizationResponse,'message'));
             $this->assertEquals('33333',XmlParser::getNode($authorizationResponse,'authCode'));
@@ -320,8 +320,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
             $capture_hash =  array('id' => '1211',
                     'litleTxnId' =>(XmlParser::getNode($authorizationResponse,'litleTxnId')),
                     'reportGroup'=>'planets','id' => '1211',);
-            $initilaize = new LitleOnlineRequest();
-            $captureResponse = $initilaize->captureRequest($capture_hash);
+            $initialize = new LitleOnlineRequest();
+            $captureResponse = $initialize->captureRequest($capture_hash);
             $this->assertEquals('001',XmlParser::getNode($captureResponse,'response'));
             $this->assertEquals('Transaction Received',XmlParser::getNode($captureResponse,'message'));
 
@@ -329,8 +329,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
             $credit_hash =  array('id' => '1211',
                     'litleTxnId' =>(XmlParser::getNode($captureResponse,'litleTxnId')),
                     'reportGroup'=>'planets');
-            $initilaize = new LitleOnlineRequest();
-            $creditResponse = $initilaize->creditRequest($credit_hash);
+            $initialize = new LitleOnlineRequest();
+            $creditResponse = $initialize->creditRequest($credit_hash);
             $this->assertEquals('001',XmlParser::getNode($creditResponse,'response'));
             $this->assertEquals('Transaction Received',XmlParser::getNode($creditResponse,'message'));
 
@@ -338,8 +338,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
             $void_hash =  array('id' => '1211',
                     'litleTxnId' =>(XmlParser::getNode($creditResponse,'litleTxnId')),
                     'reportGroup'=>'planets');
-            $initilaize = new LitleOnlineRequest();
-            $voidResponse = $initilaize->voidRequest($void_hash);
+            $initialize = new LitleOnlineRequest();
+            $voidResponse = $initialize->voidRequest($void_hash);
             $this->assertEquals('001',XmlParser::getNode($voidResponse,'response'));
             $this->assertEquals('Transaction Received',XmlParser::getNode($voidResponse,'message'));
         }
@@ -362,8 +362,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
                            'expDate' => '0312',
                         'type' => 'DI',
                         'cardValidationNum' => '758'));
-            $initilaize = new LitleOnlineRequest();
-            $authorizationResponse = $initilaize->authorizationRequest($auth_hash);
+            $initialize = new LitleOnlineRequest();
+            $authorizationResponse = $initialize->authorizationRequest($auth_hash);
             $this->assertEquals('000',XmlParser::getNode($authorizationResponse,'response'));
             $this->assertEquals('Approved',XmlParser::getNode($authorizationResponse,'message'));
             $this->assertEquals('33333',XmlParser::getNode($authorizationResponse,'authCode'));
@@ -390,8 +390,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
                         'type' => 'DI',
                         'cardValidationNum' => '758'));
 
-            $initilaize = new LitleOnlineRequest();
-            $saleResponse = $initilaize->saleRequest($sale_hash);
+            $initialize = new LitleOnlineRequest();
+            $saleResponse = $initialize->saleRequest($sale_hash);
             $this->assertEquals('000',XmlParser::getNode($saleResponse,'response'));
             $this->assertEquals('Approved',XmlParser::getNode($saleResponse,'message'));
             $this->assertEquals('33333',XmlParser::getNode($saleResponse,'authCode'));
@@ -402,8 +402,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
             $credit_hash =  array('id' => '1211',
                             'litleTxnId' =>(XmlParser::getNode($saleResponse,'litleTxnId')),
                             'reportGroup'=>'planets');
-            $initilaize = new LitleOnlineRequest();
-            $creditResponse = $initilaize->creditRequest($credit_hash);
+            $initialize = new LitleOnlineRequest();
+            $creditResponse = $initialize->creditRequest($credit_hash);
             $this->assertEquals('001',XmlParser::getNode($creditResponse,'response'));
             $this->assertEquals('Transaction Received',XmlParser::getNode($creditResponse,'message'));
 
@@ -411,8 +411,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
             $void_hash =  array('id' => '1211',
                             'litleTxnId' =>(XmlParser::getNode($creditResponse,'litleTxnId')),
                             'reportGroup'=>'planets');
-            $initilaize = new LitleOnlineRequest();
-            $voidResponse = $initilaize->voidRequest($void_hash);
+            $initialize = new LitleOnlineRequest();
+            $voidResponse = $initialize->voidRequest($void_hash);
             $this->assertEquals('001',XmlParser::getNode($voidResponse,'response'));
             $this->assertEquals('Transaction Received',XmlParser::getNode($voidResponse,'message'));
         }
@@ -435,8 +435,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
             'expDate' => '0412',
             'type' => 'AX'));
 
-            $initilaize = new LitleOnlineRequest();
-            $authorizationResponse = $initilaize->authorizationRequest($auth_hash);
+            $initialize = new LitleOnlineRequest();
+            $authorizationResponse = $initialize->authorizationRequest($auth_hash);
             $this->assertEquals('000',XmlParser::getNode($authorizationResponse,'response'));
             $this->assertEquals('Approved',XmlParser::getNode($authorizationResponse,'message'));
             $this->assertEquals('44444',XmlParser::getNode($authorizationResponse,'authCode'));
@@ -446,8 +446,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
             $capture_hash =  array('id' => '1211',
                             'litleTxnId' =>(XmlParser::getNode($authorizationResponse,'litleTxnId')),
                             'reportGroup'=>'planets');
-            $initilaize = new LitleOnlineRequest();
-            $captureResponse = $initilaize->captureRequest($capture_hash);
+            $initialize = new LitleOnlineRequest();
+            $captureResponse = $initialize->captureRequest($capture_hash);
             #$this->assertEquals('000',XmlParser::getNode($captureResponse,'response'));
             $this->assertEquals('Transaction Received',XmlParser::getNode($captureResponse,'message'));
 
@@ -455,8 +455,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
             $credit_hash =  array('id' => '1211',
                             'litleTxnId' =>(XmlParser::getNode($captureResponse,'litleTxnId')),
                             'reportGroup'=>'planets');
-            $initilaize = new LitleOnlineRequest();
-            $creditResponse = $initilaize->creditRequest($credit_hash);
+            $initialize = new LitleOnlineRequest();
+            $creditResponse = $initialize->creditRequest($credit_hash);
             $this->assertEquals('001',XmlParser::getNode($creditResponse,'response'));
             $this->assertEquals('Transaction Received',XmlParser::getNode($creditResponse,'message'));
 
@@ -464,8 +464,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
             $void_hash =  array('id' => '1211',
                             'litleTxnId' =>(XmlParser::getNode($creditResponse,'litleTxnId')),
                             'reportGroup'=>'planets');
-            $initilaize = new LitleOnlineRequest();
-            $voidResponse = $initilaize->voidRequest($void_hash);
+            $initialize = new LitleOnlineRequest();
+            $voidResponse = $initialize->voidRequest($void_hash);
             $this->assertEquals('001',XmlParser::getNode($voidResponse,'response'));
             $this->assertEquals('Transaction Received',XmlParser::getNode($voidResponse,'message'));
         }
@@ -488,8 +488,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
                     'expDate' => '0412',
                     'type' => 'AX'));
 
-            $initilaize = new LitleOnlineRequest();
-            $authorizationResponse = $initilaize->authorizationRequest($auth_hash);
+            $initialize = new LitleOnlineRequest();
+            $authorizationResponse = $initialize->authorizationRequest($auth_hash);
             $this->assertEquals('000',XmlParser::getNode($authorizationResponse,'response'));
             $this->assertEquals('Approved',XmlParser::getNode($authorizationResponse,'message'));
             $this->assertEquals('44444',XmlParser::getNode($authorizationResponse,'authCode'));
@@ -515,8 +515,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
                     'expDate' => '0412',
                     'type' => 'AX'));
 
-            $initilaize = new LitleOnlineRequest();
-            $saleResponse = $initilaize->saleRequest($sale_hash);
+            $initialize = new LitleOnlineRequest();
+            $saleResponse = $initialize->saleRequest($sale_hash);
             $this->assertEquals('000',XmlParser::getNode($saleResponse,'response'));
             $this->assertEquals('Approved',XmlParser::getNode($saleResponse,'message'));
             $this->assertEquals('44444',XmlParser::getNode($saleResponse,'authCode'));
@@ -526,8 +526,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
             $credit_hash =  array('id' => '1211',
                                     'litleTxnId' =>(XmlParser::getNode($saleResponse,'litleTxnId')),
                                     'reportGroup'=>'planets');
-            $initilaize = new LitleOnlineRequest();
-            $creditResponse = $initilaize->creditRequest($credit_hash);
+            $initialize = new LitleOnlineRequest();
+            $creditResponse = $initialize->creditRequest($credit_hash);
             $this->assertEquals('001',XmlParser::getNode($creditResponse,'response'));
             $this->assertEquals('Transaction Received',XmlParser::getNode($creditResponse,'message'));
 
@@ -535,8 +535,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
             $void_hash =  array('id' => '1211',
                                     'litleTxnId' =>(XmlParser::getNode($creditResponse,'litleTxnId')),
                                     'reportGroup'=>'planets');
-            $initilaize = new LitleOnlineRequest();
-            $voidResponse = $initilaize->voidRequest($void_hash);
+            $initialize = new LitleOnlineRequest();
+            $voidResponse = $initialize->voidRequest($void_hash);
             $this->assertEquals('001',XmlParser::getNode($voidResponse,'response'));
             $this->assertEquals('Transaction Received',XmlParser::getNode($voidResponse,'message'));
         }
@@ -554,8 +554,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
                 'type' => 'VI'),
                 'cardholderAuthentication' => array('authenticationValue'=> 'BwABBJQ1AgAAAAAgJDUCAAAAAAA='));
 
-            $initilaize = new LitleOnlineRequest();
-            $authorizationResponse = $initilaize->authorizationRequest($auth_hash);
+            $initialize = new LitleOnlineRequest();
+            $authorizationResponse = $initialize->authorizationRequest($auth_hash);
             $this->assertEquals('000',XmlParser::getNode($authorizationResponse,'response'));
             $this->assertEquals('Approved',XmlParser::getNode($authorizationResponse,'message'));
             $this->assertEquals('55555 ',XmlParser::getNode($authorizationResponse,'authCode'));
@@ -566,8 +566,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
             $capture_hash =  array('id' => '1211',
                                     'litleTxnId' =>(XmlParser::getNode($authorizationResponse,'litleTxnId')),
                                     'reportGroup'=>'planets');
-            $initilaize = new LitleOnlineRequest();
-            $captureResponse = $initilaize->captureRequest($capture_hash);
+            $initialize = new LitleOnlineRequest();
+            $captureResponse = $initialize->captureRequest($capture_hash);
             $this->assertEquals('001',XmlParser::getNode($captureResponse,'response'));
             $this->assertEquals('Transaction Received',XmlParser::getNode($captureResponse,'message'));
 
@@ -575,8 +575,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
             $credit_hash =  array('id' => '1211',
                                     'litleTxnId' =>(XmlParser::getNode($captureResponse,'litleTxnId')),
                                     'reportGroup'=>'planets');
-            $initilaize = new LitleOnlineRequest();
-            $creditResponse = $initilaize->creditRequest($credit_hash);
+            $initialize = new LitleOnlineRequest();
+            $creditResponse = $initialize->creditRequest($credit_hash);
             $this->assertEquals('001',XmlParser::getNode($creditResponse,'response'));
             $this->assertEquals('Transaction Received',XmlParser::getNode($creditResponse,'message'));
 
@@ -584,8 +584,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
             $void_hash =  array('id' => '1211',
                                     'litleTxnId' =>(XmlParser::getNode($creditResponse,'litleTxnId')),
                                     'reportGroup'=>'planets');
-            $initilaize = new LitleOnlineRequest();
-            $voidResponse = $initilaize->voidRequest($void_hash);
+            $initialize = new LitleOnlineRequest();
+            $voidResponse = $initialize->voidRequest($void_hash);
             $this->assertEquals('001',XmlParser::getNode($voidResponse,'response'));
             $this->assertEquals('Transaction Received',XmlParser::getNode($voidResponse,'message'));
         }
@@ -603,8 +603,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
                         'type' => 'VI'),
                         'cardholderAuthentication' => array('authenticationValue'=> 'BwABBJQ1AgAAAAAgJDUCAAAAAAA='));
 
-            $initilaize = new LitleOnlineRequest();
-            $authorizationResponse = $initilaize->authorizationRequest($auth_hash);
+            $initialize = new LitleOnlineRequest();
+            $authorizationResponse = $initialize->authorizationRequest($auth_hash);
             $this->assertEquals('000',XmlParser::getNode($authorizationResponse,'response'));
             $this->assertEquals('Approved',XmlParser::getNode($authorizationResponse,'message'));
             $this->assertEquals('55555 ',XmlParser::getNode($authorizationResponse,'authCode'));
@@ -625,8 +625,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
                         'type' => 'VI'),
                         'cardholderAuthentication' => array('authenticationValue'=> 'BwABBJQ1AgAAAAAgJDUCAAAAAAA='));
 
-            $initilaize = new LitleOnlineRequest();
-            $saleResponse = $initilaize->saleRequest($sale_hash);
+            $initialize = new LitleOnlineRequest();
+            $saleResponse = $initialize->saleRequest($sale_hash);
             $this->assertEquals('000',XmlParser::getNode($saleResponse,'response'));
             $this->assertEquals('Approved',XmlParser::getNode($saleResponse,'message'));
             $this->assertEquals('55555 ',XmlParser::getNode($saleResponse,'authCode'));
@@ -637,8 +637,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
             $credit_hash =  array('id' => '1211',
                                 'litleTxnId' =>(XmlParser::getNode($saleResponse,'litleTxnId')),
                                 'reportGroup'=>'planets');
-            $initilaize = new LitleOnlineRequest();
-            $creditResponse = $initilaize->creditRequest($credit_hash);
+            $initialize = new LitleOnlineRequest();
+            $creditResponse = $initialize->creditRequest($credit_hash);
             $this->assertEquals('001',XmlParser::getNode($creditResponse,'response'));
             $this->assertEquals('Transaction Received',XmlParser::getNode($creditResponse,'message'));
 
@@ -646,8 +646,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
             $void_hash =  array('id' => '1211',
                                 'litleTxnId' =>(XmlParser::getNode($creditResponse,'litleTxnId')),
                                 'reportGroup'=>'planets');
-            $initilaize = new LitleOnlineRequest();
-            $voidResponse = $initilaize->voidRequest($void_hash);
+            $initialize = new LitleOnlineRequest();
+            $voidResponse = $initialize->voidRequest($void_hash);
             $this->assertEquals('001',XmlParser::getNode($voidResponse,'response'));
             $this->assertEquals('Transaction Received',XmlParser::getNode($voidResponse,'message'));
         }

@@ -36,8 +36,8 @@ class FraudCheckFunctionalTest extends \PHPUnit_Framework_TestCase
 						'threatMetrixSessionId' => 128)
 		);
 		
-		$initilaize = new LitleOnlineRequest();
-        $fraudCheckResponse = $initilaize->fraudCheck($hash_in);
+		$initialize = new LitleOnlineRequest();
+        $fraudCheckResponse = $initialize->fraudCheck($hash_in);
         $message = XmlParser::getNode($fraudCheckResponse,'message');
         $this->assertEquals('Transaction Received',$message);
 	}
@@ -51,8 +51,8 @@ class FraudCheckFunctionalTest extends \PHPUnit_Framework_TestCase
 						'customAttribute1' => 'abc')
 		);
 		
-		$initilaize = new LitleOnlineRequest();
-        $fraudCheckResponse = $initilaize->fraudCheck($hash_in);
+		$initialize = new LitleOnlineRequest();
+        $fraudCheckResponse = $initialize->fraudCheck($hash_in);
         $message= XmlParser::getNode($fraudCheckResponse,'deviceReviewStatus');
         $this->assertEquals('pass',$message);
 	}
@@ -67,8 +67,8 @@ class FraudCheckFunctionalTest extends \PHPUnit_Framework_TestCase
 						'customAttribute2' => 'def')
 		);
 		
-		$initilaize = new LitleOnlineRequest();
-        $fraudCheckResponse = $initilaize->fraudCheck($hash_in);
+		$initialize = new LitleOnlineRequest();
+        $fraudCheckResponse = $initialize->fraudCheck($hash_in);
         $message = XmlParser::getNode($fraudCheckResponse,'triggeredRule');
         $this->assertEquals('triggered_rule_default',$message);
 	}
@@ -84,8 +84,8 @@ class FraudCheckFunctionalTest extends \PHPUnit_Framework_TestCase
 						'customAttribute3' => '7')
 		);
 		
-		$initilaize = new LitleOnlineRequest();
-        $fraudCheckResponse = $initilaize->fraudCheck($hash_in);
+		$initialize = new LitleOnlineRequest();
+        $fraudCheckResponse = $initialize->fraudCheck($hash_in);
         //echo $fraudCheckResponse->advancedFraudResults->triggeredRule[0];
         $message = XmlParser::getNode($fraudCheckResponse,'triggeredRule');
         $this->assertEquals('triggered_rule_7',$message);
@@ -103,8 +103,8 @@ class FraudCheckFunctionalTest extends \PHPUnit_Framework_TestCase
 						'customAttribute4' => 'jkl')
 		);
 		
-		$initilaize = new LitleOnlineRequest();
-        $fraudCheckResponse = $initilaize->fraudCheck($hash_in);
+		$initialize = new LitleOnlineRequest();
+        $fraudCheckResponse = $initialize->fraudCheck($hash_in);
         $message = XmlParser::getNode($fraudCheckResponse,'deviceReputationScore');
         $this->assertEquals('42',$message);
 	}
@@ -122,8 +122,8 @@ class FraudCheckFunctionalTest extends \PHPUnit_Framework_TestCase
 						'customAttribute5' => 'mno')
 		);
 		
-		$initilaize = new LitleOnlineRequest();
-        $fraudCheckResponse = $initilaize->fraudCheck($hash_in);
+		$initialize = new LitleOnlineRequest();
+        $fraudCheckResponse = $initialize->fraudCheck($hash_in);
         $message = XmlParser::getNode($fraudCheckResponse,'message');
         $this->assertEquals('Transaction Received',$message);
 	}
@@ -137,8 +137,8 @@ class FraudCheckFunctionalTest extends \PHPUnit_Framework_TestCase
 				'amount' => 100
 		);
 		
-		$initilaize = new LitleOnlineRequest();
-        $fraudCheckResponse = $initilaize->fraudCheck($hash_in);
+		$initialize = new LitleOnlineRequest();
+        $fraudCheckResponse = $initialize->fraudCheck($hash_in);
         $message = XmlParser::getNode($fraudCheckResponse,'deviceReviewStatus');
         $this->assertEquals('pass',$message);
 	}
@@ -167,8 +167,8 @@ class FraudCheckFunctionalTest extends \PHPUnit_Framework_TestCase
 				)
 		);
 		
-		$initilaize = new LitleOnlineRequest();
-        $fraudCheckResponse = $initilaize->fraudCheck($hash_in);
+		$initialize = new LitleOnlineRequest();
+        $fraudCheckResponse = $initialize->fraudCheck($hash_in);
         $message = XmlParser::getNode($fraudCheckResponse,'deviceReputationScore');
         $this->assertEquals('42',$message);
 	}
@@ -189,8 +189,8 @@ class FraudCheckFunctionalTest extends \PHPUnit_Framework_TestCase
 				)
 		);
 		
-		$initilaize = new LitleOnlineRequest();
-        $fraudCheckResponse = $initilaize->fraudCheck($hash_in);
+		$initialize = new LitleOnlineRequest();
+        $fraudCheckResponse = $initialize->fraudCheck($hash_in);
         $message = XmlParser::getNode($fraudCheckResponse,'message');
         $this->assertEquals('Transaction Received',$message);
 	}

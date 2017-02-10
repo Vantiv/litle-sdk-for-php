@@ -62,8 +62,8 @@ $sale_info = array(
              'cardValidationNum' => '349',
              'type' => 'MC' )
             );
-$initilaize = new litle\sdk\LitleOnlineRequest();
-$saleResponse =$initilaize->saleRequest($sale_info);
+$initialize = new litle\sdk\LitleOnlineRequest();
+$saleResponse =$initialize->saleRequest($sale_info);
 #display results
 echo ("Response: " . (litle\sdk\XmlParser::getNode($saleResponse,'response')) . "<br>");
 echo ("Message: " . litle\sdk\XmlParser::getNode($saleResponse,'message') . "<br>");

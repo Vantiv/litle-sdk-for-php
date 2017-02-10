@@ -19,8 +19,8 @@ $sale_info = array(
               'cardValidationNum' => '349',
               'type' => 'MC')
             );
-$initilaize = &new LitleOnlineRequest();
-$saleResponse = $initilaize->saleRequest($sale_info);
+$initialize = &new LitleOnlineRequest();
+$saleResponse = $initialize->saleRequest($sale_info);
 #display results
 echo ("Response: " . (XmlParser::getNode($saleResponse,'response')) . "<br>");
 echo ("Message: " . XmlParser::getNode($saleResponse,'message') . "<br>");

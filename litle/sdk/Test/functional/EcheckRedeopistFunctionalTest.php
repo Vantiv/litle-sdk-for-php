@@ -33,8 +33,8 @@ class EcheckRedeopistFunctionalTest extends \PHPUnit_Framework_TestCase
             'litleTxnId'=>'123456789012345678',
             'amount'=>'123');
 
-        $initilaize = new LitleOnlineRequest();
-        $echeckRedepositResponse = $initilaize->echeckRedepositRequest($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $echeckRedepositResponse = $initialize->echeckRedepositRequest($hash_in);
         $response = XmlParser::getNode($echeckRedepositResponse,'response');
         $this->assertEquals('001',$response);
     }
@@ -50,8 +50,8 @@ class EcheckRedeopistFunctionalTest extends \PHPUnit_Framework_TestCase
       'echeck' => array('accType'=>'Checking','accNum'=>'12345657890','routingNum'=>'123456789','checkNum'=>'123455'),
       'billToAddress'=>array('name'=>'Bob','city'=>'lowell','state'=>'MA','email'=>'litle.com'));
 
-        $initilaize = new LitleOnlineRequest();
-        $echeckRedepositResponse = $initilaize->echeckRedepositRequest($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $echeckRedepositResponse = $initialize->echeckRedepositRequest($hash_in);
         $response = XmlParser::getNode($echeckRedepositResponse,'response');
         $this->assertEquals('001',$response);
     }
@@ -67,8 +67,8 @@ class EcheckRedeopistFunctionalTest extends \PHPUnit_Framework_TestCase
               'echeckToken' => array('accType'=>'Checking','litleToken'=>'1234565789012','routingNum'=>'123456789','checkNum'=>'123455'),
           'billToAddress'=>array('name'=>'Bob','city'=>'lowell','state'=>'MA','email'=>'litle.com'));
 
-        $initilaize = new LitleOnlineRequest();
-        $echeckRedepositResponse = $initilaize->echeckRedepositRequest($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $echeckRedepositResponse = $initialize->echeckRedepositRequest($hash_in);
         $response = XmlParser::getNode($echeckRedepositResponse,'response');
         $this->assertEquals('001',$response);
     }

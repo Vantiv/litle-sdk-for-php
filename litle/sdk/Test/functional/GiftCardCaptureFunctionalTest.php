@@ -44,8 +44,8 @@ class GiftCardCaptureFunctionalTest extends \PHPUnit_Framework_TestCase
 				'originalAmount' => '34561'
 		);
 
-		$initilaize = new LitleOnlineRequest();
-		$authReversalResponse = $initilaize->authReversalRequest($hash_in);
+		$initialize = new LitleOnlineRequest();
+		$authReversalResponse = $initialize->authReversalRequest($hash_in);
 		$response = XmlParser::getNode($authReversalResponse,'response');
 		$this->assertEquals('000',$response);
 	}
@@ -56,8 +56,8 @@ class GiftCardCaptureFunctionalTest extends \PHPUnit_Framework_TestCase
 	 'amount'=>'123',
 	 'payPalNotes'=>'Notes','litleTxnId'=>'12345678000',);
 
-	 $initilaize = new LitleOnlineRequest();
-	 $authReversalResponse = $initilaize->authReversalRequest($hash_in);
+	 $initialize = new LitleOnlineRequest();
+	 $authReversalResponse = $initialize->authReversalRequest($hash_in);
 	 $response = XmlParser::getNode($authReversalResponse,'response');
 	 $this->assertEquals('001',$response);
 	 } */

@@ -10,8 +10,8 @@ $authRev_info = array(
   'amount'=>'20020'
 );
  
-$initilaize = &new LitleOnlineRequest();
-$reversalResponse = $initilaize->authReversalRequest($authRev_info);
+$initialize = &new LitleOnlineRequest();
+$reversalResponse = $initialize->authReversalRequest($authRev_info);
 #display results
 echo ("Response: " . (XmlParser::getNode($reversalResponse,'response')) . "<br>");
 echo ("Message: " . XmlParser::getNode($reversalResponse,'message') . "<br>");

@@ -33,8 +33,8 @@ class CaptureFunctionalTest extends \PHPUnit_Framework_TestCase
             'litleTxnId'=>'1234567891234567891',
             'amount'=>'123');
 
-        $initilaize = new LitleOnlineRequest();
-        $captureResponse = $initilaize->captureRequest($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $captureResponse = $initialize->captureRequest($hash_in);
         $message = XmlParser::getAttribute($captureResponse,'litleOnlineResponse','response');
         $this->assertEquals('0',$message);
     }
@@ -49,8 +49,8 @@ class CaptureFunctionalTest extends \PHPUnit_Framework_TestCase
               'deliveryType'=>'TBD'),
               'payPalOrderComplete'=>'true');
 
-        $initilaize = new LitleOnlineRequest();
-        $captureResponse = $initilaize->captureRequest($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $captureResponse = $initialize->captureRequest($hash_in);
         $message = XmlParser::getAttribute($captureResponse,'litleOnlineResponse','response');
         $this->assertEquals('0',$message);
     }
@@ -62,8 +62,8 @@ class CaptureFunctionalTest extends \PHPUnit_Framework_TestCase
             'patial'=>'true',
             'amount'=>'123');
 
-        $initilaize = new LitleOnlineRequest();
-        $captureResponse = $initilaize->captureRequest($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $captureResponse = $initialize->captureRequest($hash_in);
         $message = XmlParser::getAttribute($captureResponse,'litleOnlineResponse','response');
         $this->assertEquals('0',$message);
     }
@@ -74,8 +74,8 @@ class CaptureFunctionalTest extends \PHPUnit_Framework_TestCase
     			'litleTxnId'=>'1234567891234567891',
     			'amount'=>'123','pin'=>'2139');
     
-    	$initilaize = new LitleOnlineRequest();
-    	$captureResponse = $initilaize->captureRequest($hash_in);
+    	$initialize = new LitleOnlineRequest();
+    	$captureResponse = $initialize->captureRequest($hash_in);
     	$message = XmlParser::getAttribute($captureResponse,'litleOnlineResponse','response');
     	$this->assertEquals('0',$message);
     }

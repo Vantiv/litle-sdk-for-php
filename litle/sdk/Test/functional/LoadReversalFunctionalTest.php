@@ -30,8 +30,8 @@ class LoadReversalFunctionalTest extends \PHPUnit_Framework_TestCase
     public function test_simple()
     {
         $hash_in = array('litleTxnId'=> '123456789012345678','id' => '1211',);
-        $initilaize = new LitleOnlineRequest();
-        $loadReversalResponse = $initilaize->loadReversalRequest($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $loadReversalResponse = $initialize->loadReversalRequest($hash_in);
         $response = XmlParser::getAttribute($loadReversalResponse,'litleOnlineResponse','response');
         $this->assertEquals('0',$response);
     }

@@ -30,8 +30,8 @@ class DeactivateReversalFunctionalTest extends \PHPUnit_Framework_TestCase
     public function test_simple()
     {
         $hash_in = array('id' => 'id','litleTxnId'=> '123456789012345678');
-        $initilaize = new LitleOnlineRequest();
-        $deactivateReversalResponse = $initilaize->deactivateReversalRequest($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $deactivateReversalResponse = $initialize->deactivateReversalRequest($hash_in);
         $response = XmlParser::getAttribute($deactivateReversalResponse,'litleOnlineResponse','response');
         $this->assertEquals('0',$response);
     }

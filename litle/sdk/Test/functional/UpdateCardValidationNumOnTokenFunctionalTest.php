@@ -37,8 +37,8 @@ class UpdateCardValidationNumOnTokenFunctionalTest extends \PHPUnit_Framework_Te
               'litleToken'=>'123456789101112',
             'cardValidationNum'=>'123');
 
-        $initilaize = new LitleOnlineRequest();
-        $updateCardValidationNumOnTokenResponse = $initilaize->updateCardValidationNumOnToken($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $updateCardValidationNumOnTokenResponse = $initialize->updateCardValidationNumOnToken($hash_in);
         $message = XmlParser::getAttribute($updateCardValidationNumOnTokenResponse,'litleOnlineResponse','message');
         $this->assertEquals('Valid Format',$message);
     }

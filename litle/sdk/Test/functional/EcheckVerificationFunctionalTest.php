@@ -37,8 +37,8 @@ class EcheckVerificationFunctionalTest extends \PHPUnit_Framework_TestCase
       'echeck' => array('accType'=>'Checking','accNum'=>'12345657890','routingNum'=>'123456789','checkNum'=>'123455'),
       'billToAddress'=>array('name'=>'Bob','city'=>'lowell','state'=>'MA','email'=>'litle.com'));
 
-        $initilaize = new LitleOnlineRequest();
-        $echeckVerifcationResponse = $initilaize->echeckVerificationRequest($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $echeckVerifcationResponse = $initialize->echeckVerificationRequest($hash_in);
         $response = XmlParser::getNode($echeckVerifcationResponse,'response');
         $this->assertEquals('000',$response);
     }
@@ -53,8 +53,8 @@ class EcheckVerificationFunctionalTest extends \PHPUnit_Framework_TestCase
               'echeckToken' => array('accType'=>'Checking','litleToken'=>'1234565789012','routingNum'=>'123456789','checkNum'=>'123455'),
           'billToAddress'=>array('name'=>'Bob','city'=>'lowell','state'=>'MA','email'=>'litle.com'));
 
-        $initilaize = new LitleOnlineRequest();
-        $echeckVerifcationResponse = $initilaize->echeckVerificationRequest($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $echeckVerifcationResponse = $initialize->echeckVerificationRequest($hash_in);
         $response = XmlParser::getNode($echeckVerifcationResponse,'response');
         $this->assertEquals('000',$response);
     }

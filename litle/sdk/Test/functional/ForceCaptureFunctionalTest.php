@@ -43,8 +43,8 @@ class ForceCaptureFunctionalTest extends \PHPUnit_Framework_TestCase
           'expDate' =>'1210'
         ));
 
-        $initilaize = new LitleOnlineRequest();
-        $forceCaptureResponse = $initilaize->forceCaptureRequest($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $forceCaptureResponse = $initialize->forceCaptureRequest($hash_in);
         $response = XmlParser::getAttribute($forceCaptureResponse,'litleOnlineResponse','response');
         $this->assertEquals('000',$response);
     }
@@ -66,8 +66,8 @@ class ForceCaptureFunctionalTest extends \PHPUnit_Framework_TestCase
       'type'=>'VI'
         ));
 
-        $initilaize = new LitleOnlineRequest();
-        $forceCaptureResponse = $initilaize->forceCaptureRequest($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $forceCaptureResponse = $initialize->forceCaptureRequest($hash_in);
         $message = XmlParser::getAttribute($forceCaptureResponse,'litleOnlineResponse','message');
         $this->assertEquals('Valid Format',$message);
     }
@@ -90,8 +90,8 @@ class ForceCaptureFunctionalTest extends \PHPUnit_Framework_TestCase
     					'expDate' =>'1210'
     			));
     
-    	$initilaize = new LitleOnlineRequest();
-    	$forceCaptureResponse = $initilaize->forceCaptureRequest($hash_in);
+    	$initialize = new LitleOnlineRequest();
+    	$forceCaptureResponse = $initialize->forceCaptureRequest($hash_in);
     	$response = XmlParser::getAttribute($forceCaptureResponse,'litleOnlineResponse','response');
     	$this->assertEquals('000',$response);
     }
@@ -115,8 +115,8 @@ class ForceCaptureFunctionalTest extends \PHPUnit_Framework_TestCase
     			'processingType' => 'initialRecurring'
     	);
     
-    	$initilaize = new LitleOnlineRequest();
-    	$forceCaptureResponse = $initilaize->forceCaptureRequest($hash_in);
+    	$initialize = new LitleOnlineRequest();
+    	$forceCaptureResponse = $initialize->forceCaptureRequest($hash_in);
     	$response = XmlParser::getAttribute($forceCaptureResponse,'litleOnlineResponse','response');
     	$this->assertEquals('000',$response);
     }

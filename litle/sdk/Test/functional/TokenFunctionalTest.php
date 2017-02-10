@@ -36,8 +36,8 @@ class TokenFunctionalTest extends \PHPUnit_Framework_TestCase
           'orderId'=>'12344',
           'accountNumber'=>'1233456789103801');
 
-        $initilaize = new LitleOnlineRequest();
-        $registerTokenResponse = $initilaize->registerTokenRequest($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $registerTokenResponse = $initialize->registerTokenRequest($hash_in);
         $message = XmlParser::getAttribute($registerTokenResponse,'litleOnlineResponse','message');
         $this->assertEquals('Valid Format',$message);
     }
@@ -51,8 +51,8 @@ class TokenFunctionalTest extends \PHPUnit_Framework_TestCase
       'orderId'=>'12344',
       'paypageRegistrationId'=>'1233456789101112');
 
-        $initilaize = new LitleOnlineRequest();
-        $registerTokenResponse = $initilaize->registerTokenRequest($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $registerTokenResponse = $initialize->registerTokenRequest($hash_in);
         $message = XmlParser::getAttribute($registerTokenResponse,'litleOnlineResponse','message');
         $this->assertEquals('Valid Format',$message);
     }
@@ -66,8 +66,8 @@ class TokenFunctionalTest extends \PHPUnit_Framework_TestCase
           'orderId'=>'12344',
           'echeckForToken'=>array('accNum'=>'12344565','routingNum'=>'123476545'));
 
-        $initilaize = new LitleOnlineRequest();
-        $registerTokenResponse = $initilaize->registerTokenRequest($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $registerTokenResponse = $initialize->registerTokenRequest($hash_in);
         $message = XmlParser::getAttribute($registerTokenResponse,'litleOnlineResponse','message');
         $this->assertEquals('Valid Format',$message);
     }
@@ -101,8 +101,8 @@ class TokenFunctionalTest extends \PHPUnit_Framework_TestCase
     					'signature'=>'signature',
     					'version' => 'version 1'));
     
-    	$initilaize = new LitleOnlineRequest();
-    	$registerTokenResponse = $initilaize->registerTokenRequest($hash_in);
+    	$initialize = new LitleOnlineRequest();
+    	$registerTokenResponse = $initialize->registerTokenRequest($hash_in);
     	$message = XmlParser::getAttribute($registerTokenResponse,'litleOnlineResponse','message');
     	$this->assertEquals('Valid Format',$message);
     }
