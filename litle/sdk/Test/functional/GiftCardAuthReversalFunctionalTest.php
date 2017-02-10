@@ -30,26 +30,29 @@ class GiftCardAuthReversalFunctionalTest extends \PHPUnit_Framework_TestCase
     public function test_simple_giftCardAuthReversal()
     {
 		$hash_in = array (
-				'id' => 'id',
+        'id' => 'id',
 				'litleTxnId' => '12345678000',
-				/* 'card' => array (
-						'type' => 'GC',
+				'captureAmount'=>'123',
+				 'card' => array (
+				 		'type' => 'GC',
 						'number' => '4100000000000001',
 						'expDate' => '0118',
 						'pin' => '1234',
-						'cardValidationNum' => '411' 
-				)
-				, */
+						'cardValidationNum' => '411'
+				),
 				'originalRefCode' => '101',
 				'originalAmount' => '34561',
+				'originalTxnTime' => '2017-01-24T09:00:00',
 				'originalSystemTraceId' => '33',
 				'originalSequenceNumber' => '111111' 
 		);
 
         $initilaize = new LitleOnlineRequest();
-        $authReversalResponse = $initilaize->authReversalRequest($hash_in);
-        $response = XmlParser::getNode($authReversalResponse,'response');
-        $this->assertEquals('000',$response);
+        $giftCardAuthReversalResponse = $initilaize->giftCardAuthReversalRequest($hash_in);
+        $response = XmlParser::getNode($giftCardAuthReversalResponse,'systemTraceId');
+        $sequenceNumber = XmlParser::getNode($giftCardAuthReversalResponse,'sequenceNumber');
+        $this->assertEquals('0',$response);
+        $this->assertEquals('12',$sequenceNumber);
     }
 
 }
