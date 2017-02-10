@@ -245,26 +245,5 @@ class SaleFunctionalTest extends \PHPUnit_Framework_TestCase
     	$this->assertEquals('000',$response);
     }
     
-   /*  public function test_simple_sale_with_sepaDirectDebit_InsufficientDebit()
-    {
-    	$hash_in = array(
-    			'sepaDirectDebit'=>array(
-    					'mandateProvider'=>'Merchant',
-    					'sequenceType'=> 'FirstRecurring',
-    					'mandateReference'=>'some string here',
-    					'mandateUrl' => 'some string here',
-    					'iban' => 'string with min of 15 char',
-    					'preferredLanguage'=> 'USA'
-    			),
-    			'id'=>'1211',
-    			'orderId'=> '2111',
-    			'reportGroup'=>'Planets',
-    			'orderSource'=>'ecommerce',
-    			'amount'=>'110000000');
-    
-    			$initialize = new LitleOnlineRequest();
-    			$saleResponse = $initialize->saleRequest($hash_in);
-    			$response = XmlParser::getNode($saleResponse,'response');
-    			$this->assertEquals('000',$response);
-    } */
+   
 }
