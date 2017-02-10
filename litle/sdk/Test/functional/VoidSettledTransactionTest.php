@@ -45,18 +45,18 @@ class VoidSettledTransactionTest extends \PHPUnit_Framework_TestCase
         $capture_hash =  array('litleTxnId' =>(XmlParser::getNode($authorizationResponse,'litleTxnId')),'id' => '1211');
         $captureResponse = $initialize->captureRequest($capture_hash);
         //echo $captureResponse;
-        $this->assertEquals('001',XmlParser::getNode($captureResponse,'response'));
+        $this->assertEquals('000',XmlParser::getNode($captureResponse,'response'));
         $void_hash1 =  array('litleTxnId' =>362,'id' => '1211');
 
         $voidResponse1 = $initialize->voidRequest($void_hash1);
-        $this->assertEquals('001',XmlParser::getNode($voidResponse1,'response'));
+        $this->assertEquals('362',XmlParser::getNode($voidResponse1,'response'));
 
         $credit_hash =  array('litleTxnId' =>(XmlParser::getNode($captureResponse,'litleTxnId')),'id' => '1211',);
         $creditResponse = $initialize->creditRequest($credit_hash);
-        $this->assertEquals('001',XmlParser::getNode($creditResponse,'response'));
+        $this->assertEquals('000',XmlParser::getNode($creditResponse,'response'));
 
         $void_hash2 =  array('litleTxnId' =>(XmlParser::getNode($creditResponse,'litleTxnId')),'id' => '1211',);
         $voidResponse2 = $initialize->voidRequest($void_hash2);
-        $this->assertEquals('001',XmlParser::getNode($voidResponse2,'response'));
+        $this->assertEquals('000',XmlParser::getNode($voidResponse2,'response'));
     }
 }

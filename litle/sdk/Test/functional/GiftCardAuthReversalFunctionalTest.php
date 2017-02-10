@@ -25,28 +25,29 @@
 namespace litle\sdk\Test\functional;
 use litle\sdk\LitleOnlineRequest;
 use litle\sdk\XmlParser;
-class AuthReversalFunctionalTest extends \PHPUnit_Framework_TestCase
+class GiftCardAuthReversalFunctionalTest extends \PHPUnit_Framework_TestCase
 {
-    public function test_simple_authReversal()
+    public function test_simple_giftCardAuthReversal()
     {
-        $hash_in = array('id' => 'id',
-                'litleTxnId'=>'12345678000','amount'=>'123',
-              'payPalNotes'=>'Notes');
+		$hash_in = array (
+				'id' => 'id',
+				'litleTxnId' => '12345678000',
+				/* 'card' => array (
+						'type' => 'GC',
+						'number' => '4100000000000001',
+						'expDate' => '0118',
+						'pin' => '1234',
+						'cardValidationNum' => '411' 
+				)
+				, */
+				'originalRefCode' => '101',
+				'originalAmount' => '34561',
+				'originalSystemTraceId' => '33',
+				'originalSequenceNumber' => '111111' 
+		);
 
-        $initialize = new LitleOnlineRequest();
-        $authReversalResponse = $initialize->authReversalRequest($hash_in);
-        $response = XmlParser::getNode($authReversalResponse,'response');
-        $this->assertEquals('000',$response);
-    }
-
-function test_simple_authreversal_fields_out_of_order()
-    {
-        $hash_in = array('id' => 'id',
-                'amount'=>'123',
-              'payPalNotes'=>'Notes','litleTxnId'=>'12345678000',);
-
-        $initialize = new LitleOnlineRequest();
-        $authReversalResponse = $initialize->authReversalRequest($hash_in);
+        $initilaize = new LitleOnlineRequest();
+        $authReversalResponse = $initilaize->authReversalRequest($hash_in);
         $response = XmlParser::getNode($authReversalResponse,'response');
         $this->assertEquals('000',$response);
     }

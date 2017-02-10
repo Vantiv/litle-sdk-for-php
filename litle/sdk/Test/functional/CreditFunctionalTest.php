@@ -43,7 +43,7 @@ class CreditFunctionalTest extends \PHPUnit_Framework_TestCase
         $initialize = new LitleOnlineRequest();
         $creditResponse = $initialize->creditRequest($hash_in);
         $response = XmlParser::getNode($creditResponse,'response');
-        $this->assertEquals('001',$response);
+        $this->assertEquals('000',$response);
     }
 
     public function test_simple_credit_with_paypal()
@@ -89,7 +89,7 @@ class CreditFunctionalTest extends \PHPUnit_Framework_TestCase
         $initialize = new LitleOnlineRequest();
         $creditResponse = $initialize->creditRequest($hash_in);
         $response = XmlParser::getNode($creditResponse,'response');
-        $this->assertEquals('001',$response);
+        $this->assertEquals('000',$response);
     }
     public function test_amexAggregator()
     {
@@ -107,7 +107,7 @@ class CreditFunctionalTest extends \PHPUnit_Framework_TestCase
         $initialize = new LitleOnlineRequest();
         $creditResponse = $initialize->creditRequest($hash_in);
         $response = XmlParser::getNode($creditResponse,'response');
-        $this->assertEquals('001',$response);
+        $this->assertEquals('000',$response);
     }
     
     public function test_simple_credit_with_secondary_amount()
@@ -127,7 +127,7 @@ class CreditFunctionalTest extends \PHPUnit_Framework_TestCase
     	$initialize = new LitleOnlineRequest();
     	$creditResponse = $initialize->creditRequest($hash_in);
     	$response = XmlParser::getNode($creditResponse,'response');
-    	$this->assertEquals('001',$response);
+    	$this->assertEquals('000',$response);
     }
     
     public function test_simple_credit_with_litleTxnId_AndSecondaryAmount()

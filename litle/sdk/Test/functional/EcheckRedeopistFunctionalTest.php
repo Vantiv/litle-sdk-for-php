@@ -36,7 +36,7 @@ class EcheckRedeopistFunctionalTest extends \PHPUnit_Framework_TestCase
         $initialize = new LitleOnlineRequest();
         $echeckRedepositResponse = $initialize->echeckRedepositRequest($hash_in);
         $response = XmlParser::getNode($echeckRedepositResponse,'response');
-        $this->assertEquals('001',$response);
+        $this->assertEquals('000',$response);
     }
 
     public function test_echeckRedepoist_with_echeck()
@@ -53,7 +53,7 @@ class EcheckRedeopistFunctionalTest extends \PHPUnit_Framework_TestCase
         $initialize = new LitleOnlineRequest();
         $echeckRedepositResponse = $initialize->echeckRedepositRequest($hash_in);
         $response = XmlParser::getNode($echeckRedepositResponse,'response');
-        $this->assertEquals('001',$response);
+        $this->assertEquals('000',$response);
     }
 
     public function test_echeckRedepoist_with_echeckToken()
@@ -70,7 +70,7 @@ class EcheckRedeopistFunctionalTest extends \PHPUnit_Framework_TestCase
         $initialize = new LitleOnlineRequest();
         $echeckRedepositResponse = $initialize->echeckRedepositRequest($hash_in);
         $response = XmlParser::getNode($echeckRedepositResponse,'response');
-        $this->assertEquals('001',$response);
+        $this->assertEquals('000',$response);
     }
     public function test_echeckRedepoist_missing_litleTxnId()
     {
