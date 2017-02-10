@@ -250,5 +250,7 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
     	$response = XmlParser::getNode($authorizationResponse,'networkTransactionId');
     	$this->assertEquals('63225578415568556365452427825',$response);
     }
+    
+    
 
 }
