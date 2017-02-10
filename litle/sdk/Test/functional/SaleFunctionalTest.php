@@ -230,6 +230,7 @@ class SaleFunctionalTest extends \PHPUnit_Framework_TestCase
     					'sequenceType'=> 'FirstRecurring',
     					'mandateReference'=>'some string here',
     					'mandateUrl' => 'some string here',
+    					//'mandateSignatureDate'=>'2017-01-24T09:00:00',
     					'iban' => 'string with min of 15 char',
     					'preferredLanguage'=> 'USA'
     			),
@@ -244,6 +245,27 @@ class SaleFunctionalTest extends \PHPUnit_Framework_TestCase
     	$response = XmlParser::getNode($saleResponse,'response');
     	$this->assertEquals('000',$response);
     }
+    
+
+     public function test_simple_sale_with_networkTransactionId()
+    {
+    	$hash_in = array(
+    			 'card'=>array('type'=>'VI',
+                            'number'=>'4100000000000000',
+                            'expDate'=>'1213',
+                            'cardValidationNum' => '1213'),
+    			'id'=>'1211',
+    			'orderId'=> '2111',
+    			'reportGroup'=>'Planets',
+    			'orderSource'=>'ecommerce',
+    			'amount'=>'123');
+    	
+    
+    	$initialize = new LitleOnlineRequest();
+    	$saleResponse = $initialize->saleRequest($hash_in);
+    	$response = XmlParser::getNode($saleResponse,'networkTransactionId');
+    	$this->assertEquals('63225578415568556365452427825',$response);
+    } 
     
    
 }
