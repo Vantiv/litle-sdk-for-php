@@ -337,7 +337,8 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 						'accNum' => '12345657890',
 						'routingNum' => '123456789',
 						'checkNum' => '123455' 
-				) 
+				),
+				'customIdentifier' => 'Identifier'
 		);
 		$batch_request = new BatchRequest ( $this->direct );
 		$batch_request->addSubmerchantCredit ( $hash_in );
@@ -471,7 +472,8 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$hash_in = array ('id' =>'id',
 				'fundingSubmerchantId' => '2111',
 				'fundsTransferId' => '12345678',
-				'amount' => '13' 
+				'amount' => '13' ,
+				'customIdentifier' => 'Identifier'
 		);
 		$batch_request = new BatchRequest ( $this->direct );
 		$batch_request->addPayFacDebit ( $hash_in );
