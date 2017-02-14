@@ -307,7 +307,8 @@ class Transactions {
 				'fundingSubmerchantId' => XmlFields::returnArrayValue ( $hash_in, 'fundingSubmerchantId' ),
 				'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
 				'fundsTransferId' => XmlFields::returnArrayValue ( $hash_in, 'amount' ),
-				'amount' => XmlFields::returnArrayValue ( $hash_in, 'amount' )  
+				'amount' => XmlFields::returnArrayValue ( $hash_in, 'amount' )  ,
+				'customIdentifier' => XmlFields::returnArrayValue ( $hash_in, 'customIdentifier' )
 		);
 		return $hash_out;
 	}
