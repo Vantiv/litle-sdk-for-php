@@ -110,9 +110,6 @@ class TokenFunctionalTest extends \PHPUnit_Framework_TestCase
     public function test_simple_token_with_androidpay()
     {
     	$hash_in = array(
-    			'merchantId' => '101',
-		        'version'=>'8.8',
-		        'reportGroup'=>'Planets',
 		        'id'=>'id',
 		        'orderId'=>'androidpay',
 		        'accountNumber'=>'1233456789103801'
