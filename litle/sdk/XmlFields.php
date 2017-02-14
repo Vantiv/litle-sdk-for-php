@@ -298,7 +298,8 @@ class XmlFields
                         "track"=>XmlFields::returnArrayValue($hash_in, "track"),
                         "number"=>XmlFields::returnArrayValue($hash_in, "number"),
                         "expDate"=>XmlFields::returnArrayValue($hash_in, "expDate"),
-                        "cardValidationNum"=>XmlFields::returnArrayValue($hash_in, "cardValidationNum")
+                        "cardValidationNum"=>XmlFields::returnArrayValue($hash_in, "cardValidationNum"),
+            			"pin"=>XmlFields::returnArrayValue($hash_in, "pin")
             );
 
             return $hash_out;
