@@ -29,7 +29,23 @@ class ActivateReversalTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple()
     {
-        $hash_in = array('litleTxnId'=> '123456789012345678','id' => 'id');
+        $hash_in = array(
+        		'litleTxnId' => '1234567890',
+				'reportGroup'=>'Planets',
+				'id' => 'id',
+				'card' => array (
+						'type' => 'GC',
+						'number' => '4100000000000001',
+						'expDate' => '0118',
+						'pin' => '1234',
+						'cardValidationNum' => '411'
+				),
+				'originalRefCode' => '101',
+				'originalAmount' => '34561',
+				'originalTxnTime' => '2017-01-24T09:00:00',
+				'originalSystemTraceId' => '33',
+				'originalSequenceNumber' => '111111' 
+        );
         $initialize = new LitleOnlineRequest();
         $activateReversalResponse = $initialize->activateReversalRequest($hash_in);
         $response = XmlParser::getAttribute($activateReversalResponse,'litleOnlineResponse','response');
