@@ -38,7 +38,7 @@ class GiftCardCreditFunctionalTest extends \PHPUnit_Framework_TestCase
 //         		'orderSource'=>'ecommerce',
         		'card' => array (
         				'type' => 'GC',
-        				'number' => '4100000000000001',
+        				'number' => '4100000000000000',
         				'expDate' => '0118',
         				'pin' => '1234',
         				'cardValidationNum' => '411'
@@ -50,6 +50,33 @@ class GiftCardCreditFunctionalTest extends \PHPUnit_Framework_TestCase
         $giftCardCreditResponse = $initialize->giftCardCreditRequest($hash_in);
         $response = XmlParser::getNode($giftCardCreditResponse,'response');
         $this->assertEquals('000',$response);
+    }
+    
+    public function test_simple_giftCardCredit_giftCardResponse()
+    {
+    	$hash_in = array(
+    			'litleTxnId'=> '12312312',
+    			'reportGroup'=>'Planets',
+    			'creditAmount'=>'123',
+    			'id' => '1211',
+    			'card' => array (
+    					'type' => 'GC',
+    					'number' => '4100521234567000',
+    					'expDate' => '0118',
+    					'pin' => '1234',
+    					'cardValidationNum' => '411'
+    			)
+    
+    	);
+    
+    	$initialize = new LitleOnlineRequest();
+    	$giftCardCreditResponse = $initialize->giftCardCreditRequest($hash_in);
+    	$response = XmlParser::getNode($giftCardCreditResponse,'response');
+    	$this->assertEquals('000',$response);
+    	$systemTraceId = XmlParser::getNode($giftCardCreditResponse,'systemTraceId');
+    	$this -> assertEquals('0',$systemTraceId);
+    	$sequenceNumber = XmlParser::getNode($giftCardCreditResponse,'sequenceNumber');
+    	$this -> assertEquals('12',$sequenceNumber);
     }
 
 }
