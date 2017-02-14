@@ -29,9 +29,25 @@ class RefundReversalFunctionalTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple()
     {
-        $hash_in = array('litleTxnId'=> '123456789012345678','id' => '1211',);
+        $hash_in = array(
+        		'litleTxnId' => '1234567890',
+				'reportGroup'=>'Planets',
+				'id' => 'id',
+				'card' => array (
+						'type' => 'GC',
+						'number' => '4100000000000001',
+						'expDate' => '0118',
+						'pin' => '1234',
+						'cardValidationNum' => '411'
+				),
+				'originalRefCode' => '101',
+				'originalAmount' => '34561',
+				'originalTxnTime' => '2017-01-24T09:00:00',
+				'originalSystemTraceId' => '33',
+				'originalSequenceNumber' => '111111' 
+        );
         $initialize = new LitleOnlineRequest();
-        $refundReversalResponse = $initialize->echeckVoidRequest($hash_in);
+        $refundReversalResponse = $initialize->refundReversalRequest($hash_in);
         $response = XmlParser::getAttribute($refundReversalResponse,'litleOnlineResponse','response');
         $this->assertEquals('0',$response);
     }
