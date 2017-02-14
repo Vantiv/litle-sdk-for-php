@@ -327,7 +327,8 @@ class Transactions {
 				'submerchantName' => XmlFields::returnArrayValue ( $hash_in, 'submerchantName' ),
 				'fundsTransferId' => XmlFields::returnArrayValue ( $hash_in, 'amount' ),
 				'amount' => XmlFields::returnArrayValue ( $hash_in, 'amount' ) ,
-				'accountInfo' => XmlFields::echeckType ( XmlFields::returnArrayValue ( $hash_in, 'accountInfo' ) )
+				'accountInfo' => XmlFields::echeckType ( XmlFields::returnArrayValue ( $hash_in, 'accountInfo' ) ),
+				'customIdentifier' => XmlFields::returnArrayValue ( $hash_in, 'customIdentifier' ) 
 		);
 		return $hash_out;
 	}
