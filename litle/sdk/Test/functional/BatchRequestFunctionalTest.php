@@ -394,7 +394,8 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$hash_in = array ('id' =>'id',
 				'fundingSubmerchantId' => '2111',
 				'fundsTransferId' => '12345678',
-				'amount' => '13' 
+				'amount' => '13' ,
+				'customIdentifier' => 'Identifier'
 		);
 		$batch_request = new BatchRequest ( $this->direct );
 		$batch_request->addReserveCredit ( $hash_in );
