@@ -280,7 +280,7 @@ class LitleOnlineRequest
         );
 
         $choice_hash = array($hash_out['accountNumber'],$hash_out['echeckForToken'],$hash_out['paypageRegistrationId'],$hash_out['applepay']);
-        $registerTokenResponse = $this->processRequest($hash_out,$hash_in,'registerToken',$choice_hash);
+        $registerTokenResponse = $this->processRequest($hash_out,$hash_in,'registerTokenRequest',$choice_hash);
 
         return $registerTokenResponse;
     }
@@ -480,8 +480,14 @@ class LitleOnlineRequest
     public function depositReversalRequest($hash_in)
     {
         $hash_out = array(
-        'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
-        'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+        		'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
+        		'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+        		'card'=> XmlFields::giftCardCardType(XmlFields::returnArrayValue($hash_in,'card')),
+        		'originalRefCode'=>XmlFields::returnArrayValue($hash_in,'originalRefCode'),
+        		'originalAmount'=>XmlFields::returnArrayValue($hash_in,'originalAmount'),
+        		'originalTxnTime'=>XmlFields::returnArrayValue($hash_in,'originalTxnTime'),
+        		'originalSystemTraceId'=>XmlFields::returnArrayValue($hash_in,'originalSystemTraceId'),
+        		'originalSequenceNumber'=>XmlFields::returnArrayValue($hash_in,'originalSequenceNumber')
         );
         $response = $this->processRequest($hash_out,$hash_in,"depositReversal");
 
@@ -490,8 +496,14 @@ class LitleOnlineRequest
     public function refundReversalRequest($hash_in)
     {
         $hash_out = array(
-        'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
-        'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+		        'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
+		        'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+        		'card'=> XmlFields::giftCardCardType(XmlFields::returnArrayValue($hash_in,'card')),
+        		'originalRefCode'=>XmlFields::returnArrayValue($hash_in,'originalRefCode'),
+        		'originalAmount'=>XmlFields::returnArrayValue($hash_in,'originalAmount'),
+        		'originalTxnTime'=>XmlFields::returnArrayValue($hash_in,'originalTxnTime'),
+        		'originalSystemTraceId'=>XmlFields::returnArrayValue($hash_in,'originalSystemTraceId'),
+        		'originalSequenceNumber'=>XmlFields::returnArrayValue($hash_in,'originalSequenceNumber')
         );
         $response = $this->processRequest($hash_out,$hash_in,"refundReversal");
 
@@ -500,8 +512,14 @@ class LitleOnlineRequest
     public function activateReversalRequest($hash_in)
     {
         $hash_out = array(
-        'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
-        'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+		        'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
+		        'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+        		'card'=> XmlFields::giftCardCardType(XmlFields::returnArrayValue($hash_in,'card')),
+        		'originalRefCode'=>XmlFields::returnArrayValue($hash_in,'originalRefCode'),
+        		'originalAmount'=>XmlFields::returnArrayValue($hash_in,'originalAmount'),
+        		'originalTxnTime'=>XmlFields::returnArrayValue($hash_in,'originalTxnTime'),
+        		'originalSystemTraceId'=>XmlFields::returnArrayValue($hash_in,'originalSystemTraceId'),
+        		'originalSequenceNumber'=>XmlFields::returnArrayValue($hash_in,'originalSequenceNumber')
         );
         $response = $this->processRequest($hash_out,$hash_in,"activateReversal");
 
@@ -510,8 +528,13 @@ class LitleOnlineRequest
     public function deactivateReversalRequest($hash_in)
     {
         $hash_out = array(
-        'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
-        'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+		        'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
+		        'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+        		'card'=> XmlFields::giftCardCardType(XmlFields::returnArrayValue($hash_in,'card')),
+        		'originalRefCode'=>XmlFields::returnArrayValue($hash_in,'originalRefCode'),
+        		'originalTxnTime'=>XmlFields::returnArrayValue($hash_in,'originalTxnTime'),
+        		'originalSystemTraceId'=>XmlFields::returnArrayValue($hash_in,'originalSystemTraceId'),
+        		'originalSequenceNumber'=>XmlFields::returnArrayValue($hash_in,'originalSequenceNumber')
         );
         $response = $this->processRequest($hash_out,$hash_in,"deactivateReversal");
 
@@ -520,8 +543,14 @@ class LitleOnlineRequest
     public function loadReversalRequest($hash_in)
     {
         $hash_out = array(
-        'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
-        'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+		        'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
+		        'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+        		'card'=> XmlFields::giftCardCardType(XmlFields::returnArrayValue($hash_in,'card')),
+        		'originalRefCode'=>XmlFields::returnArrayValue($hash_in,'originalRefCode'),
+        		'originalAmount'=>XmlFields::returnArrayValue($hash_in,'originalAmount'),
+        		'originalTxnTime'=>XmlFields::returnArrayValue($hash_in,'originalTxnTime'),
+        		'originalSystemTraceId'=>XmlFields::returnArrayValue($hash_in,'originalSystemTraceId'),
+        		'originalSequenceNumber'=>XmlFields::returnArrayValue($hash_in,'originalSequenceNumber')
         );
         $response = $this->processRequest($hash_out,$hash_in,"loadReversal");
 
@@ -530,8 +559,14 @@ class LitleOnlineRequest
     public function unloadReversalRequest($hash_in)
     {
         $hash_out = array(
-        'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
-        'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+		        'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
+		        'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+        		'card'=> XmlFields::giftCardCardType(XmlFields::returnArrayValue($hash_in,'card')),
+        		'originalRefCode'=>XmlFields::returnArrayValue($hash_in,'originalRefCode'),
+        		'originalAmount'=>XmlFields::returnArrayValue($hash_in,'originalAmount'),
+        		'originalTxnTime'=>XmlFields::returnArrayValue($hash_in,'originalTxnTime'),
+        		'originalSystemTraceId'=>XmlFields::returnArrayValue($hash_in,'originalSystemTraceId'),
+        		'originalSequenceNumber'=>XmlFields::returnArrayValue($hash_in,'originalSequenceNumber')
         );
         $response = $this->processRequest($hash_out,$hash_in,"unloadReversal");
 
