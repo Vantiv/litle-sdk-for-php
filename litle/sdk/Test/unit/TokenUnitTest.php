@@ -135,5 +135,22 @@ class TokenUnitTest extends \PHPUnit_Framework_TestCase
     	$litleTest->newXML = $mock;
     	$litleTest->registerTokenRequest($hash_in);
     }
+    
+    public function test_token_androidpay()
+    {
+    	$hash_in = array(
+    			'id' => 'id',
+    			'orderId'=>'androidpay',
+    			'accountNumber'=>'1233456789103801'
+    	);
+    	$mock = $this->getMock('litle\sdk\LitleXmlMapper');
+    	$mock->expects($this->once())
+    	->method('request')
+    	->with($this->matchesRegularExpression('/.*<orderId>androidpay.*<accountNumber>1233456789103801.*/'));
+    
+    	$litleTest = new LitleOnlineRequest();
+    	$litleTest->newXML = $mock;
+    	$litleTest->registerTokenRequest($hash_in);
+    }
 
 }
