@@ -59,6 +59,7 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		while ($txn = $processor->nextTransaction()) {
 			echo "Transaction Type : " . $txn->getName() . "\n";
 			echo "Transaction Id: " . $txn->litleTxnId ." \n";
+			$this->assertRegExp("/^8[\d+]{16}$/",(string)$txn->litleTxnId,"");
 		}
 	}
 	function test_addSale() {
