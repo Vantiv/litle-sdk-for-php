@@ -134,6 +134,9 @@ class Obj2xml
 
         $xml->addAttribute('creditAmount', $counts_and_amounts['credit']['amount']);
         $xml->addAttribute('numCredits', $counts_and_amounts['credit']['count']);
+        
+        $xml->addAttribute('giftCardCreditAmount', $counts_and_amounts['giftCardCredit']['amount']);
+        $xml->addAttribute('numGiftCardCredits', $counts_and_amounts['giftCardCredit']['count']);
 
         $xml->addAttribute('numTokenRegistrations', $counts_and_amounts['tokenRegistration']['count']);
 
@@ -145,9 +148,15 @@ class Obj2xml
 
         $xml->addAttribute('authReversalAmount', $counts_and_amounts['authReversal']['amount']);
         $xml->addAttribute('numAuthReversals', $counts_and_amounts['authReversal']['count']);
+        
+        $xml->addAttribute('giftCardAuthReversalOriginalAmount', $counts_and_amounts['giftCardAuthReversal']['amount']);
+        $xml->addAttribute('numGiftCardAuthReversals', $counts_and_amounts['giftCardAuthReversal']['count']);
 
         $xml->addAttribute('captureAmount', $counts_and_amounts['capture']['amount']);
         $xml->addAttribute('numCaptures', $counts_and_amounts['capture']['count']);
+        
+        $xml->addAttribute('giftCardCaptureAmount', $counts_and_amounts['giftCardCapture']['amount']);
+        $xml->addAttribute('numGiftCardCaptures', $counts_and_amounts['giftCardCapture']['count']);
 
         $xml->addAttribute('echeckVerificationAmount', $counts_and_amounts['echeckVerification']['amount']);
         $xml->addAttribute('numEcheckVerification', $counts_and_amounts['echeckVerification']['count']);
