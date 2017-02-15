@@ -239,7 +239,7 @@ class BatchRequest {
 	
 		$this->addTransaction ( $hash_out, $hash_in, 'giftCardAuthReversal' );
 		$this->counts_and_amounts ['giftCardAuthReversal'] ['count'] += 1;
-		$this->counts_and_amounts ['giftCardAuthReversal'] ['amount'] += $hash_out ['amount'];
+		$this->counts_and_amounts ['giftCardAuthReversal'] ['amount'] += $hash_out ['originalAmount'];
 	}
 	public function addCredit($hash_in) {
 		$hash_out = Transactions::createCreditHash ( $hash_in );
@@ -260,7 +260,7 @@ class BatchRequest {
 	
 		$this->addTransaction ( $hash_out, $hash_in, 'giftCardCredit' );
 		$this->counts_and_amounts ['giftCardCredit'] ['count'] += 1;
-		$this->counts_and_amounts ['giftCardCredit'] ['amount'] += $hash_out ['amount'];
+		$this->counts_and_amounts ['giftCardCredit'] ['amount'] += $hash_out ['creditAmount'];
 	}
 	public function addRegisterToken($hash_in) {
 		$hash_out = Transactions::createRegisterTokenHash ( $hash_in );
@@ -300,7 +300,7 @@ class BatchRequest {
 	
 		$this->addTransaction ( $hash_out, $hash_in, 'giftCardCapture' );
 		$this->counts_and_amounts ['giftCardCapture'] ['count'] += 1;
-		$this->counts_and_amounts ['giftCardCapture'] ['amount'] += $hash_out ['amount'];
+		$this->counts_and_amounts ['giftCardCapture'] ['amount'] += $hash_out ['captureAmount'];
 	}
 	public function addCaptureGivenAuth($hash_in) {
 		$hash_out = Transactions::createCaptureGivenAuthHash ( $hash_in );
