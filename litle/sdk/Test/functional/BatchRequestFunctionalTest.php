@@ -3,6 +3,8 @@
 namespace litle\sdk\Test\functional;
 
 use litle\sdk\BatchRequest;
+use litle\sdk\LitleRequest;
+use litle\sdk\LitleResponseProcessor;
 
 require_once realpath ( dirname ( __FILE__ ) ) . '../../../LitleOnline.php';
 class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
@@ -37,6 +39,28 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals ( 1, $cts ['sale'] ['count'] );
 		$this->assertEquals ( 123, $cts ['sale'] ['amount'] );
 	}
+	# Call this function test_get_transactionResponse at the end of the test case you are testing
+	# to check the TransactionResponse Type and Id for the test case
+	# take the test_addSale() as an example and run it
+	function test_get_transactionResponse($batch_request) {
+		$litle_request = new LitleRequest();
+		
+		# close the batch, indicating that we intend to add no more sales
+		$batch_request->closeRequest();
+		# add the batch to the litle request
+		$litle_request->addBatchRequest($batch_request);
+		# close the litle request, indicating that we intend to add no more batches
+		$litle_request->closeRequest();
+		# send the batch to litle via SFTP
+		$response_file = $litle_request->sendToLitle();
+		# process the response file
+		$processor = new LitleResponseProcessor($response_file);
+		
+		while ($txn = $processor->nextTransaction()) {
+			echo "Transaction Type : " . $txn->getName() . "\n";
+			echo "Transaction Id: " . $txn->litleTxnId ." \n";
+		}
+	}
 	function test_addSale() {
 		$hash_in = array (
 				'card' => array (
@@ -60,6 +84,8 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$cts = $batch_request->getCountsAndAmounts ();
 		$this->assertEquals ( 1, $cts ['sale'] ['count'] );
 		$this->assertEquals ( 123, $cts ['sale'] ['amount'] );
+		
+		$this->test_get_transactionResponse($batch_request);
 	}
 	public function test_addAuth() {
 		$hash_in = array (
