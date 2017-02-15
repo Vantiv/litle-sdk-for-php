@@ -111,6 +111,34 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals ( 1, $cts ['authReversal'] ['count'] );
 		$this->assertEquals ( 123, $cts ['authReversal'] ['amount'] );
 	}
+	public function test_addGiftCardAuthReversal() {
+		$hash_in = array (
+        		'id' => 'id',
+				'litleTxnId' => '12345678000',
+				'captureAmount'=>'123',
+				 'card' => array (
+				 		'type' => 'GC',
+						'number' => '4100000000000001',
+						'expDate' => '0118',
+						'pin' => '1234',
+						'cardValidationNum' => '411'
+				),
+				'originalRefCode' => '101',
+				'originalAmount' => '123',
+				'originalTxnTime' => '2017-01-24T09:00:00',
+				'originalSystemTraceId' => '33',
+				'originalSequenceNumber' => '111111' 
+		);
+		$batch_request = new BatchRequest ( $this->direct );
+		$batch_request->addGiftCardAuthReversal ( $hash_in );
+	
+		$this->assertTrue ( file_exists ( $batch_request->batch_file ) );
+		$this->assertEquals ( 1, $batch_request->total_txns );
+	
+		$cts = $batch_request->getCountsAndAmounts ();
+		$this->assertEquals ( 1, $cts ['giftCardAuthReversal'] ['count'] );
+		$this->assertEquals ( 123, $cts ['giftCardAuthReversal'] ['amount'] );
+	}
 	public function test_addCredit() {
 		$hash_in = array (
 				'card' => array (
@@ -134,6 +162,30 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$cts = $batch_request->getCountsAndAmounts ();
 		$this->assertEquals ( 1, $cts ['credit'] ['count'] );
 		$this->assertEquals ( 123, $cts ['credit'] ['amount'] );
+	}
+	public function test_addGiftCardCredit() {
+		$hash_in = array(
+    			'litleTxnId'=> '12312312',
+    			'reportGroup'=>'Planets',
+    			'creditAmount'=>'123',
+    			'id' => '1211',
+    			'card' => array (
+    					'type' => 'GC',
+    					'number' => '4100521234567000',
+    					'expDate' => '0118',
+    					'pin' => '1234',
+    					'cardValidationNum' => '411'
+    			)
+    	);
+		$batch_request = new BatchRequest ( $this->direct );
+		$batch_request->addGiftCardCredit ( $hash_in );
+	
+		$this->assertTrue ( file_exists ( $batch_request->batch_file ) );
+		$this->assertEquals ( 1, $batch_request->total_txns );
+	
+		$cts = $batch_request->getCountsAndAmounts ();
+		$this->assertEquals ( 1, $cts ['giftCardCredit'] ['count'] );
+		$this->assertEquals ( 123, $cts ['giftCardCredit'] ['amount'] );
 	}
 	public function test_addRegisterToken() {
 		$hash_in = array (
@@ -206,6 +258,32 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$cts = $batch_request->getCountsAndAmounts ();
 		$this->assertEquals ( 1, $cts ['capture'] ['count'] );
 		$this->assertEquals ( 123, $cts ['capture'] ['amount'] );
+	}
+	public function test_addGiftCardCapture() {
+		$hash_in = array (
+				'id' => 'id',
+				'litleTxnId' => '12345678000',
+				'captureAmount'=>'123',
+				'card' => array (
+						'type' => 'GC',
+						'number' => '4100100000000000',
+						'expDate' => '0118',
+						'pin' => '1234',
+						'cardValidationNum' => '411'
+				),
+				'originalRefCode' => '101',
+				'originalAmount' => '34561',
+				'originalTxnTime' => '2017-01-24T09:00:00'
+		);
+		$batch_request = new BatchRequest ( $this->direct );
+		$batch_request->addGiftCardCapture ( $hash_in );
+	
+		$this->assertTrue ( file_exists ( $batch_request->batch_file ) );
+		$this->assertEquals ( 1, $batch_request->total_txns );
+	
+		$cts = $batch_request->getCountsAndAmounts ();
+		$this->assertEquals ( 1, $cts ['giftCardCapture'] ['count'] );
+		$this->assertEquals ( 123, $cts ['giftCardCapture'] ['amount'] );
 	}
 	public function test_addCaptureGivenAuth() {
 		$hash_in = array (
