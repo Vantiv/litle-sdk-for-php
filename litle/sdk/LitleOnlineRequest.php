@@ -378,7 +378,8 @@ class LitleOnlineRequest
         	'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
             'echeck'=>XmlFields::echeckType(XmlFields::returnArrayValue($hash_in,'echeck')),
             'echeckToken'=>XmlFields::echeckTokenType(XmlFields::returnArrayValue($hash_in,'echeckToken')),
-            'merchantData'=>(XmlFields::merchantData(XmlFields::returnArrayValue($hash_in,'merchantData')))
+            'merchantData'=>(XmlFields::merchantData(XmlFields::returnArrayValue($hash_in,'merchantData'))),
+        		'customIdentifier'=>XmlFields::returnArrayValue($hash_in,'customIdentifier')
         );
 
         $choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
