@@ -308,5 +308,24 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
         $this->assertRegExp('/Error validating xml data against the schema/',$message);
     	
     }
+    
+    public function test_simple_auth_with_card_IdRestrictions()
+    {
+    	$hash_in = array('id' => 'id',
+    			'card'=>array('type'=>'VI',
+    					'number'=>'4100000000000000',
+    					'expDate'=>'1213',
+    					'cardValidationNum' => '1213'),
+    			'id'=>'',
+    			'orderId'=> '2111',
+    			'reportGroup'=>'Planets',
+    			'orderSource'=>'ecommerce',
+    			'amount'=>'0');
+    
+    	$initialize = new LitleOnlineRequest();
+    	$authorizationResponse = $initialize->authorizationRequest($hash_in);
+    	$message= XmlParser::getAttribute($authorizationResponse,'litleOnlineResponse','message');
+    	$this->assertRegExp('/Error validating xml data against the schema/',$message);
+    }
 
 }
