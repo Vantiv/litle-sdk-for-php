@@ -661,9 +661,7 @@ class LitleOnlineRequest
     			'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
     			'origId'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'origId')),
     			'origActionType'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'origActionType')),
-    			'origLitleTxnId'=>XmlFields::returnArrayValue($hash_in,'origLitleTxnId'),
-    			'origOrderId'=>XmlFields::returnArrayValue($hash_in,'origOrderId'),
-    			'origAccountNumber'=>XmlFields::returnArrayValue($hash_in,'origAccountNumber'),
+    			'origLitleTxnId'=>XmlFields::returnArrayValue($hash_in,'origLitleTxnId')
     	);
     	$queryTransactionResponse = $this->processRequest($hash_out,$hash_in,"queryTransaction");
     
