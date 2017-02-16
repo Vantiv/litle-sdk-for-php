@@ -401,7 +401,9 @@ class LitleOnlineRequest
         'shipToAddress'=>XmlFields::contact(XmlFields::returnArrayValue($hash_in,'shipToAddress')),
         'echeck'=>XmlFields::echeckType(XmlFields::returnArrayValue($hash_in,'echeck')),
         'echeckToken'=>XmlFields::echeckTokenType(XmlFields::returnArrayValue($hash_in,'echeckToken')),
-        'customBilling'=>XmlFields::customBilling(XmlFields::returnArrayValue($hash_in,'customBilling')));
+        'customBilling'=>XmlFields::customBilling(XmlFields::returnArrayValue($hash_in,'customBilling')),
+        'customIdentifier'=>XmlFields::returnArrayValue($hash_in,'customIdentifier')
+        );
 
         $choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
 
@@ -426,7 +428,9 @@ class LitleOnlineRequest
             'billToAddress'=>XmlFields::contact(XmlFields::returnArrayValue($hash_in,'billToAddress')),
             'echeck'=>XmlFields::echeckType(XmlFields::returnArrayValue($hash_in,'echeck')),
             'echeckToken'=>XmlFields::echeckTokenType(XmlFields::returnArrayValue($hash_in,'echeckToken')),
-            'customBilling'=>XmlFields::customBilling(XmlFields::returnArrayValue($hash_in,'customBilling')));
+            'customBilling'=>XmlFields::customBilling(XmlFields::returnArrayValue($hash_in,'customBilling')),
+        	'customIdentifier'=>XmlFields::returnArrayValue($hash_in,'customIdentifier')
+        );
 
         $choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
         $echeckCreditResponse = $this->processRequest($hash_out,$hash_in,'echeckCredit',$choice_hash);
@@ -438,7 +442,6 @@ class LitleOnlineRequest
     {
 
         $hash_out = array(
-            'litleTxnId'=>XmlFields::returnArrayValue($hash_in,'litleTxnId'),
         	'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
             'orderId'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'orderId')),
             'amount'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'amount')),
