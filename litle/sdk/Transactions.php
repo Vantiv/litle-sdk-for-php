@@ -490,7 +490,7 @@ class Transactions {
 				'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
 				'amount' => Checker::requiredField ( XmlFields::returnArrayValue ( $hash_in, 'amount' ) ),
 				'orderSource' => Checker::requiredField ( XmlFields::returnArrayValue ( $hash_in, 'orderSource' ) ),
-				'card' => Checker::requiredField ( XmlFields::cardType ( XmlFields::returnArrayValue ( $hash_in, 'card' ) ) ) 
+				'card' => Checker::requiredField ( XmlFields::giftCardCardType ( XmlFields::returnArrayValue ( $hash_in, 'card' ) ) ) 
 		);
 		
 		return $hash_out;
@@ -500,7 +500,7 @@ class Transactions {
 				'orderId' => Checker::requiredField ( XmlFields::returnArrayValue ( $hash_in, 'orderId' ) ),
 				'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
 				'orderSource' => Checker::requiredField ( XmlFields::returnArrayValue ( $hash_in, 'orderSource' ) ),
-				'card' => Checker::requiredField ( XmlFields::cardType ( XmlFields::returnArrayValue ( $hash_in, 'card' ) ) ) 
+				'card' => Checker::requiredField ( XmlFields::giftCardCardType ( XmlFields::returnArrayValue ( $hash_in, 'card' ) ) ) 
 		);
 		
 		return $hash_out;
@@ -511,7 +511,7 @@ class Transactions {
 				'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
 				'amount' => Checker::requiredField ( XmlFields::returnArrayValue ( $hash_in, 'amount' ) ),
 				'orderSource' => Checker::requiredField ( XmlFields::returnArrayValue ( $hash_in, 'orderSource' ) ),
-				'card' => Checker::requiredField ( XmlFields::cardType ( XmlFields::returnArrayValue ( $hash_in, 'card' ) ) ) 
+				'card' => Checker::requiredField ( XmlFields::giftCardCardType ( XmlFields::returnArrayValue ( $hash_in, 'card' ) ) ) 
 		);
 		
 		return $hash_out;
@@ -522,7 +522,7 @@ class Transactions {
 				'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
 				'amount' => Checker::requiredField ( XmlFields::returnArrayValue ( $hash_in, 'amount' ) ),
 				'orderSource' => Checker::requiredField ( XmlFields::returnArrayValue ( $hash_in, 'orderSource' ) ),
-				'card' => Checker::requiredField ( XmlFields::cardType ( XmlFields::returnArrayValue ( $hash_in, 'card' ) ) ) 
+				'card' => Checker::requiredField ( XmlFields::giftCardCardType ( XmlFields::returnArrayValue ( $hash_in, 'card' ) ) ) 
 		);
 		
 		return $hash_out;
@@ -532,7 +532,7 @@ class Transactions {
 				'orderId' => Checker::requiredField ( XmlFields::returnArrayValue ( $hash_in, 'orderId' ) ),
 				'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
 				'orderSource' => Checker::requiredField ( XmlFields::returnArrayValue ( $hash_in, 'orderSource' ) ),
-				'card' => Checker::requiredField ( XmlFields::cardType ( XmlFields::returnArrayValue ( $hash_in, 'card' ) ) ) 
+				'card' => Checker::requiredField ( XmlFields::giftCardCardType ( XmlFields::returnArrayValue ( $hash_in, 'card' ) ) ) 
 		);
 		
 		return $hash_out;
