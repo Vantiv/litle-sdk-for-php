@@ -327,8 +327,7 @@ class Transactions {
 				'vendorName' => XmlFields::returnArrayValue ( $hash_in, 'vendorName' ),
 				'fundsTransferId' => XmlFields::returnArrayValue ( $hash_in, 'amount' ),
 				'amount' => XmlFields::returnArrayValue ( $hash_in, 'amount' ) ,
-				'accountInfo' => XmlFields::echeckType ( XmlFields::returnArrayValue ( $hash_in, 'accountInfo' ) ) ,
-				'customIdentifier' => XmlFields::returnArrayValue ( $hash_in, 'customIdentifier' ) 
+				'accountInfo' => XmlFields::echeckType ( XmlFields::returnArrayValue ( $hash_in, 'accountInfo' ) )
 		);
 		return $hash_out;
 	}
@@ -337,8 +336,7 @@ class Transactions {
 				'fundingSubmerchantId' => XmlFields::returnArrayValue ( $hash_in, 'fundingSubmerchantId' ),
 				'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
 				'fundsTransferId' => XmlFields::returnArrayValue ( $hash_in, 'amount' ),
-				'amount' => XmlFields::returnArrayValue ( $hash_in, 'amount' )  ,
-				'customIdentifier' => XmlFields::returnArrayValue ( $hash_in, 'customIdentifier' )  
+				'amount' => XmlFields::returnArrayValue ( $hash_in, 'amount' ) 
 		);
 		return $hash_out;
 	}
@@ -347,8 +345,7 @@ class Transactions {
 				'fundingSubmerchantId' => XmlFields::returnArrayValue ( $hash_in, 'fundingSubmerchantId' ),
 				'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
 				'fundsTransferId' => XmlFields::returnArrayValue ( $hash_in, 'amount' ),
-				'amount' => XmlFields::returnArrayValue ( $hash_in, 'amount' )  ,
-				'customIdentifier' => XmlFields::returnArrayValue ( $hash_in, 'customIdentifier' )
+				'amount' => XmlFields::returnArrayValue ( $hash_in, 'amount' )  
 		);
 		return $hash_out;
 	}
@@ -357,8 +354,7 @@ class Transactions {
 				'fundingSubmerchantId' => XmlFields::returnArrayValue ( $hash_in, 'fundingSubmerchantId' ),
 				'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
 				'fundsTransferId' => XmlFields::returnArrayValue ( $hash_in, 'amount' ),
-				'amount' => XmlFields::returnArrayValue ( $hash_in, 'amount' )  ,
-				'customIdentifier' => XmlFields::returnArrayValue ( $hash_in, 'customIdentifier' )
+				'amount' => XmlFields::returnArrayValue ( $hash_in, 'amount' ) 
 		);
 		return $hash_out;
 	}
@@ -381,8 +377,7 @@ class Transactions {
 				'vendorName' => XmlFields::returnArrayValue ( $hash_in, 'vendorName' ),
 				'fundsTransferId' => XmlFields::returnArrayValue ( $hash_in, 'amount' ),
 				'amount' => XmlFields::returnArrayValue ( $hash_in, 'amount' ) ,
-				'accountInfo' => XmlFields::echeckType ( XmlFields::returnArrayValue ( $hash_in, 'accountInfo' ) ),
-				'customIdentifier' => XmlFields::returnArrayValue ( $hash_in, 'customIdentifier' ) ,
+				'accountInfo' => XmlFields::echeckType ( XmlFields::returnArrayValue ( $hash_in, 'accountInfo' ) )
 		);
 		return $hash_out;
 	}
@@ -391,8 +386,7 @@ class Transactions {
 				'fundingSubmerchantId' => XmlFields::returnArrayValue ( $hash_in, 'fundingSubmerchantId' ),
 				'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
 				'fundsTransferId' => XmlFields::returnArrayValue ( $hash_in, 'amount' ),
-				'amount' => XmlFields::returnArrayValue ( $hash_in, 'amount' ) ,
-				'customIdentifier' => XmlFields::returnArrayValue ( $hash_in, 'customIdentifier' )
+				'amount' => XmlFields::returnArrayValue ( $hash_in, 'amount' ) 
 		);
 		return $hash_out;
 	}
@@ -401,8 +395,7 @@ class Transactions {
 				'fundingSubmerchantId' => XmlFields::returnArrayValue ( $hash_in, 'fundingSubmerchantId' ),
 				'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
 				'fundsTransferId' => XmlFields::returnArrayValue ( $hash_in, 'amount' ),
-				'amount' => XmlFields::returnArrayValue ( $hash_in, 'amount' ) ,
-				'customIdentifier' => XmlFields::returnArrayValue ( $hash_in, 'customIdentifier' )
+				'amount' => XmlFields::returnArrayValue ( $hash_in, 'amount' ) 
 		);
 		return $hash_out;
 	}
@@ -411,8 +404,7 @@ class Transactions {
 				'fundingSubmerchantId' => XmlFields::returnArrayValue ( $hash_in, 'fundingSubmerchantId' ),
 				'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
 				'fundsTransferId' => XmlFields::returnArrayValue ( $hash_in, 'amount' ),
-				'amount' => XmlFields::returnArrayValue ( $hash_in, 'amount' ) ,
-				'customIdentifier' => XmlFields::returnArrayValue ( $hash_in, 'customIdentifier' )
+				'amount' => XmlFields::returnArrayValue ( $hash_in, 'amount' ) 
 		);
 		return $hash_out;
 	}

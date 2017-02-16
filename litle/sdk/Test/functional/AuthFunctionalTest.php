@@ -308,5 +308,6 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
         $this->assertRegExp('/Error validating xml data against the schema/',$message);
     	
     }
+    
 
 }
