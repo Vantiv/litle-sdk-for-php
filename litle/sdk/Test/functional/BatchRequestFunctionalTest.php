@@ -3,8 +3,6 @@
 namespace litle\sdk\Test\functional;
 
 use litle\sdk\BatchRequest;
-use litle\sdk\LitleRequest;
-use litle\sdk\LitleResponseProcessor;
 
 require_once realpath ( dirname ( __FILE__ ) ) . '../../../LitleOnline.php';
 class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
@@ -39,29 +37,6 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals ( 1, $cts ['sale'] ['count'] );
 		$this->assertEquals ( 123, $cts ['sale'] ['amount'] );
 	}
-	# Call this function test_get_transactionResponse at the end of the test case you are testing
-	# to check the TransactionResponse Type and Id for the test case
-	# take the test_addSale() as an example and run it
-	function test_get_transactionResponse($batch_request) {
-		$litle_request = new LitleRequest();
-		
-		# close the batch, indicating that we intend to add no more sales
-		$batch_request->closeRequest();
-		# add the batch to the litle request
-		$litle_request->addBatchRequest($batch_request);
-		# close the litle request, indicating that we intend to add no more batches
-		$litle_request->closeRequest();
-		# send the batch to litle via SFTP
-		$response_file = $litle_request->sendToLitle();
-		# process the response file
-		$processor = new LitleResponseProcessor($response_file);
-		
-		while ($txn = $processor->nextTransaction()) {
-			echo "Transaction Type : " . $txn->getName() . "\n";
-			echo "Transaction Id: " . $txn->litleTxnId ." \n";
-			$this->assertRegExp("/^8[\d+]{16}$/",(string)$txn->litleTxnId,"");
-		}
-	}
 	function test_addSale() {
 		$hash_in = array (
 				'card' => array (
@@ -85,8 +60,6 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$cts = $batch_request->getCountsAndAmounts ();
 		$this->assertEquals ( 1, $cts ['sale'] ['count'] );
 		$this->assertEquals ( 123, $cts ['sale'] ['amount'] );
-		
-		$this->test_get_transactionResponse($batch_request);
 	}
 	public function test_addAuth() {
 		$hash_in = array (
@@ -466,8 +439,8 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 						'accNum' => '12345657890',
 						'routingNum' => '123456789',
 						'checkNum' => '123455' 
-				) ,
-				'customIdentifier' => 'Identifier'
+				) 
+				
 		);
 		$batch_request = new BatchRequest ( $this->direct );
 		$batch_request->addVendorCredit ( $hash_in );
@@ -483,8 +456,7 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$hash_in = array ('id' =>'id',
 				'fundingSubmerchantId' => '2111',
 				'fundsTransferId' => '12345678',
-				'amount' => '13' ,
-				'customIdentifier' => 'identifier' 
+				'amount' => '13'
 		);
 		$batch_request = new BatchRequest ( $this->direct );
 		$batch_request->addPayFacCredit ( $hash_in );
@@ -500,8 +472,7 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$hash_in = array ('id' =>'id',
 				'fundingSubmerchantId' => '2111',
 				'fundsTransferId' => '12345678',
-				'amount' => '13' ,
-				'customIdentifier' => 'Identifier'
+				'amount' => '13' 
 		);
 		$batch_request = new BatchRequest ( $this->direct );
 		$batch_request->addReserveCredit ( $hash_in );
@@ -517,8 +488,7 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$hash_in = array ('id' =>'id',
 				'fundingSubmerchantId' => '2111',
 				'fundsTransferId' => '12345678',
-				'amount' => '13' ,
-				'customIdentifier' => 'Identifier'
+				'amount' => '13'
 		);
 		$batch_request = new BatchRequest ( $this->direct );
 		$batch_request->addPhysicalCheckCredit ( $hash_in );
@@ -565,8 +535,7 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 						'accNum' => '12345657890',
 						'routingNum' => '123456789',
 						'checkNum' => '123455' 
-				) ,
-				'customIdentifier' => 'Identifier'
+				) 
 		);
 		$batch_request = new BatchRequest ( $this->direct );
 		$batch_request->addVendorDebit ( $hash_in );
@@ -582,8 +551,7 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$hash_in = array ('id' =>'id',
 				'fundingSubmerchantId' => '2111',
 				'fundsTransferId' => '12345678',
-				'amount' => '13' ,
-				'customIdentifier' => 'Identifier'
+				'amount' => '13' 
 		);
 		$batch_request = new BatchRequest ( $this->direct );
 		$batch_request->addPayFacDebit ( $hash_in );
@@ -599,8 +567,7 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$hash_in = array ('id' =>'id',
 				'fundingSubmerchantId' => '2111',
 				'fundsTransferId' => '12345678',
-				'amount' => '13' ,
-				'customIdentifier' => 'Identifier'
+				'amount' => '13' 
 		);
 		$batch_request = new BatchRequest ( $this->direct );
 		$batch_request->addReserveDebit ( $hash_in );
@@ -616,8 +583,7 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		$hash_in = array ('id' =>'id',
 				'fundingSubmerchantId' => '2111',
 				'fundsTransferId' => '12345678',
-				'amount' => '13' ,
-				'customIdentifier' => 'Identifier'
+				'amount' => '13'
 		);
 		$batch_request = new BatchRequest ( $this->direct );
 		$batch_request->addPhysicalCheckDebit ( $hash_in );
@@ -898,46 +864,11 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		);
 		$batch->addAuthReversal ( $hash_in );
 		
-		$hash_in = array (
-				'id' => 'id',
-				'litleTxnId' => '12345678000',
-				'captureAmount'=>'123',
-				'card' => array (
-						'type' => 'GC',
-						'number' => '4100000000000001',
-						'expDate' => '0118',
-						'pin' => '1234',
-						'cardValidationNum' => '411'
-				),
-				'originalRefCode' => '101',
-				'originalAmount' => '123',
-				'originalTxnTime' => '2017-01-24T09:00:00',
-				'originalSystemTraceId' => '33',
-				'originalSequenceNumber' => '111111'
-		);
-		$batch->addGiftCardAuthReversal ( $hash_in );
-		
 		$hash_in = array ('id' =>'id',
 				'litleTxnId' => '12312312',
 				'amount' => '123' 
 		);
 		$batch->addCapture ( $hash_in );
-		
-		$hash_in = array ('id' => 'id',
-				'litleTxnId' => '12345678000',
-				'captureAmount'=>'123',
-				'card' => array (
-						'type' => 'GC',
-						'number' => '4100100000000000',
-						'expDate' => '0118',
-						'pin' => '1234',
-						'cardValidationNum' => '411'
-				),
-				'originalRefCode' => '101',
-				'originalAmount' => '34561',
-				'originalTxnTime' => '2017-01-24T09:00:00'
-		);
-		$batch->addGiftCardCapture ( $hash_in );
 		
 		$hash_in = array ('id' =>'id',
 				'amount' => '123',
@@ -962,21 +893,6 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 				'amount' => '123' 
 		);
 		$batch->addCredit ( $hash_in );
-		
-		$hash_in = array(
-				'litleTxnId'=> '12312312',
-				'reportGroup'=>'Planets',
-				'creditAmount'=>'123',
-				'id' => '1211',
-				'card' => array (
-						'type' => 'GC',
-						'number' => '4100521234567000',
-						'expDate' => '0118',
-						'pin' => '1234',
-						'cardValidationNum' => '411'
-				)
-		);
-		$batch->addGiftCardCredit ( $hash_in );
 		
 		$hash_in = array ('id' =>'id',
 				'litleTxnId' => '123123' 
@@ -1069,17 +985,13 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		);
 		$batch->addUpdateCardValidationNumOnToken ( $hash_in );
 		
-		$this->assertEquals ( 16, $batch->total_txns );
+		$this->assertEquals ( 13, $batch->total_txns );
 		$cts = $batch->getCountsAndAmounts ();
 		$this->assertEquals ( 1, $cts ['sale'] ['count'] );
 		$this->assertEquals ( 1, $cts ['auth'] ['count'] );
-		$this->assertEquals ( 1, $cts ['authReversal'] ['count'] );
-		$this->assertEquals ( 1, $cts ['giftCardAuthReversal'] ['count'] );
 		$this->assertEquals ( 1, $cts ['credit'] ['count'] );
-		$this->assertEquals ( 1, $cts ['giftCardCredit'] ['count'] );
 		$this->assertEquals ( 1, $cts ['tokenRegistration'] ['count'] );
 		$this->assertEquals ( 1, $cts ['capture'] ['count'] );
-		$this->assertEquals ( 1, $cts ['giftCardCapture'] ['count'] );
 		$this->assertEquals ( 1, $cts ['forceCapture'] ['count'] );
 		$this->assertEquals ( 1, $cts ['echeckRedeposit'] ['count'] );
 		$this->assertEquals ( 1, $cts ['echeckSale'] ['count'] );
@@ -1089,12 +1001,8 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 		
 		$this->assertEquals ( 123, $cts ['sale'] ['amount'] );
 		$this->assertEquals ( 123, $cts ['auth'] ['amount'] );
-		$this->assertEquals ( 5000, $cts ['authReversal'] ['amount'] );
-		$this->assertEquals ( 123, $cts ['giftCardAuthReversal'] ['amount'] );
 		$this->assertEquals ( 123, $cts ['credit'] ['amount'] );
-		$this->assertEquals ( 123, $cts ['giftCardCredit'] ['amount'] );
 		$this->assertEquals ( 123, $cts ['capture'] ['amount'] );
-		$this->assertEquals ( 123, $cts ['giftCardCapture'] ['amount'] );
 		$this->assertEquals ( 106, $cts ['forceCapture'] ['amount'] );
 		$this->assertEquals ( 123456, $cts ['echeckSale'] ['amount'] );
 		$this->assertEquals ( 123456, $cts ['echeckVerification'] ['amount'] );
