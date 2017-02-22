@@ -25,9 +25,9 @@
 namespace litle\sdk\Test\functional;
 use litle\sdk\LitleOnlineRequest;
 use litle\sdk\XmlParser;
-class EcheckRedeopistFunctionalTest extends \PHPUnit_Framework_TestCase
+class EcheckRedepositFunctionalTest extends \PHPUnit_Framework_TestCase
 {
-    public function test_simple_echeckRedepoist()
+    public function test_simple_echeckRedeposit()
     {
         $hash_in = array('id' => 'id',
             'litleTxnId'=>'123456789012345678',
@@ -39,7 +39,7 @@ class EcheckRedeopistFunctionalTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('000',$response);
     }
 
-    public function test_echeckRedepoist_with_echeck()
+    public function test_echeckRedeposit_with_echeck()
     {
         $hash_in = array('id' => 'id',
       'amount'=>'123456',
@@ -56,7 +56,7 @@ class EcheckRedeopistFunctionalTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('000',$response);
     }
 
-    public function test_echeckRedepoist_with_echeckToken()
+    public function test_echeckRedeposit_with_echeckToken()
     {
         $hash_in = array('id' => 'id',
           'amount'=>'123456',
@@ -72,7 +72,7 @@ class EcheckRedeopistFunctionalTest extends \PHPUnit_Framework_TestCase
         $response = XmlParser::getNode($echeckRedepositResponse,'response');
         $this->assertEquals('000',$response);
     }
-    public function test_echeckRedepoist_missing_litleTxnId()
+    public function test_echeckRedeposit_missing_litleTxnId()
     {
         $hash_in = array('id' => 'id',
               'amount'=>'123456',

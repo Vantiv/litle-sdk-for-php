@@ -139,6 +139,24 @@ class EcheckSaleFunctionalTest extends \PHPUnit_Framework_TestCase
         $this->assertRegExp('/Error validating xml data against the schema/',$message);
     }
     
-
+    public function test_simple_echeckSale_with_merchantData_customIdentifier()
+    {
+    	$hash_in = array('amount'=>'123456','id' => 'id',
+    			'secondaryAmount' => '2000',
+    			'verify'=>'true',
+    			'orderId'=>'12345',
+    			'orderSource'=>'ecommerce',
+    			'echeck' => array('accType'=>'Checking','accNum'=>'12345657890','routingNum'=>'123456789','checkNum'=>'123455','ccdPaymentInformation'=>'ccd'),
+    			'billToAddress'=>array('name'=>'Bob','city'=>'lowell','state'=>'MA','email'=>'litle.com'),
+    			'customBilling'=>array('city'=>'Boston','descriptor'=>'descriptor'),
+    			'merchantData'=>array('campaign'=>'camping'),
+    			'customIdentifier'=>'identifier'
+    	);
+    
+    	$initialize = new LitleOnlineRequest();
+    	$echeckSaleResponse = $initialize->echeckSaleRequest($hash_in);
+    	$response = XmlParser::getNode($echeckSaleResponse,'response');
+    	$this->assertEquals('000',$response);
+    }
 
 }

@@ -403,6 +403,7 @@ class LitleOnlineRequest
         'echeck'=>XmlFields::echeckType(XmlFields::returnArrayValue($hash_in,'echeck')),
         'echeckToken'=>XmlFields::echeckTokenType(XmlFields::returnArrayValue($hash_in,'echeckToken')),
         'customBilling'=>XmlFields::customBilling(XmlFields::returnArrayValue($hash_in,'customBilling')),
+        'merchantData'=>XmlFields::merchantData(XmlFields::returnArrayValue($hash_in,'merchantData')),
         'customIdentifier'=>XmlFields::returnArrayValue($hash_in,'customIdentifier')
         );
 
