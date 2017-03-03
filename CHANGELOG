@@ -1,5 +1,10 @@
 = LitleOnline CHANGELOG
 
+==Version 9.20.0
+* Feature: Network compliance enhancements
+* Feature: Pin support
+* Feature: Androidpay support added
+
 ==Version 9.3.3
 Update SSL version to 6
 
