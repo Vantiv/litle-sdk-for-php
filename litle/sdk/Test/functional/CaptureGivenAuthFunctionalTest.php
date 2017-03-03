@@ -174,7 +174,6 @@ class CaptureGivenAuthFunctionalTest extends \PHPUnit_Framework_TestCase
         $captureGivenAuthResponse = $initialize->captureGivenAuthRequest($hash_in);
         $message = XmlParser::getNode($captureGivenAuthResponse, 'message');
         $this->assertEquals('Approved', $message);
-        $this->assertEquals('123456', XmlParser::getNode($captureGivenAuthResponse, 'cardSuffix'));
     }
 
 }
