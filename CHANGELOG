@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+==Version 9.10.1 (March, 6 2017)
+* Bug Fix: remove printing of XML request in LitleOnlineRequest
+
 ==Version 9.10.0 (March, 3 2017)
 * Feature: Network compliance enhancements
 * Feature: Pin support
