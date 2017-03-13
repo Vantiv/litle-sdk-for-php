@@ -41,10 +41,10 @@ class CaptureGivenAuthFunctionalTest extends \PHPUnit_Framework_TestCase
        'number' =>'4100000000000000',
        'expDate' =>'1210'));
 
-        $initilaize = new LitleOnlineRequest();
-        $captureGivenAuthResponse = $initilaize->captureGivenAuthRequest($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $captureGivenAuthResponse = $initialize->captureGivenAuthRequest($hash_in);
         $message = XmlParser::getNode($captureGivenAuthResponse,'message');
-        $this->assertEquals('Approved',$message);
+        $this->assertEquals('Transaction Received',$message);
     }
 
     public function test_simple_captureGivenAuth_with_token()
@@ -61,10 +61,10 @@ class CaptureGivenAuthFunctionalTest extends \PHPUnit_Framework_TestCase
           'litleToken' =>'123456789101112',
           'expDate' =>'1210'));
 
-        $initilaize = new LitleOnlineRequest();
-        $captureGivenAuthResponse = $initilaize->captureGivenAuthRequest($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $captureGivenAuthResponse = $initialize->captureGivenAuthRequest($hash_in);
         $message = XmlParser::getNode($captureGivenAuthResponse,'message');
-        $this->assertEquals('Approved',$message);
+        $this->assertEquals('Transaction Received',$message);
     }
 
     public function test_complex_captureGivenAuth()
@@ -83,10 +83,10 @@ class CaptureGivenAuthFunctionalTest extends \PHPUnit_Framework_TestCase
        'number' =>'4100000000000000',
        'expDate' =>'1210'));
 
-        $initilaize = new LitleOnlineRequest();
-        $captureGivenAuthResponse = $initilaize->captureGivenAuthRequest($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $captureGivenAuthResponse = $initialize->captureGivenAuthRequest($hash_in);
         $message = XmlParser::getNode($captureGivenAuthResponse,'message');
-        $this->assertEquals('Approved',$message);
+        $this->assertEquals('Transaction Received',$message);
     }
 
     public function test_authInfo()
@@ -104,10 +104,10 @@ class CaptureGivenAuthFunctionalTest extends \PHPUnit_Framework_TestCase
           'number' =>'4100000000000000',
           'expDate' =>'1210'));
 
-        $initilaize = new LitleOnlineRequest();
-        $captureGivenAuthResponse = $initilaize->captureGivenAuthRequest($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $captureGivenAuthResponse = $initialize->captureGivenAuthRequest($hash_in);
         $message = XmlParser::getNode($captureGivenAuthResponse,'message');
-        $this->assertEquals('Approved',$message);
+        $this->assertEquals('Transaction Received',$message);
     }
     
     public function test_simple_captureGivenAuth_secondary_amount()
@@ -125,10 +125,10 @@ class CaptureGivenAuthFunctionalTest extends \PHPUnit_Framework_TestCase
     					'number' =>'4100000000000000',
     					'expDate' =>'1210'));
     
-    	$initilaize = new LitleOnlineRequest();
-    	$captureGivenAuthResponse = $initilaize->captureGivenAuthRequest($hash_in);
+    	$initialize = new LitleOnlineRequest();
+    	$captureGivenAuthResponse = $initialize->captureGivenAuthRequest($hash_in);
     	$message = XmlParser::getNode($captureGivenAuthResponse,'message');
-    	$this->assertEquals('Approved',$message);
+    	$this->assertEquals('Transaction Received',$message);
     }
 
 }
