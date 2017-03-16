@@ -82,7 +82,7 @@ class TreeResponseFunctionalTest extends \PHPUnit_Framework_TestCase
 
         $litle = new LitleOnlineRequest($treeResponse=true);
         $response = $litle->captureGivenAuthRequest($hash_in);
-        $this->assertEquals('Approved',$response->captureGivenAuthResponse->message);
+        $this->assertEquals('Transaction Received',$response->captureGivenAuthResponse->message);
     }
 
     public function test_credit()
