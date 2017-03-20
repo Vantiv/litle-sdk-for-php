@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+==Version 9.12.0 (March, 20 2017)
+* Feature: add sepaDirectDebit and ideal for sale transaction
+
 ==Version 9.10.1 (March, 6 2017)
 * Bug Fix: remove printing of XML request in LitleOnlineRequest
 

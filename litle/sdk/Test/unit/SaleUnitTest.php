@@ -664,4 +664,51 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
         $litleTest->newXML = $mock;
         $litleTest->saleRequest($hash_in);
     }
+
+    public function test_sale_with_sepaDirectDebit()
+    {
+        $hash_in = array(
+            'sepaDirectDebit' => array('iban' => 'SepaDirectDebit Iban',
+                'mandateProvider' => 'Merchant',
+                'sequenceType' => 'OneTime'),
+            'id' => '1211',
+            'orderId' => '2111',
+            'reportGroup' => 'Planets',
+            'orderSource' => 'ecommerce',
+            'amount' => '123',
+            'originalNetworkTransactionId' => '225588774411336699',
+            'originalTransactionAmount' => '3336578');
+
+        $mock = $this->getMock('litle\sdk\LitleXmlMapper');
+        $mock->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<sepaDirectDebit><mandateProvider>Merchant<\/mandateProvider><sequenceType>OneTime<\/sequenceType><iban>SepaDirectDebit Iban<\/iban><\/sepaDirectDebit>.*/'));
+
+        $litleTest = new LitleOnlineRequest();
+        $litleTest->newXML = $mock;
+        $litleTest->saleRequest($hash_in);
+    }
+
+    public function test_sale_with_Ideal()
+    {
+        $hash_in = array(
+            'ideal' => array('preferredLanguage' => 'AD'),
+            'id' => '1211',
+            'orderId' => '2111',
+            'reportGroup' => 'Planets',
+            'orderSource' => 'ecommerce',
+            'amount' => '123',
+            'originalNetworkTransactionId' => '225588774411336699',
+            'originalTransactionAmount' => '3336578');
+
+        $mock = $this->getMock('litle\sdk\LitleXmlMapper');
+        $mock->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<ideal><preferredLanguage>AD<\/preferredLanguage><\/ideal>.*/'));
+
+        $litleTest = new LitleOnlineRequest();
+        $litleTest->newXML = $mock;
+        $litleTest->saleRequest($hash_in);
+    }
+
 }

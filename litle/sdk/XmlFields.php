@@ -558,4 +558,32 @@ class XmlFields
             return $hash_out;
         }
     }
+
+    public static function sepaDirectDebitType($hash_in)
+    {
+        if (isset($hash_in)) {
+            $hash_out = array(
+                "mandateProvider" => Checker::requiredField(XmlFields::returnArrayValue($hash_in, "mandateProvider")),
+                "sequenceType" => Checker::requiredField(XmlFields::returnArrayValue($hash_in, "sequenceType")),
+                "mandateReference" => XmlFields::returnArrayValue($hash_in, "mandateReference"),
+                "mandateUrl" => (XmlFields::returnArrayValue($hash_in, "mandateUrl")),
+                "mandateSignatureDate" => XmlFields::returnArrayValue($hash_in, "mandateSignatureDate"),
+                "iban" => Checker::requiredField(XmlFields::returnArrayValue($hash_in, "iban")),
+                "preferredLanguage" => XmlFields::returnArrayValue($hash_in, "preferredLanguage")
+            );
+
+            return $hash_out;
+        }
+    }
+
+    public static function idealType($hash_in)
+    {
+        if (isset($hash_in)) {
+            $hash_out = array(
+                "preferredLanguage" => XmlFields::returnArrayValue($hash_in, "preferredLanguage")
+            );
+
+            return $hash_out;
+        }
+    }
 }
