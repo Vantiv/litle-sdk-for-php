@@ -35,7 +35,7 @@ class Communication
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_PROXY, $config['proxy']);
         curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: text/xml','Expect: '));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: text/xml; charset=UTF-8','Expect: '));
         curl_setopt($ch, CURLOPT_URL, $config['url']);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $req);
         curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, true);
