@@ -47,7 +47,9 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
                 'expDate' => '0621',
                 'cardValidationNum' => '992',
                 'type' => 'VI'
-            )
+            ),
+            'proxy' => '',
+            'url' => 'https://prelive.litle.com/vap/communicator/online',
         );
 
         $initialize = new LitleOnlineRequest();
@@ -77,7 +79,9 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
                 'expDate' => '0621',
                 'cardValidationNum' => '992',
                 'type' => 'VI'
-            )
+            ),
+            'proxy' => '',
+            'url' => 'https://prelive.litle.com/vap/communicator/online',
         );
 
         $initialize = new LitleOnlineRequest();
@@ -116,7 +120,9 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
                 'expDate' => '0721',
                 'cardValidationNum' => '251',
                 'type' => 'MC'
-            )
+            ),
+            'proxy' => '',
+            'url' => 'https://prelive.litle.com/vap/communicator/online',
         );
 
         $initialize = new LitleOnlineRequest();
@@ -146,7 +152,9 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
                 'expDate' => '0721',
                 'cardValidationNum' => '251',
                 'type' => 'MC'
-            )
+            ),
+            'proxy' => '',
+            'url' => 'https://prelive.litle.com/vap/communicator/online',
         );
 
         $initialize = new LitleOnlineRequest();
@@ -176,7 +184,9 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
                 'expDate' => '0721',
                 'cardValidationNum' => '251',
                 'type' => 'MC'
-            )
+            ),
+            'proxy' => '',
+            'url' => 'https://prelive.litle.com/vap/communicator/online',
         );
 
         $initialize = new LitleOnlineRequest();
@@ -206,7 +216,9 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
                 'expDate' => '0821',
                 'cardValidationNum' => '184',
                 'type' => 'DI'
-            )
+            ),
+            'proxy' => '',
+            'url' => 'https://prelive.litle.com/vap/communicator/online',
         );
 
         $initialize = new LitleOnlineRequest();
@@ -237,7 +249,9 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
                 'expDate' => '0821',
                 'cardValidationNum' => '184',
                 'type' => 'DI'
-            )
+            ),
+            'proxy' => '',
+            'url' => 'https://prelive.litle.com/vap/communicator/online',
         );
 
         $initialize = new LitleOnlineRequest();
@@ -267,7 +281,9 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
                 'expDate' => '0821',
                 'cardValidationNum' => '184',
                 'type' => 'DI'
-            )
+            ),
+            'proxy' => '',
+            'url' => 'https://prelive.litle.com/vap/communicator/online',
         );
 
         $initialize = new LitleOnlineRequest();
@@ -297,7 +313,9 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
                 'expDate' => '0921',
                 'cardValidationNum' => '0421',
                 'type' => 'AX'
-            )
+            ),
+            'proxy' => '',
+            'url' => 'https://prelive.litle.com/vap/communicator/online',
         );
 
         $initialize = new LitleOnlineRequest();
@@ -328,7 +346,9 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
                 'expDate' => '0921',
                 'cardValidationNum' => '0421',
                 'type' => 'AX'
-            )
+            ),
+            'proxy' => '',
+            'url' => 'https://prelive.litle.com/vap/communicator/online',
         );
 
         $initialize = new LitleOnlineRequest();
@@ -359,7 +379,9 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
                 'expDate' => '0921',
                 'cardValidationNum' => '0421',
                 'type' => 'AX'
-            )
+            ),
+            'proxy' => '',
+            'url' => 'https://prelive.litle.com/vap/communicator/online',
         );
 
         $initialize = new LitleOnlineRequest();
@@ -384,7 +406,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
                 'expDate' => '0921',
                 'type' => 'VI'
             ),
-
+            'proxy' => '',
+            'url' => 'https://prelive.litle.com/vap/communicator/online',
         );
 
         $initialize = new LitleOnlineRequest();
@@ -407,7 +430,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
                 'expDate' => '1121',
                 'type' => 'MC'
             ),
-
+            'proxy' => '',
+            'url' => 'https://prelive.litle.com/vap/communicator/online',
         );
 
         $initialize = new LitleOnlineRequest();
@@ -430,7 +454,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
                 'expDate' => '0421',
                 'type' => 'AX'
             ),
-
+            'proxy' => '',
+            'url' => 'https://prelive.litle.com/vap/communicator/online',
         );
 
         $initialize = new LitleOnlineRequest();
@@ -454,7 +479,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
                 'expDate' => '0821',
                 'type' => 'DI'
             ),
-
+            'proxy' => '',
+            'url' => 'https://prelive.litle.com/vap/communicator/online',
         );
 
         $initialize = new LitleOnlineRequest();

@@ -42,7 +42,9 @@ class CertEcheckTest extends \PHPUnit_Framework_TestCase
         'echeck'=>array(
         'accNum' =>'10@BC99999',
         'accType' => 'Checking',
-        'routingNum' => '053100300'));
+        'routingNum' => '053100300'),
+            'proxy' => '',
+            'url' => 'https://prelive.litle.com/vap/communicator/online',);
 
         $initialize = new LitleOnlineRequest();
         $echeckVerificationResponse = $initialize->echeckVerificationRequest($echeck_hash);

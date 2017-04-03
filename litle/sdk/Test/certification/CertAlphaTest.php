@@ -563,7 +563,9 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
                 'cardValidationNum' => '463',
                 'type' => 'VI'),
             //TODO 3-D Secure transaction not supported by merchant
-            //'cardholderAuthentication' => array('authenticationValue'=> 'BwABBJQ1AgAAAAAgJDUCAAAAAAA=')
+            //'cardholderA uthentication' => array('authenticationValue'=> 'BwABBJQ1AgAAAAAgJDUCAAAAAAA=')
+            'proxy' => '',
+            'url' => 'https://prelive.litle.com/vap/communicator/online',
         );
 
         $initialize = new LitleOnlineRequest();
@@ -615,6 +617,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
                 'type' => 'VI'),
             //TODO 3-D Secure transaction not supported by merchant
             //'cardholderAuthentication' => array('authenticationValue'=> 'BwABBJQ1AgAAAAAgJDUCAAAAAAA=')
+            'proxy' => '',
+            'url' => 'https://prelive.litle.com/vap/communicator/online',
         );
 
         $initialize = new LitleOnlineRequest();
@@ -639,6 +643,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
                 'type' => 'VI'),
             //TODO 3-D Secure transaction not supported by merchant
             //'cardholderAuthentication' => array('authenticationValue'=> 'BwABBJQ1AgAAAAAgJDUCAAAAAAA=')
+            'proxy' => '',
+            'url' => 'https://prelive.litle.com/vap/communicator/online',
         );
 
         $initialize = new LitleOnlineRequest();
