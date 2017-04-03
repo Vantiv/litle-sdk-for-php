@@ -306,7 +306,7 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 				'amount' => '2',
 				'orderSource' => 'ecommerce',
 				'card' => array (
-						'type' => 'VI',
+						'type' => 'GC',
 						'number' => '4100000000000000',
 						'expDate' => '1213',
 						'cardValidationNum' => '1213' 
@@ -317,7 +317,7 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 				'orderId' => '1',
 				'orderSource' => 'ecommerce',
 				'card' => array (
-						'type' => 'VI',
+						'type' => 'GC',
 						'number' => '4100000000000000',
 						'expDate' => '1213',
 						'cardValidationNum' => '1213' 
@@ -329,7 +329,7 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 				'amount' => '2',
 				'orderSource' => 'ecommerce',
 				'card' => array (
-						'type' => 'VI',
+						'type' => 'GC',
 						'number' => '4100000000000000',
 						'expDate' => '1213',
 						'cardValidationNum' => '1213' 
@@ -341,7 +341,7 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 				'amount' => '2',
 				'orderSource' => 'ecommerce',
 				'card' => array (
-						'type' => 'VI',
+						'type' => 'GC',
 						'number' => '4100000000000000',
 						'expDate' => '1213',
 						'cardValidationNum' => '1213' 
@@ -352,7 +352,7 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase {
 				'orderId' => '1',
 				'orderSource' => 'ecommerce',
 				'card' => array (
-						'type' => 'VI',
+						'type' => 'GC',
 						'number' => '4100000000000000',
 						'expDate' => '1213',
 						'cardValidationNum' => '1213' 
