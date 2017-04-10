@@ -236,7 +236,7 @@ class CertEcheckTest extends \PHPUnit_Framework_TestCase
 
         $initialize = new LitleOnlineRequest();
         $echeckCreditResponse = $initialize->echeckCreditRequest($echeck_hash);
-        $this->assertEquals('001',XMLParser::getNode($echeckCreditResponse,'response'));
+        $this->assertEquals('000',XMLParser::getNode($echeckCreditResponse,'response'));
         $this->assertEquals('Transaction Received',XMLParser::getNode($echeckCreditResponse,'message'));
     }
 
@@ -257,7 +257,7 @@ class CertEcheckTest extends \PHPUnit_Framework_TestCase
 
         $initialize = new LitleOnlineRequest();
         $echeckCreditResponse = $initialize->echeckCreditRequest($echeck_hash);
-        $this->assertEquals('001',XMLParser::getNode($echeckCreditResponse,'response'));
+        $this->assertEquals('000',XMLParser::getNode($echeckCreditResponse,'response'));
         $this->assertEquals('Transaction Received',XMLParser::getNode($echeckCreditResponse,'message'));
     }
 
@@ -267,7 +267,7 @@ class CertEcheckTest extends \PHPUnit_Framework_TestCase
 
         $initialize = new LitleOnlineRequest();
         $echeckCreditResponse = $initialize->echeckCreditRequest($echeck_hash);
-        $this->assertEquals('001',XMLParser::getNode($echeckCreditResponse,'response'));
+        $this->assertEquals('000',XMLParser::getNode($echeckCreditResponse,'response'));
         $this->assertEquals('Transaction Received',XMLParser::getNode($echeckCreditResponse,'message'));
     }
 
@@ -277,7 +277,7 @@ class CertEcheckTest extends \PHPUnit_Framework_TestCase
 
         $initialize = new LitleOnlineRequest();
         $echeckCreditResponse = $initialize->echeckCreditRequest($echeck_hash);
-        $this->assertEquals('001',XMLParser::getNode($echeckCreditResponse,'response'));
+        $this->assertEquals('000',XMLParser::getNode($echeckCreditResponse,'response'));
         $this->assertEquals('Transaction Received',XMLParser::getNode($echeckCreditResponse,'message'));
     }
 }
