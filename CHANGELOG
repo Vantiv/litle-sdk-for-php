@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+==Version 9.12.1 (Apr 4, 2017)
+* Feature: Update phpseclib to new version
+
 ==Version 9.12.0 (March, 20 2017)
 * Feature: add sepaDirectDebit and ideal for sale transaction
 
