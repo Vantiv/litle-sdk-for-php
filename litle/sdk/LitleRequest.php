@@ -163,7 +163,7 @@ class LitleRequest
 
         $session = $this->createSFTPSession();
         # with extension .prg
-        $session->put('/inbound/' . basename($this->request_file) . '.prg', $this->request_file, NET_SFTP_LOCAL_FILE);
+        $session->put('/inbound/' . basename($this->request_file) . '.prg', $this->request_file, \phpseclib\Net\SFTP::SOURCE_LOCAL_FILE);
         # rename when the file upload is complete
         $session->rename('/inbound/' . basename($this->request_file) . '.prg', '/inbound/' . basename($this->request_file) . '.asc');
 
@@ -207,7 +207,7 @@ class LitleRequest
         $sftp_url = $this->config['batch_url'];
         $sftp_username = $this->config['sftp_username'];
         $sftp_password = $this->config['sftp_password'];
-        $session = new \Net_SFTP($sftp_url);
+        $session = new \phpseclib\Net\SFTP($sftp_url);
         if (!$session->login($sftp_username, $sftp_password)) {
             throw new \RuntimeException("Failed to SFTP with the username $sftp_username and the password $sftp_password to the host $sftp_url. Check your credentials!");
         }

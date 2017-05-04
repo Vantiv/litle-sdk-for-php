@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+==Version 11.0.1 (May 4, 2017)
+* Feature: update phpseclib to v2.0.4
+
 ==Version 11.0 (Apr 10, 2017)
 * Feature: implement Vantiv eCommerce XMLv11.0
 * Feature: SEPA Support
