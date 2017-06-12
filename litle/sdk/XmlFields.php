@@ -258,22 +258,23 @@ class XmlFields
                         "invoiceReferenceNumber"=>XmlFields::returnArrayValue($hash_in, "invoiceReferenceNumber"),
                         "orderDate"=>XmlFields::returnArrayValue($hash_in, "orderDate")
             );
+            $lineItem = array();
+            $detailtax = array();
             foreach ($hash_in as $key => $value) {
                 if ($key == 'lineItemData' && $key != NULL) {
-                    $lineItem = array();
-                    for ($j=0; $j<count($value); $j++) {
-                        $outIndex = ('lineItemData') . (string) $j;
-                        $hash_out[$outIndex] = XmlFields::lineItemData(XmlFields::returnArrayValue($value,$j));
-                    }
+                    $lineItem[] = $value;
                 } elseif ($key == 'detailTax' & $key != NULL) {
-                    $detailtax = array();
-                    for ($j=0; $j<count($value); $j++) {
-                        $outIndex = ('detailTax') . (string) $j;
-                        $hash_out[$outIndex] = XmlFields::detailTax(XmlFields::returnArrayValue($value,$j));
-                    }
+                    $detailtax[] = $value;
                 }
             }
-
+            for ($j=0; $j<count($lineItem); $j++) {
+                $outIndex = ('lineItemData') . (string) $j;
+                $hash_out[$outIndex] = XmlFields::lineItemData(XmlFields::returnArrayValue($lineItem,$j));
+            }
+            for ($j=0; $j<count($detailtax); $j++) {
+                $outIndex = ('detailTax') . (string) $j;
+                $hash_out[$outIndex] = XmlFields::detailTax(XmlFields::returnArrayValue($detailtax,$j));
+            }
             return $hash_out;
         }
     }
