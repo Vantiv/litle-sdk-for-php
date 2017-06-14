@@ -261,9 +261,9 @@ class XmlFields
             $lineItem = array();
             $detailtax = array();
             foreach ($hash_in as $key => $value) {
-                if ($key == 'lineItemData' && $key != NULL) {
+                if (($key == 'lineItemData' || $key == ('lineItemData'.count($lineItem))) && $key != NULL) {
                     $lineItem[] = $value;
-                } elseif ($key == 'detailTax' & $key != NULL) {
+                } elseif (($key == 'detailTax' || $key == ('detailTax'.count($detailtax))) && $key != NULL) {
                     $detailtax[] = $value;
                 }
             }
