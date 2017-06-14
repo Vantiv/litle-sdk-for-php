@@ -21,12 +21,20 @@ $sale_info = array(
               'type' => 'MC'
               ),
               'enhancedData' => array(
-                  'detailTax' => array(
-                      'taxAmount' => 300,
-                      'taxIncludedInTotal' => true
-                  ),
-                  'salesTax' => 500,
-                  'taxExempt' => false
+                  'salesTax' => 200,
+                  'taxExempt' => false,
+                  'lineItemData' => array(
+                      'itemSequenceNumber' => '1',
+                      'itemDescription' => 'product 1',
+                      'productCode' => '123',
+                      'quantity' => 3,
+                      'unitOfMeasure' => 'unit',
+                      'taxAmount' => 200,
+                      'detailTax' => array(
+                          'taxIncludedInTotal' => true,
+                          'taxAmount' => 200
+                      )
+                  )
               ),
             );
 $initialize = &new LitleOnlineRequest();

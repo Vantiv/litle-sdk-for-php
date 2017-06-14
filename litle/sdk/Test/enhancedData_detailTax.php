@@ -22,7 +22,7 @@ $sale_info = array(
               ),
               'enhancedData' => array(
                   'detailTax' => array(
-                      'taxAmount' => 300,
+                      'taxAmount' => 500,
                       'taxIncludedInTotal' => true
                   ),
                   'salesTax' => 500,
