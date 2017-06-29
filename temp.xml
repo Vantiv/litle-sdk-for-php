@@ -1,22 +1,31 @@
-<litleOnlineRequest merchantId="101" version="11.0" merchantSdk="PHP;11.0" xmlns="http://www.litle.com/schema">
+<litleOnlineRequest merchantId="1288791" version="11.0" merchantSdk="PHP;11.0" xmlns="http://www.litle.com/schema">
     <authentication>
-        <user>username</user>
-        <password>123456</password>
+        <user>SDKTEAM</user>
+        <password>V3r5K6v7</password>
     </authentication>
-    <echeckVerification reportGroup="Default Report Group" id="id">
-        <orderId>39</orderId>
-        <amount>3003</amount>
-        <orderSource>telephone</orderSource>
+    <sale reportGroup="Default Report Group" id="1">
+        <orderId>1</orderId>
+        <amount>10010</amount>
+        <orderSource>ecommerce</orderSource>
         <billToAddress>
-            <firstName>Robert</firstName>
-            <lastName>Jones</lastName>
-            <companyName>Good Goods Inc</companyName>
-            <phone>9999999999</phone>
+            <name>John Smith</name>
+            <addressLine1>1 Main St.</addressLine1>
+            <city>Burlington</city>
+            <state>MA</state>
+            <zip>01803-3747</zip>
+            <country>US</country>
         </billToAddress>
-        <echeck>
-            <accType>Corporate</accType>
-            <accNum>3099999999</accNum>
-            <routingNum>053100300</routingNum>
-        </echeck>
-    </echeckVerification>
+        <card>
+            <type>MC</type>
+            <number>5112010000000003</number>
+            <expDate>0112</expDate>
+            <cardValidationNum>349</cardValidationNum>
+        </card>
+        <enhancedData>
+            <salesTax>500</salesTax>
+            <detailTax>
+                <taxAmount>300</taxAmount>
+            </detailTax>
+        </enhancedData>
+    </sale>
 </litleOnlineRequest>

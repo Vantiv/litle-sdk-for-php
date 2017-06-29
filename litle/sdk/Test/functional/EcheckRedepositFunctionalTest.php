@@ -23,67 +23,70 @@
 * OTHER DEALINGS IN THE SOFTWARE.
 */
 namespace litle\sdk\Test\functional;
+
 use litle\sdk\LitleOnlineRequest;
 use litle\sdk\XmlParser;
+
 class EcheckRedepositFunctionalTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple_echeckRedeposit()
     {
         $hash_in = array('id' => 'id',
-            'litleTxnId'=>'123456789012345678',
-            'amount'=>'123');
+            'litleTxnId' => '123456789012345678',
+            'amount' => '123');
 
         $initialize = new LitleOnlineRequest();
         $echeckRedepositResponse = $initialize->echeckRedepositRequest($hash_in);
-        $response = XmlParser::getNode($echeckRedepositResponse,'response');
-        $this->assertEquals('000',$response);
+        $response = XmlParser::getNode($echeckRedepositResponse, 'response');
+        $this->assertEquals('000', $response);
     }
 
     public function test_echeckRedeposit_with_echeck()
     {
         $hash_in = array('id' => 'id',
-      'amount'=>'123456',
-      'verify'=>'true',
-      'orderId'=>'12345',
-        'litleTxnId'=>'123456789012345678',
-      'orderSource'=>'ecommerce',
-      'echeck' => array('accType'=>'Checking','accNum'=>'12345657890','routingNum'=>'123456789','checkNum'=>'123455'),
-      'billToAddress'=>array('name'=>'Bob','city'=>'lowell','state'=>'MA','email'=>'litle.com'));
+            'amount' => '123456',
+            'verify' => 'true',
+            'orderId' => '12345',
+            'litleTxnId' => '123456789012345678',
+            'orderSource' => 'ecommerce',
+            'echeck' => array('accType' => 'Checking', 'accNum' => '12345657890', 'routingNum' => '123456789', 'checkNum' => '123455'),
+            'billToAddress' => array('name' => 'Bob', 'city' => 'lowell', 'state' => 'MA', 'email' => 'litle.com'));
 
         $initialize = new LitleOnlineRequest();
         $echeckRedepositResponse = $initialize->echeckRedepositRequest($hash_in);
-        $response = XmlParser::getNode($echeckRedepositResponse,'response');
-        $this->assertEquals('000',$response);
+        $response = XmlParser::getNode($echeckRedepositResponse, 'response');
+        $this->assertEquals('000', $response);
     }
 
     public function test_echeckRedeposit_with_echeckToken()
     {
         $hash_in = array('id' => 'id',
-          'amount'=>'123456',
-          'verify'=>'true',
-          'orderId'=>'12345',
-        'litleTxnId'=>'123456789012345678',
-          'orderSource'=>'ecommerce',
-              'echeckToken' => array('accType'=>'Checking','litleToken'=>'1234565789012','routingNum'=>'123456789','checkNum'=>'123455'),
-          'billToAddress'=>array('name'=>'Bob','city'=>'lowell','state'=>'MA','email'=>'litle.com'));
+            'amount' => '123456',
+            'verify' => 'true',
+            'orderId' => '12345',
+            'litleTxnId' => '123456789012345678',
+            'orderSource' => 'ecommerce',
+            'echeckToken' => array('accType' => 'Checking', 'litleToken' => '1234565789012', 'routingNum' => '123456789', 'checkNum' => '123455'),
+            'billToAddress' => array('name' => 'Bob', 'city' => 'lowell', 'state' => 'MA', 'email' => 'litle.com'));
 
         $initialize = new LitleOnlineRequest();
         $echeckRedepositResponse = $initialize->echeckRedepositRequest($hash_in);
-        $response = XmlParser::getNode($echeckRedepositResponse,'response');
-        $this->assertEquals('000',$response);
+        $response = XmlParser::getNode($echeckRedepositResponse, 'response');
+        $this->assertEquals('000', $response);
     }
+
     public function test_echeckRedeposit_missing_litleTxnId()
     {
         $hash_in = array('id' => 'id',
-              'amount'=>'123456',
-              'verify'=>'true',
-              'orderId'=>'12345',
-              'orderSource'=>'ecommerce',
-                  'echeckToken' => array('accType'=>'Checking','litleToken'=>'1234565789012','routingNum'=>'123456789','checkNum'=>'123455'),
-              'billToAddress'=>array('name'=>'Bob','city'=>'lowell','state'=>'MA','email'=>'litle.com'));
+            'amount' => '123456',
+            'verify' => 'true',
+            'orderId' => '12345',
+            'orderSource' => 'ecommerce',
+            'echeckToken' => array('accType' => 'Checking', 'litleToken' => '1234565789012', 'routingNum' => '123456789', 'checkNum' => '123455'),
+            'billToAddress' => array('name' => 'Bob', 'city' => 'lowell', 'state' => 'MA', 'email' => 'litle.com'));
 
         $litleTest = new LitleOnlineRequest();
-        $this->setExpectedException('InvalidArgumentException','Missing Required Field: /litleTxnId/');
+        $this->setExpectedException('InvalidArgumentException', 'Missing Required Field: /litleTxnId/');
         $retOb = $litleTest->echeckRedepositRequest($hash_in);
     }
 

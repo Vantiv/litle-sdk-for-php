@@ -23,87 +23,89 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 namespace litle\sdk\Test\functional;
+
 use litle\sdk\LitleOnlineRequest;
 use litle\sdk\XmlParser;
+
 class QueryTransactionFunctionalTest extends \PHPUnit_Framework_TestCase
 {
     public function testSimpleQueryTransaction()
     {
         $hash_in = array(
-        	'id' => 'id',
-            'origId'=> '2111',
-            'origActionType'=>'A');
+            'id' => 'id',
+            'origId' => '2111',
+            'origActionType' => 'A');
 
         $initialize = new LitleOnlineRequest();
         $queryTransactionResponse = $initialize->queryTransaction($hash_in);
-        $response = XmlParser::getNode($queryTransactionResponse,'response');
-        $this->assertEquals('000',$response);
-        $matchCount = XmlParser::getNode($queryTransactionResponse,'matchCount');
-        $this->assertEquals('1',$matchCount);
-        $resultsMax10 = XmlParser::getNodeWithChildren($queryTransactionResponse,'results_max10');
-        foreach($resultsMax10->childNodes as $child) {
-        	$childResponse = XmlParser::getNode($child,'response');
-        	$childMessage = XmlParser::getNode($child,'message');
-        	$childOrderId = XmlParser::getNode($child,'orderId');
-        	$this->assertEquals('000',$childResponse);
-        	$this->assertEquals('Approved',$childMessage);
-        	$this->assertEquals('GenericOrderId',$childOrderId);
+        $response = XmlParser::getNode($queryTransactionResponse, 'response');
+        $this->assertEquals('000', $response);
+        $matchCount = XmlParser::getNode($queryTransactionResponse, 'matchCount');
+        $this->assertEquals('1', $matchCount);
+        $resultsMax10 = XmlParser::getNodeWithChildren($queryTransactionResponse, 'results_max10');
+        foreach ($resultsMax10->childNodes as $child) {
+            $childResponse = XmlParser::getNode($child, 'response');
+            $childMessage = XmlParser::getNode($child, 'message');
+            $childOrderId = XmlParser::getNode($child, 'orderId');
+            $this->assertEquals('000', $childResponse);
+            $this->assertEquals('Approved', $childMessage);
+            $this->assertEquals('GenericOrderId', $childOrderId);
         }
     }
 
     public function testSimpleQueryTransaction_notFound()
     {
-    	$hash_in = array(
-    			'id' => 'id',
-    			'origId'=> 'ABC',
-    			'origActionType'=>'A');
-    
-    	$initialize = new LitleOnlineRequest();
-    	$queryTransactionResponse = $initialize->queryTransaction($hash_in);
-    	$response = XmlParser::getNode($queryTransactionResponse,'response');
-    	$message = XmlParser::getNode($queryTransactionResponse,'message');
-    	$this->assertEquals('152',$response);
-    	$this->assertEquals('Original transaction found but response not yet available',$message);
+        $hash_in = array(
+            'id' => 'id',
+            'origId' => 'ABC',
+            'origActionType' => 'A');
+
+        $initialize = new LitleOnlineRequest();
+        $queryTransactionResponse = $initialize->queryTransaction($hash_in);
+        $response = XmlParser::getNode($queryTransactionResponse, 'response');
+        $message = XmlParser::getNode($queryTransactionResponse, 'message');
+        $this->assertEquals('152', $response);
+        $this->assertEquals('Original transaction found but response not yet available', $message);
     }
-    
+
     public function testSimpleQueryTransaction_multipleFound()
     {
-    	$hash_in = array(
-    			'id' => 'id',
-    			'origId'=> '2112',
-    			'origActionType'=>'A');
-    
-    	$initialize = new LitleOnlineRequest();
-    	$queryTransactionResponse = $initialize->queryTransaction($hash_in);
-    	$response = XmlParser::getNode($queryTransactionResponse,'response');
-    	$matchCount = XmlParser::getNode($queryTransactionResponse,'matchCount');
-    	$this->assertEquals('000',$response);
-    	$this->assertEquals('2',$matchCount);
-    	$resultsMax10 = XmlParser::getNodeWithChildren($queryTransactionResponse,'results_max10');
-    	foreach($resultsMax10->childNodes as $child) {
-    		$childResponse = XmlParser::getNode($child,'response');
-    		$childMessage = XmlParser::getNode($child,'message');
-    		$childOrderId = XmlParser::getNode($child,'orderId');
-    		$this->assertEquals('000',$childResponse);
-    		$this->assertEquals('Approved',$childMessage);
-    		$this->assertEquals('GenericOrderId',$childOrderId);
-    	}
+        $hash_in = array(
+            'id' => 'id',
+            'origId' => '2112',
+            'origActionType' => 'A');
+
+        $initialize = new LitleOnlineRequest();
+        $queryTransactionResponse = $initialize->queryTransaction($hash_in);
+        $response = XmlParser::getNode($queryTransactionResponse, 'response');
+        $matchCount = XmlParser::getNode($queryTransactionResponse, 'matchCount');
+        $this->assertEquals('000', $response);
+        $this->assertEquals('2', $matchCount);
+        $resultsMax10 = XmlParser::getNodeWithChildren($queryTransactionResponse, 'results_max10');
+        foreach ($resultsMax10->childNodes as $child) {
+            $childResponse = XmlParser::getNode($child, 'response');
+            $childMessage = XmlParser::getNode($child, 'message');
+            $childOrderId = XmlParser::getNode($child, 'orderId');
+            $this->assertEquals('000', $childResponse);
+            $this->assertEquals('Approved', $childMessage);
+            $this->assertEquals('GenericOrderId', $childOrderId);
+        }
     }
-    
+
     public function testSimpleQueryTransaction_responseUnavailable()
     {
-    	$hash_in = array(
-    			'id' => 'id',
-    			'origId'=> 'ABCD0',
-    			'origActionType'=>'A');
-    
-    	$initialize = new LitleOnlineRequest();
-    	$queryTransactionResponse = $initialize->queryTransaction($hash_in);
-    	$response = XmlParser::getNode($queryTransactionResponse,'response');
-    	$message = XmlParser::getNode($queryTransactionResponse,'message');
-    	$this->assertEquals('151',$response);
-    	$this->assertEquals('Original transaction not found',$message);
+        $hash_in = array(
+            'id' => 'id',
+            'origId' => 'ABCD0',
+            'origActionType' => 'A');
+
+        $initialize = new LitleOnlineRequest();
+        $queryTransactionResponse = $initialize->queryTransaction($hash_in);
+        $response = XmlParser::getNode($queryTransactionResponse, 'response');
+        $message = XmlParser::getNode($queryTransactionResponse, 'message');
+        $this->assertEquals('151', $response);
+        $this->assertEquals('Original transaction not found', $message);
     }
-    
-    
+
+
 }

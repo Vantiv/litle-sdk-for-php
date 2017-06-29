@@ -23,33 +23,35 @@
 * OTHER DEALINGS IN THE SOFTWARE.
 */
 namespace litle\sdk\Test\functional;
+
 use litle\sdk\LitleOnlineRequest;
 use litle\sdk\XmlParser;
+
 class UnloadReversalFunctionalTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple()
     {
         $hash_in = array(
-        		'litleTxnId' => '1234567890',
-				'reportGroup'=>'Planets',
-				'id' => 'id',
-				'card' => array (
-						'type' => 'GC',
-						'number' => '4100000000000001',
-						'expDate' => '0118',
-						'pin' => '1234',
-						'cardValidationNum' => '411'
-				),
-				'originalRefCode' => '101',
-				'originalAmount' => '34561',
-				'originalTxnTime' => '2017-01-24T09:00:00',
-				'originalSystemTraceId' => '33',
-				'originalSequenceNumber' => '111111' 
+            'litleTxnId' => '1234567890',
+            'reportGroup' => 'Planets',
+            'id' => 'id',
+            'card' => array(
+                'type' => 'GC',
+                'number' => '4100000000000001',
+                'expDate' => '0118',
+                'pin' => '1234',
+                'cardValidationNum' => '411'
+            ),
+            'originalRefCode' => '101',
+            'originalAmount' => '34561',
+            'originalTxnTime' => '2017-01-24T09:00:00',
+            'originalSystemTraceId' => '33',
+            'originalSequenceNumber' => '111111'
         );
         $initialize = new LitleOnlineRequest();
         $unloadReversalResponse = $initialize->unloadReversalRequest($hash_in);
-        $response = XmlParser::getAttribute($unloadReversalResponse,'litleOnlineResponse','response');
-        $this->assertEquals('0',$response);
+        $response = XmlParser::getAttribute($unloadReversalResponse, 'litleOnlineResponse', 'response');
+        $this->assertEquals('0', $response);
     }
 
 }

@@ -245,35 +245,36 @@ class XmlFields
     {
         if (isset($hash_in)) {
             $hash_out = array(
-                        "customerReference"=>XmlFields::returnArrayValue($hash_in, "customerReference"),
-                        "salesTax"=>XmlFields::returnArrayValue($hash_in, "salesTax"),
-                        "deliveryType"=>XmlFields::returnArrayValue($hash_in, "deliveryType"),
-                        "taxExempt"=>XmlFields::returnArrayValue($hash_in, "taxExempt"),
-                        "discountAmount"=>XmlFields::returnArrayValue($hash_in, "discountAmount"),
-                        "shippingAmount"=>XmlFields::returnArrayValue($hash_in, "shippingAmount"),
-                        "dutyAmount"=>XmlFields::returnArrayValue($hash_in, "dutyAmount"),
-                        "shipFromPostalCode"=>XmlFields::returnArrayValue($hash_in, "shipFromPostalCode"),
-                        "destinationPostalCode"=>XmlFields::returnArrayValue($hash_in, "destinationPostalCode"),
-                        "destinationCountryCode"=>XmlFields::returnArrayValue($hash_in, "destinationCountryCode"),
-                        "invoiceReferenceNumber"=>XmlFields::returnArrayValue($hash_in, "invoiceReferenceNumber"),
-                        "orderDate"=>XmlFields::returnArrayValue($hash_in, "orderDate")
+                "customerReference"=>XmlFields::returnArrayValue($hash_in, "customerReference"),
+                "salesTax"=>XmlFields::returnArrayValue($hash_in, "salesTax"),
+                "deliveryType"=>XmlFields::returnArrayValue($hash_in, "deliveryType"),
+                "taxExempt"=>XmlFields::returnArrayValue($hash_in, "taxExempt"),
+                "discountAmount"=>XmlFields::returnArrayValue($hash_in, "discountAmount"),
+                "shippingAmount"=>XmlFields::returnArrayValue($hash_in, "shippingAmount"),
+                "dutyAmount"=>XmlFields::returnArrayValue($hash_in, "dutyAmount"),
+                "shipFromPostalCode"=>XmlFields::returnArrayValue($hash_in, "shipFromPostalCode"),
+                "destinationPostalCode"=>XmlFields::returnArrayValue($hash_in, "destinationPostalCode"),
+                "destinationCountryCode"=>XmlFields::returnArrayValue($hash_in, "destinationCountryCode"),
+                "invoiceReferenceNumber"=>XmlFields::returnArrayValue($hash_in, "invoiceReferenceNumber"),
+                "orderDate"=>XmlFields::returnArrayValue($hash_in, "orderDate")
             );
+            $lineItem = array();
+            $detailtax = array();
             foreach ($hash_in as $key => $value) {
-                if ($key == 'lineItemData' && $key != NULL) {
-                    $lineItem = array();
-                    for ($j=0; $j<count($value); $j++) {
-                        $outIndex = ('lineItemData') . (string) $j;
-                        $hash_out[$outIndex] = XmlFields::lineItemData(XmlFields::returnArrayValue($value,$j));
-                    }
-                } elseif ($key == 'detailTax' & $key != NULL) {
-                    $detailtax = array();
-                    for ($j=0; $j<count($value); $j++) {
-                        $outIndex = ('detailTax') . (string) $j;
-                        $hash_out[$outIndex] = XmlFields::detailTax(XmlFields::returnArrayValue($value,$j));
-                    }
+                if (($key == 'lineItemData' || $key == ('lineItemData'.count($lineItem))) && $key != NULL) {
+                    $lineItem[] = $value;
+                } elseif (($key == 'detailTax' || $key == ('detailTax'.count($detailtax))) && $key != NULL) {
+                    $detailtax[] = $value;
                 }
             }
-
+            for ($j=0; $j<count($lineItem); $j++) {
+                $outIndex = ('lineItemData') . (string) $j;
+                $hash_out[$outIndex] = XmlFields::lineItemData(XmlFields::returnArrayValue($lineItem,$j));
+            }
+            for ($j=0; $j<count($detailtax); $j++) {
+                $outIndex = ('detailTax') . (string) $j;
+                $hash_out[$outIndex] = XmlFields::detailTax(XmlFields::returnArrayValue($detailtax,$j));
+            }
             return $hash_out;
         }
     }

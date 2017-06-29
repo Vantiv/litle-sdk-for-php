@@ -23,28 +23,30 @@
 * OTHER DEALINGS IN THE SOFTWARE.
 */
 namespace litle\sdk\Test\functional;
+
 use litle\sdk\LitleOnlineRequest;
 use litle\sdk\XmlParser;
- class LoadFunctionalTest extends \PHPUnit_Framework_TestCase
+
+class LoadFunctionalTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple()
     {
         $hash_in = array('id' => '1211',
-            'orderId'=>'1',
-            'amount'=> '2',
-            'orderSource'=>'ecommerce',
-            'card' => array (
-					'type' => 'GC',
-					'number' => '4100000000000001',
-					'expDate' => '0118',
-					'pin' => '1234',
-					'cardValidationNum' => '411'
-      		)
+            'orderId' => '1',
+            'amount' => '2',
+            'orderSource' => 'ecommerce',
+            'card' => array(
+                'type' => 'GC',
+                'number' => '4100000000000001',
+                'expDate' => '0118',
+                'pin' => '1234',
+                'cardValidationNum' => '411'
+            )
         );
 
         $initialize = new LitleOnlineRequest();
         $response = $initialize->load($hash_in);
-        $message = XmlParser::getAttribute($response,'litleOnlineResponse','message');
-        $this->assertEquals('Valid Format',$message);
+        $message = XmlParser::getAttribute($response, 'litleOnlineResponse', 'message');
+        $this->assertEquals('Valid Format', $message);
     }
 }

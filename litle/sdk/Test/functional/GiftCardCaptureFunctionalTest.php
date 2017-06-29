@@ -23,63 +23,65 @@
 * OTHER DEALINGS IN THE SOFTWARE.
 */
 namespace litle\sdk\Test\functional;
+
 use litle\sdk\LitleOnlineRequest;
 use litle\sdk\XmlParser;
+
 class GiftCardCaptureFunctionalTest extends \PHPUnit_Framework_TestCase
 {
-	public function test_simple_giftCardCapture()
-	{
-		$hash_in = array (
-				'id' => 'id',
-				'litleTxnId' => '12345678000',
-				'captureAmount'=>'123',
-				 'card' => array (
-				 		'type' => 'GC',
-						'number' => '4100000000000000',
-						'expDate' => '0118',
-						'pin' => '1234',
-						'cardValidationNum' => '411'
-				),
-				'originalRefCode' => '101',
-				'originalAmount' => '34561',
-				'originalTxnTime' => '2017-01-24T09:00:00'
-		);
+    public function test_simple_giftCardCapture()
+    {
+        $hash_in = array(
+            'id' => 'id',
+            'litleTxnId' => '12345678000',
+            'captureAmount' => '123',
+            'card' => array(
+                'type' => 'GC',
+                'number' => '4100000000000000',
+                'expDate' => '0118',
+                'pin' => '1234',
+                'cardValidationNum' => '411'
+            ),
+            'originalRefCode' => '101',
+            'originalAmount' => '34561',
+            'originalTxnTime' => '2017-01-24T09:00:00'
+        );
 
-		$initialize = new LitleOnlineRequest();
-		$giftCardCaptureResponse = $initialize->giftCardCaptureRequest($hash_in);
-		$response = XmlParser::getNode($giftCardCaptureResponse,'response');
-		
-		$this->assertEquals('000',$response);
-	}
-	
-	public function test_simple_giftCardCapture_giftCardResponse()
-	{
-		$hash_in = array (
-				'id' => 'id',
-				'litleTxnId' => '12345678000',
-				'captureAmount'=>'123',
-				'card' => array (
-						'type' => 'GC',
-						'number' => '4100100000000000',
-						'expDate' => '0118',
-						'pin' => '1234',
-						'cardValidationNum' => '411'
-				),
-				'originalRefCode' => '101',
-				'originalAmount' => '34561',
-				'originalTxnTime' => '2017-01-24T09:00:00'
-		);
-	
-		$initialize = new LitleOnlineRequest();
-		$giftCardCaptureResponse = $initialize->giftCardCaptureRequest($hash_in);
-		$response = XmlParser::getNode($giftCardCaptureResponse,'response');
-	
-		$this->assertEquals('000',$response);
-		$systemTraceId = XmlParser::getNode($giftCardCaptureResponse,'systemTraceId');
-		$this -> assertEquals('0',$systemTraceId);
-		$sequenceNumber = XmlParser::getNode($giftCardCaptureResponse,'sequenceNumber');
-		$this -> assertEquals('12',$sequenceNumber);
-	}
+        $initialize = new LitleOnlineRequest();
+        $giftCardCaptureResponse = $initialize->giftCardCaptureRequest($hash_in);
+        $response = XmlParser::getNode($giftCardCaptureResponse, 'response');
+
+        $this->assertEquals('000', $response);
+    }
+
+    public function test_simple_giftCardCapture_giftCardResponse()
+    {
+        $hash_in = array(
+            'id' => 'id',
+            'litleTxnId' => '12345678000',
+            'captureAmount' => '123',
+            'card' => array(
+                'type' => 'GC',
+                'number' => '4100100000000000',
+                'expDate' => '0118',
+                'pin' => '1234',
+                'cardValidationNum' => '411'
+            ),
+            'originalRefCode' => '101',
+            'originalAmount' => '34561',
+            'originalTxnTime' => '2017-01-24T09:00:00'
+        );
+
+        $initialize = new LitleOnlineRequest();
+        $giftCardCaptureResponse = $initialize->giftCardCaptureRequest($hash_in);
+        $response = XmlParser::getNode($giftCardCaptureResponse, 'response');
+
+        $this->assertEquals('000', $response);
+        $systemTraceId = XmlParser::getNode($giftCardCaptureResponse, 'systemTraceId');
+        $this->assertEquals('0', $systemTraceId);
+        $sequenceNumber = XmlParser::getNode($giftCardCaptureResponse, 'sequenceNumber');
+        $this->assertEquals('12', $sequenceNumber);
+    }
 
 
 }
