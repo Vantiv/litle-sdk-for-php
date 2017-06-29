@@ -1,21 +1,21 @@
 {
     "name": "litle/payments-sdk",
     "type": "library",
-    "description": "The Litle PHP SDK is a PHP implementation of the [Litle &amp; Co.](http://www.litle.com). XML API. This SDK was created to make it as easy as possible to connect process your payments with Litle",
-    "keywords": ["litle","sdk","ecommerce","payments"],
-    "homepage": "https://www.litle.com/developers/php",
+    "description": "The Vantiv eCommerce PHP SDK is a PHP implementation of the [Vantiv eCommerce](https://developer.vantiv.com/community/ecommerce). XML API. This SDK was created to make it as easy as possible to connect process your payments with Vantiv eCommerce",
+    "keywords": ["vantiv","litle","sdk","ecommerce","payments"],
+    "homepage": "https://developer.vantiv.com/community/ecommerce",
     "license": "MIT",
     "authors": [
         {
             "name": "Litle SDK",
-            "email": "sdksupport@litle.com",
-            "homepage": "https://www.litle.com/developers",
+            "email": "sdksupport@vantiv.com",
+            "homepage": "https://developer.vantiv.com/community/ecommerce",
             "role": "Developer"
         }
     ],
     "require": {
         "php": ">=5.3.0",
-        "phpseclib/phpseclib": "2.0.4"
+        "phpseclib/phpseclib": "2.*"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*"
