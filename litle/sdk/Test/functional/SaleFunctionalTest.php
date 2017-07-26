@@ -299,7 +299,7 @@ class SaleFunctionalTest extends \PHPUnit_Framework_TestCase
                 'taxExempt' => false
             ),
         );
-        $initialize = &new LitleOnlineRequest();
+        $initialize = new LitleOnlineRequest();
         $saleResponse = $initialize->saleRequest($sale_info);
         #display results
         echo ("Response: " . (XmlParser::getNode($saleResponse,'response'))) . "\n";

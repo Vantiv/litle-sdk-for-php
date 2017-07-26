@@ -9,7 +9,7 @@ $token_info = array(
               'id'=> '456',
 	      'accountNumber'=>'1233456789103801');
  
-$initialize = &new LitleOnlineRequest(); 
+$initialize = new LitleOnlineRequest();
 $tokenResponse = $initialize->registerTokenRequest($token_info);
  
 #display results

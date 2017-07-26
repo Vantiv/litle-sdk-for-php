@@ -23,7 +23,7 @@ $auth_info = array(
 		      'type' => 'VI')
 			);
  
-$initialize = &new LitleOnlineRequest(); 
+$initialize = new LitleOnlineRequest();
 $authResponse = $initialize->authorizationRequest($auth_info);
 
 if(XmlParser::getNode($authResponse,'message')!='Approved')
@@ -31,7 +31,7 @@ if(XmlParser::getNode($authResponse,'message')!='Approved')
 #Capture
 #Captures the authorization and results in money movement
 $capture_hash =  array('litleTxnId' =>(XmlParser::getNode($authResponse,'litleTxnId')),'id'=> '456',);
-$initialize = &new LitleOnlineRequest();
+$initialize = new LitleOnlineRequest();
 $captureResponse = $initialize->captureRequest($capture_hash);
 
 if(XmlParser::getNode($captureResponse,'message')!='Approved')
@@ -39,7 +39,7 @@ if(XmlParser::getNode($captureResponse,'message')!='Approved')
 #Credit
 #Refund the customer
 $credit_hash =  array('litleTxnId' =>(XmlParser::getNode($captureResponse,'litleTxnId')),'id'=> '456',);
-$initialize = &new LitleOnlineRequest();
+$initialize = new LitleOnlineRequest();
 $creditResponse = $initialize->creditRequest($credit_hash);
 
 if(XmlParser::getNode($creditResponse,'message')!='Approved')
@@ -47,7 +47,7 @@ if(XmlParser::getNode($creditResponse,'message')!='Approved')
 #Void
 #Cancel the refund, note that a deposit can be Voided as well
 $void_hash =  array('litleTxnId' =>(XmlParser::getNode($creditResponse,'litleTxnId')),'id'=> '456',);
-$initialize = &new LitleOnlineRequest();
+$initialize = new LitleOnlineRequest();
 $voidResponse = $initialize->voidRequest($void_hash);
 
 if(XmlParser::getNode($voidResponse,'message')!='Approved')

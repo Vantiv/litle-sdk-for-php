@@ -45,14 +45,21 @@ function initialize()
     $merchantArray = array();
     $handle = @fopen('./litle_SDK_config.ini', "w");
     if ($handle) {
-        print "Welcome to Litle PHP_SDK" . PHP_EOL;
+        print "Welcome to Vantiv eCommerce PHP_SDK" . PHP_EOL;
         print "Please input your user name: ";
         $line['user'] = trim(fgets(STDIN));
         print "Please input your password: ";
         $line['password'] = trim(fgets(STDIN));
         print "Please input your merchantId: ";
         $line['currency_merchant_map ']['DEFAULT'] = trim(fgets(STDIN));
-        print "Please choose Litle url from the following list (example: 'sandbox') or directly input another URL: \nsandbox => https://www.testlitle.com/sandbox/communicator/online \npostlive => https://postlive.litle.com/vap/communicator/online \ntransact-postlive => https://transact-postlive.litle.com/vap/communicator/online \nproduction => https://payments.litle.com/vap/communicator/online \nproduction-transact => https://transact.litle.com/vap/communicator/online \nprelive => https://prelive.litle.com/vap/communicator/online \ntransact-prelive => https://transact-prelive.litle.com/vap/communicator/online" . PHP_EOL;
+        print "Please choose Litle url from the following list (example: 'sandbox') or directly input another URL: \n" .
+            "sandbox => https://www.testlitle.com/sandbox/communicator/online \n" .
+            "postlive => https://payments.vantivpostlive.com/vap/communicator/online \n" .
+            "transact-postlive => https://transact.vantivpostlive.com/vap/communicator/online \n" .
+            "production => https://payments.vantivcnp.com/vap/communicator/online \n" .
+            "production-transact => https://transact.vantivcnp.com/vap/communicator/online \n" .
+            "prelive => https://payments.vantivprelive.com/vap/communicator/online \n" .
+            "transact-prelive => https://transact.vantivprelive.com/vap/communicator/online" . PHP_EOL;
         $url = UrlMapper::getUrl(trim(fgets(STDIN)));
 	
         $line['url'] = $url;
@@ -60,7 +67,8 @@ function initialize()
         $line['proxy'] = trim(fgets(STDIN));
 
         print "Batch processing saves files to disk. \n";
-        print "Please input a directory to save these files. If you are not using batch processing, you may hit enter. ";
+        print "Please input a directory to save these files. " .
+            "If you are not using batch processing, you may hit enter. ";
         $dir = trim(fgets(STDIN));
         $line['batch_requests_path'] = $dir;
         $line['litle_requests_path'] = $dir;
@@ -71,9 +79,11 @@ function initialize()
         $line['sftp_password'] = trim(fgets(STDIN));
         print "Please input the URL for batch processing. If you are not using batch processing, you may hit enter. ";
         $line['batch_url'] = trim(fgets(STDIN));
-        print "Please input the port for stream batch delivery. If you are not using stream batch delivery, you may hit enter. ";
+        print "Please input the port for stream batch delivery. " .
+            "If you are not using stream batch delivery, you may hit enter. ";
         $line['tcp_port'] = trim(fgets(STDIN));
-        print "Please input the timeout (in seconds) for stream batch delivery. If you are not using stream batch delivery, you may hit enter. ";
+        print "Please input the timeout (in seconds) for stream batch delivery. " .
+            "If you are not using stream batch delivery, you may hit enter. ";
         $line['tcp_timeout'] = trim(fgets(STDIN));
         # ssl should be usd by default
         $line['tcp_ssl'] = '1';
@@ -85,7 +95,8 @@ function initialize()
         fwrite($handle, "reportGroup = Default Report Group".  PHP_EOL);
     }
     fclose($handle);
-    print "The Litle configuration file has been generated, the file is located in the lib directory". PHP_EOL;
+    print "The Vantiv eCommerce configuration file has been generated, " .
+        "the file is located in the lib directory". PHP_EOL;
 }
 
 initialize();

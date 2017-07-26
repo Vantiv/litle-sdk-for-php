@@ -19,7 +19,7 @@ $capture_info = array(
   )
 );
  
-$initialize = &new LitleOnlineRequest();
+$initialize = new LitleOnlineRequest();
 $response = $initialize->forceCaptureRequest($capture_info);
  
 #display results
