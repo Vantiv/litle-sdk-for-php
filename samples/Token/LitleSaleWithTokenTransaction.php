@@ -22,7 +22,7 @@ $sale_info = array(
 		      'type' => 'MC')
 			);
  
-$initilaize = &new LitleOnlineRequest(); 
+$initilaize = new LitleOnlineRequest();
 $saleResponse = $initilaize->saleRequest($sale_info);
  
 #display results

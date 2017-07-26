@@ -9,7 +9,7 @@ $auth_info = array(
         'id'=> '456'
 	);
  
-$initilaize = &new LitleOnlineRequest(); 
+$initilaize = new LitleOnlineRequest();
 $authResponse = $initilaize->authorizationRequest($auth_info );
  
 #display results

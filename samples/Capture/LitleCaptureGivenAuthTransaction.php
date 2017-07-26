@@ -21,7 +21,7 @@ $capture_info = array(
   )
 );
  
-$initilaize = &new LitleOnlineRequest();
+$initilaize = new LitleOnlineRequest();
 $response = $initilaize->captureGivenAuthRequest($capture_info);
  
 #display results

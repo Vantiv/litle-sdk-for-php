@@ -9,7 +9,7 @@ $void_info = array(
         'id'=> '456'
 	);
  
-$initilaize = &new LitleOnlineRequest(); 
+$initilaize = new LitleOnlineRequest();
 $voidResponse = $initilaize->voidRequest($void_info);
  
 #display results
