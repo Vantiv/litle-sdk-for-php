@@ -9,7 +9,7 @@ $authRev_info = array(
     'id' => '456'
 );
 
-$initialize = &new LitleOnlineRequest();
+$initialize = new LitleOnlineRequest();
 $reversalResponse = $initialize->authReversalRequest($authRev_info);
 #display results
 echo("Response: " . (XmlParser::getNode($reversalResponse, 'response')) . "<br>");

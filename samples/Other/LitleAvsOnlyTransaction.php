@@ -24,7 +24,7 @@ $auth_info = array(
     )
 );
 
-$initialize = &new LitleOnlineRequest();
+$initialize = new LitleOnlineRequest();
 $avsResponse = $initialize->authorizationRequest($auth_info);
 
 #display results

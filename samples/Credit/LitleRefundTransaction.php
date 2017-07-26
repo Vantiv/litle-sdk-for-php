@@ -14,7 +14,7 @@ $credit_info = array(
     'amount' => '123'
 );
 
-$initialize = &new LitleOnlineRequest();
+$initialize = new LitleOnlineRequest();
 $creditResponse = $initialize->creditRequest($credit_info);
 
 #display results
