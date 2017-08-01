@@ -135,6 +135,8 @@ class LitleOnlineRequest
             'applepay' => (XmlFields::applepayType(XmlFields::returnArrayValue($hash_in, 'applepay'))),
             'sepaDirectDebit' => (XmlFields::sepaDirectDebitType(XmlFields::returnArrayValue($hash_in, 'sepaDirectDebit'))),
             'ideal' => (XmlFields::idealType(XmlFields::returnArrayValue($hash_in, 'ideal'))),
+            'giropay' => (XmlFields::idealType(XmlFields::returnArrayValue($hash_in, 'giropay'))),
+            'sofort' => (XmlFields::idealType(XmlFields::returnArrayValue($hash_in, 'sofort'))),
             'mpos' => (XmlFields::mposType(XmlFields::returnArrayValue($hash_in, 'mpos'))),
             'billMeLaterRequest' => XmlFields::billMeLaterRequest(XmlFields::returnArrayValue($hash_in, 'billMeLaterRequest')),
             'fraudCheck' => XmlFields::fraudCheckType(XmlFields::returnArrayValue($hash_in, 'fraudCheck')),
