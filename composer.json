@@ -1,13 +1,13 @@
 {
-    "name": "litle/payments-sdk",
+    "name": "vantiv/payments-sdk",
     "type": "library",
     "description": "The Vantiv eCommerce PHP SDK is a PHP implementation of the [Vantiv eCommerce](https://developer.vantiv.com/community/ecommerce). XML API. This SDK was created to make it as easy as possible to connect process your payments with Vantiv eCommerce",
-    "keywords": ["vantiv","litle","sdk","ecommerce","payments"],
+    "keywords": ["vantiv","sdk","ecommerce","payments", "cnp"],
     "homepage": "https://developer.vantiv.com/community/ecommerce",
     "license": "MIT",
     "authors": [
         {
-            "name": "Litle SDK",
+            "name": "Vantiv eCommerce SDK",
             "email": "sdksupport@vantiv.com",
             "homepage": "https://developer.vantiv.com/community/ecommerce",
             "role": "Developer"
