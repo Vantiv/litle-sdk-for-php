@@ -329,4 +329,42 @@ class SaleFunctionalTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('000', $response);
         $this->assertEquals('http://redirect.url.vantiv.com', XmlParser::getNode($saleResponse, 'redirectUrl'));
     }
+
+    public function test_sale_with_Giropay()
+    {
+        $hash_in = array(
+            'giropay' => array('preferredLanguage' => 'AD'),
+            'id' => '1211',
+            'orderId' => '2111',
+            'reportGroup' => 'Planets',
+            'orderSource' => 'ecommerce',
+            'amount' => '123',
+            'originalNetworkTransactionId' => '225588774411336699',
+            'originalTransactionAmount' => '3336578');
+
+        $initialize = new LitleOnlineRequest();
+        $saleResponse = $initialize->saleRequest($hash_in);
+        $response = XmlParser::getNode($saleResponse, 'response');
+        $this->assertEquals('000', $response);
+        $this->assertEquals('http://redirect.url.vantiv.com', XmlParser::getNode($saleResponse, 'redirectUrl'));
+    }
+
+    public function test_sale_with_Sofort()
+    {
+        $hash_in = array(
+            'sofort' => array('preferredLanguage' => 'AD'),
+            'id' => '1211',
+            'orderId' => '2111',
+            'reportGroup' => 'Planets',
+            'orderSource' => 'ecommerce',
+            'amount' => '123',
+            'originalNetworkTransactionId' => '225588774411336699',
+            'originalTransactionAmount' => '3336578');
+
+        $initialize = new LitleOnlineRequest();
+        $saleResponse = $initialize->saleRequest($hash_in);
+        $response = XmlParser::getNode($saleResponse, 'response');
+        $this->assertEquals('000', $response);
+        $this->assertEquals('http://redirect.url.vantiv.com', XmlParser::getNode($saleResponse, 'redirectUrl'));
+    }
 }

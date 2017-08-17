@@ -711,4 +711,48 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
         $litleTest->saleRequest($hash_in);
     }
 
+    public function test_sale_with_Giropay()
+    {
+        $hash_in = array(
+            'giropay' => array('preferredLanguage' => 'USA'),
+            'id' => '1211',
+            'orderId' => '2111',
+            'reportGroup' => 'Planets',
+            'orderSource' => 'ecommerce',
+            'amount' => '123',
+            'originalNetworkTransactionId' => '225588774411336699',
+            'originalTransactionAmount' => '3336578');
+
+        $mock = $this->getMock('litle\sdk\LitleXmlMapper');
+        $mock->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<giropay><preferredLanguage>USA<\/preferredLanguage><\/giropay>.*/'));
+
+        $litleTest = new LitleOnlineRequest();
+        $litleTest->newXML = $mock;
+        $litleTest->saleRequest($hash_in);
+    }
+
+    public function test_sale_with_Sofort()
+    {
+        $hash_in = array(
+            'sofort' => array('preferredLanguage' => 'USA'),
+            'id' => '1211',
+            'orderId' => '2111',
+            'reportGroup' => 'Planets',
+            'orderSource' => 'ecommerce',
+            'amount' => '123',
+            'originalNetworkTransactionId' => '225588774411336699',
+            'originalTransactionAmount' => '3336578');
+
+        $mock = $this->getMock('litle\sdk\LitleXmlMapper');
+        $mock->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<sofort><preferredLanguage>USA<\/preferredLanguage><\/sofort>.*/'));
+
+        $litleTest = new LitleOnlineRequest();
+        $litleTest->newXML = $mock;
+        $litleTest->saleRequest($hash_in);
+    }
+
 }

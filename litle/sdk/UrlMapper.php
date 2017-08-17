@@ -26,7 +26,6 @@ namespace litle\sdk;
 class UrlMapper
 {
     const POSTLIVE = "postlive";
-    const BETACERT = "betacert";
     const SANDBOX = "sandbox";
     const PRODUCTION = "production";
     const TRANSACT_PRODUCTION = "transact_production";

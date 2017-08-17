@@ -1,5 +1,10 @@
 = LitleOnline CHANGELOG
 
+
+==Version 9.13.0(August,3 2017)
+* Feature add giropay and sofort for sale transaction
+* Update URL mapper for vantiv URL's
+
 ==Version 9.12.1 (Apr 4, 2017)
 * Feature: Update phpseclib to new version
 
