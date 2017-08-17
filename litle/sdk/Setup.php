@@ -53,7 +53,7 @@ function initialize()
         print "Please input your merchantId: ";
         $line['currency_merchant_map ']['DEFAULT'] = trim(fgets(STDIN));
         print "Please choose Litle url from the following list (example: 'sandbox') or directly input another URL: \n" .
-            "sandbox => https://www.testlitle.com/sandbox/communicator/online \n" .
+            "sandbox => https://www.testvantivcnp.com/sandbox/communicator/online \n" .
             "postlive => https://payments.vantivpostlive.com/vap/communicator/online \n" .
             "transact-postlive => https://transact.vantivpostlive.com/vap/communicator/online \n" .
             "production => https://payments.vantivcnp.com/vap/communicator/online \n" .
