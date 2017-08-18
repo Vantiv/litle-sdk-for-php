@@ -26,24 +26,20 @@ namespace litle\sdk;
 class UrlMapper
 {
     const POSTLIVE = "postlive";
-    const BETACERT = "betacert";
     const SANDBOX = "sandbox";
     const PRODUCTION = "production";
     const TRANSACT_PRODUCTION = "transact_production";
     const TRANSACT_PRELIVE = "transact_prelive";
     const TRANSACT_POSTLIVE = "transact_postlive";
-    const TRANSACT_BETACERT = "transact_betacert";
     const PRELIVE = "prelive";
 
     public static function getUrl($litleEnv)
     {
         $litleOnlineCtx = 'vap/communicator/online';
         if ($litleEnv == UrlMapper::SANDBOX)
-            return 'https://www.testlitle.com/sandbox/communicator/online';
+            return 'https://www.testvantivcnp.com/sandbox/communicator/online';
         elseif ($litleEnv == UrlMapper::POSTLIVE)
             return 'https://payments.vantivpostlive.com/' . $litleOnlineCtx;
-        elseif ($litleEnv == UrlMapper::BETACERT)
-            return 'https://betacert.litle.com/' . $litleOnlineCtx;
         elseif ($litleEnv == UrlMapper::PRODUCTION)
             return 'https://payments.vantivcnp.com/' . $litleOnlineCtx;
         elseif ($litleEnv == UrlMapper::TRANSACT_PRODUCTION)
@@ -52,11 +48,9 @@ class UrlMapper
             return 'https://transact.vantivprelive.com/' . $litleOnlineCtx;
         elseif ($litleEnv == UrlMapper::TRANSACT_POSTLIVE)
             return 'https://transact.vantivpostlive.com/' . $litleOnlineCtx;
-        elseif ($litleEnv == UrlMapper::TRANSACT_BETACERT)
-            return 'https://transact-betacert.litle.com/' . $litleOnlineCtx;
         elseif ($litleEnv == UrlMapper::PRELIVE)
             return 'https://payments.vantivprelive.com/' . $litleOnlineCtx;
         else
-            return 'https://www.testlitle.com/sandbox/communicator/online';
+            return 'https://www.testvantivcnp.com/sandbox/communicator/online';
     }
 }
