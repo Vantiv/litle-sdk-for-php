@@ -687,6 +687,140 @@ class LitleOnlineRequest
     	return $fraudCheckResponse;
     }
 
+    public function subMerchantCredit($hash_in)
+    {
+        $hash_out = array (
+            'fundingSubmerchantId' => XmlFields::returnArrayValue ( $hash_in, 'fundingSubmerchantId' ),
+            'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+            'submerchantName' => XmlFields::returnArrayValue ( $hash_in, 'submerchantName' ),
+            'fundsTransferId' => XmlFields::returnArrayValue (  $hash_in, 'fundsTransferId'  ),
+            'amount' =>  XmlFields::returnArrayValue ( $hash_in, 'amount' ) ,
+            'accountInfo' => XmlFields::echeckType ( XmlFields::returnArrayValue ( $hash_in, 'accountInfo' ) ) ,
+            'customIdentifier' =>  XmlFields::returnArrayValue ( $hash_in, 'customIdentifier' )
+
+        );
+        $subMerchantCreditResponse = $this ->processRequest($hash_out, $hash_in, "submerchantCredit");
+        return $subMerchantCreditResponse;
+    }
+
+    public function subMerchantDebit($hash_in)
+    {
+        $hash_out = array (
+            'fundingSubmerchantId' => XmlFields::returnArrayValue ( $hash_in, 'fundingSubmerchantId' ),
+            'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+            'submerchantName' => XmlFields::returnArrayValue ( $hash_in, 'submerchantName' ),
+            'fundsTransferId' => XmlFields::returnArrayValue (  $hash_in, 'fundsTransferId'  ),
+            'amount' =>  XmlFields::returnArrayValue ( $hash_in, 'amount' ) ,
+            'accountInfo' => XmlFields::echeckType ( XmlFields::returnArrayValue ( $hash_in, 'accountInfo' ) ) ,
+            'customIdentifier' =>  XmlFields::returnArrayValue ( $hash_in, 'customIdentifier' )
+
+        );
+        $subMerchantDebitResponse = $this ->processRequest($hash_out, $hash_in, "submerchantDebit");
+        return $subMerchantDebitResponse;
+    }
+
+    public function payFacDebit($hash_in)
+    {
+        $hash_out = array (
+            'fundingSubmerchantId' => XmlFields::returnArrayValue ( $hash_in, 'fundingSubmerchantId' ),
+            'fundsTransferId' => XmlFields::returnArrayValue (  $hash_in, 'fundsTransferId'  ),
+            'amount' =>  XmlFields::returnArrayValue ( $hash_in, 'amount' ) ,
+        );
+        $payfacDebitResponse = $this ->processRequest($hash_out, $hash_in, 'payFacDebit');
+        return $payfacDebitResponse;
+    }
+
+    public function payFacCredit($hash_in)
+    {
+        $hash_out = array (
+            'fundingSubmerchantId' => XmlFields::returnArrayValue ( $hash_in, 'fundingSubmerchantId' ),
+            'fundsTransferId' => XmlFields::returnArrayValue (  $hash_in, 'fundsTransferId'  ),
+            'amount' =>  XmlFields::returnArrayValue ( $hash_in, 'amount' ) ,
+        );
+        $payfacCreditResponse = $this ->processRequest($hash_out, $hash_in, "payFacCredit");
+        return $payfacCreditResponse;
+    }
+
+    public function reserveCredit($hash_in)
+    {
+        $hash_out = array (
+            'fundingSubmerchantId' => XmlFields::returnArrayValue ( $hash_in, 'fundingSubmerchantId' ),
+            'fundsTransferId' => XmlFields::returnArrayValue (  $hash_in, 'fundsTransferId'  ),
+            'amount' =>  XmlFields::returnArrayValue ( $hash_in, 'amount' ) ,
+        );
+        $reserveCreditResponse = $this ->processRequest($hash_out, $hash_in, "reserveCredit");
+        return $reserveCreditResponse;
+    }
+
+    public function reserveDebit($hash_in)
+    {
+        $hash_out = array (
+            'fundingSubmerchantId' => XmlFields::returnArrayValue ( $hash_in, 'fundingSubmerchantId' ),
+            'fundsTransferId' => XmlFields::returnArrayValue (  $hash_in, 'fundsTransferId'  ),
+            'amount' =>  XmlFields::returnArrayValue ( $hash_in, 'amount' ) ,
+        );
+        $reserveDebitResponse = $this ->processRequest($hash_out, $hash_in, "reserveDebit");
+        return $reserveDebitResponse;
+    }
+
+    public function physicalCheckDebit($hash_in)
+    {
+        $hash_out = array (
+            'fundingSubmerchantId' => XmlFields::returnArrayValue ( $hash_in, 'fundingSubmerchantId' ),
+            'fundsTransferId' => XmlFields::returnArrayValue (  $hash_in, 'fundsTransferId'  ),
+            'amount' =>  XmlFields::returnArrayValue ( $hash_in, 'amount' ) ,
+        );
+        $physicalCheckDebitResponse = $this ->processRequest($hash_out, $hash_in, "physicalCheckDebit");
+        return $physicalCheckDebitResponse;
+    }
+
+    public function physicalCheckCredit($hash_in)
+    {
+        $hash_out = array (
+            'fundingSubmerchantId' => XmlFields::returnArrayValue ( $hash_in, 'fundingSubmerchantId' ),
+            'fundsTransferId' => XmlFields::returnArrayValue (  $hash_in, 'fundsTransferId'  ),
+            'amount' =>  XmlFields::returnArrayValue ( $hash_in, 'amount' ) ,
+        );
+        $physicalCheckCreditResponse = $this ->processRequest($hash_out, $hash_in, "physicalCheckCredit");
+        return $physicalCheckCreditResponse;
+    }
+
+    public function vendorCredit($hash_in)
+    {
+        $hash_out = array (
+            'fundingSubmerchantId' => XmlFields::returnArrayValue ( $hash_in, 'fundingSubmerchantId' ),
+            'vendorName' => XmlFields::returnArrayValue ( $hash_in, 'vendorName' ),
+            'fundsTransferId' => XmlFields::returnArrayValue (  $hash_in, 'fundsTransferId'  ),
+            'amount' =>  XmlFields::returnArrayValue ( $hash_in, 'amount' ) ,
+            'accountInfo' => XmlFields::echeckType ( XmlFields::returnArrayValue ( $hash_in, 'accountInfo' ) ) ,
+        );
+        $vendorCreditResponse = $this ->processRequest($hash_out, $hash_in, "vendorCredit");
+        return $vendorCreditResponse;
+    }
+
+    public function vendorDebit($hash_in)
+    {
+        $hash_out = array (
+            'fundingSubmerchantId' => XmlFields::returnArrayValue ( $hash_in, 'fundingSubmerchantId' ),
+            'vendorName' => XmlFields::returnArrayValue ( $hash_in, 'vendorName' ),
+            'fundsTransferId' => XmlFields::returnArrayValue (  $hash_in, 'fundsTransferId'  ),
+            'amount' =>  XmlFields::returnArrayValue ( $hash_in, 'amount' ) ,
+            'accountInfo' => XmlFields::echeckType ( XmlFields::returnArrayValue ( $hash_in, 'accountInfo' ) ) ,
+        );
+        $vendorDebitResponse = $this ->processRequest($hash_out, $hash_in, "vendorDebit");
+        return $vendorDebitResponse;
+    }
+
+
+    public function fundingInstructionVoid($hash_in)
+    {
+        $hash_out = array (
+            'litleTxnId' => XmlFields::returnArrayValue ( $hash_in, 'litleTxnId' ),
+        );
+        $fundingInstructionVoidResponse = $this ->processRequest($hash_out, $hash_in, "fundingInstructionVoid");
+        return $fundingInstructionVoidResponse;
+    }
+
     private static function overrideConfig($hash_in)
     {
         $hash_config = array();

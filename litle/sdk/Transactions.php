@@ -320,6 +320,19 @@ class Transactions {
 		);
 		return $hash_out;
 	}
+    public static function createSubmerchantDebitHash($hash_in) {
+        $hash_out = array (
+            'fundingSubmerchantId' => XmlFields::returnArrayValue ( $hash_in, 'fundingSubmerchantId' ),
+            'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+            'submerchantName' => XmlFields::returnArrayValue ( $hash_in, 'submerchantName' ),
+            'fundsTransferId' => XmlFields::returnArrayValue (  $hash_in, 'fundsTransferId'  ),
+            'amount' =>  XmlFields::returnArrayValue ( $hash_in, 'amount' ) ,
+            'accountInfo' => XmlFields::echeckType ( XmlFields::returnArrayValue ( $hash_in, 'accountInfo' ) ) ,
+            'customIdentifier' =>  XmlFields::returnArrayValue ( $hash_in, 'customIdentifier' )
+
+        );
+        return $hash_out;
+    }
 	public static function createVendorCreditHash($hash_in) {
 		$hash_out = array (
 				'fundingSubmerchantId' => XmlFields::returnArrayValue ( $hash_in, 'fundingSubmerchantId' ),
@@ -355,18 +368,6 @@ class Transactions {
 				'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
 				'fundsTransferId' => XmlFields::returnArrayValue ( $hash_in, 'amount' ),
 				'amount' => XmlFields::returnArrayValue ( $hash_in, 'amount' ) 
-		);
-		return $hash_out;
-	}
-	public static function createSubmerchantDebitHash($hash_in) {
-		$hash_out = array (
-				'fundingSubmerchantId' => XmlFields::returnArrayValue ( $hash_in, 'fundingSubmerchantId' ),
-				'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
-				'submerchantName' => XmlFields::returnArrayValue ( $hash_in, 'submerchantName' ),
-				'fundsTransferId' => XmlFields::returnArrayValue ( $hash_in, 'amount' ),
-				'amount' => XmlFields::returnArrayValue ( $hash_in, 'amount' ) ,
-				'accountInfo' => XmlFields::echeckType ( XmlFields::returnArrayValue ( $hash_in, 'accountInfo' ) ),
-				'customIdentifier' => XmlFields::returnArrayValue ( $hash_in, 'customIdentifier' ) 
 		);
 		return $hash_out;
 	}
