@@ -126,6 +126,19 @@ class FundingInstructionOnlineFunctionalTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('000', $response);
     }
 
+    public function test_payfac_debit_invalid_parent()
+    {
+        $hash_in = array('id' => 'id',
+            'fundingSubmerchantId' => '2111',
+            'fundsTransferId' => '12345678',
+            'amount' => '360',
+        );
+        $initialize = new LitleOnlineRequest();
+        $subMerchantDebitResponse = $initialize->payFacDebit($hash_in);
+        $response = XmlParser::getNode($subMerchantDebitResponse, 'response');
+        $this->assertEquals('360', $response);
+    }
+
     public function test_payfac_credit()
     {
         $hash_in = array('id' => 'id',
@@ -217,7 +230,7 @@ class FundingInstructionOnlineFunctionalTest extends \PHPUnit_Framework_TestCase
             'fundingSubmerchantId' => '2111',
             'vendorName' => 'Super Secret Tech Inc.',
             'fundsTransferId' => '12345678',
-            'amount' => '13',
+            'amount' => '1000',
             'accountInfo' => array(
                 'accType' => 'Checking',
                 'accNum' => '12345657890',
@@ -240,6 +253,17 @@ class FundingInstructionOnlineFunctionalTest extends \PHPUnit_Framework_TestCase
         $fundingInstructionVoid = $initialize->fundingInstructionVoid($hash_in);
         $response = XmlParser::getNode($fundingInstructionVoid, 'response');
         $this->assertEquals('000', $response);
+    }
+
+    public function test_funding_instruction_void_already_settled()
+    {
+        $hash_in = array('id' => 'id',
+            'litleTxnId' => '966284951598164362',
+        );
+        $initialize = new LitleOnlineRequest();
+        $fundingInstructionVoid = $initialize->fundingInstructionVoid($hash_in);
+        $response = XmlParser::getNode($fundingInstructionVoid, 'response');
+        $this->assertEquals('362', $response);
     }
 
 }
