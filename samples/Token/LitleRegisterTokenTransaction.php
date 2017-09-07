@@ -9,8 +9,8 @@ $token_info = array(
               'id'=> '456',
 	      'accountNumber'=>'1233456789103801');
  
-$initilaize = &new LitleOnlineRequest(); 
-$tokenResponse = $initilaize->registerTokenRequest($token_info);
+$initialize = new LitleOnlineRequest();
+$tokenResponse = $initialize->registerTokenRequest($token_info);
  
 #display results
 echo ("Response: " . (XmlParser::getNode($tokenResponse ,'response')) . "<br>");

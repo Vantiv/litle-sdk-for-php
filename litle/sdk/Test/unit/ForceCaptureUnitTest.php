@@ -281,4 +281,30 @@ class ForceCaptureUnitTest extends \PHPUnit_Framework_TestCase
     	$litleTest->newXML = $mock;
     	$litleTest->forceCaptureRequest($hash_in);
     }
+    
+    public function test_simple_forcCapture_withProcessingType()
+    {
+    	$hash_in = array(
+    			'orderId'=>'123',
+    			'id' => 'id',
+    			'litleTxnId'=>'123456',
+    			'amount'=>'106',
+    			'orderSource'=>'ecommerce',
+    			'token'=> array(
+    					'litleToken'=>'123456789101112',
+    					'expDate'=>'1210',
+    					'cardValidationNum'=>'555',
+    					'type'=>'VI'),
+    			'processingType' => 'initialRecurring'
+    			);
+    	$mock = $this->getMock('litle\sdk\LitleXmlMapper');
+    	$mock->expects($this->once())
+    	->method('request')
+    	->with($this->matchesRegularExpression('/.*<processingType>initialRecurring.*/'));
+    
+    	$litleTest = new LitleOnlineRequest();
+    	$litleTest->newXML = $mock;
+    	$litleTest->forceCaptureRequest($hash_in);
+    }
+    
 }

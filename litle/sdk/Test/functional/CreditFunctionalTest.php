@@ -23,122 +23,142 @@
 * OTHER DEALINGS IN THE SOFTWARE.
 */
 namespace litle\sdk\Test\functional;
+
 use litle\sdk\LitleOnlineRequest;
 use litle\sdk\XmlParser;
+
 class CreditFunctionalTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple_credit_with_card()
     {
         $hash_in = array(
-            'card'=>array('type'=>'VI','id' => 'id',
-                    'number'=>'4100000000000000',
-                    'expDate'=>'1213',
-                    'cardValidationNum' => '1213'),
-            'id'=>'1211',
-            'orderId'=> '2111',
-            'reportGroup'=>'Planets',
-            'orderSource'=>'ecommerce',
-            'amount'=>'123');
+            'card' => array('type' => 'VI', 'id' => 'id',
+                'number' => '4100000000000000',
+                'expDate' => '1213',
+                'cardValidationNum' => '1213'),
+            'id' => '1211',
+            'orderId' => '2111',
+            'reportGroup' => 'Planets',
+            'orderSource' => 'ecommerce',
+            'amount' => '123');
 
-        $initilaize = new LitleOnlineRequest();
-        $creditResponse = $initilaize->creditRequest($hash_in);
-        $response = XmlParser::getNode($creditResponse,'response');
-        $this->assertEquals('001',$response);
+        $initialize = new LitleOnlineRequest();
+        $creditResponse = $initialize->creditRequest($hash_in);
+        $response = XmlParser::getNode($creditResponse, 'response');
+        $this->assertEquals('000', $response);
     }
 
     public function test_simple_credit_with_paypal()
     {
         $hash_in = array('id' => 'id',
-                'paypal'=>array("payerId"=>'123','payerEmail'=>'12321321',
+            'paypal' => array("payerId" => '123', 'payerEmail' => '12321321',
                 "transactionId" => '123123'),
-                'id'=>'1211',
-                'orderId'=> '2111',
-                'reportGroup'=>'Planets',
-                'orderSource'=>'ecommerce',
-                'amount'=>'123');
+            'id' => '1211',
+            'orderId' => '2111',
+            'reportGroup' => 'Planets',
+            'orderSource' => 'ecommerce',
+            'amount' => '123');
 
-        $initilaize = new LitleOnlineRequest();
-        $creditResponse = $initilaize->creditRequest($hash_in);
-        $message= XmlParser::getAttribute($creditResponse,'litleOnlineResponse','message');
-        $this->assertRegExp('/Error validating xml data against the schema/',$message);
+        $initialize = new LitleOnlineRequest();
+        $creditResponse = $initialize->creditRequest($hash_in);
+        $message = XmlParser::getAttribute($creditResponse, 'litleOnlineResponse', 'message');
+        $this->assertRegExp('/Error validating xml data against the schema/', $message);
     }
 
     public function test_simple_credit_with_litleTxnId()
     {
-        $hash_in = array('id' => 'id','reportGroup'=>'planets','litleTxnId'=>'1234567891234567891');
+        $hash_in = array('id' => 'id', 'reportGroup' => 'planets', 'litleTxnId' => '1234567891234567891');
 
-        $initilaize = new LitleOnlineRequest();
-        $creditResponse = $initilaize->creditRequest($hash_in);
-        $message= XmlParser::getAttribute($creditResponse,'litleOnlineResponse','response');
-        $this->assertEquals("0",$message);
+        $initialize = new LitleOnlineRequest();
+        $creditResponse = $initialize->creditRequest($hash_in);
+        $message = XmlParser::getAttribute($creditResponse, 'litleOnlineResponse', 'response');
+        $this->assertEquals("0", $message);
     }
+
     public function test_paypal_notes()
     {
         $hash_in = array('id' => 'id',
-                'card'=>array('type'=>'VI',
-                        'number'=>'4100000000000000',
-                        'expDate'=>'1213',
-                        'cardValidationNum' => '1213'),
-                'id'=>'1211',
-                'payPalNotes'=>'hello',
-                'orderId'=> '2111',
-                'reportGroup'=>'Planets',
-                'orderSource'=>'ecommerce',
-                'amount'=>'123');
+            'card' => array('type' => 'VI',
+                'number' => '4100000000000000',
+                'expDate' => '1213',
+                'cardValidationNum' => '1213'),
+            'id' => '1211',
+            'payPalNotes' => 'hello',
+            'orderId' => '2111',
+            'reportGroup' => 'Planets',
+            'orderSource' => 'ecommerce',
+            'amount' => '123');
 
-        $initilaize = new LitleOnlineRequest();
-        $creditResponse = $initilaize->creditRequest($hash_in);
-        $response = XmlParser::getNode($creditResponse,'response');
-        $this->assertEquals('001',$response);
+        $initialize = new LitleOnlineRequest();
+        $creditResponse = $initialize->creditRequest($hash_in);
+        $response = XmlParser::getNode($creditResponse, 'response');
+        $this->assertEquals('000', $response);
     }
+
     public function test_amexAggregator()
     {
         $hash_in = array('id' => 'id',
-          'amount'=>'2000',
-          'orderId'=>'12344',
-          'orderSource'=>'ecommerce',
-          'processingInstuctions'=>array('bypassVelocityCheck'=>'yes'),
-          'card'=>array(
-          'type'=>'VI',
-          'number' =>'4100000000000000',
-          'expDate' =>'1210'),
-          'amexAggregatorData'=>array('sellerMerchantCategoryCode'=>'1234','sellerId'=>'1234Id'));
+            'amount' => '2000',
+            'orderId' => '12344',
+            'orderSource' => 'ecommerce',
+            'processingInstuctions' => array('bypassVelocityCheck' => 'yes'),
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000000',
+                'expDate' => '1210'),
+            'amexAggregatorData' => array('sellerMerchantCategoryCode' => '1234', 'sellerId' => '1234Id'));
 
-        $initilaize = new LitleOnlineRequest();
-        $creditResponse = $initilaize->creditRequest($hash_in);
-        $response = XmlParser::getNode($creditResponse,'response');
-        $this->assertEquals('001',$response);
+        $initialize = new LitleOnlineRequest();
+        $creditResponse = $initialize->creditRequest($hash_in);
+        $response = XmlParser::getNode($creditResponse, 'response');
+        $this->assertEquals('000', $response);
     }
-    
+
     public function test_simple_credit_with_secondary_amount()
     {
-    	$hash_in = array('id' => 'id',
-    			'card'=>array('type'=>'VI',
-    					'number'=>'4100000000000000',
-    					'expDate'=>'1213',
-    					'cardValidationNum' => '1213'),
-    			'id'=>'1211',
-    			'orderId'=> '2111',
-    			'reportGroup'=>'Planets',
-    			'orderSource'=>'ecommerce',
-    			'amount'=>'123',
-    			'secondaryAmount' => '1234');
-    
-    	$initilaize = new LitleOnlineRequest();
-    	$creditResponse = $initilaize->creditRequest($hash_in);
-    	$response = XmlParser::getNode($creditResponse,'response');
-    	$this->assertEquals('001',$response);
+        $hash_in = array('id' => 'id',
+            'card' => array('type' => 'VI',
+                'number' => '4100000000000000',
+                'expDate' => '1213',
+                'cardValidationNum' => '1213'),
+            'id' => '1211',
+            'orderId' => '2111',
+            'reportGroup' => 'Planets',
+            'orderSource' => 'ecommerce',
+            'amount' => '123',
+            'secondaryAmount' => '1234');
+
+        $initialize = new LitleOnlineRequest();
+        $creditResponse = $initialize->creditRequest($hash_in);
+        $response = XmlParser::getNode($creditResponse, 'response');
+        $this->assertEquals('000', $response);
     }
-    
+
     public function test_simple_credit_with_litleTxnId_AndSecondaryAmount()
     {
-    	$hash_in = array('id' => 'id','reportGroup'=>'planets','litleTxnId'=>'1234567891234567891','secondaryAmount'=>'100');
-    
-    	$initilaize = new LitleOnlineRequest();
-    	$creditResponse = $initilaize->creditRequest($hash_in);
-    	$message= XmlParser::getAttribute($creditResponse,'litleOnlineResponse','response');
-    	$this->assertEquals("0",$message);
-    }
-    
+        $hash_in = array('id' => 'id', 'reportGroup' => 'planets', 'litleTxnId' => '1234567891234567891', 'secondaryAmount' => '100');
 
+        $initialize = new LitleOnlineRequest();
+        $creditResponse = $initialize->creditRequest($hash_in);
+        $message = XmlParser::getAttribute($creditResponse, 'litleOnlineResponse', 'response');
+        $this->assertEquals("0", $message);
+    }
+
+    public function test_simple_credit_with_pin()
+    {
+        $hash_in = array(
+            'litleTxnId' => '12312312',
+            'id' => 'id',
+            'reportGroup' => 'Planets',
+            'amount' => '123',
+            'secondaryAmount' => '3214',
+            'surchargeAmount' => '1',
+            'pin' => '3333'
+        );
+
+        $initialize = new LitleOnlineRequest();
+        $creditResponse = $initialize->creditRequest($hash_in);
+        $message = XmlParser::getAttribute($creditResponse, 'litleOnlineResponse', 'response');
+        $this->assertEquals("0", $message);
+    }
 }

@@ -23,23 +23,25 @@
 * OTHER DEALINGS IN THE SOFTWARE.
 */
 namespace litle\sdk\Test\functional;
+
 use litle\sdk\LitleOnlineRequest;
 use litle\sdk\XmlParser;
+
 class UpdateCardValidationNumOnTokenFunctionalTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple()
     {
         $hash_in = array('id' => '1211',
             'merchantId' => '101',
-              'version'=>'8.14',
-              'reportGroup'=>'Planets',
-              'orderId'=>'12344',
-              'litleToken'=>'123456789101112',
-            'cardValidationNum'=>'123');
+            'version' => '8.14',
+            'reportGroup' => 'Planets',
+            'orderId' => '12344',
+            'litleToken' => '123456789101112',
+            'cardValidationNum' => '123');
 
-        $initilaize = new LitleOnlineRequest();
-        $updateCardValidationNumOnTokenResponse = $initilaize->updateCardValidationNumOnToken($hash_in);
-        $message = XmlParser::getAttribute($updateCardValidationNumOnTokenResponse,'litleOnlineResponse','message');
-        $this->assertEquals('Valid Format',$message);
+        $initialize = new LitleOnlineRequest();
+        $updateCardValidationNumOnTokenResponse = $initialize->updateCardValidationNumOnToken($hash_in);
+        $message = XmlParser::getAttribute($updateCardValidationNumOnTokenResponse, 'litleOnlineResponse', 'message');
+        $this->assertEquals('Valid Format', $message);
     }
 }

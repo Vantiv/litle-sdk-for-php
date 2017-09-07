@@ -23,20 +23,22 @@
 * OTHER DEALINGS IN THE SOFTWARE.
 */
 namespace litle\sdk\Test\functional;
+
 use litle\sdk\LitleOnlineRequest;
 use litle\sdk\XmlParser;
+
 class UpdatePlanFunctionalTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple()
     {
         $hash_in = array(
-            'planCode'=>'1',
-            'active'=>'false'
+            'planCode' => '1',
+            'active' => 'false'
         );
 
         $initialize = new LitleOnlineRequest();
         $updatePlanResponse = $initialize->updatePlan($hash_in);
-        $message = XmlParser::getAttribute($updatePlanResponse,'litleOnlineResponse','message');
-        $this->assertEquals('Valid Format',$message);
+        $message = XmlParser::getAttribute($updatePlanResponse, 'litleOnlineResponse', 'message');
+        $this->assertEquals('Valid Format', $message);
     }
 }

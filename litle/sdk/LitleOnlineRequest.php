@@ -1,27 +1,28 @@
 <?php
+
 /*
  * Copyright (c) 2011 Litle & Co.
-*
-* Permission is hereby granted, free of charge, to any person
-* obtaining a copy of this software and associated documentation
-* files (the "Software"), to deal in the Software without
-* restriction, including without limitation the rights to use,
-* copy, modify, merge, publish, distribute, sublicense, and/or sell
-* copies of the Software, and to permit persons to whom the
-* Software is furnished to do so, subject to the following
-* conditions:
-*
-* The above copyright notice and this permission notice shall be
-* included in all copies or substantial portions of the Software.
-* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND
-* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-* OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-* NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-* HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-* WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-* OTHER DEALINGS IN THE SOFTWARE.
-*/
+ *
+ * Permission is hereby granted, free of charge, to any person
+ * obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without
+ * restriction, including without limitation the rights to use,
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following
+ * conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ * OTHER DEALINGS IN THE SOFTWARE.
+ */
 namespace litle\sdk;
 require_once realpath(dirname(__FILE__)) . '/LitleOnline.php';
 class LitleOnlineRequest
@@ -103,8 +104,11 @@ class LitleOnlineRequest
             'recyclingRequest'=>(XmlFields::recyclingRequestType(XmlFields::returnArrayValue($hash_in,'recyclingRequest'))),
             'fraudFilterOverride'=> XmlFields::returnArrayValue($hash_in,'fraudFilterOverride'),
             'recurringRequest'=>XmlFields::recurringRequestType(XmlFields::returnArrayValue($hash_in,'recurringRequest')),
-            'debtRepayment'=>XmlFields::returnArrayValue($hash_in,'debtRepayment'),
-            'advancedFraudChecks'=>XmlFields::advancedFraudChecksType(XmlFields::returnArrayValue($hash_in,'advancedFraudChecks')),
+            'debtRepayment' => XmlFields::returnArrayValue ( $hash_in, 'debtRepayment' ),
+			'advancedFraudChecks' => XmlFields::advancedFraudChecksType ( XmlFields::returnArrayValue ( $hash_in, 'advancedFraudChecks' ) ),
+			'processingType' => XmlFields::returnArrayValue ( $hash_in, 'processingType' ),
+			'originalNetworkTransactionId' => XmlFields::returnArrayValue ( $hash_in, 'originalNetworkTransactionId' ),
+			'originalTransactionAmount' => XmlFields::returnArrayValue ( $hash_in, 'originalTransactionAmount' ),		
             );
         }
         $choice_hash = array(XmlFields::returnArrayValue($hash_out,'card'),XmlFields::returnArrayValue($hash_out,'paypal'),XmlFields::returnArrayValue($hash_out,'token'),XmlFields::returnArrayValue($hash_out,'paypage'),XmlFields::returnArrayValue($hash_out,'applepay'),XmlFields::returnArrayValue($hash_out,'mpos'));
@@ -131,6 +135,7 @@ class LitleOnlineRequest
             'token'=>XmlFields::cardTokenType(XmlFields::returnArrayValue($hash_in,'token')),
             'paypage'=>XmlFields::cardPaypageType(XmlFields::returnArrayValue($hash_in,'paypage')),
         	'applepay'=>(XmlFields::applepayType(XmlFields::returnArrayValue($hash_in,'applepay'))),
+        	'sepaDirectDebit'=>(XmlFields::sepaDirectDebitType(XmlFields::returnArrayValue($hash_in,'sepaDirectDebit'))),
             'mpos'=>(XmlFields::mposType(XmlFields::returnArrayValue($hash_in,'mpos'))),
             'billMeLaterRequest'=>XmlFields::billMeLaterRequest(XmlFields::returnArrayValue($hash_in,'billMeLaterRequest')),
             'fraudCheck'=>XmlFields::fraudCheckType(XmlFields::returnArrayValue($hash_in,'fraudCheck')),
@@ -153,6 +158,10 @@ class LitleOnlineRequest
             'litleInternalRecurringRequest'=>XmlFields::litleInternalRecurringRequestType(XmlFields::returnArrayValue($hash_in,'litleInternalRecurringRequest')),
             'debtRepayment'=>XmlFields::returnArrayValue($hash_in,'debtRepayment'),
             'advancedFraudChecks'=>XmlFields::advancedFraudChecksType(XmlFields::returnArrayValue($hash_in,'advancedFraudChecks')),
+        	'processingType' => XmlFields::returnArrayValue ( $hash_in, 'processingType' ),
+        	'originalNetworkTransactionId' => XmlFields::returnArrayValue ( $hash_in, 'originalNetworkTransactionId' ),
+        	'originalTransactionAmount' => XmlFields::returnArrayValue ( $hash_in, 'originalTransactionAmount' ),
+
         );
 
         $choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage'],$hash_out['applepay'],$hash_out['mpos']);
@@ -175,6 +184,38 @@ class LitleOnlineRequest
 
         return $authReversalResponse;
     }
+    
+    public function giftCardAuthReversalRequest($hash_in)
+    {
+    	$hash_out = array( 
+    			'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
+    			'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+    			'card'=> XmlFields::giftCardCardType(XmlFields::returnArrayValue($hash_in,'card')),
+    			'originalRefCode' =>XmlFields::returnArrayValue($hash_in,'originalRefCode'),
+    			'originalAmount' =>XmlFields::returnArrayValue($hash_in,'originalAmount'),
+    			'originalTxnTime'=>XmlFields::returnArrayValue($hash_in,'originalTxnTime'),
+    			'originalSystemTraceId'=>XmlFields::returnArrayValue($hash_in,'originalSystemTraceId'),
+    			'originalSequenceNumber'=>XmlFields::returnArrayValue($hash_in,'originalSequenceNumber')
+    	);
+    	$giftCardAuthReversalResponse = $this->processRequest($hash_out,$hash_in,'giftCardAuthReversal');
+    
+    	return $giftCardAuthReversalResponse;
+    }
+        		
+    public function giftCardCaptureRequest($hash_in) {
+		$hash_out = array (
+				'litleTxnId' => Checker::requiredField ( XmlFields::returnArrayValue ( $hash_in, 'litleTxnId' ) ),
+				'id' => Checker::requiredField ( XmlFields::returnArrayValue ( $hash_in, 'id' ) ),
+				'captureAmount' => XmlFields::returnArrayValue ( $hash_in, 'captureAmount' ),
+				'card' => XmlFields::giftCardCardType ( XmlFields::returnArrayValue ( $hash_in, 'card' ) ),
+				'originalRefCode' => XmlFields::returnArrayValue ( $hash_in, 'originalRefCode' ),
+				'originalAmount' => XmlFields::returnArrayValue ( $hash_in, 'originalAmount' ),
+				'originalTxnTime' => XmlFields::returnArrayValue ( $hash_in, 'originalTxnTime' )
+		);
+		$giftCardCaptureResponse = $this->processRequest ( $hash_out, $hash_in, 'giftCardCapture' );
+	
+		return $giftCardCaptureResponse;
+	}
 
     public function creditRequest($hash_in)
     {
@@ -185,6 +226,7 @@ class LitleOnlineRequest
                     'amount' =>XmlFields::returnArrayValue($hash_in, 'amount'),
         		    'secondaryAmount'=>XmlFields::returnArrayValue($hash_in,'secondaryAmount'),
                     'surchargeAmount' =>XmlFields::returnArrayValue($hash_in,'surchargeAmount'),
+        			'pin' =>XmlFields::returnArrayValue($hash_in,'pin'),
                     'orderSource'=>XmlFields::returnArrayValue($hash_in, 'orderSource'),
                     'billToAddress'=>XmlFields::contact(XMLFields::returnArrayValue($hash_in, 'billToAddress')),
                     'card'=>XmlFields::cardType(XMLFields::returnArrayValue($hash_in, 'card')),
@@ -207,6 +249,22 @@ class LitleOnlineRequest
         $creditResponse = $this->processRequest($hash_out,$hash_in,'credit',$choice_hash);
 
         return $creditResponse;
+    }
+    
+    public function giftCardCreditRequest($hash_in)
+    {
+    	$hash_out = array(
+    			'litleTxnId' => XmlFields::returnArrayValue($hash_in, 'litleTxnId'),   			
+    			'orderId' =>XmlFields::returnArrayValue($hash_in, 'orderId'),
+    			'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+    			'creditAmount' =>XmlFields::returnArrayValue($hash_in, 'creditAmount'),
+    			'orderSource'=>XmlFields::returnArrayValue($hash_in, 'orderSource'),
+    			'card'=>XmlFields::giftCardCardType(XMLFields::returnArrayValue($hash_in, 'card'))
+    	);
+    
+    	$giftCardCreditResponse = $this->processRequest($hash_out,$hash_in,'giftCardCredit');
+    
+    	return $giftCardCreditResponse;
     }
 
     public function registerTokenRequest($hash_in)
@@ -249,6 +307,7 @@ class LitleOnlineRequest
             'amexAggregatorData'=>XmlFields::amexAggregatorData(XmlFields::returnArrayValue($hash_in,'amexAggregatorData')),
             'merchantData'=>(XmlFields::merchantData(XmlFields::returnArrayValue($hash_in,'merchantData'))),
             'debtRepayment'=>XmlFields::returnArrayValue($hash_in,'debtRepayment'),
+        	'processingType'=>XmlFields::returnArrayValue($hash_in,'processingType')
         );
 
         $choice_hash = array(XmlFields::returnArrayValue($hash_out,'card'),XmlFields::returnArrayValue($hash_out,'paypal'),XmlFields::returnArrayValue($hash_out,'token'),XmlFields::returnArrayValue($hash_out,'paypage'),XmlFields::returnArrayValue($hash_out,'mpos'));
@@ -268,7 +327,9 @@ class LitleOnlineRequest
         'enhancedData'=>XmlFields::enhancedData(XmlFields::returnArrayValue($hash_in,'enhancedData')),
         'processingInstructions'=>XmlFields::processingInstructions(XmlFields::returnArrayValue($hash_in,'processingInstructions')),
         'payPalOrderComplete'=>XmlFields::returnArrayValue($hash_in,'payPalOrderComplete'),
-        'payPalNotes' =>XmlFields::returnArrayValue($hash_in,'payPalNotes'));
+        'payPalNotes' =>XmlFields::returnArrayValue($hash_in,'payPalNotes'),
+        'pin' =>XmlFields::returnArrayValue($hash_in,'pin')
+        );
         $captureResponse = $this->processRequest($hash_out,$hash_in,'capture');
 
         return $captureResponse;
@@ -298,7 +359,10 @@ class LitleOnlineRequest
             'pos'=>XmlFields::pos(XmlFields::returnArrayValue($hash_in,'pos')),
             'amexAggregatorData'=>XmlFields::amexAggregatorData(XmlFields::returnArrayValue($hash_in,'amexAggregatorData')),
             'merchantData'=>(XmlFields::merchantData(XmlFields::returnArrayValue($hash_in,'merchantData'))),
-            'debtRepayment'=>XmlFields::returnArrayValue($hash_in,'debtRepayment')
+            'debtRepayment'=>XmlFields::returnArrayValue($hash_in,'debtRepayment'),
+        	'processingType' => XmlFields::returnArrayValue ( $hash_in, 'processingType' ),
+        	'originalNetworkTransactionId' => XmlFields::returnArrayValue ( $hash_in, 'originalNetworkTransactionId' ),
+        	'originalTransactionAmount' => XmlFields::returnArrayValue ( $hash_in, 'originalTransactionAmount' )
         );
 
         $choice_hash = array($hash_out['card'],$hash_out['token'],$hash_out['paypage'],$hash_out['mpos']);
@@ -314,7 +378,8 @@ class LitleOnlineRequest
         	'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
             'echeck'=>XmlFields::echeckType(XmlFields::returnArrayValue($hash_in,'echeck')),
             'echeckToken'=>XmlFields::echeckTokenType(XmlFields::returnArrayValue($hash_in,'echeckToken')),
-            'merchantData'=>(XmlFields::merchantData(XmlFields::returnArrayValue($hash_in,'merchantData')))
+            'merchantData'=>(XmlFields::merchantData(XmlFields::returnArrayValue($hash_in,'merchantData'))),
+        		'customIdentifier'=>XmlFields::returnArrayValue($hash_in,'customIdentifier')
         );
 
         $choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
@@ -337,7 +402,10 @@ class LitleOnlineRequest
         'shipToAddress'=>XmlFields::contact(XmlFields::returnArrayValue($hash_in,'shipToAddress')),
         'echeck'=>XmlFields::echeckType(XmlFields::returnArrayValue($hash_in,'echeck')),
         'echeckToken'=>XmlFields::echeckTokenType(XmlFields::returnArrayValue($hash_in,'echeckToken')),
-        'customBilling'=>XmlFields::customBilling(XmlFields::returnArrayValue($hash_in,'customBilling')));
+        'customBilling'=>XmlFields::customBilling(XmlFields::returnArrayValue($hash_in,'customBilling')),
+        'merchantData'=>XmlFields::merchantData(XmlFields::returnArrayValue($hash_in,'merchantData')),
+        'customIdentifier'=>XmlFields::returnArrayValue($hash_in,'customIdentifier')
+        );
 
         $choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
 
@@ -362,7 +430,9 @@ class LitleOnlineRequest
             'billToAddress'=>XmlFields::contact(XmlFields::returnArrayValue($hash_in,'billToAddress')),
             'echeck'=>XmlFields::echeckType(XmlFields::returnArrayValue($hash_in,'echeck')),
             'echeckToken'=>XmlFields::echeckTokenType(XmlFields::returnArrayValue($hash_in,'echeckToken')),
-            'customBilling'=>XmlFields::customBilling(XmlFields::returnArrayValue($hash_in,'customBilling')));
+            'customBilling'=>XmlFields::customBilling(XmlFields::returnArrayValue($hash_in,'customBilling')),
+        	'customIdentifier'=>XmlFields::returnArrayValue($hash_in,'customIdentifier')
+        );
 
         $choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
         $echeckCreditResponse = $this->processRequest($hash_out,$hash_in,'echeckCredit',$choice_hash);
@@ -374,7 +444,6 @@ class LitleOnlineRequest
     {
 
         $hash_out = array(
-            'litleTxnId'=>XmlFields::returnArrayValue($hash_in,'litleTxnId'),
         	'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
             'orderId'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'orderId')),
             'amount'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'amount')),
@@ -416,8 +485,14 @@ class LitleOnlineRequest
     public function depositReversalRequest($hash_in)
     {
         $hash_out = array(
-        'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
-        'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+        		'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
+        		'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+        		'card'=> XmlFields::giftCardCardType(XmlFields::returnArrayValue($hash_in,'card')),
+        		'originalRefCode'=>XmlFields::returnArrayValue($hash_in,'originalRefCode'),
+        		'originalAmount'=>XmlFields::returnArrayValue($hash_in,'originalAmount'),
+        		'originalTxnTime'=>XmlFields::returnArrayValue($hash_in,'originalTxnTime'),
+        		'originalSystemTraceId'=>XmlFields::returnArrayValue($hash_in,'originalSystemTraceId'),
+        		'originalSequenceNumber'=>XmlFields::returnArrayValue($hash_in,'originalSequenceNumber')
         );
         $response = $this->processRequest($hash_out,$hash_in,"depositReversal");
 
@@ -426,8 +501,14 @@ class LitleOnlineRequest
     public function refundReversalRequest($hash_in)
     {
         $hash_out = array(
-        'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
-        'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+		        'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
+		        'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+        		'card'=> XmlFields::giftCardCardType(XmlFields::returnArrayValue($hash_in,'card')),
+        		'originalRefCode'=>XmlFields::returnArrayValue($hash_in,'originalRefCode'),
+        		'originalAmount'=>XmlFields::returnArrayValue($hash_in,'originalAmount'),
+        		'originalTxnTime'=>XmlFields::returnArrayValue($hash_in,'originalTxnTime'),
+        		'originalSystemTraceId'=>XmlFields::returnArrayValue($hash_in,'originalSystemTraceId'),
+        		'originalSequenceNumber'=>XmlFields::returnArrayValue($hash_in,'originalSequenceNumber')
         );
         $response = $this->processRequest($hash_out,$hash_in,"refundReversal");
 
@@ -436,8 +517,14 @@ class LitleOnlineRequest
     public function activateReversalRequest($hash_in)
     {
         $hash_out = array(
-        'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
-        'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+		        'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
+		        'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+        		'card'=> XmlFields::giftCardCardType(XmlFields::returnArrayValue($hash_in,'card')),
+        		'originalRefCode'=>XmlFields::returnArrayValue($hash_in,'originalRefCode'),
+        		'originalAmount'=>XmlFields::returnArrayValue($hash_in,'originalAmount'),
+        		'originalTxnTime'=>XmlFields::returnArrayValue($hash_in,'originalTxnTime'),
+        		'originalSystemTraceId'=>XmlFields::returnArrayValue($hash_in,'originalSystemTraceId'),
+        		'originalSequenceNumber'=>XmlFields::returnArrayValue($hash_in,'originalSequenceNumber')
         );
         $response = $this->processRequest($hash_out,$hash_in,"activateReversal");
 
@@ -446,8 +533,13 @@ class LitleOnlineRequest
     public function deactivateReversalRequest($hash_in)
     {
         $hash_out = array(
-        'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
-        'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+		        'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
+		        'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+        		'card'=> XmlFields::giftCardCardType(XmlFields::returnArrayValue($hash_in,'card')),
+        		'originalRefCode'=>XmlFields::returnArrayValue($hash_in,'originalRefCode'),
+        		'originalTxnTime'=>XmlFields::returnArrayValue($hash_in,'originalTxnTime'),
+        		'originalSystemTraceId'=>XmlFields::returnArrayValue($hash_in,'originalSystemTraceId'),
+        		'originalSequenceNumber'=>XmlFields::returnArrayValue($hash_in,'originalSequenceNumber')
         );
         $response = $this->processRequest($hash_out,$hash_in,"deactivateReversal");
 
@@ -456,8 +548,14 @@ class LitleOnlineRequest
     public function loadReversalRequest($hash_in)
     {
         $hash_out = array(
-        'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
-        'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+		        'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
+		        'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+        		'card'=> XmlFields::giftCardCardType(XmlFields::returnArrayValue($hash_in,'card')),
+        		'originalRefCode'=>XmlFields::returnArrayValue($hash_in,'originalRefCode'),
+        		'originalAmount'=>XmlFields::returnArrayValue($hash_in,'originalAmount'),
+        		'originalTxnTime'=>XmlFields::returnArrayValue($hash_in,'originalTxnTime'),
+        		'originalSystemTraceId'=>XmlFields::returnArrayValue($hash_in,'originalSystemTraceId'),
+        		'originalSequenceNumber'=>XmlFields::returnArrayValue($hash_in,'originalSequenceNumber')
         );
         $response = $this->processRequest($hash_out,$hash_in,"loadReversal");
 
@@ -466,8 +564,14 @@ class LitleOnlineRequest
     public function unloadReversalRequest($hash_in)
     {
         $hash_out = array(
-        'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
-        'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+		        'litleTxnId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in,'litleTxnId')),
+		        'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+        		'card'=> XmlFields::giftCardCardType(XmlFields::returnArrayValue($hash_in,'card')),
+        		'originalRefCode'=>XmlFields::returnArrayValue($hash_in,'originalRefCode'),
+        		'originalAmount'=>XmlFields::returnArrayValue($hash_in,'originalAmount'),
+        		'originalTxnTime'=>XmlFields::returnArrayValue($hash_in,'originalTxnTime'),
+        		'originalSystemTraceId'=>XmlFields::returnArrayValue($hash_in,'originalSystemTraceId'),
+        		'originalSequenceNumber'=>XmlFields::returnArrayValue($hash_in,'originalSequenceNumber')
         );
         $response = $this->processRequest($hash_out,$hash_in,"unloadReversal");
 
@@ -562,9 +666,7 @@ class LitleOnlineRequest
     			'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
     			'origId'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'origId')),
     			'origActionType'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'origActionType')),
-    			'origLitleTxnId'=>XmlFields::returnArrayValue($hash_in,'origLitleTxnId'),
-    			'origOrderId'=>XmlFields::returnArrayValue($hash_in,'origOrderId'),
-    			'origAccountNumber'=>XmlFields::returnArrayValue($hash_in,'origAccountNumber'),
+    			'origLitleTxnId'=>XmlFields::returnArrayValue($hash_in,'origLitleTxnId')
     	);
     	$queryTransactionResponse = $this->processRequest($hash_out,$hash_in,"queryTransaction");
     
@@ -583,6 +685,140 @@ class LitleOnlineRequest
     	$fraudCheckResponse = $this->processRequest($hash_out,$hash_in,"fraudCheck");
     	
     	return $fraudCheckResponse;
+    }
+
+    public function subMerchantCredit($hash_in)
+    {
+        $hash_out = array (
+            'fundingSubmerchantId' => XmlFields::returnArrayValue ( $hash_in, 'fundingSubmerchantId' ),
+            'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+            'submerchantName' => XmlFields::returnArrayValue ( $hash_in, 'submerchantName' ),
+            'fundsTransferId' => XmlFields::returnArrayValue (  $hash_in, 'fundsTransferId'  ),
+            'amount' =>  XmlFields::returnArrayValue ( $hash_in, 'amount' ) ,
+            'accountInfo' => XmlFields::echeckType ( XmlFields::returnArrayValue ( $hash_in, 'accountInfo' ) ) ,
+            'customIdentifier' =>  XmlFields::returnArrayValue ( $hash_in, 'customIdentifier' )
+
+        );
+        $subMerchantCreditResponse = $this ->processRequest($hash_out, $hash_in, "submerchantCredit");
+        return $subMerchantCreditResponse;
+    }
+
+    public function subMerchantDebit($hash_in)
+    {
+        $hash_out = array (
+            'fundingSubmerchantId' => XmlFields::returnArrayValue ( $hash_in, 'fundingSubmerchantId' ),
+            'id'=>Checker::requiredField(XmlFields::returnArrayValue($hash_in,'id')),
+            'submerchantName' => XmlFields::returnArrayValue ( $hash_in, 'submerchantName' ),
+            'fundsTransferId' => XmlFields::returnArrayValue (  $hash_in, 'fundsTransferId'  ),
+            'amount' =>  XmlFields::returnArrayValue ( $hash_in, 'amount' ) ,
+            'accountInfo' => XmlFields::echeckType ( XmlFields::returnArrayValue ( $hash_in, 'accountInfo' ) ) ,
+            'customIdentifier' =>  XmlFields::returnArrayValue ( $hash_in, 'customIdentifier' )
+
+        );
+        $subMerchantDebitResponse = $this ->processRequest($hash_out, $hash_in, "submerchantDebit");
+        return $subMerchantDebitResponse;
+    }
+
+    public function payFacDebit($hash_in)
+    {
+        $hash_out = array (
+            'fundingSubmerchantId' => XmlFields::returnArrayValue ( $hash_in, 'fundingSubmerchantId' ),
+            'fundsTransferId' => XmlFields::returnArrayValue (  $hash_in, 'fundsTransferId'  ),
+            'amount' =>  XmlFields::returnArrayValue ( $hash_in, 'amount' ) ,
+        );
+        $payfacDebitResponse = $this ->processRequest($hash_out, $hash_in, 'payFacDebit');
+        return $payfacDebitResponse;
+    }
+
+    public function payFacCredit($hash_in)
+    {
+        $hash_out = array (
+            'fundingSubmerchantId' => XmlFields::returnArrayValue ( $hash_in, 'fundingSubmerchantId' ),
+            'fundsTransferId' => XmlFields::returnArrayValue (  $hash_in, 'fundsTransferId'  ),
+            'amount' =>  XmlFields::returnArrayValue ( $hash_in, 'amount' ) ,
+        );
+        $payfacCreditResponse = $this ->processRequest($hash_out, $hash_in, "payFacCredit");
+        return $payfacCreditResponse;
+    }
+
+    public function reserveCredit($hash_in)
+    {
+        $hash_out = array (
+            'fundingSubmerchantId' => XmlFields::returnArrayValue ( $hash_in, 'fundingSubmerchantId' ),
+            'fundsTransferId' => XmlFields::returnArrayValue (  $hash_in, 'fundsTransferId'  ),
+            'amount' =>  XmlFields::returnArrayValue ( $hash_in, 'amount' ) ,
+        );
+        $reserveCreditResponse = $this ->processRequest($hash_out, $hash_in, "reserveCredit");
+        return $reserveCreditResponse;
+    }
+
+    public function reserveDebit($hash_in)
+    {
+        $hash_out = array (
+            'fundingSubmerchantId' => XmlFields::returnArrayValue ( $hash_in, 'fundingSubmerchantId' ),
+            'fundsTransferId' => XmlFields::returnArrayValue (  $hash_in, 'fundsTransferId'  ),
+            'amount' =>  XmlFields::returnArrayValue ( $hash_in, 'amount' ) ,
+        );
+        $reserveDebitResponse = $this ->processRequest($hash_out, $hash_in, "reserveDebit");
+        return $reserveDebitResponse;
+    }
+
+    public function physicalCheckDebit($hash_in)
+    {
+        $hash_out = array (
+            'fundingSubmerchantId' => XmlFields::returnArrayValue ( $hash_in, 'fundingSubmerchantId' ),
+            'fundsTransferId' => XmlFields::returnArrayValue (  $hash_in, 'fundsTransferId'  ),
+            'amount' =>  XmlFields::returnArrayValue ( $hash_in, 'amount' ) ,
+        );
+        $physicalCheckDebitResponse = $this ->processRequest($hash_out, $hash_in, "physicalCheckDebit");
+        return $physicalCheckDebitResponse;
+    }
+
+    public function physicalCheckCredit($hash_in)
+    {
+        $hash_out = array (
+            'fundingSubmerchantId' => XmlFields::returnArrayValue ( $hash_in, 'fundingSubmerchantId' ),
+            'fundsTransferId' => XmlFields::returnArrayValue (  $hash_in, 'fundsTransferId'  ),
+            'amount' =>  XmlFields::returnArrayValue ( $hash_in, 'amount' ) ,
+        );
+        $physicalCheckCreditResponse = $this ->processRequest($hash_out, $hash_in, "physicalCheckCredit");
+        return $physicalCheckCreditResponse;
+    }
+
+    public function vendorCredit($hash_in)
+    {
+        $hash_out = array (
+            'fundingSubmerchantId' => XmlFields::returnArrayValue ( $hash_in, 'fundingSubmerchantId' ),
+            'vendorName' => XmlFields::returnArrayValue ( $hash_in, 'vendorName' ),
+            'fundsTransferId' => XmlFields::returnArrayValue (  $hash_in, 'fundsTransferId'  ),
+            'amount' =>  XmlFields::returnArrayValue ( $hash_in, 'amount' ) ,
+            'accountInfo' => XmlFields::echeckType ( XmlFields::returnArrayValue ( $hash_in, 'accountInfo' ) ) ,
+        );
+        $vendorCreditResponse = $this ->processRequest($hash_out, $hash_in, "vendorCredit");
+        return $vendorCreditResponse;
+    }
+
+    public function vendorDebit($hash_in)
+    {
+        $hash_out = array (
+            'fundingSubmerchantId' => XmlFields::returnArrayValue ( $hash_in, 'fundingSubmerchantId' ),
+            'vendorName' => XmlFields::returnArrayValue ( $hash_in, 'vendorName' ),
+            'fundsTransferId' => XmlFields::returnArrayValue (  $hash_in, 'fundsTransferId'  ),
+            'amount' =>  XmlFields::returnArrayValue ( $hash_in, 'amount' ) ,
+            'accountInfo' => XmlFields::echeckType ( XmlFields::returnArrayValue ( $hash_in, 'accountInfo' ) ) ,
+        );
+        $vendorDebitResponse = $this ->processRequest($hash_out, $hash_in, "vendorDebit");
+        return $vendorDebitResponse;
+    }
+
+
+    public function fundingInstructionVoid($hash_in)
+    {
+        $hash_out = array (
+            'litleTxnId' => XmlFields::returnArrayValue ( $hash_in, 'litleTxnId' ),
+        );
+        $fundingInstructionVoidResponse = $this ->processRequest($hash_out, $hash_in, "fundingInstructionVoid");
+        return $fundingInstructionVoidResponse;
     }
 
     private static function overrideConfig($hash_in)
@@ -626,10 +862,9 @@ class LitleOnlineRequest
         Checker::choice($choice1);
         Checker::choice($choice2);
         $request = Obj2xml::toXml($hash,$hash_config, $type);
-        print($request);
         $litleOnlineResponse = $this->newXML->request($request,$hash_config,$this->useSimpleXml);
 		
         return $litleOnlineResponse;
     }
-
+    
 }

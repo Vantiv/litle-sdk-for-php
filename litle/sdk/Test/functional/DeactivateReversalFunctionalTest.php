@@ -23,17 +23,34 @@
 * OTHER DEALINGS IN THE SOFTWARE.
 */
 namespace litle\sdk\Test\functional;
+
 use litle\sdk\LitleOnlineRequest;
 use litle\sdk\XmlParser;
+
 class DeactivateReversalFunctionalTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple()
     {
-        $hash_in = array('id' => 'id','litleTxnId'=> '123456789012345678');
-        $initilaize = new LitleOnlineRequest();
-        $deactivateReversalResponse = $initilaize->deactivateReversalRequest($hash_in);
-        $response = XmlParser::getAttribute($deactivateReversalResponse,'litleOnlineResponse','response');
-        $this->assertEquals('0',$response);
+        $hash_in = array(
+            'litleTxnId' => '1234567890',
+            'reportGroup' => 'Planets',
+            'id' => 'id',
+            'card' => array(
+                'type' => 'GC',
+                'number' => '4100000000000001',
+                'expDate' => '0118',
+                'pin' => '1234',
+                'cardValidationNum' => '411'
+            ),
+            'originalRefCode' => '101',
+            'originalTxnTime' => '2017-01-24T09:00:00',
+            'originalSystemTraceId' => '33',
+            'originalSequenceNumber' => '111111'
+        );
+        $initialize = new LitleOnlineRequest();
+        $deactivateReversalResponse = $initialize->deactivateReversalRequest($hash_in);
+        $response = XmlParser::getAttribute($deactivateReversalResponse, 'litleOnlineResponse', 'response');
+        $this->assertEquals('0', $response);
     }
 
 }

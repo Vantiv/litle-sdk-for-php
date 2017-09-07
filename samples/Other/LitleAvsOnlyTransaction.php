@@ -24,8 +24,8 @@ $auth_info = array(
   )
 );
  
-$initilaize = &new LitleOnlineRequest();
-$avsResponse = $initilaize->authorizationRequest($auth_info);
+$initialize = new LitleOnlineRequest();
+$avsResponse = $initialize->authorizationRequest($auth_info);
  
 #display results
 echo ("Response: " . (XmlParser::getNode($avsResponse,'response')) . "<br>");

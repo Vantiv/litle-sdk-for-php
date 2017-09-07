@@ -107,5 +107,19 @@ class EcheckRedepositUnitTest extends \PHPUnit_Framework_TestCase
         $litleTest->newXML = $mock;
         $litleTest->echeckRedepositRequest($hash_in);
     }
+    
+    public function test_customIdentifier()
+    {
+    	$hash_in = array('litleTxnId' =>'123123','id' => 'id', 'customIdentifier' => 'customer');
+    	$mock = $this->getMock('litle\sdk\LitleXmlMapper');
+    	$mock->expects($this->once())
+    	->method('request')
+    	->with($this->matchesRegularExpression('/.*<litleTxnId>123123.*<customIdentifier>customer.*/'));
+    
+    	$litleTest = new LitleOnlineRequest();
+    	$litleTest->newXML = $mock;
+    	$litleTest->echeckRedepositRequest($hash_in);
+    }
+    
 
 }

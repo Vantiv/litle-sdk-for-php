@@ -9,8 +9,8 @@ $void_info = array(
         'id'=> '456'
 	);
  
-$initilaize = &new LitleOnlineRequest(); 
-$voidResponse = $initilaize->voidRequest($void_info);
+$initialize = new LitleOnlineRequest();
+$voidResponse = $initialize->voidRequest($void_info);
  
 #display results
 echo ("Response: " . (XmlParser::getNode($voidResponse ,'response')) . "<br>");

@@ -23,22 +23,24 @@
 * OTHER DEALINGS IN THE SOFTWARE.
 */
 namespace litle\sdk\Test\functional;
+
 use litle\sdk\LitleOnlineRequest;
 use litle\sdk\XmlParser;
+
 class CreatePlanFunctionalTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple()
     {
         $hash_in = array(
-            'planCode'=>'1',
-            'name'=> '2',
-            'intervalType'=>'MONTHLY',
-            'amount'=>'1000'
+            'planCode' => '1',
+            'name' => '2',
+            'intervalType' => 'MONTHLY',
+            'amount' => '1000'
         );
 
         $initialize = new LitleOnlineRequest();
         $createPlanResponse = $initialize->createPlan($hash_in);
-        $message = XmlParser::getAttribute($createPlanResponse,'litleOnlineResponse','message');
-        $this->assertEquals('Valid Format',$message);
+        $message = XmlParser::getAttribute($createPlanResponse, 'litleOnlineResponse', 'message');
+        $this->assertEquals('Valid Format', $message);
     }
 }

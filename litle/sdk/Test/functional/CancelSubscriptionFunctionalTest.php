@@ -23,20 +23,22 @@
 * OTHER DEALINGS IN THE SOFTWARE.
 */
 namespace litle\sdk\Test\functional;
+
 use litle\sdk\LitleOnlineRequest;
 use litle\sdk\XmlParser;
+
 class CancelSubscriptionFunctionalTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple()
     {
 
         $hash_in = array(
-            'subscriptionId'=>'2',
+            'subscriptionId' => '2',
         );
 
         $initialize = new LitleOnlineRequest();
         $cancelSubscriptionResponse = $initialize->cancelSubscription($hash_in);
-        $message = XmlParser::getAttribute($cancelSubscriptionResponse,'litleOnlineResponse','message');
-        $this->assertEquals('Valid Format',$message);
+        $message = XmlParser::getAttribute($cancelSubscriptionResponse, 'litleOnlineResponse', 'message');
+        $this->assertEquals('Valid Format', $message);
     }
 }

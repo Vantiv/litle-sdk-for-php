@@ -13,8 +13,8 @@ $capture_in = array(
 		'litleTxnId'=>'320000000000000001',
        		'amount'=>'5005'
 		);
-$initilaize = new LitleOnlineRequest(); 
-$captureResponse = $initilaize->captureRequest($capture_in);
+$initialize = new LitleOnlineRequest(); 
+$captureResponse = $initialize->captureRequest($capture_in);
  
 #display results
 echo ("Response: " . (XmlParser::getNode($captureResponse,'response')) . "<br>");

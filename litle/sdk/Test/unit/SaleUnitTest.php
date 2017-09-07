@@ -602,4 +602,54 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
     	$litleTest->newXML = $mock;
     	$litleTest->saleRequest($hash_in);
     }
+    
+    public function test_sale_with_sepaDirectDebit()
+    {
+    	$hash_in = array(
+    			'sepaDirectDebit'=>array(
+    					'mandateProvider'=>'Merchant',
+    					'sequenceType'=> 'FirstRecurring',
+    					'mandateReference'=>'some string here',
+    					'mandateUrl' => 'some string here',
+    					'iban' => 'string with min of 15 char',
+    					'preferredLanguage'=> 'USA'
+    			),
+    			'orderId'=> '2111',
+    			'orderSource'=>'ecommerce',
+    			'id'=>'654',
+    			'amount'=>'123');
+    	$mock = $this->getMock('litle\sdk\LitleXmlMapper');
+    	$mock	->expects($this->once())
+    	->method('request')
+    	->with($this->matchesRegularExpression('/.*<sepaDirectDebit><mandateProvider>Merchant.*<sequenceType>FirstRecurring.*<mandateReference>some string here.*<mandateUrl>some string here.*<iban>string with min of 15 char.*<preferredLanguage>USA.*/'));
+    
+    	$litleTest = new LitleOnlineRequest();
+    	$litleTest->newXML = $mock;
+    	$litleTest->saleRequest($hash_in);
+    }
+    
+    public function test_sale_with_processingType_orgTxnNtwId_orgTxnAmt()
+    {
+    	$hash_in = array(
+    			'card'=>array('type'=>'VI',
+    					'number'=>'4100000000000001',
+    					'expDate'=>'1213',
+    					'cardValidationNum' => '1213'),
+    			'id'=>'654',
+    			'orderId'=> '2111',
+    			'orderSource'=>'ecommerce',
+    			'amount'=>'123',
+    			'processingType' => 'accountFunding',
+    			'originalNetworkTransactionId' => 'abcdefgh',
+    			'originalTransactionAmount' => '1000'
+    			);
+    	$mock = $this->getMock('litle\sdk\LitleXmlMapper');
+    	$mock->expects($this->once())
+    	->method('request')
+    	->with($this->matchesRegularExpression('/.*<card><type>VI.*<number>4100000000000001.*<expDate>1213.*<cardValidationNum>1213.*<processingType>accountFunding.*<originalNetworkTransactionId>abcdefgh.*<originalTransactionAmount>1000.*/'));
+    
+    	$litleTest = new LitleOnlineRequest();
+    	$litleTest->newXML = $mock;
+    	$litleTest->saleRequest($hash_in);
+    }
 }

@@ -19,8 +19,8 @@ $capture_info = array(
   )
 );
  
-$initilaize = &new LitleOnlineRequest();
-$response = $initilaize->forceCaptureRequest($capture_info);
+$initialize = new LitleOnlineRequest();
+$response = $initialize->forceCaptureRequest($capture_info);
  
 #display results
 echo ("Response: " . (XmlParser::getNode($response,'response')) . "<br>");

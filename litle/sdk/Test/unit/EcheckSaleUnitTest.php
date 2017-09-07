@@ -85,5 +85,18 @@ class EcheckSaleUnitTest extends \PHPUnit_Framework_TestCase
     	$litleTest->newXML = $mock;
     	$litleTest->echeckSaleRequest($hash_in);
     }
+    
+    public function test_simple_customIdentifier()
+    {
+    	$hash_in = array('litleTxnId' =>'123123','id' => 'id','amount'=>'123','customIdentifier'=>'identifier');
+    	$mock = $this->getMock('litle\sdk\LitleXmlMapper');
+    	$mock->expects($this->once())
+    	->method('request')
+    	->with($this->matchesRegularExpression('/.*<litleTxnId>123123.*<customIdentifier>identifier.*/'));
+    
+    	$litleTest = new LitleOnlineRequest();
+    	$litleTest->newXML = $mock;
+    	$litleTest->echeckSaleRequest($hash_in);
+    }
 
 }

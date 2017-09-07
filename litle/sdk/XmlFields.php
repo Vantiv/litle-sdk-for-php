@@ -245,18 +245,18 @@ class XmlFields
     {
         if (isset($hash_in)) {
             $hash_out = array(
-                        "customerReference"=>XmlFields::returnArrayValue($hash_in, "customerReference"),
-                        "salesTax"=>XmlFields::returnArrayValue($hash_in, "salesTax"),
-                        "deliveryType"=>XmlFields::returnArrayValue($hash_in, "deliveryType"),
-                        "taxExempt"=>XmlFields::returnArrayValue($hash_in, "taxExempt"),
-                        "discountAmount"=>XmlFields::returnArrayValue($hash_in, "discountAmount"),
-                        "shippingAmount"=>XmlFields::returnArrayValue($hash_in, "shippingAmount"),
-                        "dutyAmount"=>XmlFields::returnArrayValue($hash_in, "dutyAmount"),
-                        "shipFromPostalCode"=>XmlFields::returnArrayValue($hash_in, "shipFromPostalCode"),
-                        "destinationPostalCode"=>XmlFields::returnArrayValue($hash_in, "destinationPostalCode"),
-                        "destinationCountryCode"=>XmlFields::returnArrayValue($hash_in, "destinationCountryCode"),
-                        "invoiceReferenceNumber"=>XmlFields::returnArrayValue($hash_in, "invoiceReferenceNumber"),
-                        "orderDate"=>XmlFields::returnArrayValue($hash_in, "orderDate")
+                "customerReference"=>XmlFields::returnArrayValue($hash_in, "customerReference"),
+                "salesTax"=>XmlFields::returnArrayValue($hash_in, "salesTax"),
+                "deliveryType"=>XmlFields::returnArrayValue($hash_in, "deliveryType"),
+                "taxExempt"=>XmlFields::returnArrayValue($hash_in, "taxExempt"),
+                "discountAmount"=>XmlFields::returnArrayValue($hash_in, "discountAmount"),
+                "shippingAmount"=>XmlFields::returnArrayValue($hash_in, "shippingAmount"),
+                "dutyAmount"=>XmlFields::returnArrayValue($hash_in, "dutyAmount"),
+                "shipFromPostalCode"=>XmlFields::returnArrayValue($hash_in, "shipFromPostalCode"),
+                "destinationPostalCode"=>XmlFields::returnArrayValue($hash_in, "destinationPostalCode"),
+                "destinationCountryCode"=>XmlFields::returnArrayValue($hash_in, "destinationCountryCode"),
+                "invoiceReferenceNumber"=>XmlFields::returnArrayValue($hash_in, "invoiceReferenceNumber"),
+                "orderDate"=>XmlFields::returnArrayValue($hash_in, "orderDate")
             );
             $lineItem = array();
             $detailtax = array();
@@ -299,11 +299,28 @@ class XmlFields
                         "track"=>XmlFields::returnArrayValue($hash_in, "track"),
                         "number"=>XmlFields::returnArrayValue($hash_in, "number"),
                         "expDate"=>XmlFields::returnArrayValue($hash_in, "expDate"),
-                        "cardValidationNum"=>XmlFields::returnArrayValue($hash_in, "cardValidationNum")
+                        "cardValidationNum"=>XmlFields::returnArrayValue($hash_in, "cardValidationNum"),
+            			"pin"=>XmlFields::returnArrayValue($hash_in, "pin")
             );
 
             return $hash_out;
         }
+    }
+    
+    public static function giftCardCardType($hash_in)
+    {
+    	if (isset($hash_in)) {
+    		$hash_out= 	array(
+    				"type"=>XmlFields::returnArrayValue($hash_in, "type"),
+    				"track"=>XmlFields::returnArrayValue($hash_in, "track"),
+    				"number"=>XmlFields::returnArrayValue($hash_in, "number"),
+    				"expDate"=>XmlFields::returnArrayValue($hash_in, "expDate"),
+    				"cardValidationNum"=>XmlFields::returnArrayValue($hash_in, "cardValidationNum"),
+    				"pin"=>XmlFields::returnArrayValue($hash_in, "pin")
+    		);
+    
+    		return $hash_out;
+    	}
     }
 
     public static function cardTokenType($hash_in)
@@ -541,6 +558,24 @@ class XmlFields
     				"header"=>Checker::requiredField(XmlFields::returnArrayValue($hash_in, "header")),
     				"signature"=>XmlFields::returnArrayValue($hash_in, "signature"),
     				"version"=>XmlFields::returnArrayValue($hash_in, "version")
+    		);
+    
+    		return $hash_out;
+    	}
+    }
+    
+    public static function sepaDirectDebitType($hash_in)
+    {
+    	if (isset($hash_in)) {
+    		$hash_out = array(
+    				"mandateProvider"=>(XmlFields::returnArrayValue($hash_in, "mandateProvider")),
+    				"sequenceType"=>(XmlFields::returnArrayValue($hash_in, "sequenceType")),
+    				"mandateReference"=>XmlFields::returnArrayValue($hash_in, "mandateReference"),
+    				"mandateUrl"=>XmlFields::returnArrayValue($hash_in, "mandateUrl"),
+    				"mandateSignatureDate"=>XmlFields::returnArrayValue($hash_in, "mandateSignatureDate"),
+    				"iban"=>XmlFields::returnArrayValue($hash_in, "iban"),
+    				"preferredLanguage"=>XmlFields::returnArrayValue($hash_in, "preferredLanguage")
+    
     		);
     
     		return $hash_out;

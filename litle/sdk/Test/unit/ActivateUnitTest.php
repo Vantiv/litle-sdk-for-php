@@ -35,16 +35,17 @@ class ActivateUnitTest extends \PHPUnit_Framework_TestCase
             'orderSource'=>'ECOMMERCE',
         	'id' => 'id',
             'card' => array (
-                'type'=>'VI',
-                'number'=>'4100000000000000',
-                'expDate'=>'1213',
-                'cardValidationNum' => '1213'
-            )
+					'type' => 'GC',
+					'number' => '4100000000000001',
+					'expDate' => '0118',
+					'pin' => '1234',
+					'cardValidationNum' => '411'
+      		)
         );
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
         ->method('request')
-        ->with($this->matchesRegularExpression('/.*<orderId>1.*<amount>2.*<orderSource>ECOMMERCE.*<card.*type.*VI.*/'));
+        ->with($this->matchesRegularExpression('/.*<orderId>1.*<amount>2.*<orderSource>ECOMMERCE.*<card.*type.*GC.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;

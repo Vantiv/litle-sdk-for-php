@@ -14,8 +14,8 @@ $credit_info = array(
         'amount'=>'123'
 	);
  
-$initilaize = &new LitleOnlineRequest(); 
-$creditResponse = $initilaize->creditRequest($credit_info);
+$initialize = new LitleOnlineRequest();
+$creditResponse = $initialize->creditRequest($credit_info);
  
 #display results
 echo ("Response: " . (XmlParser::getNode($creditResponse,'response')) . "<br>");

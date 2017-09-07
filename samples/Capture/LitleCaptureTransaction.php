@@ -10,8 +10,8 @@ $capture_info = array(
         'id'=> '456',
 	);
  
-$initilaize = new LitleOnlineRequest(); 
-$captureResponse = $initilaize->captureRequest($capture_info);
+$initialize = new LitleOnlineRequest(); 
+$captureResponse = $initialize->captureRequest($capture_info);
  
 #display results
 echo ("Response: " . (XmlParser::getNode($captureResponse,'response')) . "<br>");

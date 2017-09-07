@@ -22,8 +22,8 @@ $auth_info = array(
 		      'type' => 'VI')
 			);
  
-$initilaize = new LitleOnlineRequest(); 
-$authResponse = $initilaize->authorizationRequest($auth_info);
+$initialize = new LitleOnlineRequest(); 
+$authResponse = $initialize->authorizationRequest($auth_info);
  
 #display results
 echo ("Response: " . (XmlParser::getNode($authResponse,'response')) . "<br>");
