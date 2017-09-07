@@ -267,13 +267,13 @@ class XmlFields
                     $detailtax[] = $value;
                 }
             }
-            for ($j=0; $j<count($lineItem); $j++) {
-                $outIndex = ('lineItemData') . (string) $j;
-                $hash_out[$outIndex] = XmlFields::lineItemData(XmlFields::returnArrayValue($lineItem,$j));
-            }
             for ($j=0; $j<count($detailtax); $j++) {
                 $outIndex = ('detailTax') . (string) $j;
                 $hash_out[$outIndex] = XmlFields::detailTax(XmlFields::returnArrayValue($detailtax,$j));
+            }
+            for ($j=0; $j<count($lineItem); $j++) {
+                $outIndex = ('lineItemData') . (string) $j;
+                $hash_out[$outIndex] = XmlFields::lineItemData(XmlFields::returnArrayValue($lineItem,$j));
             }
             return $hash_out;
         }

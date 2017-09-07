@@ -22,6 +22,7 @@
 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 * OTHER DEALINGS IN THE SOFTWARE.
 */
+
 namespace litle\sdk\Test\unit;
 
 use litle\sdk\LitleOnlineRequest;
@@ -51,20 +52,6 @@ class AuthUnitTest extends \PHPUnit_Framework_TestCase
 
     public function test_multiple_lineItemData()
     {
-        $lineItemData = array(
-            array('itemSequenceNumber' => 'one',
-                'itemDescription' => 'desc',
-                'itemDescription' => 'flamethrower',
-                'productCode' => '112233',
-                'quantity' => '52',
-                'unitOfMeasure' => 'pounds',
-                'taxAmount' => '55'
-            ),
-            array('itemSequenceNumber' => 'two', 'itemDescription' => 'desc2'));
-        $detailTax = array(
-            array('taxAmount' => '0', 'cardAcceptorTaxId' => '0'),
-            array('taxAmount' => '1', 'cardAcceptorTaxId' => '1'));
-
         $hash_in = array('id' => 'id',
             'card' => array('type' => 'VI',
                 'number' => '4100000000000001',
@@ -73,17 +60,41 @@ class AuthUnitTest extends \PHPUnit_Framework_TestCase
             'orderId' => '2111',
             'orderSource' => 'ecommerce',
             'id' => '654',
-            'enhancedData' => array('salesTax' => '123',
-                'shippingAmount' => '123',
-                'detailTax' => $detailTax,
-                'lineItemData' => $lineItemData
+            'amount' => '123',
+            'enhancedData' => array(
+                'salesTax' => 200,
+                'taxExempt' => false,
+                'lineItemData0' => array(
+                    'itemSequenceNumber' => '1',
+                    'itemDescription' => 'product 1',
+                    'productCode' => '123',
+                    'quantity' => 3,
+                    'unitOfMeasure' => 'unit',
+                    'taxAmount' => 200,
+                    'detailTax' => array(
+                        'taxIncludedInTotal' => true,
+                        'taxAmount' => 200
+                    )
+                ),
+                'lineItemData1' => array(
+                    'itemSequenceNumber' => '2',
+                    'itemDescription' => 'product 2',
+                    'productCode' => '456',
+                    'quantity' => 1,
+                    'unitOfMeasure' => 'unit',
+                    'taxAmount' => 300,
+                    'detailTax' => array(
+                        'taxIncludedInTotal' => true,
+                        'taxAmount' => 300
+                    )
+                )
             ),
-            'amount' => '123');
+        );
 
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
             ->method('request')
-            ->with($this->matchesRegularExpression('/.*<enhancedData>.*<lineItemData>.*<itemSequenceNumber>1<\/itemSequenceNumber>.*<itemDescription>desc<\/itemDescription>.*<\/lineItemData>.*<lineItemData>.*<itemSequenceNumber>2<\/itemSequenceNumber>.*<itemDescription>desc2<\/itemDescription>.*<\/lineItemData>.*<\/enhancedData>.*/'));
+            ->with($this->matchesRegularExpression('/.*<enhancedData>.*<lineItemData>.*<itemSequenceNumber>1<\/itemSequenceNumber>.*<itemDescription>product 1<\/itemDescription>.*<\/lineItemData>.*<lineItemData>.*<itemSequenceNumber>2<\/itemSequenceNumber>.*<itemDescription>product 2<\/itemDescription>.*<\/lineItemData>.*<\/enhancedData>.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -92,10 +103,6 @@ class AuthUnitTest extends \PHPUnit_Framework_TestCase
 
     public function test_multiple_detailTax()
     {
-        $detailTax = array(
-            array('taxAmount' => '0', 'cardAcceptorTaxId' => '0'),
-            array('taxAmount' => '1', 'cardAcceptorTaxId' => '1'));
-
         $hash_in = array('id' => 'id',
             'card' => array('type' => 'VI',
                 'number' => '4100000000000001',
@@ -104,10 +111,22 @@ class AuthUnitTest extends \PHPUnit_Framework_TestCase
             'orderId' => '2111',
             'orderSource' => 'ecommerce',
             'id' => '654',
-            'enhancedData' => array('salesTax' => '123',
-                'shippingAmount' => '123',
-                'detailTax' => $detailTax),
-            'amount' => '123');
+            'enhancedData' => array(
+                'detailTax0' => array(
+                    'taxAmount' => '200',
+                    'taxRate' => '0.06',
+                    'taxIncludedInTotal' => true
+                ),
+                'detailTax1' => array(
+                    'taxAmount' => '300',
+                    'taxRate' => '0.10',
+                    'taxIncludedInTotal' => true
+                ),
+                'salesTax' => '500',
+                'taxExempt' => false
+            ),
+            'amount' => '123'
+        );
 
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())

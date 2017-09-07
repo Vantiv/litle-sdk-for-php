@@ -50,20 +50,6 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
 
     public function test_simple_auth_with_detail_tax()
     {
-        $lineItemData = array(
-            array('itemSequenceNumber' => '1',
-                'itemDescription' => 'desc',
-                'itemDescription' => 'flamethrower',
-                'productCode' => '112233',
-                'quantity' => '52',
-                'unitOfMeasure' => 'pounds',
-                'taxAmount' => '55'
-            ),
-            array('itemSequenceNumber' => '2', 'itemDescription' => 'desc2'));
-        $detailTax = array(
-            array('taxAmount' => '0', 'cardAcceptorTaxId' => '0'),
-            array('taxAmount' => '1', 'cardAcceptorTaxId' => '1'));
-
         $hash_in = array('id' => 'id',
             'card' => array('type' => 'VI',
                 'number' => '4100000000000000',
@@ -74,11 +60,43 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
             'reportGroup' => 'Planets',
             'orderSource' => 'ecommerce',
             'amount' => '0',
-            'enhancedData' => array('salesTax' => '123',
-                'shippingAmount' => '123',
-                'detailTax' => $detailTax,
-                'lineItemData' => $lineItemData
-            )
+            'enhancedData' => array(
+                'detailTax0' => array(
+                    'taxAmount' => '200',
+                    'taxRate' => '0.06',
+                    'taxIncludedInTotal' => true
+                ),
+                'detailTax1' => array(
+                    'taxAmount' => '300',
+                    'taxRate' => '0.10',
+                    'taxIncludedInTotal' => true
+                ),'lineItemData0' => array(
+                    'itemSequenceNumber' => '1',
+                    'itemDescription' => 'product 1',
+                    'productCode' => '123',
+                    'quantity' => 3,
+                    'unitOfMeasure' => 'unit',
+                    'taxAmount' => 200,
+                    'detailTax' => array(
+                        'taxIncludedInTotal' => true,
+                        'taxAmount' => 200
+                    )
+                ),
+                'lineItemData1' => array(
+                    'itemSequenceNumber' => '2',
+                    'itemDescription' => 'product 2',
+                    'productCode' => '456',
+                    'quantity' => 1,
+                    'unitOfMeasure' => 'unit',
+                    'taxAmount' => 300,
+                    'detailTax' => array(
+                        'taxIncludedInTotal' => true,
+                        'taxAmount' => 300
+                    )
+                ),
+                'salesTax' => '500',
+                'taxExempt' => false
+            ),
         );
 
         $initialize = new LitleOnlineRequest();
@@ -353,7 +371,7 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function test_simple_auth_with_card_IdRestrictions()
+    public function test_simple_auth_with_card_Id_restrictions()
     {
         $hash_in = array('id' => 'id',
             'card' => array('type' => 'VI',
@@ -372,5 +390,29 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
         $this->assertRegExp('/Error validating xml data against the schema/', $message);
     }
 
+    public function test_recurring_request()
+    {
+        $hash_in = array('id' => 'id',
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000001',
+                'expDate' => '1213'
+            ),
+            'orderId' => '12344',
+            'amount' => '2',
+            'orderSource' => 'ecommerce',
+            'fraudFilterOverride' => 'true',
+            'recurringRequest' => array(
+                'subscription' => array(
+                    'planCode' => 'abc123',
+                    'numberOfPayments' => 12
+                )
+            )
+        );
 
+        $initialize = new LitleOnlineRequest();
+        $authorizationResponse = $initialize->authorizationRequest($hash_in);
+        $response = XmlParser::getAttribute($authorizationResponse, 'litleOnlineResponse', 'response');
+        $this->assertEquals('000', $response);
+    }
 }
