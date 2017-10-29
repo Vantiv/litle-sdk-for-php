@@ -40,8 +40,8 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
             'orderSource'=>'ecommerce',
             'amount'=>'0');
 
-        $initilaize = new LitleOnlineRequest();
-        $authorizationResponse = $initilaize->authorizationRequest($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $authorizationResponse = $initialize->authorizationRequest($hash_in);
         $response = XmlParser::getNode($authorizationResponse,'response');
         $this->assertEquals('000',$response);
     }
@@ -57,8 +57,8 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
                 'orderSource'=>'ecommerce',
                 'amount'=>'123');
 
-        $initilaize = new LitleOnlineRequest();
-        $authorizationResponse = $initilaize->authorizationRequest($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $authorizationResponse = $initialize->authorizationRequest($hash_in);
         $message = XmlParser::getNode($authorizationResponse,'message');
         $this->assertEquals('Approved',$message);
     }
@@ -67,8 +67,8 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
     {
         $hash_in = array('id' => 'id','reportGroup'=>'planets','litleTxnId'=>'1234567891234567891');
 
-        $initilaize = new LitleOnlineRequest();
-        $authorizationResponse = $initilaize->authorizationRequest($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $authorizationResponse = $initialize->authorizationRequest($hash_in);
         $message= XmlParser::getAttribute($authorizationResponse,'litleOnlineResponse','message');
         $this->assertEquals("Valid Format",$message);
     }
@@ -83,8 +83,8 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
                             'orderSource'=>'notecommerce',
                             'amount'=>'123');
 
-        $initilaize = new LitleOnlineRequest();
-        $authorizationResponse = $initilaize->authorizationRequest($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $authorizationResponse = $initialize->authorizationRequest($hash_in);
         $message= XmlParser::getAttribute($authorizationResponse,'litleOnlineResponse','message');
         $this->assertRegExp('/Error validating xml data against the schema/',$message);
     }
@@ -99,8 +99,8 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
                         'orderSource'=>'ecommerce',
                         'amount'=>'123');
 
-        $initilaize = new LitleOnlineRequest();
-        $authorizationResponse = $initilaize->authorizationRequest($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $authorizationResponse = $initialize->authorizationRequest($hash_in);
         $message = XmlParser::getNode($authorizationResponse,'message');
         $this->assertEquals('Approved',$message);
     }
@@ -116,8 +116,8 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
                             'orderSource'=>'ecommerce',
                             'amount'=>'123');
 
-        $initilaize = new LitleOnlineRequest();
-        $authorizationResponse = $initilaize->authorizationRequest($hash_in);
+        $initialize = new LitleOnlineRequest();
+        $authorizationResponse = $initialize->authorizationRequest($hash_in);
         $message = XmlParser::getNode($authorizationResponse,'message');
         $this->assertEquals('Approved',$message);
     }
@@ -155,8 +155,8 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
     			'id'=>'654',
     			'amount'=>'1000');
 		
-    	$initilaize = new LitleOnlineRequest();
-        $authorizationResponse = $initilaize->authorizationRequest($hash_in);
+    	$initialize = new LitleOnlineRequest();
+        $authorizationResponse = $initialize->authorizationRequest($hash_in);
         $response = XmlParser::getNode($authorizationResponse,'response');
         $this->assertEquals('000',$response);
     }
@@ -177,8 +177,8 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
     			'id'=>'654',
     			'amount'=>'1101');
     
-    	$initilaize = new LitleOnlineRequest();
-    	$authorizationResponse = $initilaize->authorizationRequest($hash_in);
+    	$initialize = new LitleOnlineRequest();
+    	$authorizationResponse = $initialize->authorizationRequest($hash_in);
     	$response = XmlParser::getNode($authorizationResponse,'response');
     	$this->assertEquals('101',$response);
     }
@@ -199,8 +199,8 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
     			'id'=>'654',
     			'amount'=>'12312');
     
-    	$initilaize = new LitleOnlineRequest();
-    	$authorizationResponse = $initilaize->authorizationRequest($hash_in);
+    	$initialize = new LitleOnlineRequest();
+    	$authorizationResponse = $initialize->authorizationRequest($hash_in);
     	$response = XmlParser::getNode($authorizationResponse,'response');
     	$this->assertEquals('000',$response);
     }
