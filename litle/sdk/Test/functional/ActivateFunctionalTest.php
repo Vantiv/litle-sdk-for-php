@@ -30,7 +30,7 @@ class ActivateFunctionalTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple()
     {
-        $hash_in = array('id' => 'ActivateFunctionalTest.test_simple',
+        $hash_in = array('id' => 'Activate.test_simple',
             'orderId'=>'1',
             'amount'=> '2',
             'orderSource'=>'ecommerce',
