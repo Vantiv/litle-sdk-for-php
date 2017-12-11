@@ -43,7 +43,7 @@ class QueryTransactionFunctionalTest extends \PHPUnit_Framework_TestCase
         $matchCount = XmlParser::getNode($queryTransactionResponse, 'matchCount');
         $this->assertEquals('1', $matchCount);
         $resultsMax10 = XmlParser::getNodeWithChildren($queryTransactionResponse, 'results_max10');
-        foreach ($resultsMax10->childNodes as $child) {
+        foreach ($resultsMax10->getElementsByTagName('authorizationResponse') as $child) {
             $childResponse = XmlParser::getNode($child, 'response');
             $childMessage = XmlParser::getNode($child, 'message');
             $childOrderId = XmlParser::getNode($child, 'orderId');
