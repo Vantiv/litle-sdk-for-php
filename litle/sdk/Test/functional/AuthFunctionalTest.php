@@ -378,7 +378,7 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
                 'number' => '4100000000000000',
                 'expDate' => '1213',
                 'cardValidationNum' => '1213'),
-            'id' => '1234567890          1234561234567890',
+            'id' => '1234567890123456123456789012345678901234',
             'orderId' => '2111',
             'reportGroup' => 'Planets',
             'orderSource' => 'ecommerce',
