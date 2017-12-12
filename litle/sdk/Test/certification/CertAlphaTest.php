@@ -281,7 +281,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         //TODO: getting 03180 as authcode
         //$this->assertEquals('22222', trim(XmlParser::getNode($saleResponse, 'authCode')));
         //$this->assertEquals('10', XmlParser::getNode($saleResponse, 'avsResult'));
-        $//this->assertEquals('M', XmlParser::getNode($saleResponse, 'cardValidationResult'));
+       //$this->assertEquals('M', XmlParser::getNode($saleResponse, 'cardValidationResult'));
 
         //test 2B
         $credit_hash = array('id' => '1211',
