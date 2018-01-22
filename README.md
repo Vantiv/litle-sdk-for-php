@@ -47,6 +47,7 @@ If you are using a composer to manage your dependencies, you can do the followin
 require_once _DIR_.'/vendor/autoload.php';
 #sale
 $sale_info = array(
+	     'id' => '456',
              'orderId' => '1',
              'amount'  => '10010',
              'orderSource' => 'ecommerce',
