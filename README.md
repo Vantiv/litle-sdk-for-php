@@ -9,6 +9,9 @@ About Vantiv eCommerce
 
 About this SDK
 --------------
+
+##### No major updates are planned for this repository. SDK Version 12 and above can be found here: [cnp-sdk-for-php](https://github.com/Vantiv/cnp-sdk-for-php)
+
 The Vantiv eCommerce PHP SDK is a PHP implementation of the [Vantiv eCommerce](https://developer.vantiv.com/community/ecommerce). XML API. This SDK was created to make it as easy as possible to connect process your payments with Vantiv eCommerce.  This SDK utilizes  the HTTPS protocol to securely connect to Vantiv eCommerce.  Using the SDK requires coordination with the Vantiv eCommerce team in order to be provided with credentials for accessing our systems.
 
 Each PHP SDK release supports all of the functionality present in the associated Vantiv eCommerce XML version (e.g., SDK v9.3.2 supports Vantiv eCommerce XML v9.3). Please see the online copy of our XSD for Vantiv eCommerce XML to get more details on what the Vantiv eCommerce payments engine supports.
