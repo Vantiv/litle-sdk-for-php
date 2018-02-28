@@ -24,6 +24,7 @@
 */
 namespace litle\sdk;
 require_once realpath(dirname(__FILE__)) . '/UrlMapper.php';
+require_once realpath(dirname(__FILE__)) . '/PgpHelper.php';
 
 function writeConfig($line,$handle)
 {
@@ -49,7 +50,7 @@ function initialize()
         print "Please input your user name: ";
         $line['user'] = trim(fgets(STDIN));
         print "Please input your password: ";
-        $line['password'] = trim(fgets(STDIN));
+        $line['password'] = "\"".trim(fgets(STDIN))."\"";
         print "Please input your merchantId: ";
         $line['currency_merchant_map ']['DEFAULT'] = trim(fgets(STDIN));
         print "Please choose Litle url from the following list (example: 'sandbox') or directly input another URL: \n" .
@@ -61,7 +62,7 @@ function initialize()
             "prelive => https://payments.vantivprelive.com/vap/communicator/online \n" .
             "transact-prelive => https://transact.vantivprelive.com/vap/communicator/online" . PHP_EOL;
         $url = UrlMapper::getUrl(trim(fgets(STDIN)));
-	
+
         $line['url'] = $url;
         print "Please input the proxy, if no proxy hit enter key: ";
         $line['proxy'] = trim(fgets(STDIN));
@@ -76,7 +77,7 @@ function initialize()
         print "Please input your SFTP username. If you are not using SFTP, you may hit enter. ";
         $line['sftp_username'] = trim(fgets(STDIN));
         print "Please input your SFTP password. If you are not using SFTP, you may hit enter. ";
-        $line['sftp_password'] = trim(fgets(STDIN));
+        $line['sftp_password'] = "\"".trim(fgets(STDIN))."\"";
         print "Please input the URL for batch processing. If you are not using batch processing, you may hit enter. ";
         $line['batch_url'] = trim(fgets(STDIN));
         print "Please input the port for stream batch delivery. " .
@@ -88,6 +89,29 @@ function initialize()
         # ssl should be usd by default
         $line['tcp_ssl'] = '1';
         $line['print_xml'] = '0';
+        $line['deleteBatchFiles'] = 'false';
+        print "Use PGP encryption for batch files(true/false) (No encryption by default): ";
+        $useEncryption = trim(fgets(STDIN));
+        $line['useEncryption'] = $useEncryption;
+        if("true" == $useEncryption){
+            print "Import Vantiv's public key to gpg key ring? (y/n): ";
+            $import = trim(fgets(STDIN));
+            if("y" == $import) {
+                print "Please input path to Vantiv's public key (for encryption of batch requests) :";
+                $keyFile = trim(fgets(STDIN));
+                $line['vantivPublicKeyID'] = PgpHelper::importKey($keyFile);
+            }
+            else{
+                print "Please input key ID for Vantiv's public key (imported to your key ring) :";
+                $line['vantivPublicKeyID'] = trim(fgets(STDIN));
+            }
+            print "Please input passphrase for decryption :";
+            $line['gpgPassphrase'] = trim(fgets(STDIN));
+        }
+        else{
+            $line['vantivPublicKeyID'] = "";
+            $line['gpgPassphrase'] = "";
+        }
 
         writeConfig($line,$handle);
         #default http timeout set to 500 ms

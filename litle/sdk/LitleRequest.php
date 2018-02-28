@@ -2,6 +2,7 @@
 
 
 namespace litle\sdk;
+
 class LitleRequest
 {
     # file name that holds the batch requests once added
@@ -160,12 +161,30 @@ class LitleRequest
         if (!$this->closed) {
             $this->closeRequest();
         }
+        $requestFilename = $this->request_file;
+        $useEncryption = $this->config['useEncryption'];
+        if($useEncryption){
+            $publicKey = $this->config['vantivPublicKeyID'];
+            $requestFilename = $this->request_file . ".encrypted";
+            PgpHelper::encrypt($this->request_file, $requestFilename, $publicKey);
+        }
 
         $session = $this->createSFTPSession();
         # with extension .prg
-        $session->put('/inbound/' . basename($this->request_file) . '.prg', $this->request_file, \phpseclib\Net\SFTP::SOURCE_LOCAL_FILE);
+        $session->put('/inbound/' . basename($this->request_file) . '.prg', $requestFilename, \phpseclib\Net\SFTP::SOURCE_LOCAL_FILE);
         # rename when the file upload is complete
         $session->rename('/inbound/' . basename($this->request_file) . '.prg', '/inbound/' . basename($this->request_file) . '.asc');
+
+        $deleteBatchFiles = $this->config['deleteBatchFiles'];
+        LitleResponseProcessor::$deleteBatchFiles = $deleteBatchFiles;
+        if($deleteBatchFiles){
+            if(file_exists($this->request_file)){
+                unlink($this->request_file);
+            }
+            if(file_exists($requestFilename)){
+                unlink($requestFilename);
+            }
+        }
 
         $this->retrieveFromLitleSFTP($session);
     }
@@ -184,10 +203,14 @@ class LitleRequest
             }
 
             $files = $session->nlist('/outbound');
-
             if (in_array(basename($this->request_file) . '.asc', $files)) {
                 $this->downloadFromLitleSFTP($session,$time_spent, $sftp_timeout);
-
+                $useEncryption = $this->config['useEncryption'];
+                if($useEncryption){
+                    $passphrase = $this->config['gpgPassphrase'];
+                    rename($this->response_file, $this->response_file.".encrypted");
+                    PgpHelper::decrypt($this->response_file.".encrypted", $this->response_file, $passphrase);
+                }
                 return;
             }
 

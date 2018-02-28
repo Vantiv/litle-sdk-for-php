@@ -3,6 +3,8 @@
 namespace litle\sdk\Test\functional;
 
 use litle\sdk\BatchRequest;
+use litle\sdk\LitleRequest;
+use litle\sdk\LitleResponseProcessor;
 
 require_once realpath(dirname(__FILE__)) . '../../../LitleOnline.php';
 
@@ -1289,6 +1291,85 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase
 
         $cts = $batch_request->getCountsAndAmounts();
         $this->assertNotNull($cts);
+    }
+
+    public function test_mechaBatchSFTP()
+    {
+        $request = new LitleRequest();
+
+        $batch = new BatchRequest();
+        $hash_in = array(
+            'card'=>array('type'=>'VI',
+                'number'=>'4100000000000001',
+                'expDate'=>'1213',
+                'cardValidationNum' => '1213'),
+            'orderId'=> '2111',
+            'orderSource'=>'ecommerce',
+            'id'=>'654',
+            'amount'=>'123');
+        $batch->addAuth($hash_in);
+
+        $hash_in = array(
+            'card'=>array('type'=>'VI',
+                'number'=>'4100000000000001',
+                'expDate'=>'1213',
+                'cardValidationNum' => '1213'),
+            'id'=>'654',
+            'orderId'=> '2111',
+            'orderSource'=>'ecommerce',
+            'amount'=>'123');
+        $batch->addSale($hash_in);
+        $request->addBatchRequest($batch);
+
+        $resp = new LitleResponseProcessor($request->sendToLitle());
+
+        $message = $resp->getXmlReader()->getAttribute("message");
+        $response = $resp->getXmlReader()->getAttribute("response");
+        $this->assertEquals("Valid Format", $message);
+        $this->assertEquals(0, $response);
+    }
+
+    public function test_sendToLitleStream()
+    {
+        $sale_info = array(
+            'id' => '1',
+            'orderId' => '1',
+            'amount' => '10010',
+            'orderSource'=>'ecommerce',
+            'billToAddress'=>array(
+                'name' => 'John Smith',
+                'addressLine1' => '1 Main St.',
+                'city' => 'Burlington',
+                'state' => 'MA',
+                'zip' => '01803-3747',
+                'country' => 'US'),
+            'card'=>array(
+                'number' =>'5112010000000003',
+                'expDate' => '0112',
+                'cardValidationNum' => '349',
+                'type' => 'MC')
+        );
+
+        $litle_request = new LitleRequest();
+        $batch_request = new BatchRequest();
+
+        # add a sale to the batch
+        $batch_request->addSale($sale_info);
+        # close the batch, indicating that we intend to add no more sales
+        $batch_request->closeRequest();
+        # add the batch to the litle request
+        $litle_request->addBatchRequest($batch_request);
+        # close the litle request, indicating that we intend to add no more batches
+        $litle_request->closeRequest();
+        # send the batch to litle via SFTP
+        $response_file = $litle_request->sendToLitleStream();
+        # process the response file
+        $resp = new LitleResponseProcessor($response_file);
+
+        $message = $resp->getXmlReader()->getAttribute("message");
+        $response = $resp->getXmlReader()->getAttribute("response");
+        $this->assertEquals("Valid Format", $message);
+        $this->assertEquals(0, $response);
     }
 
     public function tearDown()
