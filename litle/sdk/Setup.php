@@ -90,13 +90,13 @@ function initialize()
         $line['tcp_ssl'] = '1';
         $line['print_xml'] = '0';
         $line['deleteBatchFiles'] = 'false';
-        print "Use PGP encryption for batch files(true/false) (No encryption by default): ";
+        print "Use PGP encryption for batch files? (y/n) (No encryption by default): ";
         $useEncryption = trim(fgets(STDIN));
-        $line['useEncryption'] = $useEncryption;
-        if("true" == $useEncryption){
+        if(("y" == $useEncryption) || ("true" == $useEncryption) || ("yes" == $useEncryption)){
+            $line['useEncryption'] = "true";
             print "Import Vantiv's public key to gpg key ring? (y/n): ";
             $import = trim(fgets(STDIN));
-            if("y" == $import) {
+            if(("y" == $import) || ("yes" == $import) || ("true" == $import)) {
                 print "Please input path to Vantiv's public key (for encryption of batch requests) :";
                 $keyFile = trim(fgets(STDIN));
                 $line['vantivPublicKeyID'] = PgpHelper::importKey($keyFile);
@@ -109,6 +109,7 @@ function initialize()
             $line['gpgPassphrase'] = trim(fgets(STDIN));
         }
         else{
+            $line['useEncryption'] = "false";
             $line['vantivPublicKeyID'] = "";
             $line['gpgPassphrase'] = "";
         }
