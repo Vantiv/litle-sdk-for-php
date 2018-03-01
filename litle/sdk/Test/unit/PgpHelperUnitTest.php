@@ -5,7 +5,7 @@ namespace litle\sdk\Test\unit;
 use litle\sdk\Obj2xml;
 use litle\sdk\PgpHelper;
 
-class LoadUnitTest extends \PHPUnit_Framework_TestCase
+class PgpHelperUnitTest extends \PHPUnit_Framework_TestCase
 {
     private $direct;
     private $requestFilename;
