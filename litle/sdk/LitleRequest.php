@@ -37,6 +37,11 @@ class LitleRequest
         $batches_filename = $request_dir . "request_" . $ts . "_batches";
         $request_filename = $request_dir . "request_" . $ts;
         $response_filename = $request_dir . "response_" . $ts;
+
+        if (!is_dir($request_dir)) {
+            mkdir($request_dir);
+        }
+
         // if either file already exists, let's try again!
         if (file_exists($batches_filename) || file_exists($request_filename) || file_exists($response_filename)) {
             $this->__construct();

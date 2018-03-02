@@ -179,6 +179,10 @@ class BatchRequest
         $filename = $request_dir . "batch_" . $ts . "_txns";
         $batch_filename = $request_dir . "batch_" . $ts;
 
+        if (!is_dir($request_dir)) {
+            mkdir($request_dir);
+        }
+
         // if either file already exists, let's try again!
         if (file_exists($filename) || file_exists($batch_filename)) {
             $this->__construct();
