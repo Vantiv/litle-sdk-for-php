@@ -4,6 +4,7 @@ namespace litle\sdk;
 
 class LitleResponseProcessor {
 	private $xml_reader;
+    public static $deleteBatchFiles = "false";
 	
 	/*
 	 * $response_file is a string corresponding to the path of the response file to be processed.
@@ -19,6 +20,15 @@ class LitleResponseProcessor {
 			$msg = $this->xml_reader->getAttribute ( 'message' );
 			throw new \RuntimeException ( "Response file $response_file indicates error: $msg" );
 		}
+
+        if(self::$deleteBatchFiles){
+            if(file_exists($response_file)){
+                unlink($response_file);
+            }
+            if(file_exists($response_file.".encrypted")){
+                unlink($response_file.".encrypted");
+            }
+        }
 	}
 	public function getXmlReader() {
 		return $this->xml_reader;

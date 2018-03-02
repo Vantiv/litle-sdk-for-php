@@ -36,6 +36,11 @@ class LitleRequest
         $batches_filename = $request_dir . "request_" . $ts . "_batches";
         $request_filename = $request_dir . "request_" . $ts;
         $response_filename = $request_dir . "response_" . $ts;
+
+        if (!is_dir($request_dir)) {
+            mkdir($request_dir);
+        }
+
         // if either file already exists, let's try again!
         if (file_exists($batches_filename) || file_exists($request_filename) || file_exists($response_filename)) {
             $this->__construct();
@@ -161,9 +166,17 @@ class LitleRequest
             $this->closeRequest();
         }
 
+        $requestFilename = $this->request_file;
+        $useEncryption = $this->config['useEncryption'];
+        if($useEncryption){
+            $publicKey = $this->config['vantivPublicKeyID'];
+            $requestFilename = $this->request_file . ".encrypted";
+            PgpHelper::encrypt($this->request_file, $requestFilename, $publicKey);
+        }
+
         $session = $this->createSFTPSession();
         # with extension .prg
-        $session->put('/inbound/' . basename($this->request_file) . '.prg', $this->request_file, NET_SFTP_LOCAL_FILE);
+        $session->put('/inbound/' . basename($this->request_file) . '.prg', $requestFilename, \phpseclib\Net\SFTP::SOURCE_LOCAL_FILE);
         # rename when the file upload is complete
         $session->rename('/inbound/' . basename($this->request_file) . '.prg', '/inbound/' . basename($this->request_file) . '.asc');
 
@@ -187,7 +200,12 @@ class LitleRequest
 
             if (in_array(basename($this->request_file) . '.asc', $files)) {
                 $this->downloadFromLitleSFTP($session,$time_spent, $sftp_timeout);
-
+                $useEncryption = $this->config['useEncryption'];
+                if($useEncryption){
+                    $passphrase = $this->config['gpgPassphrase'];
+                    rename($this->response_file, $this->response_file.".encrypted");
+                    PgpHelper::decrypt($this->response_file.".encrypted", $this->response_file, $passphrase);
+                }
                 return;
             }
 
@@ -207,7 +225,7 @@ class LitleRequest
         $sftp_url = $this->config['batch_url'];
         $sftp_username = $this->config['sftp_username'];
         $sftp_password = $this->config['sftp_password'];
-        $session = new \Net_SFTP($sftp_url);
+        $session = new \phpseclib\Net\SFTP($sftp_url);
         if (!$session->login($sftp_username, $sftp_password)) {
             throw new \RuntimeException("Failed to SFTP with the username $sftp_username and the password $sftp_password to the host $sftp_url. Check your credentials!");
         }
