@@ -14,7 +14,11 @@ class PgpHelper
 
         exec($command, $output, $result);
         if($result != 0){
-            throw new \RuntimeException ("The batch file could not be encrypted. Check the public key entered. ".$output[1]);
+            $response = "";
+            foreach ($output as $line){
+                $response .= $line . "\n";
+            }
+            throw new \RuntimeException ("The batch file could not be encrypted. Check the public key entered. ".$response);
         }
     }
 
@@ -28,7 +32,11 @@ class PgpHelper
 
         exec($command, $output, $result);
         if($result != 0){
-            throw new \RuntimeException ("The response could not be decrypted. ".$output[1]);
+            $response = "";
+            foreach ($output as $line){
+                $response .= $line . "\n";
+            }
+            throw new \RuntimeException ("The response could not be decrypted. ".$response);
         }
     }
 
@@ -39,7 +47,11 @@ class PgpHelper
         $command = "gpg --import ".$keyFile. " 2>&1";
         exec($command, $output, $result);
         if($result != 0){
-            throw new \RuntimeException ("The key could not be imported. ".$output[0]);
+            $response = "";
+            foreach ($output as $line){
+                $response .= $line . "\n";
+            }
+            throw new \RuntimeException ("The key could not be imported. ".$response);
         }
         $split = explode(" ", $output[0]);
         return rtrim($split[2], ":");
