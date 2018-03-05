@@ -13,6 +13,7 @@ class BatchRequestEncryptionFunctionalTest extends \PHPUnit_Framework_TestCase
     private $password;
     private $sftpUsername;
     private $sftpPassword;
+    private $merchantId;
 
     public function setUp()
     {
@@ -25,6 +26,7 @@ class BatchRequestEncryptionFunctionalTest extends \PHPUnit_Framework_TestCase
         $this->password = $_SERVER['encPassword'];
         $this->sftpUsername = $_SERVER['encSftpUsername'];
         $this->sftpPassword = $_SERVER['encSftpPassword'];
+        $this->merchantId = $_SERVER['encMerchantId'];
     }
 
     public function test_configuredLitleBatchRequestsManually()
@@ -52,6 +54,7 @@ class BatchRequestEncryptionFunctionalTest extends \PHPUnit_Framework_TestCase
         $config_hash = array(
             'user' => $this->username,
             'password' => $this->password,
+            'merchantId' => $this->merchantId,
             'sftp_username' => $this->sftpUsername,
             'sftp_password' => $this->sftpPassword,
             'useEncryption' => 'true',
@@ -85,6 +88,7 @@ class BatchRequestEncryptionFunctionalTest extends \PHPUnit_Framework_TestCase
         $config_hash = array(
             'user' => $this->username,
             'password' => $this->password,
+            'merchantId' => $this->merchantId,
             'sftp_username' => $this->sftpUsername,
             'sftp_password' => $this->sftpPassword,
             'useEncryption' => 'true',
