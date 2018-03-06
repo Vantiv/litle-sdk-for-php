@@ -23,10 +23,11 @@ class BatchRequestEncryptionFunctionalTest extends \PHPUnit_Framework_TestCase
             mkdir($this->direct);
         }
 
-        $this->config_array =parse_ini_file('../../litle_SDK_config.ini');
+        $ini_file = realpath(dirname(__FILE__)) . '/../../litle_SDK_config.ini';
+        $this->config_array =parse_ini_file($ini_file);
         $this->merchantId = $this->config_array['currency_merchant_map']['DEFAULT'];
         $this->config_array['currency_merchant_map']['DEFAULT'] = $_SERVER['encMerchantId'];
-        $handle = @fopen('../../litle_SDK_config.ini', "w");
+        $handle = @fopen($ini_file, "w");
         $this->writeConfig($this->config_array,$handle);
         fclose($handle);
 
@@ -134,8 +135,9 @@ class BatchRequestEncryptionFunctionalTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
+        $ini_file = realpath(dirname(__FILE__)) . '/../../litle_SDK_config.ini';
         $this->config_array['currency_merchant_map']['DEFAULT'] = $this->merchantId;
-        $handle = @fopen('../../litle_SDK_config.ini', "w");
+        $handle = @fopen($ini_file, "w");
         $this->writeConfig($this->config_array,$handle);
         fclose($handle);
 
