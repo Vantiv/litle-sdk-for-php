@@ -14,6 +14,7 @@ class BatchRequestEncryptionFunctionalTest extends \PHPUnit_Framework_TestCase
     private $sftpUsername;
     private $sftpPassword;
     private $merchantId;
+    private $config_array;
 
     public function setUp()
     {
@@ -22,11 +23,17 @@ class BatchRequestEncryptionFunctionalTest extends \PHPUnit_Framework_TestCase
             mkdir($this->direct);
         }
 
+        $this->config_array =parse_ini_file('../../litle_SDK_config.ini');
+        $this->merchantId = $this->config_array['currency_merchant_map']['DEFAULT'];
+        $this->config_array['currency_merchant_map']['DEFAULT'] = $_SERVER['encMerchantId'];
+        $handle = @fopen('../../litle_SDK_config.ini', "w");
+        $this->writeConfig($this->config_array,$handle);
+        fclose($handle);
+
         $this->username = $_SERVER['encUsername'];
         $this->password = $_SERVER['encPassword'];
         $this->sftpUsername = $_SERVER['encSftpUsername'];
         $this->sftpPassword = $_SERVER['encSftpPassword'];
-        $this->merchantId = $_SERVER['encMerchantId'];
     }
 
     public function test_configuredLitleBatchRequestsManually()
@@ -54,7 +61,6 @@ class BatchRequestEncryptionFunctionalTest extends \PHPUnit_Framework_TestCase
         $config_hash = array(
             'user' => $this->username,
             'password' => $this->password,
-            'merchantId' => $this->merchantId,
             'sftp_username' => $this->sftpUsername,
             'sftp_password' => $this->sftpPassword,
             'useEncryption' => 'true',
@@ -89,7 +95,6 @@ class BatchRequestEncryptionFunctionalTest extends \PHPUnit_Framework_TestCase
             'user' => $this->username,
             'password' => $this->password,
             'sftp_username' => $this->sftpUsername,
-            'merchantId' => $this->merchantId,
             'sftp_password' => $this->sftpPassword,
             'useEncryption' => 'true',
         );
@@ -129,6 +134,11 @@ class BatchRequestEncryptionFunctionalTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
+        $this->config_array['currency_merchant_map']['DEFAULT'] = $this->merchantId;
+        $handle = @fopen('../../litle_SDK_config.ini', "w");
+        $this->writeConfig($this->config_array,$handle);
+        fclose($handle);
+
         $files = glob($this->direct . '/*'); // get all file names
         foreach ($files as $file) { // iterate files
             if (is_file($file))
@@ -136,6 +146,21 @@ class BatchRequestEncryptionFunctionalTest extends \PHPUnit_Framework_TestCase
         }
         if(file_exists($this->direct)){
             rmdir($this->direct);
+        }
+    }
+
+    function writeConfig($line,$handle)
+    {
+        foreach ($line as $keys => $values) {
+            fwrite($handle, $keys. '');
+            if (is_array($values)) {
+                foreach ($values as $key2 => $value2) {
+                    fwrite($handle,"['" . $key2 . "'] =" . $value2 .  PHP_EOL);
+                }
+            } else {
+                fwrite($handle,' =' . $values);
+                fwrite($handle, PHP_EOL);
+            }
         }
     }
 }
