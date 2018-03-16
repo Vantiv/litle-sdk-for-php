@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+==Version 11.0.3 (May 16, 2017)
+* Feature: PGP support for batches
+
 ==Version 11.0.1 (May 4, 2017)
 * Feature: update phpseclib to v2.0.4
 
