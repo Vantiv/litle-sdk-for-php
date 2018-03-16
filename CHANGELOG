@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+==Version 10.1.1 (May 16, 2017)
+* Feature: PGP support for batches
+
 ==Version 9.3.3
 Update SSL version to 6
 
