@@ -76,7 +76,10 @@ class Transactions
             'fraudFilterOverride'=> XmlFields::returnArrayValue($hash_in,'fraudFilterOverride'),
             'recurringRequest'=>XmlFields::recurringRequestType(XmlFields::returnArrayValue($hash_in,'recurringRequest')),
             'debtRepayment'=>XmlFields::returnArrayValue($hash_in,'debtRepayment'),
-            );
+            'processingType'=>XmlFields::returnArrayValue($hash_in,'processingType'),
+            'originalNetworkTransactionId'=>XmlFields::returnArrayValue($hash_in,'originalNetworkTransactionId'),
+            'originalTransactionAmount'=>XmlFields::returnArrayValue($hash_in,'originalTransactionAmount'),
+        );
 
         return $hash_out;
     }
@@ -156,7 +159,8 @@ class Transactions
             'amexAggregatorData'=>XmlFields::amexAggregatorData(XmlFields::returnArrayValue($hash_in,'amexAggregatorData')),
             'merchantData'=>(XmlFields::merchantData(XmlFields::returnArrayValue($hash_in,'merchantData'))),
             'debtRepayment'=>XmlFields::returnArrayValue($hash_in,'debtRepayment'),
-            );
+            'processingType'=>XmlFields::returnArrayValue($hash_in,'processingType'),
+        );
 
         return $hash_out;
     }
@@ -198,7 +202,10 @@ class Transactions
             'pos'=>XmlFields::pos(XmlFields::returnArrayValue($hash_in,'pos')),
             'amexAggregatorData'=>XmlFields::amexAggregatorData(XmlFields::returnArrayValue($hash_in,'amexAggregatorData')),
             'merchantData'=>(XmlFields::merchantData(XmlFields::returnArrayValue($hash_in,'merchantData'))),
-            'debtRepayment'=>XmlFields::returnArrayValue($hash_in,'debtRepayment')
+            'debtRepayment'=>XmlFields::returnArrayValue($hash_in,'debtRepayment'),
+            'processingType'=>XmlFields::returnArrayValue($hash_in,'processingType'),
+            'originalNetworkTransactionId'=>XmlFields::returnArrayValue($hash_in,'originalNetworkTransactionId'),
+            'originalTransactionAmount'=>XmlFields::returnArrayValue($hash_in,'originalTransactionAmount'),
             );
 
         return $hash_out;
