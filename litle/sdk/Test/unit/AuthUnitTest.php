@@ -547,4 +547,43 @@ class AuthUnitTest extends \PHPUnit_Framework_TestCase
     	$litleTest->authorizationRequest($hash_in);
     }
 
+    public function test_auth_with_processingType()
+    {
+        $hash_in = array(
+            'card'=>array('type'=>'VI',
+                'number'=>'4100200300011001',
+                'expDate'=>'0521',),
+            'amount'=>'4999',
+            'processingType' => 'initialRecurring');
+        $mock = $this->getMock('litle\sdk\LitleXmlMapper');
+        $mock	->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<card><type>VI.*<number>4100200300011001.*<expDate>0521.*<amount>4999.*<processingType>initialRecurring.*/'));
+
+
+        $litleTest = new LitleOnlineRequest();
+        $litleTest->newXML = $mock;
+        $litleTest->authorizationRequest($hash_in);
+    }
+
+    public function test_auth_with_originalNetworkTransactionId()
+    {
+        $hash_in = array(
+            'card'=>array('type'=>'VI',
+                'number'=>'4100200300011001',
+                'expDate'=>'0521',
+                'cardValidationNum' => '463',),
+            'amount'=>'4999',
+            'orderSource' => 'recurring',
+            'originalNetworkTransactionId' => 'Value from Net_Id1 response',);
+        $mock = $this->getMock('litle\sdk\LitleXmlMapper');
+        $mock	->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<card><type>VI.*<number>4100200300011001.*<expDate>0521.*<cardValidationNum>463.*<amount>4999.*<orderSource>recurring.*<originalNetworkTransactionId>Value from Net_Id1 response.*/'));
+
+
+        $litleTest = new LitleOnlineRequest();
+        $litleTest->newXML = $mock;
+        $litleTest->authorizationRequest($hash_in);
+    }
 }
