@@ -555,6 +555,7 @@ class AuthUnitTest extends \PHPUnit_Framework_TestCase
                 'expDate'=>'0521',),
             'orderId'=> '2111',
             'amount'=>'4999',
+            'orderSource' => 'eCommerce',
             'processingType' => 'initialRecurring');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock	->expects($this->once())
