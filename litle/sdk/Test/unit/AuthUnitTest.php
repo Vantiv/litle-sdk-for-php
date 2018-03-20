@@ -553,6 +553,7 @@ class AuthUnitTest extends \PHPUnit_Framework_TestCase
             'card'=>array('type'=>'VI',
                 'number'=>'4100200300011001',
                 'expDate'=>'0521',),
+            'orderId'=> '2111',
             'amount'=>'4999',
             'processingType' => 'initialRecurring');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
@@ -573,6 +574,7 @@ class AuthUnitTest extends \PHPUnit_Framework_TestCase
                 'number'=>'4100200300011001',
                 'expDate'=>'0521',
                 'cardValidationNum' => '463',),
+            'orderId'=> '2111',
             'amount'=>'4999',
             'orderSource' => 'recurring',
             'originalNetworkTransactionId' => 'Value from Net_Id1 response',);
