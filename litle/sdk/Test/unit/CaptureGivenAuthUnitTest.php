@@ -274,4 +274,78 @@ class CaptureGivenAuthUnitTest extends \PHPUnit_Framework_TestCase
     
     }
 
+    public function test_captureGivenAuth_with_processingType()
+    {
+        $hash_in = array(
+            'amount' => '123',
+            'orderId' => '12344',
+            'processingType' => 'initialRecurring',
+            'authInformation' => array(
+                'authDate' => '2002-10-09', 'authCode' => '543216',
+                'authAmount' => '12345'),
+            'orderSource' => 'ecommerce',
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000001',
+                'expDate' => '1210'));
+        $mock = $this->getMock('litle\sdk\LitleXmlMapper');
+        $mock->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<authInformation><authDate>2002-10-09.*<authCode>543216.*><authAmount>12345.*<processingType>initialRecurring.*/'));
+
+        $litleTest = new LitleOnlineRequest();
+        $litleTest->newXML = $mock;
+        $litleTest->captureGivenAuthRequest($hash_in);
+    }
+
+    public function test_captureGivenAuth_with_originalNetworkTransactionId()
+    {
+        $hash_in = array(
+            'amount' => '123',
+            'orderId' => '12344',
+            'originalNetworkTransactionId' => 'Value from Net_Id1 response',
+            'processingType' => 'initialRecurring',
+            'authInformation' => array(
+                'authDate' => '2002-10-09', 'authCode' => '543216',
+                'authAmount' => '12345'),
+            'orderSource' => 'recurring',
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000001',
+                'expDate' => '1210'));
+        $mock = $this->getMock('litle\sdk\LitleXmlMapper');
+        $mock->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<authInformation><authDate>2002-10-09.*<authCode>543216.*><authAmount>12345.*<originalNetworkTransactionId>Value from Net_Id1 response.*/'));
+
+        $litleTest = new LitleOnlineRequest();
+        $litleTest->newXML = $mock;
+        $litleTest->captureGivenAuthRequest($hash_in);
+    }
+
+    public function test_captureGivenAuth_with_originalTransactionAmount()
+    {
+        $hash_in = array(
+            'amount' => '123',
+            'orderId' => '12344',
+            'originalNetworkTransactionId' => 'Value from Net_Id1 response',
+            'originalTransactionAmount' => 'Some Value',
+            'processingType' => 'initialRecurring',
+            'authInformation' => array(
+                'authDate' => '2002-10-09', 'authCode' => '543216',
+                'authAmount' => '12345'),
+            'orderSource' => 'recurring',
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000001',
+                'expDate' => '1210'));
+        $mock = $this->getMock('litle\sdk\LitleXmlMapper');
+        $mock->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<authInformation><authDate>2002-10-09.*<authCode>543216.*><authAmount>12345.*<originalNetworkTransactionId>Value from Net_Id1 response.*<originalTransactionAmount>Some Value.*/'));
+
+        $litleTest = new LitleOnlineRequest();
+        $litleTest->newXML = $mock;
+        $litleTest->captureGivenAuthRequest($hash_in);
+    }
 }

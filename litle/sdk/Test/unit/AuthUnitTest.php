@@ -560,7 +560,7 @@ class AuthUnitTest extends \PHPUnit_Framework_TestCase
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock	->expects($this->once())
             ->method('request')
-            ->with($this->matchesRegularExpression('/.*<card><type>VI.*<number>4100200300011001.*<expDate>0521.*<amount>4999.*<processingType>initialRecurring.*/'));
+            ->with($this->matchesRegularExpression('/.*<orderId>2111.*<amount>4999.*<orderSource>eCommerce.*<card><type>VI.*<number>4100200300011001.*<expDate>0521.*<processingType>initialRecurring.*/'));
 
 
         $litleTest = new LitleOnlineRequest();
@@ -582,7 +582,30 @@ class AuthUnitTest extends \PHPUnit_Framework_TestCase
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock	->expects($this->once())
             ->method('request')
-            ->with($this->matchesRegularExpression('/.*<card><type>VI.*<number>4100200300011001.*<expDate>0521.*<cardValidationNum>463.*<amount>4999.*<orderSource>recurring.*<originalNetworkTransactionId>Value from Net_Id1 response.*/'));
+            ->with($this->matchesRegularExpression('/.*<orderId>2111.*<amount>4999.*<orderSource>recurring.*<card><type>VI.*<number>4100200300011001.*<expDate>0521.*<cardValidationNum>463.*<originalNetworkTransactionId>Value from Net_Id1 response.*/'));
+
+
+        $litleTest = new LitleOnlineRequest();
+        $litleTest->newXML = $mock;
+        $litleTest->authorizationRequest($hash_in);
+    }
+
+    public function test_auth_with_originalTransactionAmount()
+    {
+        $hash_in = array(
+            'card'=>array('type'=>'VI',
+                'number'=>'4100200300011001',
+                'expDate'=>'0521',
+                'cardValidationNum' => '463',),
+            'orderId'=> '2111',
+            'amount'=>'4999',
+            'orderSource' => 'recurring',
+            'originalNetworkTransactionId' => 'Value from Net_Id1 response',
+            'originalTransactionAmount' => 'Some Value',);
+        $mock = $this->getMock('litle\sdk\LitleXmlMapper');
+        $mock	->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<orderId>2111.*<amount>4999.*<orderSource>recurring.*<card><type>VI.*<number>4100200300011001.*<expDate>0521.*<cardValidationNum>463.*<originalNetworkTransactionId>Value from Net_Id1 response.*<originalTransactionAmount>Some Value.*/'));
 
 
         $litleTest = new LitleOnlineRequest();

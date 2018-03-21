@@ -571,4 +571,70 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
     	$litleTest->newXML = $mock;
     	$litleTest->saleRequest($hash_in);
     }
+
+    public function test_sale_with_processingType()
+    {
+        $hash_in = array(
+            'card'=>array('type'=>'VI',
+                'number'=>'4100200300011001',
+                'expDate'=>'0521',),
+            'orderId'=> '2111',
+            'amount'=>'4999',
+            'orderSource' => 'eCommerce',
+            'processingType' => 'initialRecurring');
+        $mock = $this->getMock('litle\sdk\LitleXmlMapper');
+        $mock	->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<orderId>2111.*<amount>4999.*<orderSource>eCommerce.*<card><type>VI.*<number>4100200300011001.*<expDate>0521.*<processingType>initialRecurring.*/'));
+
+
+        $litleTest = new LitleOnlineRequest();
+        $litleTest->newXML = $mock;
+        $litleTest->saleRequest($hash_in);
+    }
+
+    public function test_sale_with_originalNetworkTransactionId()
+    {
+        $hash_in = array(
+            'card'=>array('type'=>'VI',
+                'number'=>'4100200300011001',
+                'expDate'=>'0521',
+                'cardValidationNum' => '463',),
+            'orderId'=> '2111',
+            'amount'=>'4999',
+            'orderSource' => 'recurring',
+            'originalNetworkTransactionId' => 'Value from Net_Id1 response',);
+        $mock = $this->getMock('litle\sdk\LitleXmlMapper');
+        $mock	->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<orderId>2111.*<amount>4999.*<orderSource>recurring.*<card><type>VI.*<number>4100200300011001.*<expDate>0521.*<cardValidationNum>463.*<originalNetworkTransactionId>Value from Net_Id1 response.*/'));
+
+
+        $litleTest = new LitleOnlineRequest();
+        $litleTest->newXML = $mock;
+        $litleTest->saleRequest($hash_in);
+    }
+
+    public function test_sale_with_originalTransactionAmount()
+    {
+        $hash_in = array(
+            'card'=>array('type'=>'VI',
+                'number'=>'4100200300011001',
+                'expDate'=>'0521',
+                'cardValidationNum' => '463',),
+            'orderId'=> '2111',
+            'amount'=>'4999',
+            'orderSource' => 'recurring',
+            'originalNetworkTransactionId' => 'Value from Net_Id1 response',
+            'originalTransactionAmount' => 'Some Value',);
+        $mock = $this->getMock('litle\sdk\LitleXmlMapper');
+        $mock	->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<orderId>2111.*<amount>4999.*<orderSource>recurring.*<card><type>VI.*<number>4100200300011001.*<expDate>0521.*<cardValidationNum>463.*<originalNetworkTransactionId>Value from Net_Id1 response.*<originalTransactionAmount>Some Value.*/'));
+
+
+        $litleTest = new LitleOnlineRequest();
+        $litleTest->newXML = $mock;
+        $litleTest->saleRequest($hash_in);
+    }
 }
