@@ -580,12 +580,12 @@ class SaleUnitTest extends \PHPUnit_Framework_TestCase
                 'expDate'=>'0521',),
             'orderId'=> '2111',
             'amount'=>'4999',
-            'orderSource' => 'eCommerce',
+            'orderSource' => 'ecommerce',
             'processingType' => 'initialRecurring');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock	->expects($this->once())
             ->method('request')
-            ->with($this->matchesRegularExpression('/.*<orderId>2111.*<amount>4999.*<orderSource>eCommerce.*<card><type>VI.*<number>4100200300011001.*<expDate>0521.*<processingType>initialRecurring.*/'));
+            ->with($this->matchesRegularExpression('/.*<orderId>2111.*<amount>4999.*<orderSource>ecommerce.*<card><type>VI.*<number>4100200300011001.*<expDate>0521.*<processingType>initialRecurring.*/'));
 
 
         $litleTest = new LitleOnlineRequest();

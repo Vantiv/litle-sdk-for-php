@@ -25,7 +25,7 @@
 namespace litle\sdk\Test\functional;
 use litle\sdk\LitleOnlineRequest;
 use litle\sdk\XmlParser;
-class SaleFunctionalTest extends \PHPUnit_Framework_TestCase
+class aaaaSaleFunctionalTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple_sale_with_card()
     {
@@ -195,5 +195,65 @@ class SaleFunctionalTest extends \PHPUnit_Framework_TestCase
     	$saleResponse = $initialize->saleRequest($hash_in);
     	$response = XmlParser::getNode($saleResponse,'response');
     	$this->assertEquals('110',$response);
+    }
+
+    public function test_sale_with_processingType()
+    {
+        echo('hello');
+        $hash_in = array(
+            'card'=>array('type'=>'VI',
+                'number'=>'4100200300011001',
+                'expDate'=>'0521',),
+            'orderId'=> '2111',
+            'amount'=>'4999',
+            'orderSource' => 'ecommerce',
+            'processingType' => 'initialRecurring');
+
+        $initilaize = new LitleOnlineRequest();
+        $saleResponse = $initilaize->saleRequest($hash_in);
+        $response = XmlParser::getNode($saleResponse,'response');
+        $this->assertEquals('000',$response);
+        $message = XmlParser::getNode($saleResponse,'message');
+        $this->assertEquals('Approved',$message);
+        $networkTransactionId = XmlParser::getNode($saleResponse,'networkTransactionId');
+        $this->assertNotNull($networkTransactionId);
+    }
+
+    public function test_sale_with_originalNetworkTransactionId()
+    {
+        $hash_in = array(
+            'card'=>array('type'=>'VI',
+                'number'=>'4100200300011001',
+                'expDate'=>'0521',
+                'cardValidationNum' => '463',),
+            'orderId'=> '2111',
+            'amount'=>'4999',
+            'orderSource' => 'recurring',
+            'originalNetworkTransactionId' => 'Value from Net_Id1 response',);
+
+        $initilaize = new LitleOnlineRequest();
+        $saleResponse = $initilaize->saleRequest($hash_in);
+        $response = XmlParser::getNode($saleResponse,'response');
+        $this->assertEquals('000', $response);
+    }
+
+    public function test_sale_with_originalTransactionAmount()
+    {
+        $hash_in = array(
+            'card' => array('type' => 'VI',
+                'number' => '4100200300011001',
+                'expDate' => '0521',
+                'cardValidationNum' => '463',),
+            'orderId' => '2111',
+            'amount' => '4999',
+            'orderSource' => 'recurring',
+            'originalNetworkTransactionId' => 'Value from Net_Id1 response',
+            'originalTransactionAmount' => '4999',);
+
+        $initilaize = new LitleOnlineRequest();
+        $saleResponse = $initilaize->saleRequest($hash_in);
+        $response = XmlParser::getNode($saleResponse, 'response');
+        $this->assertEquals('000', $response);
+        $this->assertEquals(0,1);
     }
 }
