@@ -202,7 +202,7 @@ class aaaaSaleFunctionalTest extends \PHPUnit_Framework_TestCase
         echo('hello');
         $hash_in = array(
             'card'=>array('type'=>'VI',
-                'number'=>'4100200300011001',
+                'number'=>'4100200300011000',
                 'expDate'=>'0521',),
             'orderId'=> '2111',
             'amount'=>'4999',
@@ -254,6 +254,5 @@ class aaaaSaleFunctionalTest extends \PHPUnit_Framework_TestCase
         $saleResponse = $initilaize->saleRequest($hash_in);
         $response = XmlParser::getNode($saleResponse, 'response');
         $this->assertEquals('000', $response);
-        $this->assertEquals(0,1);
     }
 }
