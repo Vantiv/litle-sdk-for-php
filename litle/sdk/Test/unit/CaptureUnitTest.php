@@ -22,17 +22,20 @@
 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 * OTHER DEALINGS IN THE SOFTWARE.
 */
+
 namespace litle\sdk\Test\unit;
+
 use litle\sdk\LitleOnlineRequest;
+
 class CaptureUnitTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple_capture()
     {
-        $hash_in = array('litleTxnId'=> '12312312', 'amount'=>'123');
+        $hash_in = array('litleTxnId' => '12312312', 'amount' => '123');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*<litleTxnId>12312312.*<amount>123.*/'));
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<litleTxnId>12312312.*<amount>123.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -41,23 +44,23 @@ class CaptureUnitTest extends \PHPUnit_Framework_TestCase
 
     public function test_no_txnid()
     {
-        $hash_in =array('reportGroup'=>'Planets','amount'=>'106');
+        $hash_in = array('reportGroup' => 'Planets', 'amount' => '106');
         $litleTest = new LitleOnlineRequest();
-        $this->setExpectedException('InvalidArgumentException','Missing Required Field: /litleTxnId/');
+        $this->setExpectedException('InvalidArgumentException', 'Missing Required Field: /litleTxnId/');
         $litleTest->captureRequest($hash_in);
     }
 
     public function test_loggedInUser()
     {
         $hash_in = array(
-                'litleTxnId'=> '12312312',
-                'merchantSdk'=>'PHP;8.14.0',
-                'amount'=>'123',
-                'loggedInUser'=>'gdake');
+            'litleTxnId' => '12312312',
+            'merchantSdk' => 'PHP;8.14.0',
+            'amount' => '123',
+            'loggedInUser' => 'gdake');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*merchantSdk="PHP;8.14.0".*loggedInUser="gdake" xmlns=.*>.*/'));
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*merchantSdk="PHP;8.14.0".*loggedInUser="gdake" xmlns=.*>.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -67,10 +70,10 @@ class CaptureUnitTest extends \PHPUnit_Framework_TestCase
     public function test_surchargeAmount()
     {
         $hash_in = array(
-            'litleTxnId'=>'3',
-            'amount'=>'2',
-            'surchargeAmount'=>'1',
-            'payPalNotes'=>'notes',
+            'litleTxnId' => '3',
+            'amount' => '2',
+            'surchargeAmount' => '1',
+            'payPalNotes' => 'notes',
         );
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock
@@ -86,15 +89,15 @@ class CaptureUnitTest extends \PHPUnit_Framework_TestCase
     public function test_surchargeAmount_optional()
     {
         $hash_in = array(
-                'litleTxnId'=>'3',
-                'amount'=>'2',
-                'payPalNotes'=>'notes',
+            'litleTxnId' => '3',
+            'amount' => '2',
+            'payPalNotes' => 'notes',
         );
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock
-        ->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*<amount>2<\/amount><payPalNotes>notes<\/payPalNotes>.*/'));
+            ->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<amount>2<\/amount><payPalNotes>notes<\/payPalNotes>.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;

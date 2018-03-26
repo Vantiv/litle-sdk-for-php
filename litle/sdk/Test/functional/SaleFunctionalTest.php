@@ -22,218 +22,222 @@
 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 * OTHER DEALINGS IN THE SOFTWARE.
 */
+
 namespace litle\sdk\Test\functional;
+
 use litle\sdk\LitleOnlineRequest;
 use litle\sdk\XmlParser;
+
 class aaaaSaleFunctionalTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple_sale_with_card()
     {
         $hash_in = array(
-            'card'=>array('type'=>'VI',
-                    'number'=>'4100000000000000',
-                    'expDate'=>'1213',
-                    'cardValidationNum' => '1213'),
-            'id'=>'1211',
-            'orderId'=> '2111',
-            'reportGroup'=>'Planets',
-            'orderSource'=>'ecommerce',
-            'amount'=>'123');
+            'card' => array('type' => 'VI',
+                'number' => '4100000000000000',
+                'expDate' => '1213',
+                'cardValidationNum' => '1213'),
+            'id' => '1211',
+            'orderId' => '2111',
+            'reportGroup' => 'Planets',
+            'orderSource' => 'ecommerce',
+            'amount' => '123');
 
         $initialize = new LitleOnlineRequest();
         $saleResponse = $initialize->saleRequest($hash_in);
-        $response = XmlParser::getNode($saleResponse,'response');
-        $this->assertEquals('000',$response);
+        $response = XmlParser::getNode($saleResponse, 'response');
+        $this->assertEquals('000', $response);
     }
 
     public function test_simple_sale_with_paypal()
     {
         $hash_in = array(
-                'paypal'=>array("payerId"=>'123',"token"=>'12321312',
+            'paypal' => array("payerId" => '123', "token" => '12321312',
                 "transactionId" => '123123'),
-                'id'=>'1211',
-                'orderId'=> '2111',
-                'reportGroup'=>'Planets',
-                'orderSource'=>'ecommerce',
-                'amount'=>'123');
+            'id' => '1211',
+            'orderId' => '2111',
+            'reportGroup' => 'Planets',
+            'orderSource' => 'ecommerce',
+            'amount' => '123');
 
         $initialize = new LitleOnlineRequest();
         $saleResponse = $initialize->saleRequest($hash_in);
-        $response = XmlParser::getNode($saleResponse,'response');
-        $this->assertEquals('000',$response);
+        $response = XmlParser::getNode($saleResponse, 'response');
+        $this->assertEquals('000', $response);
     }
 
     public function test_illegal_orderSource()
     {
         $hash_in = array(
-                            'paypal'=>array("payerId"=>'123',"token"=>'12321312',
-                            "transactionId" => '123123'),
-                            'id'=>'1211',
-                            'orderId'=> '2111',
-                            'reportGroup'=>'Planets',
-                            'orderSource'=>'notecommerce',
-                            'amount'=>'123');
+            'paypal' => array("payerId" => '123', "token" => '12321312',
+                "transactionId" => '123123'),
+            'id' => '1211',
+            'orderId' => '2111',
+            'reportGroup' => 'Planets',
+            'orderSource' => 'notecommerce',
+            'amount' => '123');
         $initialize = new LitleOnlineRequest();
         $saleResponse = $initialize->saleRequest($hash_in);
-        $message= XmlParser::getAttribute($saleResponse,'litleOnlineResponse','message');
-        $this->assertRegExp('/Error validating xml data against the schema/',$message);
+        $message = XmlParser::getAttribute($saleResponse, 'litleOnlineResponse', 'message');
+        $this->assertRegExp('/Error validating xml data against the schema/', $message);
     }
 
     public function test_illegal_card_type()
     {
         $hash_in = array(
-                'card'=>array('type'=>'DK',
-                        'number'=>'4100000000000000',
-                        'expDate'=>'1213',
-                        'cardValidationNum' => '1213'),
-                'id'=>'1211',
-                'orderId'=> '2111',
-                'reportGroup'=>'Planets',
-                'orderSource'=>'ecommerce',
-                'amount'=>'123');
+            'card' => array('type' => 'DK',
+                'number' => '4100000000000000',
+                'expDate' => '1213',
+                'cardValidationNum' => '1213'),
+            'id' => '1211',
+            'orderId' => '2111',
+            'reportGroup' => 'Planets',
+            'orderSource' => 'ecommerce',
+            'amount' => '123');
 
         $initialize = new LitleOnlineRequest();
         $saleResponse = $initialize->saleRequest($hash_in);
-        $message= XmlParser::getAttribute($saleResponse,'litleOnlineResponse','message');
-        $this->assertRegExp('/Error validating xml data against the schema/',$message);
+        $message = XmlParser::getAttribute($saleResponse, 'litleOnlineResponse', 'message');
+        $this->assertRegExp('/Error validating xml data against the schema/', $message);
     }
+
     public function no_reportGroup()
     {
         $hash_in = array(
-                    'card'=>array('type'=>'VI',
-                            'number'=>'4100000000000000',
-                            'expDate'=>'1213',
-                            'cardValidationNum' => '1213'),
-                    'id'=>'1211',
-                    'orderId'=> '2111',
-                    'reportGroup'=>'Planets',
-                    'orderSource'=>'ecommerce',
-                    'amount'=>'123');
+            'card' => array('type' => 'VI',
+                'number' => '4100000000000000',
+                'expDate' => '1213',
+                'cardValidationNum' => '1213'),
+            'id' => '1211',
+            'orderId' => '2111',
+            'reportGroup' => 'Planets',
+            'orderSource' => 'ecommerce',
+            'amount' => '123');
 
         $initialize = new LitleOnlineRequest();
         $saleResponse = $initialize->saleRequest($hash_in);
-        $response = XmlParser::getNode($saleResponse,'response');
-        $this->assertEquals('000',$response);
+        $response = XmlParser::getNode($saleResponse, 'response');
+        $this->assertEquals('000', $response);
     }
 
     public function test_fields_out_of_order()
     {
         $hash_in = array(
-                        'paypal'=>array("payerId"=>'123',"token"=>'12321312',
-                        "transactionId" => '123123'),
-                        'id'=>'1211',
-                        'orderId'=> '2111',
-                        'reportGroup'=>'Planets',
-                        'orderSource'=>'ecommerce',
-                        'amount'=>'123');
+            'paypal' => array("payerId" => '123', "token" => '12321312',
+                "transactionId" => '123123'),
+            'id' => '1211',
+            'orderId' => '2111',
+            'reportGroup' => 'Planets',
+            'orderSource' => 'ecommerce',
+            'amount' => '123');
 
         $initialize = new LitleOnlineRequest();
         $saleResponse = $initialize->saleRequest($hash_in);
-        $response = XmlParser::getNode($saleResponse,'response');
-        $this->assertEquals('000',$response);
+        $response = XmlParser::getNode($saleResponse, 'response');
+        $this->assertEquals('000', $response);
     }
 
     public function test_invalid_field()
     {
         $hash_in = array(
-                            'paypal'=>array("payerId"=>'123',"token"=>'12321312',
-                            "transactionId" => '123123'),
-                            'id'=>'1211',
-                            'orderId'=> '2111',
-                            'nonexistant'=>'novalue',
-                            'reportGroup'=>'Planets',
-                            'orderSource'=>'ecommerce',
-                            'amount'=>'123');
+            'paypal' => array("payerId" => '123', "token" => '12321312',
+                "transactionId" => '123123'),
+            'id' => '1211',
+            'orderId' => '2111',
+            'nonexistant' => 'novalue',
+            'reportGroup' => 'Planets',
+            'orderSource' => 'ecommerce',
+            'amount' => '123');
 
         $initialize = new LitleOnlineRequest();
         $saleResponse = $initialize->saleRequest($hash_in);
-        $message = XmlParser::getNode($saleResponse,'message');
-        $this->assertEquals('Approved',$message);
+        $message = XmlParser::getNode($saleResponse, 'message');
+        $this->assertEquals('Approved', $message);
     }
-    
+
     public function test_simple_sale_with_applepay()
     {
-    	$hash_in = array(
-    			'applepay'=>array(
-    					'data'=>'string data here',
-    					'header'=> array('applicationData' => '454657413164',
-    							'ephemeralPublicKey' => '1',
-    							'publicKeyHash' => '1234',
-    							'transactionId' => '12345'),
-    					'signature'=>'signature',
-    					'version' => 'version 1'),
-    			'id'=>'1211',
-    			'orderId'=> '2111',
-    			'reportGroup'=>'Planets',
-    			'orderSource'=>'ecommerce',
-    			'amount'=>'123');
+        $hash_in = array(
+            'applepay' => array(
+                'data' => 'string data here',
+                'header' => array('applicationData' => '454657413164',
+                    'ephemeralPublicKey' => '1',
+                    'publicKeyHash' => '1234',
+                    'transactionId' => '12345'),
+                'signature' => 'signature',
+                'version' => 'version 1'),
+            'id' => '1211',
+            'orderId' => '2111',
+            'reportGroup' => 'Planets',
+            'orderSource' => 'ecommerce',
+            'amount' => '123');
 
         $initialize = new LitleOnlineRequest();
-    	$saleResponse = $initialize->saleRequest($hash_in);
-    	$response = XmlParser::getNode($saleResponse,'response');
-    	$this->assertEquals('000',$response);
+        $saleResponse = $initialize->saleRequest($hash_in);
+        $response = XmlParser::getNode($saleResponse, 'response');
+        $this->assertEquals('000', $response);
     }
-    
+
     public function test_simple_sale_with_applepay_insufficient_funds()
     {
-    	$hash_in = array(
-    			'applepay'=>array(
-    					'data'=>'string data here',
-    					'header'=> array('applicationData' => '454657413164',
-    							'ephemeralPublicKey' => '1',
-    							'publicKeyHash' => '1234',
-    							'transactionId' => '12345'),
-    					'signature'=>'signature',
-    					'version' => 'version 1'),
-    			'id'=>'1211',
-    			'orderId'=> '2111',
-    			'reportGroup'=>'Planets',
-    			'orderSource'=>'ecommerce',
-    			'amount'=>'1110');
+        $hash_in = array(
+            'applepay' => array(
+                'data' => 'string data here',
+                'header' => array('applicationData' => '454657413164',
+                    'ephemeralPublicKey' => '1',
+                    'publicKeyHash' => '1234',
+                    'transactionId' => '12345'),
+                'signature' => 'signature',
+                'version' => 'version 1'),
+            'id' => '1211',
+            'orderId' => '2111',
+            'reportGroup' => 'Planets',
+            'orderSource' => 'ecommerce',
+            'amount' => '1110');
 
         $initialize = new LitleOnlineRequest();
-    	$saleResponse = $initialize->saleRequest($hash_in);
-    	$response = XmlParser::getNode($saleResponse,'response');
-    	$this->assertEquals('110',$response);
+        $saleResponse = $initialize->saleRequest($hash_in);
+        $response = XmlParser::getNode($saleResponse, 'response');
+        $this->assertEquals('110', $response);
     }
 
     public function test_sale_with_processingType()
     {
         echo('hello');
         $hash_in = array(
-            'card'=>array('type'=>'VI',
-                'number'=>'4100200300011000',
-                'expDate'=>'0521',),
-            'orderId'=> '2111',
-            'amount'=>'4999',
+            'card' => array('type' => 'VI',
+                'number' => '4100200300011000',
+                'expDate' => '0521',),
+            'orderId' => '2111',
+            'amount' => '4999',
             'orderSource' => 'ecommerce',
             'processingType' => 'initialRecurring');
 
         $initilaize = new LitleOnlineRequest();
         $saleResponse = $initilaize->saleRequest($hash_in);
-        $response = XmlParser::getNode($saleResponse,'response');
-        $this->assertEquals('000',$response);
-        $message = XmlParser::getNode($saleResponse,'message');
-        $this->assertEquals('Approved',$message);
-        $networkTransactionId = XmlParser::getNode($saleResponse,'networkTransactionId');
+        $response = XmlParser::getNode($saleResponse, 'response');
+        $this->assertEquals('000', $response);
+        $message = XmlParser::getNode($saleResponse, 'message');
+        $this->assertEquals('Approved', $message);
+        $networkTransactionId = XmlParser::getNode($saleResponse, 'networkTransactionId');
         $this->assertNotNull($networkTransactionId);
     }
 
     public function test_sale_with_originalNetworkTransactionId()
     {
         $hash_in = array(
-            'card'=>array('type'=>'VI',
-                'number'=>'4100200300011001',
-                'expDate'=>'0521',
+            'card' => array('type' => 'VI',
+                'number' => '4100200300011001',
+                'expDate' => '0521',
                 'cardValidationNum' => '463',),
-            'orderId'=> '2111',
-            'amount'=>'4999',
+            'orderId' => '2111',
+            'amount' => '4999',
             'orderSource' => 'recurring',
             'originalNetworkTransactionId' => 'Value from Net_Id1 response',);
 
         $initilaize = new LitleOnlineRequest();
         $saleResponse = $initilaize->saleRequest($hash_in);
-        $response = XmlParser::getNode($saleResponse,'response');
+        $response = XmlParser::getNode($saleResponse, 'response');
         $this->assertEquals('000', $response);
     }
 

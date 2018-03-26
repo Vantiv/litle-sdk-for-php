@@ -22,27 +22,30 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
+
 namespace litle\sdk\Test\unit;
+
 use litle\sdk\LitleOnlineRequest;
+
 class CreatePlanUnitTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple()
     {
         $hash_in = array(
-            'planCode'=>'1',
-            'name'=> '2',
-            'description'=>'3',
-            'intervalType'=>'MONTHLY',
-            'amount'=>'1000',
-            'numberOfPayments'=>'5',
-            'trialNumberOfIntervals'=>'6',
-            'trialIntervalType'=>'WEEKLY',
-            'active'=>'true'
+            'planCode' => '1',
+            'name' => '2',
+            'description' => '3',
+            'intervalType' => 'MONTHLY',
+            'amount' => '1000',
+            'numberOfPayments' => '5',
+            'trialNumberOfIntervals' => '6',
+            'trialIntervalType' => 'WEEKLY',
+            'active' => 'true'
         );
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*planCode.*1.*name.*2.*description.*3.*intervalType.*MONTHLY.*amount.*1000.*numberOfPayments.*5.*trialNumberOfIntervals.*6.*trialIntervalType.*WEEKLY.*active.*true.*/'));
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*planCode.*1.*name.*2.*description.*3.*intervalType.*MONTHLY.*amount.*1000.*numberOfPayments.*5.*trialNumberOfIntervals.*6.*trialIntervalType.*WEEKLY.*active.*true.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -52,19 +55,19 @@ class CreatePlanUnitTest extends \PHPUnit_Framework_TestCase
     public function test_DescriptionIsOptional()
     {
         $hash_in = array(
-            'planCode'=>'1',
-            'name'=> '2',
-            'intervalType'=>'MONTHLY',
-            'amount'=>'1000',
-            'numberOfPayments'=>'5',
-            'trialNumberOfIntervals'=>'6',
-            'trialIntervalType'=>'WEEKLY',
-            'active'=>'true'
+            'planCode' => '1',
+            'name' => '2',
+            'intervalType' => 'MONTHLY',
+            'amount' => '1000',
+            'numberOfPayments' => '5',
+            'trialNumberOfIntervals' => '6',
+            'trialIntervalType' => 'WEEKLY',
+            'active' => 'true'
         );
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->logicalNot($this->matchesRegularExpression('/.*description.*/')));
+            ->method('request')
+            ->with($this->logicalNot($this->matchesRegularExpression('/.*description.*/')));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -74,18 +77,18 @@ class CreatePlanUnitTest extends \PHPUnit_Framework_TestCase
     public function test_NumberOfPaymentsIsOptional()
     {
         $hash_in = array(
-            'planCode'=>'1',
-            'name'=> '2',
-            'intervalType'=>'MONTHLY',
-            'amount'=>'1000',
-            'trialNumberOfIntervals'=>'6',
-            'trialIntervalType'=>'WEEKLY',
-            'active'=>'true'
+            'planCode' => '1',
+            'name' => '2',
+            'intervalType' => 'MONTHLY',
+            'amount' => '1000',
+            'trialNumberOfIntervals' => '6',
+            'trialIntervalType' => 'WEEKLY',
+            'active' => 'true'
         );
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->logicalNot($this->matchesRegularExpression('/.*numberOfPayments.*/')));
+            ->method('request')
+            ->with($this->logicalNot($this->matchesRegularExpression('/.*numberOfPayments.*/')));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -95,18 +98,18 @@ class CreatePlanUnitTest extends \PHPUnit_Framework_TestCase
     public function test_TrialNumberOfIntervalsIsOptional()
     {
         $hash_in = array(
-            'planCode'=>'1',
-            'name'=> '2',
-            'intervalType'=>'MONTHLY',
-            'amount'=>'1000',
-            'numberOfPayments'=>'5',
-            'trialIntervalType'=>'WEEKLY',
-            'active'=>'true'
+            'planCode' => '1',
+            'name' => '2',
+            'intervalType' => 'MONTHLY',
+            'amount' => '1000',
+            'numberOfPayments' => '5',
+            'trialIntervalType' => 'WEEKLY',
+            'active' => 'true'
         );
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->logicalNot($this->matchesRegularExpression('/.*trialNumberOfIntervals.*/')));
+            ->method('request')
+            ->with($this->logicalNot($this->matchesRegularExpression('/.*trialNumberOfIntervals.*/')));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -116,18 +119,18 @@ class CreatePlanUnitTest extends \PHPUnit_Framework_TestCase
     public function test_TrialIntervalTypeIsOptional()
     {
         $hash_in = array(
-            'planCode'=>'1',
-            'name'=> '2',
-            'intervalType'=>'MONTHLY',
-            'amount'=>'1000',
-            'numberOfPayments'=>'5',
-            'trialNumberOfIntervals'=>'6',
-            'active'=>'true'
+            'planCode' => '1',
+            'name' => '2',
+            'intervalType' => 'MONTHLY',
+            'amount' => '1000',
+            'numberOfPayments' => '5',
+            'trialNumberOfIntervals' => '6',
+            'active' => 'true'
         );
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->logicalNot($this->matchesRegularExpression('/.*trialIntervalType.*/')));
+            ->method('request')
+            ->with($this->logicalNot($this->matchesRegularExpression('/.*trialIntervalType.*/')));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -137,18 +140,18 @@ class CreatePlanUnitTest extends \PHPUnit_Framework_TestCase
     public function test_ActiveIsOptional()
     {
         $hash_in = array(
-            'planCode'=>'1',
-            'name'=> '2',
-            'intervalType'=>'MONTHLY',
-            'amount'=>'1000',
-            'numberOfPayments'=>'5',
-            'trialNumberOfIntervals'=>'6',
-            'trialIntervalType'=>'WEEKLY'
+            'planCode' => '1',
+            'name' => '2',
+            'intervalType' => 'MONTHLY',
+            'amount' => '1000',
+            'numberOfPayments' => '5',
+            'trialNumberOfIntervals' => '6',
+            'trialIntervalType' => 'WEEKLY'
         );
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->logicalNot($this->matchesRegularExpression('/.*active.*/')));
+            ->method('request')
+            ->with($this->logicalNot($this->matchesRegularExpression('/.*active.*/')));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;

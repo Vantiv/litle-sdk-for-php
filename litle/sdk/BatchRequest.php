@@ -1,4 +1,5 @@
 <?php
+
 namespace litle\sdk;
 class BatchRequest
 {
@@ -18,7 +19,7 @@ class BatchRequest
         return $this->total_txns >= MAX_TXNS_PER_BATCH;
     }
 
-    public function __construct($request_dir=NULL)
+    public function __construct($request_dir = NULL)
     {
         // initialize the counts and amounts
 
@@ -148,8 +149,8 @@ class BatchRequest
     {
         $hash_out = Transactions::createSaleHash($hash_in);
 
-        $choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
-        $choice2_hash= array($hash_out['fraudCheck'],$hash_out['cardholderAuthentication']);
+        $choice_hash = array($hash_out['card'], $hash_out['paypal'], $hash_out['token'], $hash_out['paypage']);
+        $choice2_hash = array($hash_out['fraudCheck'], $hash_out['cardholderAuthentication']);
 
         $this->addTransaction($hash_out, $hash_in, 'sale', $choice_hash, $choice2_hash);
         $this->counts_and_amounts['sale']['count'] += 1;
@@ -160,7 +161,7 @@ class BatchRequest
     {
         $hash_out = Transactions::createAuthHash($hash_in);
 
-        $choice_hash = array(XmlFields::returnArrayValue($hash_out,'card'),XmlFields::returnArrayValue($hash_out,'paypal'),XmlFields::returnArrayValue($hash_out,'token'),XmlFields::returnArrayValue($hash_out,'paypage'));
+        $choice_hash = array(XmlFields::returnArrayValue($hash_out, 'card'), XmlFields::returnArrayValue($hash_out, 'paypal'), XmlFields::returnArrayValue($hash_out, 'token'), XmlFields::returnArrayValue($hash_out, 'paypage'));
 
         $this->addTransaction($hash_out, $hash_in, 'authorization', $choice_hash);
         $this->counts_and_amounts['auth']['count'] += 1;
@@ -171,7 +172,7 @@ class BatchRequest
     {
         $hash_out = Transactions::createAuthReversalHash($hash_in);
 
-        $this->addTransaction($hash_out,$hash_in,'authReversal');
+        $this->addTransaction($hash_out, $hash_in, 'authReversal');
         $this->counts_and_amounts['authReversal']['count'] += 1;
         $this->counts_and_amounts['authReversal']['amount'] += $hash_out['amount'];
     }
@@ -180,9 +181,9 @@ class BatchRequest
     {
         $hash_out = Transactions::createCreditHash($hash_in);
 
-        $choice_hash = array($hash_out['card'],$hash_out['paypal'],$hash_out['token'],$hash_out['paypage']);
+        $choice_hash = array($hash_out['card'], $hash_out['paypal'], $hash_out['token'], $hash_out['paypage']);
 
-        $this->addTransaction($hash_out,$hash_in,'credit',$choice_hash);
+        $this->addTransaction($hash_out, $hash_in, 'credit', $choice_hash);
         $this->counts_and_amounts['credit']['count'] += 1;
         $this->counts_and_amounts['credit']['amount'] += $hash_out['amount'];
     }
@@ -191,9 +192,9 @@ class BatchRequest
     {
         $hash_out = Transactions::createRegisterTokenHash($hash_in);
 
-        $choice_hash = array($hash_out['accountNumber'],$hash_out['echeckForToken'],$hash_out['paypageRegistrationId']);
+        $choice_hash = array($hash_out['accountNumber'], $hash_out['echeckForToken'], $hash_out['paypageRegistrationId']);
 
-        $this->addTransaction($hash_out,$hash_in,'registerTokenRequest',$choice_hash);
+        $this->addTransaction($hash_out, $hash_in, 'registerTokenRequest', $choice_hash);
         $this->counts_and_amounts['tokenRegistration']['count'] += 1;
     }
 
@@ -201,9 +202,9 @@ class BatchRequest
     {
         $hash_out = Transactions::createForceCaptureHash($hash_in);
 
-        $choice_hash = array(XmlFields::returnArrayValue($hash_out,'card'),XmlFields::returnArrayValue($hash_out,'paypal'),XmlFields::returnArrayValue($hash_out,'token'),XmlFields::returnArrayValue($hash_out,'paypage'));
+        $choice_hash = array(XmlFields::returnArrayValue($hash_out, 'card'), XmlFields::returnArrayValue($hash_out, 'paypal'), XmlFields::returnArrayValue($hash_out, 'token'), XmlFields::returnArrayValue($hash_out, 'paypage'));
 
-        $this->addTransaction($hash_out,$hash_in,'forceCapture',$choice_hash);
+        $this->addTransaction($hash_out, $hash_in, 'forceCapture', $choice_hash);
         $this->counts_and_amounts['forceCapture']['count'] += 1;
         $this->counts_and_amounts['forceCapture']['amount'] += $hash_out['amount'];
 
@@ -213,7 +214,7 @@ class BatchRequest
     {
         $hash_out = Transactions::createCaptureHash($hash_in);
 
-        $this->addTransaction($hash_out,$hash_in,'capture');
+        $this->addTransaction($hash_out, $hash_in, 'capture');
         $this->counts_and_amounts['capture']['count'] += 1;
         $this->counts_and_amounts['capture']['amount'] += $hash_out['amount'];
 
@@ -223,9 +224,9 @@ class BatchRequest
     {
         $hash_out = Transactions::createCaptureGivenAuthHash($hash_in);
 
-        $choice_hash = array($hash_out['card'],$hash_out['token'],$hash_out['paypage']);
+        $choice_hash = array($hash_out['card'], $hash_out['token'], $hash_out['paypage']);
 
-        $this->addTransaction($hash_out,$hash_in,'captureGivenAuth',$choice_hash);
+        $this->addTransaction($hash_out, $hash_in, 'captureGivenAuth', $choice_hash);
         $this->counts_and_amounts['captureGivenAuth']['count'] += 1;
         $this->counts_and_amounts['captureGivenAuth']['amount'] += $hash_out['amount'];
 
@@ -235,9 +236,9 @@ class BatchRequest
     {
         $hash_out = Transactions::createEcheckRedepositHash($hash_in);
 
-        $choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
+        $choice_hash = array($hash_out['echeck'], $hash_out['echeckToken']);
 
-        $this->addTransaction($hash_out,$hash_in,'echeckRedeposit',$choice_hash);
+        $this->addTransaction($hash_out, $hash_in, 'echeckRedeposit', $choice_hash);
         $this->counts_and_amounts['echeckRedeposit']['count'] += 1;
     }
 
@@ -245,9 +246,9 @@ class BatchRequest
     {
         $hash_out = Transactions::createEcheckSaleHash($hash_in);
 
-        $choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
+        $choice_hash = array($hash_out['echeck'], $hash_out['echeckToken']);
 
-        $this->addTransaction($hash_out,$hash_in,'echeckSale',$choice_hash);
+        $this->addTransaction($hash_out, $hash_in, 'echeckSale', $choice_hash);
         $this->counts_and_amounts['echeckSale']['count'] += 1;
         $this->counts_and_amounts['echeckSale']['amount'] += $hash_out['amount'];
 
@@ -257,9 +258,9 @@ class BatchRequest
     {
         $hash_out = Transactions::createEcheckCreditHash($hash_in);
 
-        $choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
+        $choice_hash = array($hash_out['echeck'], $hash_out['echeckToken']);
 
-        $this->addTransaction($hash_out,$hash_in,'echeckCredit',$choice_hash);
+        $this->addTransaction($hash_out, $hash_in, 'echeckCredit', $choice_hash);
         $this->counts_and_amounts['echeckCredit']['count'] += 1;
         $this->counts_and_amounts['echeckCredit']['amount'] += $hash_out['amount'];
 
@@ -269,9 +270,9 @@ class BatchRequest
     {
         $hash_out = Transactions::createEcheckVerificationHash($hash_in);
 
-        $choice_hash = array($hash_out['echeck'],$hash_out['echeckToken']);
+        $choice_hash = array($hash_out['echeck'], $hash_out['echeckToken']);
 
-        $this->addTransaction($hash_out,$hash_in,'echeckVerification',$choice_hash);
+        $this->addTransaction($hash_out, $hash_in, 'echeckVerification', $choice_hash);
         $this->counts_and_amounts['echeckVerification']['count'] += 1;
         $this->counts_and_amounts['echeckVerification']['amount'] += $hash_out['amount'];
 
@@ -281,7 +282,7 @@ class BatchRequest
     {
         $hash_out = Transactions::createUpdateCardValidationNumOnTokenHash($hash_in);
 
-        $this->addTransaction($hash_out,$hash_in,"updateCardValidationNumOnToken");
+        $this->addTransaction($hash_out, $hash_in, "updateCardValidationNumOnToken");
         $this->counts_and_amounts['updateCardValidationNumOnToken']['count'] += 1;
     }
 
@@ -289,7 +290,7 @@ class BatchRequest
     {
         $hash_out = Transactions::createUpdateSubscriptionHash($hash_in);
 
-        $this->addTransaction($hash_out,$hash_in,"updateSubscription");
+        $this->addTransaction($hash_out, $hash_in, "updateSubscription");
         $this->counts_and_amounts['updateSubscription']['count'] += 1;
     }
 
@@ -297,7 +298,7 @@ class BatchRequest
     {
         $hash_out = Transactions::createCancelSubscriptionHash($hash_in);
 
-        $this->addTransaction($hash_out,$hash_in,"cancelSubscription");
+        $this->addTransaction($hash_out, $hash_in, "cancelSubscription");
         $this->counts_and_amounts['cancelSubscription']['count'] += 1;
     }
 
@@ -305,7 +306,7 @@ class BatchRequest
     {
         $hash_out = Transactions::createCreatePlanHash($hash_in);
 
-        $this->addTransaction($hash_out,$hash_in,"createPlan");
+        $this->addTransaction($hash_out, $hash_in, "createPlan");
         $this->counts_and_amounts['createPlan']['count'] += 1;
     }
 
@@ -313,7 +314,7 @@ class BatchRequest
     {
         $hash_out = Transactions::createUpdatePlanHash($hash_in);
 
-        $this->addTransaction($hash_out,$hash_in,"updatePlan");
+        $this->addTransaction($hash_out, $hash_in, "updatePlan");
         $this->counts_and_amounts['updatePlan']['count'] += 1;
     }
 
@@ -321,38 +322,42 @@ class BatchRequest
     {
         $hash_out = Transactions::createActivateHash($hash_in);
 
-        $this->addTransaction($hash_out,$hash_in,"activate");
+        $this->addTransaction($hash_out, $hash_in, "activate");
         $this->counts_and_amounts['activate']['count'] += 1;
         $this->counts_and_amounts['activate']['amount'] += $hash_out['amount'];
     }
+
     public function addDeactivate($hash_in)
     {
         $hash_out = Transactions::createDeactivateHash($hash_in);
 
-        $this->addTransaction($hash_out,$hash_in,"deactivate");
+        $this->addTransaction($hash_out, $hash_in, "deactivate");
         $this->counts_and_amounts['deactivate']['count'] += 1;
     }
+
     public function addLoad($hash_in)
     {
         $hash_out = Transactions::createLoadHash($hash_in);
 
-        $this->addTransaction($hash_out,$hash_in,"load");
+        $this->addTransaction($hash_out, $hash_in, "load");
         $this->counts_and_amounts['load']['count'] += 1;
         $this->counts_and_amounts['load']['amount'] += $hash_out['amount'];
     }
+
     public function addUnload($hash_in)
     {
         $hash_out = Transactions::createUnloadHash($hash_in);
 
-        $this->addTransaction($hash_out,$hash_in,"unload");
+        $this->addTransaction($hash_out, $hash_in, "unload");
         $this->counts_and_amounts['unload']['count'] += 1;
         $this->counts_and_amounts['unload']['amount'] += $hash_out['amount'];
     }
+
     public function addBalanceInquiry($hash_in)
     {
         $hash_out = Transactions::createBalanceInquiryHash($hash_in);
 
-        $this->addTransaction($hash_out,$hash_in,"balanceInquiry");
+        $this->addTransaction($hash_out, $hash_in, "balanceInquiry");
         $this->counts_and_amounts['balanceInquiry']['count'] += 1;
     }
 
@@ -360,9 +365,9 @@ class BatchRequest
     {
         $hash_out = Transactions::createAccountUpdate($hash_in);
 
-        $choice_hash = array(XmlFields::returnArrayValue($hash_out,'card'),XmlFields::returnArrayValue($hash_out,'token'));
+        $choice_hash = array(XmlFields::returnArrayValue($hash_out, 'card'), XmlFields::returnArrayValue($hash_out, 'token'));
 
-        $this->addTransaction($hash_out,$hash_in,'accountUpdate',$choice_hash);
+        $this->addTransaction($hash_out, $hash_in, 'accountUpdate', $choice_hash);
         $this->counts_and_amounts['accountUpdate']['count'] += 1;
     }
 
@@ -408,7 +413,7 @@ class BatchRequest
      */
     public function closeRequest()
     {
-        $handle = @fopen($this->transaction_file,"r");
+        $handle = @fopen($this->transaction_file, "r");
         if ($handle) {
             file_put_contents($this->batch_file, Obj2xml::generateBatchHeader($this->counts_and_amounts), FILE_APPEND);
             while (($buffer = fgets($handle, 4096)) !== false) {

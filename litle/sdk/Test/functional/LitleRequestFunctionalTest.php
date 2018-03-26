@@ -1,15 +1,20 @@
 <?php
+
 namespace litle\sdk\Test\functional;
+
 use litle\sdk\Obj2xml;
 use litle\sdk\LitleRequest;
 use litle\sdk\BatchRequest;
 use litle\sdk\LitleResponseProcessor;
-require_once realpath(__DIR__). '/../../../../vendor/autoload.php';
+
+require_once realpath(__DIR__) . '/../../../../vendor/autoload.php';
+
 class LitleRequestFunctionalTest extends \PHPUnit_Framework_TestCase
 {
     private $direct;
     private $config;
     private $sale;
+
     public function setUp()
     {
         $this->direct = sys_get_temp_dir() . '/test';
@@ -18,15 +23,15 @@ class LitleRequestFunctionalTest extends \PHPUnit_Framework_TestCase
         }
         $this->config = Obj2xml::getConfig(array('batch_requests_path' => $this->direct, 'litle_requests_path' => $this->direct));
         $this->sale = array(
-            'card'=>array('type'=>'VI',
-                    'number'=>'4100000000000000',
-                    'expDate'=>'1213',
-                    'cardValidationNum' => '1213'),
-            'id'=>'1211',
-            'orderId'=> '2111',
-            'reportGroup'=>'Planets',
-            'orderSource'=>'ecommerce',
-            'amount'=>'123');
+            'card' => array('type' => 'VI',
+                'number' => '4100000000000000',
+                'expDate' => '1213',
+                'cardValidationNum' => '1213'),
+            'id' => '1211',
+            'orderId' => '2111',
+            'reportGroup' => 'Planets',
+            'orderSource' => 'ecommerce',
+            'amount' => '123');
 
     }
 
@@ -106,7 +111,7 @@ class LitleRequestFunctionalTest extends \PHPUnit_Framework_TestCase
                     <RFRRequest><litleSessionId>8675309</litleSessionId></RFRRequest>
                     </litleRequest>';
         $this->assertEquals(preg_replace(array("[\s]", '@<authentication>[<>/A-Za-z0-9]+</authentication>@'), "", $expected),
-        preg_replace(array("[\s]", '@<authentication>[<>/A-Za-z0-9]+</authentication>@'), "", file_get_contents($request->request_file)));
+            preg_replace(array("[\s]", '@<authentication>[<>/A-Za-z0-9]+</authentication>@'), "", file_get_contents($request->request_file)));
         $this->assertEquals(0, $request->total_transactions);
         $this->assertTrue($request->closed);
     }
@@ -160,30 +165,31 @@ class LitleRequestFunctionalTest extends \PHPUnit_Framework_TestCase
         </batchRequest>
         </litleRequest>';
         $this->assertEquals(preg_replace(array("[\s]", '@<authentication>[<>/A-Za-z0-9]+</authentication>@'), "", $expected),
-        preg_replace(array("[\s]", '@<authentication>[<>/A-Za-z0-9]+</authentication>@'), "", file_get_contents($request->request_file)));
+            preg_replace(array("[\s]", '@<authentication>[<>/A-Za-z0-9]+</authentication>@'), "", file_get_contents($request->request_file)));
     }
+
     public function test_sendToLitle()
     {
         $request = new LitleRequest($this->config);
         $batch = new BatchRequest($this->direct);
 
         $sale_hash = array(
-                  'orderId' => '1864',
-                  'amount' => '10010',
-                  'orderSource'=>'ecommerce',
-                  'billToAddress'=>array(
-                  'name' => 'John Smith',
-                  'addressLine1' => '1 Main St.',
-                  'city' => 'Burlington',
-                  'state' => 'MA',
-                  'zip' => '01803-3747',
-                  'country' => 'US'),
-                  'card'=>array(
-                  'number' =>'4457010000000009',
-                  'expDate' => '0112',
-                  'cardValidationNum' => '349',
-                  'type' => 'VI'),
-                  'reportGroup' => 'Planets');
+            'orderId' => '1864',
+            'amount' => '10010',
+            'orderSource' => 'ecommerce',
+            'billToAddress' => array(
+                'name' => 'John Smith',
+                'addressLine1' => '1 Main St.',
+                'city' => 'Burlington',
+                'state' => 'MA',
+                'zip' => '01803-3747',
+                'country' => 'US'),
+            'card' => array(
+                'number' => '4457010000000009',
+                'expDate' => '0112',
+                'cardValidationNum' => '349',
+                'type' => 'VI'),
+            'reportGroup' => 'Planets');
 
         $batch->addSale($sale_hash);
         $batch->closeRequest();
@@ -211,22 +217,22 @@ class LitleRequestFunctionalTest extends \PHPUnit_Framework_TestCase
         $batch = new BatchRequest($this->direct);
 
         $sale_hash = array(
-                  'orderId' => '1864',
-                  'amount' => '10010',
-                  'orderSource'=>'ecommerce',
-                  'billToAddress'=>array(
-                  'name' => 'John Smith',
-                  'addressLine1' => '1 Main St.',
-                  'city' => 'Burlington',
-                  'state' => 'MA',
-                  'zip' => '01803-3747',
-                  'country' => 'US'),
-                  'card'=>array(
-                  'number' =>'4457010000000009',
-                  'expDate' => '0112',
-                  'cardValidationNum' => '349',
-                  'type' => 'VI'),
-                  'reportGroup' => 'Planets');
+            'orderId' => '1864',
+            'amount' => '10010',
+            'orderSource' => 'ecommerce',
+            'billToAddress' => array(
+                'name' => 'John Smith',
+                'addressLine1' => '1 Main St.',
+                'city' => 'Burlington',
+                'state' => 'MA',
+                'zip' => '01803-3747',
+                'country' => 'US'),
+            'card' => array(
+                'number' => '4457010000000009',
+                'expDate' => '0112',
+                'cardValidationNum' => '349',
+                'type' => 'VI'),
+            'reportGroup' => 'Planets');
 
         $batch->addSale($sale_hash);
 
@@ -249,8 +255,8 @@ class LitleRequestFunctionalTest extends \PHPUnit_Framework_TestCase
     {
         $files = glob($this->direct . '/*'); // get all file names
         foreach ($files as $file) { // iterate files
-          if(is_file($file))
-            unlink($file); // delete file
+            if (is_file($file))
+                unlink($file); // delete file
         }
         rmdir($this->direct);
     }

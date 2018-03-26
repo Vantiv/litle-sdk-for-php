@@ -1,14 +1,18 @@
 <?php
+
 namespace litle\sdk\Test\functional;
+
 use litle\sdk\Obj2xml;
 use litle\sdk\LitleResponseProcessor;
 use litle\sdk\LitleRequest;
 use litle\sdk\BatchRequest;
+
 class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase
 {
     private $direct;
     private $config;
     private $sale;
+
     public function setUp()
     {
         $this->direct = sys_get_temp_dir() . '/test';
@@ -17,22 +21,22 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase
         }
         $this->config = Obj2xml::getConfig(array('batch_requests_path' => $this->direct, 'litle_requests_path' => $this->direct));
         $this->sale = array(
-                  'orderId' => '1864',
-                  'amount' => '10010',
-                  'orderSource'=>'ecommerce',
-                  'billToAddress'=>array(
-                  'name' => 'John Smith',
-                  'addressLine1' => '1 Main St.',
-                  'city' => 'Burlington',
-                  'state' => 'MA',
-                  'zip' => '01803-3747',
-                  'country' => 'US'),
-                  'card'=>array(
-                  'number' =>'4457010000000009',
-                  'expDate' => '0112',
-                  'cardValidationNum' => '349',
-                  'type' => 'VI'),
-                  'reportGroup' => 'Planets');
+            'orderId' => '1864',
+            'amount' => '10010',
+            'orderSource' => 'ecommerce',
+            'billToAddress' => array(
+                'name' => 'John Smith',
+                'addressLine1' => '1 Main St.',
+                'city' => 'Burlington',
+                'state' => 'MA',
+                'zip' => '01803-3747',
+                'country' => 'US'),
+            'card' => array(
+                'number' => '4457010000000009',
+                'expDate' => '0112',
+                'cardValidationNum' => '349',
+                'type' => 'VI'),
+            'reportGroup' => 'Planets');
 
     }
 
@@ -66,14 +70,14 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase
         # first batch
         $batch = new BatchRequest($this->direct);
         $hash_in = array(
-            'card'=>array('type'=>'VI',
-                    'number'=>'4100000000000001',
-                    'expDate'=>'1213',
-                    'cardValidationNum' => '1213'),
-            'orderId'=> '2111',
-            'orderSource'=>'ecommerce',
-            'id'=>'654',
-            'amount'=>'123');
+            'card' => array('type' => 'VI',
+                'number' => '4100000000000001',
+                'expDate' => '1213',
+                'cardValidationNum' => '1213'),
+            'orderId' => '2111',
+            'orderSource' => 'ecommerce',
+            'id' => '654',
+            'amount' => '123');
         $batch->addAuth($hash_in);
 
         $request->addBatchRequest($batch);
@@ -91,20 +95,20 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase
         # first batch
         $batch = new BatchRequest($this->direct);
         $hash_in = array(
-            'card'=>array('type'=>'VI',
-                    'number'=>'4100000000000001',
-                    'expDate'=>'1213',
-                    'cardValidationNum' => '1213'),
-            'orderId'=> '2111',
-            'orderSource'=>'ecommerce',
-            'id'=>'654',
-            'amount'=>'123');
+            'card' => array('type' => 'VI',
+                'number' => '4100000000000001',
+                'expDate' => '1213',
+                'cardValidationNum' => '1213'),
+            'orderId' => '2111',
+            'orderSource' => 'ecommerce',
+            'id' => '654',
+            'amount' => '123');
         $batch->addAuth($hash_in);
 
-        $hash_in = array('litleTxnId'=> '1234567890','reportGroup'=>'Planets', 'amount'=>'5000');
+        $hash_in = array('litleTxnId' => '1234567890', 'reportGroup' => 'Planets', 'amount' => '5000');
         $batch->addAuthReversal($hash_in);
 
-        $hash_in = array('litleTxnId'=> '12312312', 'amount'=>'123');
+        $hash_in = array('litleTxnId' => '12312312', 'amount' => '123');
         $batch->addCapture($hash_in);
 
         $request->addBatchRequest($batch);
@@ -112,47 +116,47 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase
         # second batch
         $batch = new BatchRequest($this->direct);
         $hash_in = array(
-       'amount'=>'123',
-       'orderId'=>'12344',
-       'authInformation' => array(
-       'authDate'=>'2002-10-09','authCode'=>'543216',
-       'authAmount'=>'12345'),
-       'orderSource'=>'ecommerce',
-       'card'=>array(
-       'type'=>'VI',
-       'number' =>'4100000000000001',
-       'expDate' =>'1210'));
+            'amount' => '123',
+            'orderId' => '12344',
+            'authInformation' => array(
+                'authDate' => '2002-10-09', 'authCode' => '543216',
+                'authAmount' => '12345'),
+            'orderSource' => 'ecommerce',
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000001',
+                'expDate' => '1210'));
         $batch->addCaptureGivenAuth($hash_in);
 
-        $hash_in = array('litleTxnId'=> '12312312','reportGroup'=>'Planets', 'amount'=>'123');
+        $hash_in = array('litleTxnId' => '12312312', 'reportGroup' => 'Planets', 'amount' => '123');
         $batch->addCredit($hash_in);
 
-        $hash_in = array('litleTxnId' =>'123123');
+        $hash_in = array('litleTxnId' => '123123');
         $batch->addEcheckCredit($hash_in);
 
         $request->addBatchRequest($batch);
 
         # third batch
         $batch = new BatchRequest($this->direct);
-        $hash_in = array('litleTxnId' =>'123123');
+        $hash_in = array('litleTxnId' => '123123');
         $batch->addEcheckRedeposit($hash_in);
 
         $hash_in = array(
-          'amount'=>'123456',
-          'verify'=>'true',
-          'orderId'=>'12345',
-          'orderSource'=>'ecommerce',
-          'echeck' => array('accType'=>'Checking','accNum'=>'12345657890','routingNum'=>'123456789','checkNum'=>'123455'),
-              'billToAddress'=>array('name'=>'Bob','city'=>'lowell','state'=>'MA','email'=>'litle.com'));
+            'amount' => '123456',
+            'verify' => 'true',
+            'orderId' => '12345',
+            'orderSource' => 'ecommerce',
+            'echeck' => array('accType' => 'Checking', 'accNum' => '12345657890', 'routingNum' => '123456789', 'checkNum' => '123455'),
+            'billToAddress' => array('name' => 'Bob', 'city' => 'lowell', 'state' => 'MA', 'email' => 'litle.com'));
         $batch->addEcheckSale($hash_in);
 
         $hash_in = array(
-          'amount'=>'123456',
-          'verify'=>'true',
-          'orderId'=>'12345',
-          'orderSource'=>'ecommerce',
-          'echeck' => array('accType'=>'Checking','accNum'=>'12345657890','routingNum'=>'123456789','checkNum'=>'123455'),
-          'billToAddress'=>array('name'=>'Bob','city'=>'lowell','state'=>'MA','email'=>'litle.com'));
+            'amount' => '123456',
+            'verify' => 'true',
+            'orderId' => '12345',
+            'orderSource' => 'ecommerce',
+            'echeck' => array('accType' => 'Checking', 'accNum' => '12345657890', 'routingNum' => '123456789', 'checkNum' => '123455'),
+            'billToAddress' => array('name' => 'Bob', 'city' => 'lowell', 'state' => 'MA', 'email' => 'litle.com'));
         $batch->addEcheckVerification($hash_in);
 
         $request->addBatchRequest($batch);
@@ -160,37 +164,37 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase
         # fourth batch
         $batch = new BatchRequest($this->direct);
         $hash_in = array(
-             'orderId'=>'123',
-              'litleTxnId'=>'123456',
-              'amount'=>'106',
-              'orderSource'=>'ecommerce',
-              'token'=> array(
-              'litleToken'=>'123456789101112',
-              'expDate'=>'1210',
-              'cardValidationNum'=>'555',
-              'type'=>'VI'));
+            'orderId' => '123',
+            'litleTxnId' => '123456',
+            'amount' => '106',
+            'orderSource' => 'ecommerce',
+            'token' => array(
+                'litleToken' => '123456789101112',
+                'expDate' => '1210',
+                'cardValidationNum' => '555',
+                'type' => 'VI'));
         $batch->addForceCapture($hash_in);
 
         $hash_in = array(
-            'card'=>array('type'=>'VI',
-                    'number'=>'4100000000000001',
-                    'expDate'=>'1213',
-                    'cardValidationNum' => '1213'),
-            'id'=>'654',
-            'orderId'=> '2111',
-            'orderSource'=>'ecommerce',
-            'amount'=>'123');
+            'card' => array('type' => 'VI',
+                'number' => '4100000000000001',
+                'expDate' => '1213',
+                'cardValidationNum' => '1213'),
+            'id' => '654',
+            'orderId' => '2111',
+            'orderSource' => 'ecommerce',
+            'amount' => '123');
         $batch->addSale($hash_in);
 
         $hash_in = array(
-              'orderId'=>'1',
-            'accountNumber'=>'123456789101112');
+            'orderId' => '1',
+            'accountNumber' => '123456789101112');
         $batch->addRegisterToken($hash_in);
 
         $hash_in = array(
-            'orderId'=>'1',
-            'litleToken'=>'123456789101112',
-            'cardValidationNum'=>'123');
+            'orderId' => '1',
+            'litleToken' => '123456789101112',
+            'cardValidationNum' => '123');
         $batch->addUpdateCardValidationNumOnToken($hash_in);
 
         $request->addBatchRequest($batch);
@@ -198,33 +202,33 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase
         # fifth batch - recurring
         $batch = new BatchRequest($this->direct);
         $hash_in = array(
-            'subscriptionId'=>'1',
-            'planCode'=> '2',
-            'billToAddress'=> array (
+            'subscriptionId' => '1',
+            'planCode' => '2',
+            'billToAddress' => array(
                 'addressLine1' => '3'
             ),
-            'card' => array (
-                'type'=>'VI',
-                'number'=>'4100000000000000',
-                'expDate'=>'1213',
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000000',
+                'expDate' => '1213',
                 'cardValidationNum' => '1213'
             ),
-            'billingDate'=>'2013-12-17');
+            'billingDate' => '2013-12-17');
         $batch->addUpdateSubscription($hash_in);
         $hash_in = array(
-            'subscriptionId'=>'2',
+            'subscriptionId' => '2',
         );
         $batch->addCancelSubscription($hash_in);
         $hash_in = array(
-            'planCode'=>'1',
-            'name'=> '2',
-            'intervalType'=>'MONTHLY',
-            'amount'=>'1000'
+            'planCode' => '1',
+            'name' => '2',
+            'intervalType' => 'MONTHLY',
+            'amount' => '1000'
         );
         $batch->addCreatePlan($hash_in);
         $hash_in = array(
-            'planCode'=>'1',
-            'active'=>'false'
+            'planCode' => '1',
+            'active' => 'false'
         );
         $batch->addUpdatePlan($hash_in);
         $request->addBatchRequest($batch);
@@ -232,70 +236,70 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase
         # sixth batch - au
         $batch = new BatchRequest($this->direct);
         $hash_in = array(
-            'card'=>array('type'=>'VI',
-                    'number'=>'4100000000000000',
-                    'expDate'=>'1213',
-                    'cardValidationNum' => '1213'),
-            'orderId'=>'8675309');
+            'card' => array('type' => 'VI',
+                'number' => '4100000000000000',
+                'expDate' => '1213',
+                'cardValidationNum' => '1213'),
+            'orderId' => '8675309');
         $batch->addAccountUpdate($hash_in);
         $request->addBatchRequest($batch);
 
         # seventh batch - gift card
         $batch = new BatchRequest($this->direct);
         $hash_in = array(
-            'orderId'=>'1',
-            'amount'=> '2',
-            'orderSource'=>'ecommerce',
-            'card' => array (
-                'type'=>'VI',
-                'number'=>'4100000000000000',
-                'expDate'=>'1213',
+            'orderId' => '1',
+            'amount' => '2',
+            'orderSource' => 'ecommerce',
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000000',
+                'expDate' => '1213',
                 'cardValidationNum' => '1213'
             )
         );
         $batch->addActivate($hash_in);
         $hash_in = array(
-            'orderId'=>'1',
-            'orderSource'=>'ecommerce',
-            'card' => array (
-                'type'=>'VI',
-                'number'=>'4100000000000000',
-                'expDate'=>'1213',
+            'orderId' => '1',
+            'orderSource' => 'ecommerce',
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000000',
+                'expDate' => '1213',
                 'cardValidationNum' => '1213'
             )
         );
         $batch->addDeactivate($hash_in);
         $hash_in = array(
-            'orderId'=>'1',
-            'amount'=> '2',
-            'orderSource'=>'ecommerce',
-            'card' => array (
-                'type'=>'VI',
-                'number'=>'4100000000000000',
-                'expDate'=>'1213',
+            'orderId' => '1',
+            'amount' => '2',
+            'orderSource' => 'ecommerce',
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000000',
+                'expDate' => '1213',
                 'cardValidationNum' => '1213'
             )
         );
         $batch->addLoad($hash_in);
         $hash_in = array(
-            'orderId'=>'1',
-            'amount'=> '2',
-            'orderSource'=>'ecommerce',
-            'card' => array (
-                'type'=>'VI',
-                'number'=>'4100000000000000',
-                'expDate'=>'1213',
+            'orderId' => '1',
+            'amount' => '2',
+            'orderSource' => 'ecommerce',
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000000',
+                'expDate' => '1213',
                 'cardValidationNum' => '1213'
             )
         );
         $batch->addUnload($hash_in);
         $hash_in = array(
-            'orderId'=>'1',
-            'orderSource'=>'ecommerce',
-            'card' => array (
-                'type'=>'VI',
-                'number'=>'4100000000000000',
-                'expDate'=>'1213',
+            'orderId' => '1',
+            'orderSource' => 'ecommerce',
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000000',
+                'expDate' => '1213',
                 'cardValidationNum' => '1213'
             )
         );
@@ -342,7 +346,7 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase
     {
         $files = glob($this->direct . '/*'); // get all file names
         foreach ($files as $file) { // iterate files
-            if(is_file($file))
+            if (is_file($file))
                 unlink($file); // delete file
         }
         rmdir($this->direct);

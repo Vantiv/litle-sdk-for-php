@@ -22,49 +22,52 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
+
 namespace litle\sdk\Test\functional;
+
 use litle\sdk\LitleOnlineRequest;
 use litle\sdk\XmlParser;
+
 class CaptureFunctionalTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple_capture()
     {
         $hash_in = array(
-            'litleTxnId'=>'1234567891234567891',
-            'amount'=>'123');
+            'litleTxnId' => '1234567891234567891',
+            'amount' => '123');
 
         $initilaize = new LitleOnlineRequest();
         $captureResponse = $initilaize->captureRequest($hash_in);
-        $message = XmlParser::getAttribute($captureResponse,'litleOnlineResponse','response');
-        $this->assertEquals('0',$message);
+        $message = XmlParser::getAttribute($captureResponse, 'litleOnlineResponse', 'response');
+        $this->assertEquals('0', $message);
     }
 
     public function test_complex_capture()
     {
         $hash_in = array(
-                'litleTxnId'=>'1234567891234567891',
-                'amount'=>'123','enhancedData'=>array(
-              'customerReference'=>'Litle',
-              'salesTax'=>'50',
-              'deliveryType'=>'TBD'),
-              'payPalOrderComplete'=>'true');
+            'litleTxnId' => '1234567891234567891',
+            'amount' => '123', 'enhancedData' => array(
+                'customerReference' => 'Litle',
+                'salesTax' => '50',
+                'deliveryType' => 'TBD'),
+            'payPalOrderComplete' => 'true');
 
         $initilaize = new LitleOnlineRequest();
         $captureResponse = $initilaize->captureRequest($hash_in);
-        $message = XmlParser::getAttribute($captureResponse,'litleOnlineResponse','response');
-        $this->assertEquals('0',$message);
+        $message = XmlParser::getAttribute($captureResponse, 'litleOnlineResponse', 'response');
+        $this->assertEquals('0', $message);
     }
 
     public function test_simple_capture_with_partial()
     {
         $hash_in = array(
-            'litleTxnId'=>'1234567891234567891',
-            'patial'=>'true',
-            'amount'=>'123');
+            'litleTxnId' => '1234567891234567891',
+            'patial' => 'true',
+            'amount' => '123');
 
         $initilaize = new LitleOnlineRequest();
         $captureResponse = $initilaize->captureRequest($hash_in);
-        $message = XmlParser::getAttribute($captureResponse,'litleOnlineResponse','response');
-        $this->assertEquals('0',$message);
+        $message = XmlParser::getAttribute($captureResponse, 'litleOnlineResponse', 'response');
+        $this->assertEquals('0', $message);
     }
 }

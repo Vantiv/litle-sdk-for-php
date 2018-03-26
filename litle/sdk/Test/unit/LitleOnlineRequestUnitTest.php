@@ -22,22 +22,25 @@
 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 * OTHER DEALINGS IN THE SOFTWARE.
 */
+
 namespace litle\sdk\Test\unit;
+
 use litle\sdk\LitleOnlineRequest;
+
 class LitleOnlineRequestUnitTest extends \PHPUnit_Framework_TestCase
 {
     public function test_set_merchant_sdk_integration()
     {
         $hash_in = array(
-            'merchantSdk'=>'Magento;8.14.3',
-            'orderId'=> '2111',
-            'id'=>'654',
-            'orderSource'=>'ecommerce',
-            'amount'=>'123');
+            'merchantSdk' => 'Magento;8.14.3',
+            'orderId' => '2111',
+            'id' => '654',
+            'orderSource' => 'ecommerce',
+            'amount' => '123');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*merchantSdk="Magento;8.14.3".*/'));
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*merchantSdk="Magento;8.14.3".*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -47,14 +50,14 @@ class LitleOnlineRequestUnitTest extends \PHPUnit_Framework_TestCase
     public function test_set_merchant_sdk_default()
     {
         $hash_in = array(
-                'orderId'=> '2111',
-                'id'=>'654',
-                'orderSource'=>'ecommerce',
-                'amount'=>'123');
+            'orderId' => '2111',
+            'id' => '654',
+            'orderSource' => 'ecommerce',
+            'amount' => '123');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*merchantSdk="PHP;8.31.0".*/'));
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*merchantSdk="PHP;8.31.0".*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;

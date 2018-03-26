@@ -1,6 +1,9 @@
 = LitleOnline CHANGELOG
 
 
+==version 8.31.0
+* Feature: Visa reccuring transaction
+
 ==version 8.29.2
 Update SSL version to 6
 

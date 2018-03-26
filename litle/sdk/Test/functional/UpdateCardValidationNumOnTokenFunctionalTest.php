@@ -22,24 +22,27 @@
 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 * OTHER DEALINGS IN THE SOFTWARE.
 */
+
 namespace litle\sdk\Test\functional;
+
 use litle\sdk\LitleOnlineRequest;
 use litle\sdk\XmlParser;
+
 class UpdateCardValidationNumOnTokenFunctionalTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple()
     {
         $hash_in = array(
             'merchantId' => '101',
-              'version'=>'8.14',
-              'reportGroup'=>'Planets',
-              'orderId'=>'12344',
-              'litleToken'=>'123456789101112',
-            'cardValidationNum'=>'123');
+            'version' => '8.14',
+            'reportGroup' => 'Planets',
+            'orderId' => '12344',
+            'litleToken' => '123456789101112',
+            'cardValidationNum' => '123');
 
         $initilaize = new LitleOnlineRequest();
         $updateCardValidationNumOnTokenResponse = $initilaize->updateCardValidationNumOnToken($hash_in);
-        $message = XmlParser::getAttribute($updateCardValidationNumOnTokenResponse,'litleOnlineResponse','message');
-        $this->assertEquals('Valid Format',$message);
+        $message = XmlParser::getAttribute($updateCardValidationNumOnTokenResponse, 'litleOnlineResponse', 'message');
+        $this->assertEquals('Valid Format', $message);
     }
 }

@@ -22,89 +22,93 @@
 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 * OTHER DEALINGS IN THE SOFTWARE.
 */
+
 namespace litle\sdk\Test\functional;
+
 use litle\sdk\LitleOnlineRequest;
 use litle\sdk\XmlParser;
+
 class EcheckSaleFunctionalTest extends \PHPUnit_Framework_TestCase
 {
 
     public function test_echeckSale_with_echeck()
     {
         $hash_in = array(
-      'amount'=>'123456',
-      'verify'=>'true',
-      'orderId'=>'12345',
-      'orderSource'=>'ecommerce',
-      'echeck' => array('accType'=>'Checking','accNum'=>'12345657890','routingNum'=>'123456789','checkNum'=>'123455'),
-      'billToAddress'=>array('name'=>'Bob','city'=>'lowell','state'=>'MA','email'=>'litle.com'));
+            'amount' => '123456',
+            'verify' => 'true',
+            'orderId' => '12345',
+            'orderSource' => 'ecommerce',
+            'echeck' => array('accType' => 'Checking', 'accNum' => '12345657890', 'routingNum' => '123456789', 'checkNum' => '123455'),
+            'billToAddress' => array('name' => 'Bob', 'city' => 'lowell', 'state' => 'MA', 'email' => 'litle.com'));
 
         $initilaize = new LitleOnlineRequest();
         $echeckSaleResponse = $initilaize->echeckSaleRequest($hash_in);
-        $response =XmlParser::getNode($echeckSaleResponse,'response');
-        $this->assertEquals('000',$response);
+        $response = XmlParser::getNode($echeckSaleResponse, 'response');
+        $this->assertEquals('000', $response);
     }
 
     public function test_echeckSale_with_echeckToken()
     {
         $hash_in = array(
-          'amount'=>'123456',
-          'verify'=>'true',
-          'orderId'=>'12345',
-          'orderSource'=>'ecommerce',
-              'echeckToken' => array('accType'=>'Checking','litleToken'=>'1234565789012','routingNum'=>'123456789','checkNum'=>'123455'),
-          'billToAddress'=>array('name'=>'Bob','city'=>'lowell','state'=>'MA','email'=>'litle.com'));
+            'amount' => '123456',
+            'verify' => 'true',
+            'orderId' => '12345',
+            'orderSource' => 'ecommerce',
+            'echeckToken' => array('accType' => 'Checking', 'litleToken' => '1234565789012', 'routingNum' => '123456789', 'checkNum' => '123455'),
+            'billToAddress' => array('name' => 'Bob', 'city' => 'lowell', 'state' => 'MA', 'email' => 'litle.com'));
 
         $initilaize = new LitleOnlineRequest();
         $echeckSaleResponse = $initilaize->echeckSaleRequest($hash_in);
-        $response = XmlParser::getNode($echeckSaleResponse,'response');
-        $this->assertEquals('000',$response);
+        $response = XmlParser::getNode($echeckSaleResponse, 'response');
+        $this->assertEquals('000', $response);
     }
 
     public function test_echeckSale_missing_amount()
     {
         $hash_in = array(
-              'verify'=>'true',
-              'orderId'=>'12345',
-              'orderSource'=>'ecommerce',
-                  'echeckToken' => array('accType'=>'Checking','litleToken'=>'1234565789012','routingNum'=>'123456789','checkNum'=>'123455'),
-              'billToAddress'=>array('name'=>'Bob','city'=>'lowell','state'=>'MA','email'=>'litle.com'));
+            'verify' => 'true',
+            'orderId' => '12345',
+            'orderSource' => 'ecommerce',
+            'echeckToken' => array('accType' => 'Checking', 'litleToken' => '1234565789012', 'routingNum' => '123456789', 'checkNum' => '123455'),
+            'billToAddress' => array('name' => 'Bob', 'city' => 'lowell', 'state' => 'MA', 'email' => 'litle.com'));
 
         $initilaize = new LitleOnlineRequest();
         $echeckSaleResponse = $initilaize->echeckSaleRequest($hash_in);
-        $message= XmlParser::getAttribute($echeckSaleResponse,'litleOnlineResponse','message');
-        $this->assertRegExp('/Error validating xml data against the schema/',$message);
+        $message = XmlParser::getAttribute($echeckSaleResponse, 'litleOnlineResponse', 'message');
+        $this->assertRegExp('/Error validating xml data against the schema/', $message);
     }
+
     public function test_echeckSale_with_shipto()
     {
         $hash_in = array(
-          'amount'=>'123456',
-          'verify'=>'true',
-          'orderId'=>'12345',
-          'orderSource'=>'ecommerce',
-          'echeck' => array('accType'=>'Checking','accNum'=>'12345657890','routingNum'=>'123456789','checkNum'=>'123455'),
-          'billToAddress'=>array('name'=>'Bob','city'=>'lowell','state'=>'MA','email'=>'litle.com'),
-          'shipToAddress'=>array('name'=>'Bob','city'=>'lowell','state'=>'MA','email'=>'litle.com'));
+            'amount' => '123456',
+            'verify' => 'true',
+            'orderId' => '12345',
+            'orderSource' => 'ecommerce',
+            'echeck' => array('accType' => 'Checking', 'accNum' => '12345657890', 'routingNum' => '123456789', 'checkNum' => '123455'),
+            'billToAddress' => array('name' => 'Bob', 'city' => 'lowell', 'state' => 'MA', 'email' => 'litle.com'),
+            'shipToAddress' => array('name' => 'Bob', 'city' => 'lowell', 'state' => 'MA', 'email' => 'litle.com'));
 
         $initilaize = new LitleOnlineRequest();
         $echeckSaleResponse = $initilaize->echeckSaleRequest($hash_in);
-        $response = XmlParser::getNode($echeckSaleResponse,'response');
-        $this->assertEquals('000',$response);
+        $response = XmlParser::getNode($echeckSaleResponse, 'response');
+        $this->assertEquals('000', $response);
     }
-    
+
     public function test_simple_echeckSale_secondaryAmount()
     {
-    	$hash_in = array('amount'=>'123456',
-    			'secondaryAmount' => '2000',
-    			'verify'=>'true',
-    			'orderId'=>'12345',
-    			'orderSource'=>'ecommerce',
-    			'echeck' => array('accType'=>'Checking','accNum'=>'12345657890','routingNum'=>'123456789','checkNum'=>'123455'),
-    			'billToAddress'=>array('name'=>'Bob','city'=>'lowell','state'=>'MA','email'=>'litle.com'));
-    
-    	$initilaize = new LitleOnlineRequest();
-    	$echeckCreditResponse = $initilaize->echeckCreditRequest($hash_in);
-    	$response = XmlParser::getNode($echeckCreditResponse,'response');
-    	$this->assertEquals('000',$response);
+        $hash_in = array('amount' => '123456',
+            'secondaryAmount' => '2000',
+            'verify' => 'true',
+            'orderId' => '12345',
+            'orderSource' => 'ecommerce',
+            'echeck' => array('accType' => 'Checking', 'accNum' => '12345657890', 'routingNum' => '123456789', 'checkNum' => '123455'),
+            'billToAddress' => array('name' => 'Bob', 'city' => 'lowell', 'state' => 'MA', 'email' => 'litle.com'));
+
+        $initilaize = new LitleOnlineRequest();
+        $echeckCreditResponse = $initilaize->echeckCreditRequest($hash_in);
+        $response = XmlParser::getNode($echeckCreditResponse, 'response');
+        $this->assertEquals('000', $response);
     }
 
 }

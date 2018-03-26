@@ -22,20 +22,23 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
+
 namespace litle\sdk\Test\unit;
+
 use litle\sdk\LitleOnlineRequest;
+
 class UpdateCardValidationNumOnTokenUnitTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple()
     {
         $hash_in = array(
-            'orderId'=>'1',
-            'litleToken'=>'123456789101112',
-            'cardValidationNum'=>'123');
+            'orderId' => '1',
+            'litleToken' => '123456789101112',
+            'cardValidationNum' => '123');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*<orderId>1.*<litleToken>123456789101112.*<cardValidationNum>123.*/'));
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<orderId>1.*<litleToken>123456789101112.*<cardValidationNum>123.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -45,12 +48,12 @@ class UpdateCardValidationNumOnTokenUnitTest extends \PHPUnit_Framework_TestCase
     public function test_orderIdIsOptional()
     {
         $hash_in = array(
-                'litleToken'=>'123456789101112',
-                'cardValidationNum'=>'123');
+            'litleToken' => '123456789101112',
+            'cardValidationNum' => '123');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*<litleToken>123456789101112.*<cardValidationNum>123.*/'));
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<litleToken>123456789101112.*<cardValidationNum>123.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -60,33 +63,33 @@ class UpdateCardValidationNumOnTokenUnitTest extends \PHPUnit_Framework_TestCase
     public function test_litleTokenIsRequired()
     {
         $hash_in = array(
-                'cardValidationNum'=>'123');
+            'cardValidationNum' => '123');
         $litleTest = new LitleOnlineRequest();
-        $this->setExpectedException('InvalidArgumentException',"Missing Required Field: /litleToken/");
+        $this->setExpectedException('InvalidArgumentException', "Missing Required Field: /litleToken/");
         $retOb = $litleTest->updateCardValidationNumOnToken($hash_in);
     }
 
     public function test_cardValidationNumIsRequired()
     {
         $hash_in = array(
-                'litleToken'=>'123456789101112');
+            'litleToken' => '123456789101112');
         $litleTest = new LitleOnlineRequest();
-        $this->setExpectedException('InvalidArgumentException',"Missing Required Field: /cardValidationNum/");
+        $this->setExpectedException('InvalidArgumentException', "Missing Required Field: /cardValidationNum/");
         $retOb = $litleTest->updateCardValidationNumOnToken($hash_in);
     }
 
     public function test_loggedInUser()
     {
         $hash_in = array(
-                'loggedInUser'=>'gdake',
-                'merchantSdk'=>'PHP;8.14.0',
-                'orderId'=>'1',
-                'litleToken'=>'123456789101112',
-                'cardValidationNum'=>'123');
+            'loggedInUser' => 'gdake',
+            'merchantSdk' => 'PHP;8.14.0',
+            'orderId' => '1',
+            'litleToken' => '123456789101112',
+            'cardValidationNum' => '123');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*merchantSdk="PHP;8.14.0".*loggedInUser="gdake" xmlns=.*>.*/'));
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*merchantSdk="PHP;8.14.0".*loggedInUser="gdake" xmlns=.*>.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;

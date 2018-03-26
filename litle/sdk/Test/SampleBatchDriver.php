@@ -1,24 +1,25 @@
 <?php
+
 namespace litle\sdk;
-require_once realpath(__DIR__). '/../../../vendor/autoload.php';
+require_once realpath(__DIR__) . '/../../../vendor/autoload.php';
 #Sale
 $sale_info = array(
-              'orderId' => '1',
-              'amount' => '10010',
-              'orderSource'=>'ecommerce',
-              'billToAddress'=>array(
-              'name' => 'John Smith',
-              'addressLine1' => '1 Main St.',
-              'city' => 'Burlington',
-              'state' => 'MA',
-              'zip' => '01803-3747',
-              'country' => 'US'),
-              'card'=>array(
-              'number' =>'5112010000000003',
-              'expDate' => '0112',
-              'cardValidationNum' => '349',
-              'type' => 'MC')
-            );
+    'orderId' => '1',
+    'amount' => '10010',
+    'orderSource' => 'ecommerce',
+    'billToAddress' => array(
+        'name' => 'John Smith',
+        'addressLine1' => '1 Main St.',
+        'city' => 'Burlington',
+        'state' => 'MA',
+        'zip' => '01803-3747',
+        'country' => 'US'),
+    'card' => array(
+        'number' => '5112010000000003',
+        'expDate' => '0112',
+        'cardValidationNum' => '349',
+        'type' => 'MC')
+);
 
 $litle_request = new LitleRequest();
 $batch_request = new BatchRequest();
@@ -38,5 +39,5 @@ $processor = new LitleResponseProcessor($response_file);
 
 while ($txn = $processor->nextTransaction()) {
     echo "Transaction Type : " . $txn->getName() . "\n";
-    echo "Transaction Id: " . $txn->litleTxnId ." \n";
+    echo "Transaction Id: " . $txn->litleTxnId . " \n";
 }

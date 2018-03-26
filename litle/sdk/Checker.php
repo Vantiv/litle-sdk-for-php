@@ -22,6 +22,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
+
 namespace litle\sdk;
 class Checker
 {
@@ -36,8 +37,8 @@ class Checker
 
     public static function choice($choiceArray)
     {
-        $i= 0;
-        for ($y=0;$y<count($choiceArray);$y++) {
+        $i = 0;
+        for ($y = 0; $y < count($choiceArray); $y++) {
             if (isset($choiceArray[$y])) {
                 $i++;
             }

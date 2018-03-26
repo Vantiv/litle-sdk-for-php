@@ -22,17 +22,20 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
+
 namespace litle\sdk\Test\unit;
+
 use litle\sdk\LitleOnlineRequest;
+
 class EcheckCreditUnitTest extends \PHPUnit_Framework_TestCase
 {
     public function test_simple_echeckCredit()
     {
-        $hash_in = array('litleTxnId' =>'123123');
+        $hash_in = array('litleTxnId' => '123123');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*<litleTxnId>123123.*/'));
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<litleTxnId>123123.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
@@ -41,46 +44,46 @@ class EcheckCreditUnitTest extends \PHPUnit_Framework_TestCase
 
     public function test_both_choices()
     {
-        $hash_in = array('reportGroup'=>'Planets','litleTxnId'=>'123456',
-        'echeckToken' => array('accType'=>'Checking','routingNum'=>'123123','litleToken'=>'1234565789012','checkNum'=>'123455'),
-        'echeck' => array('accType'=>'Checking','routingNum'=>'123123','accNum'=>'12345657890','checkNum'=>'123455'));
+        $hash_in = array('reportGroup' => 'Planets', 'litleTxnId' => '123456',
+            'echeckToken' => array('accType' => 'Checking', 'routingNum' => '123123', 'litleToken' => '1234565789012', 'checkNum' => '123455'),
+            'echeck' => array('accType' => 'Checking', 'routingNum' => '123123', 'accNum' => '12345657890', 'checkNum' => '123455'));
         $litleTest = new LitleOnlineRequest();
-        $this->setExpectedException('InvalidArgumentException',"Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
+        $this->setExpectedException('InvalidArgumentException', "Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
         $retOb = $litleTest->echeckCreditRequest($hash_in);
     }
 
     public function test_loggedInUser()
     {
         $hash_in = array(
-                'litleTxnId' =>'123123',
-                'merchantSdk'=>'PHP;8.14.0',
-                'loggedInUser' => 'gdake');
+            'litleTxnId' => '123123',
+            'merchantSdk' => 'PHP;8.14.0',
+            'loggedInUser' => 'gdake');
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
-        ->method('request')
-        ->with($this->matchesRegularExpression('/.*merchantSdk="PHP;8.14.0".*loggedInUser="gdake" xmlns=.*>.*/'));
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*merchantSdk="PHP;8.14.0".*loggedInUser="gdake" xmlns=.*>.*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
         $litleTest->echeckCreditRequest($hash_in);
     }
-    
+
     public function test_echeck_credit_secondaryAmount()
     {
-    	$hash_in = array('amount' => '5000',
-    			'secondaryAmount' => '2000',
-    			'orderSource'=>'ecommerce',
-    			'billToAddress' => array(),
-    			'echeck' => array('accType'=>'Checking','routingNum'=>'123123','accNum'=>'12345657890','checkNum'=>'123455'));
-    	 
-    	$mock = $this->getMock('litle\sdk\LitleXmlMapper');
-    	$mock->expects($this->once())
-    	->method('request')
-    	->with($this->matchesRegularExpression('/.*<amount>5000.*<orderSource>ecommerce.*<accType>Checking.*<accNum>12345657890.*<routingNum>123123.*<checkNum>123455.*/'));
-    	 
-    	$litleTest = new LitleOnlineRequest();
-    	$litleTest->newXML = $mock;
-    	$litleTest->echeckCreditRequest($hash_in);
+        $hash_in = array('amount' => '5000',
+            'secondaryAmount' => '2000',
+            'orderSource' => 'ecommerce',
+            'billToAddress' => array(),
+            'echeck' => array('accType' => 'Checking', 'routingNum' => '123123', 'accNum' => '12345657890', 'checkNum' => '123455'));
+
+        $mock = $this->getMock('litle\sdk\LitleXmlMapper');
+        $mock->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<amount>5000.*<orderSource>ecommerce.*<accType>Checking.*<accNum>12345657890.*<routingNum>123123.*<checkNum>123455.*/'));
+
+        $litleTest = new LitleOnlineRequest();
+        $litleTest->newXML = $mock;
+        $litleTest->echeckCreditRequest($hash_in);
     }
 
 }

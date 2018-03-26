@@ -22,50 +22,52 @@
 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 * OTHER DEALINGS IN THE SOFTWARE.
 */
+
 namespace litle\sdk;
 require_once realpath(dirname(__FILE__)) . '/LitleOnline.php';
+
 class Obj2xml
 {
     public static function toXml($data, $hash_config, $type, $rootNodeName = 'litleOnlineRequest')
     {
-        $config= Obj2xml::getConfig($hash_config, $type);
+        $config = Obj2xml::getConfig($hash_config, $type);
         $xml = simplexml_load_string("<?xml version='1.0' encoding='utf-8'?><$rootNodeName />");
-        $xml-> addAttribute('merchantId',$config["merchantId"]);
-        $xml-> addAttribute('version',CURRENT_XML_VERSION);
-        $xml-> addAttribute('merchantSdk',$data['merchantSdk']);
+        $xml->addAttribute('merchantId', $config["merchantId"]);
+        $xml->addAttribute('version', CURRENT_XML_VERSION);
+        $xml->addAttribute('merchantSdk', $data['merchantSdk']);
         unset($data['merchantSdk']);
         if (isset($data['loggedInUser'])) {
-            $xml->addAttribute('loggedInUser',$data["loggedInUser"]);
+            $xml->addAttribute('loggedInUser', $data["loggedInUser"]);
         };
         unset($data['loggedInUser']);
-        $xml-> addAttribute('xmlns:xmlns','http://www.litle.com/schema');// does not show up on browser docs
+        $xml->addAttribute('xmlns:xmlns', 'http://www.litle.com/schema');// does not show up on browser docs
         $authentication = $xml->addChild('authentication');
-        $authentication->addChild('user',$config["user"]);
-        $authentication->addChild('password',$config["password"]);
+        $authentication->addChild('user', $config["user"]);
+        $authentication->addChild('password', $config["password"]);
         $transacType = $xml->addChild($type);
         if (isset($data['partial'])) {
-            $transacType-> addAttribute('partial',$data["partial"]);
+            $transacType->addAttribute('partial', $data["partial"]);
         };
         unset($data['partial']);
         if (isset($data['customerId'])) {
-            $transacType-> addAttribute('customerId',$data["customerId"]);
+            $transacType->addAttribute('customerId', $data["customerId"]);
         };
         unset($data['customerId']);
         if (isset($config['reportGroup'])) {
-            $transacType-> addAttribute('reportGroup',$config["reportGroup"]);
+            $transacType->addAttribute('reportGroup', $config["reportGroup"]);
         };
         if (isset($data['id'])) {
-            $transacType-> addAttribute('id',$data["id"]);
+            $transacType->addAttribute('id', $data["id"]);
         };
         unset($data['id']);
-        Obj2xml::iterateChildren($data,$transacType);
+        Obj2xml::iterateChildren($data, $transacType);
 
         return $xml->asXML();
     }
 
     public static function transactionShouldHaveReportGroup($transactionType)
     {
-          $transactionsThatDontHaveReportGroup = array(
+        $transactionsThatDontHaveReportGroup = array(
             'updateSubscription',
             'cancelSubscription',
             'createPlan',
@@ -81,7 +83,7 @@ class Obj2xml
         if (Obj2xml::transactionShouldHaveReportGroup($type)) {
             $transac->addAttribute('reportGroup', $report_group);
         }
-        Obj2xml::iterateChildren($data,$transac);
+        Obj2xml::iterateChildren($data, $transac);
 
         return str_replace("<?xml version=\"1.0\"?>\n", "", $transac->asXML());
     }
@@ -104,7 +106,7 @@ class Obj2xml
 
     public static function generateBatchHeader($counts_and_amounts)
     {
-        $config= Obj2xml::getConfig(array());
+        $config = Obj2xml::getConfig(array());
 
         $xml = simplexml_load_string("<batchRequest />");
         $xml->addAttribute('merchantId', $config['merchantId']);
@@ -173,41 +175,43 @@ class Obj2xml
 
         $xml->addAttribute('numBatchRequests', $num_batch_requests);
         $xml->addAttribute('version', CURRENT_XML_VERSION);
-        $xml->addAttribute('xmlns:xmlns','http://www.litle.com/schema');
+        $xml->addAttribute('xmlns:xmlns', 'http://www.litle.com/schema');
         $authentication = $xml->addChild('authentication');
-        $authentication->addChild('user',$config["user"]);
-        $authentication->addChild('password',$config["password"]);
+        $authentication->addChild('user', $config["user"]);
+        $authentication->addChild('password', $config["password"]);
 
         return str_replace("<?xml version=\"1.0\"?>\n", "", str_replace("</litleRequest>", "", $xml->asXML()));
     }
 
-    private static function iterateChildren($data,$transacType)
+    private static function iterateChildren($data, $transacType)
     {
         foreach ($data as $key => $value) {
             if ($value === "REQUIRED") {
                 throw new \InvalidArgumentException("Missing Required Field: /$key/");
             } elseif (substr($key, 0, 12) === 'lineItemData') {
                 $temp_node = $transacType->addChild('lineItemData');
-                Obj2xml::iterateChildren($value,$temp_node);
-            } elseif (substr($key,0,-1) == 'detailTax') {
+                Obj2xml::iterateChildren($value, $temp_node);
+            } elseif (substr($key, 0, -1) == 'detailTax') {
                 $temp_node = $transacType->addChild('detailTax');
-                Obj2xml::iterateChildren($value,$temp_node);
+                Obj2xml::iterateChildren($value, $temp_node);
             } elseif (((is_string($value)) || is_numeric($value))) {
-                $transacType->addChild($key,str_replace('&','&amp;',$value));
+                $transacType->addChild($key, str_replace('&', '&amp;', $value));
             } elseif (is_array($value)) {
                 $node = $transacType->addChild($key);
-                Obj2xml::iterateChildren($value,$node);
+                Obj2xml::iterateChildren($value, $node);
             }
         }
     }
 
-    public static function getConfig($data, $type=NULL)
+    public static function getConfig($data, $type = NULL)
     {
+        $filename = 'litle_SDK_config.ini';
         $config_array = null;
+        $config = array();
 
-    $ini_file = realpath(dirname(__FILE__)) . '/litle_SDK_config.ini';
+        $ini_file = realpath(dirname(__FILE__)) . '/' . $filename;
         if (file_exists($ini_file)) {
-            @$config_array =parse_ini_file('litle_SDK_config.ini');
+            @$config_array = parse_ini_file($filename);
         }
 
         if (empty($config_array)) {
@@ -223,9 +227,9 @@ class Obj2xml
                 if ($name == 'merchantId') {
                     $config['merchantId'] = $config_array['currency_merchant_map']['DEFAULT'];
                 } elseif ($name == 'version') {
-                    $config['version'] = isset($config_array['version'])? $config_array['version']:CURRENT_XML_VERSION;
+                    $config['version'] = isset($config_array['version']) ? $config_array['version'] : CURRENT_XML_VERSION;
                 } elseif ($name == 'timeout') {
-                        $config['timeout'] = isset($config_array['timeout'])? $config_array['timeout']:'65';
+                    $config['timeout'] = isset($config_array['timeout']) ? $config_array['timeout'] : '65';
                 } else {
                     if ((!isset($config_array[$name])) and ($name != 'proxy')) {
                         throw new \InvalidArgumentException("Missing Field /$name/");
@@ -235,7 +239,7 @@ class Obj2xml
             }
         }
         if ($type == 'updateSubscription' || $type == 'cancelSubscription' || $type == 'createPlan' || $type == 'updatePlan') {
-            if (array_key_exists('reportGroup',$config)) {
+            if (array_key_exists('reportGroup', $config)) {
                 unset($config['reportGroup']);
                 $config = array_filter($config);
             }

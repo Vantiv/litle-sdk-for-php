@@ -22,24 +22,27 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
+
 namespace litle\sdk\Test\unit;
+
 use litle\sdk\Checker;
+
 class CheckerUnitTest extends \PHPUnit_Framework_TestCase
 {
     public function test_required()
     {
         $checker = new Checker();
-        $this->assertEquals('REQUIRED',$checker->requiredField(null));
+        $this->assertEquals('REQUIRED', $checker->requiredField(null));
     }
 
     public function test_choice()
     {
         $checker = new Checker();
-        $hash1= null;
-        $hash2= array('21321','214323');
-        $hash3 = array('143543','78987');
-        $hash4 = array($hash1,$hash2,$hash3);
-        $this->setExpectedException('InvalidArgumentException',"Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
+        $hash1 = null;
+        $hash2 = array('21321', '214323');
+        $hash3 = array('143543', '78987');
+        $hash4 = array($hash1, $hash2, $hash3);
+        $this->setExpectedException('InvalidArgumentException', "Entered an Invalid Amount of Choices for a Field, please only fill out one Choice!!!!");
         $checker->choice($hash4);
     }
 }
