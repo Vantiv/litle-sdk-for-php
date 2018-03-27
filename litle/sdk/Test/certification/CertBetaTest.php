@@ -28,11 +28,14 @@ namespace litle\sdk\Test\certification;
 use litle\sdk\LitleOnlineRequest;
 USE litle\sdk\XmlParser;
 
+define('PRELIVE_URL', 'https://payments.vantivprelive.com/vap/communicator/online');
+
 class CertBetaTest extends \PHPUnit_Framework_TestCase
 {
     public function test_6_Auth()
     {
         $auth_hash = array(
+            'url' => PRELIVE_URL,
             'orderId' => '6',
             'amount' => '60060',
             'orderSource' => 'ecommerce',
@@ -60,6 +63,7 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
     public function test_6_sale()
     {
         $sale_hash = array(
+            'url' => PRELIVE_URL,
             'orderId' => '6',
             'amount' => '60060',
             'orderSource' => 'ecommerce',
@@ -84,6 +88,7 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('P', XmlParser::getNode($saleResponse, 'cardValidationResult'));
 
         $void_hash = array(
+            'url' => PRELIVE_URL,
             'litleTxnId' => (XmlParser::getNode($saleResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initilaize = new LitleOnlineRequest();
@@ -95,6 +100,7 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
     public function test_7_Auth()
     {
         $auth_hash = array(
+            'url' => PRELIVE_URL,
             'orderId' => '7',
             'amount' => '70070',
             'orderSource' => 'ecommerce',
@@ -122,6 +128,7 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
     public function test_7_avs()
     {
         $auth_hash = array(
+            'url' => PRELIVE_URL,
             'orderId' => '7',
             'amount' => '70070',
             'orderSource' => 'ecommerce',
@@ -149,6 +156,7 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
     public function test_7_sale()
     {
         $sale_hash = array(
+            'url' => PRELIVE_URL,
             'orderId' => '7',
             'amount' => '70070',
             'orderSource' => 'ecommerce',
@@ -176,6 +184,7 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
     public function test_8_Auth()
     {
         $auth_hash = array(
+            'url' => PRELIVE_URL,
             'orderId' => '8',
             'amount' => '80080',
             'orderSource' => 'ecommerce',
@@ -202,6 +211,7 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
     public function test_8_avs()
     {
         $auth_hash = array(
+            'url' => PRELIVE_URL,
             'orderId' => '8',
             'amount' => '80080',
             'orderSource' => 'ecommerce',
@@ -228,6 +238,7 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
     public function test_8_sale()
     {
         $sale_hash = array(
+            'url' => PRELIVE_URL,
             'orderId' => '8',
             'amount' => '80080',
             'orderSource' => 'ecommerce',
@@ -254,6 +265,7 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
     public function test_9_Auth()
     {
         $auth_hash = array(
+            'url' => PRELIVE_URL,
             'orderId' => '9',
             'amount' => '90090',
             'orderSource' => 'ecommerce',
@@ -279,6 +291,7 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
     public function test_9_avs()
     {
         $auth_hash = array(
+            'url' => PRELIVE_URL,
             'orderId' => '9',
             'amount' => '90090',
             'orderSource' => 'ecommerce',
@@ -304,6 +317,7 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
     public function test_9_sale()
     {
         $sale_hash = array(
+            'url' => PRELIVE_URL,
             'orderId' => '9',
             'amount' => '90090',
             'orderSource' => 'ecommerce',
@@ -329,6 +343,7 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
     public function test_10()
     {
         $auth_hash = array(
+            'url' => PRELIVE_URL,
             'orderId' => '10',
             'amount' => '40000',
             'orderSource' => 'ecommerce',
@@ -347,6 +362,7 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
     public function test_11()
     {
         $auth_hash = array(
+            'url' => PRELIVE_URL,
             'orderId' => '11',
             'amount' => '60000',
             'orderSource' => 'ecommerce',
@@ -365,6 +381,7 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
     public function test_12()
     {
         $auth_hash = array(
+            'url' => PRELIVE_URL,
             'orderId' => '12',
             'amount' => '50000',
             'orderSource' => 'ecommerce',
@@ -383,6 +400,7 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
     public function test_13()
     {
         $auth_hash = array(
+            'url' => PRELIVE_URL,
             'orderId' => '13',
             'amount' => '15000',
             'orderSource' => 'ecommerce',
