@@ -22,6 +22,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
+
 #require_once realpath(dirname(__FILE__)) . '/LitleOnline.php';
 namespace litle\sdk;
 class LitleXmlMapper
@@ -30,9 +31,9 @@ class LitleXmlMapper
     {
     }
 
-    public function request($request,$hash_config=NULL,$useSimpleXml)
+    public function request($request, $hash_config = NULL, $useSimpleXml)
     {
-        $response = Communication::httpRequest($request,$hash_config);
+        $response = Communication::httpRequest($request, $hash_config);
         if ($useSimpleXml) {
             $respObj = simplexml_load_string($response);
         } else {

@@ -22,9 +22,14 @@
 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 * OTHER DEALINGS IN THE SOFTWARE.
 */
+
 namespace litle\sdk\Test\certification;
+
 use litle\sdk\LitleOnlineRequest;
 USE litle\sdk\XmlParser;
+
+//define('PRELIVE_URL', 'https://payments.vantivprelive.com/vap/communicator/online');
+define('PRELIVE_URL', 'https://www.testvantivcnp.com/sandbox/communicator/online');
 
 class CertBetaTest extends \PHPUnit_Framework_TestCase
 {
@@ -33,26 +38,26 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
         $auth_hash = array(
             'orderId' => '6',
             'amount' => '60060',
-            'orderSource'=>'ecommerce',
-            'billToAddress'=>array(
-            'name' => 'Joe Green',
-            'addressLine1' => '6 Main St.',
-            'city' => 'Derry',
-            'state' => 'NH',
-            'zip' => '03038',
-            'country' => 'US'),
-            'card'=>array(
-            'number' =>'4457010100000008',
-            'expDate' => '0612',
-            'type' => 'VI',
-            'cardValidationNum' => '992'));
+            'orderSource' => 'ecommerce',
+            'billToAddress' => array(
+                'name' => 'Joe Green',
+                'addressLine1' => '6 Main St.',
+                'city' => 'Derry',
+                'state' => 'NH',
+                'zip' => '03038',
+                'country' => 'US'),
+            'card' => array(
+                'number' => '4457010100000008',
+                'expDate' => '0612',
+                'type' => 'VI',
+                'cardValidationNum' => '992'));
 
         $initialize = new LitleOnlineRequest();
         $authorizationResponse = $initialize->authorizationRequest($auth_hash);
-        $this->assertEquals('110',XmlParser::getNode($authorizationResponse,'response'));
-        $this->assertEquals('Insufficient Funds',XmlParser::getNode($authorizationResponse,'message'));
-        $this->assertEquals('34',XmlParser::getNode($authorizationResponse,'avsResult'));
-        $this->assertEquals('P',XmlParser::getNode($authorizationResponse,'cardValidationResult'));
+        $this->assertEquals('110', XmlParser::getNode($authorizationResponse, 'response'));
+        $this->assertEquals('Insufficient Funds', XmlParser::getNode($authorizationResponse, 'message'));
+        $this->assertEquals('34', XmlParser::getNode($authorizationResponse, 'avsResult'));
+        $this->assertEquals('P', XmlParser::getNode($authorizationResponse, 'cardValidationResult'));
     }
 
     public function test_6_sale()
@@ -60,34 +65,34 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
         $sale_hash = array(
             'orderId' => '6',
             'amount' => '60060',
-            'orderSource'=>'ecommerce',
-            'billToAddress'=>array(
-            'name' => 'Joe Green',
-            'addressLine1' => '6 Main St.',
-            'city' => 'Derry',
-            'state' => 'NH',
-            'zip' => '03038',
-            'country' => 'US'),
-            'card'=>array(
-            'number' =>'4457010100000008',
-            'expDate' => '0612',
-            'type' => 'VI',
-            'cardValidationNum' => '992'));
+            'orderSource' => 'ecommerce',
+            'billToAddress' => array(
+                'name' => 'Joe Green',
+                'addressLine1' => '6 Main St.',
+                'city' => 'Derry',
+                'state' => 'NH',
+                'zip' => '03038',
+                'country' => 'US'),
+            'card' => array(
+                'number' => '4457010100000008',
+                'expDate' => '0612',
+                'type' => 'VI',
+                'cardValidationNum' => '992'));
 
         $initialize = new LitleOnlineRequest();
         $saleResponse = $initialize->saleRequest($sale_hash);
-        $this->assertEquals('110',XmlParser::getNode($saleResponse,'response'));
-        $this->assertEquals('Insufficient Funds',XmlParser::getNode($saleResponse,'message'));
-        $this->assertEquals('34',XmlParser::getNode($saleResponse,'avsResult'));
-        $this->assertEquals('P',XmlParser::getNode($saleResponse,'cardValidationResult'));
+        $this->assertEquals('110', XmlParser::getNode($saleResponse, 'response'));
+        $this->assertEquals('Insufficient Funds', XmlParser::getNode($saleResponse, 'message'));
+        $this->assertEquals('34', XmlParser::getNode($saleResponse, 'avsResult'));
+        $this->assertEquals('P', XmlParser::getNode($saleResponse, 'cardValidationResult'));
 
-        $void_hash =  array(
-                        'litleTxnId' =>(XmlParser::getNode($saleResponse,'litleTxnId')),
-                        'reportGroup'=>'planets');
+        $void_hash = array(
+            'litleTxnId' => (XmlParser::getNode($saleResponse, 'litleTxnId')),
+            'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
         $voidResponse = $initialize->voidRequest($void_hash);
-        $this->assertEquals('360',XmlParser::getNode($voidResponse,'response'));
-        $this->assertEquals('No transaction found with specified litleTxnId',XmlParser::getNode($voidResponse,'message'));
+        $this->assertEquals('360', XmlParser::getNode($voidResponse, 'response'));
+        $this->assertEquals('No transaction found with specified litleTxnId', XmlParser::getNode($voidResponse, 'message'));
     }
 
     public function test_7_Auth()
@@ -95,106 +100,106 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
         $auth_hash = array(
             'orderId' => '7',
             'amount' => '70070',
-            'orderSource'=>'ecommerce',
-            'billToAddress'=>array(
-            'name' => 'Jane Murray',
-            'addressLine1' => '7 Main St.',
-            'city' => 'Amesbury',
-            'state' => 'MA',
-            'zip' => '01913',
-            'country' => 'US'),
-            'card'=> array(
-            'number' =>'5112010100000002',
-            'expDate' => '0712',
-            'cardValidationNum' => '251',
-            'type' => 'MC'));
+            'orderSource' => 'ecommerce',
+            'billToAddress' => array(
+                'name' => 'Jane Murray',
+                'addressLine1' => '7 Main St.',
+                'city' => 'Amesbury',
+                'state' => 'MA',
+                'zip' => '01913',
+                'country' => 'US'),
+            'card' => array(
+                'number' => '5112010100000002',
+                'expDate' => '0712',
+                'cardValidationNum' => '251',
+                'type' => 'MC'));
 
         $initialize = new LitleOnlineRequest();
         $authorizationResponse = $initialize->authorizationRequest($auth_hash);
-        $this->assertEquals('301',XmlParser::getNode($authorizationResponse,'response'));
-        $this->assertEquals('Invalid Account Number',XmlParser::getNode($authorizationResponse,'message'));
-        $this->assertEquals('34',XmlParser::getNode($authorizationResponse,'avsResult'));
-        $this->assertEquals('N',XmlParser::getNode($authorizationResponse,'cardValidationResult'));
+        $this->assertEquals('301', XmlParser::getNode($authorizationResponse, 'response'));
+        $this->assertEquals('Invalid Account Number', XmlParser::getNode($authorizationResponse, 'message'));
+        $this->assertEquals('34', XmlParser::getNode($authorizationResponse, 'avsResult'));
+        $this->assertEquals('N', XmlParser::getNode($authorizationResponse, 'cardValidationResult'));
     }
 
     public function test_7_avs()
     {
         $auth_hash = array(
-                    'orderId' => '7',
-                    'amount' => '70070',
-                    'orderSource'=>'ecommerce',
-                    'billToAddress'=>array(
-                    'name' => 'Jane Murray',
-                    'addressLine1' => '7 Main St.',
-                    'city' => 'Amesbury',
-                    'state' => 'MA',
-                    'zip' => '01913',
-                    'country' => 'US'),
-                    'card'=> array(
-                    'number' =>'5112010100000002',
-                    'expDate' => '0712',
-                    'cardValidationNum' => '251',
-                    'type' => 'MC'));
+            'orderId' => '7',
+            'amount' => '70070',
+            'orderSource' => 'ecommerce',
+            'billToAddress' => array(
+                'name' => 'Jane Murray',
+                'addressLine1' => '7 Main St.',
+                'city' => 'Amesbury',
+                'state' => 'MA',
+                'zip' => '01913',
+                'country' => 'US'),
+            'card' => array(
+                'number' => '5112010100000002',
+                'expDate' => '0712',
+                'cardValidationNum' => '251',
+                'type' => 'MC'));
 
         $initialize = new LitleOnlineRequest();
         $authorizationResponse = $initialize->authorizationRequest($auth_hash);
-        $this->assertEquals('301',XmlParser::getNode($authorizationResponse,'response'));
-        $this->assertEquals('Invalid Account Number',XmlParser::getNode($authorizationResponse,'message'));
-        $this->assertEquals('34',XmlParser::getNode($authorizationResponse,'avsResult'));
-        $this->assertEquals('N',XmlParser::getNode($authorizationResponse,'cardValidationResult'));
+        $this->assertEquals('301', XmlParser::getNode($authorizationResponse, 'response'));
+        $this->assertEquals('Invalid Account Number', XmlParser::getNode($authorizationResponse, 'message'));
+        $this->assertEquals('34', XmlParser::getNode($authorizationResponse, 'avsResult'));
+        $this->assertEquals('N', XmlParser::getNode($authorizationResponse, 'cardValidationResult'));
     }
 
     public function test_7_sale()
     {
         $sale_hash = array(
-                    'orderId' => '7',
-                    'amount' => '70070',
-                    'orderSource'=>'ecommerce',
-                    'billToAddress'=>array(
-                    'name' => 'Jane Murray',
-                    'addressLine1' => '7 Main St.',
-                    'city' => 'Amesbury',
-                    'state' => 'MA',
-                    'zip' => '01913',
-                    'country' => 'US'),
-                    'card'=> array(
-                    'number' =>'5112010100000002',
-                    'expDate' => '0712',
-                    'cardValidationNum' => '251',
-                    'type' => 'MC'));
+            'orderId' => '7',
+            'amount' => '70070',
+            'orderSource' => 'ecommerce',
+            'billToAddress' => array(
+                'name' => 'Jane Murray',
+                'addressLine1' => '7 Main St.',
+                'city' => 'Amesbury',
+                'state' => 'MA',
+                'zip' => '01913',
+                'country' => 'US'),
+            'card' => array(
+                'number' => '5112010100000002',
+                'expDate' => '0712',
+                'cardValidationNum' => '251',
+                'type' => 'MC'));
 
         $initialize = new LitleOnlineRequest();
         $saleResponse = $initialize->authorizationRequest($sale_hash);
-        $this->assertEquals('301',XmlParser::getNode($saleResponse,'response'));
-        $this->assertEquals('Invalid Account Number',XmlParser::getNode($saleResponse,'message'));
-        $this->assertEquals('34',XmlParser::getNode($saleResponse,'avsResult'));
-        $this->assertEquals('N',XmlParser::getNode($saleResponse,'cardValidationResult'));
+        $this->assertEquals('301', XmlParser::getNode($saleResponse, 'response'));
+        $this->assertEquals('Invalid Account Number', XmlParser::getNode($saleResponse, 'message'));
+        $this->assertEquals('34', XmlParser::getNode($saleResponse, 'avsResult'));
+        $this->assertEquals('N', XmlParser::getNode($saleResponse, 'cardValidationResult'));
     }
 
     public function test_8_Auth()
     {
         $auth_hash = array(
-        'orderId' => '8',
-        'amount' => '80080',
-        'orderSource'=>'ecommerce',
-        'billToAddress'=> array(
-        'name' => 'Mark Johnson',
-        'addressLine1' => '8 Main St.',
-        'city' => 'Manchester',
-        'state' => 'NH',
-        'zip' => '03101',
-        'country' => 'US'),
-        'card'=> array(
-        'number' =>'6011010100000002',
-        'expDate' => '0812',
-        'type' => 'DI',
-        'cardValidationNum' => '184'));
+            'orderId' => '8',
+            'amount' => '80080',
+            'orderSource' => 'ecommerce',
+            'billToAddress' => array(
+                'name' => 'Mark Johnson',
+                'addressLine1' => '8 Main St.',
+                'city' => 'Manchester',
+                'state' => 'NH',
+                'zip' => '03101',
+                'country' => 'US'),
+            'card' => array(
+                'number' => '6011010100000002',
+                'expDate' => '0812',
+                'type' => 'DI',
+                'cardValidationNum' => '184'));
         $initialize = new LitleOnlineRequest();
         $authorizationResponse = $initialize->authorizationRequest($auth_hash);
-        $this->assertEquals('123',XmlParser::getNode($authorizationResponse,'response'));
-        $this->assertEquals('Call Discover',XmlParser::getNode($authorizationResponse,'message'));
-        $this->assertEquals('34',XmlParser::getNode($authorizationResponse,'avsResult'));
-        $this->assertEquals('P',XmlParser::getNode($authorizationResponse,'cardValidationResult'));
+        $this->assertEquals('123', XmlParser::getNode($authorizationResponse, 'response'));
+        $this->assertEquals('Call Discover', XmlParser::getNode($authorizationResponse, 'message'));
+        $this->assertEquals('34', XmlParser::getNode($authorizationResponse, 'avsResult'));
+        $this->assertEquals('P', XmlParser::getNode($authorizationResponse, 'cardValidationResult'));
     }
 
     public function test_8_avs()
@@ -202,25 +207,25 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
         $auth_hash = array(
             'orderId' => '8',
             'amount' => '80080',
-            'orderSource'=>'ecommerce',
-            'billToAddress'=> array(
-            'name' => 'Mark Johnson',
-            'addressLine1' => '8 Main St.',
-            'city' => 'Manchester',
-            'state' => 'NH',
-            'zip' => '03101',
-            'country' => 'US'),
-            'card'=> array(
-            'number' =>'6011010100000002',
-            'expDate' => '0812',
-            'type' => 'DI',
-            'cardValidationNum' => '184'));
+            'orderSource' => 'ecommerce',
+            'billToAddress' => array(
+                'name' => 'Mark Johnson',
+                'addressLine1' => '8 Main St.',
+                'city' => 'Manchester',
+                'state' => 'NH',
+                'zip' => '03101',
+                'country' => 'US'),
+            'card' => array(
+                'number' => '6011010100000002',
+                'expDate' => '0812',
+                'type' => 'DI',
+                'cardValidationNum' => '184'));
         $initialize = new LitleOnlineRequest();
         $authorizationResponse = $initialize->authorizationRequest($auth_hash);
-        $this->assertEquals('123',XmlParser::getNode($authorizationResponse,'response'));
-        $this->assertEquals('Call Discover',XmlParser::getNode($authorizationResponse,'message'));
-        $this->assertEquals('34',XmlParser::getNode($authorizationResponse,'avsResult'));
-        $this->assertEquals('P',XmlParser::getNode($authorizationResponse,'cardValidationResult'));
+        $this->assertEquals('123', XmlParser::getNode($authorizationResponse, 'response'));
+        $this->assertEquals('Call Discover', XmlParser::getNode($authorizationResponse, 'message'));
+        $this->assertEquals('34', XmlParser::getNode($authorizationResponse, 'avsResult'));
+        $this->assertEquals('P', XmlParser::getNode($authorizationResponse, 'cardValidationResult'));
     }
 
     public function test_8_sale()
@@ -228,50 +233,50 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
         $sale_hash = array(
             'orderId' => '8',
             'amount' => '80080',
-            'orderSource'=>'ecommerce',
-            'billToAddress'=> array(
-            'name' => 'Mark Johnson',
-            'addressLine1' => '8 Main St.',
-            'city' => 'Manchester',
-            'state' => 'NH',
-            'zip' => '03101',
-            'country' => 'US'),
-            'card'=> array(
-            'number' =>'6011010100000002',
-            'expDate' => '0812',
-            'type' => 'DI',
-            'cardValidationNum' => '184'));
+            'orderSource' => 'ecommerce',
+            'billToAddress' => array(
+                'name' => 'Mark Johnson',
+                'addressLine1' => '8 Main St.',
+                'city' => 'Manchester',
+                'state' => 'NH',
+                'zip' => '03101',
+                'country' => 'US'),
+            'card' => array(
+                'number' => '6011010100000002',
+                'expDate' => '0812',
+                'type' => 'DI',
+                'cardValidationNum' => '184'));
         $initialize = new LitleOnlineRequest();
         $saleResponse = $initialize->saleRequest($sale_hash);
-        $this->assertEquals('123',XmlParser::getNode($saleResponse,'response'));
-        $this->assertEquals('Call Discover',XmlParser::getNode($saleResponse,'message'));
-        $this->assertEquals('34',XmlParser::getNode($saleResponse,'avsResult'));
-        $this->assertEquals('P',XmlParser::getNode($saleResponse,'cardValidationResult'));
+        $this->assertEquals('123', XmlParser::getNode($saleResponse, 'response'));
+        $this->assertEquals('Call Discover', XmlParser::getNode($saleResponse, 'message'));
+        $this->assertEquals('34', XmlParser::getNode($saleResponse, 'avsResult'));
+        $this->assertEquals('P', XmlParser::getNode($saleResponse, 'cardValidationResult'));
     }
 
     public function test_9_Auth()
     {
         $auth_hash = array(
-        'orderId' => '9',
-        'amount' => '90090',
-        'orderSource'=>'ecommerce',
-        'billToAddress'=>array(
-        'name' => 'James Miller',
-        'addressLine1' => '9 Main St.',
-        'city' => 'Boston',
-        'state' => 'MA',
-        'zip' => '02134',
-        'country' => 'US'),
-        'card'=>array(
-        'number' =>'375001010000003',
-        'expDate' => '0912',
-        'cardValidationNum' => '0421',
-        'type' => 'AX'));
+            'orderId' => '9',
+            'amount' => '90090',
+            'orderSource' => 'ecommerce',
+            'billToAddress' => array(
+                'name' => 'James Miller',
+                'addressLine1' => '9 Main St.',
+                'city' => 'Boston',
+                'state' => 'MA',
+                'zip' => '02134',
+                'country' => 'US'),
+            'card' => array(
+                'number' => '375001010000003',
+                'expDate' => '0912',
+                'cardValidationNum' => '0421',
+                'type' => 'AX'));
         $initialize = new LitleOnlineRequest();
         $authorizationResponse = $initialize->authorizationRequest($auth_hash);
-        $this->assertEquals('303',XmlParser::getNode($authorizationResponse,'response'));
-        $this->assertEquals('Pick Up Card',XmlParser::getNode($authorizationResponse,'message'));
-        $this->assertEquals('34',XmlParser::getNode($authorizationResponse,'avsResult'));
+        $this->assertEquals('303', XmlParser::getNode($authorizationResponse, 'response'));
+        $this->assertEquals('Pick Up Card', XmlParser::getNode($authorizationResponse, 'message'));
+        $this->assertEquals('34', XmlParser::getNode($authorizationResponse, 'avsResult'));
     }
 
     public function test_9_avs()
@@ -279,67 +284,67 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
         $auth_hash = array(
             'orderId' => '9',
             'amount' => '90090',
-            'orderSource'=>'ecommerce',
-            'billToAddress'=>array(
-            'name' => 'James Miller',
-            'addressLine1' => '9 Main St.',
-            'city' => 'Boston',
-            'state' => 'MA',
-            'zip' => '02134',
-            'country' => 'US'),
-            'card'=>array(
-            'number' =>'375001010000003',
-            'expDate' => '0912',
-            'cardValidationNum' => '0421',
-            'type' => 'AX'));
-        $initialize = new LitleOnlineRequest();
-        $authorizationResponse = $initialize->authorizationRequest($auth_hash);
-        $this->assertEquals('303',XmlParser::getNode($authorizationResponse,'response'));
-        $this->assertEquals('Pick Up Card',XmlParser::getNode($authorizationResponse,'message'));
-        $this->assertEquals('34',XmlParser::getNode($authorizationResponse,'avsResult'));
-    }
-
-    public function test_9_sale()
-    {
-        $sale_hash = array(
-                'orderId' => '9',
-                'amount' => '90090',
-                'orderSource'=>'ecommerce',
-                'billToAddress'=>array(
+            'orderSource' => 'ecommerce',
+            'billToAddress' => array(
                 'name' => 'James Miller',
                 'addressLine1' => '9 Main St.',
                 'city' => 'Boston',
                 'state' => 'MA',
                 'zip' => '02134',
                 'country' => 'US'),
-                'card'=>array(
-                'number' =>'375001010000003',
+            'card' => array(
+                'number' => '375001010000003',
+                'expDate' => '0912',
+                'cardValidationNum' => '0421',
+                'type' => 'AX'));
+        $initialize = new LitleOnlineRequest();
+        $authorizationResponse = $initialize->authorizationRequest($auth_hash);
+        $this->assertEquals('303', XmlParser::getNode($authorizationResponse, 'response'));
+        $this->assertEquals('Pick Up Card', XmlParser::getNode($authorizationResponse, 'message'));
+        $this->assertEquals('34', XmlParser::getNode($authorizationResponse, 'avsResult'));
+    }
+
+    public function test_9_sale()
+    {
+        $sale_hash = array(
+            'orderId' => '9',
+            'amount' => '90090',
+            'orderSource' => 'ecommerce',
+            'billToAddress' => array(
+                'name' => 'James Miller',
+                'addressLine1' => '9 Main St.',
+                'city' => 'Boston',
+                'state' => 'MA',
+                'zip' => '02134',
+                'country' => 'US'),
+            'card' => array(
+                'number' => '375001010000003',
                 'expDate' => '0912',
                 'cardValidationNum' => '0421',
                 'type' => 'AX'));
         $initialize = new LitleOnlineRequest();
         $saleResponse = $initialize->saleRequest($sale_hash);
-        $this->assertEquals('303',XmlParser::getNode($saleResponse,'response'));
-        $this->assertEquals('Pick Up Card',XmlParser::getNode($saleResponse,'message'));
-        $this->assertEquals('34',XmlParser::getNode($saleResponse,'avsResult'));
+        $this->assertEquals('303', XmlParser::getNode($saleResponse, 'response'));
+        $this->assertEquals('Pick Up Card', XmlParser::getNode($saleResponse, 'message'));
+        $this->assertEquals('34', XmlParser::getNode($saleResponse, 'avsResult'));
     }
 
     public function test_10()
     {
         $auth_hash = array(
-        'orderId' => '10',
-        'amount' => '40000',
-        'orderSource'=>'ecommerce',
-        'card'=>array(
-        'number' =>'4457010140000141',
-        'expDate' => '0912',
-        'type' => 'VI'),
-        'allowPartialAuth' => 'true');
+            'orderId' => '10',
+            'amount' => '40000',
+            'orderSource' => 'ecommerce',
+            'card' => array(
+                'number' => '4457010140000141',
+                'expDate' => '0912',
+                'type' => 'VI'),
+            'allowPartialAuth' => 'true');
         $initialize = new LitleOnlineRequest();
         $authorizationResponse = $initialize->authorizationRequest($auth_hash);
-        $this->assertEquals('010',XmlParser::getNode($authorizationResponse,'response'));
-        $this->assertEquals('Partially Approved',XmlParser::getNode($authorizationResponse,'message'));
-        $this->assertEquals('32000',XmlParser::getNode($authorizationResponse,'approvedAmount'));
+        $this->assertEquals('010', XmlParser::getNode($authorizationResponse, 'response'));
+        $this->assertEquals('Partially Approved', XmlParser::getNode($authorizationResponse, 'message'));
+        $this->assertEquals('32000', XmlParser::getNode($authorizationResponse, 'approvedAmount'));
     }
 
     public function test_11()
@@ -347,52 +352,52 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
         $auth_hash = array(
             'orderId' => '11',
             'amount' => '60000',
-            'orderSource'=>'ecommerce',
-            'card'=>array(
-            'number' =>'5112010140000004',
+            'orderSource' => 'ecommerce',
+            'card' => array(
+                'number' => '5112010140000004',
                 'expDate' => '1111',
                 'type' => 'MC'),
             'allowPartialAuth' => 'true');
         $initialize = new LitleOnlineRequest();
         $authorizationResponse = $initialize->authorizationRequest($auth_hash);
-        $this->assertEquals('010',XmlParser::getNode($authorizationResponse,'response'));
-        $this->assertEquals('Partially Approved',XmlParser::getNode($authorizationResponse,'message'));
-        $this->assertEquals('48000',XmlParser::getNode($authorizationResponse,'approvedAmount'));
+        $this->assertEquals('010', XmlParser::getNode($authorizationResponse, 'response'));
+        $this->assertEquals('Partially Approved', XmlParser::getNode($authorizationResponse, 'message'));
+        $this->assertEquals('48000', XmlParser::getNode($authorizationResponse, 'approvedAmount'));
     }
 
     public function test_12()
     {
         $auth_hash = array(
-                'orderId' => '12',
-                'amount' => '50000',
-                'orderSource'=>'ecommerce',
-                'card'=>array(
-                'number' =>'375001014000009',
+            'orderId' => '12',
+            'amount' => '50000',
+            'orderSource' => 'ecommerce',
+            'card' => array(
+                'number' => '375001014000009',
                 'expDate' => '0412',
                 'type' => 'AX'),
-                'allowPartialAuth' => 'true');
+            'allowPartialAuth' => 'true');
         $initialize = new LitleOnlineRequest();
         $authorizationResponse = $initialize->authorizationRequest($auth_hash);
-        $this->assertEquals('010',XmlParser::getNode($authorizationResponse,'response'));
-        $this->assertEquals('Partially Approved',XmlParser::getNode($authorizationResponse,'message'));
-        $this->assertEquals('40000',XmlParser::getNode($authorizationResponse,'approvedAmount'));
+        $this->assertEquals('010', XmlParser::getNode($authorizationResponse, 'response'));
+        $this->assertEquals('Partially Approved', XmlParser::getNode($authorizationResponse, 'message'));
+        $this->assertEquals('40000', XmlParser::getNode($authorizationResponse, 'approvedAmount'));
     }
 
     public function test_13()
     {
         $auth_hash = array(
-        'orderId' => '13',
-        'amount' => '15000',
-        'orderSource'=>'ecommerce',
-        'card'=>array(
-        'number' =>'6011010140000004',
-        'expDate' => '0812',
-        'type' => 'DI'),
-        'allowPartialAuth' => 'true');
+            'orderId' => '13',
+            'amount' => '15000',
+            'orderSource' => 'ecommerce',
+            'card' => array(
+                'number' => '6011010140000004',
+                'expDate' => '0812',
+                'type' => 'DI'),
+            'allowPartialAuth' => 'true');
         $initialize = new LitleOnlineRequest();
         $authorizationResponse = $initialize->authorizationRequest($auth_hash);
-        $this->assertEquals('010',XmlParser::getNode($authorizationResponse,'response'));
-        $this->assertEquals('Partially Approved',XmlParser::getNode($authorizationResponse,'message'));
-        $this->assertEquals('12000',XmlParser::getNode($authorizationResponse,'approvedAmount'));
+        $this->assertEquals('010', XmlParser::getNode($authorizationResponse, 'response'));
+        $this->assertEquals('Partially Approved', XmlParser::getNode($authorizationResponse, 'message'));
+        $this->assertEquals('12000', XmlParser::getNode($authorizationResponse, 'approvedAmount'));
     }
 }

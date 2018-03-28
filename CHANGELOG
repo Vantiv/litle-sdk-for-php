@@ -1,6 +1,9 @@
 = LitleOnline CHANGELOG
 
 
+==version 9.14.0
+* Feature: Visa reccuring transaction
+
 ==Version 9.13.0(August,3 2017)
 * Feature add giropay and sofort for sale transaction
 * Update URL mapper for vantiv URL's

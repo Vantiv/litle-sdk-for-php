@@ -22,6 +22,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
+
 namespace litle\sdk\Test\functional;
 
 use litle\sdk\LitleOnlineRequest;
@@ -46,7 +47,7 @@ class Utf8FunctionalTest extends \PHPUnit_Framework_TestCase
         $authorizationResponse = $initialize->authorizationRequest($hash_in);
         $response = XmlParser::getNode($authorizationResponse, 'response');
         $this->assertEquals('000', $response);
-        $this->assertEquals('PlanetsРусский中文', XmlParser::getAttribute($authorizationResponse, 'authorizationResponse','reportGroup'));
+        $this->assertEquals('PlanetsРусский中文', XmlParser::getAttribute($authorizationResponse, 'authorizationResponse', 'reportGroup'));
         $this->assertEquals('63225578415568556365452427825', XmlParser::getNode($authorizationResponse, 'networkTransactionId'));
     }
 }

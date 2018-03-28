@@ -22,6 +22,7 @@
 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 * OTHER DEALINGS IN THE SOFTWARE.
 */
+
 namespace litle\sdk;
 require_once realpath(dirname(__FILE__)) . '/LitleOnline.php';
 

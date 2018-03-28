@@ -28,6 +28,9 @@ namespace litle\sdk\Test\certification;
 use litle\sdk\LitleOnlineRequest;
 use litle\sdk\XmlParser;
 
+//define('PRELIVE_URL', 'https://payments.vantivprelive.com/vap/communicator/online');
+define('PRELIVE_URL', 'https://www.testvantivcnp.com/sandbox/communicator/online');
+
 require_once realpath(__DIR__) . '/../../../../vendor/autoload.php';
 
 class CertAlphaTest extends \PHPUnit_Framework_TestCase

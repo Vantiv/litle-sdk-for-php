@@ -22,6 +22,7 @@
 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 * OTHER DEALINGS IN THE SOFTWARE.
 */
+
 namespace litle\sdk\Test\unit;
 
 use litle\sdk\LitleOnlineRequest;
@@ -56,7 +57,7 @@ class LitleOnlineRequestUnitTest extends \PHPUnit_Framework_TestCase
         $mock = $this->getMock('litle\sdk\LitleXmlMapper');
         $mock->expects($this->once())
             ->method('request')
-            ->with($this->matchesRegularExpression('/.*merchantSdk="PHP;9.13.1".*/'));
+            ->with($this->matchesRegularExpression('/.*merchantSdk="PHP;9.14.0".*/'));
 
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;

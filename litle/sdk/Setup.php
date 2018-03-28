@@ -22,6 +22,7 @@
 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 * OTHER DEALINGS IN THE SOFTWARE.
 */
+
 namespace litle\sdk;
 require_once realpath(dirname(__FILE__)) . '/UrlMapper.php';
 
@@ -80,10 +81,10 @@ function initialize()
         print "Please input the URL for batch processing. If you are not using batch processing, you may hit enter. ";
         $line['batch_url'] = trim(fgets(STDIN));
         print "Please input the port for stream batch delivery. " .
-        "If you are not using stream batch delivery, you may hit enter. ";
+            "If you are not using stream batch delivery, you may hit enter. ";
         $line['tcp_port'] = trim(fgets(STDIN));
         print "Please input the timeout (in seconds) for stream batch delivery. " .
-        "If you are not using stream batch delivery, you may hit enter. ";
+            "If you are not using stream batch delivery, you may hit enter. ";
         $line['tcp_timeout'] = trim(fgets(STDIN));
         # ssl should be usd by default
         $line['tcp_ssl'] = '1';
