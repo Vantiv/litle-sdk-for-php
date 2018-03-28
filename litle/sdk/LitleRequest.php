@@ -18,14 +18,15 @@ class LitleRequest
     public $total_transactions = 0;
 
     public $closed = false;
+
     /*
      * Creates the intermediate request file and preps it to have batches added
      */
-    public function __construct($overrides=array())
+    public function __construct($overrides = array())
     {
         $config = Obj2xml::getConfig($overrides);
 
-        $this->config= $config;
+        $this->config = $config;
         $request_dir = $config['litle_requests_path'];
 
         if (substr($request_dir, -1, 1) != DIRECTORY_SEPARATOR) {
@@ -81,7 +82,7 @@ class LitleRequest
         if (!$batch_request->closed) {
             $batch_request->closeRequest();
         }
-        $handle = @fopen($batch_request->batch_file,"r");
+        $handle = @fopen($batch_request->batch_file, "r");
         if ($handle) {
             while (($buffer = fgets($handle, 4096)) !== false) {
                 file_put_contents($this->batches_file, $buffer, FILE_APPEND);
@@ -117,12 +118,13 @@ class LitleRequest
         unset($this->batches_file);
         $this->closed = true;
     }
+
     /*
      * Fleshes out the XML needed for the Litle Request. Returns the file name of the completed request file
      */
     public function closeRequest()
     {
-        $handle = @fopen($this->batches_file,"r");
+        $handle = @fopen($this->batches_file, "r");
         if ($handle) {
             file_put_contents($this->request_file, Obj2xml::generateRequestHeader($this->config, $this->num_batch_requests), FILE_APPEND);
             while (($buffer = fgets($handle, 4096)) !== false) {
@@ -173,7 +175,7 @@ class LitleRequest
     /*
      * Given a timeout (defaults to 7200 seconds - two hours), periodically poll the SFTP directory, looking for the response file for this request.
      */
-    public function retrieveFromLitleSFTP($session, $sftp_timeout=7200)
+    public function retrieveFromLitleSFTP($session, $sftp_timeout = 7200)
     {
         $time_spent = 0;
         $this->resetSFTPSession($session);
@@ -186,7 +188,7 @@ class LitleRequest
             $files = $session->nlist('/outbound');
 
             if (in_array(basename($this->request_file) . '.asc', $files)) {
-                $this->downloadFromLitleSFTP($session,$time_spent, $sftp_timeout);
+                $this->downloadFromLitleSFTP($session, $time_spent, $sftp_timeout);
 
                 return;
             }
@@ -218,12 +220,12 @@ class LitleRequest
     /*
      * Resets SFTP Session if Session is unseeted or timed out
      */
-     public function resetSFTPSession($session)
-     {
+    public function resetSFTPSession($session)
+    {
         if (!isset($session)) {
             $session = $this->createSFTPSession();
         }
-     }
+    }
 
     /*
      * Downloads the response file from the SFTP server to local system iteratively
@@ -266,7 +268,7 @@ class LitleRequest
 
         $tcp_url = $this->config['batch_url'];
         $tcp_port = $this->config['tcp_port'];
-        $tcp_ssl = (int) $this->config['tcp_ssl'];
+        $tcp_ssl = (int)$this->config['tcp_ssl'];
         $tcp_timeout = $this->config['tcp_timeout'];;
 
         if ($tcp_ssl) {
@@ -278,7 +280,7 @@ class LitleRequest
         if (!$sock) {
             throw new \RuntimeException("Error when opening socket at $tcp_url : $tcp_port. Error number: $err_no Error message: $err_str");
         } else {
-            $handle = @fopen($this->request_file,"r");
+            $handle = @fopen($this->request_file, "r");
             if ($handle) {
                 while (($buffer = fgets($handle, 4096)) !== false) {
                     fwrite($sock, $buffer);
