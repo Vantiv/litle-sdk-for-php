@@ -37,6 +37,7 @@ class CertEcheckTest extends \PHPUnit_Framework_TestCase
     public function test_37()
     {
         $echeck_hash = array(
+            'url' => PRELIVE_URL,
             'orderId' => '37',
             'amount' => '3001',
             'orderSource' => 'telephone',
@@ -57,6 +58,7 @@ class CertEcheckTest extends \PHPUnit_Framework_TestCase
     public function test_38()
     {
         $echeck_hash = array(
+            'url' => PRELIVE_URL,
             'orderId' => '38',
             'amount' => '3002',
             'orderSource' => 'telephone',
@@ -78,6 +80,7 @@ class CertEcheckTest extends \PHPUnit_Framework_TestCase
     public function test_39()
     {
         $echeck_hash = array(
+            'url' => PRELIVE_URL,
             'orderId' => '39',
             'amount' => '3003',
             'orderSource' => 'telephone',
@@ -100,6 +103,7 @@ class CertEcheckTest extends \PHPUnit_Framework_TestCase
     public function test_40()
     {
         $echeck_hash = array(
+            'url' => PRELIVE_URL,
             'orderId' => '40',
             'amount' => '3004',
             'orderSource' => 'telephone',
@@ -123,6 +127,7 @@ class CertEcheckTest extends \PHPUnit_Framework_TestCase
     public function test_41()
     {
         $echeck_hash = array(
+            'url' => PRELIVE_URL,
             'orderId' => '41',
             'amount' => '2008',
             'orderSource' => 'telephone',
@@ -144,6 +149,7 @@ class CertEcheckTest extends \PHPUnit_Framework_TestCase
     public function test_42()
     {
         $echeck_hash = array(
+            'url' => PRELIVE_URL,
             'orderId' => '42',
             'amount' => '2004',
             'orderSource' => 'telephone',
@@ -164,6 +170,7 @@ class CertEcheckTest extends \PHPUnit_Framework_TestCase
     public function test_43()
     {
         $echeck_hash = array(
+            'url' => PRELIVE_URL,
             'orderId' => '43',
             'amount' => '2007',
             'orderSource' => 'telephone',
@@ -185,6 +192,7 @@ class CertEcheckTest extends \PHPUnit_Framework_TestCase
     public function test_44()
     {
         $echeck_hash = array(
+            'url' => PRELIVE_URL,
             'orderId' => '44',
             'amount' => '2009',
             'orderSource' => 'telephone',
@@ -207,6 +215,7 @@ class CertEcheckTest extends \PHPUnit_Framework_TestCase
     public function test_45()
     {
         $echeck_hash = array(
+            'url' => PRELIVE_URL,
             'orderId' => '45',
             'amount' => '1001',
             'orderSource' => 'telephone',
@@ -226,6 +235,7 @@ class CertEcheckTest extends \PHPUnit_Framework_TestCase
     public function test_46()
     {
         $echeck_hash = array(
+            'url' => PRELIVE_URL,
             'orderId' => '46',
             'amount' => '1003',
             'orderSource' => 'telephone',
@@ -247,6 +257,7 @@ class CertEcheckTest extends \PHPUnit_Framework_TestCase
     public function test_47()
     {
         $echeck_hash = array(
+            'url' => PRELIVE_URL,
             'orderId' => '47',
             'amount' => '1007',
             'orderSource' => 'telephone',

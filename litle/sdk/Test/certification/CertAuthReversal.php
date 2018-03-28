@@ -36,6 +36,7 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
     public function test_32()
     {
         $auth_hash = array(
+            'url' => PRELIVE_URL,
             'orderId' => '32',
             'amount' => '10010',
             'orderSource' => 'ecommerce',
@@ -61,6 +62,7 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
 
         //test 32A
         $capture_hash = array(
+            'url' => PRELIVE_URL,
             'litleTxnId' => (XmlParser::getNode($authorizationResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -69,6 +71,7 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Approved', XmlParser::getNode($captureResponse, 'message'));
         //test32B
         $authReversal_hash = array(
+            'url' => PRELIVE_URL,
             'litleTxnId' => (XmlParser::getNode($authorizationResponse, 'litleTxnId')),
             'reportGroup' => 'planets', 'amount' => '5005');
         $initialize = new LitleOnlineRequest();
@@ -80,6 +83,7 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
     public function test_33()
     {
         $auth_hash = array(
+            'url' => PRELIVE_URL,
             'orderId' => '33',
             'amount' => '20020',
             'orderSource' => 'ecommerce',
@@ -107,6 +111,7 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
 
         //test 33A
         $authReversal_hash = array(
+            'url' => PRELIVE_URL,
             'litleTxnId' => (XmlParser::getNode($authorizationResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -118,6 +123,7 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
     public function test_34()
     {
         $auth_hash = array(
+            'url' => PRELIVE_URL,
             'orderId' => '34',
             'amount' => '30030',
             'orderSource' => 'ecommerce',
@@ -143,6 +149,7 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
 
         //test 34A
         $authReversal_hash = array(
+            'url' => PRELIVE_URL,
             'litleTxnId' => (XmlParser::getNode($authorizationResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -154,6 +161,7 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
     public function test_35()
     {
         $auth_hash = array(
+            'url' => PRELIVE_URL,
             'orderId' => '35',
             'amount' => '40040',
             'orderSource' => 'ecommerce',
@@ -177,6 +185,7 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
 
         //test 35A
         $capture_hash = array(
+            'url' => PRELIVE_URL,
             'litleTxnId' => (XmlParser::getNode($authorizationResponse, 'litleTxnId')),
             'reportGroup' => 'planets', 'amount' => '20020');
         $initialize = new LitleOnlineRequest();
@@ -185,6 +194,7 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Approved', XmlParser::getNode($captureResponse, 'message'));
         //test35B
         $authReversal_hash = array(
+            'url' => PRELIVE_URL,
             'litleTxnId' => (XmlParser::getNode($authorizationResponse, 'litleTxnId')),
             'reportGroup' => 'planets', 'amount' => '20020');
         $initialize = new LitleOnlineRequest();
@@ -196,6 +206,7 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
     public function test_36()
     {
         $auth_hash = array(
+            'url' => PRELIVE_URL,
             'orderId' => '36',
             'amount' => '20500',
             'orderSource' => 'ecommerce',
@@ -210,6 +221,7 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
 
         //test 33A
         $authReversal_hash = array(
+            'url' => PRELIVE_URL,
             'litleTxnId' => (XmlParser::getNode($authorizationResponse, 'litleTxnId')),
             'reportGroup' => 'planets', 'amount' => '10000');
         $initialize = new LitleOnlineRequest();
