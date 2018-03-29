@@ -27,7 +27,6 @@ class LitleResponseProcessor
     {
         return $this->xml_reader;
     }
-
     /*
      * If called with either false or no argument, return a SimpleXMLElement corresponding to the next transaction response in the response file.
      * If called with true, return the raw XML for the next transaction response in the response file.

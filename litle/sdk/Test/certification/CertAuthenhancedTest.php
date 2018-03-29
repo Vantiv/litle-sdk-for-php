@@ -28,8 +28,8 @@ namespace litle\sdk\Test\certification;
 use litle\sdk\LitleOnlineRequest;
 USE litle\sdk\XmlParser;
 
-//define('PRELIVE_URL', 'https://payments.vantivprelive.com/vap/communicator/online');
-define('PRELIVE_URL', 'https://www.testvantivcnp.com/sandbox/communicator/online');
+define('PRELIVE_URL', 'https://payments.vantivprelive.com/vap/communicator/online');
+//define('PRELIVE_URL', 'https://www.testvantivcnp.com/sandbox/communicator/online');
 
 class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
 {

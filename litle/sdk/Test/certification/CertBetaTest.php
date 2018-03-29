@@ -28,8 +28,8 @@ namespace litle\sdk\Test\certification;
 use litle\sdk\LitleOnlineRequest;
 USE litle\sdk\XmlParser;
 
-//define('PRELIVE_URL', 'https://payments.vantivprelive.com/vap/communicator/online');
-define('PRELIVE_URL', 'https://www.testvantivcnp.com/sandbox/communicator/online');
+define('PRELIVE_URL', 'https://payments.vantivprelive.com/vap/communicator/online');
+//define('PRELIVE_URL', 'https://www.testvantivcnp.com/sandbox/communicator/online');
 
 class CertBetaTest extends \PHPUnit_Framework_TestCase
 {
@@ -95,7 +95,7 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
         $initialize = new LitleOnlineRequest();
         $voidResponse = $initialize->voidRequest($void_hash);
         $this->assertEquals('360', XmlParser::getNode($voidResponse, 'response'));
-        $this->assertEquals('No transaction found with specified litleTxnId', XmlParser::getNode($voidResponse, 'message'));
+        $this->assertEquals('No transaction found with specified transaction Id', XmlParser::getNode($voidResponse, 'message'));
     }
 
     public function test_7_Auth()

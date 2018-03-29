@@ -162,7 +162,6 @@ class LitleRequest
         if (!$this->closed) {
             $this->closeRequest();
         }
-
         $session = $this->createSFTPSession();
         # with extension .prg
         $session->put('/inbound/' . basename($this->request_file) . '.prg', $this->request_file, \phpseclib\Net\SFTP::SOURCE_LOCAL_FILE);

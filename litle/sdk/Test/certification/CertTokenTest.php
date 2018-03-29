@@ -28,8 +28,8 @@ namespace litle\sdk\Test\certification;
 use litle\sdk\LitleOnlineRequest;
 USE litle\sdk\XmlParser;
 
-//define('PRELIVE_URL', 'https://payments.vantivprelive.com/vap/communicator/online');
-define('PRELIVE_URL', 'https://www.testvantivcnp.com/sandbox/communicator/online');
+define('PRELIVE_URL', 'https://payments.vantivprelive.com/vap/communicator/online');
+//define('PRELIVE_URL', 'https://www.testvantivcnp.com/sandbox/communicator/online');
 
 class CertTokenTest extends \PHPUnit_Framework_TestCase
 {
@@ -45,7 +45,7 @@ class CertTokenTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('445711', XMLParser::getNode($registerTokenResponse, 'bin'));
         $this->assertEquals('VI', XMLParser::getNode($registerTokenResponse, 'type'));
         $this->assertEquals('801', XMLParser::getNode($registerTokenResponse, 'response'));
-        $this->assertEquals('1111222233330123', XMLParser::getNode($registerTokenResponse, 'litleToken'));
+        $this->assertEquals('0123', substr(XMLParser::getNode($registerTokenResponse, 'litleToken'), -4));
         $this->assertEquals('Account number was successfully registered', XMLParser::getNode($registerTokenResponse, 'message'));
     }
 
@@ -74,7 +74,7 @@ class CertTokenTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('445711', XMLParser::getNode($registerTokenResponse, 'bin'));
         $this->assertEquals('VI', XMLParser::getNode($registerTokenResponse, 'type'));
         $this->assertEquals('802', XMLParser::getNode($registerTokenResponse, 'response'));
-        $this->assertEquals('1111222233330123', XMLParser::getNode($registerTokenResponse, 'litleToken'));
+        $this->assertEquals('0123', substr(XMLParser::getNode($registerTokenResponse, 'litleToken'), -4));
         $this->assertEquals('Account number was previously registered', XMLParser::getNode($registerTokenResponse, 'message'));
     }
 
@@ -83,7 +83,9 @@ class CertTokenTest extends \PHPUnit_Framework_TestCase
         $token_hash = array(
             'url' => PRELIVE_URL,
             'orderId' => '53',
-            'echeckForToken' => array('accNum' => '1099999998', 'routingNum' => '114567895'));
+            'echeckForToken' => array(
+                'accNum' => '1099999998',
+                'routingNum' => '011100012'));
 
         $initialize = new LitleOnlineRequest();
         $registerTokenResponse = $initialize->registerTokenRequest($token_hash);
@@ -104,7 +106,7 @@ class CertTokenTest extends \PHPUnit_Framework_TestCase
         $initialize = new LitleOnlineRequest();
         $registerTokenResponse = $initialize->registerTokenRequest($token_hash);
         $this->assertEquals('900', XMLParser::getNode($registerTokenResponse, 'response'));
-        $this->assertEquals('Invalid bank routing number', XMLParser::getNode($registerTokenResponse, 'message'));
+        $this->assertEquals('Invalid Bank Routing Number', XMLParser::getNode($registerTokenResponse, 'message'));
     }
 
     public function test_55()
@@ -138,7 +140,7 @@ class CertTokenTest extends \PHPUnit_Framework_TestCase
         $initialize = new LitleOnlineRequest();
         $registerTokenResponse = $initialize->authorizationRequest($token_hash);
         $this->assertEquals('301', XMLParser::getNode($registerTokenResponse, 'response'));
-        $this->assertEquals('Invalid account number', XMLParser::getNode($registerTokenResponse, 'message'));
+        $this->assertEquals('Invalid Account Number', XMLParser::getNode($registerTokenResponse, 'message'));
     }
 
     public function test_57()
@@ -167,12 +169,14 @@ class CertTokenTest extends \PHPUnit_Framework_TestCase
             'orderId' => '59',
             'amount' => '15000',
             'orderSource' => 'ecommerce',
-            'token' => array('litleToken' => '1712990000040196', 'expDate' => '1112'));
+            'token' => array('litleToken' => '1111000100092332',
+                'expDate' => '1121'));
 
         $initialize = new LitleOnlineRequest();
         $authorizationResponse = $initialize->authorizationRequest($token_hash);
         $this->assertEquals('822', XMLParser::getNode($authorizationResponse, 'response'));
         $this->assertEquals('Token was not found', XMLParser::getNode($authorizationResponse, 'message'));
+
     }
 
     public function test_60()
@@ -182,7 +186,9 @@ class CertTokenTest extends \PHPUnit_Framework_TestCase
             'orderId' => '60',
             'amount' => '15000',
             'orderSource' => 'ecommerce',
-            'token' => array('litleToken' => '1712999999999999', 'expDate' => '1112'));
+            'token' => array(
+                'litleToken' => '1112000100000085',
+                'expDate' => '1121'));
 
         $initialize = new LitleOnlineRequest();
         $authorizationResponse = $initialize->authorizationRequest($token_hash);
@@ -201,7 +207,10 @@ class CertTokenTest extends \PHPUnit_Framework_TestCase
             'billToAddress' => array(
                 'firstName' => 'Tom',
                 'lastName' => 'Black'),
-            'echeck' => array('accType' => 'Checking', 'accNum' => '1099999003', 'routingNum' => '114567895'));
+            'echeck' => array(
+                'accType' => 'Checking',
+                'accNum' => '1099999003',
+                'routingNum' => '011100012'));
 
         $initialize = new LitleOnlineRequest();
         $registerTokenResponse = $initialize->echeckSaleRequest($token_hash);
@@ -209,7 +218,6 @@ class CertTokenTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Account number was successfully registered', XMLParser::getNode($registerTokenResponse, 'tokenMessage'));
         $this->assertEquals('EC', XMLParser::getNode($registerTokenResponse, 'type'));
         $this->assertEquals('003', XMLParser::getNode($registerTokenResponse, 'eCheckAccountSuffix'));
-        $this->assertEquals('111922223333444003', XMLParser::getNode($registerTokenResponse, 'litleToken'));
     }
 
     function test_62()
@@ -222,7 +230,10 @@ class CertTokenTest extends \PHPUnit_Framework_TestCase
             'billToAddress' => array(
                 'firstName' => 'Tom',
                 'lastName' => 'Black'),
-            'echeck' => array('accType' => 'Checking', 'accNum' => '1099999999', 'routingNum' => '114567895'));
+            'echeck' => array(
+                'accType' => 'Checking',
+                'accNum' => '1099999999',
+                'routingNum' => '011100012'));
 
         $initialize = new LitleOnlineRequest();
         $registerTokenResponse = $initialize->echeckSaleRequest($token_hash);
@@ -230,7 +241,6 @@ class CertTokenTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Account number was successfully registered', XMLParser::getNode($registerTokenResponse, 'tokenMessage'));
         $this->assertEquals('EC', XMLParser::getNode($registerTokenResponse, 'type'));
         $this->assertEquals('999', XMLParser::getNode($registerTokenResponse, 'eCheckAccountSuffix'));
-        $this->assertEquals('111922223333444999', XMLParser::getNode($registerTokenResponse, 'litleToken'));
     }
 
     function test_63()
@@ -243,7 +253,10 @@ class CertTokenTest extends \PHPUnit_Framework_TestCase
             'billToAddress' => array(
                 'firstName' => 'Tom',
                 'lastName' => 'Black'),
-            'echeck' => array('accType' => 'Checking', 'accNum' => '1099999999', 'routingNum' => '214567892'));
+            'echeck' => array(
+                'accType' => 'Checking',
+                'accNum' => '1099999999',
+                'routingNum' => '011100012'));
 
         $initialize = new LitleOnlineRequest();
         $registerTokenResponse = $initialize->echeckSaleRequest($token_hash);
@@ -251,7 +264,6 @@ class CertTokenTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Account number was successfully registered', XMLParser::getNode($registerTokenResponse, 'tokenMessage'));
         $this->assertEquals('EC', XMLParser::getNode($registerTokenResponse, 'type'));
         $this->assertEquals('999', XMLParser::getNode($registerTokenResponse, 'eCheckAccountSuffix'));
-        $this->assertEquals('111922223333555999', XMLParser::getNode($registerTokenResponse, 'litleToken'));
     }
 
 }
