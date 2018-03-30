@@ -6,3 +6,5 @@
 reports/
 /vendor
 composer.lock
+
+/litle_SDK_config*

@@ -29,6 +29,7 @@ use litle\sdk\LitleOnlineRequest;
 USE litle\sdk\XmlParser;
 
 define('PRELIVE_URL', 'https://payments.vantivprelive.com/vap/communicator/online');
+//define('PRELIVE_URL', 'https://www.testvantivcnp.com/sandbox/communicator/online');
 
 class CertBetaTest extends \PHPUnit_Framework_TestCase
 {
@@ -52,8 +53,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
                 'type' => 'VI',
                 'cardValidationNum' => '992'));
 
-        $initilaize = new LitleOnlineRequest();
-        $authorizationResponse = $initilaize->authorizationRequest($auth_hash);
+        $initialize = new LitleOnlineRequest();
+        $authorizationResponse = $initialize->authorizationRequest($auth_hash);
         $this->assertEquals('110', XmlParser::getNode($authorizationResponse, 'response'));
         $this->assertEquals('Insufficient Funds', XmlParser::getNode($authorizationResponse, 'message'));
         $this->assertEquals('34', XmlParser::getNode($authorizationResponse, 'avsResult'));
@@ -80,8 +81,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
                 'type' => 'VI',
                 'cardValidationNum' => '992'));
 
-        $initilaize = new LitleOnlineRequest();
-        $saleResponse = $initilaize->saleRequest($sale_hash);
+        $initialize = new LitleOnlineRequest();
+        $saleResponse = $initialize->saleRequest($sale_hash);
         $this->assertEquals('110', XmlParser::getNode($saleResponse, 'response'));
         $this->assertEquals('Insufficient Funds', XmlParser::getNode($saleResponse, 'message'));
         $this->assertEquals('34', XmlParser::getNode($saleResponse, 'avsResult'));
@@ -91,10 +92,10 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
             'url' => PRELIVE_URL,
             'litleTxnId' => (XmlParser::getNode($saleResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
-        $initilaize = new LitleOnlineRequest();
-        $voidResponse = $initilaize->voidRequest($void_hash);
+        $initialize = new LitleOnlineRequest();
+        $voidResponse = $initialize->voidRequest($void_hash);
         $this->assertEquals('360', XmlParser::getNode($voidResponse, 'response'));
-        $this->assertEquals('No transaction found with specified litleTxnId', XmlParser::getNode($voidResponse, 'message'));
+        $this->assertEquals('No transaction found with specified transaction Id', XmlParser::getNode($voidResponse, 'message'));
     }
 
     public function test_7_Auth()
@@ -117,8 +118,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
                 'cardValidationNum' => '251',
                 'type' => 'MC'));
 
-        $initilaize = new LitleOnlineRequest();
-        $authorizationResponse = $initilaize->authorizationRequest($auth_hash);
+        $initialize = new LitleOnlineRequest();
+        $authorizationResponse = $initialize->authorizationRequest($auth_hash);
         $this->assertEquals('301', XmlParser::getNode($authorizationResponse, 'response'));
         $this->assertEquals('Invalid Account Number', XmlParser::getNode($authorizationResponse, 'message'));
         $this->assertEquals('34', XmlParser::getNode($authorizationResponse, 'avsResult'));
@@ -145,8 +146,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
                 'cardValidationNum' => '251',
                 'type' => 'MC'));
 
-        $initilaize = new LitleOnlineRequest();
-        $authorizationResponse = $initilaize->authorizationRequest($auth_hash);
+        $initialize = new LitleOnlineRequest();
+        $authorizationResponse = $initialize->authorizationRequest($auth_hash);
         $this->assertEquals('301', XmlParser::getNode($authorizationResponse, 'response'));
         $this->assertEquals('Invalid Account Number', XmlParser::getNode($authorizationResponse, 'message'));
         $this->assertEquals('34', XmlParser::getNode($authorizationResponse, 'avsResult'));
@@ -173,8 +174,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
                 'cardValidationNum' => '251',
                 'type' => 'MC'));
 
-        $initilaize = new LitleOnlineRequest();
-        $saleResponse = $initilaize->authorizationRequest($sale_hash);
+        $initialize = new LitleOnlineRequest();
+        $saleResponse = $initialize->authorizationRequest($sale_hash);
         $this->assertEquals('301', XmlParser::getNode($saleResponse, 'response'));
         $this->assertEquals('Invalid Account Number', XmlParser::getNode($saleResponse, 'message'));
         $this->assertEquals('34', XmlParser::getNode($saleResponse, 'avsResult'));
@@ -200,8 +201,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
                 'expDate' => '0812',
                 'type' => 'DI',
                 'cardValidationNum' => '184'));
-        $initilaize = new LitleOnlineRequest();
-        $authorizationResponse = $initilaize->authorizationRequest($auth_hash);
+        $initialize = new LitleOnlineRequest();
+        $authorizationResponse = $initialize->authorizationRequest($auth_hash);
         $this->assertEquals('123', XmlParser::getNode($authorizationResponse, 'response'));
         $this->assertEquals('Call Discover', XmlParser::getNode($authorizationResponse, 'message'));
         $this->assertEquals('34', XmlParser::getNode($authorizationResponse, 'avsResult'));
@@ -227,8 +228,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
                 'expDate' => '0812',
                 'type' => 'DI',
                 'cardValidationNum' => '184'));
-        $initilaize = new LitleOnlineRequest();
-        $authorizationResponse = $initilaize->authorizationRequest($auth_hash);
+        $initialize = new LitleOnlineRequest();
+        $authorizationResponse = $initialize->authorizationRequest($auth_hash);
         $this->assertEquals('123', XmlParser::getNode($authorizationResponse, 'response'));
         $this->assertEquals('Call Discover', XmlParser::getNode($authorizationResponse, 'message'));
         $this->assertEquals('34', XmlParser::getNode($authorizationResponse, 'avsResult'));
@@ -254,8 +255,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
                 'expDate' => '0812',
                 'type' => 'DI',
                 'cardValidationNum' => '184'));
-        $initilaize = new LitleOnlineRequest();
-        $saleResponse = $initilaize->saleRequest($sale_hash);
+        $initialize = new LitleOnlineRequest();
+        $saleResponse = $initialize->saleRequest($sale_hash);
         $this->assertEquals('123', XmlParser::getNode($saleResponse, 'response'));
         $this->assertEquals('Call Discover', XmlParser::getNode($saleResponse, 'message'));
         $this->assertEquals('34', XmlParser::getNode($saleResponse, 'avsResult'));
@@ -281,8 +282,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
                 'expDate' => '0912',
                 'cardValidationNum' => '0421',
                 'type' => 'AX'));
-        $initilaize = new LitleOnlineRequest();
-        $authorizationResponse = $initilaize->authorizationRequest($auth_hash);
+        $initialize = new LitleOnlineRequest();
+        $authorizationResponse = $initialize->authorizationRequest($auth_hash);
         $this->assertEquals('303', XmlParser::getNode($authorizationResponse, 'response'));
         $this->assertEquals('Pick Up Card', XmlParser::getNode($authorizationResponse, 'message'));
         $this->assertEquals('34', XmlParser::getNode($authorizationResponse, 'avsResult'));
@@ -307,8 +308,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
                 'expDate' => '0912',
                 'cardValidationNum' => '0421',
                 'type' => 'AX'));
-        $initilaize = new LitleOnlineRequest();
-        $authorizationResponse = $initilaize->authorizationRequest($auth_hash);
+        $initialize = new LitleOnlineRequest();
+        $authorizationResponse = $initialize->authorizationRequest($auth_hash);
         $this->assertEquals('303', XmlParser::getNode($authorizationResponse, 'response'));
         $this->assertEquals('Pick Up Card', XmlParser::getNode($authorizationResponse, 'message'));
         $this->assertEquals('34', XmlParser::getNode($authorizationResponse, 'avsResult'));
@@ -333,8 +334,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
                 'expDate' => '0912',
                 'cardValidationNum' => '0421',
                 'type' => 'AX'));
-        $initilaize = new LitleOnlineRequest();
-        $saleResponse = $initilaize->saleRequest($sale_hash);
+        $initialize = new LitleOnlineRequest();
+        $saleResponse = $initialize->saleRequest($sale_hash);
         $this->assertEquals('303', XmlParser::getNode($saleResponse, 'response'));
         $this->assertEquals('Pick Up Card', XmlParser::getNode($saleResponse, 'message'));
         $this->assertEquals('34', XmlParser::getNode($saleResponse, 'avsResult'));
@@ -352,8 +353,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
                 'expDate' => '0912',
                 'type' => 'VI'),
             'allowPartialAuth' => 'true');
-        $initilaize = new LitleOnlineRequest();
-        $authorizationResponse = $initilaize->authorizationRequest($auth_hash);
+        $initialize = new LitleOnlineRequest();
+        $authorizationResponse = $initialize->authorizationRequest($auth_hash);
         $this->assertEquals('010', XmlParser::getNode($authorizationResponse, 'response'));
         $this->assertEquals('Partially Approved', XmlParser::getNode($authorizationResponse, 'message'));
         $this->assertEquals('32000', XmlParser::getNode($authorizationResponse, 'approvedAmount'));
@@ -371,8 +372,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
                 'expDate' => '1111',
                 'type' => 'MC'),
             'allowPartialAuth' => 'true');
-        $initilaize = new LitleOnlineRequest();
-        $authorizationResponse = $initilaize->authorizationRequest($auth_hash);
+        $initialize = new LitleOnlineRequest();
+        $authorizationResponse = $initialize->authorizationRequest($auth_hash);
         $this->assertEquals('010', XmlParser::getNode($authorizationResponse, 'response'));
         $this->assertEquals('Partially Approved', XmlParser::getNode($authorizationResponse, 'message'));
         $this->assertEquals('48000', XmlParser::getNode($authorizationResponse, 'approvedAmount'));
@@ -390,8 +391,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
                 'expDate' => '0412',
                 'type' => 'AX'),
             'allowPartialAuth' => 'true');
-        $initilaize = new LitleOnlineRequest();
-        $authorizationResponse = $initilaize->authorizationRequest($auth_hash);
+        $initialize = new LitleOnlineRequest();
+        $authorizationResponse = $initialize->authorizationRequest($auth_hash);
         $this->assertEquals('010', XmlParser::getNode($authorizationResponse, 'response'));
         $this->assertEquals('Partially Approved', XmlParser::getNode($authorizationResponse, 'message'));
         $this->assertEquals('40000', XmlParser::getNode($authorizationResponse, 'approvedAmount'));
@@ -409,8 +410,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
                 'expDate' => '0812',
                 'type' => 'DI'),
             'allowPartialAuth' => 'true');
-        $initilaize = new LitleOnlineRequest();
-        $authorizationResponse = $initilaize->authorizationRequest($auth_hash);
+        $initialize = new LitleOnlineRequest();
+        $authorizationResponse = $initialize->authorizationRequest($auth_hash);
         $this->assertEquals('010', XmlParser::getNode($authorizationResponse, 'response'));
         $this->assertEquals('Partially Approved', XmlParser::getNode($authorizationResponse, 'message'));
         $this->assertEquals('12000', XmlParser::getNode($authorizationResponse, 'approvedAmount'));
