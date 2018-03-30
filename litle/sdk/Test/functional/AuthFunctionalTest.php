@@ -296,4 +296,62 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('2050', XmlParser::getNode($authorizationResponse, 'expYear'));
         $this->assertEquals('aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1kUXc0dzlXZ1hjUQ0K', XmlParser::getNode($authorizationResponse, 'cryptogram'));
     }
+
+    public function test_auth_with_processingType()
+    {
+        $hash_in = array(
+            'card' => array('type' => 'VI',
+                'number' => '4100200300011001',
+                'expDate' => '0521',),
+            'orderId' => '2111',
+            'amount' => '4999',
+            'orderSource' => 'ecommerce',
+            'processingType' => 'initialRecurring');
+
+        $initialize = new LitleOnlineRequest();
+        $authorizationResponse = $initialize->authorizationRequest($hash_in);
+        $response = XmlParser::getNode($authorizationResponse, 'response');
+        $this->assertEquals('000', $response);
+        $message = XmlParser::getNode($authorizationResponse, 'message');
+        $this->assertEquals('Approved', $message);
+        $networkTransactionId = XmlParser::getNode($authorizationResponse, 'networkTransactionId');
+        $this->assertNotNull($networkTransactionId);
+    }
+
+    public function test_auth_with_originalNetworkTransactionId()
+    {
+        $hash_in = array(
+            'card' => array('type' => 'VI',
+                'number' => '4100200300011001',
+                'expDate' => '0521',
+                'cardValidationNum' => '463',),
+            'orderId' => '2111',
+            'amount' => '4999',
+            'orderSource' => 'recurring',
+            'originalNetworkTransactionId' => 'Value from Net_Id1 response',);
+
+        $initialize = new LitleOnlineRequest();
+        $authorizationResponse = $initialize->authorizationRequest($hash_in);
+        $response = XmlParser::getNode($authorizationResponse, 'response');
+        $this->assertEquals('000', $response);
+    }
+
+    public function test_auth_with_originalTransactionAmount()
+    {
+        $hash_in = array(
+            'card' => array('type' => 'VI',
+                'number' => '4100200300011001',
+                'expDate' => '0521',
+                'cardValidationNum' => '463',),
+            'orderId' => '2111',
+            'amount' => '4999',
+            'orderSource' => 'recurring',
+            'originalNetworkTransactionId' => 'Value from Net_Id1 response',
+            'originalTransactionAmount' => '4999',);
+
+        $initialize = new LitleOnlineRequest();
+        $authorizationResponse = $initialize->authorizationRequest($hash_in);
+        $response = XmlParser::getNode($authorizationResponse, 'response');
+        $this->assertEquals('000', $response);
+    }
 }

@@ -8,4 +8,5 @@ reports/
 composer.lock
 /lib
 /litle_SDK_config.ini
+/litle_SDK_config*
 .idea/

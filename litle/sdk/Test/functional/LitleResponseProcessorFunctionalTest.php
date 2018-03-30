@@ -499,129 +499,129 @@ class LitleResponseProcessorFunctionalTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($txnCount, 6);
     }
 
-    public function test_PFIF_instruction_txn()
-    {
-
-        $request = new LitleRequest ($this->config);
-
-        // first batch
-        $batch_request = new BatchRequest ($this->direct);
-
-
-        $submerchantCreditHash = array(
-            'fundingSubmerchantId' => '2111',
-            'submerchantName' => '001',
-            'fundsTransferId' => '12345678',
-            'amount' => '13',
-            'accountInfo' => array(
-                'accType' => 'Checking',
-                'accNum' => '1092969901',
-                'routingNum' => '011075150',
-                'checkNum' => '123455'
-            )
-        );
-        $batch_request->addSubmerchantCredit($submerchantCreditHash);
-
-        $payFacCreditHash = array(
-            'fundingSubmerchantId' => '2111',
-            'fundsTransferId' => '12345678',
-            'amount' => '13'
-        );
-        $batch_request->addPayFacCredit($payFacCreditHash);
-
-        $vendorCreditHash = array(
-            'fundingSubmerchantId' => '2111',
-            'vendorName' => '001',
-            'fundsTransferId' => '12345678',
-            'amount' => '13',
-            'accountInfo' => array(
-                'accType' => 'Checking',
-                'accNum' => '1092969901',
-                'routingNum' => '011075150',
-                'checkNum' => '123455'
-            )
-        );
-        $batch_request->addVendorCredit($vendorCreditHash);
-
-        $reserveCreditHash = array(
-            'fundingSubmerchantId' => '2111',
-            'fundsTransferId' => '12345678',
-            'amount' => '13'
-        );
-        $batch_request->addReserveCredit($reserveCreditHash);
-
-        $physicalCheckCreditHash = array(
-            'fundingSubmerchantId' => '2111',
-            'fundsTransferId' => '12345678',
-            'amount' => '13'
-        );
-        $batch_request->addPhysicalCheckCredit($physicalCheckCreditHash);
-
-        $submerchantDebitHash = array(
-            'fundingSubmerchantId' => '2111',
-            'submerchantName' => '001',
-            'fundsTransferId' => '12345678',
-            'amount' => '13',
-            'accountInfo' => array(
-                'accType' => 'Checking',
-                'accNum' => '1092969901',
-                'routingNum' => '011075150',
-                'checkNum' => '123455'
-            )
-        );
-        $batch_request->addSubmerchantDebit($submerchantDebitHash);
-
-        $payFacDebitHash = array(
-            'fundingSubmerchantId' => '2111',
-            'fundsTransferId' => '12345678',
-            'amount' => '13'
-        );
-        $batch_request->addPayFacDebit($payFacDebitHash);
-
-        $vendorDebitHash = array(
-            'fundingSubmerchantId' => '2111',
-            'vendorName' => '001',
-            'fundsTransferId' => '12345678',
-            'amount' => '13',
-            'accountInfo' => array(
-                'accType' => 'Checking',
-                'accNum' => '1092969901',
-                'routingNum' => '011075150',
-                'checkNum' => '123455'
-            )
-        );
-        $batch_request->addVendorDebit($vendorDebitHash);
-
-        $reserveDebitHash = array(
-            'fundingSubmerchantId' => '2111',
-            'fundsTransferId' => '12345678',
-            'amount' => '13'
-        );
-        $batch_request->addReserveDebit($reserveDebitHash);
-
-        $physicalCheckDebitHash = array(
-            'fundingSubmerchantId' => '2111',
-            'fundsTransferId' => '12345678',
-            'amount' => '13'
-        );
-        $batch_request->addPhysicalCheckDebit($physicalCheckDebitHash);
-
-        $request->addBatchRequest($batch_request);
-
-        $response = $request->sendToLitleStream();
-        $respProcessor = new LitleResponseProcessor ($response);
-
-        $txnResponse = $respProcessor->nextTransaction();
-        $txnCount = 0;
-
-        while ($txnResponse != FALSE) {
-            $this->assertEquals($txnResponse->response, '000');
-            $txnCount++;
-            $txnResponse = $respProcessor->nextTransaction();
-        }
-
-        $this->assertEquals($txnCount, 10);
-    }
+//    public function test_PFIF_instruction_txn()
+//    {
+//
+//        $request = new LitleRequest ($this->config);
+//
+//        // first batch
+//        $batch_request = new BatchRequest ($this->direct);
+//
+//
+//        $submerchantCreditHash = array(
+//            'fundingSubmerchantId' => '2111',
+//            'submerchantName' => '001',
+//            'fundsTransferId' => '12345678',
+//            'amount' => '13',
+//            'accountInfo' => array(
+//                'accType' => 'Checking',
+//                'accNum' => '1092969901',
+//                'routingNum' => '011075150',
+//                'checkNum' => '123455'
+//            )
+//        );
+//        $batch_request->addSubmerchantCredit($submerchantCreditHash);
+//
+//        $payFacCreditHash = array(
+//            'fundingSubmerchantId' => '2111',
+//            'fundsTransferId' => '12345678',
+//            'amount' => '13'
+//        );
+//        $batch_request->addPayFacCredit($payFacCreditHash);
+//
+//        $vendorCreditHash = array(
+//            'fundingSubmerchantId' => '2111',
+//            'vendorName' => '001',
+//            'fundsTransferId' => '12345678',
+//            'amount' => '13',
+//            'accountInfo' => array(
+//                'accType' => 'Checking',
+//                'accNum' => '1092969901',
+//                'routingNum' => '011075150',
+//                'checkNum' => '123455'
+//            )
+//        );
+//        $batch_request->addVendorCredit($vendorCreditHash);
+//
+//        $reserveCreditHash = array(
+//            'fundingSubmerchantId' => '2111',
+//            'fundsTransferId' => '12345678',
+//            'amount' => '13'
+//        );
+//        $batch_request->addReserveCredit($reserveCreditHash);
+//
+//        $physicalCheckCreditHash = array(
+//            'fundingSubmerchantId' => '2111',
+//            'fundsTransferId' => '12345678',
+//            'amount' => '13'
+//        );
+//        $batch_request->addPhysicalCheckCredit($physicalCheckCreditHash);
+//
+//        $submerchantDebitHash = array(
+//            'fundingSubmerchantId' => '2111',
+//            'submerchantName' => '001',
+//            'fundsTransferId' => '12345678',
+//            'amount' => '13',
+//            'accountInfo' => array(
+//                'accType' => 'Checking',
+//                'accNum' => '1092969901',
+//                'routingNum' => '011075150',
+//                'checkNum' => '123455'
+//            )
+//        );
+//        $batch_request->addSubmerchantDebit($submerchantDebitHash);
+//
+//        $payFacDebitHash = array(
+//            'fundingSubmerchantId' => '2111',
+//            'fundsTransferId' => '12345678',
+//            'amount' => '13'
+//        );
+//        $batch_request->addPayFacDebit($payFacDebitHash);
+//
+//        $vendorDebitHash = array(
+//            'fundingSubmerchantId' => '2111',
+//            'vendorName' => '001',
+//            'fundsTransferId' => '12345678',
+//            'amount' => '13',
+//            'accountInfo' => array(
+//                'accType' => 'Checking',
+//                'accNum' => '1092969901',
+//                'routingNum' => '011075150',
+//                'checkNum' => '123455'
+//            )
+//        );
+//        $batch_request->addVendorDebit($vendorDebitHash);
+//
+//        $reserveDebitHash = array(
+//            'fundingSubmerchantId' => '2111',
+//            'fundsTransferId' => '12345678',
+//            'amount' => '13'
+//        );
+//        $batch_request->addReserveDebit($reserveDebitHash);
+//
+//        $physicalCheckDebitHash = array(
+//            'fundingSubmerchantId' => '2111',
+//            'fundsTransferId' => '12345678',
+//            'amount' => '13'
+//        );
+//        $batch_request->addPhysicalCheckDebit($physicalCheckDebitHash);
+//
+//        $request->addBatchRequest($batch_request);
+//
+//        $response = $request->sendToLitleStream();
+//        $respProcessor = new LitleResponseProcessor ($response);
+//
+//        $txnResponse = $respProcessor->nextTransaction();
+//        $txnCount = 0;
+//
+//        while ($txnResponse != FALSE) {
+//            $this->assertEquals($txnResponse->response, '000');
+//            $txnCount++;
+//            $txnResponse = $respProcessor->nextTransaction();
+//        }
+//
+//        $this->assertEquals($txnCount, 10);
+//    }
 
     public function tearDown()
     {

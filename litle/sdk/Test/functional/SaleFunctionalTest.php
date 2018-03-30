@@ -370,4 +370,62 @@ class SaleFunctionalTest extends \PHPUnit_Framework_TestCase
         // re-implement when sandbox supports this payment type
 //        $this->assertEquals('http://redirect.url.vantiv.com', XmlParser::getNode($saleResponse, 'redirectUrl'));
     }
+
+    public function test_sale_with_processingType()
+    {
+        $hash_in = array(
+            'card' => array('type' => 'VI',
+                'number' => '4100200300011000',
+                'expDate' => '0521',),
+            'orderId' => '2111',
+            'amount' => '4999',
+            'orderSource' => 'ecommerce',
+            'processingType' => 'initialRecurring');
+
+        $initialize = new LitleOnlineRequest();
+        $saleResponse = $initialize->saleRequest($hash_in);
+        $response = XmlParser::getNode($saleResponse, 'response');
+        $this->assertEquals('000', $response);
+        $message = XmlParser::getNode($saleResponse, 'message');
+        $this->assertEquals('Approved', $message);
+        $networkTransactionId = XmlParser::getNode($saleResponse, 'networkTransactionId');
+        $this->assertNotNull($networkTransactionId);
+    }
+
+    public function test_sale_with_originalNetworkTransactionId()
+    {
+        $hash_in = array(
+            'card' => array('type' => 'VI',
+                'number' => '4100200300011001',
+                'expDate' => '0521',
+                'cardValidationNum' => '463',),
+            'orderId' => '2111',
+            'amount' => '4999',
+            'orderSource' => 'recurring',
+            'originalNetworkTransactionId' => 'Value from Net_Id1 response',);
+
+        $initialize = new LitleOnlineRequest();
+        $saleResponse = $initialize->saleRequest($hash_in);
+        $response = XmlParser::getNode($saleResponse, 'response');
+        $this->assertEquals('000', $response);
+    }
+
+    public function test_sale_with_originalTransactionAmount()
+    {
+        $hash_in = array(
+            'card' => array('type' => 'VI',
+                'number' => '4100200300011001',
+                'expDate' => '0521',
+                'cardValidationNum' => '463',),
+            'orderId' => '2111',
+            'amount' => '4999',
+            'orderSource' => 'recurring',
+            'originalNetworkTransactionId' => 'Value from Net_Id1 response',
+            'originalTransactionAmount' => '4999',);
+
+        $initialize = new LitleOnlineRequest();
+        $saleResponse = $initialize->saleRequest($hash_in);
+        $response = XmlParser::getNode($saleResponse, 'response');
+        $this->assertEquals('000', $response);
+    }
 }

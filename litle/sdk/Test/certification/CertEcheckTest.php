@@ -187,7 +187,6 @@ class CertEcheckTest extends \PHPUnit_Framework_TestCase
         $echeckSaleResponse = $initialize->echeckSaleRequest($echeck_hash);
         $this->assertEquals('000', XMLParser::getNode($echeckSaleResponse, 'response'));
         $this->assertEquals('Approved', XMLParser::getNode($echeckSaleResponse, 'message'));
-        echo(XmlParser::getDomDocumentAsString($echeckSaleResponse));
     }
 
     public function test_44()

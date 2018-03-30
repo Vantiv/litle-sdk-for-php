@@ -42,9 +42,9 @@ class Transactions
             'litleInternalRecurringRequest' => XmlFields::litleInternalRecurringRequestType(XmlFields::returnArrayValue($hash_in, 'litleInternalRecurringRequest')),
             'debtRepayment' => XmlFields::returnArrayValue($hash_in, 'debtRepayment'),
             'advancedFraudChecks' => XmlFields::advancedFraudChecksType(XmlFields::returnArrayValue($hash_in, 'advancedFraudChecks')),
-            'processingType' => XmlFields::advancedFraudChecksType(XmlFields::returnArrayValue($hash_in, 'processingType')),
-            'originalNetworkTransactionId' => XmlFields::advancedFraudChecksType(XmlFields::returnArrayValue($hash_in, 'originalNetworkTransactionId')),
-            'originalTransacionAmount' => XmlFields::advancedFraudChecksType(XmlFields::returnArrayValue($hash_in, 'originalTransacionAmount'))
+            'processingType' => XmlFields::returnArrayValue($hash_in, 'processingType'),
+            'originalNetworkTransactionId' => XmlFields::returnArrayValue($hash_in, 'originalNetworkTransactionId'),
+            'originalTransactionAmount' => XmlFields::returnArrayValue($hash_in, 'originalTransactionAmount'),
         );
 
         return $hash_out;
@@ -83,9 +83,9 @@ class Transactions
             'recurringRequest' => XmlFields::recurringRequestType(XmlFields::returnArrayValue($hash_in, 'recurringRequest')),
             'debtRepayment' => XmlFields::returnArrayValue($hash_in, 'debtRepayment'),
             'advancedFraudChecks' => XmlFields::advancedFraudChecksType(XmlFields::returnArrayValue($hash_in, 'advancedFraudChecks')),
-            'processingType' => XmlFields::advancedFraudChecksType(XmlFields::returnArrayValue($hash_in, 'processingType')),
-            'originalNetworkTransactionId' => XmlFields::advancedFraudChecksType(XmlFields::returnArrayValue($hash_in, 'originalNetworkTransactionId')),
-            'originalTransacionAmount' => XmlFields::advancedFraudChecksType(XmlFields::returnArrayValue($hash_in, 'originalTransacionAmount'))
+            'processingType' => XmlFields::returnArrayValue($hash_in, 'processingType'),
+            'originalNetworkTransactionId' => XmlFields::returnArrayValue($hash_in, 'originalNetworkTransactionId'),
+            'originalTransactionAmount' => XmlFields::returnArrayValue($hash_in, 'originalTransactionAmount'),
         );
 
         return $hash_out;
