@@ -696,7 +696,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
             'url' => 'https://payments.vantivprelive.com/vap/communicator/online'
         );
 
-        $initialize = new CnpOnlineRequest();
+        $initialize = new LitleOnlineRequest();
         $saleResponse = $initialize->saleRequest($sale_hash);
 //        $this->assertEquals('000', XmlParser::getNode($saleResponse, 'response'));
 //        $this->assertEquals('Approved', XmlParser::getNode($saleResponse, 'message'));
@@ -717,7 +717,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
             'url' => 'https://payments.vantivprelive.com/vap/communicator/online'
         );
 
-        $initialize = new CnpOnlineRequest();
+        $initialize = new LitleOnlineRequest();
         $saleResponse = $initialize->saleRequest($sale_hash);
         $this->assertEquals('917', XmlParser::getNode($saleResponse, 'response'));
         $this->assertEquals('Invalid billing country code', XmlParser::getNode($saleResponse, 'message'));
@@ -738,7 +738,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
             'url' => 'https://payments.vantivprelive.com/vap/communicator/online'
         );
 
-        $initialize = new CnpOnlineRequest();
+        $initialize = new LitleOnlineRequest();
         $saleResponse = $initialize->saleRequest($sale_hash);
 //        $this->assertEquals('000', XmlParser::getNode($saleResponse, 'response'));
 //        $this->assertEquals('Approved', XmlParser::getNode($saleResponse, 'message'));
@@ -759,7 +759,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
             'url' => 'https://payments.vantivprelive.com/vap/communicator/online'
         );
 
-        $initialize = new CnpOnlineRequest();
+        $initialize = new LitleOnlineRequest();
         $saleResponse = $initialize->saleRequest($sale_hash);
         $this->assertEquals('917', XmlParser::getNode($saleResponse, 'response'));
         $this->assertEquals('Invalid billing country code', XmlParser::getNode($saleResponse, 'message'));
@@ -778,7 +778,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
             'url' => 'https://payments.vantivprelive.com/vap/communicator/online'
         );
 
-        $initialize = new CnpOnlineRequest();
+        $initialize = new LitleOnlineRequest();
         $saleResponse = $initialize->saleRequest($sale_hash);
 //        $this->assertEquals('000', XmlParser::getNode($saleResponse, 'response'));
 //        $this->assertEquals('Approved', XmlParser::getNode($saleResponse, 'message'));
@@ -799,7 +799,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
             'url' => 'https://payments.vantivprelive.com/vap/communicator/online'
         );
 
-        $initialize = new CnpOnlineRequest();
+        $initialize = new LitleOnlineRequest();
         $saleResponse = $initialize->saleRequest($sale_hash);
         $this->assertEquals('917', XmlParser::getNode($saleResponse, 'response'));
         $this->assertEquals('Invalid billing country code', XmlParser::getNode($saleResponse, 'message'));
