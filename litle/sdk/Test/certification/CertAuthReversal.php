@@ -226,7 +226,6 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
                 'type' => 'AX'));
         $initialize = new LitleOnlineRequest();
         $authorizationResponse = $initialize->authorizationRequest($auth_hash);
-        //TODO Processing Network Unavailable
         $this->assertEquals('000', XmlParser::getNode($authorizationResponse, 'response'));
         $this->assertEquals('Approved', XmlParser::getNode($authorizationResponse, 'message'));
 

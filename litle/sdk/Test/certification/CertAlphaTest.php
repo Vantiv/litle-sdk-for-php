@@ -59,7 +59,6 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         $authorizationResponse = $initialize->authorizationRequest($auth_hash);
         $this->assertEquals('000', XmlParser::getNode($authorizationResponse, 'response'));
         $this->assertEquals('Approved', XmlParser::getNode($authorizationResponse, 'message'));
-        //TODO: getting blank auth code
         $this->assertEquals('11111', trim(XmlParser::getNode($authorizationResponse, 'authCode')));
         $this->assertEquals('1', XmlParser::getNode($authorizationResponse, 'avsResult'));
         $this->assertEquals('M', XmlParser::getNode($authorizationResponse, 'cardValidationResult'));
@@ -119,7 +118,6 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         $authorizationResponse = $initialize->authorizationRequest($auth_hash);
         $this->assertEquals('000', XmlParser::getNode($authorizationResponse, 'response'));
         $this->assertEquals('Approved', XmlParser::getNode($authorizationResponse, 'message'));
-        //TODO: Getting blank authCode
         $this->assertEquals('11111', trim(XmlParser::getNode($authorizationResponse, 'authCode')));
         $this->assertEquals('1', XmlParser::getNode($authorizationResponse, 'avsResult'));
         $this->assertEquals('M', XmlParser::getNode($authorizationResponse, 'cardValidationResult'));
@@ -149,7 +147,6 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         $saleResponse = $initialize->saleRequest($sale_hash);
         $this->assertEquals('000', XmlParser::getNode($saleResponse, 'response'));
         $this->assertEquals('Approved', XmlParser::getNode($saleResponse, 'message'));
-        //TODO: Getting 05890 as authcode
         $this->assertEquals('11111', trim(XmlParser::getNode($saleResponse, 'authCode')));
         $this->assertEquals('1', XmlParser::getNode($saleResponse, 'avsResult'));
         $this->assertEquals('M', XmlParser::getNode($saleResponse, 'cardValidationResult'));
@@ -194,7 +191,6 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
                 'expDate' => '0212',
                 'cardValidationNum' => '261',
                 'type' => 'MC'),
-            //TODO 3-D Secure transaction not supported by merchant
             'cardholderAuthentication' => array('authenticationValue'=>'BwABBJQ1AgAAAAAgJDUCAAAAAAA=' )
         );
 
@@ -202,7 +198,6 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         $authorizationResponse = $initialize->authorizationRequest($auth_hash);
         $this->assertEquals('000', XmlParser::getNode($authorizationResponse, 'response'));
         $this->assertEquals('Approved', XmlParser::getNode($authorizationResponse, 'message'));
-        //TODO: getting empty authcode
         $this->assertEquals('22222', trim(XmlParser::getNode($authorizationResponse, 'authCode')));
         $this->assertEquals('10', XmlParser::getNode($authorizationResponse, 'avsResult'));
         $this->assertEquals('M', XmlParser::getNode($authorizationResponse, 'cardValidationResult'));
@@ -262,7 +257,6 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
                 'expDate' => '0212',
                 'cardValidationNum' => '261',
                 'type' => 'MC'),
-            //TODO run against prelive for certification
             'cardholderAuthentication' => array('authenticationValue'=>'BwABBJQ1AgAAAAAgJDUCAAAAAAA=' )
         );
 
@@ -270,10 +264,9 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         $authorizationResponse = $initialize->authorizationRequest($auth_hash);
         $this->assertEquals('000', XmlParser::getNode($authorizationResponse, 'response'));
         $this->assertEquals('Approved', XmlParser::getNode($authorizationResponse, 'message'));
-        //TODO: Getting blank authcode
-        //$this->assertEquals('22222', trim(XmlParser::getNode($authorizationResponse, 'authCode')));
-        //$this->assertEquals('10', XmlParser::getNode($authorizationResponse, 'avsResult'));
-        //$this->assertEquals('M', XmlParser::getNode($authorizationResponse, 'cardValidationResult'));
+        $this->assertEquals('22222', trim(XmlParser::getNode($authorizationResponse, 'authCode')));
+        $this->assertEquals('10', XmlParser::getNode($authorizationResponse, 'avsResult'));
+        $this->assertEquals('M', XmlParser::getNode($authorizationResponse, 'cardValidationResult'));
     }
 
     function test_2_sale()
@@ -303,7 +296,6 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         $saleResponse = $initialize->saleRequest($sale_hash);
         $this->assertEquals('000', XmlParser::getNode($saleResponse, 'response'));
         $this->assertEquals('Approved', XmlParser::getNode($saleResponse, 'message'));
-        //TODO: getting 03180 as authcode
         $this->assertEquals('22222', trim(XmlParser::getNode($saleResponse, 'authCode')));
         $this->assertEquals('10', XmlParser::getNode($saleResponse, 'avsResult'));
        $this->assertEquals('M', XmlParser::getNode($saleResponse, 'cardValidationResult'));
@@ -355,7 +347,6 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         $authorizationResponse = $initialize->authorizationRequest($auth_hash);
         $this->assertEquals('000', XmlParser::getNode($authorizationResponse, 'response'));
         $this->assertEquals('Approved', XmlParser::getNode($authorizationResponse, 'message'));
-        //TODO: getting blank auth code
         $this->assertEquals('33333', trim(XmlParser::getNode($authorizationResponse, 'authCode')));
         $this->assertEquals('10', XmlParser::getNode($authorizationResponse, 'avsResult'));
         $this->assertEquals('M', XmlParser::getNode($authorizationResponse, 'cardValidationResult'));
@@ -418,7 +409,6 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         $authorizationResponse = $initialize->authorizationRequest($auth_hash);
         $this->assertEquals('000', XmlParser::getNode($authorizationResponse, 'response'));
         $this->assertEquals('Approved', XmlParser::getNode($authorizationResponse, 'message'));
-        //Getting blank auth code
         $this->assertEquals('33333', trim(XmlParser::getNode($authorizationResponse, 'authCode')));
         $this->assertEquals('10', XmlParser::getNode($authorizationResponse, 'avsResult'));
         $this->assertEquals('M', XmlParser::getNode($authorizationResponse, 'cardValidationResult'));
@@ -449,7 +439,6 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         $saleResponse = $initialize->saleRequest($sale_hash);
        $this->assertEquals('000', XmlParser::getNode($saleResponse, 'response'));
         $this->assertEquals('Approved', XmlParser::getNode($saleResponse, 'message'));
-        //TODO: getting 57966 as authcode
         $this->assertEquals('33333', trim(XmlParser::getNode($saleResponse, 'authCode')));
         $this->assertEquals('10', XmlParser::getNode($saleResponse, 'avsResult'));
         $this->assertEquals('M', XmlParser::getNode($saleResponse, 'cardValidationResult'));
@@ -499,7 +488,6 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         $initialize = new LitleOnlineRequest();
         $authorizationResponse = $initialize->authorizationRequest($auth_hash);
-        //TODO run against prelive for certification
         $this->assertEquals('000',XmlParser::getNode($authorizationResponse,'response'));
         $this->assertEquals('Approved',XmlParser::getNode($authorizationResponse,'message'));
         $this->assertEquals('44444 ',XmlParser::getNode($authorizationResponse,'authCode'));
@@ -561,7 +549,6 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         $initialize = new LitleOnlineRequest();
         $authorizationResponse = $initialize->authorizationRequest($auth_hash);
-        //TODO run against prelive for certification
         $this->assertEquals('000',XmlParser::getNode($authorizationResponse,'response'));
         $this->assertEquals('Approved',XmlParser::getNode($authorizationResponse,'message'));
         $this->assertEquals('44444 ',XmlParser::getNode($authorizationResponse,'authCode'));
@@ -697,7 +684,6 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         $authorizationResponse = $initialize->authorizationRequest($auth_hash);
         $this->assertEquals('000', XmlParser::getNode($authorizationResponse, 'response'));
         $this->assertEquals('Approved', XmlParser::getNode($authorizationResponse, 'message'));
-        //TODO: getting blank authcode
         $this->assertEquals('55555 ', XmlParser::getNode($authorizationResponse, 'authCode'));
         $this->assertEquals('32', XmlParser::getNode($authorizationResponse, 'avsResult'));
         $this->assertEquals('M', XmlParser::getNode($authorizationResponse, 'cardValidationResult'));
@@ -723,7 +709,6 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         $saleResponse = $initialize->saleRequest($sale_hash);
         $this->assertEquals('000', XmlParser::getNode($saleResponse, 'response'));
         $this->assertEquals('Approved', XmlParser::getNode($saleResponse, 'message'));
-        //TODO: getting 59302 as authcode
         $this->assertEquals('55555 ', XmlParser::getNode($saleResponse, 'authCode'));
         $this->assertEquals('32', XmlParser::getNode($saleResponse, 'avsResult'));
         $this->assertEquals('M', XmlParser::getNode($saleResponse, 'cardValidationResult'));
