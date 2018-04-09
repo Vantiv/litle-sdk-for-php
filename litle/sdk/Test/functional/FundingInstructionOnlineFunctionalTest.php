@@ -266,4 +266,23 @@ class FundingInstructionOnlineFunctionalTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('362', $response);
     }
 
+    public function test_fastAccessFunding()
+    {
+        $hash_in = array('id' => 'id',
+            'fundingSubmerchantId' => '2111',
+            'submerchantName' => '001',
+            'fundsTransferId' => '1234567891111111',
+            'amount' => '13',
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000000',
+                'expDate' => '1210'
+            )
+        );
+        $initialize = new LitleOnlineRequest();
+        $fastAccessFundingResponse = $initialize->fastAccessFunding($hash_in);
+        $response = XmlParser::getNode($fastAccessFundingResponse, 'response');
+        $this->assertEquals('000', $response);
+    }
+
 }

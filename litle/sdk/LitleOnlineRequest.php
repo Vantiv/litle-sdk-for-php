@@ -136,6 +136,9 @@ class LitleOnlineRequest
             'paypage'=>XmlFields::cardPaypageType(XmlFields::returnArrayValue($hash_in,'paypage')),
         	'applepay'=>(XmlFields::applepayType(XmlFields::returnArrayValue($hash_in,'applepay'))),
         	'sepaDirectDebit'=>(XmlFields::sepaDirectDebitType(XmlFields::returnArrayValue($hash_in,'sepaDirectDebit'))),
+            'ideal'=>(XmlFields::idealType(XmlFields::returnArrayValue($hash_in,'ideal'))),
+            'giropay'=>(XmlFields::giropayType(XmlFields::returnArrayValue($hash_in,'giropay'))),
+            'sofort'=>(XmlFields::sofortType(XmlFields::returnArrayValue($hash_in,'sofort'))),
             'mpos'=>(XmlFields::mposType(XmlFields::returnArrayValue($hash_in,'mpos'))),
             'billMeLaterRequest'=>XmlFields::billMeLaterRequest(XmlFields::returnArrayValue($hash_in,'billMeLaterRequest')),
             'fraudCheck'=>XmlFields::fraudCheckType(XmlFields::returnArrayValue($hash_in,'fraudCheck')),
@@ -819,6 +822,21 @@ class LitleOnlineRequest
         );
         $fundingInstructionVoidResponse = $this ->processRequest($hash_out, $hash_in, "fundingInstructionVoid");
         return $fundingInstructionVoidResponse;
+    }
+
+    public function fastAccessFunding($hash_in)
+    {
+        $hash_out = array (
+            'fundingSubmerchantId' => XmlFields::returnArrayValue ( $hash_in, 'fundingSubmerchantId' ),
+            'submerchantName' => XmlFields::returnArrayValue ( $hash_in, 'submerchantName' ),
+            'fundsTransferId' => XmlFields::returnArrayValue (  $hash_in, 'fundsTransferId'  ),
+            'amount' =>  XmlFields::returnArrayValue ( $hash_in, 'amount' ) ,
+            'card'=> (XmlFields::cardType(XmlFields::returnArrayValue($hash_in,'card'))),
+            'token'=>(XmlFields::cardTokenType(XmlFields::returnArrayValue($hash_in,'token'))),
+            'paypage'=>(XmlFields::cardPaypageType(XmlFields::returnArrayValue($hash_in,'paypage'))),
+        );
+        $fastAccessFunding = $this ->processRequest($hash_out, $hash_in, "fastAccessFunding");
+        return $fastAccessFunding;
     }
 
     private static function overrideConfig($hash_in)

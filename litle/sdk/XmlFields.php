@@ -581,4 +581,37 @@ class XmlFields
     		return $hash_out;
     	}
     }
+
+    public static function idealType($hash_in)
+    {
+        if (isset($hash_in)) {
+            $hash_out = array(
+                "preferredLanguage"=>XmlFields::returnArrayValue($hash_in, "preferredLanguage")
+            );
+
+            return $hash_out;
+        }
+    }
+
+    public static function giropayType($hash_in)
+    {
+        if (isset($hash_in)) {
+            $hash_out = array(
+                "preferredLanguage"=>XmlFields::returnArrayValue($hash_in, "preferredLanguage")
+            );
+
+            return $hash_out;
+        }
+    }
+
+    public static function sofortType($hash_in)
+    {
+        if (isset($hash_in)) {
+            $hash_out = array(
+                "preferredLanguage"=>XmlFields::returnArrayValue($hash_in, "preferredLanguage")
+            );
+
+            return $hash_out;
+        }
+    }
 }

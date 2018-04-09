@@ -160,5 +160,32 @@ class CaptureGivenAuthFunctionalTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Approved', $message);
     }
 
+    public function test_simple_captureGivenAuth_with_processingType_COF()
+    {
+        $hash_in = array(
+            'id' => 'id',
+            'orderId' => '12344',
+            'amount' => '106',
+            'authInformation' => array(
+                'authDate' => '2002-10-09',
+                'authCode' => '543216',
+                'authAmount' => '12345'
+            ),
+            'orderSource' => 'ecommerce',
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000000',
+                'expDate' => '1210'),
+            'processingType' => 'initialCOF',
+            'originalNetworkTransactionId' => 'abcdefghijklmnopqrstuvwxyz',
+            'originalTransactionAmount' => '1000'
+        );
+
+        $initialize = new LitleOnlineRequest();
+        $captureGivenAuthResponse = $initialize->captureGivenAuthRequest($hash_in);
+        $message = XmlParser::getNode($captureGivenAuthResponse, 'message');
+        $this->assertEquals('Approved', $message);
+    }
+
 
 }

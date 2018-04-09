@@ -290,6 +290,29 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('000', $response);
     }
 
+    public function test_simple_auth_with_card_processingType_COF()
+    {
+        $hash_in = array('id' => 'id',
+            'card' => array('type' => 'VI',
+                'number' => '4100000000000000',
+                'expDate' => '1213',
+                'cardValidationNum' => '1213'),
+            'id' => '1211',
+            'orderId' => '2111',
+            'reportGroup' => 'Planets',
+            'orderSource' => 'ecommerce',
+            'amount' => '0',
+            'processingType' => 'initialCOF',
+            'originalNetworkTransactionId' => 'abcdefghijklmnopqrstuvwxyz',
+            'originalTransactionAmount' => '1000'
+        );
+
+        $initialize = new LitleOnlineRequest();
+        $authorizationResponse = $initialize->authorizationRequest($hash_in);
+        $response = XmlParser::getNode($authorizationResponse, 'response');
+        $this->assertEquals('000', $response);
+    }
+
     public function test_simple_auth_with_networkTransactionId()
     {
         $hash_in = array(

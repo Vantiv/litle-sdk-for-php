@@ -1,5 +1,9 @@
 = LitleOnline CHANGELOG
 
+==Version 11.4.0 (May 16, 2017)
+* Feature: Upgraded to XML v11.4
+* Feature: Added Card on file support for Visa
+
 ==Version 11.0.3 (May 16, 2017)
 * Feature: PGP support for batches
 

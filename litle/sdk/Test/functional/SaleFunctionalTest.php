@@ -306,5 +306,120 @@ class SaleFunctionalTest extends \PHPUnit_Framework_TestCase
         echo ("Message: " . XmlParser::getNode($saleResponse,'message')) . "\n";
     }
 
+    public function test_sale_with_Ideal()
+    {
+        $hash_in = array(
+            'ideal' => array('preferredLanguage' => 'AD'),
+            'id' => '1211',
+            'orderId' => '2111',
+            'reportGroup' => 'Planets',
+            'orderSource' => 'ecommerce',
+            'amount' => '123');
+
+        $initialize = new LitleOnlineRequest();
+        $saleResponse = $initialize->saleRequest($hash_in);
+        $response = XmlParser::getNode($saleResponse, 'response');
+        $this->assertEquals('000', $response);
+        $this->assertEquals('http://redirect.url.vantiv.com', XmlParser::getNode($saleResponse, 'redirectUrl'));
+    }
+
+    public function test_sale_with_Giropay()
+    {
+        $hash_in = array(
+            'giropay' => array('preferredLanguage' => 'AD'),
+            'id' => '1211',
+            'orderId' => '2111',
+            'reportGroup' => 'Planets',
+            'orderSource' => 'ecommerce',
+            'amount' => '123');
+
+        $initialize = new LitleOnlineRequest();
+        $saleResponse = $initialize->saleRequest($hash_in);
+        $response = XmlParser::getNode($saleResponse, 'response');
+        $this->assertEquals('000', $response);
+        // re-implement when sandbox supports this payment type
+//        $this->assertEquals('http://redirect.url.vantiv.com', XmlParser::getNode($saleResponse, 'redirectUrl'));
+    }
+
+    public function test_sale_with_Sofort()
+    {
+        $hash_in = array(
+            'sofort' => array('preferredLanguage' => 'AD'),
+            'id' => '1211',
+            'orderId' => '2111',
+            'reportGroup' => 'Planets',
+            'orderSource' => 'ecommerce',
+            'amount' => '123');
+
+        $initialize = new LitleOnlineRequest();
+        $saleResponse = $initialize->saleRequest($hash_in);
+        $response = XmlParser::getNode($saleResponse, 'response');
+        $this->assertEquals('000', $response);
+        // re-implement when sandbox supports this payment type
+//        $this->assertEquals('http://redirect.url.vantiv.com', XmlParser::getNode($saleResponse, 'redirectUrl'));
+    }
+
+    public function test_sale_with_processingTypeCOF()
+    {
+        $hash_in = array(
+            'card'=>array('type'=>'VI',
+                'number'=>'4100200300011000',
+                'expDate'=>'0521',),
+            'id' => '1211',
+            'orderId'=> '2111',
+            'amount'=>'4999',
+            'orderSource' => 'ecommerce',
+            'processingType' => 'initialCOF');
+        $initilaize = new LitleOnlineRequest();
+        $saleResponse = $initilaize->saleRequest($hash_in);
+        $response = XmlParser::getNode($saleResponse,'response');
+        $this->assertEquals('000',$response);
+        $message = XmlParser::getNode($saleResponse,'message');
+        $this->assertEquals('Approved',$message);
+        $networkTransactionId = XmlParser::getNode($saleResponse,'networkTransactionId');
+        $this->assertNotNull($networkTransactionId);
+    }
+
+    public function test_sale_with_processingTypeCOF1()
+    {
+        $hash_in = array(
+            'card'=>array('type'=>'VI',
+                'number'=>'4100200300011000',
+                'expDate'=>'0521',),
+            'id' => '1211',
+            'orderId'=> '2111',
+            'amount'=>'4999',
+            'orderSource' => 'ecommerce',
+            'processingType' => 'merchantInitiatedCOF');
+        $initilaize = new LitleOnlineRequest();
+        $saleResponse = $initilaize->saleRequest($hash_in);
+        $response = XmlParser::getNode($saleResponse,'response');
+        $this->assertEquals('000',$response);
+        $message = XmlParser::getNode($saleResponse,'message');
+        $this->assertEquals('Approved',$message);
+        $networkTransactionId = XmlParser::getNode($saleResponse,'networkTransactionId');
+        $this->assertNotNull($networkTransactionId);
+    }
+
+    public function test_sale_with_processingTypeCOF2()
+    {
+        $hash_in = array(
+            'card'=>array('type'=>'VI',
+                'number'=>'4100200300011000',
+                'expDate'=>'0521',),
+            'id' => '1211',
+            'orderId'=> '2111',
+            'amount'=>'4999',
+            'orderSource' => 'ecommerce',
+            'processingType' => 'cardholderInitiatedCOF');
+        $initilaize = new LitleOnlineRequest();
+        $saleResponse = $initilaize->saleRequest($hash_in);
+        $response = XmlParser::getNode($saleResponse,'response');
+        $this->assertEquals('000',$response);
+        $message = XmlParser::getNode($saleResponse,'message');
+        $this->assertEquals('Approved',$message);
+        $networkTransactionId = XmlParser::getNode($saleResponse,'networkTransactionId');
+        $this->assertNotNull($networkTransactionId);
+    }
 
 }
