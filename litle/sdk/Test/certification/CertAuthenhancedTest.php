@@ -27,11 +27,15 @@ namespace litle\sdk\Test\certification;
 use litle\sdk\LitleOnlineRequest;
 USE litle\sdk\XmlParser;
 
+define('PRELIVE_URL', 'https://payments.vantivprelive.com/vap/communicator/online');
+
 class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
 {
     public function test_14()
     {
-        $auth_hash = array('id' => '1211',
+        $auth_hash = array(
+            'url' => PRELIVE_URL,
+            'id' => '1211',
             'orderId' => '14',
             'amount' => '3000',
             'orderSource' => 'ecommerce',
@@ -43,17 +47,18 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
         $authorizationResponse = $initialize->authorizationRequest($auth_hash);
         $this->assertEquals('000', XmlParser::getNode($authorizationResponse, 'response'));
         $this->assertEquals('Approved', XmlParser::getNode($authorizationResponse, 'message'));
-        // TODO enhancedAuthResponse is empty
-        //$this->assertEquals('PREPAID',XmlParser::getNode($authorizationResponse,'type'));
-        //$this->assertEquals('2000',XmlParser::getNode($authorizationResponse,'availableBalance'));
-        //$this->assertEquals('NO',XmlParser::getNode($authorizationResponse,'reloadable'));
-        //$this->assertEquals('GIFT',XmlParser::getNode($authorizationResponse,'prepaidCardType'));
+        $this->assertEquals('PREPAID',XmlParser::getNode($authorizationResponse,'type'));
+        $this->assertEquals('2000',XmlParser::getNode($authorizationResponse,'availableBalance'));
+        $this->assertEquals('NO',XmlParser::getNode($authorizationResponse,'reloadable'));
+        $this->assertEquals('GIFT',XmlParser::getNode($authorizationResponse,'prepaidCardType'));
 
     }
 
     public function test_15()
     {
-        $auth_hash = array('id' => '1211',
+        $auth_hash = array(
+            'url' => PRELIVE_URL,
+            'id' => '1211',
             'orderId' => '15',
             'amount' => '3000',
             'orderSource' => 'ecommerce',
@@ -65,17 +70,18 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
         $authorizationResponse = $initialize->authorizationRequest($auth_hash);
         $this->assertEquals('000', XmlParser::getNode($authorizationResponse, 'response'));
         $this->assertEquals('Approved', XmlParser::getNode($authorizationResponse, 'message'));
-        // TODO enhancedAuthResponse is empty
-        // $this->assertEquals('PREPAID',XmlParser::getNode($authorizationResponse,'type'));
-        // $this->assertEquals('2000',XmlParser::getNode($authorizationResponse,'availableBalance'));
-        // $this->assertEquals('YES',XmlParser::getNode($authorizationResponse,'reloadable'));
-        // $this->assertEquals('PAYROLL',XmlParser::getNode($authorizationResponse,'prepaidCardType'));
+         $this->assertEquals('PREPAID',XmlParser::getNode($authorizationResponse,'type'));
+         $this->assertEquals('2000',XmlParser::getNode($authorizationResponse,'availableBalance'));
+         $this->assertEquals('YES',XmlParser::getNode($authorizationResponse,'reloadable'));
+         $this->assertEquals('PAYROLL',XmlParser::getNode($authorizationResponse,'prepaidCardType'));
 
     }
 
     public function test_16()
     {
-        $auth_hash = array('id' => '1211',
+        $auth_hash = array(
+            'url' => PRELIVE_URL,
+            'id' => '1211',
             'orderId' => '16',
             'amount' => '3000',
             'orderSource' => 'ecommerce',
@@ -87,17 +93,18 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
         $authorizationResponse = $initialize->authorizationRequest($auth_hash);
         $this->assertEquals('000', XmlParser::getNode($authorizationResponse, 'response'));
         $this->assertEquals('Approved', XmlParser::getNode($authorizationResponse, 'message'));
-        // TODO enhancedAuthResponse is empty
-        // $this->assertEquals('PREPAID',XmlParser::getNode($authorizationResponse,'type'));
-        // $this->assertEquals('0',XmlParser::getNode($authorizationResponse,'availableBalance'));
-        // $this->assertEquals('YES',XmlParser::getNode($authorizationResponse,'reloadable'));
-        // $this->assertEquals('PAYROLL',XmlParser::getNode($authorizationResponse,'prepaidCardType'));
+         $this->assertEquals('PREPAID',XmlParser::getNode($authorizationResponse,'type'));
+         $this->assertEquals('0',XmlParser::getNode($authorizationResponse,'availableBalance'));
+         $this->assertEquals('YES',XmlParser::getNode($authorizationResponse,'reloadable'));
+         $this->assertEquals('PAYROLL',XmlParser::getNode($authorizationResponse,'prepaidCardType'));
 
     }
 
     public function test_17()
     {
-        $auth_hash = array('id' => '1211',
+        $auth_hash = array(
+            'url' => PRELIVE_URL,
+            'id' => '1211',
             'orderId' => '17',
             'amount' => '3000',
             'orderSource' => 'ecommerce',
@@ -109,17 +116,18 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
         $authorizationResponse = $initialize->authorizationRequest($auth_hash);
         $this->assertEquals('000', XmlParser::getNode($authorizationResponse, 'response'));
         $this->assertEquals('Approved', XmlParser::getNode($authorizationResponse, 'message'));
-        // TODO enhancedAuthResponse is empty
-        // $this->assertEquals('PREPAID',XmlParser::getNode($authorizationResponse,'type'));
-        // $this->assertEquals('6500',XmlParser::getNode($authorizationResponse,'availableBalance'));
-        // $this->assertEquals('YES',XmlParser::getNode($authorizationResponse,'reloadable'));
-        // $this->assertEquals('PAYROLL',XmlParser::getNode($authorizationResponse,'prepaidCardType'));
+         $this->assertEquals('PREPAID',XmlParser::getNode($authorizationResponse,'type'));
+         $this->assertEquals('6500',XmlParser::getNode($authorizationResponse,'availableBalance'));
+         $this->assertEquals('YES',XmlParser::getNode($authorizationResponse,'reloadable'));
+         $this->assertEquals('PAYROLL',XmlParser::getNode($authorizationResponse,'prepaidCardType'));
 
     }
 
     public function test_18()
     {
-        $auth_hash = array('id' => '1211',
+        $auth_hash = array(
+            'url' => PRELIVE_URL,
+            'id' => '1211',
             'orderId' => '18',
             'amount' => '3000',
             'orderSource' => 'ecommerce',
@@ -131,17 +139,18 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
         $authorizationResponse = $initialize->authorizationRequest($auth_hash);
         $this->assertEquals('000', XmlParser::getNode($authorizationResponse, 'response'));
         $this->assertEquals('Approved', XmlParser::getNode($authorizationResponse, 'message'));
-        // TODO enhancedAuthResponse is empty
-        // $this->assertEquals('PREPAID',XmlParser::getNode($authorizationResponse,'type'));
-        // $this->assertEquals('12200',XmlParser::getNode($authorizationResponse,'availableBalance'));
-        // $this->assertEquals('YES',XmlParser::getNode($authorizationResponse,'reloadable'));
-        // $this->assertEquals('PAYROLL',XmlParser::getNode($authorizationResponse,'prepaidCardType'));
+         $this->assertEquals('PREPAID',XmlParser::getNode($authorizationResponse,'type'));
+         $this->assertEquals('12200',XmlParser::getNode($authorizationResponse,'availableBalance'));
+         $this->assertEquals('YES',XmlParser::getNode($authorizationResponse,'reloadable'));
+         $this->assertEquals('PAYROLL',XmlParser::getNode($authorizationResponse,'prepaidCardType'));
 
     }
 
     public function test_19()
     {
-        $auth_hash = array('id' => '1211',
+        $auth_hash = array(
+            'url' => PRELIVE_URL,
+            'id' => '1211',
             'orderId' => '19',
             'amount' => '3000',
             'orderSource' => 'ecommerce',
@@ -151,20 +160,20 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
                 'type' => 'MC'));
         $initialize = new LitleOnlineRequest();
         $authorizationResponse = $initialize->authorizationRequest($auth_hash);
-        //TODO: getting 850 as response
-        //$this->assertEquals('000', XmlParser::getNode($authorizationResponse, 'response'));
-        //$this->assertEquals('Approved', XmlParser::getNode($authorizationResponse, 'message'));
-        // TODO enhancedAuthResponse is empty
-        // $this->assertEquals('PREPAID',XmlParser::getNode($authorizationResponse,'type'));
-        // $this->assertEquals('20000',XmlParser::getNode($authorizationResponse,'availableBalance'));
-        // $this->assertEquals('YES',XmlParser::getNode($authorizationResponse,'reloadable'));
-        // $this->assertEquals('PAYROLL',XmlParser::getNode($authorizationResponse,'prepaidCardType'));
+        $this->assertEquals('000', XmlParser::getNode($authorizationResponse, 'response'));
+        $this->assertEquals('Approved', XmlParser::getNode($authorizationResponse, 'message'));
+         $this->assertEquals('PREPAID',XmlParser::getNode($authorizationResponse,'type'));
+         $this->assertEquals('20000',XmlParser::getNode($authorizationResponse,'availableBalance'));
+         $this->assertEquals('YES',XmlParser::getNode($authorizationResponse,'reloadable'));
+         $this->assertEquals('PAYROLL',XmlParser::getNode($authorizationResponse,'prepaidCardType'));
 
     }
 
     public function test_20()
     {
-        $auth_hash = array('id' => '1211',
+        $auth_hash = array(
+            'url' => PRELIVE_URL,
+            'id' => '1211',
             'orderId' => '20',
             'amount' => '3000',
             'orderSource' => 'ecommerce',
@@ -176,17 +185,18 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
         $authorizationResponse = $initialize->authorizationRequest($auth_hash);
         $this->assertEquals('000', XmlParser::getNode($authorizationResponse, 'response'));
         $this->assertEquals('Approved', XmlParser::getNode($authorizationResponse, 'message'));
-        // TODO enhancedAuthResponse is empty
-        // $this->assertEquals('PREPAID',XmlParser::getNode($authorizationResponse,'type'));
-        // $this->assertEquals('10050',XmlParser::getNode($authorizationResponse,'availableBalance'));
-        // $this->assertEquals('YES',XmlParser::getNode($authorizationResponse,'reloadable'));
-        // $this->assertEquals('PAYROLL',XmlParser::getNode($authorizationResponse,'prepaidCardType'));
+         $this->assertEquals('PREPAID',XmlParser::getNode($authorizationResponse,'type'));
+         $this->assertEquals('10050',XmlParser::getNode($authorizationResponse,'availableBalance'));
+         $this->assertEquals('YES',XmlParser::getNode($authorizationResponse,'reloadable'));
+         $this->assertEquals('PAYROLL',XmlParser::getNode($authorizationResponse,'prepaidCardType'));
 
     }
 
     public function test_21()
     {
-        $auth_hash = array('id' => '1211',
+        $auth_hash = array(
+            'url' => PRELIVE_URL,
+            'id' => '1211',
             'orderId' => '21',
             'amount' => '5000',
             'orderSource' => 'ecommerce',
@@ -198,14 +208,15 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
         $authorizationResponse = $initialize->authorizationRequest($auth_hash);
         $this->assertEquals('000', XmlParser::getNode($authorizationResponse, 'response'));
         $this->assertEquals('Approved', XmlParser::getNode($authorizationResponse, 'message'));
-        // TODO enhancedAuthResponse is empty
-        // $this->assertEquals('AFFLUENT',XmlParser::getNode($authorizationResponse,'affluence'));
+         $this->assertEquals('AFFLUENT',XmlParser::getNode($authorizationResponse,'affluence'));
 
     }
 
     public function test_22()
     {
-        $auth_hash = array('id' => '1211',
+        $auth_hash = array(
+            'url' => PRELIVE_URL,
+            'id' => '1211',
             'orderId' => '22',
             'amount' => '5000',
             'orderSource' => 'ecommerce',
@@ -217,14 +228,15 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
         $authorizationResponse = $initialize->authorizationRequest($auth_hash);
         $this->assertEquals('000', XmlParser::getNode($authorizationResponse, 'response'));
         $this->assertEquals('Approved', XmlParser::getNode($authorizationResponse, 'message'));
-        // TODO enhancedAuthResponse is empty
-        // $this->assertEquals('MASS AFFLUENT',XmlParser::getNode($authorizationResponse,'affluence'));
+         $this->assertEquals('MASS AFFLUENT',XmlParser::getNode($authorizationResponse,'affluence'));
 
     }
 
     public function test_23()
     {
-        $auth_hash = array('id' => '1211',
+        $auth_hash = array(
+            'url' => PRELIVE_URL,
+            'id' => '1211',
             'orderId' => '23',
             'amount' => '5000',
             'orderSource' => 'ecommerce',
@@ -236,14 +248,15 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
         $authorizationResponse = $initialize->authorizationRequest($auth_hash);
         $this->assertEquals('000', XmlParser::getNode($authorizationResponse, 'response'));
         $this->assertEquals('Approved', XmlParser::getNode($authorizationResponse, 'message'));
-        // TODO enhancedAuthResponse is empty
-        // $this->assertEquals('AFFLUENT',XmlParser::getNode($authorizationResponse,'affluence'));
+         $this->assertEquals('AFFLUENT',XmlParser::getNode($authorizationResponse,'affluence'));
 
     }
 
     public function test_24()
     {
-        $auth_hash = array('id' => '1211',
+        $auth_hash = array(
+            'url' => PRELIVE_URL,
+            'id' => '1211',
             'orderId' => '24',
             'amount' => '5000',
             'orderSource' => 'ecommerce',
@@ -255,14 +268,15 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
         $authorizationResponse = $initialize->authorizationRequest($auth_hash);
         $this->assertEquals('000', XmlParser::getNode($authorizationResponse, 'response'));
         $this->assertEquals('Approved', XmlParser::getNode($authorizationResponse, 'message'));
-        // TODO enhancedAuthResponse is empty
-        // $this->assertEquals('MASS AFFLUENT',XmlParser::getNode($authorizationResponse,'affluence'));
+         $this->assertEquals('MASS AFFLUENT',XmlParser::getNode($authorizationResponse,'affluence'));
 
     }
 
     public function test_25()
     {
-        $auth_hash = array('id' => '1211',
+        $auth_hash = array(
+            'url' => PRELIVE_URL,
+            'id' => '1211',
             'orderId' => '25',
             'amount' => '5000',
             'orderSource' => 'ecommerce',
@@ -274,8 +288,7 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
         $authorizationResponse = $initialize->authorizationRequest($auth_hash);
         $this->assertEquals('000', XmlParser::getNode($authorizationResponse, 'response'));
         $this->assertEquals('Approved', XmlParser::getNode($authorizationResponse, 'message'));
-        // TODO enhancedAuthResponse is empty
-        // $this->assertEquals('BRA',XmlParser::getNode($authorizationResponse,'issuerCountry'));
+         $this->assertEquals('BRA',XmlParser::getNode($authorizationResponse,'issuerCountry'));
 
     }
 }
