@@ -47,55 +47,55 @@ function initialize()
     if ($handle) {
         print "Welcome to Litle PHP_SDK" . PHP_EOL;
         print "Please input your user name: ";
-        $line['user'] = trim(fgets(STDIN));
+        $line['user'] = formatConfigValue(STDIN);
         print "Please input your password: ";
-        $line['password'] = trim(fgets(STDIN));
+        $line['password'] = formatConfigValue(STDIN);
         print "Please input your merchantId: ";
-        $line['currency_merchant_map ']['DEFAULT'] = trim(fgets(STDIN));
+        $line['currency_merchant_map ']['DEFAULT'] = formatConfigValue(STDIN);
         print "Please choose Litle url from the following list (example: 'sandbox') or directly input another URL: \nsandbox => https://www.testlitle.com/sandbox/communicator/online \npostlive => https://postlive.litle.com/vap/communicator/online \ntransact-postlive => https://transact-postlive.litle.com/vap/communicator/online \nproduction => https://payments.litle.com/vap/communicator/online \nproduction-transact => https://transact.litle.com/vap/communicator/online \nprelive => https://prelive.litle.com/vap/communicator/online \ntransact-prelive => https://transact-prelive.litle.com/vap/communicator/online" . PHP_EOL;
         $url = UrlMapper::getUrl(trim(fgets(STDIN)));
 	
         $line['url'] = $url;
         print "Please input the proxy, if no proxy hit enter key: ";
-        $line['proxy'] = trim(fgets(STDIN));
+        $line['proxy'] = formatConfigValue(STDIN);
 
         print "Batch processing saves files to disk. \n";
         print "Please input a directory to save these files. If you are not using batch processing, you may hit enter. ";
-        $dir = trim(fgets(STDIN));
+        $dir = formatConfigValue(STDIN);
         $line['batch_requests_path'] = $dir;
         $line['litle_requests_path'] = $dir;
 
         print "Please input your SFTP username. If you are not using SFTP, you may hit enter. ";
-        $line['sftp_username'] = trim(fgets(STDIN));
+        $line['sftp_username'] = formatConfigValue(STDIN);
         print "Please input your SFTP password. If you are not using SFTP, you may hit enter. ";
-        $line['sftp_password'] = trim(fgets(STDIN));
+        $line['sftp_password'] = formatConfigValue(STDIN);
         print "Please input the URL for batch processing. If you are not using batch processing, you may hit enter. ";
-        $line['batch_url'] = trim(fgets(STDIN));
+        $line['batch_url'] = formatConfigValue(STDIN);
         print "Please input the port for stream batch delivery. If you are not using stream batch delivery, you may hit enter. ";
-        $line['tcp_port'] = trim(fgets(STDIN));
+        $line['tcp_port'] = formatConfigValue(STDIN);
         print "Please input the timeout (in seconds) for stream batch delivery. If you are not using stream batch delivery, you may hit enter. ";
-        $line['tcp_timeout'] = trim(fgets(STDIN));
+        $line['tcp_timeout'] = formatConfigValue(STDIN);
         # ssl should be usd by default
         $line['tcp_ssl'] = '1';
         $line['print_xml'] = '0';
         $line['deleteBatchFiles'] = 'false';
         print "Use PGP encryption for batch files? (y/n) (No encryption by default): ";
-        $useEncryption = trim(fgets(STDIN));
+        $useEncryption = formatConfigValue(STDIN);
         if(("y" == $useEncryption) || ("true" == $useEncryption) || ("yes" == $useEncryption)){
             $line['useEncryption'] = "true";
             print "Import Vantiv's public key to gpg key ring? (y/n): ";
-            $import = trim(fgets(STDIN));
+            $import = formatConfigValue(STDIN);
             if(("y" == $import) || ("yes" == $import) || ("true" == $import)) {
                 print "Please input path to Vantiv's public key (for encryption of batch requests) :";
-                $keyFile = trim(fgets(STDIN));
+                $keyFile = formatConfigValue(STDIN);
                 $line['vantivPublicKeyID'] = PgpHelper::importKey($keyFile);
             }
             else{
                 print "Please input key ID for Vantiv's public key (imported to your key ring) :";
-                $line['vantivPublicKeyID'] = trim(fgets(STDIN));
+                $line['vantivPublicKeyID'] = formatConfigValue(STDIN);
             }
             print "Please input passphrase for decryption :";
-            $line['gpgPassphrase'] = trim(fgets(STDIN));
+            $line['gpgPassphrase'] = formatConfigValue(STDIN);
         }
         else{
             $line['useEncryption'] = "false";
@@ -109,6 +109,10 @@ function initialize()
     }
     fclose($handle);
     print "The Litle configuration file has been generated, the file is located in the lib directory". PHP_EOL;
+}
+
+function formatConfigValue($str){
+    return "\"" . trim(fgets($str)) . "\"";
 }
 
 initialize();
