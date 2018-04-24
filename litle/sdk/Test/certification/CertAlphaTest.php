@@ -67,6 +67,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         //test 1A
         $capture_hash = array(
             'url' => PRELIVE_URL,
+            'id' => (XmlParser::getNode($authorizationResponse, 'id')),
             'litleTxnId' => (XmlParser::getNode($authorizationResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -77,6 +78,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         //test 1B
         $credit_hash = array(
             'url' => PRELIVE_URL,
+            'id' => (XmlParser::getNode($captureResponse, 'id')),
             'litleTxnId' => (XmlParser::getNode($captureResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -86,6 +88,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         $void_hash = array(
             'url' => PRELIVE_URL,
+            'id' => (XmlParser::getNode($creditResponse, 'id')),
             'litleTxnId' => (XmlParser::getNode($creditResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -151,6 +154,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         $credit_hash = array(
             'url' => PRELIVE_URL,
+            'id' => (XmlParser::getNode($saleResponse, 'id')),
             'litleTxnId' => (XmlParser::getNode($saleResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -160,6 +164,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         $void_hash = array(
             'url' => PRELIVE_URL,
+            'id' => (XmlParser::getNode($creditResponse, 'id')),
             'litleTxnId' => (XmlParser::getNode($creditResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -201,6 +206,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         //test 2A
         $capture_hash = array(
             'url' => PRELIVE_URL,
+            'id' => (XmlParser::getNode($authorizationResponse, 'id')),
             'litleTxnId' => (XmlParser::getNode($authorizationResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -211,6 +217,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         //test 2B
         $credit_hash = array(
             'url' => PRELIVE_URL,
+            'id' => (XmlParser::getNode($captureResponse, 'id')),
             'litleTxnId' => (XmlParser::getNode($captureResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -220,6 +227,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         $void_hash = array(
             'url' => PRELIVE_URL,
+            'id' => (XmlParser::getNode($creditResponse, 'id')),
             'litleTxnId' => (XmlParser::getNode($creditResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -292,6 +300,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         //test 2B
         $credit_hash = array(
             'url' => PRELIVE_URL,
+            'id' => (XmlParser::getNode($saleResponse, 'id')),
             'litleTxnId' => (XmlParser::getNode($saleResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -301,6 +310,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         $void_hash = array(
             'url' => PRELIVE_URL,
+            'id' => (XmlParser::getNode($creditResponse, 'id')),
             'litleTxnId' => (XmlParser::getNode($creditResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -340,6 +350,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         //test 3A
         $capture_hash = array(
             'url' => PRELIVE_URL,
+            'id' => (XmlParser::getNode($authorizationResponse, 'id')),
             'litleTxnId' => (XmlParser::getNode($authorizationResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -350,6 +361,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         //test 3B
         $credit_hash = array(
             'url' => PRELIVE_URL,
+            'id' => (XmlParser::getNode($captureResponse, 'id')),
             'litleTxnId' => (XmlParser::getNode($captureResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -359,6 +371,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         $void_hash = array(
             'url' => PRELIVE_URL,
+            'id' => (XmlParser::getNode($creditResponse, 'id')),
             'litleTxnId' => (XmlParser::getNode($creditResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -426,6 +439,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         //test 3B
         $credit_hash = array(
             'url' => PRELIVE_URL,
+            'id' => (XmlParser::getNode($saleResponse, 'id')),
             'litleTxnId' => (XmlParser::getNode($saleResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -435,6 +449,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         $void_hash = array(
             'url' => PRELIVE_URL,
+            'id' => (XmlParser::getNode($creditResponse, 'id')),
             'litleTxnId' => (XmlParser::getNode($creditResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -472,6 +487,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         //test 4A
         $capture_hash = array(
             'url' => PRELIVE_URL,
+            'id' => (XmlParser::getNode($authorizationResponse, 'id')),
             'litleTxnId' => (XmlParser::getNode($authorizationResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -482,6 +498,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         //test 4B
         $credit_hash = array(
             'url' => PRELIVE_URL,
+            'id' => (XmlParser::getNode($captureResponse, 'id')),
             'litleTxnId' => (XmlParser::getNode($captureResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -491,6 +508,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         $void_hash = array(
             'url' => PRELIVE_URL,
+            'id' => (XmlParser::getNode($creditResponse, 'id')),
             'litleTxnId' => (XmlParser::getNode($creditResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -556,6 +574,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         //test 4B
         $credit_hash = array(
             'url' => PRELIVE_URL,
+            'id' => (XmlParser::getNode($saleResponse, 'id')),
             'litleTxnId' => (XmlParser::getNode($saleResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -565,6 +584,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         $void_hash = array(
             'url' => PRELIVE_URL,
+            'id' => (XmlParser::getNode($creditResponse, 'id')),
             'litleTxnId' => (XmlParser::getNode($creditResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -598,6 +618,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         //test 5A
         $capture_hash = array(
             'url' => PRELIVE_URL,
+            'id' => (XmlParser::getNode($authorizationResponse, 'id')),
             'litleTxnId' => (XmlParser::getNode($authorizationResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -608,6 +629,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         //test 5B
         $credit_hash = array(
             'url' => PRELIVE_URL,
+            'id' => (XmlParser::getNode($captureResponse, 'id')),
             'litleTxnId' => (XmlParser::getNode($captureResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -617,6 +639,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         $void_hash = array(
             'url' => PRELIVE_URL,
+            'id' => (XmlParser::getNode($creditResponse, 'id')),
             'litleTxnId' => (XmlParser::getNode($creditResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -673,6 +696,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         //test 5B
         $credit_hash = array(
             'url' => PRELIVE_URL,
+            'id' => (XmlParser::getNode($saleResponse, 'id')),
             'litleTxnId' => (XmlParser::getNode($saleResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -682,6 +706,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         $void_hash = array(
             'url' => PRELIVE_URL,
+            'id' => (XmlParser::getNode($creditResponse, 'id')),
             'litleTxnId' => (XmlParser::getNode($creditResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
