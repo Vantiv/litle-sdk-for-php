@@ -1,5 +1,7 @@
 = LitleOnline CHANGELOG
 
+==version 8.31.1
+* BugFix: Set content-type to text/xml; charset=UTF-8
 
 ==version 8.31.0
 * Feature: Visa reccuring transaction
