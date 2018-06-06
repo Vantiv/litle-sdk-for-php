@@ -343,7 +343,7 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
             'id' => 'id',
             'card' => array(
                 'type' => 'VI',
-                'number' => '4100800000000000',
+                'number' => '4100300000100000',
                 'expDate' => '1213',
                 'cardValidationNum' => '1213'
 

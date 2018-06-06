@@ -54,7 +54,7 @@ class GiftCardAuthReversalFunctionalTest extends \PHPUnit_Framework_TestCase
         $response = XmlParser::getNode($giftCardAuthReversalResponse, 'systemTraceId');
         $sequenceNumber = XmlParser::getNode($giftCardAuthReversalResponse, 'sequenceNumber');
         $this->assertEquals('0', $response);
-        $this->assertEquals('12', $sequenceNumber);
+        $this->assertEquals('123456', $sequenceNumber);
     }
 
 }

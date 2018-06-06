@@ -78,7 +78,7 @@ class GiftCardCreditFunctionalTest extends \PHPUnit_Framework_TestCase
         $systemTraceId = XmlParser::getNode($giftCardCreditResponse, 'systemTraceId');
         $this->assertEquals('0', $systemTraceId);
         $sequenceNumber = XmlParser::getNode($giftCardCreditResponse, 'sequenceNumber');
-        $this->assertEquals('12', $sequenceNumber);
+        $this->assertEquals('123456', $sequenceNumber);
     }
 
 }

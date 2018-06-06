@@ -80,7 +80,7 @@ class GiftCardCaptureFunctionalTest extends \PHPUnit_Framework_TestCase
         $systemTraceId = XmlParser::getNode($giftCardCaptureResponse, 'systemTraceId');
         $this->assertEquals('0', $systemTraceId);
         $sequenceNumber = XmlParser::getNode($giftCardCaptureResponse, 'sequenceNumber');
-        $this->assertEquals('12', $sequenceNumber);
+        $this->assertEquals('123456', $sequenceNumber);
     }
 
 
