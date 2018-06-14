@@ -39,7 +39,7 @@ class FraudCheckFunctionalTest extends \PHPUnit_Framework_TestCase
 		$initilaize = new LitleOnlineRequest();
         $fraudCheckResponse = $initilaize->fraudCheck($hash_in);
         $message = XmlParser::getNode($fraudCheckResponse,'message');
-        $this->assertEquals('Transaction Received',$message);
+        $this->assertEquals('Approved',$message);
 	}
 	
 	public function test_one_customAttributes()
@@ -125,7 +125,7 @@ class FraudCheckFunctionalTest extends \PHPUnit_Framework_TestCase
 		$initilaize = new LitleOnlineRequest();
         $fraudCheckResponse = $initilaize->fraudCheck($hash_in);
         $message = XmlParser::getNode($fraudCheckResponse,'message');
-        $this->assertEquals('Transaction Received',$message);
+        $this->assertEquals('Approved',$message);
 	}
 	
 	public function test_amount()
@@ -192,6 +192,6 @@ class FraudCheckFunctionalTest extends \PHPUnit_Framework_TestCase
 		$initilaize = new LitleOnlineRequest();
         $fraudCheckResponse = $initilaize->fraudCheck($hash_in);
         $message = XmlParser::getNode($fraudCheckResponse,'message');
-        $this->assertEquals('Transaction Received',$message);
+        $this->assertEquals('Approved',$message);
 	}
 }

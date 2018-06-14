@@ -44,7 +44,7 @@ class CaptureGivenAuthFunctionalTest extends \PHPUnit_Framework_TestCase
         $initialize = new LitleOnlineRequest();
         $captureGivenAuthResponse = $initialize->captureGivenAuthRequest($hash_in);
         $message = XmlParser::getNode($captureGivenAuthResponse,'message');
-        $this->assertEquals('Transaction Received',$message);
+        $this->assertEquals('Approved',$message);
     }
 
     public function test_simple_captureGivenAuth_with_token()
@@ -64,7 +64,7 @@ class CaptureGivenAuthFunctionalTest extends \PHPUnit_Framework_TestCase
         $initialize = new LitleOnlineRequest();
         $captureGivenAuthResponse = $initialize->captureGivenAuthRequest($hash_in);
         $message = XmlParser::getNode($captureGivenAuthResponse,'message');
-        $this->assertEquals('Transaction Received',$message);
+        $this->assertEquals('Approved',$message);
     }
 
     public function test_complex_captureGivenAuth()
@@ -86,7 +86,7 @@ class CaptureGivenAuthFunctionalTest extends \PHPUnit_Framework_TestCase
         $initialize = new LitleOnlineRequest();
         $captureGivenAuthResponse = $initialize->captureGivenAuthRequest($hash_in);
         $message = XmlParser::getNode($captureGivenAuthResponse,'message');
-        $this->assertEquals('Transaction Received',$message);
+        $this->assertEquals('Approved',$message);
     }
 
     public function test_authInfo()
@@ -107,7 +107,7 @@ class CaptureGivenAuthFunctionalTest extends \PHPUnit_Framework_TestCase
         $initialize = new LitleOnlineRequest();
         $captureGivenAuthResponse = $initialize->captureGivenAuthRequest($hash_in);
         $message = XmlParser::getNode($captureGivenAuthResponse,'message');
-        $this->assertEquals('Transaction Received',$message);
+        $this->assertEquals('Approved',$message);
     }
     
     public function test_simple_captureGivenAuth_secondary_amount()
@@ -128,7 +128,7 @@ class CaptureGivenAuthFunctionalTest extends \PHPUnit_Framework_TestCase
     	$initialize = new LitleOnlineRequest();
     	$captureGivenAuthResponse = $initialize->captureGivenAuthRequest($hash_in);
     	$message = XmlParser::getNode($captureGivenAuthResponse,'message');
-    	$this->assertEquals('Transaction Received',$message);
+    	$this->assertEquals('Approved',$message);
     }
 
 }

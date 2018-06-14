@@ -82,7 +82,7 @@ class TreeResponseFunctionalTest extends \PHPUnit_Framework_TestCase
 
         $litle = new LitleOnlineRequest($treeResponse=true);
         $response = $litle->captureGivenAuthRequest($hash_in);
-        $this->assertEquals('Transaction Received',$response->captureGivenAuthResponse->message);
+        $this->assertEquals('Approved',$response->captureGivenAuthResponse->message);
     }
 
     public function test_credit()
@@ -100,7 +100,7 @@ class TreeResponseFunctionalTest extends \PHPUnit_Framework_TestCase
 
         $litle = new LitleOnlineRequest($treeResponse=true);
         $response = $litle->creditRequest($hash_in);
-        $this->assertEquals('001',$response->creditResponse->response);
+        $this->assertEquals('000',$response->creditResponse->response);
     }
 
     public function test_echeckCredit()
@@ -169,7 +169,6 @@ class TreeResponseFunctionalTest extends \PHPUnit_Framework_TestCase
               'merchantId' => '101',
               'version'=>'8.8',
               'reportGroup'=>'Planets',
-              'litleTxnId'=>'123456',
               'orderId'=>'12344',
               'amount'=>'106',
               'orderSource'=>'ecommerce',
@@ -181,7 +180,7 @@ class TreeResponseFunctionalTest extends \PHPUnit_Framework_TestCase
 
         $litle = new LitleOnlineRequest($treeResponse=true);
         $response = $litle->forceCaptureRequest($hash_in);
-        $this->assertEquals('001',$response->forceCaptureResponse->response);
+        $this->assertEquals('000',$response->forceCaptureResponse->response);
     }
 
     public function test_void()
