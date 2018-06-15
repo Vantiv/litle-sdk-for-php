@@ -191,7 +191,7 @@ class CertEcheckTest extends \PHPUnit_Framework_TestCase
         // Test 48
         $echeck_hash = array(
             'url' => PRELIVE_URL,
-            'litleTxnId' => XMLParser::getNode($echeckSaleResponse, 'litleTxnId');
+            'litleTxnId' => XMLParser::getNode($echeckSaleResponse, 'litleTxnId'));
 
         $initialize = new LitleOnlineRequest();
         $echeckCreditResponse = $initialize->echeckCreditRequest($echeck_hash);
