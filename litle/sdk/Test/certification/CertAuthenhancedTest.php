@@ -362,7 +362,7 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function test_30()
+    /*public function test_30()
     {
         $auth_hash = array('id' => '1211',
             'orderId' => '30',
@@ -386,9 +386,9 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('341',XmlParser::getNode($authorizationResponse,'response'));
 //        $this->assertEquals('Invalid healthcare amounts',XmlParser::getNode($authorizationResponse,'message'));
 
-    }
+    }*/
 
-    public function test_31()
+    /*public function test_31()
     {
         $auth_hash = array('id' => '1211',
             'orderId' => '31',
@@ -410,6 +410,6 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('010',XmlParser::getNode($authorizationResponse,'response'));
         $this->assertEquals('Partially Approved',XmlParser::getNode($authorizationResponse,'message'));
         $this->assertEquals('18699',XmlParser::getNode($authorizationResponse,'approvedAmount'));
-    }
+    }*/
 
 }
