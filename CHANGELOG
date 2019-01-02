@@ -1,5 +1,8 @@
 = LitleOnline CHANGELOG
 
+==version 8.31.2
+* Feature: phpseclib v8
+
 ==version 8.31.1
 * BugFix: Set content-type to text/xml; charset=UTF-8
 
