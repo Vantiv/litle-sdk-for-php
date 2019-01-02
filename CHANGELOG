@@ -1,8 +1,5 @@
 = LitleOnline CHANGELOG
 
-==version 8.31.3
-* BugFix: Remove phpseclib dependency
-
 ==version 8.31.2
 * Feature: phpseclib v8
 
