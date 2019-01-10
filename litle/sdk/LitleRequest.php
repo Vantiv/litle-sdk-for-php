@@ -166,7 +166,7 @@ class LitleRequest
 
         $session = $this->createSFTPSession();
         # with extension .prg
-        $session->put('/inbound/' . basename($this->request_file) . '.prg', $this->request_file, NET_SFTP_LOCAL_FILE);
+        $session->put('/inbound/' . basename($this->request_file) . '.prg', $this->request_file, \phpseclib\Net\SFTP::SOURCE_LOCAL_FILE);
         # rename when the file upload is complete
         $session->rename('/inbound/' . basename($this->request_file) . '.prg', '/inbound/' . basename($this->request_file) . '.asc');
 
