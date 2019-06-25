@@ -582,8 +582,8 @@ class LitleOnlineRequest
     public function fraudCheck($hash_in)
     {
         $hash_out = array(
-            'id' => Checker::requiredField(XmlFields::returnArrayValue($hash_in, 'id')),
-            'advancedFraudChecks' => Checker::requiredField(XmlFields::returnArrayValue($hash_in, 'advancedFraudChecks')),
+            'id' => XmlFields::returnArrayValue($hash_in, 'id'),
+            'advancedFraudChecks' => (XmlFields::returnArrayValue($hash_in, 'advancedFraudChecks')),
             'billToAddress' => XmlFields::contact(XmlFields::returnArrayValue($hash_in, 'billToAddress')),
             'shipToAddress' => XmlFields::contact(XmlFields::returnArrayValue($hash_in, 'shipToAddress')),
             'amount' => (XmlFields::returnArrayValue($hash_in, 'amount'))
