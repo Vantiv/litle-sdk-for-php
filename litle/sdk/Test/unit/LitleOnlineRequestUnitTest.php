@@ -31,6 +31,7 @@ class LitleOnlineRequestUnitTest extends \PHPUnit_Framework_TestCase
 {
     public function test_set_merchant_sdk_integration()
     {
+        echo("test_set_merchant_sdk_integration begin");
         $hash_in = array(
             'merchantSdk' => 'Magento;8.14.3',
             'orderId' => '2111',
