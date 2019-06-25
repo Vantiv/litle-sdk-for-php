@@ -193,9 +193,13 @@ class FraudCheckFunctionalTest extends \PHPUnit_Framework_TestCase
             )
         );
 
+        echo("begin new LittleOnlineRequest");
         $initialize = new LitleOnlineRequest();
+        echo("get fraudCheckResponse");
         $fraudCheckResponse = $initialize->fraudCheck($hash_in);
+        echo("get message element");
         $message = XmlParser::getNode($fraudCheckResponse, 'message');
+        echo("assertEquals");
         $this->assertEquals('Approved', $message);
         echo("test_shipToAddress end");
     }
