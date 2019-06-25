@@ -36,7 +36,8 @@ class CertTokenTest extends \PHPUnit_Framework_TestCase
     public function test_50()
     {
         $token_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy'=>'',
             'orderId' => '50',
             'accountNumber' => '4457119922390123');
 
@@ -52,7 +53,8 @@ class CertTokenTest extends \PHPUnit_Framework_TestCase
     public function test_51()
     {
         $token_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy'=>'',
             'orderId' => '51',
             'accountNumber' => '4457119999999999');
 
@@ -65,7 +67,8 @@ class CertTokenTest extends \PHPUnit_Framework_TestCase
     public function test_52()
     {
         $token_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy'=>'',
             'orderId' => '52',
             'accountNumber' => '4457119922390123');
 
@@ -81,7 +84,8 @@ class CertTokenTest extends \PHPUnit_Framework_TestCase
     public function test_53() #merchant is not authorized for echeck tokens
     {
         $token_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy'=>'',
             'orderId' => '53',
             'echeckForToken' => array(
                 'accNum' => '1099999998',
@@ -98,7 +102,8 @@ class CertTokenTest extends \PHPUnit_Framework_TestCase
     public function test_54() #merchant is not authorized for echeck tokens
     {
         $token_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy'=>'',
             'orderId' => '54',
             'echeckForToken' => array('accNum' => '1022222102', 'routingNum' => '1145_7895'));
 
@@ -111,7 +116,8 @@ class CertTokenTest extends \PHPUnit_Framework_TestCase
     public function test_55()
     {
         $token_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy'=>'',
             'orderId' => '55',
             'amount' => '15000',
             'orderSource' => 'ecommerce',
@@ -130,7 +136,8 @@ class CertTokenTest extends \PHPUnit_Framework_TestCase
     public function test_56()
     {
         $token_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy'=>'',
             'orderId' => '56',
             'amount' => '15000',
             'orderSource' => 'ecommerce',
@@ -145,7 +152,8 @@ class CertTokenTest extends \PHPUnit_Framework_TestCase
     public function test_57()
     {
         $token_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy'=>'',
             'orderId' => '57',
             'amount' => '15000',
             'orderSource' => 'ecommerce',
@@ -164,7 +172,8 @@ class CertTokenTest extends \PHPUnit_Framework_TestCase
     public function test_59()
     {
         $token_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy'=>'',
             'orderId' => '59',
             'amount' => '15000',
             'orderSource' => 'ecommerce',
@@ -181,7 +190,8 @@ class CertTokenTest extends \PHPUnit_Framework_TestCase
     public function test_60()
     {
         $token_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy'=>'',
             'orderId' => '60',
             'amount' => '15000',
             'orderSource' => 'ecommerce',
@@ -199,7 +209,8 @@ class CertTokenTest extends \PHPUnit_Framework_TestCase
     function test_61()
     {
         $token_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy'=>'',
             'orderId' => '61',
             'amount' => '15000',
             'orderSource' => 'ecommerce',
@@ -222,7 +233,8 @@ class CertTokenTest extends \PHPUnit_Framework_TestCase
     function test_62()
     {
         $token_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy'=>'',
             'orderId' => '62',
             'amount' => '15000',
             'orderSource' => 'ecommerce',
@@ -245,7 +257,8 @@ class CertTokenTest extends \PHPUnit_Framework_TestCase
     function test_63()
     {
         $token_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy'=>'',
             'orderId' => '63',
             'amount' => '15000',
             'orderSource' => 'ecommerce',
