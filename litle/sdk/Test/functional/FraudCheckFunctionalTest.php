@@ -178,6 +178,7 @@ class FraudCheckFunctionalTest extends \PHPUnit_Framework_TestCase
 
     public function test_shipToAddress()
     {
+        echo("test_shipToAddress begin");
         $hash_in = array(
             'id' => 'id',
             'advancedFraudChecks' => array(
