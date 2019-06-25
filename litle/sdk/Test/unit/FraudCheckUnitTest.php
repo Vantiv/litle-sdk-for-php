@@ -220,6 +220,5 @@ class FraudCheckUnitTest extends \PHPUnit_Framework_TestCase
         $litleTest = new LitleOnlineRequest();
         $litleTest->newXML = $mock;
         $litleTest->fraudCheck($hash_in);
-        echo("test_shipToAddress end");
     }
 }

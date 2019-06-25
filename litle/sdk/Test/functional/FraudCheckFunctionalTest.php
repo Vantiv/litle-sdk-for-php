@@ -196,5 +196,6 @@ class FraudCheckFunctionalTest extends \PHPUnit_Framework_TestCase
         $fraudCheckResponse = $initialize->fraudCheck($hash_in);
         $message = XmlParser::getNode($fraudCheckResponse, 'message');
         $this->assertEquals('Approved', $message);
+        echo("test_shipToAddress end");
     }
 }
