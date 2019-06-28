@@ -34,7 +34,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
     function test_6_auth()
     {
         $hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '6',
             'amount' => '10010',
@@ -66,7 +67,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
     function test_6_sale()
     {
         $hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '6',
             'amount' => '10010',
@@ -96,7 +98,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
 
         //test 6a
         $hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'litleTxnId' => (XmlParser::getNode($response, 'litleTxnId')),
             'reportGroup' => 'planets');
@@ -109,7 +112,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
     function test_7_auth()
     {
         $hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '7',
             'amount' => '10010',
@@ -141,7 +145,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
     function test_7_avs()
     {
         $hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '7',
             'amount' => '000',
@@ -173,7 +178,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
     function test_7_sale()
     {
         $hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '7',
             'amount' => '10100',
@@ -205,7 +211,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
     function test_8_auth()
     {
         $hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '8',
             'amount' => '10010',
@@ -238,7 +245,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
     function test_8_avs()
     {
         $hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '8',
             'amount' => '000',
@@ -270,7 +278,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
     function test_8_sale()
     {
         $hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '8',
             'amount' => '10010',
@@ -302,7 +311,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
     function test_9_auth()
     {
         $hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '9',
             'amount' => '10010',
@@ -334,7 +344,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
     function test_9_avs()
     {
         $hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '9',
             'amount' => '000',
@@ -366,7 +377,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
     function test_9_sale()
     {
         $hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '9',
             'amount' => '10010',
@@ -398,7 +410,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
     function test_10_auth()
     {
         $hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => 'thisisid',
             'orderId' => '10',
             'amount' => '40000',
@@ -421,7 +434,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
     function test_11_auth()
     {
         $hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => 'thisisid',
             'orderId' => '11',
             'amount' => '60000',
@@ -444,7 +458,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
     function test_12_auth()
     {
         $hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => 'thisisid',
             'orderId' => '12',
             'amount' => '50000',
@@ -467,7 +482,8 @@ class CertBetaTest extends \PHPUnit_Framework_TestCase
     function test_13_auth()
     {
         $hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => 'thisisid',
             'orderId' => '13',
             'amount' => '15000',

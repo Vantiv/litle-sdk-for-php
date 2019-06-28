@@ -35,7 +35,8 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
     public function test_32()
     {
         $auth_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '32',
             'amount' => '10010',
@@ -62,7 +63,8 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
 
         //test 32A
         $capture_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'litleTxnId' => (XmlParser::getNode($authorizationResponse, 'litleTxnId')),
             'reportGroup' => 'planets', 'id' => '1211',);
         $initialize = new LitleOnlineRequest();
@@ -71,7 +73,8 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Approved', XmlParser::getNode($captureResponse, 'message'));
         //test32B
         $authReversal_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'litleTxnId' => (XmlParser::getNode($authorizationResponse, 'litleTxnId')),
             'reportGroup' => 'planets', 'amount' => '5005');
@@ -84,7 +87,8 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
     public function test_33()
     {
         $auth_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '33',
             'amount' => '20020',
@@ -114,7 +118,8 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
 
         //test 33A
         $authReversal_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'litleTxnId' => (XmlParser::getNode($authorizationResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
@@ -127,7 +132,8 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
     public function test_34()
     {
         $auth_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '34',
             'amount' => '30030',
@@ -154,7 +160,8 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
 
         //test 34A
         $authReversal_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'litleTxnId' => (XmlParser::getNode($authorizationResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
@@ -167,7 +174,8 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
     public function test_35()
     {
         $auth_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '35',
             'amount' => '40040',
@@ -192,7 +200,8 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
 
         //test 35A
         $capture_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'litleTxnId' => (XmlParser::getNode($authorizationResponse, 'litleTxnId')),
             'reportGroup' => 'planets', 'amount' => '20020');
@@ -202,7 +211,8 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Approved', XmlParser::getNode($captureResponse, 'message'));
         //test35B
         $authReversal_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'litleTxnId' => (XmlParser::getNode($authorizationResponse, 'litleTxnId')),
             'reportGroup' => 'planets', 'amount' => '20020');
@@ -215,7 +225,8 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
     public function test_36()
     {
         $auth_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '36',
             'amount' => '20500',
@@ -231,7 +242,8 @@ class CertAuthReversal extends \PHPUnit_Framework_TestCase
 
         //test 36A
         $authReversal_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'litleTxnId' => (XmlParser::getNode($authorizationResponse, 'litleTxnId')),
             'reportGroup' => 'planets', 'amount' => '10000');
