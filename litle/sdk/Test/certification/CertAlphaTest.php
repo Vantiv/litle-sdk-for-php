@@ -36,10 +36,11 @@ define('PRELIVE_URL', 'https://payments.vantivprelive.com/vap/communicator/onlin
 // The voidRequest fails intermitently in many tests!!
 class CertAlphaTest extends \PHPUnit_Framework_TestCase
 {
-    private preliveStatus = $_SERVER['preliveStatus'];
+    private $preliveStatus;
 
     function test_1_Auth()
     {
+        $this->preliveStatus = $_SERVER['preliveStatus'];
         if(strtolower($this->preliveStatus) == 'down'){
             $this->markTestSkipped('Prelive is not available');
         }
