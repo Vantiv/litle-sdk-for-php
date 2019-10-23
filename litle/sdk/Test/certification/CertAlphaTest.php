@@ -252,6 +252,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
     {
         $auth_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'orderId' => '2',
             'amount' => '10100',
             'orderSource' => 'ecommerce',
@@ -620,6 +621,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
     {
         $auth_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'orderId' => '5',
             'amount' => '50050',
             'orderSource' => 'ecommerce',
