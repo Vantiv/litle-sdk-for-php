@@ -18,7 +18,7 @@ class LitleRequestFunctionalTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         echo("LitleRequestFunctionTest setUp begin");
-        $this->direct = sys_get_temp_dir() . '/test';
+        $this->direct = sys_get_temp_dir() . '/test' . CURRENT_SDK_VERSION;
         if (!file_exists($this->direct)) {
             mkdir($this->direct);
         }
