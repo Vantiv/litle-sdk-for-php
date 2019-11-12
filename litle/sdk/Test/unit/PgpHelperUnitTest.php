@@ -17,7 +17,7 @@ class PgpHelperUnitTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->direct = sys_get_temp_dir() . '/test' . CURRENT_SDK_VERSION;
+        $this->direct = sys_get_temp_dir() . '/testPHP.' . CURRENT_SDK_VERSION;
         if (!file_exists($this->direct)) {
             mkdir($this->direct);
         }
