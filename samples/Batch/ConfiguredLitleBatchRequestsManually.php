@@ -28,7 +28,7 @@ $config_hash = array(
     'merchantId' => '101',
     'sftp_username' => 'sdk',
     'sftp_password' => 'Zj8I8Ly5',
-    'batch_url' => 'prelive.litle.com',
+    'batch_url' => 'payments.vantivprelive.com',
     'batch_requests_path' => '/usr/local/litle-home/twang/git/batches',
     'litle_requests_path' => '/usr/local/litle-home/twang/git/batches'
 );

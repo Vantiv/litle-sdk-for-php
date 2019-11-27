@@ -178,6 +178,7 @@ class FraudCheckFunctionalTest extends \PHPUnit_Framework_TestCase
 
     public function test_shipToAddress()
     {
+        echo("test_shipToAddress begin");
         $hash_in = array(
             'id' => 'id',
             'advancedFraudChecks' => array(
@@ -192,9 +193,14 @@ class FraudCheckFunctionalTest extends \PHPUnit_Framework_TestCase
             )
         );
 
+        echo("begin new LittleOnlineRequest");
         $initialize = new LitleOnlineRequest();
+        echo("get fraudCheckResponse");
         $fraudCheckResponse = $initialize->fraudCheck($hash_in);
-        $message = XmlParser::getNode($fraudCheckResponse, 'message');
-        $this->assertEquals('Approved', $message);
+        echo("get message element");
+        $response = XmlParser::getNode($fraudCheckResponse, 'response');
+        echo("assertEquals");
+        $this->assertEquals('000', $response);
+        echo("test_shipToAddress end");
     }
 }

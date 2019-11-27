@@ -17,6 +17,7 @@ class LitleRequestFunctionalTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        echo("LitleRequestFunctionTest setUp begin");
         $this->direct = sys_get_temp_dir() . '/test';
         if (!file_exists($this->direct)) {
             mkdir($this->direct);
@@ -38,10 +39,12 @@ class LitleRequestFunctionalTest extends \PHPUnit_Framework_TestCase
             'orderSource' => 'ecommerce',
             'amount' => '123'
         );
+        echo("LitleRequestFuctionalTest setUp end");
     }
 
     public function test_wouldFill()
     {
+        echo("test_wouldFill begin");
         $request = new LitleRequest ($this->config);
         $this->assertTrue($request->wouldFill(500001));
         $this->assertFalse($request->wouldFill(500000));
