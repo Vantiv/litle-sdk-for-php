@@ -34,7 +34,8 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
     public function test_14()
     {
         $auth_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '14',
             'amount' => '3000',
@@ -57,7 +58,8 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
     public function test_15()
     {
         $auth_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '15',
             'amount' => '3000',
@@ -80,7 +82,8 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
     public function test_16()
     {
         $auth_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '16',
             'amount' => '3000',
@@ -103,7 +106,8 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
     public function test_17()
     {
         $auth_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '17',
             'amount' => '3000',
@@ -126,7 +130,8 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
     public function test_18()
     {
         $auth_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '18',
             'amount' => '3000',
@@ -149,7 +154,8 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
     public function test_19()
     {
         $auth_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '19',
             'amount' => '3000',
@@ -172,7 +178,8 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
     public function test_20()
     {
         $auth_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '20',
             'amount' => '3000',
@@ -195,7 +202,8 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
     public function test_21()
     {
         $auth_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '21',
             'amount' => '5000',
@@ -215,7 +223,8 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
     public function test_22()
     {
         $auth_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '22',
             'amount' => '5000',
@@ -235,7 +244,8 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
     public function test_23()
     {
         $auth_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '23',
             'amount' => '5000',
@@ -255,7 +265,8 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
     public function test_24()
     {
         $auth_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '24',
             'amount' => '5000',
@@ -275,7 +286,8 @@ class CertAuthenhancedTest extends \PHPUnit_Framework_TestCase
     public function test_25()
     {
         $auth_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '25',
             'amount' => '5000',

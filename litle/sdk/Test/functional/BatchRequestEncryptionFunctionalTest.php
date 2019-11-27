@@ -58,7 +58,7 @@ class BatchRequestEncryptionFunctionalTest extends \PHPUnit_Framework_TestCase
             'sftp_username' => $this->sftpUsername,
             'sftp_password' => $this->sftpPassword,
             'useEncryption' => 'true',
-            'batch_url' => 'prelive.litle.com',
+            'batch_url' => 'payments.vantivprelive.com',
         );
 
         $litle_request = new LitleRequest($config_hash);

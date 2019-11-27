@@ -37,7 +37,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
     function test_1_Auth()
     {
         $auth_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             #'user'=> '12312',
             'orderId' => '1',
@@ -65,7 +66,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         //test 1A
         $capture_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'litleTxnId' => (XmlParser::getNode($authorizationResponse, 'litleTxnId')),
             'reportGroup' => 'planets', 'id' => '1211',);
         $initialize = new LitleOnlineRequest();
@@ -75,7 +77,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         //test 1B
         $credit_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'litleTxnId' => (XmlParser::getNode($captureResponse, 'litleTxnId')),
             'reportGroup' => 'planets', 'id' => '1211',);
         $initialize = new LitleOnlineRequest();
@@ -85,7 +88,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         //test 1C
         $void_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'litleTxnId' => (XmlParser::getNode($creditResponse, 'litleTxnId')),
             'reportGroup' => 'planets', 'id' => '1211',);
         $initialize = new LitleOnlineRequest();
@@ -97,7 +101,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
     function test_1_avs()
     {
         $auth_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '1',
             'amount' => '0',
@@ -126,7 +131,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
     function test_1_sale()
     {
         $sale_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '1',
             'amount' => '10010',
@@ -152,7 +158,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('M', XmlParser::getNode($saleResponse, 'cardValidationResult'));
 
         $credit_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'litleTxnId' => (XmlParser::getNode($saleResponse, 'litleTxnId')),
             'reportGroup' => 'planets', 'id' => '1211',);
         $initialize = new LitleOnlineRequest();
@@ -161,7 +168,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Approved', XmlParser::getNode($creditResponse, 'message'));
 
         $void_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'litleTxnId' => (XmlParser::getNode($creditResponse, 'litleTxnId')),
             'reportGroup' => 'planets', 'id' => '1211',);
         $initialize = new LitleOnlineRequest();
@@ -173,7 +181,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
     function test_2_Auth()
     {
         $auth_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '2',
             'amount' => '20020',
@@ -204,7 +213,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         //test 2A
         $capture_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'litleTxnId' => (XmlParser::getNode($authorizationResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
@@ -215,7 +225,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         //test 2B
         $credit_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'litleTxnId' => (XmlParser::getNode($captureResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
@@ -226,7 +237,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         //test 2C
         $void_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'litleTxnId' => (XmlParser::getNode($creditResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
@@ -239,7 +251,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
     function test_2_avs()
     {
         $auth_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '2',
             'amount' => '0',
@@ -272,7 +285,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
     function test_2_sale()
     {
         $sale_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '2',
             'amount' => '20020',
@@ -302,7 +316,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         //test 2B
         $credit_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'litleTxnId' => (XmlParser::getNode($saleResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
@@ -313,7 +328,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         //test 2C
         $void_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'litleTxnId' => (XmlParser::getNode($creditResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
@@ -326,7 +342,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
     function test_3_Auth()
     {
         $auth_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'orderId' => '3', 'id' => '1211',
             'amount' => '30030',
             'orderSource' => 'ecommerce',
@@ -353,7 +370,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         //test 3A
         $capture_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'litleTxnId' => (XmlParser::getNode($authorizationResponse, 'litleTxnId')),
             'reportGroup' => 'planets', 'id' => '1211',);
@@ -364,7 +382,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         //test 3B
         $credit_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'litleTxnId' => (XmlParser::getNode($captureResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
@@ -375,7 +394,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         //test 3C
         $void_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'litleTxnId' => (XmlParser::getNode($creditResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
@@ -388,7 +408,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
     function test_3_avs()
     {
         $auth_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '3',
             'amount' => '0',
@@ -417,7 +438,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
     function test_3_sale()
     {
         $sale_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '3',
             'amount' => '30030',
@@ -445,7 +467,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         //test 3B
         $credit_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'litleTxnId' => (XmlParser::getNode($saleResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
@@ -456,7 +479,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         //test 3C
         $void_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'litleTxnId' => (XmlParser::getNode($creditResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
@@ -469,7 +493,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
     function test_4_Auth()
     {
         $auth_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '4',
             'amount' => '40040',
@@ -495,7 +520,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         //test 4A
         $capture_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'litleTxnId' => (XmlParser::getNode($authorizationResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
@@ -506,7 +532,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         //test 4B
         $credit_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'litleTxnId' => (XmlParser::getNode($captureResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
@@ -517,7 +544,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         //test 4C
         $void_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'litleTxnId' => (XmlParser::getNode($creditResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
@@ -530,7 +558,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
     function test_4_avs()
     {
         $auth_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '4',
             'amount' => '0',
@@ -559,7 +588,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
     function test_4_sale()
     {
         $sale_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '4',
             'amount' => '40040',
@@ -585,7 +615,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         //test 4B
         $credit_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'litleTxnId' => (XmlParser::getNode($saleResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
@@ -596,7 +627,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         //test 4C
         $void_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'litleTxnId' => (XmlParser::getNode($creditResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
@@ -609,7 +641,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
     function test_5_auth()
     {
         $auth_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '5',
             'amount' => '50050',
@@ -632,7 +665,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         //test 5A
         $capture_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'litleTxnId' => (XmlParser::getNode($authorizationResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
@@ -643,7 +677,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         //test 5B
         $credit_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'litleTxnId' => (XmlParser::getNode($captureResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
@@ -654,7 +689,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         //test 5C
         $void_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'litleTxnId' => (XmlParser::getNode($creditResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
@@ -667,7 +703,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
     function test_5_avs()
     {
         $auth_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '5',
             'amount' => '0',
@@ -692,7 +729,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
     function test_5_sale()
     {
         $sale_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'orderId' => '5',
             'amount' => '50050',
@@ -715,7 +753,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         //test 5B
         $credit_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'litleTxnId' => (XmlParser::getNode($saleResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
@@ -726,7 +765,8 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         //test 5C
         $void_hash = array(
-            'url' => PRELIVE_URL,
+            'url' => PRELIVE_URL, 
+ 	 	 	'proxy' => '',
             'id' => '1211',
             'litleTxnId' => (XmlParser::getNode($creditResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
