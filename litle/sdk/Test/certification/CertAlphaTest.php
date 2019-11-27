@@ -36,10 +36,18 @@ define('PRELIVE_URL', 'https://payments.vantivprelive.com/vap/communicator/onlin
 // The voidRequest fails intermitently in many tests!!
 class CertAlphaTest extends \PHPUnit_Framework_TestCase
 {
+    private $preliveStatus;
+
     function test_1_Auth()
     {
+        $this->preliveStatus = $_SERVER['preliveStatus'];
+        if(strtolower($this->preliveStatus) == 'down'){
+            $this->markTestSkipped('Prelive is not available');
+        }
+
         $auth_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             #'user'=> '12312',
             'orderId' => '1',
             'amount' => '10100',
@@ -67,6 +75,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         //test 1A
         $capture_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'litleTxnId' => (XmlParser::getNode($authorizationResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -77,6 +86,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         //test 1B
         $credit_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'litleTxnId' => (XmlParser::getNode($captureResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -99,6 +109,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
     {
         $auth_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'orderId' => '1',
             'amount' => '0',
             'orderSource' => 'ecommerce',
@@ -127,6 +138,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
     {
         $sale_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'orderId' => '1',
             'amount' => '10010',
             'orderSource' => 'ecommerce',
@@ -152,6 +164,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
 
         $credit_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'litleTxnId' => (XmlParser::getNode($saleResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -174,6 +187,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
     {
         $auth_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'orderId' => '2',
             'amount' => '10100',
             'orderSource' => 'ecommerce',
@@ -203,6 +217,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         //test 2A
         $capture_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'litleTxnId' => (XmlParser::getNode($authorizationResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -213,6 +228,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         //test 2B
         $credit_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'litleTxnId' => (XmlParser::getNode($captureResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -223,6 +239,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         // Intermittent behavior
         /*$void_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'litleTxnId' => (XmlParser::getNode($creditResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -235,6 +252,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
     {
         $auth_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'orderId' => '2',
             'amount' => '10100',
             'orderSource' => 'ecommerce',
@@ -266,6 +284,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
     {
         $sale_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'orderId' => '2',
             'amount' => '10100',
             'orderSource' => 'ecommerce',
@@ -295,6 +314,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         //test 2B
         $credit_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'litleTxnId' => (XmlParser::getNode($saleResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -305,6 +325,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         // Intermittent behavior
         /*$void_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'litleTxnId' => (XmlParser::getNode($creditResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -317,6 +338,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
     {
         $auth_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'orderId' => '3',
             'amount' => '10100',
             'orderSource' => 'ecommerce',
@@ -344,6 +366,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         //test 3A
         $capture_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'litleTxnId' => (XmlParser::getNode($authorizationResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -354,6 +377,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         //test 3B
         $credit_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'litleTxnId' => (XmlParser::getNode($captureResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -364,6 +388,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         // Intermittent behavior
         /*$void_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'litleTxnId' => (XmlParser::getNode($creditResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -376,6 +401,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
     {
         $auth_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'orderId' => '3',
             'amount' => '0',
             'orderSource' => 'ecommerce',
@@ -404,6 +430,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
     {
         $sale_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'orderId' => '3',
             'amount' => '30030',
             'orderSource' => 'ecommerce',
@@ -431,6 +458,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         //test 3B
         $credit_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'litleTxnId' => (XmlParser::getNode($saleResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -441,6 +469,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         // Intermittent behavior
         /*$void_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'litleTxnId' => (XmlParser::getNode($creditResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -453,6 +482,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
     {
         $auth_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'orderId' => '4',
             'amount' => '10100',
             'orderSource' => 'ecommerce',
@@ -478,6 +508,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         //test 4A
         $capture_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'litleTxnId' => (XmlParser::getNode($authorizationResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -488,6 +519,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         //test 4B
         $credit_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'litleTxnId' => (XmlParser::getNode($captureResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -510,6 +542,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
     {
         $auth_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'orderId' => '4',
             'amount' => '0',
             'orderSource' => 'ecommerce',
@@ -538,6 +571,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
     {
         $sale_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'orderId' => '4',
             'amount' => '40040',
             'orderSource' => 'ecommerce',
@@ -563,6 +597,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         //test 4B
         $credit_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'litleTxnId' => (XmlParser::getNode($saleResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -573,6 +608,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         // Intermittent behavior
         /*$void_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'litleTxnId' => (XmlParser::getNode($creditResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -585,6 +621,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
     {
         $auth_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'orderId' => '5',
             'amount' => '50050',
             'orderSource' => 'ecommerce',
@@ -606,6 +643,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         //test 5A
         $capture_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'litleTxnId' => (XmlParser::getNode($authorizationResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -616,6 +654,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         //test 5B
         $credit_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'litleTxnId' => (XmlParser::getNode($captureResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -638,6 +677,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
     {
         $auth_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'orderId' => '5',
             'amount' => '0',
             'orderSource' => 'ecommerce',
@@ -661,6 +701,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
     {
         $sale_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'orderId' => '5',
             'amount' => '50050',
             'orderSource' => 'ecommerce',
@@ -682,6 +723,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         //test 5B
         $credit_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'litleTxnId' => (XmlParser::getNode($saleResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
@@ -692,6 +734,7 @@ class CertAlphaTest extends \PHPUnit_Framework_TestCase
         // Intermittent behavior
         /*$void_hash = array(
             'url' => PRELIVE_URL,
+            'proxy' => '',
             'litleTxnId' => (XmlParser::getNode($creditResponse, 'litleTxnId')),
             'reportGroup' => 'planets');
         $initialize = new LitleOnlineRequest();
