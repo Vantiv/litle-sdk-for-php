@@ -10,7 +10,7 @@ require_once realpath ( dirname ( __FILE__ ) ) . '../../../LitleOnline.php';
 class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 	private $direct;
 	public function setUp() {
-		$this->direct = sys_get_temp_dir () . '/test';
+		$this->direct = sys_get_temp_dir () . '/test' . CURRENT_SDK_VERSION;
 		if (! file_exists ( $this->direct )) {
 			mkdir ( $this->direct );
 		}

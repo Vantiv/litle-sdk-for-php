@@ -13,7 +13,7 @@ class LitleRequestFunctionalTest extends \PHPUnit_Framework_TestCase {
 	private $config;
 	private $sale;
 	public function setUp() {
-		$this->direct = sys_get_temp_dir () . '/test';
+		$this->direct = sys_get_temp_dir () . '/test' . CURRENT_SDK_VERSION;
 		if (! file_exists ( $this->direct )) {
 			mkdir ( $this->direct );
 		}
