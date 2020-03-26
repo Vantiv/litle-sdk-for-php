@@ -59,6 +59,6 @@ class VoidSettledTransactionTest extends \PHPUnit_Framework_TestCase
 
         $void_hash2 = array('litleTxnId' => (XmlParser::getNode($creditResponse, 'litleTxnId')), 'id' => '1211',);
         $voidResponse2 = $initialize->voidRequest($void_hash2);
-        $this->assertEquals('000', XmlParser::getNode($voidResponse2, 'response'));
+        $this->assertEquals('368', XmlParser::getNode($voidResponse2, 'response'));
     }
 }
