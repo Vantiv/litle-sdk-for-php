@@ -19,7 +19,7 @@ class PgpHelperUnitTest extends \PHPUnit_Framework_TestCase
     {
         $this->direct = sys_get_temp_dir() . '/testPHP.' . CURRENT_SDK_VERSION;
         if (!file_exists($this->direct)) {
-            mkdir($this->direct);
+            mkdir($this->direct, 0777, true);
         }
 
         $config = Obj2xml::getConfig(array());
