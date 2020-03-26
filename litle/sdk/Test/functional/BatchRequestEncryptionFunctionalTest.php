@@ -14,6 +14,7 @@ class BatchRequestEncryptionFunctionalTest extends \PHPUnit_Framework_TestCase
     private $sftpUsername;
     private $sftpPassword;
     private $merchantId;
+    private $preliveStatus;
 
     public function setUp()
     {
@@ -27,10 +28,15 @@ class BatchRequestEncryptionFunctionalTest extends \PHPUnit_Framework_TestCase
         $this->sftpUsername = $_SERVER['encSftpUsername'];
         $this->sftpPassword = $_SERVER['encSftpPassword'];
         $this->merchantId = $_SERVER['encMerchantId'];
+        $this->preliveStatus = $_SERVER['preliveStatus'];
     }
 
     public function test_configuredLitleBatchRequestsManually()
     {
+        if(strtolower($this->preliveStatus) == 'down'){
+            $this->markTestSkipped('Prelive is not available');
+        }
+
         $sale_info = array(
             'id' => '1',
             'orderId' => '1',
@@ -85,6 +91,10 @@ class BatchRequestEncryptionFunctionalTest extends \PHPUnit_Framework_TestCase
 
     public function test_mechaBatch()
     {
+        if(strtolower($this->preliveStatus) == 'down'){
+            $this->markTestSkipped('Prelive is not available');
+        }
+
         $config_hash = array(
             'user' => $this->username,
             'password' => $this->password,
