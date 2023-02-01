@@ -30,7 +30,7 @@ class LitleXmlMapper
     {
     }
 
-    public function request($request,$hash_config=NULL,$useSimpleXml)
+    public function request($request,$hash_config=NULL,$useSimpleXml=false)
     {
         $response = Communication::httpRequest($request,$hash_config);
         if ($useSimpleXml) {
