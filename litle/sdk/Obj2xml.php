@@ -104,10 +104,9 @@ class Obj2xml
         return str_replace("<?xml version=\"1.0\"?>\n", "", $rfr->asXML());
     }
 
-    public static function generateBatchHeader($counts_and_amounts)
+    public static function generateBatchHeader($counts_and_amounts, $config = [])
     {
-        $config = Obj2xml::getConfig(array());
-
+        $config = Obj2xml::getConfig($config);
         $xml = simplexml_load_string("<batchRequest />");
         $xml->addAttribute('merchantId', $config['merchantId']);
         $xml->addAttribute('merchantSdk', CURRENT_SDK_VERSION);

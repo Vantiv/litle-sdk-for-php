@@ -411,11 +411,11 @@ class BatchRequest
      * When no more transactions are to be added, the transactions file can be amended with the XML tags for the counts
      *  and amounts of the batch request. Returns the filename of the complete batchrequest file
      */
-    public function closeRequest()
+    public function closeRequest($config)
     {
         $handle = @fopen($this->transaction_file, "r");
         if ($handle) {
-            file_put_contents($this->batch_file, Obj2xml::generateBatchHeader($this->counts_and_amounts), FILE_APPEND);
+            file_put_contents($this->batch_file, Obj2xml::generateBatchHeader($this->counts_and_amounts, $config), FILE_APPEND);
             while (($buffer = fgets($handle, 4096)) !== false) {
                 file_put_contents($this->batch_file, $buffer, FILE_APPEND);
             }
