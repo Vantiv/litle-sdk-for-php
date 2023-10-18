@@ -70,4 +70,17 @@ class CaptureFunctionalTest extends \PHPUnit_Framework_TestCase
         $message = XmlParser::getAttribute($captureResponse, 'litleOnlineResponse', 'response');
         $this->assertEquals('0', $message);
     }
+
+    public function test_simple_capture_with_foreignRetailerIndicatorEnum()
+    {
+        $hash_in = array(
+            'litleTxnId' => '1234567891234567891',
+            'amount' => '123',
+            'foreignRetailerIndicator' => 'F');
+
+        $initilaize = new LitleOnlineRequest();
+        $captureResponse = $initilaize->captureRequest($hash_in);
+        $message = XmlParser::getAttribute($captureResponse, 'litleOnlineResponse', 'response');
+        $this->assertEquals('0', $message);
+    }
 }

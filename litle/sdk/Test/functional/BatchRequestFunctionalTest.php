@@ -32,7 +32,8 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase
             'orderId'=> '2111',
             'reportGroup'=>'Planets',
             'orderSource'=>'ecommerce',
-            'amount'=>'123');
+            'amount'=>'123',
+            'foreignRetailerIndicator' => 'F');
         $batch_request = new BatchRequest($this->direct);
         $batch_request->addSale($hash_in);
 
@@ -88,7 +89,59 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase
             'orderId'=> '2111',
             'reportGroup'=>'Planets',
             'orderSource'=>'ecommerce',
-            'amount'=>'123');
+            'amount'=>'123',
+            'billToAddress' => array(
+                'name' => 'David Berman A',
+                'addressLine1' => '10 Main Street',
+                'city' => 'San Jose',
+                'state' => 'ca',
+                'zip' => '95032',
+                'country' => 'USA',
+                'email' => 'dberman@phoenixProcessing.com',
+                'phone' => '781-270-1111',
+                'sellerId' => '21234234A1',
+                'url' => 'www.google.com',
+            ),
+            'shipToAddress' => array(
+                'name' => 'Raymond J. Johnson Jr. B',
+                'addressLine1' => '123 Main Street',
+                'city' => 'McLean',
+                'state' => 'VA',
+                'zip' => '22102',
+                'country' => 'USA',
+                'email' => 'ray@rayjay.com',
+                'phone' => '978-275-0000',
+                'sellerId' => '21234234A2',
+                'url' => 'www.google.com',
+            ),
+            'retailerAddress' => array(
+                'name' => 'John doe',
+                'addressLine1' => '123 Main Street',
+                'addressLine2' => '123 Main Street',
+                'addressLine3' => '123 Main Street',
+                'city' => 'Cincinnati',
+                'state' => 'OH',
+                'zip' => '45209',
+                'country' => 'USA',
+                'email' => 'noone@abc.com',
+                'phone' => '1234562783',
+                'sellerId' => '21234234A12345678910',
+                'companyName' => 'Google INC',
+                'url' => 'https://www.youtube.com/results?search_query',
+            ),
+            'additionalCOFData' => array(
+                'totalPaymentCount' => 'ND',
+                'paymentType' => 'Fixed Amount',
+                'uniqueId' => '234GTYH654RF13',
+                'frequencyOfMIT' => 'Annually',
+                'validationReference' => 'ANBH789UHY564RFC@EDB',
+                'sequenceIndicator' => '86',
+            ),
+            'merchantCategoryCode' => '5964',
+            'businessIndicator' => 'walletTransfer',
+            'crypto' => 'true',
+            'authIndicator' => 'Estimated',
+        );
         $batch_request = new BatchRequest($this->direct);
         $batch_request->addAuth($hash_in);
 
@@ -976,6 +1029,26 @@ class BatchRequestFunctionalTest extends \PHPUnit_Framework_TestCase
         $cts = $batch_request->getCountsAndAmounts();
         $this->assertNotNull($cts);
     }
+
+    public function test_auth_with_litleTxnId()
+    {
+        if(strtolower($this->preliveStatus) == 'down'){
+            $this->markTestSkipped('Prelive is not available');
+        }
+
+        $hash_in = array('reportGroup' => 'planets', 'litleTxnId' => '1234567891234567891','authIndicator' => 'Estimated','amount' => '123');
+
+        $batch_request = new BatchRequest($this->direct);
+        $batch_request->addAuth($hash_in);
+
+        $this->assertTrue(file_exists($batch_request->batch_file));
+        $this->assertEquals(1, $batch_request->total_txns);
+
+        $cts = $batch_request->getCountsAndAmounts();
+        $this->assertEquals(1, $cts['auth']['count']);
+        $this->assertEquals(123, $cts['auth']['amount']);
+    }
+
 
     public function tearDown()
     {

@@ -170,7 +170,7 @@ class aaaaSaleFunctionalTest extends \PHPUnit_Framework_TestCase
             'orderId' => '2111',
             'reportGroup' => 'Planets',
             'orderSource' => 'ecommerce',
-            'amount' => '123');
+            'amount' => '12334');
 
         $initialize = new LitleOnlineRequest();
         $saleResponse = $initialize->saleRequest($hash_in);
@@ -227,7 +227,7 @@ class aaaaSaleFunctionalTest extends \PHPUnit_Framework_TestCase
     {
         $hash_in = array(
             'card' => array('type' => 'VI',
-                'number' => '4100200300011001',
+                'number' => '4100200300011000',
                 'expDate' => '0521',
                 'cardValidationNum' => '463',),
             'orderId' => '2111',
@@ -245,7 +245,7 @@ class aaaaSaleFunctionalTest extends \PHPUnit_Framework_TestCase
     {
         $hash_in = array(
             'card' => array('type' => 'VI',
-                'number' => '4100200300011001',
+                'number' => '4100200300011000',
                 'expDate' => '0521',
                 'cardValidationNum' => '463',),
             'orderId' => '2111',
@@ -258,5 +258,78 @@ class aaaaSaleFunctionalTest extends \PHPUnit_Framework_TestCase
         $saleResponse = $initilaize->saleRequest($hash_in);
         $response = XmlParser::getNode($saleResponse, 'response');
         $this->assertEquals('000', $response);
+    }
+
+    public function test_changes_for_v8_33()
+    {
+        $hash_in = array(
+                'card' => array(
+                    'type' => 'VI',
+                    'number' => '4005518220000002',
+                    'expDate' => '0150',
+                    'cardValidationNum' => '987',
+                ),
+                'id'=>'0001',
+                'orderId' => '82364_cnpApiAuth',
+                'amount' => '2870',
+                'orderSource' => 'telephone',
+                'billToAddress' => array(
+                    'name' => 'David Berman A',
+                    'addressLine1' => '10 Main Street',
+                    'city' => 'San Jose',
+                    'state' => 'ca',
+                    'zip' => '95032',
+                    'country' => 'USA',
+                    'email' => 'dberman@phoenixProcessing.com',
+                    'phone' => '781-270-1111',
+                    'sellerId' => '21234234A1',
+                    'url' => 'www.google.com',
+                ),
+                'shipToAddress' => array(
+                    'name' => 'Raymond J. Johnson Jr. B',
+                    'addressLine1' => '123 Main Street',
+                    'city' => 'McLean',
+                    'state' => 'VA',
+                    'zip' => '22102',
+                    'country' => 'USA',
+                    'email' => 'ray@rayjay.com',
+                    'phone' => '978-275-0000',
+                    'sellerId' => '21234234A2',
+                    'url' => 'www.google.com',
+                ),
+                'retailerAddress' => array(
+                    'name' => 'John doe',
+                    'addressLine1' => '123 Main Street',
+                    'addressLine2' => '123 Main Street',
+                    'addressLine3' => '123 Main Street',
+                    'city' => 'Cincinnati',
+                    'state' => 'OH',
+                    'zip' => '45209',
+                    'country' => 'USA',
+                    'email' => 'noone@abc.com',
+                    'phone' => '1234562783',
+                    'sellerId' => '21234234A123456789101112',
+                    'companyName' => 'Google INC',
+                    'url' => 'https://www.youtube.com/results?search_query',
+                ),
+                'additionalCOFData' => array(
+                    'totalPaymentCount' => 'ND',
+                    'paymentType' => 'Fixed Amount',
+                    'uniqueId' => '234GTYH654RF13',
+                    'frequencyOfMIT' => 'Annually',
+                    'validationReference' => 'ANBH789UHY564RFC@EDB',
+                    'sequenceIndicator' => '86',
+                ),
+                'merchantCategoryCode' => '5964',
+                'businessIndicator' => 'walletTransfer',
+                'crypto' => 'true',
+                'foreignRetailerIndicator' => 'F'
+            );
+
+        $initialize = new LitleOnlineRequest();
+        $saleResponse = $initialize->saleRequest($hash_in);
+        $message = XmlParser::getAttribute($saleResponse, 'litleOnlineResponse', 'message');
+        $message = XmlParser::getNode($saleResponse, 'message');
+        $this->assertEquals('Approved', $message);
     }
 }

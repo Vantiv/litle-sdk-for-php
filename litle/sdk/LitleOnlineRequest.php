@@ -72,7 +72,9 @@ class LitleOnlineRequest
     public function authorizationRequest($hash_in)
     {
         if (isset($hash_in['litleTxnId'])) {
-            $hash_out = array('litleTxnId' => (XmlFields::returnArrayValue($hash_in, 'litleTxnId')));
+            $hash_out = array('litleTxnId' => (XmlFields::returnArrayValue($hash_in, 'litleTxnId')),
+                'amount' => Checker::requiredField(XmlFields::returnArrayValue($hash_in, 'amount')),
+                'authIndicator' => Checker::requiredField(XmlFields::returnArrayValue($hash_in, 'authIndicator')));
         } else {
             $hash_out = array(
                 'orderId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in, 'orderId')),
@@ -83,6 +85,8 @@ class LitleOnlineRequest
                 'customerInfo' => (XmlFields::customerInfo(XmlFields::returnArrayValue($hash_in, 'customerInfo'))),
                 'billToAddress' => (XmlFields::contact(XmlFields::returnArrayValue($hash_in, 'billToAddress'))),
                 'shipToAddress' => (XmlFields::contact(XmlFields::returnArrayValue($hash_in, 'shipToAddress'))),
+                'retailerAddress' => (XmlFields::contact(XmlFields::returnArrayValue($hash_in, 'retailerAddress'))),
+                'additionalCOFData' => (XmlFields::additionalCOFData(XmlFields::returnArrayValue($hash_in, 'additionalCOFData'))),
                 'card' => (XmlFields::cardType(XmlFields::returnArrayValue($hash_in, 'card'))),
                 'paypal' => (XmlFields::payPal(XmlFields::returnArrayValue($hash_in, 'paypal'))),
                 'token' => (XmlFields::cardTokenType(XmlFields::returnArrayValue($hash_in, 'token'))),
@@ -109,6 +113,10 @@ class LitleOnlineRequest
                 'processingType' => XmlFields::returnArrayValue($hash_in, 'processingType'),
                 'originalNetworkTransactionId' => XmlFields::returnArrayValue($hash_in, 'originalNetworkTransactionId'),
                 'originalTransactionAmount' => XmlFields::returnArrayValue($hash_in, 'originalTransactionAmount'),
+                'merchantCategoryCode' => XmlFields::returnArrayValue($hash_in, 'merchantCategoryCode'),
+                'businessIndicator' => XmlFields::returnArrayValue($hash_in, 'businessIndicator'),
+                'crypto' => XmlFields::returnArrayValue($hash_in, 'crypto'),
+                'authIndicator' => XmlFields::returnArrayValue($hash_in, 'authIndicator')
             );
         }
         $choice_hash = array(XmlFields::returnArrayValue($hash_out, 'card'), XmlFields::returnArrayValue($hash_out, 'paypal'), XmlFields::returnArrayValue($hash_out, 'token'), XmlFields::returnArrayValue($hash_out, 'paypage'), XmlFields::returnArrayValue($hash_out, 'applepay'), XmlFields::returnArrayValue($hash_out, 'mpos'));
@@ -129,6 +137,8 @@ class LitleOnlineRequest
             'customerInfo' => XmlFields::customerInfo(XmlFields::returnArrayValue($hash_in, 'customerInfo')),
             'billToAddress' => XmlFields::contact(XmlFields::returnArrayValue($hash_in, 'billToAddress')),
             'shipToAddress' => XmlFields::contact(XmlFields::returnArrayValue($hash_in, 'shipToAddress')),
+            'retailerAddress' => XmlFields::contact(XmlFields::returnArrayValue($hash_in, 'retailerAddress')),
+            'additionalCOFData' => XmlFields::additionalCOFData(XmlFields::returnArrayValue($hash_in, 'additionalCOFData')),
             'card' => XmlFields::cardType(XmlFields::returnArrayValue($hash_in, 'card')),
             'paypal' => XmlFields::payPal(XmlFields::returnArrayValue($hash_in, 'paypal')),
             'token' => XmlFields::cardTokenType(XmlFields::returnArrayValue($hash_in, 'token')),
@@ -159,6 +169,10 @@ class LitleOnlineRequest
             'processingType' => XmlFields::returnArrayValue($hash_in, 'processingType'),
             'originalNetworkTransactionId' => XmlFields::returnArrayValue($hash_in, 'originalNetworkTransactionId'),
             'originalTransactionAmount' => XmlFields::returnArrayValue($hash_in, 'originalTransactionAmount'),
+            'merchantCategoryCode' => XmlFields::returnArrayValue($hash_in, 'merchantCategoryCode'),
+            'businessIndicator' => XmlFields::returnArrayValue($hash_in, 'businessIndicator'),
+            'crypto' => XmlFields::returnArrayValue($hash_in, 'crypto'),
+            'foreignRetailerIndicator' => XmlFields::returnArrayValue($hash_in, 'foreignRetailerIndicator'),
         );
 
         $choice_hash = array($hash_out['card'], $hash_out['paypal'], $hash_out['token'], $hash_out['paypage'], $hash_out['applepay'], $hash_out['mpos']);
@@ -252,6 +266,7 @@ class LitleOnlineRequest
             'merchantData' => (XmlFields::merchantData(XmlFields::returnArrayValue($hash_in, 'merchantData'))),
             'debtRepayment' => XmlFields::returnArrayValue($hash_in, 'debtRepayment'),
             'processingType' => XmlFields::returnArrayValue($hash_in, 'processingType'),
+            'foreignRetailerIndicator' => XmlFields::returnArrayValue($hash_in, 'foreignRetailerIndicator'),
         );
 
         $choice_hash = array(XmlFields::returnArrayValue($hash_out, 'card'), XmlFields::returnArrayValue($hash_out, 'paypal'), XmlFields::returnArrayValue($hash_out, 'token'), XmlFields::returnArrayValue($hash_out, 'paypage'), XmlFields::returnArrayValue($hash_out, 'mpos'));
@@ -270,7 +285,8 @@ class LitleOnlineRequest
             'enhancedData' => XmlFields::enhancedData(XmlFields::returnArrayValue($hash_in, 'enhancedData')),
             'processingInstructions' => XmlFields::processingInstructions(XmlFields::returnArrayValue($hash_in, 'processingInstructions')),
             'payPalOrderComplete' => XmlFields::returnArrayValue($hash_in, 'payPalOrderComplete'),
-            'payPalNotes' => XmlFields::returnArrayValue($hash_in, 'payPalNotes'));
+            'payPalNotes' => XmlFields::returnArrayValue($hash_in, 'payPalNotes'),
+            'foreignRetailerIndicator' => XmlFields::returnArrayValue($hash_in, 'foreignRetailerIndicator'));
         $captureResponse = $this->processRequest($hash_out, $hash_in, 'capture');
 
         return $captureResponse;
@@ -287,6 +303,8 @@ class LitleOnlineRequest
             'orderSource' => Checker::requiredField(XmlFields::returnArrayValue($hash_in, 'orderSource')),
             'billToAddress' => XmlFields::contact(XmlFields::returnArrayValue($hash_in, 'billToAddress')),
             'shipToAddress' => XmlFields::contact(XmlFields::returnArrayValue($hash_in, 'shipToAddress')),
+            'retailerAddress' => XmlFields::contact(XmlFields::returnArrayValue($hash_in, 'retailerAddress')),
+            'additionalCOFData' => XmlFields::additionalCOFData(XmlFields::returnArrayValue($hash_in, 'additionalCOFData')),
             'card' => XmlFields::cardType(XmlFields::returnArrayValue($hash_in, 'card')),
             'token' => XmlFields::cardTokenType(XmlFields::returnArrayValue($hash_in, 'token')),
             'paypage' => XmlFields::cardPaypageType(XmlFields::returnArrayValue($hash_in, 'paypage')),
@@ -302,7 +320,11 @@ class LitleOnlineRequest
             'debtRepayment' => XmlFields::returnArrayValue($hash_in, 'debtRepayment'),
             'processingType' => XmlFields::returnArrayValue($hash_in, 'processingType'),
             'originalNetworkTransactionId' => XmlFields::returnArrayValue($hash_in, 'originalNetworkTransactionId'),
-            'originalTransactionAmount' => XmlFields::returnArrayValue($hash_in, 'originalTransactionAmount')
+            'originalTransactionAmount' => XmlFields::returnArrayValue($hash_in, 'originalTransactionAmount'),
+            'merchantCategoryCode' => XmlFields::returnArrayValue($hash_in, 'merchantCategoryCode'),
+            'businessIndicator' => XmlFields::returnArrayValue($hash_in, 'businessIndicator'),
+            'crypto' => XmlFields::returnArrayValue($hash_in, 'crypto'),
+            'foreignRetailerIndicator' => XmlFields::returnArrayValue($hash_in, 'foreignRetailerIndicator'),
         );
 
         $choice_hash = array($hash_out['card'], $hash_out['token'], $hash_out['paypage'], $hash_out['mpos']);
