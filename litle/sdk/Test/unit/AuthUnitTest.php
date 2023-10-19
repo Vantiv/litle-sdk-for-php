@@ -614,4 +614,75 @@ class AuthUnitTest extends \PHPUnit_Framework_TestCase
         $litleTest->newXML = $mock;
         $litleTest->authorizationRequest($hash_in);
     }
+
+    public function test_auth_with_additionalCOFData()
+    {
+        $hash_in = array(
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4005518220000002',
+                'expDate' => '0150',
+                'cardValidationNum' => '987',
+            ),
+            'id'=>'0001',
+            'orderId' => '82364_cnpApiAuth',
+            'amount' => '2870',
+            'orderSource' => 'telephone',
+            'additionalCOFData' => array(
+                'totalPaymentCount' => 'ND',
+                'paymentType' => 'Fixed Amount',
+                'uniqueId' => '234GTYH654RF13',
+                'frequencyOfMIT' => 'Annually',
+                'validationReference' => 'ANBH789UHY564RFC@EDB',
+                'sequenceIndicator' => '86',
+            ),
+            'merchantCategoryCode' => '5964',
+            'businessIndicator' => 'walletTransfer',
+            'crypto' => 'true',
+        );
+        $mock = $this->getMock('litle\sdk\LitleXmlMapper');
+        $mock
+            ->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<additionalCOFData><totalPaymentCount>ND.*<paymentType>Fixed Amount.*<uniqueId>234GTYH654RF13.*<frequencyOfMIT>Annually.*<validationReference>ANBH789UHY564RFC@EDB.*<sequenceIndicator>86.*/'));
+        $litleTest = new LitleOnlineRequest();
+        $litleTest->newXML = $mock;
+        $litleTest->authorizationRequest($hash_in);
+    }
+
+    public function test_auth_merchantCategoryCode()
+    {
+        $hash_in = array(
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4005518220000002',
+                'expDate' => '0150',
+                'cardValidationNum' => '987',
+            ),
+            'id'=>'0001',
+            'orderId' => '82364_cnpApiAuth',
+            'amount' => '2870',
+            'orderSource' => 'telephone',
+            'additionalCOFData' => array(
+                'totalPaymentCount' => 'ND',
+                'paymentType' => 'Fixed Amount',
+                'uniqueId' => '234GTYH654RF13',
+                'frequencyOfMIT' => 'Annually',
+                'validationReference' => 'ANBH789UHY564RFC@EDB',
+                'sequenceIndicator' => '86',
+            ),
+            'merchantCategoryCode' => '5964',
+            'businessIndicator' => 'walletTransfer',
+            'crypto' => 'true',
+        );
+        $mock = $this->getMock('litle\sdk\LitleXmlMapper');
+        $mock
+            ->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<merchantCategoryCode>5964.*<businessIndicator>walletTransfer.*<crypto>true.*/'));
+
+        $litleTest = new LitleOnlineRequest();
+        $litleTest->newXML = $mock;
+        $litleTest->authorizationRequest($hash_in);
+    }
 }

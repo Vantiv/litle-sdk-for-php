@@ -470,6 +470,29 @@ class XmlFieldsTest extends \PHPUnit_Framework_TestCase
         $hash_out = XmlFields::contact($hash);
         $this->assertEquals($input, $hash_out["phone"]);
     }
+    public function test_contact_selleID_to_long()
+    {
+        $input = "21234234A12345678910";
+        $hash = array("sellerId" => $input . "1");
+        $hash_out = XmlFields::contact($hash);
+        $this->assertEquals($input, $hash_out["sellerId"]);
+    }
+
+    public function test_contact_url_to_long()
+    {
+        $input = "www.google.com";
+        $hash = array("url" => $input);
+        $hash_out = XmlFields::contact($hash);
+        $this->assertEquals($input, $hash_out["url"]);
+    }
+
+    public function test_additionalCofData_with_sequenceIndicator()
+    {
+        $input = "12";
+        $hash = array("sequenceIndicator" => $input);
+        $hash_out = XmlFields::additionalCOFData($hash);
+        $this->assertEquals($input, $hash_out["sequenceIndicator"]);
+    }
 
     public function test_recurringRequest_full()
     {

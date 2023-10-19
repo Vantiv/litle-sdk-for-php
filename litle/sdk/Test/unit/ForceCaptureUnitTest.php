@@ -311,4 +311,32 @@ class ForceCaptureUnitTest extends \PHPUnit_Framework_TestCase
         $litleTest->newXML = $mock;
         $litleTest->forceCaptureRequest($hash_in);
     }
+
+    public function test_forceCapture_with_foreignRetailerIndicator()
+    {
+        $hash_in = array(
+            'merchantId' => '101',
+            'version' => '8.33',
+            'reportGroup' => 'Planets',
+            'litleTxnId' => '123456',
+            'orderId' => '12344',
+            'amount' => '106',
+            'secondaryAmount' => '2000',
+            'orderSource' => 'ecommerce',
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000000',
+                'expDate' => '1210'
+            ),
+            'foreignRetailerIndicator' => 'F'
+        );
+        $mock = $this->getMock('litle\sdk\LitleXmlMapper');
+        $mock
+            ->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<foreignRetailerIndicator>F.*/'));
+        $litleTest = new LitleOnlineRequest();
+        $litleTest->newXML = $mock;
+        $litleTest->forceCaptureRequest($hash_in);
+    }
 }

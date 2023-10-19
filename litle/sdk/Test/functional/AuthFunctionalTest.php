@@ -25,6 +25,7 @@
 
 namespace litle\sdk\Test\functional;
 
+use http\Message;
 use litle\sdk\LitleOnlineRequest;
 use litle\sdk\XmlParser;
 
@@ -68,7 +69,7 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
 
     public function test_simple_auth_with_litleTxnId()
     {
-        $hash_in = array('reportGroup' => 'planets', 'litleTxnId' => '1234567891234567891');
+        $hash_in = array('reportGroup' => 'planets', 'litleTxnId' => '1234567891234567891','amount' => '124','authIndicator'=>'Estimated');
 
         $initilaize = new LitleOnlineRequest();
         $authorizationResponse = $initilaize->authorizationRequest($hash_in);
@@ -203,7 +204,7 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
             'orderId' => '2111',
             'orderSource' => 'ecommerce',
             'id' => '654',
-            'amount' => '12312');
+            'amount' => '1231');
 
         $initilaize = new LitleOnlineRequest();
         $authorizationResponse = $initilaize->authorizationRequest($hash_in);
@@ -215,7 +216,7 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
     {
         $hash_in = array(
             'card' => array('type' => 'VI',
-                'number' => '4100200300011001',
+                'number' => '4100200300011000',
                 'expDate' => '0521',),
             'orderId' => '2111',
             'amount' => '4999',
@@ -236,7 +237,7 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
     {
         $hash_in = array(
             'card' => array('type' => 'VI',
-                'number' => '4100200300011001',
+                'number' => '4100200300011000',
                 'expDate' => '0521',
                 'cardValidationNum' => '463',),
             'orderId' => '2111',
@@ -254,7 +255,7 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
     {
         $hash_in = array(
             'card' => array('type' => 'VI',
-                'number' => '4100200300011001',
+                'number' => '4100200300011000',
                 'expDate' => '0521',
                 'cardValidationNum' => '463',),
             'orderId' => '2111',
@@ -263,6 +264,108 @@ class AuthFunctionalTest extends \PHPUnit_Framework_TestCase
             'originalNetworkTransactionId' => 'Value from Net_Id1 response',
             'originalTransactionAmount' => '4999',);
 
+        $initilaize = new LitleOnlineRequest();
+        $authorizationResponse = $initilaize->authorizationRequest($hash_in);
+        $response = XmlParser::getNode($authorizationResponse, 'response');
+        $this->assertEquals('000', $response);
+    }
+      public function test_auth_with_v8_32()
+    {
+            $hash_in = array(
+                'card' => array(
+                    'type' => 'VI',
+                    'number' => '4005518220000002',
+                    'expDate' => '0150',
+                    'cardValidationNum' => '987',
+                ),
+                'id'=>'0001',
+                'orderId' => '82364_cnpApiAuth',
+                'amount' => '2870',
+                'orderSource' => 'telephone',
+                'billToAddress' => array(
+                    'name' => 'David Berman A',
+                    'addressLine1' => '10 Main Street',
+                    'city' => 'San Jose',
+                    'state' => 'ca',
+                    'zip' => '95032',
+                    'country' => 'USA',
+                    'email' => 'dberman@phoenixProcessing.com',
+                    'phone' => '781-270-1111',
+                    'sellerId' => '21234234A1',
+                    'url' => 'www.google.com',
+                ),
+                'shipToAddress' => array(
+                    'name' => 'Raymond J. Johnson Jr. B',
+                    'addressLine1' => '123 Main Street',
+                    'city' => 'McLean',
+                    'state' => 'VA',
+                    'zip' => '22102',
+                    'country' => 'USA',
+                    'email' => 'ray@rayjay.com',
+                    'phone' => '978-275-0000',
+                    'sellerId' => '21234234A2',
+                    'url' => 'www.google.com',
+                ),
+                'retailerAddress' => array(
+                    'name' => 'John doe',
+                    'addressLine1' => '123 Main Street',
+                    'addressLine2' => '123 Main Street',
+                    'addressLine3' => '123 Main Street',
+                    'city' => 'Cincinnati',
+                    'state' => 'OH',
+                    'zip' => '45209',
+                    'country' => 'USA',
+                    'email' => 'noone@abc.com',
+                    'phone' => '1234562783',
+                    'sellerId' => '21234234A12345678910',
+                    'companyName' => 'Google INC',
+                    'url' => 'https://www.youtube.com/results?search_query',
+                ),
+                'additionalCOFData' => array(
+                    'totalPaymentCount' => 'ND',
+                    'paymentType' => 'Fixed Amount',
+                    'uniqueId' => '234GTYH654RF13',
+                    'frequencyOfMIT' => 'Annually',
+                    'validationReference' => 'ANBH789UHY564RFC@EDB',
+                    'sequenceIndicator' => '86',
+                ),
+                'merchantCategoryCode' => '5964',
+                'businessIndicator' => 'walletTransfer',
+                'crypto' => 'true',
+            );
+        $initilaize = new LitleOnlineRequest();
+        $authorizationResponse = $initilaize->authorizationRequest($hash_in);
+        $response = XmlParser::getNode($authorizationResponse, 'response');
+        $this->assertEquals('000', $response);
+    }
+
+    public function test_auth_with_changes_v8_33()
+    {
+        $hash_in = array(
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4005518220000002',
+                'expDate' => '0150',
+                'cardValidationNum' => '987',
+            ),
+            'id'=>'0001',
+            'orderId' => '82364_cnpApiAuth',
+            'amount' => '2870',
+            'orderSource' => 'telephone',
+            'additionalCOFData' => array(
+                'totalPaymentCount' => 'ND',
+                'paymentType' => 'Fixed Amount',
+                'uniqueId' => '234GTYH654RF13',
+                'frequencyOfMIT' => 'Annually',
+                'validationReference' => 'ANBH789UHY564RFC@EDB',
+                'sequenceIndicator' => '86',
+            ),
+            'merchantCategoryCode' => '5964',
+            'businessIndicator' => 'walletTransfer',
+            'crypto' => 'true',
+            'authIndicator' => 'Estimated'
+
+        );
         $initilaize = new LitleOnlineRequest();
         $authorizationResponse = $initilaize->authorizationRequest($hash_in);
         $response = XmlParser::getNode($authorizationResponse, 'response');

@@ -98,4 +98,29 @@ class ForceCaptureFunctionalTest extends \PHPUnit_Framework_TestCase
         $response = XmlParser::getAttribute($forceCaptureResponse, 'litleOnlineResponse', 'response');
         $this->assertEquals('000', $response);
     }
+
+    public function test_simple_forceCapture_with_foreignRetailerIndicatorEnum()
+    {
+        $hash_in = array(
+            'merchantId' => '101',
+            'version' => '8.8',
+            'reportGroup' => 'Planets',
+            'litleTxnId' => '123456',
+            'orderId' => '12344',
+            'amount' => '106',
+            'secondaryAmount' => '2000',
+            'orderSource' => 'ecommerce',
+            'card' => array(
+                'type' => 'VI',
+                'number' => '4100000000000000',
+                'expDate' => '1210'
+            ),
+            'foreignRetailerIndicator' => 'F'
+        );
+
+        $initilaize = new LitleOnlineRequest();
+        $forceCaptureResponse = $initilaize->forceCaptureRequest($hash_in);
+        $response = XmlParser::getAttribute($forceCaptureResponse, 'litleOnlineResponse', 'response');
+        $this->assertEquals('000', $response);
+    }
 }

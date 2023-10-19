@@ -15,6 +15,8 @@ class Transactions
             'customerInfo' => XmlFields::customerInfo(XmlFields::returnArrayValue($hash_in, 'customerInfo')),
             'billToAddress' => XmlFields::contact(XmlFields::returnArrayValue($hash_in, 'billToAddress')),
             'shipToAddress' => XmlFields::contact(XmlFields::returnArrayValue($hash_in, 'shipToAddress')),
+            'retailerAddress' => XmlFields::contact(XmlFields::returnArrayValue($hash_in, 'retailerAddress')),
+            'additionalCOFData' => XmlFields::additionalCOFData(XmlFields::returnArrayValue($hash_in, 'additionalCOFData')),
             'card' => XmlFields::cardType(XmlFields::returnArrayValue($hash_in, 'card')),
             'paypal' => XmlFields::payPal(XmlFields::returnArrayValue($hash_in, 'paypal')),
             'token' => XmlFields::cardTokenType(XmlFields::returnArrayValue($hash_in, 'token')),
@@ -40,6 +42,10 @@ class Transactions
             'recurringRequest' => XmlFields::recurringRequestType(XmlFields::returnArrayValue($hash_in, 'recurringRequest')),
             'litleInternalRecurringRequest' => XmlFields::litleInternalRecurringRequestType(XmlFields::returnArrayValue($hash_in, 'litleInternalRecurringRequest')),
             'debtRepayment' => XmlFields::returnArrayValue($hash_in, 'debtRepayment'),
+            'merchantCategoryCode' => XmlFields::returnArrayValue($hash_in, 'merchantCategoryCode'),
+            'businessIndicator' => XmlFields::returnArrayValue($hash_in, 'businessIndicator'),
+            'crypto' => XmlFields::returnArrayValue($hash_in, 'crypto'),
+            'foreignRetailerIndicator' => XmlFields::returnArrayValue($hash_in, 'foreignRetailerIndicator'),
         );
 
         return $hash_out;
@@ -47,41 +53,53 @@ class Transactions
 
     public static function createAuthHash($hash_in)
     {
-        $hash_out = array(
-            'orderId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in, 'orderId')),
-            'amount' => Checker::requiredField(XmlFields::returnArrayValue($hash_in, 'amount')),
-            'surchargeAmount' => XmlFields::returnArrayValue($hash_in, 'surchargeAmount'),
-            'secondaryAmount' => XmlFields::returnArrayValue($hash_in, 'secondaryAmount'),
-            'orderSource' => Checker::requiredField(XmlFields::returnArrayValue($hash_in, 'orderSource')),
-            'customerInfo' => (XmlFields::customerInfo(XmlFields::returnArrayValue($hash_in, 'customerInfo'))),
-            'billToAddress' => (XmlFields::contact(XmlFields::returnArrayValue($hash_in, 'billToAddress'))),
-            'shipToAddress' => (XmlFields::contact(XmlFields::returnArrayValue($hash_in, 'shipToAddress'))),
-            'card' => (XmlFields::cardType(XmlFields::returnArrayValue($hash_in, 'card'))),
-            'paypal' => (XmlFields::payPal(XmlFields::returnArrayValue($hash_in, 'paypal'))),
-            'token' => (XmlFields::cardTokenType(XmlFields::returnArrayValue($hash_in, 'token'))),
-            'paypage' => (XmlFields::cardPaypageType(XmlFields::returnArrayValue($hash_in, 'paypage'))),
-            'applepay' => (XmlFields::applepayType(XmlFields::returnArrayValue($hash_in, 'applepay'))),
-            'billMeLaterRequest' => (XmlFields::billMeLaterRequest(XmlFields::returnArrayValue($hash_in, 'billMeLaterRequest'))),
-            'cardholderAuthentication' => (XmlFields::fraudCheckType(XmlFields::returnArrayValue($hash_in, 'cardholderAuthentication'))),
-            'processingInstructions' => (XmlFields::processingInstructions(XmlFields::returnArrayValue($hash_in, 'processingInstructions'))),
-            'pos' => (XmlFields::pos(XmlFields::returnArrayValue($hash_in, 'pos'))),
-            'customBilling' => (XmlFields::customBilling(XmlFields::returnArrayValue($hash_in, 'customBilling'))),
-            'taxBilling' => (XmlFields::taxBilling(XmlFields::returnArrayValue($hash_in, 'taxBilling'))),
-            'enhancedData' => (XmlFields::enhancedData(XmlFields::returnArrayValue($hash_in, 'enhancedData'))),
-            'amexAggregatorData' => (XmlFields::amexAggregatorData(XmlFields::returnArrayValue($hash_in, 'amexAggregatorData'))),
-            'allowPartialAuth' => XmlFields::returnArrayValue($hash_in, 'allowPartialAuth'),
-            'healthcareIIAS' => (XmlFields::healthcareIIAS(XmlFields::returnArrayValue($hash_in, 'healthcareIIAS'))),
-            'filtering' => (XmlFields::filteringType(XmlFields::returnArrayValue($hash_in, 'filtering'))),
-            'merchantData' => (XmlFields::merchantData(XmlFields::returnArrayValue($hash_in, 'merchantData'))),
-            'recyclingRequest' => (XmlFields::recyclingRequestType(XmlFields::returnArrayValue($hash_in, 'recyclingRequest'))),
-            'fraudFilterOverride' => XmlFields::returnArrayValue($hash_in, 'fraudFilterOverride'),
-            'recurringRequest' => XmlFields::recurringRequestType(XmlFields::returnArrayValue($hash_in, 'recurringRequest')),
-            'debtRepayment' => XmlFields::returnArrayValue($hash_in, 'debtRepayment'),
-            'processingType' => XmlFields::returnArrayValue($hash_in, 'processingType'),
-            'originalNetworkTransactionId' => XmlFields::returnArrayValue($hash_in, 'originalNetworkTransactionId'),
-            'originalTransactionAmount' => XmlFields::returnArrayValue($hash_in, 'originalTransactionAmount'),
-        );
-
+        if (isset($hash_in['litleTxnId'])) {
+            $hash_out = array(
+                'litleTxnId' => (XmlFields::returnArrayValue($hash_in, 'litleTxnId')),
+                'amount' => Checker::requiredField(XmlFields::returnArrayValue($hash_in, 'amount')),
+                'authIndicator' => Checker::requiredField(XmlFields::returnArrayValue($hash_in, 'authIndicator')));
+        } else {
+            $hash_out = array(
+                'orderId' => Checker::requiredField(XmlFields::returnArrayValue($hash_in, 'orderId')),
+                'amount' => Checker::requiredField(XmlFields::returnArrayValue($hash_in, 'amount')),
+                'surchargeAmount' => XmlFields::returnArrayValue($hash_in, 'surchargeAmount'),
+                'secondaryAmount' => XmlFields::returnArrayValue($hash_in, 'secondaryAmount'),
+                'orderSource' => Checker::requiredField(XmlFields::returnArrayValue($hash_in, 'orderSource')),
+                'customerInfo' => (XmlFields::customerInfo(XmlFields::returnArrayValue($hash_in, 'customerInfo'))),
+                'billToAddress' => (XmlFields::contact(XmlFields::returnArrayValue($hash_in, 'billToAddress'))),
+                'shipToAddress' => (XmlFields::contact(XmlFields::returnArrayValue($hash_in, 'shipToAddress'))),
+                'retailerAddress' => (XmlFields::contact(XmlFields::returnArrayValue($hash_in, 'retailerAddress'))),
+                'additionalCOFData' => (XmlFields::additionalCOFData(XmlFields::returnArrayValue($hash_in, 'additionalCOFData'))),
+                'card' => (XmlFields::cardType(XmlFields::returnArrayValue($hash_in, 'card'))),
+                'paypal' => (XmlFields::payPal(XmlFields::returnArrayValue($hash_in, 'paypal'))),
+                'token' => (XmlFields::cardTokenType(XmlFields::returnArrayValue($hash_in, 'token'))),
+                'paypage' => (XmlFields::cardPaypageType(XmlFields::returnArrayValue($hash_in, 'paypage'))),
+                'applepay' => (XmlFields::applepayType(XmlFields::returnArrayValue($hash_in, 'applepay'))),
+                'billMeLaterRequest' => (XmlFields::billMeLaterRequest(XmlFields::returnArrayValue($hash_in, 'billMeLaterRequest'))),
+                'cardholderAuthentication' => (XmlFields::fraudCheckType(XmlFields::returnArrayValue($hash_in, 'cardholderAuthentication'))),
+                'processingInstructions' => (XmlFields::processingInstructions(XmlFields::returnArrayValue($hash_in, 'processingInstructions'))),
+                'pos' => (XmlFields::pos(XmlFields::returnArrayValue($hash_in, 'pos'))),
+                'customBilling' => (XmlFields::customBilling(XmlFields::returnArrayValue($hash_in, 'customBilling'))),
+                'taxBilling' => (XmlFields::taxBilling(XmlFields::returnArrayValue($hash_in, 'taxBilling'))),
+                'enhancedData' => (XmlFields::enhancedData(XmlFields::returnArrayValue($hash_in, 'enhancedData'))),
+                'amexAggregatorData' => (XmlFields::amexAggregatorData(XmlFields::returnArrayValue($hash_in, 'amexAggregatorData'))),
+                'allowPartialAuth' => XmlFields::returnArrayValue($hash_in, 'allowPartialAuth'),
+                'healthcareIIAS' => (XmlFields::healthcareIIAS(XmlFields::returnArrayValue($hash_in, 'healthcareIIAS'))),
+                'filtering' => (XmlFields::filteringType(XmlFields::returnArrayValue($hash_in, 'filtering'))),
+                'merchantData' => (XmlFields::merchantData(XmlFields::returnArrayValue($hash_in, 'merchantData'))),
+                'recyclingRequest' => (XmlFields::recyclingRequestType(XmlFields::returnArrayValue($hash_in, 'recyclingRequest'))),
+                'fraudFilterOverride' => XmlFields::returnArrayValue($hash_in, 'fraudFilterOverride'),
+                'recurringRequest' => XmlFields::recurringRequestType(XmlFields::returnArrayValue($hash_in, 'recurringRequest')),
+                'debtRepayment' => XmlFields::returnArrayValue($hash_in, 'debtRepayment'),
+                'processingType' => XmlFields::returnArrayValue($hash_in, 'processingType'),
+                'originalNetworkTransactionId' => XmlFields::returnArrayValue($hash_in, 'originalNetworkTransactionId'),
+                'originalTransactionAmount' => XmlFields::returnArrayValue($hash_in, 'originalTransactionAmount'),
+                'merchantCategoryCode' => XmlFields::returnArrayValue($hash_in, 'merchantCategoryCode'),
+                'businessIndicator' => XmlFields::returnArrayValue($hash_in, 'businessIndicator'),
+                'crypto' => XmlFields::returnArrayValue($hash_in, 'crypto'),
+                'authIndicator' => XmlFields::returnArrayValue($hash_in, 'authIndicator')
+            );
+       }
         return $hash_out;
     }
 
@@ -161,6 +179,7 @@ class Transactions
             'merchantData' => (XmlFields::merchantData(XmlFields::returnArrayValue($hash_in, 'merchantData'))),
             'debtRepayment' => XmlFields::returnArrayValue($hash_in, 'debtRepayment'),
             'processingType' => XmlFields::returnArrayValue($hash_in, 'processingType'),
+            'foreignRetailerIndicator' => XmlFields::returnArrayValue($hash_in, 'foreignRetailerIndicator'),
         );
 
         return $hash_out;
@@ -176,8 +195,8 @@ class Transactions
             'enhancedData' => XmlFields::enhancedData(XmlFields::returnArrayValue($hash_in, 'enhancedData')),
             'processingInstructions' => XmlFields::processingInstructions(XmlFields::returnArrayValue($hash_in, 'processingInstructions')),
             'payPalOrderComplete' => XmlFields::returnArrayValue($hash_in, 'payPalOrderComplete'),
-            'payPalNotes' => XmlFields::returnArrayValue($hash_in, 'payPalNotes'));
-
+            'payPalNotes' => XmlFields::returnArrayValue($hash_in, 'payPalNotes'),
+            'foreignRetailerIndicator' => XmlFields::returnArrayValue($hash_in, 'foreignRetailerIndicator'));
         return $hash_out;
     }
 
@@ -192,6 +211,8 @@ class Transactions
             'orderSource' => Checker::requiredField(XmlFields::returnArrayValue($hash_in, 'orderSource')),
             'billToAddress' => XmlFields::contact(XmlFields::returnArrayValue($hash_in, 'billToAddress')),
             'shipToAddress' => XmlFields::contact(XmlFields::returnArrayValue($hash_in, 'shipToAddress')),
+            'retailerAddress' => XmlFields::contact(XmlFields::returnArrayValue($hash_in, 'retailerAddress')),
+            'additionalCOFData' => XmlFields::additionalCOFData(XmlFields::returnArrayValue($hash_in, 'additionalCOFData')),
             'card' => XmlFields::cardType(XmlFields::returnArrayValue($hash_in, 'card')),
             'token' => XmlFields::cardTokenType(XmlFields::returnArrayValue($hash_in, 'token')),
             'paypage' => XmlFields::cardPaypageType(XmlFields::returnArrayValue($hash_in, 'paypage')),
@@ -207,6 +228,10 @@ class Transactions
             'processingType' => XmlFields::returnArrayValue($hash_in, 'processingType'),
             'originalNetworkTransactionId' => XmlFields::returnArrayValue($hash_in, 'originalNetworkTransactionId'),
             'originalTransactionAmount' => XmlFields::returnArrayValue($hash_in, 'originalTransactionAmount'),
+            'merchantCategoryCode' => XmlFields::returnArrayValue($hash_in, 'merchantCategoryCode'),
+            'businessIndicator' => XmlFields::returnArrayValue($hash_in, 'businessIndicator'),
+            'crypto' => XmlFields::returnArrayValue($hash_in, 'crypto'),
+            'foreignRetailerIndicator' => XmlFields::returnArrayValue($hash_in, 'foreignRetailerIndicator'),
         );
 
         return $hash_out;

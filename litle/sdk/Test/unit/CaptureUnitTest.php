@@ -104,4 +104,21 @@ class CaptureUnitTest extends \PHPUnit_Framework_TestCase
         $litleTest->captureRequest($hash_in);
     }
 
+    public function test_capture_with_foreignRetailerIndicator()
+    {
+        $hash_in = array(
+            'litleTxnId' => '1234567891234567891',
+            'amount' => '123',
+            'foreignRetailerIndicator' => 'F');
+
+        $mock = $this->getMock('litle\sdk\LitleXmlMapper');
+        $mock
+            ->expects($this->once())
+            ->method('request')
+            ->with($this->matchesRegularExpression('/.*<amount>123<\/amount><foreignRetailerIndicator>F<\/foreignRetailerIndicator>.*/'));
+
+        $litleTest = new LitleOnlineRequest();
+        $litleTest->newXML = $mock;
+        $litleTest->captureRequest($hash_in);
+    }
 }

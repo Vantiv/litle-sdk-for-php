@@ -452,4 +452,78 @@ class XmlFieldsFunctionalTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("Valid Format", $message);
     }
 
+    public function test_auth_with_sellerID_and_url()
+    {
+        $hash_in = array('merchantId' => '101',
+            'version' => '8.32',
+            'reportGroup' => 'Planets',
+            'orderId' => '12344',
+            'amount' => '106',
+            'orderSource' => 'ecommerce',
+                'card' => array(
+                    'type' => 'VI',
+                    'number' => '4005518220000002',
+                    'expDate' => '0150',
+                    'cardValidationNum' => '987',
+                ),
+                'billToAddress' => array(
+                    'name' => 'David Berman A',
+                    'addressLine1' => '10 Main Street',
+                    'city' => 'San Jose',
+                    'state' => 'ca',
+                    'zip' => '95032',
+                    'country' => 'USA',
+                    'email' => 'dberman@phoenixProcessing.com',
+                    'phone' => '781-270-1111',
+                    'sellerId' => '21234234A1',
+                    'url' => 'www.google.com',
+                ),
+                'shipToAddress' => array(
+                    'name' => 'Raymond J. Johnson Jr. B',
+                    'addressLine1' => '123 Main Street',
+                    'city' => 'McLean',
+                    'state' => 'VA',
+                    'zip' => '22102',
+                    'country' => 'USA',
+                    'email' => 'ray@rayjay.com',
+                    'phone' => '978-275-0000',
+                    'sellerId' => '21234234A2',
+                    'url' => 'www.google.com',
+                ),
+                'retailerAddress' => array(
+                    'name' => 'John doe',
+                    'addressLine1' => '123 Main Street',
+                    'addressLine2' => '123 Main Street',
+                    'addressLine3' => '123 Main Street',
+                    'city' => 'Cincinnati',
+                    'state' => 'OH',
+                    'zip' => '45209',
+                    'country' => 'USA',
+                    'email' => 'noone@abc.com',
+                    'phone' => '1234562783',
+                    'sellerId' => '21234234A1234567891011121111111111111111111',
+                    'companyName' => 'Google INC',
+                    'url' => 'https://www.youtube.com/results?search_query1111111111111111',
+                ),
+                'additionalCOFData' => array(
+                    'totalPaymentCount' => 'ND',
+                    'paymentType' => 'Variable Amount',
+                    'uniqueId' => '234GTYH654RF13',
+                    'frequencyOfMIT' => 'Annually',
+                    'validationReference' => 'ANBH789UHY564RFC@EDB',
+                    'sequenceIndicator' => '86',
+                ),
+                'merchantCategoryCode' => '5964',
+                'businessIndicator' => 'walletTransfer',
+                'crypto' => 'true',
+                'foreignRetailerIndicatorEnum' => 'F'
+            );
+
+
+        $initilaize = new LitleOnlineRequest();
+        $authResponse = $initilaize->authorizationRequest($hash_in);
+        $message = XmlParser::getAttribute($authResponse, 'litleOnlineResponse', 'message');
+        $this->assertEquals("Valid Format", $message);
+    }
+
 }

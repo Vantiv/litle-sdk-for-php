@@ -1,5 +1,25 @@
 = LitleOnline CHANGELOG
 
+==version v8.33(October 18, 2023)
+• Change : Added New Enum -foreignRetailerIndicatorEnum with value F .
+• Change : Added New Enum foreignRetailerIndicatorEnum is added in Capture, forceCapture,captureGivenAuth,sale request.
+• Change : Added New Enum -authIndicatorEnum with value Estimated, Incremental.
+• Change : Added new element amount, authIndicator in authorization.
+
+==version V8.32(October 18, 2023)
+• Change : New elements retailerAddress added of type contact in authorization , captureGivenAuth and sale Request.
+• Change : New elements additionalCOFData added of type additionalCOFData in authorization , captureGivenAuth and sale
+request.
+• Change : New elements totalPaymentCount, paymentType, uniqueId,frequencyOfMIT,validationReference, sequenceIndicator are added for new element additionalCOFData
+• Change : Added new elements businessIndicator, merchantCategoryCode, crypto in authorization, captureGivenAuth and sale
+request.
+• Change : Added new subelements SellerId, URL in existing complex type Contact.
+• Change : Added New Enum businessIndicatorEnum with values consumerBillPayment, buyOnlinePickUpInStore,
+highRiskSecuritiesPurchase, fundTransfer, walletTransfer.
+• Change : Added New Enum paymentTypeEnum with values Fixed Amount, Variable Amount.
+• Change : Added New Enum frequencyOfMITEnum with values Daily, Weekly, BiWeekly, Monthly, Quarterly, BiAnnually,
+Annually, UNSCHEDULED.
+
 ==version 8.31.2
 * Feature: phpseclib v8
 

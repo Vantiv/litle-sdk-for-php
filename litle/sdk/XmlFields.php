@@ -55,7 +55,9 @@ class XmlFields
                 "zip" => XmlFields::returnArrayValue($hash_in, "zip", 20),
                 "country" => XmlFields::returnArrayValue($hash_in, "country", 3),
                 "email" => XmlFields::returnArrayValue($hash_in, "email", 100),
-                "phone" => XmlFields::returnArrayValue($hash_in, "phone", 20)
+                "phone" => XmlFields::returnArrayValue($hash_in, "phone", 20),
+                "sellerId" => XmlFields::returnArrayValue($hash_in, "sellerId", 20),
+                "url" => XmlFields::returnArrayValue($hash_in, "url", 35)
             );
 
             return $hash_out;
@@ -290,6 +292,24 @@ class XmlFields
             return $hash_out;
         }
     }
+
+    public static function additionalCOFData($hash_in)
+    {
+        if (isset($hash_in)) {
+            $hash_out = array(
+                "totalPaymentCount" => XmlFields::returnArrayValue($hash_in, "totalPaymentCount", 2),
+                "paymentType" => XmlFields::returnArrayValue($hash_in, "paymentType"),
+                "uniqueId" => XmlFields::returnArrayValue($hash_in, "uniqueId", 14),
+                "frequencyOfMIT" => XmlFields::returnArrayValue($hash_in, "frequencyOfMIT"),
+                "validationReference" => XmlFields::returnArrayValue($hash_in, "validationReference", 20),
+                "sequenceIndicator" => XmlFields::returnArrayValue($hash_in, "sequenceIndicator"),
+            );
+
+            return $hash_out;
+        }
+
+    }
+
 
     public static function cardType($hash_in)
     {
